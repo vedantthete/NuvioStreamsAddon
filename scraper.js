@@ -133,7 +133,7 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId) => {
     }
 
     console.log(`  Constructed ShowBox URL: ${constructedShowboxUrl}`);
-    return constructedShowboxUrl;
+    return { showboxUrl: constructedShowboxUrl, year: year, title: title };
 };
 
 // Function to fetch sources for a single FID
@@ -627,12 +627,15 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
     console.log(`Getting streams for TMDB ${tmdbType}/${tmdbId}${seasonNum !== null ? `, Season ${seasonNum}` : ''}${episodeNum !== null ? `, Episode ${episodeNum}` : ''}`);
     
     // First, get the ShowBox URL from TMDB ID
-    const showboxUrl = await getShowboxUrlFromTmdbInfo(tmdbType, tmdbId);
-    if (!showboxUrl) {
+    const tmdbInfo = await getShowboxUrlFromTmdbInfo(tmdbType, tmdbId);
+    if (!tmdbInfo || !tmdbInfo.showboxUrl) {
         console.log(`Could not construct ShowBox URL for TMDB ${tmdbType}/${tmdbId}`);
         return [];
     }
-    
+    const showboxUrl = tmdbInfo.showboxUrl;
+    const mediaYear = tmdbInfo.year; // Year from TMDB
+    // const originalTmdbMediaTitle = tmdbInfo.title; // Title from TMDB, if needed later
+
     // Then, get FebBox link from ShowBox
     const showboxScraper = new ShowBoxScraper();
     const febboxShareInfos = await showboxScraper.extractFebboxShareLinks(showboxUrl);
@@ -646,13 +649,18 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
     
     for (const shareInfo of febboxShareInfos) {
         const febboxUrl = shareInfo.febbox_share_url;
-        const showboxTitle = shareInfo.showbox_title || "Unknown Title";
+        // MODIFICATION: Construct base title, add year for movies
+        let baseStreamTitle = shareInfo.showbox_title || "Unknown Title";
+        if (tmdbType === 'movie' && mediaYear) {
+            baseStreamTitle = `${baseStreamTitle} (${mediaYear})`;
+        }
         
-        console.log(`Processing FebBox URL: ${febboxUrl} (${showboxTitle})`);
+        console.log(`Processing FebBox URL: ${febboxUrl} (${baseStreamTitle})`);
         
         // For TV shows, handle season and episode
         if (tmdbType === 'tv' && seasonNum !== null) {
-            await processShowWithSeasonsEpisodes(febboxUrl, showboxTitle, seasonNum, episodeNum, allStreams);
+            // Pass baseStreamTitle (which will be just show name for TV)
+            await processShowWithSeasonsEpisodes(febboxUrl, baseStreamTitle, seasonNum, episodeNum, allStreams);
         } else {
             // Handle movies or TV shows without season/episode specified (old behavior)
             // Extract FIDs from FebBox page
@@ -662,7 +670,7 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
             if (directSources && directSources.length > 0) {
                 for (const source of directSources) {
                     allStreams.push({
-                        title: `${showboxTitle} - ${source.label}`,
+                        title: `${baseStreamTitle} - ${source.label}`, // MODIFICATION: Use baseStreamTitle
                         url: source.url,
                         quality: parseQualityFromLabel(source.label)
                     });
@@ -676,7 +684,7 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
                     const sources = await fetchSourcesForSingleFid(fid, shareKey);
                     for (const source of sources) {
                         allStreams.push({
-                            title: `${showboxTitle} - ${source.label}`,
+                            title: `${baseStreamTitle} - ${source.label}`, // MODIFICATION: Use baseStreamTitle
                             url: source.url,
                             quality: parseQualityFromLabel(source.label)
                         });
