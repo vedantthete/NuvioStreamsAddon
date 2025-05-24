@@ -1,0 +1,14 @@
+{
+  "id": "com.stremio.showbox.scraper",
+  "version": "0.1.0",
+  "name": "ShowBox Scraper",
+  "description": "Stremio addon for ShowBox streaming links",
+  "logo": "https://www.stremio.com/website/stremio-logo-small.png",
+  "resources": ["stream"],
+  "types": ["movie", "series"],
+  "catalogs": [],
+  "behaviorHints": {
+    "adult": false,
+    "p2p": false
+  }
+} 
