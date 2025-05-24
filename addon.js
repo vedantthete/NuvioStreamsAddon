@@ -87,10 +87,24 @@ builder.defineStreamHandler(async ({ type, id }) => {
             // Aligning with the working example provided by the user
             const qualityLabel = stream.quality || 'ORG';
             const sourceTitle = stream.title; // This is the descriptive title from our scraper
+            let displayTitle = sourceTitle; // Default to full descriptive title
+
+            // If it's a TV series episode, shorten the title for Stremio display
+            if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null) {
+                // sourceTitle is typically: "Series Name - S<Season>E<EpisodeFromFile> - FileName - Quality"
+                // We want to display: "Series Name - E<RequestedEpisode>"
+                const seasonPattern = ` - S${seasonNum}`;
+                const parts = sourceTitle.split(seasonPattern);
+                if (parts.length > 0) {
+                    const seriesName = parts[0]; // Get the part before " - S<seasonNum>..."
+                    displayTitle = `${seriesName} - E${episodeNum}`;
+                } 
+                // If parsing fails, it defaults to the full sourceTitle, which is acceptable.
+            }
 
             return {
                 name: `ShowBox - ${qualityLabel}`, // Primary label in Stremio UI, e.g., "ShowBox - 1080p", "ShowBox - ORG"
-                title: sourceTitle, // Secondary details, or used by player
+                title: displayTitle, // MODIFIED: Use the potentially shortened title for TV episodes
                 url: stream.url,
                 type: 'url', // CRITICAL: This is the type of the stream itself, not the content
                 availability: 2, 
