@@ -1,13 +1,37 @@
 const { addonBuilder } = require('stremio-addon-sdk');
-const { getStreamsFromTmdbId, convertImdbToTmdb } = require('./scraper');
+const { getStreamsFromTmdbId, convertImdbToTmdb, isScraperApiKeyNeeded } = require('./scraper');
 const manifest = require('./manifest.json');
 
 // Initialize the addon
 const builder = new addonBuilder(manifest);
 
 // Define stream handler for movies
-builder.defineStreamHandler(async ({ type, id }) => {
+builder.defineStreamHandler(async (args) => {
+    const { type, id, config } = args;
+
+    const userScraperApiKey = (config && config.scraperApiKey) ? config.scraperApiKey : null;
+
     console.log(`Stream request for Stremio type: '${type}', id: '${id}'`);
+    if (userScraperApiKey) {
+        const maskedApiKey = userScraperApiKey.length > 8 
+            ? `${userScraperApiKey.substring(0, 4)}...${userScraperApiKey.substring(userScraperApiKey.length - 4)}` 
+            : userScraperApiKey;
+        console.log(`  Using ScraperAPI Key: ${maskedApiKey}`);
+    } else {
+        console.log("  No ScraperAPI Key configured by user.");
+    }
+
+    if (isScraperApiKeyNeeded() && !userScraperApiKey) {
+        console.log("  ScraperAPI key is required but not configured by the user.");
+        return {
+            streams: [{
+                name: "Configuration Error",
+                title: "Please configure your ScraperAPI Key in the addon settings.",
+                type: "url",
+                url: "#configurationError"
+            }]
+        };
+    }
     
     if (type !== 'movie' && type !== 'series') {
         return { streams: [] };
@@ -43,7 +67,7 @@ builder.defineStreamHandler(async ({ type, id }) => {
             
             // Use just the IMDb ID part for conversion
             const baseImdbId = imdbParts[0];
-            const conversionResult = await convertImdbToTmdb(baseImdbId);
+            const conversionResult = await convertImdbToTmdb(baseImdbId, userScraperApiKey);
             if (conversionResult && conversionResult.tmdbId && conversionResult.tmdbType) {
                 tmdbId = conversionResult.tmdbId;
                 tmdbTypeFromId = conversionResult.tmdbType;
@@ -54,7 +78,7 @@ builder.defineStreamHandler(async ({ type, id }) => {
             }
         } else {
             // Regular movie IMDb ID
-            const conversionResult = await convertImdbToTmdb(id);
+            const conversionResult = await convertImdbToTmdb(id, userScraperApiKey);
             if (conversionResult && conversionResult.tmdbId && conversionResult.tmdbType) {
                 tmdbId = conversionResult.tmdbId;
                 tmdbTypeFromId = conversionResult.tmdbType;
@@ -76,7 +100,7 @@ builder.defineStreamHandler(async ({ type, id }) => {
     
     try {
         console.log(`Fetching streams for TMDB Type: '${tmdbTypeFromId}', ID: '${tmdbId}'${seasonNum !== null ? `, Season: ${seasonNum}` : ''}${episodeNum !== null ? `, Episode: ${episodeNum}` : ''}`);
-        const streamsFromScraper = await getStreamsFromTmdbId(tmdbTypeFromId, tmdbId, seasonNum, episodeNum);
+        const streamsFromScraper = await getStreamsFromTmdbId(tmdbTypeFromId, tmdbId, seasonNum, episodeNum, userScraperApiKey);
         
         if (!streamsFromScraper || streamsFromScraper.length === 0) {
             console.log(`  No streams returned from scraper for TMDB ${tmdbTypeFromId}/${tmdbId}`);

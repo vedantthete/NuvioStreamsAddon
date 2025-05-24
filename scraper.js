@@ -4,7 +4,8 @@ const fs = require('fs').promises;
 const path = require('path');
 
 // Constants from unified_scraper.js
-const SCRAPER_API_KEY = '96845d13e7a0a0d40fb4f148cd135ddc';
+// MODIFICATION: Remove hardcoded SCRAPER_API_KEY
+// const SCRAPER_API_KEY = '96845d13e7a0a0d40fb4f148cd135ddc'; 
 const FEBBOX_COOKIE = 'ui=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDgwNjYzMjgsIm5iZiI6MTc0ODA2NjMyOCwiZXhwIjoxNzc5MTcwMzQ4LCJkYXRhIjp7InVpZCI6NzgyNDcwLCJ0b2tlbiI6ImUwMTAyNjIyOWMyOTVlOTFlOTY0MWJjZWZiZGE4MGUxIn19.Za7tx60gu8rq9pLw1LVuIjROaBJzgF_MV049B8NO3L8';
 const FEBBOX_PLAYER_URL = "https://www.febbox.com/file/player";
 const FEBBOX_FILE_SHARE_LIST_URL = "https://www.febbox.com/file/file_share_list";
@@ -57,7 +58,8 @@ const saveToCache = async (cacheKey, content, subDir = '') => {
 };
 
 // TMDB helper function to get ShowBox URL from TMDB ID
-const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId) => {
+// MODIFICATION: Accept scraperApiKey
+const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId, scraperApiKey) => {
     const cacheSubDir = 'tmdb_api';
     const cacheKey = `tmdb-${tmdbType}-${tmdbId}.json`;
     const cachedTmdbData = await getFromCache(cacheKey, cacheSubDir);
@@ -137,11 +139,13 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId) => {
 };
 
 // Function to fetch sources for a single FID
-const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => {
+// MODIFICATION: Accept scraperApiKey
+const fetchSourcesForSingleFid = async (fidToProcess, shareKey, scraperApiKey) => {
     console.log(`  Fetching fresh player data for video FID: ${fidToProcess} (Share: ${shareKey}) - Caching disabled for these links.`);
     
     const scraperApiPayloadForPost = {
-        api_key: SCRAPER_API_KEY,
+        // MODIFICATION: Use passed scraperApiKey
+        api_key: scraperApiKey, 
         url: FEBBOX_PLAYER_URL,
         keep_headers: 'true'
     };
@@ -203,8 +207,10 @@ const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => {
 
 // ShowBox scraper class
 class ShowBoxScraper {
-    constructor() {
+    // MODIFICATION: Constructor accepts scraperApiKey
+    constructor(scraperApiKey) {
         this.baseUrl = SCRAPER_API_URL;
+        this.scraperApiKey = scraperApiKey; // Store it
         this.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
             'Accept-Language': 'en-US,en;q=0.9',
@@ -227,7 +233,8 @@ class ShowBoxScraper {
         console.log(`ShowBoxScraper: Making request to: ${url} via ScraperAPI`);
  
         const payload = {
-            api_key: SCRAPER_API_KEY,
+            // MODIFICATION: Use stored scraperApiKey
+            api_key: this.scraperApiKey, 
             url: url,
             keep_headers: 'true'
         };
@@ -438,7 +445,8 @@ class ShowBoxScraper {
 }
 
 // Function to extract FIDs from FebBox share page
-const extractFidsFromFebboxPage = async (febboxUrl) => {
+// MODIFICATION: Accept scraperApiKey
+const extractFidsFromFebboxPage = async (febboxUrl, scraperApiKey) => {
     const cacheSubDir = 'febbox_page_html';
     const simpleUrlKey = febboxUrl.replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9_.-]/g, '_');
     const cacheKey = `${simpleUrlKey}.html`;
@@ -447,7 +455,8 @@ const extractFidsFromFebboxPage = async (febboxUrl) => {
 
     if (!contentHtml) {
         const headers = { 'Cookie': FEBBOX_COOKIE };
-        const payloadInitial = { api_key: SCRAPER_API_KEY, url: febboxUrl, keep_headers: 'true' };
+        // MODIFICATION: Use passed scraperApiKey
+        const payloadInitial = { api_key: scraperApiKey, url: febboxUrl, keep_headers: 'true' };
         try {
             console.log(`Fetching FebBox page content from URL: ${febboxUrl}`);
             const response = await axios.get(SCRAPER_API_URL, { 
@@ -526,7 +535,8 @@ const extractFidsFromFebboxPage = async (febboxUrl) => {
 };
 
 // Function to convert IMDb ID to TMDB ID using TMDB API
-const convertImdbToTmdb = async (imdbId) => {
+// MODIFICATION: Accept scraperApiKey (though not directly used for TMDB calls here, kept for consistency if future needs arise)
+const convertImdbToTmdb = async (imdbId, scraperApiKey) => {
     if (!imdbId || !imdbId.startsWith('tt')) {
         console.log('  Invalid IMDb ID format provided for conversion.', imdbId);
         return null;
@@ -585,11 +595,13 @@ const convertImdbToTmdb = async (imdbId) => {
 
 // Exposed API for the Stremio addon
 // This will be a function to get streams from a TMDB ID
-const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeNum = null) => {
+// MODIFICATION: Accept scraperApiKey
+const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeNum = null, scraperApiKey) => {
     console.log(`Getting streams for TMDB ${tmdbType}/${tmdbId}${seasonNum !== null ? `, Season ${seasonNum}` : ''}${episodeNum !== null ? `, Episode ${episodeNum}` : ''}`);
     
     // First, get the ShowBox URL from TMDB ID
-    const tmdbInfo = await getShowboxUrlFromTmdbInfo(tmdbType, tmdbId);
+    // MODIFICATION: Pass scraperApiKey
+    const tmdbInfo = await getShowboxUrlFromTmdbInfo(tmdbType, tmdbId, scraperApiKey);
     if (!tmdbInfo || !tmdbInfo.showboxUrl) {
         console.log(`Could not construct ShowBox URL for TMDB ${tmdbType}/${tmdbId}`);
         return [];
@@ -599,7 +611,8 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
     // const originalTmdbMediaTitle = tmdbInfo.title; // Title from TMDB, if needed later
 
     // Then, get FebBox link from ShowBox
-    const showboxScraper = new ShowBoxScraper();
+    // MODIFICATION: Pass scraperApiKey to ShowBoxScraper constructor
+    const showboxScraper = new ShowBoxScraper(scraperApiKey);
     const febboxShareInfos = await showboxScraper.extractFebboxShareLinks(showboxUrl);
     if (!febboxShareInfos || febboxShareInfos.length === 0) {
         console.log(`No FebBox share links found for ${showboxUrl}`);
@@ -622,11 +635,13 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
         // For TV shows, handle season and episode
         if (tmdbType === 'tv' && seasonNum !== null) {
             // Pass baseStreamTitle (which will be just show name for TV)
-            await processShowWithSeasonsEpisodes(febboxUrl, baseStreamTitle, seasonNum, episodeNum, allStreams);
+            // MODIFICATION: Pass scraperApiKey
+            await processShowWithSeasonsEpisodes(febboxUrl, baseStreamTitle, seasonNum, episodeNum, allStreams, scraperApiKey);
         } else {
             // Handle movies or TV shows without season/episode specified (old behavior)
             // Extract FIDs from FebBox page
-            const { fids, shareKey, directSources } = await extractFidsFromFebboxPage(febboxUrl);
+            // MODIFICATION: Pass scraperApiKey
+            const { fids, shareKey, directSources } = await extractFidsFromFebboxPage(febboxUrl, scraperApiKey);
             
             // If we have direct sources from player setup
             if (directSources && directSources.length > 0) {
@@ -643,7 +658,8 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
             // Process FIDs
             if (fids.length > 0 && shareKey) {
                 for (const fid of fids) {
-                    const sources = await fetchSourcesForSingleFid(fid, shareKey);
+                    // MODIFICATION: Pass scraperApiKey
+                    const sources = await fetchSourcesForSingleFid(fid, shareKey, scraperApiKey);
                     for (const source of sources) {
                         allStreams.push({
                             title: `${baseStreamTitle} - ${source.label}`, // MODIFICATION: Use baseStreamTitle
@@ -672,7 +688,8 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
 };
 
 // Function to handle TV shows with seasons and episodes
-const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum, episodeNum, allStreams) => {
+// MODIFICATION: Accept scraperApiKey
+const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum, episodeNum, allStreams, scraperApiKey) => {
     console.log(`Processing TV Show: ${showboxTitle}, Season: ${seasonNum}, Episode: ${episodeNum !== null ? episodeNum : 'all'}`);
     
     // Cache for the main FebBox page
@@ -688,7 +705,8 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         try {
             const response = await axios.get(SCRAPER_API_URL, {
                 params: {
-                    api_key: SCRAPER_API_KEY,
+                    // MODIFICATION: Use passed scraperApiKey
+                    api_key: scraperApiKey,
                     url: febboxUrl,
                     keep_headers: 'true'
                 },
@@ -740,7 +758,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     if (folders.length === 0) {
         console.log(`No season folders found on ${febboxUrl}`);
         // It might be directly files, so try the original logic as fallback
-        const { fids, directSources } = await extractFidsFromFebboxPage(febboxUrl);
+        const { fids, directSources } = await extractFidsFromFebboxPage(febboxUrl, scraperApiKey);
         
         if (directSources && directSources.length > 0) {
             for (const source of directSources) {
@@ -755,7 +773,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         
         if (fids.length > 0) {
             for (const fid of fids) {
-                const sources = await fetchSourcesForSingleFid(fid, shareKey);
+                const sources = await fetchSourcesForSingleFid(fid, shareKey, scraperApiKey);
                 for (const source of sources) {
                     allStreams.push({
                         title: `${showboxTitle} - ${source.label}`,
@@ -809,7 +827,8 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         try {
             const folderResponse = await axios.get(SCRAPER_API_URL, {
                 params: {
-                    api_key: SCRAPER_API_KEY,
+                    // MODIFICATION: Use passed scraperApiKey
+                    api_key: scraperApiKey,
                     url: `${FEBBOX_FILE_SHARE_LIST_URL}?share_key=${shareKey}&parent_id=${selectedFolder.id}&is_html=1&pwd=`,
                     keep_headers: 'true'
                 },
@@ -899,7 +918,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     
     // Get video sources for each episode FID
     for (const fid of episodeFids) {
-        const sources = await fetchSourcesForSingleFid(fid, shareKey);
+        const sources = await fetchSourcesForSingleFid(fid, shareKey, scraperApiKey);
         for (const source of sources) {
             // Find the episode detail for this FID to include in title
             const episodeDetail = episodeDetails.find(ep => ep.fid === fid);
@@ -1011,8 +1030,15 @@ function sortStreamsByQuality(streams) {
 // Initialize the cache directory
 ensureCacheDir(CACHE_DIR).catch(console.error);
 
+// MODIFICATION: Add isScraperApiKeyNeeded function
+const isScraperApiKeyNeeded = () => {
+    // Since most core functionalities (ShowBox, FebBox) use ScraperAPI
+    return true; 
+};
+
 module.exports = {
     getStreamsFromTmdbId,
     parseQualityFromLabel,
-    convertImdbToTmdb
+    convertImdbToTmdb,
+    isScraperApiKeyNeeded // MODIFICATION: Export the new function
 }; 

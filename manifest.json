@@ -2,13 +2,23 @@
   "id": "com.stremio.showbox.scraper",
   "version": "0.1.0",
   "name": "SBOX",
-  "description": "Stremio addon for ShowBox streaming links",
+  "description": "Stremio addon for ShowBox streaming links. Requires your own ScraperAPI key.",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Box-logo.svg/800px-Box-logo.svg.png?20100206173817",
   "resources": ["stream"],
   "types": ["movie", "series"],
   "catalogs": [],
   "behaviorHints": {
     "adult": false,
-    "p2p": false
-  }
+    "p2p": false,
+    "configurable": true
+  },
+  "config": [
+    {
+      "key": "scraperApiKey",
+      "type": "text",
+      "title": "ScraperAPI Key",
+      "description": "Enter your ScraperAPI.com API key.",
+      "required": true
+    }
+  ]
 } 
