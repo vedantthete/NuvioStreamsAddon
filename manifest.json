@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "name": "SBOX",
   "description": "Stremio addon for ShowBox streaming links",
-  "logo": "https://www.pikpng.com/pngl/m/238-2383593_s-logo-png-transparent-cool-s-logo-clipart.png",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Box-logo.svg/800px-Box-logo.svg.png?20100206173817",
   "resources": ["stream"],
   "types": ["movie", "series"],
   "catalogs": [],
