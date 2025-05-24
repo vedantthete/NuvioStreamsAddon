@@ -1,9 +1,9 @@
 {
   "id": "com.stremio.showbox.scraper",
   "version": "0.1.0",
-  "name": "ShowBox Scraper",
+  "name": "SBOX",
   "description": "Stremio addon for ShowBox streaming links",
-  "logo": "https://www.stremio.com/website/stremio-logo-small.png",
+  "logo": "https://www.pikpng.com/pngl/m/238-2383593_s-logo-png-transparent-cool-s-logo-clipart.png",
   "resources": ["stream"],
   "types": ["movie", "series"],
   "catalogs": [],
