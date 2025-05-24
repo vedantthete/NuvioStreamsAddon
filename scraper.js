@@ -141,8 +141,37 @@ const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => {
     const cacheSubDir = 'febbox_player';
     const cacheKey = `fid-${fidToProcess}_share-${shareKey}.json`;
 
-    // Always fetch fresh streaming links
-    console.log(`  Fetching fresh player data for video FID: ${fidToProcess} (Share: ${shareKey})`);
+    // MODIFICATION: Attempt to load from cache first
+    const cachedData = await getFromCache(cacheKey, cacheSubDir);
+    if (cachedData) {
+        const fidVideoLinks = [];
+        if (Array.isArray(cachedData)) { 
+            for (const sourceItem of cachedData) {
+                if (sourceItem.url && sourceItem.label) { 
+                     fidVideoLinks.push({
+                        "label": String(sourceItem.label),
+                        "url": String(sourceItem.url)
+                    });
+                }
+            }
+        } else if (typeof cachedData === 'object' && cachedData.label && cachedData.url) { 
+            fidVideoLinks.push({
+                "label": String(cachedData.label),
+                "url": String(cachedData.url)
+            });
+        } else if (typeof cachedData === 'string' && cachedData.startsWith('http')) { 
+             fidVideoLinks.push({ "label": "DirectLink (cached)", "url": cachedData.trim() });
+        }
+
+        if (fidVideoLinks.length > 0) {
+             console.log(`  Using ${fidVideoLinks.length} cached video link(s) for FID ${fidToProcess}`);
+             return fidVideoLinks;
+        }
+    }
+    // END MODIFICATION: Cache check first
+
+    // If cache is empty or invalid, fetch fresh streaming links
+    console.log(`  No valid cache for FID ${fidToProcess} (Share: ${shareKey}). Fetching fresh player data.`);
     
     const scraperApiPayloadForPost = {
         api_key: SCRAPER_API_KEY,
@@ -173,7 +202,7 @@ const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => {
             console.log(`    Could not find sources array in player response for FID ${fidToProcess}`);
             if (playerContent.startsWith('http') && (playerContent.includes('.mp4') || playerContent.includes('.m3u8'))) {
                 resultToCache = [{ "label": "DirectLink", "url": playerContent.trim() }];
-                await saveToCache(cacheKey, resultToCache, cacheSubDir);
+                await saveToCache(cacheKey, resultToCache, cacheSubDir); // Save successfully fetched direct link
                 return resultToCache;
             }
             try {
@@ -200,41 +229,15 @@ const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => {
         if (fidVideoLinks.length > 0) {
             console.log(`    Extracted ${fidVideoLinks.length} fresh video link(s) for FID ${fidToProcess}`);
             resultToCache = fidVideoLinks;
-            await saveToCache(cacheKey, resultToCache, cacheSubDir);
+            await saveToCache(cacheKey, resultToCache, cacheSubDir); // Save successfully fetched links
         }
         return fidVideoLinks;
     } catch (error) {
         console.log(`    Request error for FID ${fidToProcess}: ${error.message}`);
-        
-        // Only if there's an error, try to use cached data as a fallback
-        console.log(`    Attempting to use cached data as fallback for FID ${fidToProcess}`);
-        const cachedData = await getFromCache(cacheKey, cacheSubDir);
-        if (cachedData) {
-            const fidVideoLinks = [];
-            if (Array.isArray(cachedData)) { 
-                for (const sourceItem of cachedData) {
-                    if (sourceItem.url && sourceItem.label) { 
-                         fidVideoLinks.push({
-                            "label": String(sourceItem.label),
-                            "url": String(sourceItem.url)
-                        });
-                    }
-                }
-            } else if (typeof cachedData === 'object' && cachedData.label && cachedData.url) { 
-                fidVideoLinks.push({
-                    "label": String(cachedData.label),
-                    "url": String(cachedData.url)
-                });
-            } else if (typeof cachedData === 'string' && cachedData.startsWith('http')) { 
-                 fidVideoLinks.push({ "label": "DirectLink (cached)", "url": cachedData.trim() });
-            }
-
-            if (fidVideoLinks.length > 0) {
-                 console.log(`    Using ${fidVideoLinks.length} cached video link(s) for FID ${fidToProcess} as fallback`);
-                 return fidVideoLinks;
-            }
-        }
-        
+        // MODIFICATION: Since we tried cache first, this error means fresh fetch failed.
+        // The old fallback to cache here is no longer the primary cache-check path.
+        // We just return empty if fresh fetch fails and cache was already empty/invalid.
+        console.log(`    Fresh fetch failed for FID ${fidToProcess}. No valid cached links were found initially.`);
         return [];
     }
 };
