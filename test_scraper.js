@@ -68,6 +68,7 @@ async function runScraperInteractive() {
         console.log(`${index + 1}. Title: ${stream.title}`);
         console.log(`   Quality: ${stream.quality}`);
         console.log(`   Size: ${stream.size || 'Unknown size'}`);
+        console.log(`   Codecs: ${(stream.codecs || []).join(', ') || 'N/A'}`);
         console.log(`   URL: ${stream.url}\n`);
       });
     } else {

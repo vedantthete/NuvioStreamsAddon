@@ -223,9 +223,19 @@ const fetchSourcesForSingleFid = async (fidToProcess, shareKey, scraperApiKey) =
         const fidVideoLinks = [];
         for (const sourceItem of sourcesData) {
             if (sourceItem.file && sourceItem.label) {
+                let detailedFilename = null;
+                try {
+                    const urlParams = new URLSearchParams(new URL(sourceItem.file).search);
+                    if (urlParams.has('KEY5')) {
+                        detailedFilename = urlParams.get('KEY5');
+                    }
+                } catch (e) {
+                    // console.warn('Could not parse URL to get KEY5:', sourceItem.file, e.message);
+                }
                 fidVideoLinks.push({
                     "label": String(sourceItem.label),
-                    "url": String(sourceItem.file)
+                    "url": String(sourceItem.file),
+                    "detailedFilename": detailedFilename // Add extracted filename
                 });
             }
         }
@@ -732,10 +742,22 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
             // If we have direct sources from player setup
             if (directSources && directSources.length > 0) {
                 for (const source of directSources) {
+                    const streamTitle = `${baseStreamTitle} - ${source.label}`;
+                    // directSources from extractFidsFromFebboxPage don't have KEY5 pre-parsed.
+                    // We'd need to parse source.url here if we want KEY5 from them.
+                    // For now, stick to streamTitle for directSources, or modify extractFidsFromFebboxPage for them too.
+                    let key5FromDirectSource = null;
+                    try {
+                        const urlParams = new URLSearchParams(new URL(source.url).search);
+                        if (urlParams.has('KEY5')) {
+                            key5FromDirectSource = urlParams.get('KEY5');
+                        }
+                    } catch(e) { /* ignore if URL parsing fails */ }
                     allStreams.push({
-                        title: `${baseStreamTitle} - ${source.label}`, // MODIFICATION: Use baseStreamTitle
+                        title: streamTitle, 
                         url: source.url,
-                        quality: parseQualityFromLabel(source.label)
+                        quality: parseQualityFromLabel(source.label),
+                        codecs: extractCodecDetails(key5FromDirectSource || streamTitle) 
                     });
                 }
                 continue; // Skip FID processing if we have direct sources
@@ -750,10 +772,12 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
 
                 for (const sources of fidSourcesArray) {
                     for (const source of sources) {
+                        const streamTitle = `${baseStreamTitle} - ${source.label}`;
                         allStreams.push({
-                            title: `${baseStreamTitle} - ${source.label}`, 
+                            title: streamTitle, 
                             url: source.url,
-                            quality: parseQualityFromLabel(source.label)
+                            quality: parseQualityFromLabel(source.label),
+                            codecs: extractCodecDetails(source.detailedFilename || streamTitle) 
                         });
                     }
                 }
@@ -784,7 +808,7 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
     if (sortedStreams.length > 0) {
         console.log(`Found ${sortedStreams.length} streams (sorted by quality):`);
         sortedStreams.forEach((stream, i) => {
-            console.log(`  ${i+1}. ${stream.quality} (${stream.size || 'Unknown size'}): ${stream.title}`);
+            console.log(`  ${i+1}. ${stream.quality} (${stream.size || 'Unknown size'}) [${(stream.codecs || []).join(', ') || 'No codec info'}]: ${stream.title}`);
         });
     }
     console.timeEnd(mainTimerLabel);
@@ -798,6 +822,8 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     console.time(processTimerLabel);
     console.log(`Processing TV Show: ${showboxTitle}, Season: ${seasonNum}, Episode: ${episodeNum !== null ? episodeNum : 'all'}`);
     
+    let selectedEpisode = null; // MODIFICATION: Declare selectedEpisode at function scope
+
     // Cache for the main FebBox page
     const cacheSubDirMain = 'febbox_page_html';
     const simpleUrlKey = febboxUrl.replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9_.-]/g, '_');
@@ -876,10 +902,12 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         
         if (directSources && directSources.length > 0) {
             for (const source of directSources) {
+                const streamTitle = `${showboxTitle} - ${source.label}`;
                 allStreams.push({
-                    title: `${showboxTitle} - ${source.label}`,
+                    title: streamTitle, 
                     url: source.url,
-                    quality: parseQualityFromLabel(source.label)
+                    quality: parseQualityFromLabel(source.label),
+                    codecs: extractCodecDetails(source.detailedFilename || streamTitle) 
                 });
             }
             console.timeEnd(processTimerLabel);
@@ -894,10 +922,12 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
 
             for (const sources of fallbackFidSourcesArray) {
                 for (const source of sources) {
+                    const streamTitle = `${showboxTitle} - ${source.label}`;
                     allStreams.push({
-                        title: `${showboxTitle} - ${source.label}`,
+                        title: streamTitle, 
                         url: source.url,
-                        quality: parseQualityFromLabel(source.label)
+                        quality: parseQualityFromLabel(source.label),
+                        codecs: extractCodecDetails(source.detailedFilename || streamTitle) 
                     });
                 }
             }
@@ -1017,8 +1047,6 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     
     // If episode number specified, find matching episode
     if (episodeNum !== null) {
-        let selectedEpisode = null;
-        
         // First try exact episode number match
         for (const episode of episodeDetails) {
             if (episode.episodeNum === episodeNum) {
@@ -1059,10 +1087,12 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
             const episodeDetail = episodeDetails.find(ep => ep.fid === fid);
             const episodeName = episodeDetail ? episodeDetail.name : '';
             
+            const streamTitle = `${showboxTitle} - S${seasonNum}${episodeNum && selectedEpisode && fid === selectedEpisode.fid ? `E${episodeNum}` : (episodeDetail ? `E${episodeDetail.episodeNum}`: '')} - ${episodeName} - ${source.label}`;
             allStreams.push({
-                title: `${showboxTitle} - S${seasonNum}${episodeNum && selectedEpisode && fid === selectedEpisode.fid ? `E${episodeNum}` : (episodeDetail ? `E${episodeDetail.episodeNum}`: '')} - ${episodeName} - ${source.label}`,
+                title: streamTitle, 
                 url: source.url,
-                quality: parseQualityFromLabel(source.label)
+                quality: parseQualityFromLabel(source.label),
+                codecs: extractCodecDetails(source.detailedFilename || streamTitle) 
             });
         }
       }
@@ -1163,6 +1193,43 @@ const parseSizeToBytes = (sizeString) => {
         }
     }
     return Number.MAX_SAFE_INTEGER; // Fallback for unparsed strings
+};
+
+// Helper function to extract codec details from a string (filename/label)
+const extractCodecDetails = (text) => {
+    if (!text || typeof text !== 'string') return [];
+    const details = new Set();
+    const lowerText = text.toLowerCase();
+
+    // Video Codecs & Technologies
+    if (lowerText.includes('dolby vision') || lowerText.includes('dovi') || lowerText.includes('.dv.')) details.add('DV');
+    if (lowerText.includes('hdr10+') || lowerText.includes('hdr10plus')) details.add('HDR10+');
+    else if (lowerText.includes('hdr')) details.add('HDR'); // General HDR if not HDR10+
+    if (lowerText.includes('sdr')) details.add('SDR');
+    
+    if (lowerText.includes('av1')) details.add('AV1');
+    else if (lowerText.includes('h265') || lowerText.includes('x265') || lowerText.includes('hevc')) details.add('H.265');
+    else if (lowerText.includes('h264') || lowerText.includes('x264') || lowerText.includes('avc')) details.add('H.264');
+    
+    // Audio Codecs
+    if (lowerText.includes('atmos')) details.add('Atmos');
+    if (lowerText.includes('truehd') || lowerText.includes('true-hd')) details.add('TrueHD');
+    if (lowerText.includes('dts-hd ma') || lowerText.includes('dtshdma') || lowerText.includes('dts-hdhr')) details.add('DTS-HD MA');
+    else if (lowerText.includes('dts-hd')) details.add('DTS-HD'); // General DTS-HD if not MA/HR
+    else if (lowerText.includes('dts') && !lowerText.includes('dts-hd')) details.add('DTS'); // Plain DTS
+
+    if (lowerText.includes('eac3') || lowerText.includes('e-ac-3') || lowerText.includes('dd+') || lowerText.includes('ddplus')) details.add('EAC3');
+    else if (lowerText.includes('ac3') || (lowerText.includes('dd') && !lowerText.includes('dd+') && !lowerText.includes('ddp'))) details.add('AC3'); // Plain AC3/DD
+    
+    if (lowerText.includes('aac')) details.add('AAC');
+    if (lowerText.includes('opus')) details.add('Opus');
+    if (lowerText.includes('mp3')) details.add('MP3');
+
+    // Bit depth (less common but useful)
+    if (lowerText.includes('10bit') || lowerText.includes('10-bit')) details.add('10-bit');
+    else if (lowerText.includes('8bit') || lowerText.includes('8-bit')) details.add('8-bit');
+
+    return Array.from(details);
 };
 
 // Utility function to sort streams by quality in order of resolution

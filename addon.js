@@ -9,6 +9,36 @@ const builder = new addonBuilder(manifest);
 builder.defineStreamHandler(async (args) => {
     const { type, id, config } = args;
 
+    // Helper to get flag emoji from URL hostname
+    const getFlagEmojiForUrl = (url) => {
+        try {
+            const hostname = new URL(url).hostname;
+            // Match common patterns like xx, xxN, xxNN at the start of a part of the hostname
+            const match = hostname.match(/^([a-zA-Z]{2,3})[0-9]{0,2}(?:[.-]|$)/i);
+            if (match && match[1]) {
+                const countryCode = match[1].toLowerCase();
+                const flagMap = {
+                    'us': '🇺🇸', 'usa': '🇺🇸',
+                    'gb': '🇬🇧', 'uk': '🇬🇧',
+                    'ca': '🇨🇦',
+                    'de': '🇩🇪',
+                    'fr': '🇫🇷',
+                    'nl': '🇳🇱',
+                    'hk': '🇭🇰',
+                    'sg': '🇸🇬',
+                    'jp': '🇯🇵',
+                    'au': '🇦🇺',
+                    'in': '🇮🇳',
+                    // Add more as needed
+                };
+                return flagMap[countryCode] || '🏳️'; // Default to white flag if no specific match
+            }
+        } catch (e) {
+            // Invalid URL or other error
+        }
+        return '🏳️'; // Default flag
+    };
+
     const userScraperApiKey = (config && config.scraperApiKey) ? config.scraperApiKey : null;
 
     console.log(`Stream request for Stremio type: '${type}', id: '${id}'`);
@@ -108,27 +138,68 @@ builder.defineStreamHandler(async (args) => {
         }
         
         const stremioStreamObjects = streamsFromScraper.map((stream, index) => {
-            // Aligning with the working example provided by the user
             const qualityLabel = stream.quality || 'ORG';
-            const sourceTitle = stream.title; // This is the descriptive title from our scraper
-            let displayTitle = sourceTitle; // Default to full descriptive title
+            const sourceTitle = stream.title; 
+            let displayTitle = sourceTitle; 
 
-            // If it's a TV series episode, shorten the title for Stremio display
             if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null) {
-                // sourceTitle is typically: "Series Name - S<Season>E<EpisodeFromFile> - FileName - Quality"
-                // We want to display: "Series Name - E<RequestedEpisode>"
                 const seasonPattern = ` - S${seasonNum}`;
                 const parts = sourceTitle.split(seasonPattern);
                 if (parts.length > 0) {
-                    const seriesName = parts[0]; // Get the part before " - S<seasonNum>..."
+                    const seriesName = parts[0]; 
                     displayTitle = `${seriesName} - E${episodeNum}`;
                 } 
-                // If parsing fails, it defaults to the full sourceTitle, which is acceptable.
             }
 
+            const flagEmoji = getFlagEmojiForUrl(stream.url);
+
+            // Construct the 'name' field for Stremio
+            let nameDisplay = `${flagEmoji} ShowBox - ${qualityLabel}`;
+            const nameVideoTechTags = [];
+            if (stream.codecs) {
+                if (stream.codecs.includes('DV')) {
+                    nameVideoTechTags.push('DV');
+                } else if (stream.codecs.includes('HDR10+')) {
+                    nameVideoTechTags.push('HDR10+');
+                } else if (stream.codecs.includes('HDR')) {
+                    nameVideoTechTags.push('HDR');
+                }
+                // Atmos is intentionally not added to 'name' here as per current request
+            }
+            if (nameVideoTechTags.length > 0) {
+                nameDisplay += ` | ${nameVideoTechTags.join(' | ')}`;
+            }
+
+            // Construct the 'title' field for Stremio (secondary label)
+            let titleParts = [];
+            if (stream.size && stream.size !== 'Unknown size' && !stream.size.toLowerCase().includes('n/a')) {
+                titleParts.push(stream.size);
+            }
+
+            if (stream.codecs && stream.codecs.length > 0) {
+                stream.codecs.forEach(codec => {
+                    if (['DV', 'HDR10+', 'HDR', 'SDR'].includes(codec)) {
+                        titleParts.push(`✨ ${codec}`);
+                    } else if (['Atmos', 'TrueHD', 'DTS-HD MA'].includes(codec)) {
+                        titleParts.push(`🔊 ${codec}`);
+                    } else if (['H.265', 'H.264', 'AV1'].includes(codec)) {
+                        titleParts.push(`🎞️ ${codec}`);
+                    } else if (['EAC3', 'AC3', 'AAC', 'Opus', 'MP3', 'DTS-HD', 'DTS'].includes(codec)) { // DTS-HD & DTS here as general audio
+                        titleParts.push(`🎧 ${codec}`);
+                    } else if (['10-bit', '8-bit'].includes(codec)) {
+                        titleParts.push(`⚙️ ${codec}`);
+                    } else {
+                        titleParts.push(codec); // Codec without a specific emoji category
+                    }
+                });
+            }
+            
+            const titleSecondLine = titleParts.join(" • ");
+            const finalTitle = titleSecondLine ? `${displayTitle}\n${titleSecondLine}` : displayTitle;
+
             return {
-                name: `ShowBox - ${qualityLabel}`, // Primary label in Stremio UI, e.g., "ShowBox - 1080p", "ShowBox - ORG"
-                title: `${displayTitle}\n${stream.size || ''}`, // MODIFIED: Add size to the title on a new line
+                name: nameDisplay, 
+                title: finalTitle, 
                 url: stream.url,
                 type: 'url', // CRITICAL: This is the type of the stream itself, not the content
                 availability: 2, 
