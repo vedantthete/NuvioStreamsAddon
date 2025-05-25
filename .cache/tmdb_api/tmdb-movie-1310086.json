@@ -1,0 +1,68 @@
+{
+  "adult": false,
+  "backdrop_path": "/fMPpkOUiu8d19H5PFe30sYhlavB.jpg",
+  "belongs_to_collection": {
+    "id": 1310087,
+    "name": "Off Track Collection",
+    "poster_path": null,
+    "backdrop_path": null
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81735101",
+  "id": 1310086,
+  "imdb_id": "tt32598081",
+  "origin_country": [
+    "SE"
+  ],
+  "original_language": "sv",
+  "original_title": "Ute och cyklar",
+  "overview": "Siblings Lisa and Daniel gear up for the Vätternrundan cycling race, where unexpected detours, old flames and marriage problems test their resolve.",
+  "popularity": 22.0725,
+  "poster_path": "/7WPiTruDUJuqMsK93ribGeH85X6.jpg",
+  "production_companies": [
+    {
+      "id": 5746,
+      "logo_path": "/sWgSj9muRStENKBoIoaDK6OZmDu.png",
+      "name": "Yellow Bird",
+      "origin_country": "SE"
+    },
+    {
+      "id": 4510,
+      "logo_path": "/j9dMjGc4GHwSL0fx1iEtxz05qrV.png",
+      "name": "Jarowskij",
+      "origin_country": "SE"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "SE",
+      "name": "Sweden"
+    }
+  ],
+  "release_date": "2025-05-23",
+  "revenue": 0,
+  "runtime": 0,
+  "spoken_languages": [
+    {
+      "english_name": "Swedish",
+      "iso_639_1": "sv",
+      "name": "svenska"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Off Track 2",
+  "video": false,
+  "vote_average": 5,
+  "vote_count": 2
+}

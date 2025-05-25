@@ -1,0 +1,73 @@
+{
+  "adult": false,
+  "backdrop_path": "/bIh56F8e5EaZ3r2nD1hXAOisItZ.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 99,
+      "name": "Documentary"
+    }
+  ],
+  "homepage": "https://www.gedeonmediagroup.com/en/production/bambi-a-tale-of-life-in-the-woods/",
+  "id": 1094473,
+  "imdb_id": "tt32373637",
+  "origin_country": [
+    "FR"
+  ],
+  "original_language": "fr",
+  "original_title": "Bambi, l'histoire d'une vie dans les bois",
+  "overview": "The life of Bambi, a male roe deer, from his birth through childhood, the loss of his mother, the finding of a mate, the lessons he learns from his father, and the experience he gains about the dangers posed by human hunters in the forest.",
+  "popularity": 166.5163,
+  "poster_path": "/vWNVHtwOhcoOEUSrY1iHRGbgH8O.jpg",
+  "production_companies": [
+    {
+      "id": 2668,
+      "logo_path": "/wXmehIpEfAaJk7eU6GpBERpK3m1.png",
+      "name": "MC4",
+      "origin_country": "FR"
+    },
+    {
+      "id": 4621,
+      "logo_path": "/hEKBTnDXH49trohO1NtI2JT0e5g.png",
+      "name": "Gébéka Films",
+      "origin_country": "FR"
+    },
+    {
+      "id": 18626,
+      "logo_path": "/gb0xmYIKvNy2LnUOfLVglww7U0g.png",
+      "name": "Kinology",
+      "origin_country": "FR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    }
+  ],
+  "release_date": "2024-10-16",
+  "revenue": 1419154,
+  "runtime": 77,
+  "spoken_languages": [
+    {
+      "english_name": "French",
+      "iso_639_1": "fr",
+      "name": "Français"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Bambi: A Life in the Woods",
+  "video": false,
+  "vote_average": 5.955,
+  "vote_count": 22
+}

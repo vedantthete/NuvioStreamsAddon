@@ -1,0 +1,68 @@
+{
+  "adult": false,
+  "backdrop_path": "/hAQnXxOwCjgYcKRgTdYPRC8neqL.jpg",
+  "belongs_to_collection": {
+    "id": 1187990,
+    "name": "Devara Collection",
+    "poster_path": null,
+    "backdrop_path": null
+  },
+  "budget": 31764000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "",
+  "id": 811941,
+  "imdb_id": "tt11821912",
+  "origin_country": [
+    "IN"
+  ],
+  "original_language": "te",
+  "original_title": "Devara: Part 1",
+  "overview": "Devara, a fearless man from a coastal region, embarks on a perilous journey into the treacherous world of the sea to safeguard the lives of his people. Unbeknownst to him, his brother Bhaira is plotting a conspiracy against him. As events unfold, Devara passes on his legacy to his mild-mannered and timid son, Varada.",
+  "popularity": 48.4639,
+  "poster_path": "/1105WNYals12Va2f4F3VeBZdcWX.jpg",
+  "production_companies": [
+    {
+      "id": 163427,
+      "logo_path": null,
+      "name": "N. T. R. Arts",
+      "origin_country": "IN"
+    },
+    {
+      "id": 175613,
+      "logo_path": null,
+      "name": "Yuvasudha Arts",
+      "origin_country": "IN"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "IN",
+      "name": "India"
+    }
+  ],
+  "release_date": "2024-09-26",
+  "revenue": 49520000,
+  "runtime": 175,
+  "spoken_languages": [
+    {
+      "english_name": "Telugu",
+      "iso_639_1": "te",
+      "name": "తెలుగు"
+    }
+  ],
+  "status": "Released",
+  "tagline": "When courage turns into a Disease... Fear is the only cure",
+  "title": "Devara: Part 1",
+  "video": false,
+  "vote_average": 6.959,
+  "vote_count": 194
+}

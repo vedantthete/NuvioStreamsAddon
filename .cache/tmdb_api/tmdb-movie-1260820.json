@@ -1,0 +1,65 @@
+{
+  "adult": false,
+  "backdrop_path": "/jI8j3vy1fFZpjaGA6ALuyQuadfm.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    }
+  ],
+  "homepage": "",
+  "id": 1260820,
+  "imdb_id": "tt21824844",
+  "origin_country": [
+    "ES"
+  ],
+  "original_language": "es",
+  "original_title": "Stream",
+  "overview": "Craven, a streamer with thousands of followers on a live streaming platform, has prepared a very special stream for Halloween. What no one expects when reacting to a video of Pentagram, a group of young paranormal investigators, is that the live experience will turn into the worst night of their lives. And maybe... the last.",
+  "popularity": 57.8663,
+  "poster_path": "/nnyjtBfUYA8ASHA9OhADrX0sMNQ.jpg",
+  "production_companies": [
+    {
+      "id": 223799,
+      "logo_path": null,
+      "name": "Cotas Films",
+      "origin_country": ""
+    },
+    {
+      "id": 151949,
+      "logo_path": null,
+      "name": "MGC Marketing Producción",
+      "origin_country": ""
+    },
+    {
+      "id": 223800,
+      "logo_path": null,
+      "name": "Wild Lemon Films",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "ES",
+      "name": "Spain"
+    }
+  ],
+  "release_date": "2024-02-06",
+  "revenue": 0,
+  "runtime": 84,
+  "spoken_languages": [
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Stream",
+  "video": false,
+  "vote_average": 6.3,
+  "vote_count": 16
+}

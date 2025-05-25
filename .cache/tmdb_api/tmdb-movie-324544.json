@@ -1,0 +1,82 @@
+{
+  "adult": false,
+  "backdrop_path": "/op3qmNhvwEvyT7UFyPbIfQmKriB.jpg",
+  "belongs_to_collection": null,
+  "budget": 55000000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    }
+  ],
+  "homepage": "https://inthelostlands.com",
+  "id": 324544,
+  "imdb_id": "tt4419684",
+  "origin_country": [
+    "DE",
+    "CH"
+  ],
+  "original_language": "en",
+  "original_title": "In the Lost Lands",
+  "overview": "A queen sends the powerful and feared sorceress Gray Alys to the ghostly wilderness of the Lost Lands in search of a magical power, where she and her guide, the drifter Boyce, must outwit and outfight both man and demon.",
+  "popularity": 145.0698,
+  "poster_path": "/dDlfjR7gllmr8HTeN6rfrYhTdwX.jpg",
+  "production_companies": [
+    {
+      "id": 47,
+      "logo_path": "/i7Z9ot2o3N5Sa3HrF09kniFs2y8.png",
+      "name": "Constantin Film",
+      "origin_country": "DE"
+    },
+    {
+      "id": 187303,
+      "logo_path": "/5CJA1Ej3gJxosjkzz2T7AeLw1SQ.png",
+      "name": "Spark Productions",
+      "origin_country": "CH"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "DE",
+      "name": "Germany"
+    },
+    {
+      "iso_3166_1": "CH",
+      "name": "Switzerland"
+    }
+  ],
+  "release_date": "2025-02-27",
+  "revenue": 4755330,
+  "runtime": 102,
+  "spoken_languages": [
+    {
+      "english_name": "German",
+      "iso_639_1": "de",
+      "name": "Deutsch"
+    },
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Ndebele",
+      "iso_639_1": "nd",
+      "name": ""
+    }
+  ],
+  "status": "Released",
+  "tagline": "She seeks the power to free her people.",
+  "title": "In the Lost Lands",
+  "video": false,
+  "vote_average": 6.4,
+  "vote_count": 388
+}

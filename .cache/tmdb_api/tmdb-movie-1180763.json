@@ -1,0 +1,49 @@
+{
+  "adult": false,
+  "backdrop_path": "/d4h5A6tcJYwnU4HI3oSiNrqkgwN.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    }
+  ],
+  "homepage": "https://fromtheshadowsfilm.com",
+  "id": 1180763,
+  "imdb_id": "tt14208454",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "From the Shadows",
+  "overview": "When Dr. Joseph Cawl and members of his Hidden Wisdom cult die in a mysterious fire, survivors contact a paranormal expert to find the truth. What they discover makes them the next target of a deranged killer.",
+  "popularity": 83.534,
+  "poster_path": "/22aFuf6UnDaGP9G5CLfF92Cj1nf.jpg",
+  "production_companies": [],
+  "production_countries": [],
+  "release_date": "2023-09-22",
+  "revenue": 0,
+  "runtime": 88,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "From the Shadows",
+  "video": false,
+  "vote_average": 3.1,
+  "vote_count": 4
+}

@@ -1278,5 +1278,10 @@ module.exports = {
     getStreamsFromTmdbId,
     parseQualityFromLabel,
     convertImdbToTmdb,
-    isScraperApiKeyNeeded // MODIFICATION: Export the new function
+    isScraperApiKeyNeeded,
+    // Functions needed by cache_populator.js
+    getShowboxUrlFromTmdbInfo,
+    ShowBoxScraper, 
+    extractFidsFromFebboxPage,
+    processShowWithSeasonsEpisodes
 }; 

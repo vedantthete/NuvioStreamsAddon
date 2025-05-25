@@ -1,0 +1,71 @@
+{
+  "adult": false,
+  "backdrop_path": "/dAeubkAjzTCoP3VFFxu0Btm4mFp.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.riffraffthemovie.com",
+  "id": 1127767,
+  "imdb_id": "tt27775403",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Riff Raff",
+  "overview": "A retired hitman's life is turned upside down when his ex-wife and son arrive unannounced during the holidays because they are on the run from his former mob associates.",
+  "popularity": 2.1628,
+  "poster_path": "/xPSur71bxvFVdQ6RdKv0yaVKT2n.jpg",
+  "production_companies": [
+    {
+      "id": 206783,
+      "logo_path": "/mVo5Ir4gatRa1U94v4p9Mr15OPJ.png",
+      "name": "Signature Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 169623,
+      "logo_path": null,
+      "name": "Canopy Pictures",
+      "origin_country": "CN"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    },
+    {
+      "iso_3166_1": "CN",
+      "name": "China"
+    }
+  ],
+  "release_date": "2025-02-27",
+  "revenue": 901370,
+  "runtime": 103,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Crime is a family affair.",
+  "title": "Riff Raff",
+  "video": false,
+  "vote_average": 5.7,
+  "vote_count": 38
+}

@@ -1,0 +1,69 @@
+{
+  "adult": false,
+  "backdrop_path": "/1hBtO9tXP60IFBZD27OsbaBmxs5.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 37,
+      "name": "Western"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    }
+  ],
+  "homepage": "",
+  "id": 1414048,
+  "imdb_id": "tt35317668",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Day of Reckoning",
+  "overview": "Put-upon lawman John Dorsey is on the verge of losing his wife and his job as sheriff, so he posses up with bullish U.S. Marshall Butch Hayden to hold outlaw Emily Rusk hostage. A battle of wills ensues as Emily turns the posse on themselves, but as her marauding husband and his gang approach, Emily and John realize they will need each other to survive.",
+  "popularity": 56.4243,
+  "poster_path": "/cVSjSQryFUERYSdOmdgJ2m0eBte.jpg",
+  "production_companies": [
+    {
+      "id": 79279,
+      "logo_path": "/gcCJ3eCR1bzw7IPQX3UoxqClpUP.png",
+      "name": "ESX Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 186218,
+      "logo_path": "/4G1yai3i2nUmoBbz78BSP0TDh8l.png",
+      "name": "Lila Lane Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 135299,
+      "logo_path": "/j7wNO03pluRj5WQQKVK0URm5upr.png",
+      "name": "TackleBox Films",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-03-28",
+  "revenue": 0,
+  "runtime": 106,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Day of Reckoning",
+  "video": false,
+  "vote_average": 6.7,
+  "vote_count": 17
+}

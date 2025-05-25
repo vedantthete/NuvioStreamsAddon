@@ -1,0 +1,130 @@
+{
+  "adult": false,
+  "backdrop_path": "/hmZnqijPaaACjenDkrbWcCmcADI.jpg",
+  "belongs_to_collection": null,
+  "budget": 9600000,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://a24films.com/films/the-brutalist",
+  "id": 549509,
+  "imdb_id": "tt8999762",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "The Brutalist",
+  "overview": "When a visionary architect and his wife flee post-war Europe in 1947 to rebuild their legacy and witness the birth of modern United States, their lives are changed forever by a mysterious, wealthy client.",
+  "popularity": 17.3278,
+  "poster_path": "/vP7Yd6couiAaw9jgMd5cjMRj3hQ.jpg",
+  "production_companies": [
+    {
+      "id": 237811,
+      "logo_path": "/9lTZCHoAiGnY5oPJVQHU9ilHr0G.png",
+      "name": "Brookstreet Pictures",
+      "origin_country": "GB"
+    },
+    {
+      "id": 236171,
+      "logo_path": null,
+      "name": "Kaplan Morrison",
+      "origin_country": "US"
+    },
+    {
+      "id": 153971,
+      "logo_path": "/fKr7g5Q4NFl94TOijKgzmhtb9eu.png",
+      "name": "Intake Films",
+      "origin_country": "GB"
+    },
+    {
+      "id": 19194,
+      "logo_path": "/pi73D7m6qBeQ6TtXi5bv5QeEwNK.png",
+      "name": "Andrew Lauren Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 9987,
+      "logo_path": "/o5OTKAw7Acl5fTZYPyl8M8D9570.png",
+      "name": "Lipsync Productions",
+      "origin_country": "GB"
+    },
+    {
+      "id": 215964,
+      "logo_path": "/hgueKTQkSwc6r7rNfMaC155E1bl.png",
+      "name": "Richmond Pictures",
+      "origin_country": "GB"
+    },
+    {
+      "id": 236172,
+      "logo_path": null,
+      "name": "Meyohas Studio",
+      "origin_country": "US"
+    },
+    {
+      "id": 171436,
+      "logo_path": "/2PCuIrmhOMX9eGpxs8PQWjxfU3s.png",
+      "name": "Carte Blanche",
+      "origin_country": "US"
+    },
+    {
+      "id": 242541,
+      "logo_path": "/1jtSImaZfXUYoqKlyQoYIwwvfx2.png",
+      "name": "Pierce Capital Entertainment",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2024-12-20",
+  "revenue": 50145227,
+  "runtime": 215,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Italian",
+      "iso_639_1": "it",
+      "name": "Italiano"
+    },
+    {
+      "english_name": "Russian",
+      "iso_639_1": "ru",
+      "name": "Pусский"
+    },
+    {
+      "english_name": "Hebrew",
+      "iso_639_1": "he",
+      "name": "עִבְרִית"
+    },
+    {
+      "english_name": "Hungarian",
+      "iso_639_1": "hu",
+      "name": "Magyar"
+    },
+    {
+      "english_name": "Yiddish",
+      "iso_639_1": "yi",
+      "name": ""
+    }
+  ],
+  "status": "Released",
+  "tagline": "Welcome to America.",
+  "title": "The Brutalist",
+  "video": false,
+  "vote_average": 7.02,
+  "vote_count": 1075
+}

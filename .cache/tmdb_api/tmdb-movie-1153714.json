@@ -1,0 +1,79 @@
+{
+  "adult": false,
+  "backdrop_path": "/eDBZN0TbWkxoAB0qIDFagVcPPTN.jpg",
+  "belongs_to_collection": null,
+  "budget": 15000000,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "https://a24films.com/films/death-of-a-unicorn",
+  "id": 1153714,
+  "imdb_id": "tt28443655",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Death of a Unicorn",
+  "overview": "A father and daughter accidentally hit and kill a unicorn while en route to a weekend retreat, where his billionaire boss seeks to exploit the creature’s miraculous curative properties.",
+  "popularity": 75.6604,
+  "poster_path": "/lXR32JepFwD1UHkplWqtBP1K79z.jpg",
+  "production_companies": [
+    {
+      "id": 41077,
+      "logo_path": "/1ZXsGaFPgrgS6ZZGS37AqD5uU12.png",
+      "name": "A24",
+      "origin_country": "US"
+    },
+    {
+      "id": 123620,
+      "logo_path": "/ePRhZ3yb09Ya6WMzCCBYopwIYbE.png",
+      "name": "Square Peg",
+      "origin_country": "US"
+    },
+    {
+      "id": 89386,
+      "logo_path": "/vZB7mZWZ0uL4qmDeisrkGb0ce2y.png",
+      "name": "Secret Engine",
+      "origin_country": "US"
+    },
+    {
+      "id": 114130,
+      "logo_path": "/4qWbeq1VqAH1RSCBFvCNkkY5Qi8.png",
+      "name": "Ley Line Entertainment",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-03-27",
+  "revenue": 15983827,
+  "runtime": 107,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Payback is a beast.",
+  "title": "Death of a Unicorn",
+  "video": false,
+  "vote_average": 6.4,
+  "vote_count": 246
+}

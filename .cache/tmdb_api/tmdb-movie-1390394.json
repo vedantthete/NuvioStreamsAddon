@@ -1,0 +1,64 @@
+{
+  "adult": false,
+  "backdrop_path": "/qQ9i4mO2GrUFR3gLWjf8J6s3Wf3.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 99,
+      "name": "Documentary"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81667943",
+  "id": 1390394,
+  "imdb_id": "tt34682248",
+  "origin_country": [
+    "BR"
+  ],
+  "original_language": "pt",
+  "original_title": "Baila, Vini",
+  "overview": "Vini Jr. has it all: talent, resilience and boldness. Follow his dancing, unpredictable feet on his inspiring journey to becoming a global soccer star.",
+  "popularity": 46.9452,
+  "poster_path": "/4ImGMcwpy4k2zmcXBSFYNK6kRr9.jpg",
+  "production_companies": [
+    {
+      "id": 2429,
+      "logo_path": "/s0p6DEF7H9yooJFjKhN4lFpTiVk.png",
+      "name": "Conspiração Filmes",
+      "origin_country": "BR"
+    },
+    {
+      "id": 262440,
+      "logo_path": null,
+      "name": "VJR Studios",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "BR",
+      "name": "Brazil"
+    }
+  ],
+  "release_date": "2025-05-15",
+  "revenue": 0,
+  "runtime": 106,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Portuguese",
+      "iso_639_1": "pt",
+      "name": "Português"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Vini Jr.",
+  "video": false,
+  "vote_average": 6,
+  "vote_count": 18
+}

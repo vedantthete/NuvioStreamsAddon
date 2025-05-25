@@ -1,0 +1,57 @@
+{
+  "adult": false,
+  "backdrop_path": "/vNUwK5P42m81uG57kKI1WxSZwIQ.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    }
+  ],
+  "homepage": "",
+  "id": 1403735,
+  "imdb_id": "tt32831759",
+  "origin_country": [
+    "IN"
+  ],
+  "original_language": "te",
+  "original_title": "లైలా",
+  "overview": "Sonu Model, a renowned beautician from the old city, is forced to disguise himself as Laila, leading to a series of comedic, romantic, and action-packed events. Chaos ensues in this hilarious laugh riot",
+  "popularity": 117.6774,
+  "poster_path": "/l4gsNxFPGpzbq0D6QK1a8vO1lBz.jpg",
+  "production_companies": [
+    {
+      "id": 100071,
+      "logo_path": null,
+      "name": "Shine Screens",
+      "origin_country": "IN"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "IN",
+      "name": "India"
+    }
+  ],
+  "release_date": "2025-02-14",
+  "revenue": 0,
+  "runtime": 134,
+  "spoken_languages": [
+    {
+      "english_name": "Telugu",
+      "iso_639_1": "te",
+      "name": "తెలుగు"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Laila",
+  "video": false,
+  "vote_average": 5,
+  "vote_count": 3
+}

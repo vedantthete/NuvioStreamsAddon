@@ -1,0 +1,133 @@
+{
+  "adult": false,
+  "backdrop_path": "/r4X2xRrWleVgx0kahP27xRmm3ia.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "https://theavenue.film/movies/locked",
+  "id": 1083968,
+  "imdb_id": "tt26671996",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Locked",
+  "overview": "When Eddie breaks into a luxury SUV, he steps into a deadly trap set by William, a self-proclaimed vigilante delivering his own brand of twisted justice. With no means of escape, Eddie must fight to survive in a ride where escape is an illusion, survival is a nightmare, and justice shifts into high gear.",
+  "popularity": 33.9548,
+  "poster_path": "/hhkiqXpfpufwxVrdSftzeKIANl3.jpg",
+  "production_companies": [
+    {
+      "id": 220749,
+      "logo_path": null,
+      "name": "north.five.six",
+      "origin_country": "US"
+    },
+    {
+      "id": 192895,
+      "logo_path": "/69EFt5deCSBptxMaW3NJlpSpdqC.png",
+      "name": "ZQ Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 194918,
+      "logo_path": "/pzsC9ZzbRjHaBES0GH8n2dgtCZk.png",
+      "name": "R.U. Robot Studios",
+      "origin_country": "CZ"
+    },
+    {
+      "id": 55446,
+      "logo_path": "/zi63Cmjvx06eELmmduPBDRyP135.png",
+      "name": "Arcana Studio",
+      "origin_country": "CA"
+    },
+    {
+      "id": 249834,
+      "logo_path": null,
+      "name": "Sillen Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 121204,
+      "logo_path": "/vbtvY4IxgUZk713rkmoTO4MHIac.png",
+      "name": "BondIt Media Capital",
+      "origin_country": "US"
+    },
+    {
+      "id": 157114,
+      "logo_path": null,
+      "name": "Exemplary Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 107037,
+      "logo_path": "/1IpcXQYgcVumtmfZxlBsw2c2g0L.png",
+      "name": "Magic Button Films",
+      "origin_country": "CA"
+    },
+    {
+      "id": 249836,
+      "logo_path": null,
+      "name": "Longevity Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 2623,
+      "logo_path": "/7Bkm1yUF0y8x6jw8dHRfzS3B6dq.png",
+      "name": "Blue Rider Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 122323,
+      "logo_path": "/gWiaDcDxt0AkSE9hxsUn5naFGRT.png",
+      "name": "Raimi Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 185127,
+      "logo_path": "/lD5UjvX5MsbIwbZJvdC5aee1nwm.png",
+      "name": "The Avenue Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 77317,
+      "logo_path": null,
+      "name": "A-A Productions",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    },
+    {
+      "iso_3166_1": "CA",
+      "name": "Canada"
+    },
+    {
+      "iso_3166_1": "CZ",
+      "name": "Czech Republic"
+    }
+  ],
+  "release_date": "2025-03-20",
+  "revenue": 3,
+  "runtime": 95,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "No escape. No mercy. Just survival.",
+  "title": "Locked",
+  "video": false,
+  "vote_average": 6.315,
+  "vote_count": 143
+}

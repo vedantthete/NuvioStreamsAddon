@@ -1,0 +1,81 @@
+{
+  "adult": false,
+  "backdrop_path": "/icFWIk1KfkWLZnugZAJEDauNZ94.jpg",
+  "belongs_to_collection": null,
+  "budget": 15000000,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    }
+  ],
+  "homepage": "https://untildawn.movie",
+  "id": 1232546,
+  "imdb_id": "tt30955489",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Until Dawn",
+  "overview": "One year after her sister Melanie mysteriously disappeared, Clover and her friends head into the remote valley where she vanished in search of answers. Exploring an abandoned visitor center, they find themselves stalked by a masked killer and horrifically murdered one by one...only to wake up and find themselves back at the beginning of the same evening.",
+  "popularity": 287.8015,
+  "poster_path": "/juA4IWO52Fecx8lhAsxmDgy3M3.jpg",
+  "production_companies": [
+    {
+      "id": 125281,
+      "logo_path": "/3hV8pyxzAJgEjiSYVv1WZ0ZYayp.png",
+      "name": "PlayStation Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 149696,
+      "logo_path": "/w0ARek3q2bIKGfoM2WRsFOqyYCB.png",
+      "name": "Coin Operated",
+      "origin_country": "US"
+    },
+    {
+      "id": 125060,
+      "logo_path": "/9giIHcLFMEQhYByHBvPB2ZuQSM8.png",
+      "name": "Mångata",
+      "origin_country": "US"
+    },
+    {
+      "id": 829,
+      "logo_path": "/aXqwCvJSCDbTclkxAYfsT1l4Dsa.png",
+      "name": "Vertigo Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 3287,
+      "logo_path": "/bz6GbCQQXGNE56LTW9dwgksW0Iw.png",
+      "name": "Screen Gems",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-04-23",
+  "revenue": 50023607,
+  "runtime": 103,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Every night a different nightmare.",
+  "title": "Until Dawn",
+  "video": false,
+  "vote_average": 6.4,
+  "vote_count": 284
+}

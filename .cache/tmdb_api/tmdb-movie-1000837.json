@@ -1,0 +1,91 @@
+{
+  "adult": false,
+  "backdrop_path": "/x0pkoGlwWdkzRxgQioD3cUG0awu.jpg",
+  "belongs_to_collection": null,
+  "budget": 1480000,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 36,
+      "name": "History"
+    }
+  ],
+  "homepage": "https://www.sonyclassics.com/film/imstillhere",
+  "id": 1000837,
+  "imdb_id": "tt14961016",
+  "origin_country": [
+    "BR"
+  ],
+  "original_language": "pt",
+  "original_title": "Ainda Estou Aqui",
+  "overview": "In 1971, military dictatorship in Brazil reaches its height. The Paiva family — Rubens, Eunice, and their five children — live in a beachside house in Rio, open to all their friends. One day, Rubens is taken for questioning and does not return.",
+  "popularity": 13.6393,
+  "poster_path": "/gZnsMbhCvhzAQlKaVpeFRHYjGyb.jpg",
+  "production_companies": [
+    {
+      "id": 346,
+      "logo_path": "/ymwuRMQkrQojx55MeMO861Rdecz.png",
+      "name": "VideoFilmes",
+      "origin_country": "BR"
+    },
+    {
+      "id": 393,
+      "logo_path": "/5lf9uTroyzjNDOyu86qWV0eqIPc.png",
+      "name": "MACT Productions",
+      "origin_country": "FR"
+    },
+    {
+      "id": 30666,
+      "logo_path": "/g8LmDZVFWDRJW72sj0nAj1gh8ac.png",
+      "name": "RT Features",
+      "origin_country": "BR"
+    },
+    {
+      "id": 94,
+      "logo_path": "/huC7HqorvUThGIrENrbcHmQVUA0.png",
+      "name": "ARTE France Cinéma",
+      "origin_country": "FR"
+    },
+    {
+      "id": 2429,
+      "logo_path": "/s0p6DEF7H9yooJFjKhN4lFpTiVk.png",
+      "name": "Conspiração Filmes",
+      "origin_country": "BR"
+    },
+    {
+      "id": 205328,
+      "logo_path": "/jnjQmSwaNZEeiteT857QVIXLgIt.png",
+      "name": "Globoplay",
+      "origin_country": "BR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "BR",
+      "name": "Brazil"
+    },
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    }
+  ],
+  "release_date": "2024-09-19",
+  "revenue": 35741532,
+  "runtime": 138,
+  "spoken_languages": [
+    {
+      "english_name": "Portuguese",
+      "iso_639_1": "pt",
+      "name": "Português"
+    }
+  ],
+  "status": "Released",
+  "tagline": "When a mother's courage defies tyranny, hope is reborn.",
+  "title": "I'm Still Here",
+  "video": false,
+  "vote_average": 7.971,
+  "vote_count": 670
+}

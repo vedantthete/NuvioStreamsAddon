@@ -1,0 +1,70 @@
+{
+  "adult": false,
+  "backdrop_path": "/7nfpkR9XsQ1lBNCXSSHxGV7Dkxe.jpg",
+  "belongs_to_collection": {
+    "id": 1084247,
+    "name": "Zootopia Collection",
+    "poster_path": "/u8597pdwSHOvcJQhP2cLi7a67ZW.jpg",
+    "backdrop_path": "/1WDssJDYInLA4Avg45lgy3WM6Ly.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    }
+  ],
+  "homepage": "",
+  "id": 1084242,
+  "imdb_id": "tt26443597",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Zootopia 2",
+  "overview": "Detectives Judy Hopps and Nick Wilde find themselves on the twisting trail of a mysterious reptile who arrives in Zootopia and turns the mammal metropolis upside down.",
+  "popularity": 17.3624,
+  "poster_path": "/LrMBxFwnsMgXTnaWqHYinn3vDN.jpg",
+  "production_companies": [
+    {
+      "id": 6125,
+      "logo_path": "/tzsMJBJZINu7GHzrpYzpReWhh66.png",
+      "name": "Walt Disney Animation Studios",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-11-26",
+  "revenue": 0,
+  "runtime": 0,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "In Production",
+  "tagline": "",
+  "title": "Zootopia 2",
+  "video": false,
+  "vote_average": 0,
+  "vote_count": 0
+}

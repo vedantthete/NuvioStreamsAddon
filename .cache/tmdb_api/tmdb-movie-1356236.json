@@ -1,0 +1,54 @@
+{
+  "adult": false,
+  "backdrop_path": "/svLj9iyRmmeNVRsMreANn7DPPZE.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    }
+  ],
+  "homepage": "",
+  "id": 1356236,
+  "imdb_id": "tt33319706",
+  "origin_country": [
+    "AR",
+    "NZ"
+  ],
+  "original_language": "en",
+  "original_title": "Saint Catherine",
+  "overview": "An orphaned girl is rescued from a satanic ritual and taken to Saint Catherine Institute for homeless youth. There she will learn new skills while facing demons that stalk her.",
+  "popularity": 64.3093,
+  "poster_path": "/hBJdzKPeDaC96AzlrtMWBomYSZV.jpg",
+  "production_companies": [
+    {
+      "id": 97315,
+      "logo_path": null,
+      "name": "Black Mandala",
+      "origin_country": "NZ"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "NZ",
+      "name": "New Zealand"
+    }
+  ],
+  "release_date": "2024-09-24",
+  "revenue": 0,
+  "runtime": 86,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Saint Catherine",
+  "video": false,
+  "vote_average": 6.908,
+  "vote_count": 38
+}

@@ -1,0 +1,63 @@
+{
+  "adult": false,
+  "backdrop_path": "/mkylBNgH4DSvVWm3SdaKr63rDdt.jpg",
+  "belongs_to_collection": null,
+  "budget": 15000000,
+  "genres": [
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 10402,
+      "name": "Music"
+    }
+  ],
+  "homepage": "https://www.hurryuptomorrow.movie",
+  "id": 1093237,
+  "imdb_id": "tt26927452",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Hurry Up Tomorrow",
+  "overview": "A musician plagued by insomnia is pulled into an odyssey with a stranger who begins to unravel the very core of his existence.",
+  "popularity": 18.8652,
+  "poster_path": "/9W44XSMYbjXdlXcQhD104zPhhhJ.jpg",
+  "production_companies": [
+    {
+      "id": 201732,
+      "logo_path": "/uSnew3vQeFPEh4AkUMmS7eRgPzJ.png",
+      "name": "Manic Phase",
+      "origin_country": "US"
+    },
+    {
+      "id": 81368,
+      "logo_path": "/srN5L2dTtbsb48VUHvpNG71pT7q.png",
+      "name": "Live Nation Productions",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-05-14",
+  "revenue": 3954179,
+  "runtime": 106,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Reality lies deeper than you think.",
+  "title": "Hurry Up Tomorrow",
+  "video": false,
+  "vote_average": 5.2,
+  "vote_count": 32
+}

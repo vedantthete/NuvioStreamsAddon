@@ -1,99 +1,121 @@
 // cache_populator.js
-const { getStreamsFromTmdbId, convertImdbToTmdb } = require('./scraper');
+const fs = require('fs').promises;
+const path = require('path');
+const {
+    getShowboxUrlFromTmdbInfo, // Caches TMDB info
+    ShowBoxScraper,          // Caches ShowBox pages and API responses
+    extractFidsFromFebboxPage, // Caches FebBox share page HTML
+    processShowWithSeasonsEpisodes, // Caches FebBox main page & season folder HTML
+    // We will NOT call fetchSourcesForSingleFid or getStreamsFromTmdbId directly to avoid fetching final stream links
+} = require('./scraper');
 
-async function populateCache() {
-    const args = process.argv.slice(2); // Skip node executable and script path
+const TMDB_MASTER_LIST_FILE = path.join(__dirname, 'tmdb_master_list.json');
+const SCRAPER_API_KEYS = [
+    '97b86e829812f220d98e737205778cab',
+    '96845d13e7a0a0d40fb4f148cd135ddc'
+];
+let currentApiKeyIndex = 0;
 
-    const usage = () => {
-        console.log(`
-Usage:
-  node cache_populator.js convert <imdbId>
-    Example: node cache_populator.js convert tt0111161
+// Simple delay function
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-  node cache_populator.js streams movie <tmdbId>
-    Example: node cache_populator.js streams movie 550
+function getNextScraperApiKey() {
+    const key = SCRAPER_API_KEYS[currentApiKeyIndex];
+    currentApiKeyIndex = (currentApiKeyIndex + 1) % SCRAPER_API_KEYS.length;
+    // console.log(`  Using ScraperAPI Key ending with: ...${key.slice(-4)}`);
+    return key;
+}
 
-  node cache_populator.js streams tv <tmdbId> [seasonNumber] [episodeNumber]
-    Example (whole season): node cache_populator.js streams tv 1396 1
-    Example (specific episode): node cache_populator.js streams tv 1396 1 1
-        `);
-    };
+async function populateCacheForMediaItem(mediaItem) {
+    const apiKey = getNextScraperApiKey();
+    console.log(`\nProcessing: ${mediaItem.title} (${mediaItem.type} - ${mediaItem.tmdbId}) with API key ...${apiKey.slice(-4)}`);
 
-    if (args.length < 2) {
-        usage();
+    // 1. Get ShowBox URL (this also caches TMDB data for the item)
+    const tmdbInfo = await getShowboxUrlFromTmdbInfo(mediaItem.type, mediaItem.tmdbId, apiKey);
+    if (!tmdbInfo || !tmdbInfo.showboxUrl) {
+        console.log(`  Skipping ${mediaItem.title}: Could not get ShowBox URL.`);
         return;
     }
+    console.log(`  Got ShowBox URL: ${tmdbInfo.showboxUrl}`);
+    await delay(200); // Delay after TMDB interaction
 
-    const command = args[0];
+    // 2. Get FebBox Share Link(s) (this caches ShowBox page HTML and its share_link API call)
+    const showboxScraper = new ShowBoxScraper(apiKey);
+    const febboxShareInfos = await showboxScraper.extractFebboxShareLinks(tmdbInfo.showboxUrl);
+    if (!febboxShareInfos || febboxShareInfos.length === 0) {
+        console.log(`  Skipping ${mediaItem.title}: No FebBox share links found from ShowBox.`);
+        return;
+    }
+    console.log(`  Found ${febboxShareInfos.length} FebBox share link(s).`);
+    await delay(200); // Delay after ShowBox interaction
 
-    if (command === 'convert') {
-        if (args.length !== 2) {
-            console.error('Error: Invalid arguments for "convert" command.');
-            usage();
-            return;
-        }
-        const imdbId = args[1];
-        console.log(`Attempting to convert IMDb ID: ${imdbId} and cache the result...`);
-        try {
-            const result = await convertImdbToTmdb(imdbId);
-            if (result) {
-                console.log(`Conversion successful for ${imdbId}: TMDB ID ${result.tmdbId} (${result.tmdbType}), Title: ${result.title}`);
-                console.log(`Data for this conversion should now be cached.`);
-            } else {
-                console.log(`Conversion failed or no data found for ${imdbId}. Check scraper logs for details.`);
+    // 3. For each FebBox link, access it to cache its HTML and potentially season/episode listings
+    for (const shareInfo of febboxShareInfos) {
+        const febboxUrl = shareInfo.febbox_share_url;
+        console.log(`  Processing FebBox URL for caching: ${febboxUrl}`);
+
+        if (mediaItem.type === 'tv' && mediaItem.seasons && mediaItem.seasons.length > 0) {
+            for (const season of mediaItem.seasons) {
+                console.log(`    Caching season ${season.season_number} for ${mediaItem.title}`);
+                // Call processShowWithSeasonsEpisodes to cache main FebBox page and specific season folder HTML
+                // We pass an empty array for allStreams as we don't want to collect them here.
+                // We also pass null for episodeNum to indicate we are processing for the whole season page context.
+                try {
+                    await processShowWithSeasonsEpisodes(febboxUrl, mediaItem.title, season.season_number, null, [], apiKey);
+                    console.log(`      Cached FebBox main page and season ${season.season_number} folder list for ${febboxUrl}`);
+                } catch (e) {
+                    console.error(`      Error processing season ${season.season_number} for ${mediaItem.title} at ${febboxUrl}: ${e.message}`);
+                }
+                await delay(500); // Delay between processing each season
             }
-        } catch (error) {
-            console.error(`Error during IMDb ID conversion for ${imdbId}:`, error.message);
-        }
-    } else if (command === 'streams') {
-        if (args.length < 3) {
-            console.error('Error: Invalid arguments for "streams" command.');
-            usage();
-            return;
-        }
-        const type = args[1];
-        const tmdbId = args[2];
-        let season = args[3] ? parseInt(args[3], 10) : null;
-        let episode = args[4] ? parseInt(args[4], 10) : null;
-
-        if (type !== 'movie' && type !== 'tv') {
-            console.error('Error: Invalid type. Must be "movie" or "tv".');
-            usage();
-            return;
-        }
-        if (isNaN(parseInt(tmdbId, 10))) {
-             console.warn(`Warning: TMDB ID "${tmdbId}" does not appear to be a valid number.`);
-        }
-        if (args[3] && isNaN(season)) {
-            console.error('Error: Season number must be a number.');
-            usage();
-            return;
-        }
-        if (args[4] && isNaN(episode)) {
-            console.error('Error: Episode number must be a number.');
-            usage();
-            return;
-        }
-
-
-        console.log(`Attempting to fetch streams for TMDB ${type}/${tmdbId}${season ? ` S${season}` : ''}${episode ? `E${episode}` : ''} and populate cache...`);
-        try {
-            const streams = await getStreamsFromTmdbId(type, tmdbId, season, episode);
-            if (streams && streams.length > 0) {
-                console.log(`Successfully fetched ${streams.length} streams for TMDB ${type}/${tmdbId}. All related data should now be cached.`);
-            } else {
-                console.log(`No streams found for TMDB ${type}/${tmdbId}. Some intermediate data might still be cached. Check scraper logs for details.`);
+        } else {
+            // For movies, or TV shows where season details weren't fetched/available in master list,
+            // just fetch and cache the main FebBox share page.
+            try {
+                await extractFidsFromFebboxPage(febboxUrl, apiKey);
+                console.log(`    Cached main FebBox page for ${febboxUrl}`);
+            } catch (e) {
+                console.error(`    Error extracting FIDs/caching for ${febboxUrl}: ${e.message}`);
             }
-        } catch (error) {
-            console.error(`Error fetching streams for TMDB ${type}/${tmdbId}:`, error.message);
         }
-    } else {
-        console.error(`Error: Unknown command "${command}".`);
-        usage();
+        await delay(300); // Delay after processing a FebBox URL
     }
 }
 
-populateCache().catch(err => {
-    console.error("Unhandled error in cache populator:", err.message);
-    console.error("Stacktrace:", err.stack);
+async function main() {
+    console.log("Starting Cache Populator...");
+    let tmdbMasterList;
+    try {
+        const fileContent = await fs.readFile(TMDB_MASTER_LIST_FILE, 'utf-8');
+        tmdbMasterList = JSON.parse(fileContent);
+        console.log(`Successfully read ${tmdbMasterList.length} items from ${TMDB_MASTER_LIST_FILE}`);
+    } catch (error) {
+        console.error(`Error reading or parsing ${TMDB_MASTER_LIST_FILE}: ${error.message}`);
+        console.error("Please ensure you run 'node fetch_tmdb_data.js' first to generate this file.");
+        return;
+    }
+
+    if (!tmdbMasterList || tmdbMasterList.length === 0) {
+        console.log("No media items found in the master list. Nothing to populate.");
+        return;
+    }
+
+    let itemsProcessed = 0;
+    for (const mediaItem of tmdbMasterList) {
+        try {
+            await populateCacheForMediaItem(mediaItem);
+            itemsProcessed++;
+            console.log(`  Completed processing for: ${mediaItem.title}. Total items processed: ${itemsProcessed}/${tmdbMasterList.length}`);
+        } catch (error) {
+            console.error(`Unhandled error processing ${mediaItem.title} (ID: ${mediaItem.tmdbId}): ${error.message}`);
+            // Optionally, decide if you want to continue or stop on unhandled errors
+        }
+        await delay(1000); // Delay between processing each top-level media item (movie/show)
+    }
+
+    console.log("Cache population process finished.");
+}
+
+main().catch(err => {
+    console.error("Unhandled critical error in cache populator main function:", err);
 }); 

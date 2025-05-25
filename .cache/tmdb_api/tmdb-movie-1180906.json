@@ -1,0 +1,71 @@
+{
+  "adult": false,
+  "backdrop_path": "/bFmziv84NfEVEGTK8c6EVY3bxve.jpg",
+  "belongs_to_collection": null,
+  "budget": 1500000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "",
+  "id": 1180906,
+  "imdb_id": "tt27611143",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Desert Dawn",
+  "overview": "A newly appointed small-town sheriff and his begrudging deputy get tangled up in a web of lies and corruption involving shady businessmen and the cartel while investigating the murder of a mysterious woman.",
+  "popularity": 62.2157,
+  "poster_path": "/S21BfLrJSD9njucBfY3CKqp8rD.jpg",
+  "production_companies": [
+    {
+      "id": 35625,
+      "logo_path": "/zxIrXuRMBmsXf7XpouDrF0P4RjI.png",
+      "name": "Premiere Entertainment Group",
+      "origin_country": "US"
+    },
+    {
+      "id": 141814,
+      "logo_path": null,
+      "name": "Al Bravo Films",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-05-15",
+  "revenue": 0,
+  "runtime": 89,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "There is no turning back.",
+  "title": "Desert Dawn",
+  "video": false,
+  "vote_average": 8.2,
+  "vote_count": 5
+}

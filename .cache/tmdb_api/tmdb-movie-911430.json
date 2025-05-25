@@ -1,0 +1,81 @@
+{
+  "adult": false,
+  "backdrop_path": "/8PHTO4a11JuZwYko7QPBUWq45wJ.jpg",
+  "belongs_to_collection": null,
+  "budget": 300000000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.f1themovie.com",
+  "id": 911430,
+  "imdb_id": "tt16311594",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "F1 The Movie",
+  "overview": "Racing legend Sonny Hayes is coaxed out of retirement to lead a struggling Formula 1 team—and mentor a young hotshot driver—while chasing one more chance at glory.",
+  "popularity": 16.0727,
+  "poster_path": "/cxq7ZfwV4BFhdvBLfN3VBJh03go.jpg",
+  "production_companies": [
+    {
+      "id": 81,
+      "logo_path": "/8wOfUhA7vwU2gbPjQy7Vv3EiF0o.png",
+      "name": "Plan B Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 130,
+      "logo_path": "/c9dVHPOL3cqCr2593Ahk0nEKTEM.png",
+      "name": "Jerry Bruckheimer Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 199632,
+      "logo_path": null,
+      "name": "Dawn Apollo Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 194232,
+      "logo_path": "/oE7H93u8sy5vvW5EH3fpCp68vvB.png",
+      "name": "Apple Studios",
+      "origin_country": "US"
+    },
+    {
+      "id": 19647,
+      "logo_path": null,
+      "name": "Monolith Pictures",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-06-22",
+  "revenue": 0,
+  "runtime": 153,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Post Production",
+  "tagline": "",
+  "title": "F1 The Movie",
+  "video": false,
+  "vote_average": 0,
+  "vote_count": 0
+}
