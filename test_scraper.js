@@ -1,7 +1,5 @@
+require('dotenv').config(); // Load environment variables from .env file
 const readline = require('readline');
-const { getStreamsFromTmdbId, isScraperApiKeyNeeded } = require('./scraper.js');
-
-const SCRAPER_API_KEY = '97b86e829812f220d98e737205778cab';
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -10,11 +8,48 @@ const rl = readline.createInterface({
 
 const question = (query) => new Promise((resolve) => rl.question(query, resolve));
 
+// Get ScraperAPI key from environment if available, otherwise use a fallback
+const SCRAPER_API_KEY = process.env.SCRAPER_API_KEY_VALUE || '97b86e829812f220d98e737205778cab';
+
 async function runScraperInteractive() {
   console.time('runScraperInteractive_total');
   try {
+    // Let user choose which scraper to use
+    console.log("\n==== SCRAPER MODE SELECTION ====");
+    console.log("1. ScraperAPI mode (uses scraperapi.js)");
+    console.log("   - Uses ScraperAPI service to bypass website blocks");
+    console.log("   - Requires a valid ScraperAPI key");
+    console.log("   - More reliable but has usage costs");
+    console.log("\n2. Proxy/Direct mode (uses scraper.js)");
+    console.log("   - Uses direct connections or optional proxy");
+    console.log("   - No ScraperAPI costs");
+    console.log("   - May encounter website blocks");
+    console.log("   - Can be configured to use a proxy via SHOWBOX_PROXY_URL_VALUE");
+    console.log("\n============================");
+    const scraperChoice = await question("Enter your choice (1 or 2): ");
+    
+    // Load appropriate scraper based on user input
+    let scraper;
+    if (scraperChoice === '1') {
+      console.log('\n✅ Using ScraperAPI mode with scraperapi.js');
+      scraper = require('./scraperapi.js');
+    } else {
+      console.log('\n✅ Using Proxy/Direct mode with scraper.js');
+      scraper = require('./scraper.js');
+    }
+    
+    // Show current environment configuration
+    console.log("\n==== CURRENT CONFIGURATION ====");
+    console.log(`ScraperAPI Key: ${SCRAPER_API_KEY ? "Configured" : "Not configured"}`);
+    console.log(`ShowBox Proxy URL: ${process.env.SHOWBOX_PROXY_URL_VALUE || "Not configured"}`);
+    console.log(`Cache Disabled: ${process.env.DISABLE_CACHE === 'true' ? "Yes" : "No"}`);
+    console.log("===============================\n");
+    
+    // Destructure the required functions from the selected scraper
+    const { getStreamsFromTmdbId, isScraperApiKeyNeeded } = scraper;
+    
     if (isScraperApiKeyNeeded() && !SCRAPER_API_KEY) {
-      console.error("Error: Scraper API Key is needed but not provided in test_scraper.js.");
+      console.error("⚠️ Error: Scraper API Key is needed but not provided in test_scraper.js.");
       rl.close();
       return;
     }
@@ -63,16 +98,24 @@ async function runScraperInteractive() {
     const streams = await getStreamsFromTmdbId(type, tmdbId, seasonNum, episodeNum, SCRAPER_API_KEY);
 
     if (streams && streams.length > 0) {
-      console.log("\n--- Found Streams ---");
+      console.log("\n===== FOUND STREAMS =====");
+      console.log(`Total streams found: ${streams.length}`);
+      
       streams.forEach((stream, index) => {
-        console.log(`${index + 1}. Title: ${stream.title}`);
-        console.log(`   Quality: ${stream.quality}`);
-        console.log(`   Size: ${stream.size || 'Unknown size'}`);
-        console.log(`   Codecs: ${(stream.codecs || []).join(', ') || 'N/A'}`);
-        console.log(`   URL: ${stream.url}\n`);
+        console.log(`\n📺 STREAM #${index + 1}`);
+        console.log(`🎬 Title: ${stream.title}`);
+        console.log(`🔍 Quality: ${stream.quality}`);
+        console.log(`📊 Size: ${stream.size || 'Unknown size'}`);
+        if (stream.codecs && stream.codecs.length > 0) {
+          console.log(`🎞️ Codecs: ${stream.codecs.join(', ')}`);
+        } else {
+          console.log(`🎞️ Codecs: N/A`);
+        }
+        console.log(`🔗 URL: ${stream.url}`);
       });
+      console.log("\n=======================");
     } else {
-      console.log("\n--- No streams found. ---");
+      console.log("\n❌ No streams found.");
     }
 
   } catch (error) {

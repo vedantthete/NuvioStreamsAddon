@@ -1,0 +1,147 @@
+{
+  "adult": false,
+  "backdrop_path": "/jRI3mFtozHlo6CNSw1943w5OBqX.jpg",
+  "created_by": [],
+  "episode_run_time": [],
+  "first_air_date": "2021-06-11",
+  "genres": [
+    {
+      "id": 10764,
+      "name": "Reality"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "https://www.amazon.com/dp/B095RYWGNR",
+  "id": 117648,
+  "in_production": true,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2025-05-23",
+  "last_episode_to_air": {
+    "id": 6093432,
+    "name": "Cottaging",
+    "overview": "There’s a big new arrival at the farm, a much smaller one down in the pig pens, and it looks as though the pub search might finally be over.",
+    "vote_average": 7,
+    "vote_count": 1,
+    "air_date": "2025-05-23",
+    "episode_number": 4,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 45,
+    "season_number": 4,
+    "show_id": 117648,
+    "still_path": "/8G7iXgiPScHEVJSuofq95kufNym.jpg"
+  },
+  "name": "Clarkson's Farm",
+  "next_episode_to_air": {
+    "id": 6093433,
+    "name": "Endgaming",
+    "overview": "",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-30",
+    "episode_number": 5,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": null,
+    "season_number": 4,
+    "show_id": 117648,
+    "still_path": "/quLjB6GEeuKDMCMpoZt1OpmkS2W.jpg"
+  },
+  "networks": [
+    {
+      "id": 1024,
+      "logo_path": "/w7HfLNm9CWwRmAMU58udl2L7We7.png",
+      "name": "Prime Video",
+      "origin_country": ""
+    }
+  ],
+  "number_of_episodes": 32,
+  "number_of_seasons": 4,
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_name": "Clarkson's Farm",
+  "overview": "Follow Jeremy Clarkson as he embarks on his latest adventure, farming. The man who on several occasions claims to be allergic to manual labour takes on the most manually labour intensive job there is. What could possibly go wrong?",
+  "popularity": 50.1852,
+  "poster_path": "/yKc3FqwD2eanWBUwqcRH7bChE3V.jpg",
+  "production_companies": [
+    {
+      "id": 114378,
+      "logo_path": "/u2LABgcjXoomyWSr2T3NHAqxSl7.png",
+      "name": "Expectation Entertainment",
+      "origin_country": "GB"
+    },
+    {
+      "id": 155845,
+      "logo_path": null,
+      "name": "Con Dao Productions",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2021-06-11",
+      "episode_count": 8,
+      "id": 178668,
+      "name": "Season 1",
+      "overview": "An intense, arduous and frequently hilarious year in the life of Britain’s most unlikely farmer, Jeremy Clarkson. Join Jeremy and his rag-tag band of agricultural associates as they face-up to a backdrop of unhelpful weather, disobedient animals, unresponsive crops and an unexpected pandemic. This is Jeremy Clarkson as you’ve never seen him before.",
+      "poster_path": "/a21632b9uQNsEgyyCMM1bCTjKw0.jpg",
+      "season_number": 1,
+      "vote_average": 8.4
+    },
+    {
+      "air_date": "2023-02-10",
+      "episode_count": 8,
+      "id": 319378,
+      "name": "Season 2",
+      "overview": "Another year in the life of Diddly Squat Farm, run by Jeremy Clarkson, Britain's best-known but least-qualified amateur farmer. In an effort to increase his annual profit (£144 last year) he's diversifying, in the shape of cows, more chickens and his own restaurant.",
+      "poster_path": "/ditg1eaI70yOco0KtzUaYLynieC.jpg",
+      "season_number": 2,
+      "vote_average": 8.5
+    },
+    {
+      "air_date": "2024-05-03",
+      "episode_count": 8,
+      "id": 377007,
+      "name": "Season 3",
+      "overview": "After the triumphant finale of Season 2, we return to Diddly Squat to find everything in turmoil. The council has shut the restaurant and the weather is ruining the crops. Desperate for new income streams Jeremy enters a world of pig breeding, goat attacks and mushroom mountains. Meanwhile Kaleb, promoted to farm manager, deals with an unwelcome rival. The funniest, most heartbreaking season yet.",
+      "poster_path": "/ej1F2GIoj4Tdz4rYtUilj4Haz2b.jpg",
+      "season_number": 3,
+      "vote_average": 8.4
+    },
+    {
+      "air_date": "2025-05-23",
+      "episode_count": 8,
+      "id": 449616,
+      "name": "Season 4",
+      "overview": "Jeremy is taking on his most ambitious project yet, setting out to buy a pub that will reignite his Farm to Fork restaurant vision. But the road to becoming a landlord isn’t exactly straightforward, and with new faces, new livestock and new machinery arriving at the farm, life at Diddly Squat is busier than ever.",
+      "poster_path": "/ssTi3MHqsrIlfoCH85NsdvAh0u7.jpg",
+      "season_number": 4,
+      "vote_average": 6.8
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "It’s the pig one.",
+  "type": "Reality",
+  "vote_average": 8.451,
+  "vote_count": 309
+}

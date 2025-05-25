@@ -1,0 +1,103 @@
+{
+  "adult": false,
+  "backdrop_path": "/1mAv2KedEyKR0cEdsMHANNwzAsS.jpg",
+  "created_by": [],
+  "episode_run_time": [
+    90
+  ],
+  "first_air_date": "2011-09-04",
+  "genres": [
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    }
+  ],
+  "homepage": "",
+  "id": 44434,
+  "in_production": false,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2011-09-11",
+  "last_episode_to_air": {
+    "id": 893506,
+    "name": "Part Two",
+    "overview": "With Janet no longer involved in the police interviews, Fred becomes uncooperative, but he seems to open up when she is asked to return. As the police continue to search his home and remote country locations for missing victims, Fred becomes preoccupied with one victim in particular - and Janet realises that she is physically similar to the missing woman. Later, Janet visits Fred in prison, hoping to persuade him to reveal more about his crimes. As she tries to convince Fred to tell the whole truth, she becomes gradually more closely involved with him - a development which proves to have shattering consequences for her.",
+    "vote_average": 8.3,
+    "vote_count": 3,
+    "air_date": "2011-09-11",
+    "episode_number": 2,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 69,
+    "season_number": 1,
+    "show_id": 44434,
+    "still_path": "/6gEZnMuaYaGAMXAg0s4Ky2IbdGX.jpg"
+  },
+  "name": "Appropriate Adult",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 9,
+      "logo_path": "/oz9pjTHnBUmlju8OkaTymhKbh6C.png",
+      "name": "ITV1",
+      "origin_country": "GB"
+    }
+  ],
+  "number_of_episodes": 2,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_name": "Appropriate Adult",
+  "overview": "The extraordinary story of Gloucester housewife Janet Leach who played a key role in the uncovering of the crimes of Fred and Rosemary West.",
+  "popularity": 2.9073,
+  "poster_path": "/aJWUhvJXoTdiAkuRz8WbFiMlpRH.jpg",
+  "production_companies": [
+    {
+      "id": 24546,
+      "logo_path": "/AffgIsVKcudKagSu3MV3phsV5Vw.png",
+      "name": "ITV Studios",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2011-09-04",
+      "episode_count": 2,
+      "id": 53442,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/iTL9QYyKZYpekVAVYVzeT8iflae.jpg",
+      "season_number": 1,
+      "vote_average": 8.3
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Ended",
+  "tagline": "",
+  "type": "Miniseries",
+  "vote_average": 6.7,
+  "vote_count": 44
+}

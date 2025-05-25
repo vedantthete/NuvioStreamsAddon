@@ -1,5 +1,20 @@
 const { addonBuilder } = require('stremio-addon-sdk');
-const { getStreamsFromTmdbId, convertImdbToTmdb, isScraperApiKeyNeeded } = require('./scraper');
+require('dotenv').config(); // Ensure environment variables are loaded
+
+// Determine which scraper to use based on environment variable
+let scraper;
+if (process.env.SCRAPER_MODE === 'api') {
+    console.log('Using ScraperAPI mode with scraperapi.js');
+    scraper = require('./scraperapi.js');
+} else {
+    // Default to proxy/direct mode
+    console.log('Using proxy/direct mode with scraper.js');
+    scraper = require('./scraper.js');
+}
+
+// Destructure the required functions from the selected scraper
+const { getStreamsFromTmdbId, convertImdbToTmdb, isScraperApiKeyNeeded } = scraper;
+
 const manifest = require('./manifest.json');
 
 // Initialize the addon
