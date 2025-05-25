@@ -1,0 +1,74 @@
+{
+  "adult": false,
+  "backdrop_path": "/dx8wpD04sWu8g9oDi9j0Vi1ocqQ.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    }
+  ],
+  "homepage": "",
+  "id": 1140847,
+  "imdb_id": "tt28087226",
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_title": "Cinderella's Revenge",
+  "overview": "Cinderella finds freedom from her wicked stepmother with the help of her fairy godmother. Only this time, they unleash a plan of bloody vengeance.",
+  "popularity": 12.8377,
+  "poster_path": "/cYB3SHhITJSbRoisgn9QQTP8YkZ.jpg",
+  "production_companies": [
+    {
+      "id": 13923,
+      "logo_path": "/wobbHfqb8lIBcsUxMOQEgMdVqsQ.png",
+      "name": "Sobini Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 39081,
+      "logo_path": null,
+      "name": "Titan Global Entertainment",
+      "origin_country": ""
+    },
+    {
+      "id": 220959,
+      "logo_path": null,
+      "name": "EMRJ Entertainment",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    }
+  ],
+  "release_date": "2024-04-26",
+  "revenue": 0,
+  "runtime": 85,
+  "spoken_languages": [
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    },
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "This ain't no fairy tale",
+  "title": "Cinderella's Revenge",
+  "video": false,
+  "vote_average": 5.4,
+  "vote_count": 35
+}

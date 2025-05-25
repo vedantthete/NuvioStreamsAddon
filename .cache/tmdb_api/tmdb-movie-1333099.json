@@ -1,0 +1,119 @@
+{
+  "adult": false,
+  "backdrop_path": "/585hAEHBMNqyCt3pswF5MjImBrR.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    }
+  ],
+  "homepage": "",
+  "id": 1333099,
+  "imdb_id": "tt9881850",
+  "origin_country": [
+    "AR",
+    "BR",
+    "EC",
+    "CO",
+    "PE",
+    "ES"
+  ],
+  "original_language": "es",
+  "original_title": "Dalia y el libro rojo",
+  "overview": "Dalia, the daughter of a famous writer who has recently died, inherits the legacy of finishing his book. To do this, Dalia will become part of the book and will come face to face with the characters who have taken the theme of the book in order to be the protagonists.",
+  "popularity": 14.352,
+  "poster_path": "/brk5WOAEQWPcMLMsRrkPBtpVk3f.jpg",
+  "production_companies": [
+    {
+      "id": 92248,
+      "logo_path": "/7FXFnpWBSsEUcWqNiZNPLMO5rUi.png",
+      "name": "Vista Sur Films",
+      "origin_country": "AR"
+    },
+    {
+      "id": 236668,
+      "logo_path": null,
+      "name": "Golem Studio",
+      "origin_country": ""
+    },
+    {
+      "id": 92247,
+      "logo_path": null,
+      "name": "Felipe Producciones",
+      "origin_country": ""
+    },
+    {
+      "id": 173584,
+      "logo_path": "/xNG9wXucEeuesWG6azyP0mcLTCT.png",
+      "name": "FilmSharks International",
+      "origin_country": "AR"
+    },
+    {
+      "id": 236670,
+      "logo_path": null,
+      "name": "Signos Studio",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "AR",
+      "name": "Argentina"
+    },
+    {
+      "iso_3166_1": "BR",
+      "name": "Brazil"
+    },
+    {
+      "iso_3166_1": "CO",
+      "name": "Colombia"
+    },
+    {
+      "iso_3166_1": "EC",
+      "name": "Ecuador"
+    },
+    {
+      "iso_3166_1": "PE",
+      "name": "Peru"
+    },
+    {
+      "iso_3166_1": "ES",
+      "name": "Spain"
+    }
+  ],
+  "release_date": "2024-10-17",
+  "revenue": 0,
+  "runtime": 106,
+  "spoken_languages": [
+    {
+      "english_name": "German",
+      "iso_639_1": "de",
+      "name": "Deutsch"
+    },
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Dalia and the Red Book",
+  "video": false,
+  "vote_average": 7.2,
+  "vote_count": 18
+}

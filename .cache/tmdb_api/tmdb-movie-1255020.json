@@ -1,0 +1,57 @@
+{
+  "adult": false,
+  "backdrop_path": "/zjnctpKe4Unjf1edDi2uLjQYrKI.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    }
+  ],
+  "homepage": "",
+  "id": 1255020,
+  "imdb_id": null,
+  "origin_country": [
+    "CN"
+  ],
+  "original_language": "zh",
+  "original_title": "裂战",
+  "overview": "Yan Xin, a female scientist at Hainan Xingye Torch Company, used gene editing technology to cultivate super rubber seeds and went to Yinfan Island overseas for trial planting, hoping to turn it into a rich new world. Lin Xiang of the International Security Company personally led the team to this crisis-ridden land in order to protect his still beloved ex-wife Yan Xin. Since their arrival, conflicts and conspiracies have been taking turns, with the figure of local drug lord Li Wenyao looming behind them. Unknown dangers, the ultimate showdown, the two people opposing good and evil cannot escape the destined battle.",
+  "popularity": 10.0578,
+  "poster_path": "/AiB6C4ykGUKGFYZqceQo3fK9tHt.jpg",
+  "production_companies": [
+    {
+      "id": 222652,
+      "logo_path": null,
+      "name": "海南时代光彩影业有限公司",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CN",
+      "name": "China"
+    }
+  ],
+  "release_date": "2024-03-06",
+  "revenue": 0,
+  "runtime": 94,
+  "spoken_languages": [
+    {
+      "english_name": "Mandarin",
+      "iso_639_1": "zh",
+      "name": "普通话"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Cruel War",
+  "video": false,
+  "vote_average": 7,
+  "vote_count": 1
+}

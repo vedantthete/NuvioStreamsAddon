@@ -1,0 +1,63 @@
+{
+  "adult": false,
+  "backdrop_path": null,
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    }
+  ],
+  "homepage": "https://kelassbintang.com/",
+  "id": 1135869,
+  "imdb_id": null,
+  "origin_country": [
+    "AO"
+  ],
+  "original_language": "ho",
+  "original_title": "Kelas Bintang - Salome",
+  "overview": "Kelas Bintang is back with this pack of drama called Salome.",
+  "popularity": 14.094,
+  "poster_path": "/9R94k6pMdLWHwzxSSlKVrPo0EE3.jpg",
+  "production_companies": [
+    {
+      "id": 198702,
+      "logo_path": null,
+      "name": "Kelas Bintang",
+      "origin_country": ""
+    },
+    {
+      "id": 215214,
+      "logo_path": null,
+      "name": "Karya Bintang Bersama",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "ID",
+      "name": "Indonesia"
+    }
+  ],
+  "release_date": "2023-05-13",
+  "revenue": 0,
+  "runtime": 59,
+  "spoken_languages": [
+    {
+      "english_name": "Abkhazian",
+      "iso_639_1": "ab",
+      "name": ""
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Salome",
+  "video": false,
+  "vote_average": 10,
+  "vote_count": 1
+}

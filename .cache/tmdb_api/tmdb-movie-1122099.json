@@ -1,0 +1,79 @@
+{
+  "adult": false,
+  "backdrop_path": "/1nn7nCFRTKeWOXbtjrFxfSvf1EI.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10402,
+      "name": "Music"
+    }
+  ],
+  "homepage": "https://www.focusfeatures.com/the-ballad-of-wallis-island",
+  "id": 1122099,
+  "imdb_id": "tt27674982",
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_title": "The Ballad of Wallis Island",
+  "overview": "Eccentric lottery winner Charles lives alone on a remote island but dreams of hiring his favourite musician, Herb McGwyer, to play an exclusive, private gig. Unbeknownst to Herb, Charles has also hired Herb’s ex-bandmate and ex-girlfriend, Nell, with her new husband in tow, to perform the old favourites. As tempers flare and old tensions resurface, the stormy weather traps them all on the island and Charles desperately looks for a way to salvage his dream gig.",
+  "popularity": 11.6764,
+  "poster_path": "/AhmJOYdUn9katXqDk0ZpZanQ0xp.jpg",
+  "production_companies": [
+    {
+      "id": 1219,
+      "logo_path": "/6OGqCShROjIvmBOfRbeUsn7im93.png",
+      "name": "Baby Cow Productions",
+      "origin_country": "GB"
+    },
+    {
+      "id": 19375,
+      "logo_path": null,
+      "name": "Moxie Pictures",
+      "origin_country": "GB"
+    },
+    {
+      "id": 10146,
+      "logo_path": "/xnFIOeq5cKw09kCWqV7foWDe4AA.png",
+      "name": "Focus Features",
+      "origin_country": "US"
+    },
+    {
+      "id": 80893,
+      "logo_path": "/hFzOkuR4FoZE1U1hvuojMp4Qfxa.png",
+      "name": "BBC Studios",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    }
+  ],
+  "release_date": "2025-03-28",
+  "revenue": 736965,
+  "runtime": 100,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "He's getting the band back together.",
+  "title": "The Ballad of Wallis Island",
+  "video": false,
+  "vote_average": 6.885,
+  "vote_count": 26
+}

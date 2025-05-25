@@ -1,0 +1,66 @@
+{
+  "adult": false,
+  "backdrop_path": "/3m0j3hCS8kMAaP9El6Vy5Lqnyft.jpg",
+  "belongs_to_collection": {
+    "id": 1126392,
+    "name": "The Platform Collection",
+    "poster_path": "/nhzz8k3Kh1roYdPvbryX3VtgLZN.jpg",
+    "backdrop_path": "/m7REj1vsxi2aEcwT7iFHPRXbwgN.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81284730",
+  "id": 1125510,
+  "imdb_id": "tt27729779",
+  "origin_country": [
+    "ES"
+  ],
+  "original_language": "es",
+  "original_title": "El hoyo 2",
+  "overview": "After a mysterious leader imposes his law in a brutal system of vertical cells, a new arrival battles against a dubious food distribution method.",
+  "popularity": 13.2642,
+  "poster_path": "/tvIpBg12IIA5Dr9Sjn38ygS1vQp.jpg",
+  "production_companies": [
+    {
+      "id": 52270,
+      "logo_path": null,
+      "name": "Basque Films",
+      "origin_country": "ES"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "ES",
+      "name": "Spain"
+    }
+  ],
+  "release_date": "2024-09-27",
+  "revenue": 0,
+  "runtime": 101,
+  "spoken_languages": [
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Hunger will be the least of your worries.",
+  "title": "The Platform 2",
+  "video": false,
+  "vote_average": 5.555,
+  "vote_count": 1190
+}

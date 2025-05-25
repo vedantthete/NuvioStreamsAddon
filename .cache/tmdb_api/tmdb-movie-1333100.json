@@ -1,0 +1,76 @@
+{
+  "adult": false,
+  "backdrop_path": "/nB6IR9XfdRpVRKCz85uT97EjgwB.jpg",
+  "belongs_to_collection": {
+    "id": 383987,
+    "name": "Attack on Titan: Animation Collection",
+    "poster_path": "/50rRT2Kf8NQ1zeD2y5KTQDEp8FX.jpg",
+    "backdrop_path": "/f8ruHHptnKb45zMQN5bAKgbSLyw.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    }
+  ],
+  "homepage": "",
+  "id": 1333100,
+  "imdb_id": "tt33175825",
+  "origin_country": [
+    "JP"
+  ],
+  "original_language": "ja",
+  "original_title": "劇場版「進撃の巨人」完結編 THE LAST ATTACK",
+  "overview": "A colossal-sized omnibus film bringing together the last two episodes of Attack on Titan in the franchise's first-ever theatrical experience. After venturing beyond the walls and separated from his comrades, Eren finds himself inspired by this new truth and plots the \"Rumbling,\" a terrifying plan to eradicate every living thing in the world. With the fate of the world hanging in the balance, a motley crew of Eren's former comrades and enemies scramble to halt his deadly mission. The only question is, can they stop him?",
+  "popularity": 14.3018,
+  "poster_path": "/wgwldDDlTDDMrluOMkpSA8lyKjv.jpg",
+  "production_companies": [
+    {
+      "id": 21444,
+      "logo_path": "/wSejGn3lAZdQ5muByxvzigwyDY6.png",
+      "name": "MAPPA",
+      "origin_country": "JP"
+    },
+    {
+      "id": 9148,
+      "logo_path": "/rtW3NadfF4kR5mTW00ahiFxw6k7.png",
+      "name": "Pony Canyon",
+      "origin_country": "JP"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "JP",
+      "name": "Japan"
+    }
+  ],
+  "release_date": "2024-11-08",
+  "revenue": 19791639,
+  "runtime": 145,
+  "spoken_languages": [
+    {
+      "english_name": "Japanese",
+      "iso_639_1": "ja",
+      "name": "日本語"
+    }
+  ],
+  "status": "Released",
+  "tagline": "See for yourself the end of their story.",
+  "title": "Attack on Titan: THE LAST ATTACK",
+  "video": false,
+  "vote_average": 8.701,
+  "vote_count": 72
+}

@@ -130,8 +130,9 @@ async function main() {
     const categories = [
         { type: 'movie', endpoint: '/movie/popular', fetchFunction: fetchMovieDetails, label: "Popular Movies" },
         { type: 'movie', endpoint: '/trending/movie/week', fetchFunction: fetchMovieDetails, label: "Trending Movies" },
-        // { type: 'tv', endpoint: '/tv/popular', fetchFunction: fetchShowDetailsAndEpisodes, label: "Popular TV Shows" }, // Temporarily disabled
-        // { type: 'tv', endpoint: '/trending/tv/week', fetchFunction: fetchShowDetailsAndEpisodes, label: "Trending TV Shows" } // Temporarily disabled
+        { type: 'tv', endpoint: '/tv/popular', fetchFunction: fetchShowDetailsAndEpisodes, label: "Popular TV Shows" },
+        { type: 'tv', endpoint: '/trending/tv/week', fetchFunction: fetchShowDetailsAndEpisodes, label: "Trending TV Shows" },
+        { type: 'tv', endpoint: '/tv/top_rated', fetchFunction: fetchShowDetailsAndEpisodes, label: "Top Rated TV Shows", minVoteCount: 500 }
     ];
 
     for (const category of categories) {
@@ -143,6 +144,13 @@ async function main() {
                 // console.log(`  Skipping already processed ID: ${item.id} (${item.title || item.name})`);
                 continue;
             }
+
+            // Check for minimum vote count if specified for the category
+            if (category.minVoteCount && item.vote_count < category.minVoteCount) {
+                // console.log(`  Skipping ${item.name || item.title} due to low vote count: ${item.vote_count} (needed ${category.minVoteCount})`);
+                continue;
+            }
+
             const details = await category.fetchFunction(item.id);
             if (details) {
                 allMedia.push(details);

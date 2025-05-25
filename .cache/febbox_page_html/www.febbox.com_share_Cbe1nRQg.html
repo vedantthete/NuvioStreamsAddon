@@ -1,0 +1,2355 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="apple-touch-icon" type="image/png" href="/static/index_img/logo_icon.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="/static/index_img/logo_icon.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="/static/index_img/logo_icon.png">
+    <link rel="icon" type="image/png" href="/static/index_img/logo_icon.png">
+        <meta content="Last Breath (2025), ShowBox" name="keywords">
+        <meta name="description" content="FEB is a free and powerful online disk tool, which can watch streaming media online, support most video formats, online reading, listening to music, cloud download, free files, article subscription, etc" />
+        <title>Last Breath (2025) Shared by ShowBox</title>
+        <link rel="stylesheet" href="/static/css/style_mobile.css?rand=22da266f761676f71fe8891ff6af106a"/>
+    <link href="/static/plugins/viewer/css/viewer.min.css?rand=22da266f761676f71fe8891ff6af106a" rel="stylesheet">
+    <style>
+        html,body{
+            height:100%;
+        }
+        .header{background:rgba(41,41,41,.94)}
+        .content{color:#333;padding-top:1px;height:calc(100% - 1px);}
+        .content .share_top{padding:18px 16px;border-bottom:1px solid #D8D8D8;font-size:0;}
+        .content .share_top .logo{vertical-align:middle;}
+        .content .share_top .file_info2{display:inline-block;width:calc(100% - 123px);/*margin-top:10px;*/margin-left:10px;vertical-align:middle;}
+        .content .share_top .file_info2 .name{font-size:14px;font-weight:600;line-height:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+        .content .share_top .file_info2 .desc{color:#666;font-size:12px;line-height:14px;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+        .content .share_top .right2{float:right;margin-top:2px;}
+        .content .share_top .avatar{width:32px;height:32px;border-radius:18px;margin-left:12px;}
+        .content .share_top .login{height:32px;padding:0 20px;background:transparent;border-radius:60px;border:1px solid rgba(0,0,0,0.15);outline:0;color:#333;font-size:14px;font-weight:500;}
+        .content .share_top button{vertical-align:top;margin-left:10px;}
+        .content .share{width:calc(100% - 28px);margin:32px auto 0;padding:0 14px;height:calc(100% - 170px);position:relative;}
+        .content .share .share_file,.content .file_info3 .file_img{width:calc(100% - 28px);max-height:100%;position:absolute;top:50%;transform:translate(0, -50%);text-align:center;}
+        .content .share .share_file .play_img,.content .file_info3 .file_img .play_img{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);}
+        .content .share .share_file .file_icon{position:relative;}
+        .content .share .share_file .ext{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);color:#fff;font-size:24px;font-weight:bold;line-height:33px;}
+        .content .share .share_file .file_name{color:#333;font-size:15px;font-weight:600;line-height:18px;margin-top:20px;}
+        .content .share .share_file .desc2{color:rgba(0,0,0,0.7);font-size:13px;line-height:15px;margin-top:8px;}
+        .content .share .share_file .time{color:rgba(0,0,0,0.4);font-size:13px;line-height:15px;margin-top:7px;}
+        .content .share .user2 .avatar{width:24px;height:24px;border-radius:12px;vertical-align:middle;}
+        .content .share .user2 span{width:calc(100% - 32px);display:inline-block;color:#000;font-size:16px;font-weight:500;line-height:22px;vertical-align:middle;margin-left:8px;}
+        .content .share .dir_info{margin-top:14px;font-size:0;}
+        .content .share .dir_info > p {width: 54px;height: 54px;position: relative;display: inline-block;vertical-align: middle;}
+        .content .share .dir_info img{vertical-align:middle;}
+        .content .share .dir_info .left2{display:inline-block;width:calc(100% - 70px);margin-left:16px;vertical-align:middle;}
+        .content .share .dir_info .left2 .name{font-size:16px;font-weight:600;line-height:19px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+        .content .share .dir_info .left2 .desc{color:rgba(0,0,0,0.4);font-size:12px;line-height:14px;margin-top:8px;}
+        .content .share .dir_info .file_img2,.content .share .dir_info .file_img3{display:inline-block;width:54px;background-repeat:no-repeat;background-position:center;background-size:cover;}
+        .content .share .dir_info .file_img3{position:absolute;right:-8px;bottom:-9px;border:1px solid #fff;}
+        .content .share .files{border-top:1px solid #D8D8D8;margin-top:20px;height:calc(100% - 103px);}
+        .content .share .files .info{margin-top:16px;position:relative;}
+        .content .share .files .info .path{width:calc(100% - 118px);color:rgba(0,0,0,0.4);font-size:14px;font-weight:600;line-height:22px;white-space:nowrap;overflow:auto;}
+        .content .share .files .info .path span:last-child{color:#000;}
+        .content .share .files .info .path span:not(:last-child){cursor:pointer;}
+        .content .share .files .info .list_type{float:right;font-size:0;position:absolute;top:4px;right:0;}
+        .content .share .files .info .list_type img:not(:first-child){margin-left:15px;}
+        .content .share .file_list{font-size:0;width:calc(100% + 16px);margin-top:16px;max-height:calc(100% - 68px);padding-bottom:14px;overflow:auto;scrollbar-width:none;-ms-overflow-style:none;}
+        .content .share .file_list::-webkit-scrollbar{
+            display:none;
+        }
+        .content .share .file_list img{vertical-align:middle;}
+        .content .share .file_list.icon_list{width:100%;}
+        .content .share .file_list.icon_list .file{border-bottom:1px solid rgba(0,0,0,0.05);font-size:0;}
+        .content .share .file_list.icon_list .file:first-child{border-top:1px solid rgba(0,0,0,0.05);}
+        .content .share .file_list.icon_list .file .left2{display:inline-block;width:calc(100% - 9px);padding:9px 9px 9px 0;font-size:0;vertical-align:middle;}
+        .content .share .file_list.icon_list .file .left2 .file_icon{
+            width: 28px;
+            text-align:center;
+            margin-right:10px;
+            position:relative;
+            display:inline-block;
+            vertical-align:middle;
+            line-height:28px;
+            height: 28px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .content .share .file_list.icon_list .file .left2 .file_icon img{
+            max-width: 28px;
+            max-height: 28px;
+        }
+        .content .share .file_list.icon_list .file .left2 .file_info{
+            display: inline-block;
+            vertical-align: middle;
+            width: calc(100% - 48px);
+        }
+        .content .share .file_list.icon_list .file .left2 .file_name{
+            font-size: 13.5px;
+            color: rgba(0, 0, 0, 0.87);
+            cursor: pointer;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .content .share .file_list.icon_list .file .left2 .file_name_show {
+            max-width: 160px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.65);
+            padding: 4px 6px;
+            background: #4D4D4D;
+            border-radius: 2px;
+            line-height: 13px;
+            position: absolute;
+            left: 120px;
+            top: 30px;
+            word-wrap: break-word;
+            z-index: 6;
+            display: none;
+        }
+        .content .share .file_list.icon_list .file .left2 .quality{
+            margin-right: 4px;
+            color: #999;
+            font-size: 10px;
+            font-weight: 400;
+            margin-top: 4px;
+            display: inline-block;
+            background: rgba(216, 216, 216, 0.28);
+            border-radius: 3px;
+            padding: 1px 4px;
+        }
+        .content .share .file_list.icon_list .file .left2 .runtime {
+            margin-right: 4px;
+            color: #999;
+            font-size: 10px;
+            font-weight: 400;
+            margin-top: 4px;
+            display: inline-block;
+            background: rgba(216, 216, 216, 0.28);
+            border-radius: 3px;
+            padding: 1px 4px;
+        }
+        .content .share .file_list.icon_list .file .file_size,.content .share .file_list.icon_list .file .file_type,.content .share .file_list.icon_list .file .file_time{
+            /*display:inline-block;*/
+            color:rgba(0, 0, 0, 0.65);
+            font-size:13px;
+            line-height:28px;
+            padding:9px 8px;
+            vertical-align:middle;
+            display:none;
+        }
+        .content .share .file_list.gridType_list2,.content .share .file_list.waterfall_list{
+            width:calc(100% + 18px);
+        }
+        .content .share .file_list .file_thumbnail{
+            width:calc(50% - 16px);
+            max-width:180px;
+            /*height:159px;*/
+            position:relative;
+            display:inline-block;
+            margin-top:18px;
+            margin-right:16px;
+            vertical-align:top;
+        }
+        .content .share .file_list .file_gridType{
+            width:calc(50% - 18px);
+            max-width:180px;
+            border:1px solid rgba(0,0,0,0.08);
+            border-radius:8px;
+            margin-right:16px;
+            padding:0 0 8px 0;
+            margin-top:18px;
+        }
+        .content .share .file_list .file_waterfall{
+            max-width:180px;
+        }
+        .content .share .file_list .file_waterfall .file_img{
+            text-align:center;
+        }
+        .content .share .file_list .file_waterfall .file_img{
+            position:relative;
+        }
+        .content .share .file_list .file_waterfall .file_icon2{
+            width:100%;
+            padding-top:100%;
+            position:relative;
+            background:#F7F8FA;
+            border-radius:6px;
+        }
+        .content .share .file_list .file_waterfall .file_icon2{
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size:cover;
+        }
+        .content .share .file_list .file_waterfall .file_img .waterfall_img{
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size:cover;
+        }
+        .content .share .file_list .file_waterfall .file_img>div>img{
+            max-width:200px;
+            max-height:375px;
+            min-width:120px;
+            min-height:30px;
+        }
+        .content .share .file_list .file_waterfall .file_icon2 .folder_icon{
+            min-width:16px;
+            min-height:13px;
+            position:absolute;
+            left:4px;
+            bottom:3px;
+        }
+        .content .share .file_list .file_waterfall .file_img .folder_icon{
+            min-width:16px;
+            min-height:13px;
+            position:absolute;
+            left:4px;
+            bottom:3px;
+        }
+        .content .share .file_list .file_waterfall .file_img .music_num{
+            position: absolute;
+            top: 3px;
+            right: 4px;
+            height: 16px;
+            padding: 0 4px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 2px;
+            color: #fff;
+            font-size: 12px;
+            line-height: 16px;
+        }
+        .content .share .file_list .file_waterfall .file_img .img2{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%, -50%);
+            max-width:64px;
+            max-height:64px;
+            min-width:0;
+            min-height:0;
+        }
+        .content .share .file_list>div .file_thumbnail:nth-child(6n+1){
+            margin-left:0;
+        }
+        .content .share .file_list .file_thumbnail{
+            font-family: AtlasGrotesk,sans-serif;
+        }
+        .content .share .file_list .file_thumbnail:hover{
+            background:rgba(0,0,0,0.05);
+        }
+        .content .share .file_list .file_thumbnail .file_icon{
+            width:100%;
+            /*height:100%;*/
+            padding-top:100%;
+            /*line-height:160px;*/
+            text-align:center;
+            position:relative;
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size:cover;
+            border-radius:6px;
+            background-color: rgba(0,0,0,0.05);
+        }
+        .content .share .file_list .file_gridType .file_icon{
+            width:100%;
+            padding-top:72.5%;
+            /*height:116px;*/
+            /*line-height:116px;*/
+            border-bottom-left-radius:0;
+            border-bottom-right-radius:0;
+        }
+        .content .share .file_list .file_thumbnail .file_icon>img{
+            max-width:80%;
+            max-height:80%;
+        }
+        .content .share .file_list .file_gridType .file_icon>img{
+            max-width:50%;
+            max-height:50%;
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%, -50%);
+        }
+        .content .share .file_list .file_gridType .file_icon .icon_bg{
+            width:100%;
+            /*height:116px;*/
+            height:100%;
+            position:absolute;
+            top:0;
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size:cover;
+            border-top-left-radius:8px;
+            border-top-right-radius:8px;
+        }
+        .content .share .file_list .file_thumbnail .file_icon .folder_icon{
+            position:absolute;
+            left:4px;
+            bottom:3px;
+        }
+        .content .share .file_list .file_thumbnail .file_icon .music_num{
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            height: 16px;
+            padding: 0 4px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 2px;
+            color: #fff;
+            font-size: 12px;
+            line-height: 16px;
+        }
+        .content .share .file_list .file_thumbnail .file_name{
+            color:rgba(0,0,0,0.86);
+            font-size:0;
+            text-align:center;
+            margin-top:8px;
+        }
+        .content .share .file_list .file_gridType .file_name{
+            padding:0 6px;
+        }
+        .content .share .file_list .file_thumbnail .file_name span{
+            font-size:12px;
+        }
+        .content .share .file_list .file_thumbnail .file_name span{
+            display:inline-block;
+            max-width:calc(100% - 24px);
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+        }
+        .content .share .file_list .file_thumbnail .file_name img{
+            margin-left:4px;
+            vertical-align:top;
+        }
+        .content .share .file_list .file_waterfall .file_name3{
+            color:rgba(0,0,0,0.86);
+            font-size:0;
+            margin-top:8px;
+            word-break:break-all;
+            text-overflow:-o-ellipsis-lastline;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            display:-webkit-box;
+            -webkit-line-clamp:2;
+            line-clamp:2;
+            -webkit-box-orient:vertical;
+        }
+        .content .share .file_list .file_waterfall .file_name3 span{
+            font-size:12px;
+        }
+        .content .share .file_list .file_thumbnail .file_name_show{
+            max-width:160px;
+            font-size:12px;
+            color:rgba(255,255,255,0.65);
+            padding:4px 6px;
+            background:#4D4D4D;
+            border-radius:2px;
+            position:absolute;
+            top:150px;
+            left:50%;
+            transform:translate(-50%, 0);
+            z-index:6;
+            word-wrap:break-word;
+            display:none;
+        }
+        .content .share .file_list .file_thumbnail .file_name:hover + .file_name_show{
+            display:block;
+        }
+        .content .share .file_list .file_thumbnail .file_info{
+            display:inline-block;
+            vertical-align:middle;
+            width:100%;
+            margin-top:4px;
+            text-align:center;
+        }
+        .content .share .file_list .file_thumbnail .file_icon .file_info2,.content .share .file_list .file_thumbnail .file_img .file_info2{
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.2);
+        }
+        .content .share .file_list .file_thumbnail .file_icon .file_info2{
+            border-radius:6px;
+        }
+        .content .share .file_list .file_thumbnail .file_icon .time,.content .share .file_list .file_thumbnail .file_img .time{
+            position:absolute;
+            top:2px;
+            left:4px;
+            background:rgba(0, 0, 0, 0.2);
+            border-radius:3px;
+            padding:2px 4px;
+            color:rgba(255,255,255,0.86);
+            font-size:10px;
+            font-weight:500;
+            line-height:15px;
+        }
+        .content .share .file_list .file_thumbnail .file_icon .quality,.content .share .file_list .file_thumbnail .file_img .quality{
+            position:absolute;
+            top:2px;
+            right:4px;
+            background:rgba(0, 0, 0, 0.2);
+            border-radius:3px;
+            padding:2px 4px;
+            color:rgba(255,255,255,0.86);
+            font-size:10px;
+            font-weight:500;
+            line-height:15px;
+        }
+        .content .share .file_list .file_thumbnail .file_icon .video_name,.content .share .file_list .file_thumbnail .file_img .video_name{
+            position:absolute;
+            top:50%;
+            right:0;
+            transform:translate(0, -50%);
+            width:100%;
+            padding:0 8px;
+            color:rgba(255,255,255,0.6);
+            font-size:11px;
+            font-weight:500;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+        }
+        .content .share .file_list .file_thumbnail .file_icon .score,.content .share .file_list .file_thumbnail .file_img .score{
+            position:absolute;
+            bottom:4px;
+            left:4px;
+            color:rgba(255,255,255,0.86);
+            font-size:11px;
+            font-weight:400;
+            line-height:15px;
+        }
+        .content .share .file_list .file_thumbnail .file_icon .score img,.content .share .file_list .file_thumbnail .file_img .score img{
+            margin:2.5px 4px 0 0;
+            vertical-align:top;
+        }
+        .content .share .file_list .file_thumbnail .file_icon .file_name2{
+            position:absolute;
+            bottom:4px;
+            width:calc(100% - 24px);
+            padding:0 12px;
+            color:rgba(255,255,255,0.48);
+            font-size:12px;
+            /*font-weight:500;*/
+            text-align:center;
+            line-height:14px;
+            word-break:break-all;
+            text-overflow:-o-ellipsis-lastline;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            display:-webkit-box;
+            -webkit-line-clamp:2;
+            line-clamp:2;
+            -webkit-box-orient:vertical;
+        }
+        .content .share .file_list .file_thumbnail .last_time{
+            margin-right:4px;
+            color:#007AFF;
+            font-size:12px;
+            font-weight:500;
+            display:inline-block !important;
+        }
+        .content .share .file_list .file_thumbnail>p:last-child{
+            margin-top:6px;
+            text-align:center;
+            /*display:none;*/
+        }
+        .content .bottom_operation{width:calc(100% - 24px);position:fixed;left:0;bottom:0;padding:16px 12px;border-top:1px solid #D8D8D8;background:#fff;font-size:0;}
+        .content .bottom_operation .accept{height:32px;padding:0 12px;background:#0161FE;border-radius:60px;border:0;outline:0;color:#fff;font-size:12px;font-weight:500;}
+        .content .bottom_operation .open_app{height:32px;padding:0 12px;background:rgba(1, 97, 254, 0.08);border-radius:60px;border:0;outline:0;color:#0161FE;font-size:12px;font-weight:500;}
+        .content .bottom_operation .share_more{display:inline-block;margin-top:4px;vertical-align:middle;float:right;}
+        .content .bottom_operation button{vertical-align:middle;}
+        .content .bottom_operation button:not(:first-child){margin-left:12px;}
+        .content .bottom_operation .more_operation{position:absolute;width:136px;right:5px;bottom:50px;background:#fff;border-radius:6px;border:1px solid rgba(0,0,0,0.08);display:none;}
+        .content .bottom_operation .more_operation p{padding:9px 16px;font-size:14px;}
+        .content .bottom_operation .more_operation p:not(:last-child){border-bottom:1px solid rgba(0,0,0,0.05);}
+        .content .bottom_operation .more_operation p img{vertical-align:middle;margin:-1px 4px 0 0;}
+        .content .share_tips{position:fixed;top:0;background:rgba(0,0,0,0.78);width:100%;height:100%;z-index:99;}
+        .content .share_tips p{padding:12px 16px;}
+        .content .share_tips p:nth-child(2){color:#fff;font-size:16px;font-weight:500}
+        .content .share_tips p:nth-child(n+3){color:rgba(255,255,255,.8);font-size:12px;margin-top:8px}
+        .content .share_tips .close{position:absolute;top:14px;right:16px}
+        .content .password{margin-top:180px;text-align:center;}
+        .content .password .avatar{width:64px;height:64px;border-radius:32px;}
+        .content .password .name{color:rgba(0,0,0,0.4);font-size:14px;margin-top:16px;}
+        .content .password .pwd input{width:260px;height:44px;background:rgba(217,217,217,0.2);border-radius:22px;border:0;outline:0;font-size:16px;margin-top:48px;text-align:center;}
+        .content .password .pwd input::-webkit-input-placeholder{color:rgba(0,0,0,0.4);}
+        .content .password .view_btn button{width:260px;height:44px;border-radius:22px;background:#0070ff;border:0;outline:0;color:#fff;font-size:16px;font-weight:500;margin-top:24px}
+        .content .password .expire_time{color:rgba(0,0,0,.29);font-size:12px;font-weight:500;margin-top:16px}
+        .content .download_app{color:#333;font-size:14px;font-weight:500;margin-top:113px;}
+        .content .download_app a{color:#007AFF;text-decoration:underline;}
+        /*.content .share_more{text-align:center;margin-top:110px;}*/
+        .content .more_popup{width:178px;position:absolute;bottom:30px;left:50%;transform:translate(-50%, 0);background:#FFFFFF;box-shadow:0px 2px 8px 0px rgba(0, 0, 0, 0.16);border-radius:2px;border:1px solid rgba(0, 0, 0, 0.05);display:none;}
+        .content .more_popup p{padding:12px 16px;font-size:14px;}
+        .content .more_popup a{color:#333;text-decoration:none;}
+        .content .more_popup a:first-child p{border-bottom:1px solid rgba(0,0,0,0.05);}
+        .content .open_error{width:max-content;color:#FF3B30;font-size:14px;text-decoration:underline;position:absolute;bottom:90px;left:50%;transform:translate(-50%, 0);}
+        .content .install_tip{width:max-content;font-size:14px;text-decoration:underline;position:absolute;bottom:90px;left:50%;transform:translate(-50%, 0);}
+        .content .download_tv_tips{width:100%;height:100%;background:rgba(0,0,0,.5);position:fixed;top:0;left:0;z-index:1}
+        .content .download_tv_tips_con{width:360px;height:190px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:4px;text-align:center}
+        .content .download_tv_tips_con p:first-child{padding:14px 16px 0;text-align:right}
+        .content .download_tv_tips_con p:nth-child(2){margin-top:30px}
+        .content .download_tv_tips_con .desc{color:rgba(0,0,0,.87);font-size:16px;font-weight:500;line-height:24px;margin-top:24px;padding:0 47px}
+        .content .save_tip{position:fixed;top:64px;padding:8px 0;width:100%;background:#FFEAC3;text-align:center;}
+        .content .save_tip p{color:rgba(0,0,0,0.6);font-size:12px;}
+        .content .save_tip img{position:absolute;right:10px;top:7px;}
+        .content .file_info3{position:fixed;width:100%;height:100%;top:0;left:0;background:#fff;display:none;}
+        .content .file_info3 .file_img{top:50%;}
+        .content .file_info3 .file_img .tip{color:rgba(0,0,0,0.6);font-size:14px;line-height:20px;margin-top:32px;padding:0 16px;}
+        .content .file_info3 .file_img .tip a{color:#0070FF;}
+        .content .file_info3 .file_top{padding:16px;border-bottom:1px solid #D8D8D8;}
+        .content .file_info3 .close2{vertical-align:middle;}
+        .content .file_info3 .info2{display:inline-block;width:calc(100% - 118px);margin-left:10px;vertical-align:middle;}
+        .content .file_info3 .info2 .name{font-size:14px;font-weight:600;line-height:16px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+        .content .file_info3 .info2 .desc{color:#666;font-size:12px;line-height:14px;margin-top:4px;}
+        .content .file_info3 .right2{float:right;margin-top:2px;}
+        .content .file_info3 .avatar{width:32px;height:32px;border-radius:18px;}
+        .content .file_info3 .login{height:32px;padding:0 20px;background:transparent;border-radius:60px;border:1px solid rgba(0,0,0,0.15);outline:0;color:#333;font-size:14px;font-weight:500;}
+        .content .file_info3 .bottom2{width:calc(100% - 32px);position:fixed;left:0;bottom:0;padding:16px;border-top:1px solid #D8D8D8;background:#fff;font-size:0;}
+        .content .file_info3 .bottom2 .download3,.content .file_info3 .bottom2 .details{height:32px;padding:0 20px 0 18px;background:transparent;border-radius:60px;border:1px solid rgba(0,0,0,0.15);outline:0;color:#333;font-size:14px;font-weight:500;}
+        .content .file_info3 .bottom2 .download3 img,.content .file_info3 .bottom2 .details img{vertical-align:middle;margin:-1px 4px 0 0;}
+        .content .file_info3 .bottom2 button{vertical-align:top;margin-right:16px;}
+        #video_bg,.download_tip_popup2,.login_tip_popup{width:100%;height:100%;position:fixed;top:0;left:0;background:rgba(0,0,0,0.5);z-index:9999;display:none;}
+        #video_bg .video_con{width:95%;height:90%;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);background:#000;}
+        #player_panel #player_box{display:none;}
+        .download_progress{width:calc(100% - 32px);background:#fff;padding:16px;border-radius:8px;position:fixed;bottom:0;right:0;box-shadow: -6px 0px 6px 0px rgba(0, 0, 0, 0.05);border: 1px solid rgba(0, 0, 0, 0.05);z-index:99;display:none;}
+        .download_progress .close2{position:absolute;top:16px;right:16px;}
+        .download_progress .name{color:#333;font-size:16px;font-weight:500;margin-top:4px;}
+        .download_progress #progress{margin-top:12px;height:14px;appearance:none;}
+        #progress::-webkit-progress-bar {
+            border-radius: 7px;
+            background-color: #f3f3f3;
+        }
+        #progress::-webkit-progress-value {
+            border-radius: 7px;
+            background-color: #007AFF; /* 进度条的颜色 */
+        }
+        .download_tip_popup2 .download_tip_con,.login_tip_popup .login_tip_con{width:calc(100% - 30px);max-width:450px;background:#fff;border-radius:8px;color:#333;position:relative;top:50%;left:50%;transform:translate(-50%, -50%);}
+        .download_tip_popup2 .download_tip_con .top,.login_tip_popup .login_tip_con .top{padding:14px 16px;text-align:right;}
+        .download_tip_popup2 .download_tip_con .desc,.login_tip_popup .login_tip_con .desc{padding:0 22px;color:#333;font-size:14px;line-height:17px;margin-top:10px;}
+        .download_tip_popup2 .download_tip_con .bottom,.login_tip_popup .login_tip_con .bottom{padding:16px;border-top:1px solid rgba(0,0,0,0.06);margin-top:24px;text-align:right;}
+        .download_tip_popup2 .download_tip_con .bottom button,.login_tip_popup .login_tip_con .bottom button{height:32px;padding:0 16px;background:transparent;border-radius:6px;border:1px solid rgba(0,0,0,0.07);outline:0;color:#333;font-size:14px;font-weight:600;}
+        .download_tip_popup2 .download_tip_con .bottom button:not(:first-child),.login_tip_popup .login_tip_con .bottom button:not(:first-child){margin-left:16px;}
+        .download_tip_popup2 .download_tip_con .bottom button:first-child,.login_tip_popup .login_tip_con .bottom button:first-child{background:#0070FF;color:#fff;}
+        .img_lists{display:none}
+        .login_tip,.login_tip2{position:absolute;left:10px;bottom:72px;background:rgba(13, 13, 13, 0.69);padding:13px 16px 13px 18px;border-radius:6px;font-size:15px;line-height:18px;z-index:999;}
+        .login_tip a,.login_tip2 a{color:#007AFF;vertical-align:middle;}
+        .login_tip span,.login_tip2 span{color:rgba(255,255,255,0.6);vertical-align:middle;}
+        .login_tip img,.login_tip2 img{margin-left:16px;vertical-align:middle;}
+        .login_tip2{left:50%;transform:translate(-50%, 0);width:max-content;border-radius:50px;}
+        .loading2{
+            height:100%;width:100%;background:rgba(0,0,0,0.5);position:fixed;top:0;left:0;display:none;z-index:999999;
+        }
+        .loading2 >p{position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;height:80px;width:80px;text-align: center;line-height:80px;}
+        .loading2 p span{position:absolute;display:block;height:60px;width:60px;margin:10px;border-radius:50%;-webkit-box-shadow:0 2px 3px #56BEBF; animation:loading ease 1s infinite;left:0;top:0;}
+        @keyframes loading2{
+            0%{transform:rotate(0deg)}
+            100%{transform:rotate(360deg)}
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <!--        <div class="save_tip">-->
+<!--            <p>您正在访问的是国际版，文件可能无法保存。</p>-->
+<!--            <img src="/static/index_img/mobile/tip_close.png" width="18">-->
+<!--        </div>-->
+        <div class="share_top">
+            <script type="text/javascript" style="display:none">
+//<![CDATA[
+window.__mirage2 = {petok:"qYeFteEnvCyToDVcp8HzIPyrKIPlYeVdFwpl8aQutO4-1800-0.0.1.1"};
+//]]>
+</script>
+<script type="text/javascript" src="https://ajax.cloudflare.com/cdn-cgi/scripts/04b3eb47/cloudflare-static/mirage2.min.js"></script>
+<img width="27" class="logo" onclick="window.location='/'" data-cfsrc="/static/index_img/mobile/logo.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/mobile/logo.png" width="27" class="logo" onclick="window.location='/'"></noscript>
+                        <div class="right2">
+                                <img onerror="this.src='/static/img/avatar_default.png';" class="avatar" data-cfsrc="https://images.febbox.com/avatar/000/78/24/70_avatar_middle.jpg?t=1748037315" style="display:none;visibility:hidden;"><noscript><img src="https://images.febbox.com/avatar/000/78/24/70_avatar_middle.jpg?t=1748037315" onerror="this.src='/static/img/avatar_default.png';" class="avatar"></noscript>
+                                <div class="sidebar">
+                    <div class="user">
+                        <div class="user_info2">
+                            <img onerror="this.src='/static/img/avatar_default.png';" class="avatar2" data-uid="782470" data-cfsrc="https://images.febbox.com/avatar/000/78/24/70_avatar_middle.jpg?t=1748037315" style="display:none;visibility:hidden;"><noscript><img src="https://images.febbox.com/avatar/000/78/24/70_avatar_middle.jpg?t=1748037315" onerror="this.src='/static/img/avatar_default.png';" class="avatar2" data-uid="782470"></noscript>
+                            <div class="left2">
+                                <p class="name">Nayif_Noushad</p>
+                                                                <p class="status"><img width="30" data-cfsrc="/static/index_img/free2.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/free2.png" width="30"></noscript></p>
+                                                            </div>
+                            <img width="8" class="user_info" data-cfsrc="/static/index_img/info.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/info.png" width="8" class="user_info"></noscript>
+                        </div>
+                        <!--                    <div class="follow2">-->
+                        <!--                        <p class="following"><span></span> Following</p>-->
+                        <!--                        <span class="line"></span>-->
+                        <!--                        <p class="follower"><span></span> Follower</p>-->
+                        <!--                    </div>-->
+                    </div>
+                    <div class="capacity_size">
+                        <div class="capacity">
+                            <p class="used" style="width:85.5%%"></p>
+                            <p class="sub_space" style="width:0%;"></p>
+                            <p class="exceed_progress" style="width:0%;"></p>
+                        </div>
+                                                <p class="desc">875.77 GB of 1 TB Used</p>
+                                            </div>
+                    <ul>
+                        <a href="/channel/channel_dynamic"><li><span class="new"></span>Channel</li></a>
+                        <a href="/article/news"><li>News Center</li></a>
+                        <a href="javascript:void(0);" class="devices_btn"><li>Devices</li></a>
+                        <a href="javascript:void(0);" class="links_btn"><li>Links</li></a>
+                        <a href="/pay/charge" class="feb_coins"><li>FebCoins <span>( 0 )</span></li></a>
+                        <a href="/pay/orders"><li>Transactions</li></a>
+                        <a href="/ticket"><li>Tickets</li></a>
+                        <a href="/faq"><li>Help</li></a>
+                        <a href="/download"><li>Download Apps</li></a>
+                        <a href="/logout"><li>Logout</li></a>
+                    </ul>
+                </div>
+                            </div>
+        </div>
+        <div class="share">
+                        <p class="user2"><img onerror="this.src='/static/img/avatar_default.png';" class="avatar" data-cfsrc="https://images.febbox.com/avatar/000/00/00/23_avatar_middle.jpg?t=1648138654" style="display:none;visibility:hidden;"><noscript><img src="https://images.febbox.com/avatar/000/00/00/23_avatar_middle.jpg?t=1648138654" onerror="this.src='/static/img/avatar_default.png';" class="avatar"></noscript><span>ShowBox invites you to collaborate</span></p>
+            <div class="dir_info">
+                <p>
+                                        <img width="54" data-cfsrc="/static/index_img/file_type/dir_icon2.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/file_type/dir_icon2.png" width="54"></noscript>
+                                    </p>
+                <div class="left2">
+                                        <p class="name">Last Breath (2025)</p>
+                    <p class="desc">3 files · 31.83 GB</p>
+                                    </div>
+            </div>
+            <div class="files">
+                <div class="info">
+                    <p class="path">
+                                                <span data-id="0">Last Breath (2025)</span>
+                        <!--                        /<span>music</span>-->
+                    </p>
+                    <p class="list_type">
+                                                <img width="16" class="grid2" data-cfsrc="/static/index_img/grid2.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/grid2.png" width="16" class="grid2"></noscript>
+                                                <img width="16" class="grid" data-cfsrc="/static/index_img/grid.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/grid.png" width="16" class="grid"></noscript>
+                                                <img width="16" class="waterfall" data-cfsrc="/static/index_img/waterfall.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/waterfall.png" width="16" class="waterfall"></noscript>
+                                                <img width="16" class="list" data-cfsrc="/static/index_img/list.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/list.png" width="16" class="list"></noscript>
+                                            </p>
+                </div>
+                <div class="file_list icon_list">
+                    <div class="f_list_scroll">
+                                        <div class="file " data-id="19740930" >
+                        <div class="left2">
+                            <div class="file_icon" >
+                                                                <img onerror="this.src='/static/index_img/file_type/video_icon.png'" data-cfsrc="https://thumb.febbox.com/thumb_dGh1bWIvMDE2LzQzLzAyLzE2NDMwMjkxXzIzX3RodW1iLmpwZz90PTE3NDI3NDkyMzB8MTUwfDc1.png" style="display:none;visibility:hidden;"><noscript><img src="https://thumb.febbox.com/thumb_dGh1bWIvMDE2LzQzLzAyLzE2NDMwMjkxXzIzX3RodW1iLmpwZz90PTE3NDI3NDkyMzB8MTUwfDc1.png" onerror="this.src='/static/index_img/file_type/video_icon.png'"></noscript>
+                                                                                            </div>
+                            <div class="file_info">
+                                <p class="file_name">Last.Breath.2025.2160p.WEB-DL.DDP5.1.Atmos.SDR.H265-AOC.mkv</p>
+                                <p class="file_name_show">Last.Breath.2025.2160p.WEB-DL.DDP5.1.Atmos.SDR.H265-AOC.mkv</p>
+                                                            </div>
+                        </div>
+                                                <p class="file_size" style="width:110px;">13.86 GB</p>
+                                                <p class="file_type" style="width:100px;">mkv</p>
+                                                <p class="file_time" style="width:140px;">2025-03-23 08:00:30</p>
+                    </div>
+                                                            <div class="file " data-id="19740928" >
+                        <div class="left2">
+                            <div class="file_icon" >
+                                                                <img onerror="this.src='/static/index_img/file_type/video_icon.png'" data-cfsrc="https://thumb.febbox.com/thumb_dGh1bWIvMDE2LzQyLzk2LzE2NDI5NjQ3XzIzX3RodW1iLmpwZz90PTE3NDI3NDkyMjl8MTUwfDc1.png" style="display:none;visibility:hidden;"><noscript><img src="https://thumb.febbox.com/thumb_dGh1bWIvMDE2LzQyLzk2LzE2NDI5NjQ3XzIzX3RodW1iLmpwZz90PTE3NDI3NDkyMjl8MTUwfDc1.png" onerror="this.src='/static/index_img/file_type/video_icon.png'"></noscript>
+                                                                                            </div>
+                            <div class="file_info">
+                                <p class="file_name">Last.Breath.2025.Hybrid.2160p.WEB-DL.DV.HDR.DDP5.1.Atmos.H265-AOC.mkv</p>
+                                <p class="file_name_show">Last.Breath.2025.Hybrid.2160p.WEB-DL.DV.HDR.DDP5.1.Atmos.H265-AOC.mkv</p>
+                                                            </div>
+                        </div>
+                                                <p class="file_size" style="width:110px;">16.26 GB</p>
+                                                <p class="file_type" style="width:100px;">mkv</p>
+                                                <p class="file_time" style="width:140px;">2025-03-23 08:00:29</p>
+                    </div>
+                                                            <div class="file " data-id="19490721" >
+                        <div class="left2">
+                            <div class="file_icon" >
+                                                                <img onerror="this.src='/static/index_img/file_type/video_icon.png'" data-cfsrc="https://thumb.febbox.com/thumb_dGh1bWIvMDE2LzI2LzQ4LzE2MjY0ODkzXzIzX3RodW1iLmpwZz90PTE3NDIzNzEyMjJ8MTUwfDc1.png" style="display:none;visibility:hidden;"><noscript><img src="https://thumb.febbox.com/thumb_dGh1bWIvMDE2LzI2LzQ4LzE2MjY0ODkzXzIzX3RodW1iLmpwZz90PTE3NDIzNzEyMjJ8MTUwfDc1.png" onerror="this.src='/static/index_img/file_type/video_icon.png'"></noscript>
+                                                                                            </div>
+                            <div class="file_info">
+                                <p class="file_name">Last.Breath.2025.1080p.WEBRip.x264.AAC5.1-LAMA.mp4</p>
+                                <p class="file_name_show">Last.Breath.2025.1080p.WEBRip.x264.AAC5.1-LAMA.mp4</p>
+                                                            </div>
+                        </div>
+                                                <p class="file_size" style="width:110px;">1.72 GB</p>
+                                                <p class="file_type" style="width:100px;">mp4</p>
+                                                <p class="file_time" style="width:140px;">2025-03-18 23:00:22</p>
+                    </div>
+                                                            </div>
+                </div>
+            </div>
+                    </div>
+        <div class="bottom_operation">
+                        <button class="accept" onclick="window.location='/console?shareid=Cbe1nRQg'">Accept</button>
+                        <button class="open_app" id="open_app_share">OPEN IN FEB APP</button>
+                        <p class="share_more"><img width="24" data-cfsrc="/static/index_img/share_more.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/share_more.png" width="24"></noscript></p>
+            <div class="more_operation">
+                <p class="report2" onclick="window.location='/report?url=https%3A%2F%2Fwww.febbox.com%2Fshare%2FCbe1nRQg'">Reoprt</p>
+            </div>
+                    </div>
+        <div class="file_info3">
+            <div class="file_top">
+                <img width="16" class="close2" data-cfsrc="/static/index_img/popup_close.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/popup_close.png" width="16" class="close2"></noscript>
+                <div class="info2">
+                    <p class="name">aabb.png</p>
+                    <p class="desc">Jun 11,2021 13:33 · 1.23 MB</p>
+                </div>
+                <div class="right2">
+                                        <img onerror="this.src='/static/img/avatar_default.png';" class="avatar" data-cfsrc="https://images.febbox.com/avatar/000/78/24/70_avatar_middle.jpg?t=1748037315" style="display:none;visibility:hidden;"><noscript><img src="https://images.febbox.com/avatar/000/78/24/70_avatar_middle.jpg?t=1748037315" onerror="this.src='/static/img/avatar_default.png';" class="avatar"></noscript>
+                                    </div>
+            </div>
+            <div class="file_img">
+
+            </div>
+            <div class="bottom2">
+                <button class="download3"><img width="16" data-cfsrc="/static/index_img/file_btn/download.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/file_btn/download.png" width="16"></noscript>Download</button>
+                <button class="details"><img width="16" data-cfsrc="/static/index_img/mobile/info.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/mobile/info.png" width="16"></noscript>Attribute</button>
+            </div>
+        </div>
+        <div class="share_tips" style="display: none;">
+            <p style="display: none;" class="tips"><img width="100%" data-cfsrc="/static/index_img/mobile/share_tips.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/mobile/share_tips.png" width="100%"></noscript></p>
+            <p style="display: none;" class="tips2"><img width="100%" data-cfsrc="/static/index_img/mobile/share_tips2.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/mobile/share_tips2.png" width="100%"></noscript></p>
+            <p style="display: none;" class="tips3"><img width="100%" data-cfsrc="/static/index_img/mobile/share_tips3.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/mobile/share_tips3.png" width="100%"></noscript></p>
+            <p style="display: none;" class="tips4"><img width="100%" data-cfsrc="/static/index_img/mobile/share_tips4.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/mobile/share_tips4.png" width="100%"></noscript></p>
+            <p style="display: none;" class="tips5"><img width="100%" data-cfsrc="/static/index_img/mobile/share_tips5.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/mobile/share_tips5.png" width="100%"></noscript></p>
+            <p style="display: none;" class="tips6"><img width="100%" data-cfsrc="/static/index_img/mobile/share_tips6.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/mobile/share_tips6.png" width="100%"></noscript></p>
+            <p style="display: none;" class="tips7"><img width="100%" data-cfsrc="/static/index_img/wechat_windows_tip.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/wechat_windows_tip.png" width="100%"></noscript></p>
+            <p style="display: none;" class="tips8"><img width="100%" data-cfsrc="/static/index_img/wechat_mac_tip.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/wechat_mac_tip.png" width="100%"></noscript></p>
+        </div>
+        <textarea id="copy_share_link_input" readonly style="width: 1px;border: none;height: 1px;top: -99999999px;">https://www.febbox.com/share/Cbe1nRQg</textarea>
+            </div>
+    <div class="download_progress">
+        <img width="13" class="close2" data-cfsrc="/static/index_img/popup_close.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/popup_close.png" width="13" class="close2"></noscript>
+        <p class="name">Downloading</p>
+        <progress id="progress" value="0" max="100" style="width: 100%;color:#007AFF;"></progress>
+    </div>
+    <div class="download_tips_popup">
+        <div class="download_tips">
+            <div class="top">
+                <span>Download</span>
+                <img width="16" class="popup_close" data-cfsrc="/static/index_img/file_btn/close.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/file_btn/close.png" width="16" class="popup_close"></noscript>
+            </div>
+            <div class="download_tips_con">
+                <div class="download_file_info">
+                    <p class="file_img"><img src="" ></p>
+                    <div class="left">
+                        <p class="file_name"></p>
+                        <p class="file_size"></p>
+                    </div>
+                </div>
+                <p class="desc">The file is too large, please receive before downloading</p>
+                <p class="accept"><a href="/console?shareid=Cbe1nRQg"><button>Accept</button></a></p>
+            </div>
+        </div>
+    </div>
+    <div class="file_details_popup">
+        <div class="file_details">
+            <div class="top">
+                <span>Details</span>
+                <img width="16" class="popup_close" data-cfsrc="/static/index_img/file_btn/close.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/file_btn/close.png" width="16" class="popup_close"></noscript>
+            </div>
+            <div class="file_details_con">
+
+            </div>
+        </div>
+    </div>
+    <div class="download_tip_popup2">
+        <div class="download_tip_con">
+            <div class="top">
+                <img width="16" class="popup_close" data-cfsrc="/static/index_img/file_btn/close.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/file_btn/close.png" width="16" class="popup_close"></noscript>
+            </div>
+            <p class="desc">Currently not logged in, download speed will be restricted. Do you want to log in?</p>
+            <div class="bottom">
+                <button onclick="window.location='/login?jump=/share/Cbe1nRQg'">Login</button>
+                <button class="continue_d">Continue Download</button>
+            </div>
+        </div>
+    </div>
+    <div class="login_tip_popup">
+        <div class="login_tip_con">
+            <div class="top">
+                <img width="16" class="popup_close" data-cfsrc="/static/index_img/file_btn/close.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/file_btn/close.png" width="16" class="popup_close"></noscript>
+            </div>
+            <p class="desc">Currently not supported for preview without login, please log in first</p>
+            <div class="bottom">
+                <button onclick="window.location='/login?jump=/share/Cbe1nRQg'">Login</button>
+            </div>
+        </div>
+    </div>
+        <div class="FebCards_popup">
+        <div class="FebCards_con">
+            <div class="top">
+                <span>FebCards</span>
+                <img width="16" class="popup_close" data-cfsrc="/static/index_img/file_btn/close.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/file_btn/close.png" width="16" class="popup_close"></noscript>
+            </div>
+            <div class="FebCards">
+                <div class="user_card">
+                    <div class="user_info">
+                        <img src="" class="avatar">
+                        <div class="left">
+                            <p class="username">Effie Becker</p>
+                            <p class="status"><img width="44" data-cfsrc="/static/index_img/family.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/family.png" width="44"></noscript></p>
+                            <p class="email">Effie <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="084a6d6b636d7a486f65696164266b6765">[email&#160;protected]</a></p>
+                        </div>
+                    </div>
+                    <p class="uid">12361278412</p>
+                    <div class="family_info">
+                        <p><span>Family Plan Expired 06/14/2021</span><img width="28" data-cfsrc="/static/index_img/auto.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/auto.png" width="28"></noscript></p>
+                        <img width="8" data-cfsrc="/static/index_img/into2.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/into2.png" width="8"></noscript>
+                    </div>
+                </div>
+                <div class="vip_card" id="card1">
+                    <p class="card_name">VIP Plan</p>
+                    <div class="card_info">
+                        <p><img width="14" data-cfsrc="/static/index_img/space2.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/space2.png" width="14"></noscript>2 TB Space</p>
+                        <p><img width="14" data-cfsrc="/static/index_img/speed.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/speed.png" width="14"></noscript>High-Speed</p>
+                        <p><img width="14" data-cfsrc="/static/index_img/no_ad.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/no_ad.png" width="14"></noscript>No Ads</p>
+                    </div>
+                    <a href="/pay/vip">
+                        <div class="vip_info">
+                            <p>Manage Plan</p>
+                            <img width="8" data-cfsrc="/static/index_img/into2.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/into2.png" width="8"></noscript>
+                        </div>
+                    </a>
+                </div>
+                <div class="space_card" id="card2">
+                    <p class="card_name">Space Usage</p>
+                    <div class="card_info">
+                        <div class="used">
+                            <p><span>50GB</span> / <span>1000GB</span></p>
+                            <p><img width="14" data-cfsrc="/static/index_img/users.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/users.png" width="14"></noscript><span>5 Users</span></p>
+                        </div>
+                        <div class="progress">
+                            <p style="width:20%"></p>
+                            <p class="sub_space" style="width:15%;"></p>
+                            <p class="exceed_progress" style="width:0%;"></p>
+                        </div>
+                    </div>
+                    <div class="space_info">
+                        <p>Manage space</p>
+                        <img width="8" data-cfsrc="/static/index_img/into2.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/into2.png" width="8"></noscript>
+                    </div>
+                </div>
+                <div class="coins_card" onclick="window.location='/pay/charge';" id="card3">
+                    <p class="card_name">Febcoins</p>
+                    <div class="card_info">
+                        <img width="30" data-cfsrc="/static/index_img/coins2.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/coins2.png" width="30"></noscript>
+                        <span>3000</span>
+                    </div>
+                    <div class="coins">
+                        <img width="8" data-cfsrc="/static/index_img/into2.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/into2.png" width="8"></noscript>
+                    </div>
+                </div>
+                <div class="speed_card" id="card4">
+                    <p class="card_name">Speed Limited</p>
+                    <div class="card_info">
+                        <p>NO LIMITED</p>
+                        <p class="record">30 GB Used Today</p>
+                        <p class="record">30 MB Used Yesterday</p>
+                    </div>
+                    <div class="speed_info">
+                        <img width="8" data-cfsrc="/static/index_img/into2.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/into2.png" width="8"></noscript>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="my_plan_popup">
+        <div class="my_plan_con">
+            <div class="top">
+                <span>My Plan</span>
+                <img width="16" class="my_plan_close" data-cfsrc="/static/index_img/file_btn/close.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/file_btn/close.png" width="16" class="my_plan_close"></noscript>
+            </div>
+            <div class="my_plan">
+                <div class="user_info">
+                    <img onerror="this.src='/static/img/avatar_default.png';" class="avatar" data-uid="782470" data-cfsrc="https://images.febbox.com/avatar/000/78/24/70_avatar_middle.jpg?t=1748037315" style="display:none;visibility:hidden;"><noscript><img src="https://images.febbox.com/avatar/000/78/24/70_avatar_middle.jpg?t=1748037315" onerror="this.src='/static/img/avatar_default.png';" class="avatar" data-uid="782470"></noscript>
+                    <div class="left">
+                        <p class="name">Nayif_Noushad</p>
+                        <p class="email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="600e0119090616050c091901595920070d01090c4e030f0d">[email&#160;protected]</a></p>
+                    </div>
+                    <button class="renew" onclick="window.location.href='/pay/vip';">Renew</button>
+                </div>
+                <div class="plan_info">
+                    <p class="name">
+                        <span>My Plan</span>
+                        <span class="plan_history">History</span>
+                    </p>
+                    <p class="plan current_plan">
+                        <span>Current Plan</span>
+                        <span></span>
+                    </p>
+                    <p class="plan time">
+                        <span>Premium Expire</span>
+                        <span></span>
+                    </p>
+                </div>
+                <div class="members">
+
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="space_popup">
+
+    </div>
+    <div class="high_speed_popup">
+        <div class="high_speed_con">
+            <div class="top">
+                <span>High Speed Flow</span>
+                <img width="16" class="popup_close" data-cfsrc="/static/index_img/file_btn/close.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/file_btn/close.png" width="16" class="popup_close"></noscript>
+            </div>
+            <div class="high_speed">
+                <p class="img"><img width="156" data-cfsrc="/static/index_img/no_limit.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/no_limit.png" width="156"></noscript></p>
+                <div class="usage">
+                    <p>Usage</p>
+                    <p></p>
+                </div>
+                <div class="flow_reset">
+                    <p>Flow Reset</p>
+                    <p></p>
+                </div>
+                <div class="tips">
+                    <p>1. 100 GB / Mon for free users, reset every 30 days, 100 GB / Day for Premium, reset every day.</p>
+                    <p>2. When the high speed flow runs out, it will automatically enter the low speed mode, other functions will not be affected.</p>
+                    <p><a href="/faq">More</a></p>
+                </div>
+                <div class="bottom">
+                    <p>100 GB / day for Premium</p>
+                    <a href="/plan"><button class="upgrade">Upgrade</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="plan_history_popup">
+        <div class="plan_history_con">
+            <div class="top">
+                <span>History</span>
+                <img width="16" class="popup_close" data-cfsrc="/static/index_img/file_btn/close.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/file_btn/close.png" width="16" class="popup_close"></noscript>
+            </div>
+            <div class="history_list">
+                <div class="history_list_scroll">
+                    <div class="history">
+                        <p class="date">2021-1-12</p>
+                        <div class="plan">
+                            <img width="40" data-cfsrc="/static/index_img/single_plan.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/single_plan.png" width="40"></noscript>
+                            <div class="left">
+                                <p class="name">Premium-Single Plan</p>
+                                <p class="time">6 Months · Auto Renew</p>
+                            </div>
+                            <p class="status">Effective</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="family_add_popup">
+        <div class="family_add_con">
+            <div class="top">
+                <span>Add Members</span>
+                <img width="16" class="popup_close" data-cfsrc="/static/index_img/file_btn/close.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/file_btn/close.png" width="16" class="popup_close"></noscript>
+            </div>
+            <div class="family_add">
+                <p class="invite_add">
+                    <input type="text" name="email" placeholder="Enter User Email">
+                    <button class="btn invite_btn">Invite</button>
+                </p>
+                <p class="invite_tips">You cannot add users who is a Premium user or family plan account</p>
+            </div>
+        </div>
+    </div>
+    <div class="devices_popup">
+        <div class="devices_con">
+            <div class="top">
+                Devices                <img width="16" class="popup_close" data-cfsrc="/static/index_img/file_btn/close.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/file_btn/close.png" width="16" class="popup_close"></noscript>
+            </div>
+            <div class="devices">
+                <p class="desc">Display the device information of the logged-in account, log out of unfamiliar devices to ensure information security</p>
+                <p class="name">Logged-in devices (<span></span>)</p>
+                <p class="device_type"><span class="web_device active">Browsers</span><span class="app_device">APPs</span></p>
+                <div class="device_list webs">
+                    <div class="device_list_scroll">
+
+                    </div>
+                </div>
+                <div class="device_list apps">
+                    <div class="device_list_scroll">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="link_file_list_popup">
+        <div class="link_file_list_con">
+            <div class="top">
+                <span>Link Management</span>
+                <img width="16" class="popup_close" data-cfsrc="/static/index_img/file_btn/close.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/file_btn/close.png" width="16" class="popup_close"></noscript>
+            </div>
+            <div class="link_file_list">
+                <div class="link_file_list_scroll">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="invite_link_list_popup">
+        <div class="invite_link_list_con">
+            <div class="top">
+                <span>Link Management</span>
+                <img width="16" class="popup_close" data-cfsrc="/static/index_img/file_btn/close.png" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/file_btn/close.png" width="16" class="popup_close"></noscript>
+            </div>
+            <p class="name">Links generated from “<span></span>”</p>
+            <div class="link_type">
+                <p class="copy_links show">Copy Links</p>
+                <p class="share_links">Working Together</p>
+            </div>
+            <div class="link_list copy_link_list">
+
+            </div>
+            <div class="link_list share_link_list">
+
+            </div>
+        </div>
+    </div>
+    <div class="loading2">
+        <p><span></span></p>
+    </div>
+    <ul class="img_lists" id="img_lists">
+        <li class="img show" data-id="" read_only="0"><img src="" alt=""></li>
+    </ul>
+    <div id="video_bg">
+        <div class="video_con">
+            <img id="video_close" style="display:none;visibility:hidden;" data-cfsrc="/static/index_img/close_btn.png" data-cfstyle="width:32px;position:absolute;right:-16px;top:-16px;"><noscript><img id="video_close" src="/static/index_img/close_btn.png" style="width:32px;position:absolute;right:-16px;top:-16px;"></noscript>
+            <div id="player_loading" style="position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);"><img data-cfsrc="/static/index_img/load.gif" style="display:none;visibility:hidden;"><noscript><img src="/static/index_img/load.gif"></noscript></div>
+            <div style="padding: 10px;height:calc(100% - 20px);" id="player_panel">
+                <div id="player_box" class="player_box"></div>
+                <!--                    <video id="player_box" class="player_box" controls playsinline></video>-->
+            </div>
+        </div>
+    </div>
+    <a href="" class="download2" target="_blank" download></a>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/static/js/jquery-3.5.1.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/jszip.min.js"></script>
+    <script src="/static/plugins/viewer/js/viewer.min.js?rand=22da266f761676f71fe8891ff6af106a"></script>
+    <script src="/static/js/jwplayer/jwplayer.js?rand=22da266f761676f71fe8891ff6af106a"></script>
+    <script>jwplayer.key="a4eBtAyaqLJo6kCNQnBN+C35MscUBquB";</script>
+    <script>
+        var browser = 'Safari';
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        var isiPad = (u.indexOf('iPad') > -1 || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
+        var isiPhone = u.indexOf('iPhone') > -1;
+
+        function copy_share_link () {
+            var dom = document.getElementById('copy_share_link_input');
+            if(typeof document.execCommand == "function"){
+                dom.select();
+                var result = document.execCommand('copy');
+            }
+        }
+        $(function (){
+            if (isAndroid) {
+                var html = 'Install APP in Google Play';
+            } else if (isiPad || isiPhone) {
+                var html = 'Install APP in App Store';
+            } else {
+                var html = 'Install APP';
+            }
+            $('#install_app_store').html(html);
+            var ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1';
+            if (ua.indexOf('FBAV') > -1 && ua.indexOf('Android') > -1) {
+                console.log('fb android');
+                $('.share_tips, .tips2').show();
+            } else if (ua.indexOf('FBAN') > -1 || ua.indexOf('FBIOS') > -1 || ua.indexOf('FBDV') > -1 || ua.indexOf('FBMD') > -1 || ua.indexOf('FBSN') > -1 || ua.indexOf('FBID') > -1 || ua.indexOf('FBLC') > -1 || ua.indexOf('FBOP') > -1) {
+                console.log('fb ios');
+                $('.share_tips, .tips2').show();
+            } else if (ua.indexOf('Instagram') > -1 && ua.indexOf('iPhone') > -1) {
+                console.log('Instagram ios');
+                $('.share_tips, .tips6').show();
+            } else if (ua.indexOf('Instagram') > -1 && ua.indexOf('Android') > -1) {
+                console.log('Instagram Android');
+                $('.share_tips, .tips3').show();
+            } else if (ua.indexOf('Snapchat') > -1 && ua.indexOf('iPhone') > -1) {
+                console.log('Snapchat iPhone');
+                $('.share_tips, .tips6').show();
+            } else if (ua.indexOf('Snapchat') > -1 && ua.indexOf('Android') > -1) {
+                console.log('Snapchat Android');
+                $('.share_tips, .tips4').show();
+            } else if (ua.indexOf('TwitterAndroid') > -1) {
+                console.log('TwitterAndroid');
+                $('.share_tips, .tips').show();
+            } else if (ua.indexOf('Safari/') > -1 && ua.indexOf('Mobile/') > -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Android') === -1 && ua.indexOf('Linux') === -1 ) {
+                // console.log('safari');
+                // $('.share_tips, .tips5').show();
+            } else if (ua.indexOf('DingTalk/') > -1) {
+                console.log('DingTalk');
+                $('.share_tips, .tips4').show();
+            }else if (ua.indexOf('WindowsWechat') > -1) {
+                console.log('WindowsWechat');
+                $('.share_tips, .tips7').show();
+            }else if (ua.indexOf('MacWechat') > -1) {
+                console.log('MacWechat');
+                $('.share_tips, .tips8').show();
+            }
+
+
+            var nowTime = new Date();
+            var offset = nowTime.getTimezoneOffset();
+            console.log(offset);
+            var link = 'febbox://share?region=world&shareid=Cbe1nRQg';
+            $('#open_app_share').on('click', function () {
+                copy_share_link();
+                if ($(this).hasClass('disabled')) {
+                    return fasle;
+                }
+                $('#jump_app_store').hide();
+                var request_id = guid();
+                var link = 'febbox://share?region=world&shareid=Cbe1nRQg&request_id='+request_id;
+                console.log('sss');
+                $(this).css({opacity:'0.5'}).addClass('disabled').text('Opening FEB APP ......');
+                fid = new Array(19490720);
+                var fids = JSON.stringify(fid);
+                var share = '';
+                $.ajax({
+                    url:'/file/client_request',
+                    type:'get',
+                    data:{'request_id':request_id},
+                    dataType:'json',
+                    success:function(data){
+                        if (data.code != 1) {
+                            alert('download error');
+                        }
+                        var request_count = 0;
+                        window.location.href=link;
+                        fetch_request(request_id, request_count, fids, share);
+                    }
+                });
+            });
+                        if (ua.indexOf('WindowsWechat') === -1 && ua.indexOf('MacWechat') === -1) {
+                window.location.href = link;
+            }
+            
+            var forms = document.getElementsByClassName('needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false);
+            });
+
+            $('.format-time').each(function () {
+                var time = parseInt($(this).attr('data-timestamp'))-0;
+                console.log(time*1000);
+                var date = new Date(time*1000);
+                var year = date.getFullYear(),
+                month = ("0" + (date.getMonth() + 1)).slice(-2),
+                sdate = ("0" + date.getDate()).slice(-2),
+                hour = ("0" + date.getHours()).slice(-2),
+                minute = ("0" + date.getMinutes()).slice(-2),
+                second = ("0" + date.getSeconds()).slice(-2);
+                // 拼接
+                var result = year + "-"+ month +"-"+ sdate +" "+ hour +":"+ minute;/* +":" + second;*/
+                $(this).html(result);
+            });
+
+            $('.share_tips .close').click(function () {
+                $('.share_tips').hide();
+            });
+
+            $(".share_more img").click(function () {
+                $('.more_popup').show();
+            });
+            $(document).click(function(e){
+                if($(e.target).closest(".share_more img").length === 0){
+                    $('.more_popup').hide();
+                }
+            });
+            $('#jump_app_store,#install_app_store').click(function (){
+                copy_share_link();
+                if (isAndroid) {
+                    window.location.href = 'https://play.google.com/store/apps/details?id=com.topspeed.febbox2';
+                } else if (isiPad || isiPhone) {
+                    window.location.href = 'https://apps.apple.com/app/febbox-100g-cloud-storage/id1543861870';
+                } else {
+                    window.location.href = '/download';
+                }
+            });
+            function fetch_request(request_id, request_count, fids, share) {
+                $.ajax({
+                    url:'/file/client_request_query',
+                    type:'get',
+                    data:{'request_id':request_id},
+                    dataType:'json',
+                    success:function(data){
+                        if (data.code == 1) {
+                            $('#install_app_store').hide();
+                            $('#jump_app_store').hide();
+                            $('#open_app_share').css({opacity:'1'}).removeClass('disabled').text('OPEN IN FEB APP');
+                            console.log('client download success');
+                            return true;
+                        }
+                        if (request_count == 5) {
+                            $('#install_app_store').hide();
+                            $('#jump_app_store').show();
+                            $('#open_app_share').css({opacity:'1'}).removeClass('disabled').text('Reopen FEB APP');
+                            //alert('open app error');
+                            //file_download_exec(fids, share);
+                            $('#jump_app_store').click();
+                            return false;
+                        }
+                        request_count++;
+                        setTimeout(function() {
+                            fetch_request(request_id, request_count, fids, share);
+                        }, 500);
+                    }
+                })
+            }
+        });
+        function guid() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.random() * 16 | 0,
+                    v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+    </script>
+    <script>
+        $(".share_top .right2 .avatar,.file_info3 .file_top .right2 .avatar").click(function(e){
+            e.stopPropagation();
+            $(".sidebar").css("display","block");
+            $.ajax({
+                url: '/console/user_info',
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        if(data.user.article_new == 1){
+                            $(".sidebar ul li .new").css('display','inline-block');
+                        }else{
+                            $(".sidebar ul li .new").hide();
+                        }
+                        $(".sidebar .user .avatar2").attr("src",data.user.avatar);
+                        $(".sidebar .user .name").html(data.user.username);
+                        $(".sidebar .capacity .used").css("width",data.user.progress+'%');
+                        $(".sidebar .capacity .sub_space").css("width",data.user.sub_progress+'%');
+                        $(".sidebar .capacity .exceed_progress").css("width",data.user.exceed_progress+'%');
+                        if(data.user.quota_used2 > data.user.quota_total2){
+                            $(".sidebar .capacity_size .desc").html('<span class="exceed_space">'+data.user.quota_used+'</span> of '+data.user.quota_total+' Used');
+                        }else{
+                            $(".sidebar .capacity_size .desc").text(data.user.quota_used+' of '+data.user.quota_total+' Used');
+                        }
+                        $(".sidebar ul .feb_coins span").text('( '+data.user.amount+' )');
+                        if(data.user.is_vip === 1){
+                            if(data.user.family > 0){
+                                $(".sidebar .user .status").html('<img src="/static/index_img/family.png" width="44">');
+                            }else{
+                                $(".sidebar .user .status").html('<img src="/static/index_img/vip2.png" width="25">');
+                            }
+                        }else{
+                            $(".sidebar .user .status").html('<img src="/static/index_img/free2.png" width="30">');
+                        }
+                    }else{
+                        // alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        $(document).click(function(){
+            $(".sidebar").hide();
+        });
+
+        $(".devices_btn").click(function(){
+            $(".loading2").show();
+            $.ajax({
+                url: '/index/device_list',
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        $(".devices_con .webs .device_list_scroll").html(data.html2);
+                        $(".devices_con .apps .device_list_scroll").html(data.html);
+                        $(".devices_con .devices .name span").text(data.count);
+                        $(".devices_popup").show();
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        $(".devices_popup .popup_close").click(function () {
+            $(".devices_popup").hide();
+        });
+
+        $(".devices_con .device_type span").click(function(){
+            $(".devices_con .device_type span").removeClass('active');
+            $(this).addClass('active');
+            if($(this).hasClass('app_device')){
+                $(".devices_con .device_list.webs").hide();
+                $(".devices_con .device_list.apps").show();
+            }else{
+                $(".devices_con .device_list.apps").hide();
+                $(".devices_con .device_list.webs").show();
+            }
+        });
+
+        $(document).on("click",".devices_con .device_list .device .log_out",function(){
+            var open_udid = $(this).parent().attr("data-val");
+            $(".loading2").show();
+            var web = '';
+            if($(this).parent().hasClass("device_web")){
+                web = 1;
+            }
+            var device = $(this).parent();
+            $.ajax({
+                url: '/console/device_quit',
+                type: 'post',
+                data: {'open_udid':open_udid,'web':web},
+                dataType: 'json',
+                success: function(data){
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        device.remove();
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        $(".links_btn").click(function(){
+            $(".loading2").show();
+            $.ajax({
+                url: '/console/link_list',
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        $(".link_file_list_con .link_file_list .link_file_list_scroll").html(data.html);
+                    }
+                    $(".link_file_list_popup").show();
+                }
+            });
+        });
+
+        var link_file_page = 1;
+        var link_file_ppp = 0;
+        $(".link_file_list_con .link_file_list").scroll(function(){
+            var htmlHeight = $(".link_file_list_con .link_file_list .link_file_list_scroll").height();
+            var scrollTop = $(this).scrollTop();
+            var height = $(this).height();
+            if(scrollTop+height>=htmlHeight-1 && !link_file_ppp){
+                link_file_ppp = 1;
+                link_file_page++;
+                $.ajax({
+                    url : "/console/link_list",
+                    type : 'get',
+                    data : {'page':link_file_page},
+                    dataType : 'json',
+                    success: function(data){
+                        link_file_ppp = 0;
+                        if(data.html){
+                            $(".link_file_list_con .link_file_list .link_file_list_scroll").append(data.html);
+                        }else{
+                            link_file_page--;
+                        }
+                    }
+                });
+            }
+        });
+
+        $(".link_file_list_popup .popup_close").click(function () {
+            $(".link_file_list_popup").hide();
+        });
+
+        $(document).on("click",".link_file_list_con .link_file_list .link_file",function(){
+            var name = $(this).find(".file_name").text();
+            var fid = $(this).attr("data-id");
+            $(".loading2").show();
+            $.ajax({
+                url: '/console/file_link2?fid='+fid,
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        $(".invite_link_list_con .name span").text(name);
+                        $(".invite_link_list_con .copy_link_list").html(data.copy_html);
+                        $(".invite_link_list_con .share_link_list").html(data.share_html);
+                        $(".invite_link_list_con .share_link_list").hide();
+                        $(".invite_link_list_con .link_type .share_links").removeClass("show");
+                        $(".invite_link_list_con .link_type .copy_links").addClass("show");
+                        $(".invite_link_list_con .copy_link_list").show();
+                        $(".invite_link_list_con .link_type").show();
+                        $(".invite_link_list_popup").show();
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        $(document).on("click",".invite_link_list_con .top .popup_close",function(){
+            $(".invite_link_list_popup").hide();
+        });
+
+        $(document).on("click",".share_file_con .invited_links",function(){
+            var fid = $(".share_file_con").attr("data-val");
+            var read_only = $(".share_file_con").attr("read_only");
+            $(".loading2").show();
+            $.ajax({
+                url: '/console/file_link2',
+                data: {'fid':fid,'read_only':read_only},
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        $(".invite_link_list_con .name span").text(name);
+                        $(".invite_link_list_con .copy_link_list").html(data.copy_html);
+                        $(".invite_link_list_con .share_link_list").html(data.share_html);
+                        $(".invite_link_list_con .share_link_list").hide();
+                        $(".invite_link_list_con .link_type .share_links").removeClass("show");
+                        $(".invite_link_list_con .link_type .copy_links").addClass("show");
+                        $(".invite_link_list_con .copy_link_list").show();
+                        $(".invite_link_list_con .link_type").show();
+                        $(".invite_link_list_popup").show();
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        $(".invite_link_list_con .link_type .copy_links").click(function(){
+            $(".invite_link_list_con .link_type .share_links").removeClass("show");
+            $(this).addClass("show");
+            $(".invite_link_list_con .share_link_list").hide();
+            $(".invite_link_list_con .copy_link_list").show();
+        });
+        $(".invite_link_list_con .link_type .share_links").click(function(){
+            $(".invite_link_list_con .link_type .copy_links").removeClass("show");
+            $(this).addClass("show");
+            $(".invite_link_list_con .copy_link_list").hide();
+            $(".invite_link_list_con .share_link_list").show();
+        });
+
+        $(document).on("click",".invite_link_list_con .copy_url",function(){
+            var password = $(this).parent().attr("data-val");
+            var url = $(this).parent().find("span").text();
+            var text = '';
+            if(password){
+                text = 'Link:'+url+' Password:'+password;
+            }else{
+                text = 'Link:'+url;
+            }
+            copyText(text);
+        });
+
+        $(document).on("click",".invite_link_list_con .file_link .link_del",function(){
+            var link = $(this).parent().parent();
+            var key = link.attr("data-key");
+            $(".loading2").show();
+            $.ajax({
+                url: '/console/file_link_del',
+                type: 'post',
+                data: {'key':key},
+                dataType: 'json',
+                success: function(data){
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        link.remove();
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        $(".sidebar .user .user_info2").click(function(){
+            $(".loading2").show();
+            $.ajax({
+                url: '/console/user_cards',
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        $(".FebCards_con .FebCards .user_card .avatar").attr("src",data.data.user.avatar);
+                        $(".FebCards_con .FebCards .user_card .username").text(data.data.user.username);
+                        if(data.data.user.family >= 1){
+                            $(".FebCards_con .FebCards .user_card .status").html('<img src="/static/index_img/family.png" width="44">');
+                        }else if(data.data.user.is_vip){
+                            $(".FebCards_con .FebCards .user_card .status").html('<img src="/static/index_img/vip2.png" width="25">');
+                        }else{
+                            $(".FebCards_con .FebCards .user_card .status").html('<img src="/static/index_img/free2.png" width="30">');
+                        }
+                        $(".FebCards_con .FebCards .user_card .email").text(data.data.user.email);
+                        $(".FebCards_con .FebCards .user_card .uid").text(data.data.user.uid_org);
+                        if(data.data.user.family >= 1){
+                            $(".FebCards_con .FebCards .user_card .family_info p:first-child").html('<span>'+fb_lang.console_cards_vip+' '+data.data.user.expire_time+'</span>');
+                        }else if(data.data.user.is_vip){
+                            $(".FebCards_con .FebCards .user_card .family_info p:first-child").html('<span>'+fb_lang.console_cards_vip2+' '+data.data.user.expire_time+'</span>');
+                        }else{
+                            $(".FebCards_con .FebCards .user_card .family_info p:first-child").html('');
+                        }
+                        $(".FebCards_con .FebCards .space_card .used p:first-child span:first-child").text(data.data.user.quota_used);
+                        $(".FebCards_con .FebCards .space_card .used p:first-child span:last-child").text(data.data.user.quota_total);
+                        if(data.data.user.family >= 1){
+                            $(".FebCards_con .FebCards .space_card .used p:last-child span").text(data.data.user.family_member_count+' Users');
+                        }else{
+                            $(".FebCards_con .FebCards .space_card .used p:last-child").hide();
+                        }
+                        $(".FebCards_con .FebCards .space_card .progress p").css("width",data.data.user.progress+'%');
+                        $(".FebCards_con .FebCards .space_card .progress .sub_space").css("width",data.data.user.sub_progress+'%');
+                        $(".FebCards_con .FebCards .space_card .progress .exceed_progress").css("width",data.data.user.exceed_progress+'%');
+                        $(".FebCards_con .FebCards .coins_card .card_info span").text(data.data.user.amount);
+                        if(data.data.flow.off){
+                            $(".FebCards_con .FebCards .speed_card .card_info p:first-child").text(fb_lang.console_speed_limited);
+                        }else{
+                            $(".FebCards_con .FebCards .speed_card .card_info p:first-child").text(fb_lang.console_no_limited);
+                        }
+                        if(data.data.flow.traffic_today_usage == '0 GB' && !data.data.flow.traffic_today_usage_mb){
+                            $(".FebCards_con .FebCards .speed_card .card_info .record:nth-child(2)").hide();
+                        }else{
+                            if(data.data.flow.traffic_today_usage != '0 GB'){
+                                $(".FebCards_con .FebCards .speed_card .card_info .record:nth-child(2)").text(data.data.flow.traffic_today_usage+' Used Today');
+                            }else{
+                                $(".FebCards_con .FebCards .speed_card .card_info .record:nth-child(2)").text(data.data.flow.traffic_today_usage_mb+'MB Used Today');
+                            }
+                        }
+                        if(data.data.flow.traffic_yesterday_usage == '0 GB' && !data.data.flow.traffic_yesterday_usage_mb){
+                            $(".FebCards_con .FebCards .speed_card .card_info .record:nth-child(3)").hide();
+                        }else{
+                            if(data.data.flow.traffic_yesterday_usage != '0 GB'){
+                                $(".FebCards_con .FebCards .speed_card .card_info .record:nth-child(3)").text(data.data.flow.traffic_yesterday_usage+' Used Yesterday');
+                            }else{
+                                $(".FebCards_con .FebCards .speed_card .card_info .record:nth-child(3)").text(data.data.flow.traffic_yesterday_usage_mb+'MB Used Yesterday');
+                            }
+                        }
+                        if(data.data.cards){
+                            var arr = $(".FebCards_con .FebCards>div");
+                            var arr2 = [];
+                            arr2[0] = arr[0];
+                            arr2[1] = $(".FebCards_con .FebCards #card"+data.data.cards.order[0])[0];
+                            arr2[2] = $(".FebCards_con .FebCards #card"+data.data.cards.order[1])[0];
+                            arr2[3] = $(".FebCards_con .FebCards #card"+data.data.cards.order[2])[0];
+                            arr2[4] = $(".FebCards_con .FebCards #card"+data.data.cards.order[3])[0];
+                            $(".FebCards_con .FebCards").html(arr2);
+
+                            if(data.data.cards.vip_card == 1){
+                                $(".vip_card").show();
+                            }else{
+                                $(".vip_card").hide();
+                            }
+                            if(data.data.cards.space_card == 1){
+                                $(".space_card").show();
+                            }else{
+                                $(".space_card").hide();
+                            }
+                            if(data.data.cards.coins_card == 1){
+                                $(".coins_card").show();
+                            }else{
+                                $(".coins_card").hide();
+                            }
+                            if(data.data.cards.speed_card == 1){
+                                $(".speed_card").show();
+                            }else{
+                                $(".speed_card").hide();
+                            }
+                        }
+                        $(".FebCards_popup").show();
+                        $(".cards_set_popup").hide();
+                    }else{
+                        // alert(data.msg);
+                        $(".error_tips .txt").text(data.msg);
+                        $(".error_tips").show().delay(3000).hide(300);
+                    }
+                }
+            });
+        });
+
+        $(".FebCards_popup .popup_close").click(function(){
+            $(".FebCards_popup").hide();
+        });
+
+        $(".my_plan_popup .my_plan_close").click(function(){
+            $(".my_plan_popup").hide();
+        });
+
+        $(document).on("click",".FebCards_con .FebCards .user_card .family_info",function(){
+            $(".loading2").show();
+            $.ajax({
+                url: '/console/user_plan',
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        $(".my_plan_con .plan_info .current_plan span:last-child").text(data.data.package_name);
+                        $(".my_plan_con .plan_info .time span:last-child").text(data.data.current_plan_expire);
+                        if(data.data.html){
+                            $(".my_plan_con .members").html(data.data.html);
+                            $(".my_plan_con .members").show();
+                        }else{
+                            $(".my_plan_con .members").hide();
+                        }
+                        $(".my_plan_popup").show();
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        $(document).on("click",".space_popup .space_close",function(){
+            $(".space_popup").hide();
+        });
+
+        $(document).on("click",".sidebar .capacity_size,.FebCards_con .FebCards .space_card .space_info",function(){
+            $(".loading2").show();
+            $.ajax({
+                url: '/console/user_space',
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        $(".space_popup").html(data.html);
+                        $(".space_popup").show();
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        $(".FebCards_con .FebCards .speed_card").click(function () {
+            $(".loading2").show();
+            $.ajax({
+                url: '/console/user_traffic_query',
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        if(data['data']['used'] < 100){
+                            $(".high_speed_con .high_speed .img img").attr('src', '/static/index_img/no_limit.png');
+                        }else{
+                            $(".high_speed_con .high_speed .img img").attr('src', '/static/index_img/limit.png');
+                        }
+                        $(".high_speed_con .high_speed .usage p:last-child").text(data['data']['traffic_usage']?data['data']['traffic_usage']:'0 GB'+' / '+data['data']['traffic_limit']?data['data']['traffic_limit']:'100 GB');
+                        $(".high_speed_con .high_speed .flow_reset p:last-child").text(data['data']['reset_at']?data['data']['reset_at']:'0 Days');
+                        $(".high_speed_popup").show();
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        $(".high_speed_con .top .popup_close").click(function () {
+            $(".high_speed_popup").hide();
+        });
+
+        $(".plan_history_popup .popup_close,.plan_history_popup .back").click(function(){
+            $(".plan_history_popup").hide();
+        });
+
+        $(document).on("click",".my_plan_con .plan_history",function(){
+            $.ajax({
+                url: '/console/order_list',
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        $(".plan_history_con .history_list .history_list_scroll").html(data.html);
+                        $(".plan_history_popup").show();
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        history_list_page = 1;
+        history_list_status = false;
+        $(".plan_history_con .history_list").scroll(function(){
+            var htmlHeight = $(".plan_history_con .history_list .history_list_scroll").height();
+            var scrollTop = $(this).scrollTop();
+            var height = $(this).height();
+            if(scrollTop+height>=htmlHeight-1 && !history_list_status){
+                history_list_status = true;
+                history_list_page++;
+                $.ajax({
+                    url: '/console/order_list',
+                    type: 'get',
+                    data: {'page':history_list_page},
+                    dataType: 'json',
+                    success: function(data){
+                        history_list_status = false;
+                        if(data.html){
+                            $(".plan_history_con .history_list .history_list_scroll").append(data.data.html);
+                        }else{
+                            history_list_page--;
+                        }
+                    }
+                });
+            }
+        });
+
+        $(".family_add_popup .popup_close").click(function(){
+            $(".family_add_popup").hide();
+        });
+
+        $(document).on("click",".my_plan_con .members .add_family",function(){
+            $(".family_add_popup").show();
+        });
+
+        $(document).on("click",".family_add_con .invite_btn",function(){
+            var email = $(this).prev().val();
+            if(email){
+                $.ajax({
+                    url: '/console/family_invite',
+                    type: 'post',
+                    data: {'email':email},
+                    dataType: 'json',
+                    success: function (data) {
+                        $(".loading2").hide();
+                        if(data.code === 1){
+                            $(".family_add_popup").hide();
+                            $(".success_tips span:nth-child(2)").text('Successful invitation');
+                            $(".success_tips").show().delay(3000).hide(300);
+                        }else{
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }else{
+                alert('Not Email');
+            }
+        });
+
+        $(".bottom_operation .share_more").click(function (e){
+            e.stopPropagation();
+            $(".bottom_operation .more_operation").show();
+        });
+
+        $(document).click(function (){
+            $(".bottom_operation .more_operation").hide();
+        });
+
+        $(".download_progress .close2").click(function (){
+            $(".download_progress").hide();
+        });
+
+        $(document).on("click", ".bottom_operation .more_operation .download_file,.share_download .continue_d", function (){
+            if($(this).parents('.download_tip_con').length === 0){
+                            }else{
+                $(".download_tip_popup2").hide();
+            }
+            $(".loading2").show();
+            var share_key = "Cbe1nRQg";
+            $.ajax({
+                url: '/file/share_download',
+                type: 'get',
+                data: {'share_key':share_key},
+                dataType: 'json',
+                success: function (data) {
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        if(data.data.length > 1){
+                            var files = [];
+                            var total_size = 0;
+                            for(var i=0; i < data.data.length; i++){
+                                if(data.data[i].error == 0){
+                                    if(data.data[i].path){
+                                        data.data[i].path = data.data[i].path+'/';
+                                    }
+                                    var aa = {'url':data.data[i].download_url, 'name':data.data[i].path+data.data[i].file_name}
+                                    files.push(aa);
+                                    total_size += data.data[i].file_size;
+                                }
+                            }
+
+                            var zip = new JSZip();
+
+                            const progressElement = document.getElementById('progress');
+                            var download_size = 0;
+
+                            var fetchPromises = files.map(function(file) {
+                                $(".download_progress .name").text('Downloading');
+                                $(".download_progress").show();
+                                return fetch(file.url)
+                                    .then(response => {
+                                        // 进度条相关
+                                        // 获取 Response 对象的 body 属性的读取器（reader）。body 属性是一个可读的流（ReadableStream），可以用来读取响应体的数据。
+                                        const reader = response.body.getReader();
+                                        // const contentLength = +response.headers.get('Content-Length');
+                                        let receivedLength = 0;
+                                        let chunks = [];
+                                        // 读取一个数据块。这个方法返回一个 Promise，当一个数据块被读取时，这个 Promise 就会解析为一个包含 done 和 value 属性的对象。done 属性表示是否已经读取完所有数据，value 属性是一个 Uint8Array，包含了读取到的数据块。
+                                        return reader.read().then(function processChunk({ done, value }) {
+                                            if (done) {
+                                                // 将 chunks 数组中的所有数据块复制到一个新的 Uint8Array 中，然后使用这个 Uint8Array 创建一个 Blob 对象
+                                                let data = new Uint8Array(receivedLength);
+                                                let position = 0;
+                                                for(let chunk of chunks) {
+                                                    data.set(chunk, position);
+                                                    position += chunk.length;
+                                                }
+                                                return new Blob([data]);
+                                            }
+                                            // 将读取到的数据块添加到 chunks 数组中。
+                                            chunks.push(value);
+                                            // 更新已接收的数据长度。
+                                            receivedLength += value.length;
+                                            download_size += value.length;
+                                            // console.log(`已下载：${download_size}，总大小：${total_size}`);
+                                            const percent = Math.round((download_size / total_size) * 100);
+                                            progressElement.value = percent;
+                                            // 递归调用 reader.read()，直到读取完所有数据。
+                                            return reader.read().then(processChunk);
+                                        });
+                                    })
+                                    .then(blob => {
+                                        zip.file(file.name, blob);
+                                    });
+                            });
+
+                            Promise.all(fetchPromises).then(function() {
+                                zip.generateAsync({ type: 'blob' }).then(function(content) {
+                                    $(".download_progress .name").text('Download complete');
+                                    var link = document.createElement('a');
+                                    link.href = URL.createObjectURL(content);
+                                    link.download = data.download_name;
+                                    link.click();
+                                });
+                            }).catch(function(error) {
+                                console.error('Error:', error);
+                            });
+                        }else{
+                            let a = document.createElement('a');
+                            a.download = data.data[0].file_name
+                            a.style.display = 'none';
+                            a.href = data.data[0].download_url;
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                        }
+                        // if (isiPad || isiPhone) {
+                        //     window.location.href = data.data[0].download_url;
+                        // }else{
+                        //     window.open(data.data[0].download_url);
+                        // }
+                    }else{
+                        if(data.code === -9){
+                            if(data.data.thumb){
+                                $(".download_tips .download_file_info .file_img img").attr("src",data.data.thumb);
+                            }else{
+                                $(".download_tips .download_file_info .file_img img").attr("src","/static/index_img/file_type/"+data.data.file_icon+".png");
+                            }
+                            $(".download_tips .download_file_info .file_name").text(data.data.file_name);
+                            $(".download_tips .download_file_info .file_size").text(data.data.file_size);
+                            $(".download_tips_popup").show();
+                            return;
+                        }
+                        alert(data.msg);
+                    }
+                }
+            })
+        })
+
+        $(".download_tip_con .popup_close").click(function (){
+            $(".download_tip_popup2").hide();
+        });
+
+        $(".login_tip_con .popup_close").click(function (){
+            $(".login_tip_popup").hide();
+        });
+
+        $(".file_info3 .close2").click(function (){
+            $(".file_info3").hide();
+        });
+
+        $(document).on('click', '.files .file_list .file,.files .file_list .file_thumbnail', function (){
+            if($(this).hasClass('open_dir')){
+                return;
+            }
+
+            var id = $(this).attr('data-id');
+            $(".loading2").show();
+            $.ajax({
+                url: '/file/file_info',
+                type: 'get',
+                data: {'fid':id},
+                dataType: 'json',
+                success: function (data) {
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        $(".file_info3 .info2 .name").text(data.data.file.file_name);
+                        $(".file_info3 .info2 .desc").text(data.data.file.update_time2+' · '+data.data.file.file_size);
+                        if(data.data.file.file_icon == 'img_icon' || data.data.file.file_icon == 'video_icon'){
+                            if(data.data.file.file_icon == 'img_icon'){
+                                var class_name = 'show_img';
+                            }
+                            if(data.data.file.file_icon == 'video_icon'){
+                                var class_name = 'play_video';
+                            }
+                            $(".file_info3 .file_img").css({'height':'calc(100% - 131px)','display':'flex','align-items':'center','justify-content':'center'}).html('<img src="'+data.data.file.thumb_big+'" class="file_icon '+class_name+'" data-id="'+id+'" style="max-width:100%;max-height:100%;">');
+                            if(data.data.file.file_icon == 'video_icon'){
+                                $(".file_info3 .file_img").append('<img src="/static/index_img/play_video.png" width="66" class="play_img">');
+                            }
+                        }else{
+                            if(data.data.file.thumb){
+                                $(".file_info3 .file_img").html('<img src="'+data.data.file.thumb+'" class="file_icon" style="max-width:100%;max-height:100%;">');
+                            }else if(data.data.file.thumb_big){
+                                $(".file_info3 .file_img").html('<img src="'+data.data.file.thumb_big+'" class="file_icon" style="max-width:100%;max-height:100%;">');
+                            }else{
+                                $(".file_info3 .file_img").html('<img src="/static/index_img/file_type/'+data.data.file.file_icon+'2.png" class="file_icon">');
+                            }
+                            $(".file_info3 .file_img").css({'height':'','display':'','align-items':'','justify-content':''});
+                            $(".file_info3 .file_img").append('<p class="tip">This type of file cannot be previewed at the moment, please <a href="javascript:;">download</a> it locally and open it with another application.</p>')
+                        }
+                        $(".file_info3").attr('data-id',id).show();
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            })
+        });
+
+        $(".file_details_popup .popup_close").click(function(){
+            $(".file_details_popup").hide();
+        });
+
+        $(document).on("click",".bottom_operation .more_operation .details,.file_info3 .details",function(){
+            var share_key = "Cbe1nRQg";
+            if($(this).parents('.more_operation').length > 0){
+                var fid = $(this).attr('data-id');
+            }else{
+                var fid = $('.file_info3').attr('data-id');
+            }
+            $(".loading_popup").show();
+            $.ajax({
+                url: '/file/file_more_info',
+                type: 'post',
+                data: {'share_key':share_key,'fid':fid},
+                dataType: 'json',
+                success: function(data){
+                    $(".loading_popup").hide();
+                    if(data.code===1){
+                        $(".file_details_popup .file_details_con").html(data.html)
+                        $(".file_details_popup .file_details_con").animate( { scrollTop: 0 } );
+                        $(".file_details_popup .file_details").attr("data-id",data.id).attr("data-val",data.param);
+                        $(".file_details_popup .file_details").attr("data-fid",data.fid);
+                        $(".file_details_popup").show();
+                    }else{
+                        alert(data.msg);
+                        // $(".error_tips .txt").text(data.msg);
+                        // $(".error_tips").show().delay(3000).hide(300);
+                    }
+                }
+            });
+        });
+
+        $(".download_tips_popup .popup_close").click(function(){
+            $(".download_tips_popup").hide();
+        });
+
+        $(document).on("click", ".file_info3 .download3,.file_download .continue_d", function (){
+            if($(this).parents('.download_tip_con').length === 0){
+                var fid = $('.file_info3').attr('data-id');
+                            }else{
+                var fid = $('.download_tip_con').attr('data-id');
+                $(".download_tip_popup2").hide();
+            }
+            $(".loading2").show();
+            var share_key = "Cbe1nRQg";
+            var fid = $('.file_info3').attr('data-id');
+            $.ajax({
+                url: '/file/file_download',
+                type: 'post',
+                data: {'share_key':share_key,'fid':fid},
+                dataType: 'json',
+                success: function (data) {
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        let a = document.createElement('a');
+                        a.download = data.data[0].file_name
+                        a.style.display = 'none';
+                        a.href = data.data[0].download_url;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        // if (isiPad || isiPhone) {
+                        //     window.location.href = data.data[0].download_url;
+                        // }else{
+                        //     window.open(data.data[0].download_url);
+                        // }
+                    }else{
+                        if(data.code === -9){
+                            if(data.data.thumb){
+                                $(".download_tips .download_file_info .file_img img").attr("src",data.data.thumb);
+                            }else{
+                                $(".download_tips .download_file_info .file_img img").attr("src","/static/index_img/file_type/"+data.data.file_icon+".png");
+                            }
+                            $(".download_tips .download_file_info .file_name").text(data.data.file_name);
+                            $(".download_tips .download_file_info .file_size").text(data.data.file_size);
+                            $(".download_tips_popup").show();
+                            return;
+                        }
+                        alert(data.msg);
+                    }
+                }
+            })
+        });
+
+        $(document).on('click', '.open_dir', function (){
+            var share_key = "Cbe1nRQg";
+            var pwd = "";
+            var p_id = $(this).attr('data-id');
+            var path_name = $(this).attr('data-path');
+            $(".loading2").show();
+            $.ajax({
+                url: '/file/file_share_list',
+                type: 'get',
+                data: {'share_key':share_key, 'pwd':pwd, 'parent_id':p_id, 'is_html':1},
+                dataType: 'json',
+                success: function (data) {
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        page = 1;
+                        $('.share .files .info .path').append('<span class="splitter">/</span><span data-id="'+p_id+'">'+path_name+'</span>');
+                        $(".share .files .file_list .f_list_scroll").html(data.html);
+                    }else{
+                        alert.msg(data.msg);
+                    }
+                }
+            })
+        });
+
+        $(document).on('click', '.files .info .path span:not(:last-child)', function (){
+            if($(this).hasClass('splitter')){
+                return;
+            }
+            var share_key = "Cbe1nRQg";
+            var pwd = "";
+            var p_id = $(this).attr('data-id');
+            var path = $(this);
+            $(".loading2").show();
+            $.ajax({
+                url: '/file/file_share_list',
+                type: 'get',
+                data: {'share_key':share_key, 'pwd':pwd, 'parent_id':p_id, 'is_html':1},
+                dataType: 'json',
+                success: function (data) {
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        page = 1;
+                        path.nextAll().remove();
+                        $(".share .files .file_list .f_list_scroll").html(data.html);
+                    }else{
+                        alert.msg(data.msg);
+                    }
+                }
+            })
+        });
+
+        $(document).on('click', '.files .info .list_type img', function (){
+            var old_type = getCookie('share_file_mode');
+            var type = $(this).attr("class");
+            if(old_type == type){
+                return;
+            }
+            if(old_type == 'list'){
+                $(".files .info .list_type .list").attr('src', '/static/index_img/list2.png');
+            }
+            if(old_type == 'waterfall'){
+                $(".files .info .list_type .waterfall").attr('src', '/static/index_img/waterfall.png');
+            }
+            if(old_type == 'grid'){
+                $(".files .info .list_type .grid").attr('src', '/static/index_img/grid.png');
+            }
+            if(old_type == 'grid2'){
+                $(".files .info .list_type .grid2").attr('src', '/static/index_img/grid2.png');
+            }
+            setCookie('share_file_mode', type);
+            if(type == 'list'){
+                $(".files .info .list_type .list").attr('src', '/static/index_img/list.png');
+            }
+            if(type == 'waterfall'){
+                $(".files .info .list_type .waterfall").attr('src', '/static/index_img/waterfall_active.png');
+            }
+            if(type == 'grid'){
+                $(".files .info .list_type .grid").attr('src', '/static/index_img/grid_active.png');
+            }
+            if(type == 'grid2'){
+                $(".files .info .list_type .grid2").attr('src', '/static/index_img/grid2_active.png');
+            }
+            var share_key = "Cbe1nRQg";
+            var pwd = "";
+            var p_id = $('.files .info .path span:last-child').attr('data-id');
+            $(".loading2").show();
+            $.ajax({
+                url: '/file/file_share_list',
+                type: 'get',
+                data: {'share_key':share_key, 'pwd':pwd, 'parent_id':p_id, 'is_html':1},
+                dataType: 'json',
+                success: function (data) {
+                    $(".loading2").hide();
+                    if(data.code === 1){
+                        page = 1;
+                        if(type == 'list'){
+                            var class_name = 'file_list icon_list';
+                        }else if(type == 'waterfall'){
+                            var class_name = 'file_list waterfall_list';
+                        }else if(type == 'grid'){
+                            var class_name = 'file_list gridType_list';
+                        }else if(type == 'grid2'){
+                            var class_name = 'file_list gridType_list2';
+                        }
+                        $('.share .files .file_list').attr('class', class_name);
+                        $(".share .files .file_list .f_list_scroll").html(data.html);
+                    }else{
+                        alert.msg(data.msg);
+                    }
+                }
+            })
+        });
+
+                var play_id = '';
+        if(play_id){
+            var share_key = "Cbe1nRQg";
+            $('.video_con').css({height:'90%'});
+            $(".video_con #player_loading").show();
+            $('#video_bg').show();
+            $('#player_box').remove();
+            $('#player_panel').html('<div id="player_box" class="player_box"></div>');
+            window.history.pushState('', '', '/share/'+share_key);
+            $.ajax({
+                type : 'POST',
+                url : '/file/player',
+                data : {'fid':play_id,'share_key':share_key},
+                dataType : 'text',
+                success: function(data){
+                    try {
+                        var data2 = $.parseJSON(data);
+                        if(data2.code < 0){
+                            $('#video_bg').hide();
+                            $('#player_box').remove();
+                            $(".error_tips .txt").text(data2.msg);
+                            $(".error_tips").show().delay(3000).hide(300);
+                            return false;
+                        }
+                    } catch (d) {
+
+                    }
+                    $('#player_box').html(data);
+                    $(".video_con #player_loading").hide();
+                    // $('.video_con').css({height:'auto'});
+                },
+                error: function(){
+                    alert("network error");
+                    $(".video_con #player_loading").hide();
+                }
+            });
+        }
+        
+        $(document).on("click",".share .play_img,.file_info3 .play_img",function(){
+                        var fid = $(this).prev().attr('data-id');
+            var share_key = "Cbe1nRQg";
+            $('.video_con').css({height:'90%'});
+            $(".video_con #player_loading").show();
+            $('#video_bg').show();
+            $('#player_box').remove();
+            $('#player_panel').html('<div id="player_box" class="player_box"></div>');
+            $.ajax({
+                type : 'POST',
+                url : '/file/player',
+                data : {'fid':fid,'share_key':share_key},
+                dataType : 'text',
+                success: function(data){
+                    try {
+                        var data2 = $.parseJSON(data);
+                        if(data2.code < 0){
+                            $('#video_bg').hide();
+                            $('#player_box').remove();
+                            $(".error_tips .txt").text(data2.msg);
+                            $(".error_tips").show().delay(3000).hide(300);
+                            return false;
+                        }
+                    } catch (d) {
+
+                    }
+                    $('#player_box').html(data);
+                    $(".video_con #player_loading").hide();
+                    // $('.video_con').css({height:'auto'});
+                },
+                error: function(){
+                    alert("network error");
+                    $(".video_con #player_loading").hide();
+                }
+            });
+        });
+
+        $(document).on("click",".login_tip img",function(){
+            $(".login_tip").hide();
+        });
+
+        var page = 1;
+        var end = false;
+        $(".share .files .file_list").scroll(function () {
+            var htmlHeight=$(".share .files .file_list .f_list_scroll").height();
+            var clientHeight=$(this).height();
+            var scrollTop=$(this).scrollTop();
+            // console.log(htmlHeight,clientHeight,scrollTop);
+            if(scrollTop+clientHeight>=htmlHeight-1 && !end){
+                end = true;
+                $(".loading2").show();
+                var id = $(".share .files .info .path span:last-child").attr("data-id");
+                if(!id){
+                    id = 0;
+                }
+                var share_key = "Cbe1nRQg";
+                var pwd = "";
+                page++;
+                $.ajax({
+                    url: '/file/file_share_list?page='+page,
+                    type: 'get',
+                    data: {'share_key':share_key,'pwd':pwd,'parent_id':id,'is_html':1},
+                    dataType: 'json',
+                    success: function (data) {
+                        end = false;
+                        $(".loading2").hide();
+                        if(data.code === 1){
+                            if(!data.html){
+                                page--;
+                            }
+                            $(".share .files .file_list .f_list_scroll").append(data.html);
+                        }else{
+                            page--;
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+        });
+
+        $(document).on("click",".show_img",function(){
+            var share_key = "Cbe1nRQg";
+            var fid = $(this).attr('data-id');
+            $.ajax({
+                url: '/file/show_img2',
+                type: 'get',
+                data: {'fid':fid,'share_key':share_key},
+                dataType: 'json',
+                success: function(data){
+                    $(".img_lists").html(data.html);
+                    var index = $("#img_lists .show").index();
+                    $('#img_lists').viewer("update");
+                    $('#img_lists').viewer("view",index);
+                    $(".viewer-container").css('z-index','9999');
+                }
+            });
+        });
+
+        $(document).on("click",".viewer-next",function(e){
+            var img = $(".img_lists .show").next();
+            if(img.length > 0) {
+                $(".img_lists .show").removeClass("show");
+                img.addClass("show");
+            }else{
+                var fid = $(".img_lists .show").attr('data-id');
+                var share_key = "Cbe1nRQg";
+                $.ajax({
+                    url: '/file/show_img2',
+                    type: 'get',
+                    data: {'fid':fid,'share_key':share_key,'slide_type':'forward'},
+                    dataType: 'json',
+                    success: function(data){
+                        if($(".viewer-container").is(":hidden")){
+                            return;
+                        }
+                        if(data.html){
+                            $(".img_lists").append(data.html);
+                            var img = $(".img_lists .show").next();
+                            $(".img_lists .show").removeClass("show");
+                            img.addClass("show");
+                            var index = $("#img_lists .show").index();
+                            $('#img_lists').viewer("update");
+                            $('#img_lists').viewer("view",index);
+                        }
+                    }
+                });
+            }
+        });
+
+        $(document).on("click",".viewer-prev",function(e){
+            var img = $(".img_lists .show").prev();
+            if(img.length > 0) {
+                $(".img_lists .show").removeClass("show");
+                img.addClass("show");
+            }else{
+                var fid = $(".img_lists .show").attr('data-id');
+                var share_key = "Cbe1nRQg";
+                $.ajax({
+                    url: '/file/show_img2',
+                    type: 'get',
+                    data: {'fid':fid,'share_key':share_key,'slide_type':'backward'},
+                    dataType: 'json',
+                    success: function(data){
+                        if($(".viewer-container").is(":hidden")){
+                            return;
+                        }
+                        if(data.html){
+                            $(".img_lists").prepend(data.html);
+                            var img = $(".img_lists .show").prev();
+                            $(".img_lists .show").removeClass("show");
+                            img.addClass("show");
+                            var index = $("#img_lists .show").index();
+                            $('#img_lists').viewer("update");
+                            $('#img_lists').viewer("view",index);
+                        }
+                    }
+                });
+            }
+        });
+
+        $(".dir_info_popup .popup_close").click(function(){
+            $(".dir_info_popup").hide();
+            $("body").css("overflow","");
+        });
+
+        function getCookie(name){
+            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+            if(arr=document.cookie.match(reg)){
+                return unescape(arr[2]);
+            }else{
+                return false;
+            }
+        }
+
+        function setCookie(name,value) {
+            var Days = 365;
+            var exp = new Date();
+            exp.setTime(exp.getTime() + Days*24*60*60*1000);
+            document.cookie = name + "="+ value + ";expires=" + exp.toGMTString() + ";path=/";
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9455c723de0d8c73',t:'MTc0ODE4MzkyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+<script>
+
+</script>

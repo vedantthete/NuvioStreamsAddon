@@ -1,0 +1,73 @@
+{
+  "adult": false,
+  "backdrop_path": "/v1U3lht8yAgdL9FdpzxlznAqNWH.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "",
+  "id": 1396122,
+  "imdb_id": "tt36293840",
+  "origin_country": [
+    "BD"
+  ],
+  "original_language": "bn",
+  "original_title": "তান্ডব",
+  "overview": "HOLD YOUR BREATH, THERE's GONNA BE TAANDOB !!",
+  "popularity": 12.7166,
+  "poster_path": "/iplMLlXU1BgmTz4xviILTOlECYL.jpg",
+  "production_companies": [
+    {
+      "id": 172489,
+      "logo_path": "/a5TEqpvEhsR5aSXfuB91LWiN2iv.png",
+      "name": "Alpha-i",
+      "origin_country": "BD"
+    },
+    {
+      "id": 12877,
+      "logo_path": "/eKruM4v4KT0ILAK2NsDGne6qA7D.png",
+      "name": "SVF Entertainment",
+      "origin_country": "IN"
+    },
+    {
+      "id": 157210,
+      "logo_path": "/5PnqIRUbdpW53V4p56NGxY9lYYB.png",
+      "name": "Chorki",
+      "origin_country": "BD"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "BD",
+      "name": "Bangladesh"
+    },
+    {
+      "iso_3166_1": "IN",
+      "name": "India"
+    }
+  ],
+  "release_date": "2025-06-07",
+  "revenue": 0,
+  "runtime": 0,
+  "spoken_languages": [
+    {
+      "english_name": "Bengali",
+      "iso_639_1": "bn",
+      "name": "বাংলা"
+    }
+  ],
+  "status": "In Production",
+  "tagline": "",
+  "title": "Taandob",
+  "video": false,
+  "vote_average": 0,
+  "vote_count": 0
+}

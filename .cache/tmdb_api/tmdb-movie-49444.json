@@ -1,0 +1,66 @@
+{
+  "adult": false,
+  "backdrop_path": "/7BdxZXbSkUiVeCRXKD3hi9KYeWm.jpg",
+  "belongs_to_collection": {
+    "id": 77816,
+    "name": "Kung Fu Panda Collection",
+    "poster_path": "/xoYc0RYKSc3xC4S9OpPZxKocKtj.jpg",
+    "backdrop_path": "/2nbtv33hEk2CTnuMhTGZgsFdi3K.jpg"
+  },
+  "budget": 150000000,
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "http://www.kungfupanda.com/",
+  "id": 49444,
+  "imdb_id": "tt1302011",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Kung Fu Panda 2",
+  "overview": "Po and his friends fight to stop a peacock villain from conquering China with a deadly new weapon, but first the Dragon Warrior must come to terms with his past.",
+  "popularity": 12.0626,
+  "poster_path": "/mtqqD00vB4PGRt20gWtGqFhrkd0.jpg",
+  "production_companies": [
+    {
+      "id": 521,
+      "logo_path": "/3BPX5VGBov8SDqTV7wC1L1xShAS.png",
+      "name": "DreamWorks Animation",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2011-05-25",
+  "revenue": 665692281,
+  "runtime": 91,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Twice the awesomeness.",
+  "title": "Kung Fu Panda 2",
+  "video": false,
+  "vote_average": 7.041,
+  "vote_count": 7399
+}

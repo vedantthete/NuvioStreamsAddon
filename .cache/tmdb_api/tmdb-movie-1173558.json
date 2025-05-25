@@ -1,0 +1,61 @@
+{
+  "adult": false,
+  "backdrop_path": "/gAVN26CLN1gnf5a1fEdf8EqlMZG.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81446391",
+  "id": 1173558,
+  "imdb_id": "tt26787296",
+  "origin_country": [
+    "BR"
+  ],
+  "original_language": "pt",
+  "original_title": "O Lado Bom de Ser Traída",
+  "overview": "Babi discovers a betrayal by her long-term partner and decides to embark on a new adventure in life. On this journey, she meets judge Marco and they begin to live a story permeated by a lot of sexual tension.",
+  "popularity": 12.6381,
+  "poster_path": "/3MxgXI3VO7QCNnP0mPBjxLIemNM.jpg",
+  "production_companies": [
+    {
+      "id": 80325,
+      "logo_path": "/nLfcX5QYw9qKoPejAbisq1vjNNz.png",
+      "name": "Glaz Entretenimento",
+      "origin_country": "BR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "BR",
+      "name": "Brazil"
+    }
+  ],
+  "release_date": "2023-10-25",
+  "revenue": 0,
+  "runtime": 99,
+  "spoken_languages": [
+    {
+      "english_name": "Portuguese",
+      "iso_639_1": "pt",
+      "name": "Português"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Burning Betrayal",
+  "video": false,
+  "vote_average": 6.317,
+  "vote_count": 197
+}

@@ -1,0 +1,128 @@
+{
+  "adult": false,
+  "backdrop_path": "/hU1Q9YVzdYhokr8a9gLywnSUMlN.jpg",
+  "belongs_to_collection": {
+    "id": 822306,
+    "name": "Miraculous World",
+    "poster_path": "/jaQiXB7ZCiW8zUCnuZ7sf73yX4Z.jpg",
+    "backdrop_path": "/fL266xNoCgTa4rGHzfRdLHpQnJ1.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    }
+  ],
+  "homepage": "",
+  "id": 1147400,
+  "imdb_id": "tt29259099",
+  "origin_country": [
+    "FR"
+  ],
+  "original_language": "fr",
+  "original_title": "Miraculous World : Paris, Les Aventures de Toxinelle et Griffe Noire",
+  "overview": "Miraculous holders from another world appear in Paris. They come from a parallel universe where everything is reversed: the holders of Ladybug and Black Cat Miraculouses, Shadybug and Claw Noir, are the bad guys, and the holder of the Butterfly Miraculous, Hesperia, is a superhero. Ladybug and Cat Noir will have to help Hesperia counter the attacks of their evil doubles and prevent them from seizing the Butterfly's Miraculous. Can our heroes also help Hesperia make Shadybug and Claw Noir better people?",
+  "popularity": 14.6178,
+  "poster_path": "/nydROKumZe9oFZNiSn792MDDA1v.jpg",
+  "production_companies": [
+    {
+      "id": 79650,
+      "logo_path": null,
+      "name": "Zagtoon",
+      "origin_country": "FR"
+    },
+    {
+      "id": 79175,
+      "logo_path": "/e3uLvwItKgTfzfwansI0ZjtN45N.png",
+      "name": "SAMG Entertainment",
+      "origin_country": "KR"
+    },
+    {
+      "id": 35136,
+      "logo_path": "/lhGOKiuEls3KiWigu1hbvrqUP68.png",
+      "name": "Method Animation",
+      "origin_country": "FR"
+    },
+    {
+      "id": 103374,
+      "logo_path": "/ApbzfacgrUSGF3r4MUfbnjeso9L.png",
+      "name": "The Walt Disney Company EMEA",
+      "origin_country": "GB"
+    },
+    {
+      "id": 20498,
+      "logo_path": "/f1IuC7TbBHlNHybw2TZn5R1p4sx.png",
+      "name": "Télé-Québec",
+      "origin_country": "CA"
+    },
+    {
+      "id": 22123,
+      "logo_path": "/zPTy6QDAlCKGeAALZoFEL3QAlut.png",
+      "name": "TF1",
+      "origin_country": "FR"
+    },
+    {
+      "id": 118295,
+      "logo_path": "/gQyZpZtbd0wV1lFI84G6Sa2th7T.png",
+      "name": "Gloob",
+      "origin_country": "BR"
+    },
+    {
+      "id": 200505,
+      "logo_path": null,
+      "name": "Norman Studio",
+      "origin_country": "FR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CA",
+      "name": "Canada"
+    },
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    },
+    {
+      "iso_3166_1": "KR",
+      "name": "South Korea"
+    },
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    }
+  ],
+  "release_date": "2023-10-21",
+  "revenue": 0,
+  "runtime": 48,
+  "spoken_languages": [
+    {
+      "english_name": "French",
+      "iso_639_1": "fr",
+      "name": "Français"
+    }
+  ],
+  "status": "Released",
+  "tagline": "It only takes one decision to become a hero.",
+  "title": "Miraculous World: Paris, Tales of Shadybug and Claw Noir",
+  "video": false,
+  "vote_average": 7.224,
+  "vote_count": 598
+}

@@ -1,0 +1,105 @@
+{
+  "adult": false,
+  "backdrop_path": "/9iQWsXwjOMGDvTDdvCnpiyR0UG3.jpg",
+  "belongs_to_collection": {
+    "id": 135483,
+    "name": "Taken Collection",
+    "poster_path": "/zcBtDhjYfmeHHRXtrFuGPsY0ybA.jpg",
+    "backdrop_path": "/kv2zhXfePOrk5fKrkYn38MoBCUg.jpg"
+  },
+  "budget": 25000000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "http://www.takenmovie.com/",
+  "id": 8681,
+  "imdb_id": "tt0936501",
+  "origin_country": [
+    "FR"
+  ],
+  "original_language": "en",
+  "original_title": "Taken",
+  "overview": "Bryan Mills, a former government operative, is trying to reconnect with his teenage daughter Kim. After reluctantly agreeing with his ex-wife to let Kim go to Paris on vacation with a friend, his worst nightmare comes true. While on the phone with his daughter shortly after she arrives in Paris, she and her friend are abducted by a gang of human traffickers. Working against the clock, Bryan relies on his extensive training and skills to track down the ruthless gang that abducted her and launch a one-man war to rescue his daughter.",
+  "popularity": 17.709,
+  "poster_path": "/y5Va1WXDX6nZElVirPrGxf6w99B.jpg",
+  "production_companies": [
+    {
+      "id": 6896,
+      "logo_path": "/2Q89KvzxTKB5BAv9RqFIPI1qb7E.png",
+      "name": "EuropaCorp",
+      "origin_country": "FR"
+    },
+    {
+      "id": 1115,
+      "logo_path": "/ntH7T5gsN6wtyrfHGHJDTuneQ7o.png",
+      "name": "M6 Films",
+      "origin_country": "FR"
+    },
+    {
+      "id": 6877,
+      "logo_path": null,
+      "name": "Grive Productions",
+      "origin_country": "FR"
+    },
+    {
+      "id": 25,
+      "logo_path": "/qZCc1lty5FzX30aOCVRBLzaVmcp.png",
+      "name": "20th Century Fox",
+      "origin_country": "US"
+    },
+    {
+      "id": 222910,
+      "logo_path": null,
+      "name": "Seaside Film Taken",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2008-02-18",
+  "revenue": 226830568,
+  "runtime": 94,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "French",
+      "iso_639_1": "fr",
+      "name": "Français"
+    },
+    {
+      "english_name": "Arabic",
+      "iso_639_1": "ar",
+      "name": "العربية"
+    },
+    {
+      "english_name": "Albanian",
+      "iso_639_1": "sq",
+      "name": "shqip"
+    }
+  ],
+  "status": "Released",
+  "tagline": "They took his daughter. He'll take their lives.",
+  "title": "Taken",
+  "video": false,
+  "vote_average": 7.395,
+  "vote_count": 11487
+}

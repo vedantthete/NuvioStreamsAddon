@@ -1,0 +1,71 @@
+{
+  "adult": false,
+  "backdrop_path": "/jrpLhYHxsE7XVZCtP8LZrfhlvIy.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    }
+  ],
+  "homepage": "",
+  "id": 1303055,
+  "imdb_id": "tt32323148",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "A Breed Apart",
+  "overview": "When Violet accepts an invitation to a private island with some of the world's most famous social influencers, she expects a weekend of unrivaled viral opportunity. She soon becomes part of her own horrific reality show when the guests are pitted against each other to capture the island's legendary man-eating dogs before they become victims of the monstrous canines.",
+  "popularity": 8.0811,
+  "poster_path": "/6IiNUUV6H2W1wUc8e1w4GfuQCOE.jpg",
+  "production_companies": [
+    {
+      "id": 12029,
+      "logo_path": "/8PAf5K4VVI6xO9SjB7bxLtpi4xH.png",
+      "name": "Curmudgeon Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 80713,
+      "logo_path": "/7pcqQVviN7Uao9B1h850ek65EPJ.png",
+      "name": "Daro Film Distribution",
+      "origin_country": "MC"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    },
+    {
+      "iso_3166_1": "MC",
+      "name": "Monaco"
+    }
+  ],
+  "release_date": "2025-05-16",
+  "revenue": 0,
+  "runtime": 100,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Like. Subscribe. Survive.",
+  "title": "A Breed Apart",
+  "video": false,
+  "vote_average": 4.885,
+  "vote_count": 13
+}

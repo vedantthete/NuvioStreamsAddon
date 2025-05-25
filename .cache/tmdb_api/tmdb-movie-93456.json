@@ -1,0 +1,77 @@
+{
+  "adult": false,
+  "backdrop_path": "/fOipappvgVtUbbHOtmCkHzcwJjC.jpg",
+  "belongs_to_collection": {
+    "id": 86066,
+    "name": "Despicable Me Collection",
+    "poster_path": "/xIXhIlZDRmSSfNbpN7kBCm5hg39.jpg",
+    "backdrop_path": "/37xamYKRUGCRux532lKcZdVGYuR.jpg"
+  },
+  "budget": 76000000,
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    }
+  ],
+  "homepage": "",
+  "id": 93456,
+  "imdb_id": "tt1690953",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Despicable Me 2",
+  "overview": "Gru is recruited by the Anti-Villain League to help deal with a powerful new super criminal.",
+  "popularity": 10.9481,
+  "poster_path": "/oyMPJJZoOpLHgJoFPUOn6DgkbWJ.jpg",
+  "production_companies": [
+    {
+      "id": 6704,
+      "logo_path": "/fOG2oY4m1YuYTQh4bMqqZkmgOAI.png",
+      "name": "Illumination",
+      "origin_country": "US"
+    },
+    {
+      "id": 33,
+      "logo_path": "/3wwjVpkZtnog6lSKzWDjvw2Yi00.png",
+      "name": "Universal Pictures",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2013-06-26",
+  "revenue": 970766005,
+  "runtime": 98,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "When the world needed a hero, they called a villain.",
+  "title": "Despicable Me 2",
+  "video": false,
+  "vote_average": 6.934,
+  "vote_count": 11492
+}

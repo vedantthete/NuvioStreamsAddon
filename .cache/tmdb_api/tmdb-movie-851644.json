@@ -1,0 +1,63 @@
+{
+  "adult": false,
+  "backdrop_path": "/3NLczZ7sSIKoe3jLlH9yOfdqUcF.jpg",
+  "belongs_to_collection": null,
+  "budget": 119,
+  "genres": [
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "",
+  "id": 851644,
+  "imdb_id": "tt15340724",
+  "origin_country": [
+    "KR"
+  ],
+  "original_language": "ko",
+  "original_title": "20세기 소녀",
+  "overview": "In 1999, a teen girl keeps close tabs on a boy in school on behalf of her deeply smitten best friend – then she gets swept up in a love story of her own.",
+  "popularity": 12.8907,
+  "poster_path": "/dbhk3PV7TmaL0FcelsArLFW0rRO.jpg",
+  "production_companies": [
+    {
+      "id": 49096,
+      "logo_path": "/dj9VQ8Tqw4OTP8h5JkSOQGpEeMR.png",
+      "name": "Yong Film",
+      "origin_country": "KR"
+    },
+    {
+      "id": 199265,
+      "logo_path": "/mv2yDqAgT1ea1eTXZMDr89zX95M.png",
+      "name": "CJ ENM Studios",
+      "origin_country": "KR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "KR",
+      "name": "South Korea"
+    }
+  ],
+  "release_date": "2022-10-06",
+  "revenue": 0,
+  "runtime": 119,
+  "spoken_languages": [
+    {
+      "english_name": "Korean",
+      "iso_639_1": "ko",
+      "name": "한국어/조선말"
+    }
+  ],
+  "status": "Released",
+  "tagline": "A first love pov story.",
+  "title": "20th Century Girl",
+  "video": false,
+  "vote_average": 8.177,
+  "vote_count": 730
+}

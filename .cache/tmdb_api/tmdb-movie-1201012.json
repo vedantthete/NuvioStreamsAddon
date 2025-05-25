@@ -1,0 +1,67 @@
+{
+  "adult": false,
+  "backdrop_path": "/l2QSVFR5aLcW1Vl4cGKrQkEp6fY.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81943001",
+  "id": 1201012,
+  "imdb_id": "tt21194868",
+  "origin_country": [
+    "IN"
+  ],
+  "original_language": "hi",
+  "original_title": "धूम धाम",
+  "overview": "On their wedding night, an oddball couple is thrust into a chaotic chase, dodging goons and cops in a frenzied hunt for the mysterious \"Charlie.\"",
+  "popularity": 10.5122,
+  "poster_path": "/2E7me3rPi8HqaeheuD86YlpNX6k.jpg",
+  "production_companies": [
+    {
+      "id": 212774,
+      "logo_path": null,
+      "name": "B62 Studios",
+      "origin_country": "IN"
+    },
+    {
+      "id": 115477,
+      "logo_path": "/6CkBjiSlfAJFaMjwB44ILbOhFuV.png",
+      "name": "Jio Studios",
+      "origin_country": "IN"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "IN",
+      "name": "India"
+    }
+  ],
+  "release_date": "2025-02-13",
+  "revenue": 0,
+  "runtime": 109,
+  "spoken_languages": [
+    {
+      "english_name": "Hindi",
+      "iso_639_1": "hi",
+      "name": "हिन्दी"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Dulha. Dulhan. Danger.",
+  "title": "Dhoom Dhaam",
+  "video": false,
+  "vote_average": 6.722,
+  "vote_count": 45
+}

@@ -1,0 +1,119 @@
+{
+  "adult": false,
+  "backdrop_path": "/Eeuq1qmv8UEsd4sX6BSrGNYR19.jpg",
+  "belongs_to_collection": null,
+  "budget": 4870000,
+  "genres": [
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    }
+  ],
+  "homepage": "https://www.gaumont.com/en/movie/night-call",
+  "id": 1001274,
+  "imdb_id": "tt16826430",
+  "origin_country": [
+    "BE",
+    "FR"
+  ],
+  "original_language": "fr",
+  "original_title": "La Nuit se traîne",
+  "overview": "Mady, a student, works as a locksmith by night. He helps Claire get into her apartment and soon realizes that she lied to him about her identity and robbed something that belonged to a dangerous man, Yannick. Mady gets embroiled in a manhunt and will have one night to prove his innocence.",
+  "popularity": 11.4968,
+  "poster_path": "/5NYSdTdM1A4WKDmxwoph7PSFunv.jpg",
+  "production_companies": [
+    {
+      "id": 110258,
+      "logo_path": null,
+      "name": "Daylight Films",
+      "origin_country": "BE"
+    },
+    {
+      "id": 11983,
+      "logo_path": null,
+      "name": "Formosa Productions",
+      "origin_country": "FR"
+    },
+    {
+      "id": 3134,
+      "logo_path": "/1w7LQKO5fNzovefxGReUpZlM8e9.png",
+      "name": "A Private View",
+      "origin_country": "BE"
+    },
+    {
+      "id": 9,
+      "logo_path": "/nda3dTUYdDrJ6rZqBpYvY865aDv.png",
+      "name": "Gaumont",
+      "origin_country": "FR"
+    },
+    {
+      "id": 591,
+      "logo_path": "/q5I5RDwMEiqoNmfaJgd2LraEOJY.png",
+      "name": "France 3 Cinéma",
+      "origin_country": "FR"
+    },
+    {
+      "id": 11797,
+      "logo_path": "/61JT9Ldht918n04Q73l2KhCjss.png",
+      "name": "VOO",
+      "origin_country": "BE"
+    },
+    {
+      "id": 24430,
+      "logo_path": "/7ZIwXTA5QVD6feybiITOL6OYJPJ.png",
+      "name": "BeTV",
+      "origin_country": "BE"
+    },
+    {
+      "id": 92187,
+      "logo_path": "/yrAyYme1zlZtHuhlWS3DlFAj762.png",
+      "name": "Proximus",
+      "origin_country": "BE"
+    },
+    {
+      "id": 202584,
+      "logo_path": "/xzwuvF1SmLz0O1TunE2eMWq8Rdn.png",
+      "name": "RTL Belgium",
+      "origin_country": "BE"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "BE",
+      "name": "Belgium"
+    },
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    }
+  ],
+  "release_date": "2024-08-28",
+  "revenue": 0,
+  "runtime": 97,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "French",
+      "iso_639_1": "fr",
+      "name": "Français"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Some doors should never be unlocked.",
+  "title": "Night Call",
+  "video": false,
+  "vote_average": 6.795,
+  "vote_count": 95
+}

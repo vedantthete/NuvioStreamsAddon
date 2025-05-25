@@ -1,0 +1,57 @@
+{
+  "adult": false,
+  "backdrop_path": "/dFOFsm3z8tss4Nz8dzahbc6r5CD.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81686326",
+  "id": 1329336,
+  "imdb_id": "tt33130902",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "The Bad Guys: Haunted Heist",
+  "overview": "The crafty Bad Guys crew embarks on a high-stakes Halloween heist to swipe a priceless amulet from a spooky mansion. What could go wrong?",
+  "popularity": 14.4553,
+  "poster_path": "/oEJC05CqPugMxC4rFu9r6r6vg6m.jpg",
+  "production_companies": [
+    {
+      "id": 42141,
+      "logo_path": "/3DWUezrpxTqVMW4oKRhzfqJbULK.png",
+      "name": "DreamWorks Animation Television",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2024-10-02",
+  "revenue": 0,
+  "runtime": 25,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Bad Guys: Haunted Heist",
+  "video": false,
+  "vote_average": 6.952,
+  "vote_count": 125
+}

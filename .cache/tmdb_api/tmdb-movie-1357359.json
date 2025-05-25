@@ -1,0 +1,98 @@
+{
+  "adult": false,
+  "backdrop_path": "/n77uTuX36Nb0yz8DCU9HBJi4RYw.jpg",
+  "belongs_to_collection": {
+    "id": 1485333,
+    "name": "Ejen Ali Collection",
+    "poster_path": null,
+    "backdrop_path": null
+  },
+  "budget": 2200000,
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "",
+  "id": 1357359,
+  "imdb_id": "tt33381728",
+  "origin_country": [
+    "MY"
+  ],
+  "original_language": "ms",
+  "original_title": "Ejen Ali: The Movie 2",
+  "overview": "Ejen Ali is appointed as the pilot of Project Satria, a new armoured suit with the help of an Artificial Intelligence programme specially designed to optimise the physical performance and mental skills of MATA agents while carrying out their secret missions.",
+  "popularity": 15.8145,
+  "poster_path": "/cjDAlNKylyqNUpv6nDoFR1YBEAD.jpg",
+  "production_companies": [
+    {
+      "id": 85512,
+      "logo_path": "/ldhs94D8MfQy6g5OQPF7Xlx7veS.png",
+      "name": "WAU Animation",
+      "origin_country": "MY"
+    },
+    {
+      "id": 27090,
+      "logo_path": "/rm9GCMgxKobZuUATg41ZTb1IzzT.png",
+      "name": "Primeworks Studios",
+      "origin_country": "MY"
+    },
+    {
+      "id": 254936,
+      "logo_path": null,
+      "name": "Komet Productions",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "MY",
+      "name": "Malaysia"
+    }
+  ],
+  "release_date": "2025-05-22",
+  "revenue": 0,
+  "runtime": 120,
+  "spoken_languages": [
+    {
+      "english_name": "Malay",
+      "iso_639_1": "ms",
+      "name": "Bahasa melayu"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Ejen Ali: The Movie 2",
+  "video": false,
+  "vote_average": 0,
+  "vote_count": 0
+}

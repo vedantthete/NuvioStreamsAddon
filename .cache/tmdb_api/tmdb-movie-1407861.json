@@ -1,0 +1,79 @@
+{
+  "adult": false,
+  "backdrop_path": "/y12HU18e5FHNeqkSZdvMBEOY6BU.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    }
+  ],
+  "homepage": "",
+  "id": 1407861,
+  "imdb_id": "tt29343289",
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_title": "The Bayou",
+  "overview": "Vacation turns disaster when Houston grad Kyle and her friends survive a plane crash in the desolate Louisiana everglades, only to discover there's something way more dangerous lurking in the shallows.",
+  "popularity": 14.7531,
+  "poster_path": "/sf6j1SbgDf7VTjL1MRq5MAQSOyE.jpg",
+  "production_companies": [
+    {
+      "id": 248409,
+      "logo_path": null,
+      "name": "Cowboy Cosmonaut Films",
+      "origin_country": "GB"
+    },
+    {
+      "id": 212927,
+      "logo_path": "/pnU0Lw2xaaJzKv6CXEoIC1yGkjV.png",
+      "name": "Big Safari",
+      "origin_country": "GB"
+    },
+    {
+      "id": 31787,
+      "logo_path": "/dWkJVibgXMBhPathe3rn7raMcta.png",
+      "name": "Creativity Capital",
+      "origin_country": "GB"
+    },
+    {
+      "id": 155758,
+      "logo_path": "/iZi0zd9ijrcWR9zlEUUthG8d600.png",
+      "name": "Tea Shop Productions",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    }
+  ],
+  "release_date": "2025-01-31",
+  "revenue": 0,
+  "runtime": 87,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Fear has found a new home.",
+  "title": "The Bayou",
+  "video": false,
+  "vote_average": 6.2,
+  "vote_count": 81
+}

@@ -1,0 +1,67 @@
+{
+  "adult": false,
+  "backdrop_path": "/iXlHfi9hq7nfSv31pBab8fpMfZh.jpg",
+  "belongs_to_collection": null,
+  "budget": 36000000,
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    }
+  ],
+  "homepage": "",
+  "id": 10830,
+  "imdb_id": "tt0117008",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Matilda",
+  "overview": "Matilda Wormwood is an exquisite and intelligent little girl. Unfortunately, her parents, Harry and Zinnia misunderstand her because they think she is so different. As time passes, she finally starts school and has a kind teacher, loyal friends, and a sadistic headmistress. As she gets fed up with the constant cruelty, she begins to realize that she has a gift of telekinetic powers. After some days of practice, she suddenly turns the tables to stand up to Harry and Zinnia and outwit the headmistress.",
+  "popularity": 12.1256,
+  "poster_path": "/wYoDpWInsBEVSmWStnRH06ddoyk.jpg",
+  "production_companies": [
+    {
+      "id": 216,
+      "logo_path": "/iKPzC6YxqNAk6fMoTtFhIF5p6yw.png",
+      "name": "Jersey Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 559,
+      "logo_path": "/eC0bWHVjnjUducyA6YFoEFqnPMC.png",
+      "name": "TriStar Pictures",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "1996-08-02",
+  "revenue": 33500000,
+  "runtime": 98,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "A little magic goes a long way.",
+  "title": "Matilda",
+  "video": false,
+  "vote_average": 7.165,
+  "vote_count": 4533
+}

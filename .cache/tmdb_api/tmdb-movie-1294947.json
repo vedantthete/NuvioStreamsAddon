@@ -1,0 +1,73 @@
+{
+  "adult": false,
+  "backdrop_path": "/qab3t7IsPygLnqQbdtjAyLmbNy6.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "",
+  "id": 1294947,
+  "imdb_id": "tt33636020",
+  "origin_country": [
+    "MX"
+  ],
+  "original_language": "es",
+  "original_title": "Déjame Estar Contigo",
+  "overview": "Lucía lives with an incurable disease, and Bruno was deported to Mexico with no place to sleep. An unexpected phone call brings them together in an emotional story of overcoming, reconstruction and hope.",
+  "popularity": 13.268,
+  "poster_path": "/g7CoOjbpKO9tAbQhyJgOB6iwrqV.jpg",
+  "production_companies": [
+    {
+      "id": 191621,
+      "logo_path": "/f9Vkl26ue8YdcnSxeIGasY1s1R5.png",
+      "name": "Filmadora",
+      "origin_country": "MX"
+    },
+    {
+      "id": 74139,
+      "logo_path": null,
+      "name": "EFICINE 189",
+      "origin_country": "MX"
+    },
+    {
+      "id": 7570,
+      "logo_path": "/gW8dfVtl1JsGIiLnvglea1OHHVr.png",
+      "name": "Videocine",
+      "origin_country": "MX"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "MX",
+      "name": "Mexico"
+    }
+  ],
+  "release_date": "2025-01-12",
+  "revenue": 0,
+  "runtime": 80,
+  "spoken_languages": [
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "A love with an expiration date.",
+  "title": "Déjame Estar Contigo",
+  "video": false,
+  "vote_average": 7.663,
+  "vote_count": 43
+}

@@ -1,0 +1,113 @@
+{
+  "adult": false,
+  "backdrop_path": "/41Y3h2FVfoU4baFdTZwRrlD4MDM.jpg",
+  "belongs_to_collection": null,
+  "budget": 88000000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    }
+  ],
+  "homepage": "https://www.sonypictures.com/movies/pixels",
+  "id": 257344,
+  "imdb_id": "tt2120120",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Pixels",
+  "overview": "Video game experts are recruited by the military to fight 1980s-era video game characters who've attacked New York.",
+  "popularity": 11.6545,
+  "poster_path": "/d26S5EfVXLNxRXqyFy1yyl3qRq3.jpg",
+  "production_companies": [
+    {
+      "id": 5,
+      "logo_path": "/71BqEFAF4V3qjjMPCpLuyJFB9A.png",
+      "name": "Columbia Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 878,
+      "logo_path": "/e2AZdsQdkhN0qJhoN4TMYiVPLyb.png",
+      "name": "Happy Madison Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 436,
+      "logo_path": "/A7WCkG3F0NFvjGCwUnclpGdIu9E.png",
+      "name": "1492 Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 34034,
+      "logo_path": null,
+      "name": "LStar Capital",
+      "origin_country": "US"
+    },
+    {
+      "id": 14714,
+      "logo_path": "/dSHaVKtBCpMU5VP9wMbTkqov62i.png",
+      "name": "China Film Group Corporation",
+      "origin_country": "CN"
+    },
+    {
+      "id": 113210,
+      "logo_path": null,
+      "name": "Film Croppers Entertainment",
+      "origin_country": "FR"
+    },
+    {
+      "id": 15357,
+      "logo_path": "/uvaRT02pY9U8qLH8a9WwwAroDqr.png",
+      "name": "Prime Focus",
+      "origin_country": "IN"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CN",
+      "name": "China"
+    },
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    },
+    {
+      "iso_3166_1": "IN",
+      "name": "India"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2015-07-16",
+  "revenue": 244900000,
+  "runtime": 106,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Play for the planet.",
+  "title": "Pixels",
+  "video": false,
+  "vote_average": 5.749,
+  "vote_count": 7686
+}

@@ -1,0 +1,69 @@
+{
+  "adult": false,
+  "backdrop_path": "/jiKwojRdwMYsDEMxQp5NFS3sOKb.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "",
+  "id": 1282980,
+  "imdb_id": "tt15173952",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "825 Forest Road",
+  "overview": "After a family tragedy, Chuck Wilson hopes to start a new life in Ashland Falls with his wife Maria and little sister Elizabeth, but he quickly discovers that the town has a dark history of being haunted by a ghostly woman who drives residents to suicide.",
+  "popularity": 13.1815,
+  "poster_path": "/ohESp5Nw49OD4ExCeNYCEIGX2iq.jpg",
+  "production_companies": [
+    {
+      "id": 62981,
+      "logo_path": null,
+      "name": "Cognetti Films",
+      "origin_country": ""
+    },
+    {
+      "id": 3048,
+      "logo_path": null,
+      "name": "Epic Level Entertainment",
+      "origin_country": ""
+    },
+    {
+      "id": 209454,
+      "logo_path": null,
+      "name": "Marlyous' Boys",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-04-24",
+  "revenue": 0,
+  "runtime": 101,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "825 Forest Road",
+  "video": false,
+  "vote_average": 6.1,
+  "vote_count": 29
+}

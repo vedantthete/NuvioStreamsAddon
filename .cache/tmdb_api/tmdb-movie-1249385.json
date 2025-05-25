@@ -1,0 +1,57 @@
+{
+  "adult": false,
+  "backdrop_path": "/zvWnh0ABsJlco2tikliiATEKhLN.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "https://epic-pictures.com/film/ghost-game",
+  "id": 1249385,
+  "imdb_id": "tt29341577",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Ghost Game",
+  "overview": "As part of an internet challenge to live undetected in a stranger’s home, a daring couple target an infamous haunted house and endure a series of chilling incidents as they witness a family descending into madness.",
+  "popularity": 13.5707,
+  "poster_path": "/kxxWBEn7qTN2xumSferCHbDudcT.jpg",
+  "production_companies": [
+    {
+      "id": 7662,
+      "logo_path": "/uGLpMN6r5MyFosNTgP9PKU48CHp.png",
+      "name": "Epic Pictures Group",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2024-10-18",
+  "revenue": 0,
+  "runtime": 86,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Evil lives here.",
+  "title": "Ghost Game",
+  "video": false,
+  "vote_average": 3.778,
+  "vote_count": 27
+}

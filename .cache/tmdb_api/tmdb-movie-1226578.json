@@ -1,0 +1,85 @@
+{
+  "adult": false,
+  "backdrop_path": "/bizhlTVjifYQUu4Xrdt7m3TYr7d.jpg",
+  "belongs_to_collection": null,
+  "budget": 10000000,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    }
+  ],
+  "homepage": "https://neonrated.com/films/longlegs",
+  "id": 1226578,
+  "imdb_id": "tt23468450",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Longlegs",
+  "overview": "FBI Agent Lee Harker is a gifted new recruit assigned to the unsolved case of an elusive serial killer. As the case takes complex turns, unearthing evidence of the occult, Harker discovers a personal connection to the merciless killer and must race against time to stop him before he claims the lives of another innocent family.",
+  "popularity": 13.8906,
+  "poster_path": "/1EwNyiiNFd863H4e8nWEzutnZD7.jpg",
+  "production_companies": [
+    {
+      "id": 184518,
+      "logo_path": "/lOouI8ibBzhLI4qvku74FPUVT8t.png",
+      "name": "C2 Motion Picture Group",
+      "origin_country": "US"
+    },
+    {
+      "id": 831,
+      "logo_path": "/vLENXiYTyITnMDrTKabUXhgTKX2.png",
+      "name": "Saturn Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 85465,
+      "logo_path": "/oxx1bmXDQxeBsvYZmCxMtfJ5wa3.png",
+      "name": "Oddfellows Entertainment",
+      "origin_country": "CA"
+    },
+    {
+      "id": 232289,
+      "logo_path": "/bV35YIaGQvRtjsD2r8KdlvYDKrp.png",
+      "name": "Traffic.",
+      "origin_country": "US"
+    },
+    {
+      "id": 167684,
+      "logo_path": "/kzQwU2H6woBFti9cqjr9BrVXrst.png",
+      "name": "Range Media Partners",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CA",
+      "name": "Canada"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2024-07-10",
+  "revenue": 127961936,
+  "runtime": 101,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Say your prayers.",
+  "title": "Longlegs",
+  "video": false,
+  "vote_average": 6.565,
+  "vote_count": 2046
+}

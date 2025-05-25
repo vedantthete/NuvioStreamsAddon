@@ -1,0 +1,71 @@
+{
+  "adult": false,
+  "backdrop_path": "/wgvc3PmjQGtYYDWaeuV867mnFDs.jpg",
+  "belongs_to_collection": null,
+  "budget": 90000000,
+  "genres": [
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    }
+  ],
+  "homepage": "https://www.sonypictures.com/movies/thefifthelement",
+  "id": 18,
+  "imdb_id": "tt0119116",
+  "origin_country": [
+    "FR"
+  ],
+  "original_language": "fr",
+  "original_title": "Le Cinquième Élément",
+  "overview": "In 2257, a taxi driver is unintentionally given the task of saving a young girl who is part of the key that will ensure the survival of humanity.",
+  "popularity": 11.4586,
+  "poster_path": "/fPtlCO1yQtnoLHOwKtWz7db6RGU.jpg",
+  "production_companies": [
+    {
+      "id": 9,
+      "logo_path": "/nda3dTUYdDrJ6rZqBpYvY865aDv.png",
+      "name": "Gaumont",
+      "origin_country": "FR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    }
+  ],
+  "release_date": "1997-05-02",
+  "revenue": 263920180,
+  "runtime": 126,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Swedish",
+      "iso_639_1": "sv",
+      "name": "svenska"
+    },
+    {
+      "english_name": "German",
+      "iso_639_1": "de",
+      "name": "Deutsch"
+    }
+  ],
+  "status": "Released",
+  "tagline": "There is no future without it.",
+  "title": "The Fifth Element",
+  "video": false,
+  "vote_average": 7.555,
+  "vote_count": 11028
+}

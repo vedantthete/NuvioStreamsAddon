@@ -1,0 +1,53 @@
+{
+  "adult": false,
+  "backdrop_path": "/tehewlwOPFDDf4syutyopaY23AY.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    }
+  ],
+  "homepage": "",
+  "id": 1352774,
+  "imdb_id": "tt33050292",
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_title": "Piglet",
+  "overview": "On Kate's 21st birthday camping trip, her friends encounter Piglet, a monstrous human-pig hybrid who brutally murders one of them. They uncover Piglet's origins and Kate must confront her past to survive the relentless killer.",
+  "popularity": 13.1226,
+  "poster_path": "/5wZNFUJAwyX6RCxdqrLO9lLWJ20.jpg",
+  "production_companies": [
+    {
+      "id": 84624,
+      "logo_path": "/mY4SMEplDeqrLF2kBLShp4qJSvK.png",
+      "name": "Proportion Productions",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    }
+  ],
+  "release_date": "2025-01-25",
+  "revenue": 0,
+  "runtime": 83,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "This pork will chop you up.",
+  "title": "Piglet",
+  "video": false,
+  "vote_average": 5.289,
+  "vote_count": 19
+}

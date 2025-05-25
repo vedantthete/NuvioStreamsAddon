@@ -1,0 +1,106 @@
+{
+  "adult": false,
+  "backdrop_path": "/ea0AQV7dE2fj7MNJUQispY2sgA8.jpg",
+  "belongs_to_collection": {
+    "id": 52985,
+    "name": "Wrong Turn Collection",
+    "poster_path": "/dtfQY5ZxvdHNG4HqNDy0ifwk1q6.jpg",
+    "backdrop_path": "/soWEzM8FooUK30RMcD16ryWrfil.jpg"
+  },
+  "budget": 12600000,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "",
+  "id": 9902,
+  "imdb_id": "tt0295700",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Wrong Turn",
+  "overview": "Chris crashes into a carload of other young people, and the group of stranded motorists is soon lost in the woods of West Virginia, where they're hunted by three cannibalistic mountain men who are grossly disfigured by generations of inbreeding.",
+  "popularity": 11.8142,
+  "poster_path": "/7lyxwOg7SdGff79yKCQmJ3AKWSf.jpg",
+  "production_companies": [
+    {
+      "id": 53350,
+      "logo_path": null,
+      "name": "DCP Wrong Turn Productions",
+      "origin_country": ""
+    },
+    {
+      "id": 491,
+      "logo_path": "/5LvDUt3KmvRnXQ4NrdWJYHeuA8J.png",
+      "name": "Summit Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 508,
+      "logo_path": "/7cxRWzi4LsVm4Utfpr1hfARNurT.png",
+      "name": "Regency Enterprises",
+      "origin_country": "US"
+    },
+    {
+      "id": 24212,
+      "logo_path": null,
+      "name": "Media Cooperation One",
+      "origin_country": ""
+    },
+    {
+      "id": 47,
+      "logo_path": "/i7Z9ot2o3N5Sa3HrF09kniFs2y8.png",
+      "name": "Constantin Film",
+      "origin_country": "DE"
+    },
+    {
+      "id": 25,
+      "logo_path": "/qZCc1lty5FzX30aOCVRBLzaVmcp.png",
+      "name": "20th Century Fox",
+      "origin_country": "US"
+    },
+    {
+      "id": 4253,
+      "logo_path": "/qgFBsEmKTckDM0Fk6ZTB8RyW0Rc.png",
+      "name": "Don Carmody Productions",
+      "origin_country": "CA"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CA",
+      "name": "Canada"
+    },
+    {
+      "iso_3166_1": "DE",
+      "name": "Germany"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2003-05-30",
+  "revenue": 28650575,
+  "runtime": 84,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "It's the last one you'll ever take.",
+  "title": "Wrong Turn",
+  "video": false,
+  "vote_average": 6.368,
+  "vote_count": 2785
+}

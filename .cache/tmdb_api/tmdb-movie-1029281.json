@@ -1,0 +1,73 @@
+{
+  "adult": false,
+  "backdrop_path": "/2ANHqBhbAhyIBRTLSVfENskpxon.jpg",
+  "belongs_to_collection": null,
+  "budget": 4000000,
+  "genres": [
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "https://www.strangedarlingfilm.com",
+  "id": 1029281,
+  "imdb_id": "tt22375054",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Strange Darling",
+  "overview": "Nothing is what it seems when a twisted one-night stand spirals into a serial killer’s vicious murder spree.",
+  "popularity": 11.381,
+  "poster_path": "/kWNCRgt3ocv19bYO0sk7TRuZuFY.jpg",
+  "production_companies": [
+    {
+      "id": 14,
+      "logo_path": "/m6AHu84oZQxvq7n1rsvMNJIAsMu.png",
+      "name": "Miramax",
+      "origin_country": "US"
+    },
+    {
+      "id": 169906,
+      "logo_path": "/vEiG2JXNpnJD8k8jkF6cHOpsFLe.png",
+      "name": "Spooky Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 173318,
+      "logo_path": null,
+      "name": "Electric Lady Studios",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2024-08-14",
+  "revenue": 4853595,
+  "runtime": 98,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Love hurts.",
+  "title": "Strange Darling",
+  "video": false,
+  "vote_average": 7,
+  "vote_count": 518
+}

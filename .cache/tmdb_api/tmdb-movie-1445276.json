@@ -1,0 +1,63 @@
+{
+  "adult": false,
+  "backdrop_path": "/s5TJ2SkHookM77fSk4BvY2yCN5r.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    }
+  ],
+  "homepage": "https://hicbc.com/tv/agaru-bl-night/",
+  "id": 1445276,
+  "imdb_id": null,
+  "origin_country": [
+    "JP"
+  ],
+  "original_language": "ja",
+  "original_title": "たまらないのは恋なのか",
+  "overview": "Misuzu was branded a delinquent when a small incident left him isolated. But one day, he sees the top student, Kitahara, get surrounded by bullies and decides to help him out. That sparked Kitahara's interest in the lonely boy, but Misuzu pushes Kitahara away. \"If you get involved with me, you'll get ostracized by everyone else too.\" But it won't take long for Misuzu's resolve to falter...",
+  "popularity": 13.1818,
+  "poster_path": "/zESBv0bTqtb4ICJ9oYn2HFec8JV.jpg",
+  "production_companies": [
+    {
+      "id": 12384,
+      "logo_path": "/qNooLje0YQh1y3y9LUM2Y5QCtiF.png",
+      "name": "CBC",
+      "origin_country": "JP"
+    },
+    {
+      "id": 258759,
+      "logo_path": null,
+      "name": "aeonium",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "JP",
+      "name": "Japan"
+    }
+  ],
+  "release_date": "2025-04-06",
+  "revenue": 0,
+  "runtime": 0,
+  "spoken_languages": [
+    {
+      "english_name": "Japanese",
+      "iso_639_1": "ja",
+      "name": "日本語"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "A Love Too Captivating",
+  "video": false,
+  "vote_average": 5,
+  "vote_count": 1
+}

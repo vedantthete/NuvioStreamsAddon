@@ -1,0 +1,85 @@
+{
+  "adult": false,
+  "backdrop_path": "/7xbAPWP9utLRecydyFSBaQ0PYGZ.jpg",
+  "belongs_to_collection": null,
+  "budget": 5000000,
+  "genres": [
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    }
+  ],
+  "homepage": "https://www.angel.com/movies/homestead",
+  "id": 1217690,
+  "imdb_id": "tt29137778",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Homestead",
+  "overview": "A nuclear bomb is detonated in Los Angeles, and the nation devolves into unprecedented chaos. Ex-Green Beret Jeff Eriksson and his family escape to The Homestead, an eccentric prepper’s fortress nestled in the mountains. As violent threats and apocalyptic conditions creep toward their borders, the residents of The Homestead are left to wonder: how long can a group of people resist both the dangers of human nature and the bloodshed at their doorstep?",
+  "popularity": 13.0691,
+  "poster_path": "/fKts7WTTP7KWvI6N7WYIuEhmgXP.jpg",
+  "production_companies": [
+    {
+      "id": 165435,
+      "logo_path": "/pDh2WDdOajWST9jlkFo6TOvETnB.png",
+      "name": "Angel Studios",
+      "origin_country": "US"
+    },
+    {
+      "id": 216019,
+      "logo_path": null,
+      "name": "Black Autumn Show",
+      "origin_country": "US"
+    },
+    {
+      "id": 216020,
+      "logo_path": null,
+      "name": "Skies Fall Media Group",
+      "origin_country": ""
+    },
+    {
+      "id": 75818,
+      "logo_path": "/zQACA4T0EmPmxVTGBCHcZj5i8PQ.png",
+      "name": "Radiate Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 223271,
+      "logo_path": "/2Rc6Dvg3tpIfDzgQE6ycWxNj0kT.png",
+      "name": "2521 Entertainment",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2024-12-19",
+  "revenue": 20811864,
+  "runtime": 111,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Survival brought them together. Will fear tear them apart?",
+  "title": "Homestead",
+  "video": false,
+  "vote_average": 6.273,
+  "vote_count": 55
+}

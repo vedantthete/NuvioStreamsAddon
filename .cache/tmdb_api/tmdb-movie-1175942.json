@@ -1,0 +1,96 @@
+{
+  "adult": false,
+  "backdrop_path": "/vHP2az8Ly2ZAJWGHFlux7QpAN2Q.jpg",
+  "belongs_to_collection": {
+    "id": 1231053,
+    "name": "The Bad Guys Collection",
+    "poster_path": "/oVgEMlI8kPVt6vF5HLEqSf9nbmG.jpg",
+    "backdrop_path": "/A0VR7xcg6MZSXd8kCzQE3VoB86D.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    }
+  ],
+  "homepage": "https://www.thebadguysmovie.com",
+  "id": 1175942,
+  "imdb_id": "tt30017619",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "The Bad Guys 2",
+  "overview": "The now-reformed Bad Guys are trying (very, very hard) to be good, but instead find themselves hijacked into a high-stakes, globe-trotting heist, masterminded by a new team of criminals they never saw coming: The Bad Girls.",
+  "popularity": 12.2681,
+  "poster_path": "/mFVdwAnHCUg49S8Q1XFrJotPyIF.jpg",
+  "production_companies": [
+    {
+      "id": 521,
+      "logo_path": "/3BPX5VGBov8SDqTV7wC1L1xShAS.png",
+      "name": "DreamWorks Animation",
+      "origin_country": "US"
+    },
+    {
+      "id": 30246,
+      "logo_path": "/zYY3tNfZuDVfmwv8hvm4ZdLMdIM.png",
+      "name": "Scholastic Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 1778,
+      "logo_path": "/b5rT6VbYza3LyfltCmz1OcqzWJM.png",
+      "name": "dentsu",
+      "origin_country": "JP"
+    },
+    {
+      "id": 33,
+      "logo_path": "/3wwjVpkZtnog6lSKzWDjvw2Yi00.png",
+      "name": "Universal Pictures",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "JP",
+      "name": "Japan"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-07-30",
+  "revenue": 0,
+  "runtime": 102,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Post Production",
+  "tagline": "Back in badness.",
+  "title": "The Bad Guys 2",
+  "video": false,
+  "vote_average": 0,
+  "vote_count": 0
+}

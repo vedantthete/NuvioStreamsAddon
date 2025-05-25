@@ -1,0 +1,78 @@
+{
+  "adult": false,
+  "backdrop_path": "/6cpRpfD3isvluFwXDGSiDVyibPJ.jpg",
+  "belongs_to_collection": {
+    "id": 829561,
+    "name": "365 Days Collection",
+    "poster_path": "/AkYEOw8PSpUxx9w5a6WL60QKSYF.jpg",
+    "backdrop_path": "/yxnx4pBJgUqrmygFmAKwnL4EVI7.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81397579",
+  "id": 829560,
+  "imdb_id": "tt21106646",
+  "origin_country": [
+    "PL"
+  ],
+  "original_language": "pl",
+  "original_title": "Kolejne 365 dni",
+  "overview": "Laura and Massimo's relationship hangs in the balance as they try to overcome trust issues while a tenacious Nacho works to push them apart.",
+  "popularity": 14.7595,
+  "poster_path": "/5r9RI0IqztfZJ4C4uSdyoiFYvOB.jpg",
+  "production_companies": [
+    {
+      "id": 113069,
+      "logo_path": "/xdOWWeuVPyy1rUZW7DWJUz16vuF.png",
+      "name": "Ekipa",
+      "origin_country": "PL"
+    },
+    {
+      "id": 133440,
+      "logo_path": "/affIuBGXZHwRdnk893aMhEeavAQ.png",
+      "name": "Open Mind Production",
+      "origin_country": "PL"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "PL",
+      "name": "Poland"
+    }
+  ],
+  "release_date": "2022-08-18",
+  "revenue": 0,
+  "runtime": 112,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Italian",
+      "iso_639_1": "it",
+      "name": "Italiano"
+    },
+    {
+      "english_name": "Polish",
+      "iso_639_1": "pl",
+      "name": "Polski"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Next 365 Days",
+  "video": false,
+  "vote_average": 6.359,
+  "vote_count": 1210
+}

@@ -1,0 +1,96 @@
+{
+  "adult": false,
+  "backdrop_path": "/uT5G4fA7jKxlJNfwYPMm353f5AI.jpg",
+  "belongs_to_collection": {
+    "id": 77816,
+    "name": "Kung Fu Panda Collection",
+    "poster_path": "/xoYc0RYKSc3xC4S9OpPZxKocKtj.jpg",
+    "backdrop_path": "/2nbtv33hEk2CTnuMhTGZgsFdi3K.jpg"
+  },
+  "budget": 145000000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    }
+  ],
+  "homepage": "http://www.kungfupanda.com/",
+  "id": 140300,
+  "imdb_id": "tt2267968",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Kung Fu Panda 3",
+  "overview": "While Po and his father are visiting a secret panda village, an evil spirit threatens all of China, forcing Po to form a ragtag army to fight back.",
+  "popularity": 14.2218,
+  "poster_path": "/oajNi4Su39WAByHI6EONu8G8HYn.jpg",
+  "production_companies": [
+    {
+      "id": 521,
+      "logo_path": "/3BPX5VGBov8SDqTV7wC1L1xShAS.png",
+      "name": "DreamWorks Animation",
+      "origin_country": "US"
+    },
+    {
+      "id": 14714,
+      "logo_path": "/dSHaVKtBCpMU5VP9wMbTkqov62i.png",
+      "name": "China Film Group Corporation",
+      "origin_country": "CN"
+    },
+    {
+      "id": 76266,
+      "logo_path": "/iWn5yo47iLurqotd3EfkAROdtxr.png",
+      "name": "Oriental DreamWorks",
+      "origin_country": "CN"
+    },
+    {
+      "id": 214902,
+      "logo_path": null,
+      "name": "Zhong Ming You Ying Film",
+      "origin_country": "CN"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CN",
+      "name": "China"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2016-01-23",
+  "revenue": 521170825,
+  "runtime": 95,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Grab destiny by the dumplings.",
+  "title": "Kung Fu Panda 3",
+  "video": false,
+  "vote_average": 6.9,
+  "vote_count": 6204
+}

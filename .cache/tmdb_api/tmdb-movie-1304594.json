@@ -1,0 +1,77 @@
+{
+  "adult": false,
+  "backdrop_path": "/8U1xsLUtWSN8WlH0xzwYGZxHMUi.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "",
+  "id": 1304594,
+  "imdb_id": "tt33372007",
+  "origin_country": [
+    "MX"
+  ],
+  "original_language": "es",
+  "original_title": "Una Pequeña Confusión",
+  "overview": "Lola and Cuau, a progressive middle-class pair, and Iñigo and Majo, a young conservative, well-heeled duo, turn to artificial insemination as a last resort to have children. In a madcap twist based on actual events, a mix-up at the clinic results in each mom-to-be carrying the other one's baby.",
+  "popularity": 14.9067,
+  "poster_path": "/ApXr9phfcvIX06tLGhxOH2kmndb.jpg",
+  "production_companies": [
+    {
+      "id": 7570,
+      "logo_path": "/gW8dfVtl1JsGIiLnvglea1OHHVr.png",
+      "name": "Videocine",
+      "origin_country": "MX"
+    },
+    {
+      "id": 231437,
+      "logo_path": null,
+      "name": "No Dancing Today",
+      "origin_country": "MX"
+    },
+    {
+      "id": 181497,
+      "logo_path": null,
+      "name": "Arco Entertainment Media",
+      "origin_country": "MX"
+    },
+    {
+      "id": 231443,
+      "logo_path": null,
+      "name": "Gebo Films",
+      "origin_country": "MX"
+    },
+    {
+      "id": 177843,
+      "logo_path": null,
+      "name": "Espectro MX Films",
+      "origin_country": "MX"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "MX",
+      "name": "Mexico"
+    }
+  ],
+  "release_date": "2024-12-25",
+  "revenue": 0,
+  "runtime": 107,
+  "spoken_languages": [
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Una Pequeña Confusión",
+  "video": false,
+  "vote_average": 7.38,
+  "vote_count": 71
+}

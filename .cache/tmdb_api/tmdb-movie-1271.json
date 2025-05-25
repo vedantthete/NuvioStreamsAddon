@@ -1,0 +1,106 @@
+{
+  "adult": false,
+  "backdrop_path": "/eGhjeUbzttA3E4flxdAm8gHz4h4.jpg",
+  "belongs_to_collection": {
+    "id": 125570,
+    "name": "300 Collection",
+    "poster_path": "/nKQqh6kJvPdpOJD24enD3Bm1Hy5.jpg",
+    "backdrop_path": "/jeyZp2BKvAyl0L6LV3z13duoUFz.jpg"
+  },
+  "budget": 65000000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 10752,
+      "name": "War"
+    }
+  ],
+  "homepage": "http://300themovie.warnerbros.com",
+  "id": 1271,
+  "imdb_id": "tt0416449",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "300",
+  "overview": "Based on Frank Miller's graphic novel, \"300\" is very loosely based the 480 B.C. Battle of Thermopylae, where the King of Sparta led his army against the advancing Persians; the battle is said to have inspired all of Greece to band together against the Persians, and helped usher in the world's first democracy.",
+  "popularity": 12.6641,
+  "poster_path": "/h7Lcio0c9ohxPhSZg42eTlKIVVY.jpg",
+  "production_companies": [
+    {
+      "id": 449,
+      "logo_path": "/fV3x8bowlRCXKtkWDovLYco7cOK.png",
+      "name": "Virtual Studios",
+      "origin_country": "US"
+    },
+    {
+      "id": 923,
+      "logo_path": "/5UQsZrfbfG2dYJbx8DxfoTr2Bvu.png",
+      "name": "Legendary Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 2994,
+      "logo_path": "/jg4nWIIjQ49APUHqTWZ09gArhF8.png",
+      "name": "Hollywood Gang Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 2995,
+      "logo_path": "/drzD5Yq9aQuDEbNxlTAhmlL2izx.png",
+      "name": "Atmosphere Entertainment MM",
+      "origin_country": "US"
+    },
+    {
+      "id": 7636,
+      "logo_path": "/e6uCvCNTf0nnery1iaQh6QSgpbn.png",
+      "name": "Nimar Studios",
+      "origin_country": "BG"
+    },
+    {
+      "id": 174,
+      "logo_path": "/zhD3hhtKB5qyv7ZeL4uLpNxgMVU.png",
+      "name": "Warner Bros. Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 9995,
+      "logo_path": "/mAIGhOYhN4N2N0F7p4dbKhgXf3l.png",
+      "name": "Cruel & Unusual Films",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2007-03-07",
+  "revenue": 456082343,
+  "runtime": 116,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Prepare for glory!",
+  "title": "300",
+  "video": false,
+  "vote_average": 7.188,
+  "vote_count": 14017
+}
