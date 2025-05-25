@@ -1,0 +1,89 @@
+{
+  "adult": false,
+  "backdrop_path": "/e807jDKiFcntZS32ze88X6I96OD.jpg",
+  "belongs_to_collection": {
+    "id": 1313822,
+    "name": "Batman Ninja Collection",
+    "poster_path": "/Yl53r6YcaLlI93IszLjtB2rHmi.jpg",
+    "backdrop_path": "/5uwoP4ZXaKW4P8mREkzFFC7X2c2.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    }
+  ],
+  "homepage": "https://www.warnerbros.com/movies/batman-ninja-vs-yakuza-league",
+  "id": 1297763,
+  "imdb_id": "tt32508210",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "ja",
+  "original_title": "ニンジャバットマン対ヤクザリーグ",
+  "overview": "The Batman family has returned to the present to discover that Japan has disappeared, and a giant island - Hinomoto - is now in the sky over Gotham City.  At the top sit the Yakuza, a group of superpowered individuals who reign without honor or humanity and look suspiciously like the Justice League. Now, it’s up to Batman and his allies to save Gotham!",
+  "popularity": 28.9795,
+  "poster_path": "/sVVT6GYFErVv0Lcc9NvqCu0iOxO.jpg",
+  "production_companies": [
+    {
+      "id": 93154,
+      "logo_path": "/vTNoVe4tBhY1hshuVVF7fA2RbSD.png",
+      "name": "Kamikaze Douga",
+      "origin_country": "JP"
+    },
+    {
+      "id": 3627,
+      "logo_path": "/pBfPYpzg5o3EoBPfrFKzTRi8MGr.png",
+      "name": "Warner Bros. Japan",
+      "origin_country": "JP"
+    },
+    {
+      "id": 429,
+      "logo_path": "/4Y00XuSMuP1gimd0jP6JT57QbCI.png",
+      "name": "DC",
+      "origin_country": "US"
+    },
+    {
+      "id": 2785,
+      "logo_path": "/l5zW8jjmQOCx2dFmvnmbYmqoBmL.png",
+      "name": "Warner Bros. Animation",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "JP",
+      "name": "Japan"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-03-17",
+  "revenue": 0,
+  "runtime": 90,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Japanese",
+      "iso_639_1": "ja",
+      "name": "日本語"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Batman Ninja vs. Yakuza League",
+  "video": false,
+  "vote_average": 6.7,
+  "vote_count": 155
+}

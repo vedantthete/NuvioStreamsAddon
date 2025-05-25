@@ -1,0 +1,94 @@
+{
+  "adult": false,
+  "backdrop_path": "/z8m1butRYsUEhkjmp2URoJkfnu1.jpg",
+  "belongs_to_collection": null,
+  "budget": 46000000,
+  "genres": [
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.countofmontecristofilm.co.uk",
+  "id": 1084736,
+  "imdb_id": "tt26446278",
+  "origin_country": [
+    "FR"
+  ],
+  "original_language": "fr",
+  "original_title": "Le Comte de Monte-Cristo",
+  "overview": "Edmond Dantes becomes the target of a sinister plot and is arrested on his wedding day for a crime he did not commit. After 14 years in the island prison of Château d’If, he manages a daring escape. Now rich beyond his dreams, he assumes the identity of the Count of Monte-Cristo and exacts his revenge on the three men who betrayed him.",
+  "popularity": 17.1493,
+  "poster_path": "/sAT1P3FGhtJ68anUyJScnMu8t1l.jpg",
+  "production_companies": [
+    {
+      "id": 20339,
+      "logo_path": "/zPj4RPXztwznZcKDef583wqKERy.png",
+      "name": "Chapter 2",
+      "origin_country": "FR"
+    },
+    {
+      "id": 188578,
+      "logo_path": null,
+      "name": "Fargo Films",
+      "origin_country": "FR"
+    },
+    {
+      "id": 7981,
+      "logo_path": "/6Yv1gIAuGkHS5Vis4UjnqHhCPWV.png",
+      "name": "Pathé",
+      "origin_country": "FR"
+    },
+    {
+      "id": 1115,
+      "logo_path": "/ntH7T5gsN6wtyrfHGHJDTuneQ7o.png",
+      "name": "M6 Films",
+      "origin_country": "FR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    }
+  ],
+  "release_date": "2024-06-28",
+  "revenue": 75360860,
+  "runtime": 178,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Italian",
+      "iso_639_1": "it",
+      "name": "Italiano"
+    },
+    {
+      "english_name": "Romanian",
+      "iso_639_1": "ro",
+      "name": "Română"
+    },
+    {
+      "english_name": "French",
+      "iso_639_1": "fr",
+      "name": "Français"
+    }
+  ],
+  "status": "Released",
+  "tagline": "This is not vengeance, this is justice.",
+  "title": "The Count of Monte Cristo",
+  "video": false,
+  "vote_average": 7.997,
+  "vote_count": 1627
+}

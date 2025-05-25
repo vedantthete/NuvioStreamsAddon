@@ -1,0 +1,86 @@
+{
+  "adult": false,
+  "backdrop_path": "/18TSJF1WLA4CkymvVUcKDBwUJ9F.jpg",
+  "belongs_to_collection": {
+    "id": 727761,
+    "name": "Terrifier Collection",
+    "poster_path": "/60PWLvDagquCysvzNWmpdPeVvsx.jpg",
+    "backdrop_path": "/zREjCmCHIHdEF6ufPoDQjhl4Wdm.jpg"
+  },
+  "budget": 2000000,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "https://terrifier3.com/",
+  "id": 1034541,
+  "imdb_id": "tt27911000",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Terrifier 3",
+  "overview": "Five years after surviving Art the Clown's Halloween massacre, Sienna and Jonathan are still struggling to rebuild their shattered lives. As the holiday season approaches, they try to embrace the Christmas spirit and leave the horrors of the past behind. But just when they think they're safe, Art returns, determined to turn their holiday cheer into a new nightmare. The festive season quickly unravels as Art unleashes his twisted brand of terror, proving that no holiday is safe.",
+  "popularity": 22.6986,
+  "poster_path": "/ju10W5gl3PPK3b7TjEmVOZap51I.jpg",
+  "production_companies": [
+    {
+      "id": 238902,
+      "logo_path": "/jLAg5fOlAw1Jl8Q7WoyKxh1H22y.png",
+      "name": "Cineverse",
+      "origin_country": "US"
+    },
+    {
+      "id": 15157,
+      "logo_path": "/yezzLb9RbKNtQUsyYySAqC9TQr7.png",
+      "name": "Bloody Disgusting",
+      "origin_country": "US"
+    },
+    {
+      "id": 84591,
+      "logo_path": null,
+      "name": "Dark Age Cinema",
+      "origin_country": "US"
+    },
+    {
+      "id": 114220,
+      "logo_path": "/b5n3DtfUySREkq4Xi962zMg69qq.png",
+      "name": "Fuzz on the Lens Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 213025,
+      "logo_path": "/bFz17QGqfF8wiQAH3T4kfzKC8dU.png",
+      "name": "The Coven",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2024-10-09",
+  "revenue": 90322103,
+  "runtime": 125,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Prepare to be terrified again.",
+  "title": "Terrifier 3",
+  "video": false,
+  "vote_average": 6.851,
+  "vote_count": 1589
+}

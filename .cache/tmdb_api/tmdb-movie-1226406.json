@@ -1,0 +1,73 @@
+{
+  "adult": false,
+  "backdrop_path": "/aGgr2Q07AcyiWPGODoofgZDUEHp.jpg",
+  "belongs_to_collection": null,
+  "budget": 18000000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    }
+  ],
+  "homepage": "http://www.lovehurtsmovie.com",
+  "id": 1226406,
+  "imdb_id": "tt30788842",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Love Hurts",
+  "overview": "A realtor is pulled back into the life he left behind after his former partner-in-crime resurfaces with an ominous message. With his crime-lord brother also on his trail, he must confront his past and the history he never fully buried.",
+  "popularity": 22.2843,
+  "poster_path": "/skPPVeHoTTVVSJlb0Ib5vrqiuA4.jpg",
+  "production_companies": [
+    {
+      "id": 121470,
+      "logo_path": "/hYURmkObkMOBj5KO7L1i5TdXS2a.png",
+      "name": "87North Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 33,
+      "logo_path": "/3wwjVpkZtnog6lSKzWDjvw2Yi00.png",
+      "name": "Universal Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 1778,
+      "logo_path": "/b5rT6VbYza3LyfltCmz1OcqzWJM.png",
+      "name": "dentsu",
+      "origin_country": "JP"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-02-06",
+  "revenue": 16958671,
+  "runtime": 83,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "You can't break up with your past.",
+  "title": "Love Hurts",
+  "video": false,
+  "vote_average": 5.921,
+  "vote_count": 189
+}

@@ -1,0 +1,101 @@
+{
+  "adult": false,
+  "backdrop_path": "/hfTyu2VPBqLRPo2DauW8q7bh9bm.jpg",
+  "belongs_to_collection": {
+    "id": 488924,
+    "name": "Paddington Collection",
+    "poster_path": "/hDTDM3YfUQ9uLMpxxg0okE2N4hz.jpg",
+    "backdrop_path": "/cpmSe7SerOiI1dRgQG328OaHNBl.jpg"
+  },
+  "budget": 90000000,
+  "genres": [
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    }
+  ],
+  "homepage": "https://www.paddingtoninperu.co.uk",
+  "id": 516729,
+  "imdb_id": "tt5822536",
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_title": "Paddington in Peru",
+  "overview": "Paddington travels to Peru to visit his beloved Aunt Lucy, who now resides at the Home for Retired Bears. With the Brown Family in tow, a thrilling adventure ensues when a mystery plunges them into an unexpected journey through the Amazon rainforest and up to the mountain peaks of Peru.",
+  "popularity": 18.4068,
+  "poster_path": "/rzfqeLdHIysJGrspMICyedpqDqt.jpg",
+  "production_companies": [
+    {
+      "id": 238886,
+      "logo_path": null,
+      "name": "Marmalade Pictures",
+      "origin_country": "GB"
+    },
+    {
+      "id": 73025,
+      "logo_path": "/zYb2OfWjKvNlngpq4LemY9JVC51.png",
+      "name": "Kinoshita Group",
+      "origin_country": "JP"
+    },
+    {
+      "id": 694,
+      "logo_path": "/5LEHONGkZBIoWvp1ygHOF8iyi1M.png",
+      "name": "StudioCanal",
+      "origin_country": "FR"
+    },
+    {
+      "id": 11341,
+      "logo_path": "/xytTBODEy3p20ksHL4Ftxr483Iv.png",
+      "name": "Stage 6 Films",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    },
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    },
+    {
+      "iso_3166_1": "JP",
+      "name": "Japan"
+    }
+  ],
+  "release_date": "2024-11-08",
+  "revenue": 168610271,
+  "runtime": 106,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "A little bear goes a long way.",
+  "title": "Paddington in Peru",
+  "video": false,
+  "vote_average": 6.861,
+  "vote_count": 386
+}

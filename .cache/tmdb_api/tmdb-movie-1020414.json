@@ -1,0 +1,61 @@
+{
+  "adult": false,
+  "backdrop_path": "/9uGxyklcNwpjlIe3Lim7HyPVns6.jpg",
+  "belongs_to_collection": null,
+  "budget": 250000,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    }
+  ],
+  "homepage": "https://www.itnfilms.net/catalog/peter-pan's-neverland-nightmare",
+  "id": 1020414,
+  "imdb_id": "tt21955520",
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_title": "Peter Pan's Neverland Nightmare",
+  "overview": "Wendy Darling strikes out in an attempt to rescue her brother Michael from the clutches of the evil Peter Pan who intends to send him to Neverland. Along the way she meets a twisted Tinkerbell, who is hooked on what she thinks is fairy dust.",
+  "popularity": 31.0706,
+  "poster_path": "/mOR1Ks0EcXocwMV4EPv4letz0F5.jpg",
+  "production_companies": [
+    {
+      "id": 155744,
+      "logo_path": "/qwVw2UPwBOQZkhOb3LyHgID5xKQ.png",
+      "name": "Jagged Edge Productions",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    }
+  ],
+  "release_date": "2025-01-13",
+  "revenue": 1196497,
+  "runtime": 89,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "He's every parent's worst nightmare.",
+  "title": "Peter Pan's Neverland Nightmare",
+  "video": false,
+  "vote_average": 5.2,
+  "vote_count": 78
+}

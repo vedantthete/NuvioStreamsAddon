@@ -1,0 +1,77 @@
+{
+  "adult": false,
+  "backdrop_path": "/7bIWKyWdT04HTY3PqLETT8CH7jo.jpg",
+  "belongs_to_collection": null,
+  "budget": 30000000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    }
+  ],
+  "homepage": "https://flixerhd.com/",
+  "id": 974453,
+  "imdb_id": "tt8337290",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Absolution",
+  "overview": "An aging ex-boxer gangster working as muscle for a Boston crime boss receives an upsetting diagnosis.  Despite a faltering memory, he attempts to rectify the sins of his past and reconnect with his estranged children. He is determined to leave a positive legacy for his grandson, but the criminal underworld isn’t done with him and won’t loosen their grip willingly.",
+  "popularity": 17.6243,
+  "poster_path": "/gt70JOD9xsPlpJnuBJAWdOT4yRg.jpg",
+  "production_companies": [
+    {
+      "id": 175140,
+      "logo_path": "/grxF2M2ZByxjnzDyvHkfU5Tjr80.png",
+      "name": "Electromagnetic Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 80292,
+      "logo_path": "/2s4EgAlqccfIPvbQPeRfNEBe1e0.png",
+      "name": "Sculptor Media",
+      "origin_country": "US"
+    },
+    {
+      "id": 220749,
+      "logo_path": null,
+      "name": "north.five.six",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2024-10-31",
+  "revenue": 3854594,
+  "runtime": 112,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Everyone pays in the end.",
+  "title": "Absolution",
+  "video": false,
+  "vote_average": 5.894,
+  "vote_count": 409
+}

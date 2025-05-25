@@ -1,0 +1,95 @@
+{
+  "adult": false,
+  "backdrop_path": "/dXoBFj9Yl9HDRcDVQubkuVCh26N.jpg",
+  "belongs_to_collection": {
+    "id": 1421776,
+    "name": "Panda Plan Collection",
+    "poster_path": "/rO62kjEpxKoi22euZlM11o2hRJe.jpg",
+    "backdrop_path": null
+  },
+  "budget": 25000000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "",
+  "id": 1160956,
+  "imdb_id": "tt28630624",
+  "origin_country": [
+    "CN"
+  ],
+  "original_language": "zh",
+  "original_title": "熊猫计划",
+  "overview": "International action star Jackie Chan is invited to the adoption ceremony of a rare baby panda, but after an international crime syndicate attempts to kidnap the bear, Jackie has to save the bear using his stunt work skills.",
+  "popularity": 33.2651,
+  "poster_path": "/8iMPQl13q89jQhaA5nXb6UiT0t0.jpg",
+  "production_companies": [
+    {
+      "id": 30324,
+      "logo_path": "/dgwcWHsusZtDCDJ7rUikk452lBd.png",
+      "name": "Emei Film Studio",
+      "origin_country": "CN"
+    },
+    {
+      "id": 126771,
+      "logo_path": null,
+      "name": "Mandarin Motion Pictures",
+      "origin_country": "HK"
+    },
+    {
+      "id": 96956,
+      "logo_path": null,
+      "name": "Maoyan Entertainment",
+      "origin_country": "CN"
+    },
+    {
+      "id": 155372,
+      "logo_path": null,
+      "name": "Wishart Media",
+      "origin_country": "CN"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CN",
+      "name": "China"
+    }
+  ],
+  "release_date": "2024-10-01",
+  "revenue": 42238170,
+  "runtime": 99,
+  "spoken_languages": [
+    {
+      "english_name": "Arabic",
+      "iso_639_1": "ar",
+      "name": "العربية"
+    },
+    {
+      "english_name": "Mandarin",
+      "iso_639_1": "zh",
+      "name": "普通话"
+    },
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Georgian",
+      "iso_639_1": "ka",
+      "name": "ქართული"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Panda Plan",
+  "video": false,
+  "vote_average": 6.849,
+  "vote_count": 192
+}

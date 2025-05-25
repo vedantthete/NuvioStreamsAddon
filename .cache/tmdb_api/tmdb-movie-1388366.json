@@ -1,0 +1,71 @@
+{
+  "adult": false,
+  "backdrop_path": "/xkjWiRQtrenqGRWO2Enry2JIl4d.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    }
+  ],
+  "homepage": "",
+  "id": 1388366,
+  "imdb_id": "tt30956852",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Popeye the Slayer Man",
+  "overview": "A curious group of friends sneak into an abandoned spinach canning factory to film a documentary on the legend of the \"Sailor Man,\" who is said to haunt the factory and local docks.",
+  "popularity": 24.163,
+  "poster_path": "/nVwu3mN7hr1yF467pGct3yQFM41.jpg",
+  "production_companies": [
+    {
+      "id": 245500,
+      "logo_path": null,
+      "name": "Millman Productions",
+      "origin_country": ""
+    },
+    {
+      "id": 212440,
+      "logo_path": null,
+      "name": "Otsego Media",
+      "origin_country": ""
+    },
+    {
+      "id": 245501,
+      "logo_path": null,
+      "name": "Ron Lee Productions",
+      "origin_country": ""
+    },
+    {
+      "id": 245502,
+      "logo_path": null,
+      "name": "Salem House Films",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-03-21",
+  "revenue": 0,
+  "runtime": 88,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "He is what he is.",
+  "title": "Popeye the Slayer Man",
+  "video": false,
+  "vote_average": 5.804,
+  "vote_count": 97
+}

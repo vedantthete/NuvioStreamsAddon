@@ -5,8 +5,8 @@ const path = require('path');
 const TMDB_API_KEY = '439c478a771f35c05022f9feabcca01c'; // From scraper.js
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const OUTPUT_FILE = path.join(__dirname, 'tmdb_master_list.json');
-const MAX_PAGES_PER_CATEGORY = 5; // Fetch top N pages for popular/trending
-const MAX_ITEMS_PER_CATEGORY = 100; // Limit total items from each category
+const MAX_PAGES_PER_CATEGORY = 50; // Fetch top N pages for popular/trending
+const MAX_ITEMS_PER_CATEGORY = 1000; // Limit total items from each category
 
 // Simple delay function to be respectful to the API
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));

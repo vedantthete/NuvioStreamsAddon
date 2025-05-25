@@ -686,25 +686,18 @@
     "imdb_id": "tt1852099"
   },
   {
-    "tmdbId": "1098006",
+    "tmdbId": "1411773",
     "type": "movie",
-    "title": "Fountain of Youth",
-    "year": "2025",
-    "imdb_id": "tt27075958"
+    "title": "The Last Stand of Ellen Cole",
+    "year": "2024",
+    "imdb_id": "tt15682498"
   },
   {
-    "tmdbId": "1061474",
+    "tmdbId": "1356039",
     "type": "movie",
-    "title": "Superman",
+    "title": "Counterattack",
     "year": "2025",
-    "imdb_id": "tt5950044"
-  },
-  {
-    "tmdbId": "11",
-    "type": "movie",
-    "title": "Star Wars",
-    "year": "1977",
-    "imdb_id": "tt0076759"
+    "imdb_id": "tt23648788"
   },
   {
     "tmdbId": "56292",
@@ -714,60 +707,11 @@
     "imdb_id": "tt1229238"
   },
   {
-    "tmdbId": "956",
+    "tmdbId": "138843",
     "type": "movie",
-    "title": "Mission: Impossible III",
-    "year": "2006",
-    "imdb_id": "tt0317919"
-  },
-  {
-    "tmdbId": "955",
-    "type": "movie",
-    "title": "Mission: Impossible II",
-    "year": "2000",
-    "imdb_id": "tt0120755"
-  },
-  {
-    "tmdbId": "1233575",
-    "type": "movie",
-    "title": "Black Bag",
-    "year": "2025",
-    "imdb_id": "tt30988739"
-  },
-  {
-    "tmdbId": "177677",
-    "type": "movie",
-    "title": "Mission: Impossible - Rogue Nation",
-    "year": "2015",
-    "imdb_id": "tt2381249"
-  },
-  {
-    "tmdbId": "1310086",
-    "type": "movie",
-    "title": "Off Track 2",
-    "year": "2025",
-    "imdb_id": "tt32598081"
-  },
-  {
-    "tmdbId": "1151039",
-    "type": "movie",
-    "title": "Nonnas",
-    "year": "2025",
-    "imdb_id": "tt28309594"
-  },
-  {
-    "tmdbId": "671",
-    "type": "movie",
-    "title": "Harry Potter and the Philosopher's Stone",
-    "year": "2001",
-    "imdb_id": "tt0241527"
-  },
-  {
-    "tmdbId": "849509",
-    "type": "movie",
-    "title": "Jade",
-    "year": "2024",
-    "imdb_id": "tt14469386"
+    "title": "The Conjuring",
+    "year": "2013",
+    "imdb_id": "tt1457767"
   },
   {
     "tmdbId": "1064213",
@@ -777,109 +721,25 @@
     "imdb_id": "tt28607951"
   },
   {
-    "tmdbId": "1457515",
+    "tmdbId": "1064486",
     "type": "movie",
-    "title": "Air Force Elite: Thunderbirds",
-    "year": "2025",
-    "imdb_id": "tt35628532"
-  },
-  {
-    "tmdbId": "541671",
-    "type": "movie",
-    "title": "From the World of John Wick: Ballerina",
-    "year": "2025",
-    "imdb_id": "tt7181546"
-  },
-  {
-    "tmdbId": "1127767",
-    "type": "movie",
-    "title": "Riff Raff",
-    "year": "2025",
-    "imdb_id": "tt27775403"
-  },
-  {
-    "tmdbId": "1087192",
-    "type": "movie",
-    "title": "How to Train Your Dragon",
-    "year": "2025",
-    "imdb_id": "tt26743210"
-  },
-  {
-    "tmdbId": "617126",
-    "type": "movie",
-    "title": "The Fantastic Four: First Steps",
-    "year": "2025",
-    "imdb_id": "tt10676052"
-  },
-  {
-    "tmdbId": "402431",
-    "type": "movie",
-    "title": "Wicked",
+    "title": "Memoir of a Snail",
     "year": "2024",
-    "imdb_id": "tt1262426"
+    "imdb_id": "tt23770030"
   },
   {
-    "tmdbId": "19995",
+    "tmdbId": "1242669",
     "type": "movie",
-    "title": "Avatar",
-    "year": "2009",
-    "imdb_id": "tt0499549"
-  },
-  {
-    "tmdbId": "1084242",
-    "type": "movie",
-    "title": "Zootopia 2",
+    "title": "Mr. K",
     "year": "2025",
-    "imdb_id": "tt26443597"
+    "imdb_id": "tt7972570"
   },
   {
-    "tmdbId": "330459",
+    "tmdbId": "1294203",
     "type": "movie",
-    "title": "Rogue One: A Star Wars Story",
-    "year": "2016",
-    "imdb_id": "tt3748528"
-  },
-  {
-    "tmdbId": "1084199",
-    "type": "movie",
-    "title": "Companion",
+    "title": "My Fault: London",
     "year": "2025",
-    "imdb_id": "tt26584495"
-  },
-  {
-    "tmdbId": "281957",
-    "type": "movie",
-    "title": "The Revenant",
-    "year": "2015",
-    "imdb_id": "tt1663202"
-  },
-  {
-    "tmdbId": "1093237",
-    "type": "movie",
-    "title": "Hurry Up Tomorrow",
-    "year": "2025",
-    "imdb_id": "tt26927452"
-  },
-  {
-    "tmdbId": "27205",
-    "type": "movie",
-    "title": "Inception",
-    "year": "2010",
-    "imdb_id": "tt1375666"
-  },
-  {
-    "tmdbId": "1895",
-    "type": "movie",
-    "title": "Star Wars: Episode III - Revenge of the Sith",
-    "year": "2005",
-    "imdb_id": "tt0121766"
-  },
-  {
-    "tmdbId": "329",
-    "type": "movie",
-    "title": "Jurassic Park",
-    "year": "1993",
-    "imdb_id": "tt0107290"
+    "imdb_id": "tt32434379"
   },
   {
     "tmdbId": "1249289",
@@ -889,95 +749,60 @@
     "imdb_id": "tt31456973"
   },
   {
-    "tmdbId": "245891",
+    "tmdbId": "597",
     "type": "movie",
-    "title": "John Wick",
-    "year": "2014",
-    "imdb_id": "tt2911666"
+    "title": "Titanic",
+    "year": "1997",
+    "imdb_id": "tt0120338"
   },
   {
-    "tmdbId": "1022787",
+    "tmdbId": "274336",
     "type": "movie",
-    "title": "Elio",
+    "title": "Urban Tale",
+    "year": "2012",
+    "imdb_id": "tt2734854"
+  },
+  {
+    "tmdbId": "299536",
+    "type": "movie",
+    "title": "Avengers: Infinity War",
+    "year": "2018",
+    "imdb_id": "tt4154756"
+  },
+  {
+    "tmdbId": "1405338",
+    "type": "movie",
+    "title": "Demon City",
     "year": "2025",
-    "imdb_id": "tt4900148"
+    "imdb_id": "tt35111035"
   },
   {
-    "tmdbId": "591273",
+    "tmdbId": "1125899",
     "type": "movie",
-    "title": "Fear Street: 1994",
-    "year": "2021",
-    "imdb_id": "tt6566576"
-  },
-  {
-    "tmdbId": "603692",
-    "type": "movie",
-    "title": "John Wick: Chapter 4",
-    "year": "2023",
-    "imdb_id": "tt10366206"
-  },
-  {
-    "tmdbId": "22",
-    "type": "movie",
-    "title": "Pirates of the Caribbean: The Curse of the Black Pearl",
-    "year": "2003",
-    "imdb_id": "tt0325980"
-  },
-  {
-    "tmdbId": "438631",
-    "type": "movie",
-    "title": "Dune",
-    "year": "2021",
-    "imdb_id": "tt1160419"
-  },
-  {
-    "tmdbId": "549509",
-    "type": "movie",
-    "title": "The Brutalist",
-    "year": "2024",
-    "imdb_id": "tt8999762"
-  },
-  {
-    "tmdbId": "627725",
-    "type": "movie",
-    "title": "The Banker",
-    "year": "2020",
-    "imdb_id": "tt6285944"
-  },
-  {
-    "tmdbId": "974576",
-    "type": "movie",
-    "title": "Conclave",
-    "year": "2024",
-    "imdb_id": "tt20215234"
-  },
-  {
-    "tmdbId": "1124620",
-    "type": "movie",
-    "title": "The Monkey",
+    "title": "Cleaner",
     "year": "2025",
-    "imdb_id": "tt27714946"
+    "imdb_id": "tt27812086"
   },
   {
-    "tmdbId": "1000837",
+    "tmdbId": "1151039",
     "type": "movie",
-    "title": "I'm Still Here",
+    "title": "Nonnas",
+    "year": "2025",
+    "imdb_id": "tt28309594"
+  },
+  {
+    "tmdbId": "829557",
+    "type": "movie",
+    "title": "365 Days: This Day",
+    "year": "2022",
+    "imdb_id": "tt12996154"
+  },
+  {
+    "tmdbId": "1160956",
+    "type": "movie",
+    "title": "Panda Plan",
     "year": "2024",
-    "imdb_id": "tt14961016"
-  },
-  {
-    "tmdbId": "1495",
-    "type": "movie",
-    "title": "Kingdom of Heaven",
-    "year": "2005",
-    "imdb_id": "tt0320661"
-  },
-  {
-    "tmdbId": "693134",
-    "type": "movie",
-    "title": "Dune: Part Two",
-    "year": "2024",
-    "imdb_id": "tt15239678"
+    "imdb_id": "tt28630624"
   },
   {
     "tmdbId": "238",
@@ -987,88 +812,193 @@
     "imdb_id": "tt0068646"
   },
   {
-    "tmdbId": "911430",
+    "tmdbId": "1212855",
     "type": "movie",
-    "title": "F1 The Movie",
+    "title": "Fight or Flight",
     "year": "2025",
-    "imdb_id": "tt16311594"
+    "imdb_id": "tt13652286"
   },
   {
-    "tmdbId": "1891",
+    "tmdbId": "1020414",
     "type": "movie",
-    "title": "The Empire Strikes Back",
-    "year": "1980",
-    "imdb_id": "tt0080684"
-  },
-  {
-    "tmdbId": "1272149",
-    "type": "movie",
-    "title": "Bridget Jones: Mad About the Boy",
+    "title": "Peter Pan's Neverland Nightmare",
     "year": "2025",
-    "imdb_id": "tt32063050"
+    "imdb_id": "tt21955520"
   },
   {
-    "tmdbId": "372058",
+    "tmdbId": "945961",
     "type": "movie",
-    "title": "Your Name.",
-    "year": "2016",
-    "imdb_id": "tt5311514"
-  },
-  {
-    "tmdbId": "335984",
-    "type": "movie",
-    "title": "Blade Runner 2049",
-    "year": "2017",
-    "imdb_id": "tt1856101"
-  },
-  {
-    "tmdbId": "10138",
-    "type": "movie",
-    "title": "Iron Man 2",
-    "year": "2010",
-    "imdb_id": "tt1228705"
-  },
-  {
-    "tmdbId": "1893",
-    "type": "movie",
-    "title": "Star Wars: Episode I - The Phantom Menace",
-    "year": "1999",
-    "imdb_id": "tt0120915"
-  },
-  {
-    "tmdbId": "76600",
-    "type": "movie",
-    "title": "Avatar: The Way of Water",
-    "year": "2022",
-    "imdb_id": "tt1630029"
-  },
-  {
-    "tmdbId": "1013601",
-    "type": "movie",
-    "title": "The Alto Knights",
-    "year": "2025",
-    "imdb_id": "tt21815562"
-  },
-  {
-    "tmdbId": "989662",
-    "type": "movie",
-    "title": "A Different Man",
+    "title": "Alien: Romulus",
     "year": "2024",
-    "imdb_id": "tt21097228"
+    "imdb_id": "tt18412256"
   },
   {
-    "tmdbId": "9476",
+    "tmdbId": "845781",
     "type": "movie",
-    "title": "A Knight's Tale",
+    "title": "Red One",
+    "year": "2024",
+    "imdb_id": "tt14948432"
+  },
+  {
+    "tmdbId": "1310861",
+    "type": "movie",
+    "title": "The Goldsmith's Secret",
+    "year": "2025",
+    "imdb_id": "tt32439773"
+  },
+  {
+    "tmdbId": "694943",
+    "type": "movie",
+    "title": "Pizza Dare 1",
+    "year": "2020",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "1229730",
+    "type": "movie",
+    "title": "Carjackers",
+    "year": "2025",
+    "imdb_id": "tt35683795"
+  },
+  {
+    "tmdbId": "385687",
+    "type": "movie",
+    "title": "Fast X",
+    "year": "2023",
+    "imdb_id": "tt5433140"
+  },
+  {
+    "tmdbId": "671",
+    "type": "movie",
+    "title": "Harry Potter and the Philosopher's Stone",
     "year": "2001",
-    "imdb_id": "tt0183790"
+    "imdb_id": "tt0241527"
   },
   {
-    "tmdbId": "101",
+    "tmdbId": "1337395",
     "type": "movie",
-    "title": "Léon: The Professional",
-    "year": "1994",
-    "imdb_id": "tt0110413"
+    "title": "Kiskisan",
+    "year": "2024",
+    "imdb_id": "tt33269451"
+  },
+  {
+    "tmdbId": "573435",
+    "type": "movie",
+    "title": "Bad Boys: Ride or Die",
+    "year": "2024",
+    "imdb_id": "tt4919268"
+  },
+  {
+    "tmdbId": "346698",
+    "type": "movie",
+    "title": "Barbie",
+    "year": "2023",
+    "imdb_id": "tt1517268"
+  },
+  {
+    "tmdbId": "1084199",
+    "type": "movie",
+    "title": "Companion",
+    "year": "2025",
+    "imdb_id": "tt26584495"
+  },
+  {
+    "tmdbId": "974576",
+    "type": "movie",
+    "title": "Conclave",
+    "year": "2024",
+    "imdb_id": "tt20215234"
+  },
+  {
+    "tmdbId": "603",
+    "type": "movie",
+    "title": "The Matrix",
+    "year": "1999",
+    "imdb_id": "tt0133093"
+  },
+  {
+    "tmdbId": "1018247",
+    "type": "movie",
+    "title": "MK Ultra",
+    "year": "2022",
+    "imdb_id": "tt7147158"
+  },
+  {
+    "tmdbId": "302946",
+    "type": "movie",
+    "title": "The Accountant",
+    "year": "2016",
+    "imdb_id": "tt2140479"
+  },
+  {
+    "tmdbId": "693134",
+    "type": "movie",
+    "title": "Dune: Part Two",
+    "year": "2024",
+    "imdb_id": "tt15239678"
+  },
+  {
+    "tmdbId": "1104845",
+    "type": "movie",
+    "title": "Plankton: The Movie",
+    "year": "2025",
+    "imdb_id": "tt32560777"
+  },
+  {
+    "tmdbId": "1136721",
+    "type": "movie",
+    "title": "The Glenarma Tapes",
+    "year": "2024",
+    "imdb_id": "tt27761801"
+  },
+  {
+    "tmdbId": "1278162",
+    "type": "movie",
+    "title": "Panor",
+    "year": "2025",
+    "imdb_id": "tt35450281"
+  },
+  {
+    "tmdbId": "1373723",
+    "type": "movie",
+    "title": "The Codes of War",
+    "year": "2025",
+    "imdb_id": "tt32044730"
+  },
+  {
+    "tmdbId": "361743",
+    "type": "movie",
+    "title": "Top Gun: Maverick",
+    "year": "2022",
+    "imdb_id": "tt1745960"
+  },
+  {
+    "tmdbId": "14836",
+    "type": "movie",
+    "title": "Coraline",
+    "year": "2009",
+    "imdb_id": "tt0327597"
+  },
+  {
+    "tmdbId": "177677",
+    "type": "movie",
+    "title": "Mission: Impossible - Rogue Nation",
+    "year": "2015",
+    "imdb_id": "tt2381249"
+  },
+  {
+    "tmdbId": "872585",
+    "type": "movie",
+    "title": "Oppenheimer",
+    "year": "2023",
+    "imdb_id": "tt15398776"
+  },
+  {
+    "tmdbId": "808",
+    "type": "movie",
+    "title": "Shrek",
+    "year": "2001",
+    "imdb_id": "tt0126029"
   },
   {
     "tmdbId": "155",
@@ -1078,11 +1008,32 @@
     "imdb_id": "tt0468569"
   },
   {
-    "tmdbId": "1771",
+    "tmdbId": "15567",
     "type": "movie",
-    "title": "Captain America: The First Avenger",
-    "year": "2011",
-    "imdb_id": "tt0458339"
+    "title": "Stitch! The Movie",
+    "year": "2003",
+    "imdb_id": "tt0348124"
+  },
+  {
+    "tmdbId": "411",
+    "type": "movie",
+    "title": "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe",
+    "year": "2005",
+    "imdb_id": "tt0363771"
+  },
+  {
+    "tmdbId": "895956",
+    "type": "movie",
+    "title": "The Burning Cold",
+    "year": "2023",
+    "imdb_id": "tt11934038"
+  },
+  {
+    "tmdbId": "402431",
+    "type": "movie",
+    "title": "Wicked",
+    "year": "2024",
+    "imdb_id": "tt1262426"
   },
   {
     "tmdbId": "269149",
@@ -1090,5 +1041,8706 @@
     "title": "Zootopia",
     "year": "2016",
     "imdb_id": "tt2948356"
+  },
+  {
+    "tmdbId": "1087192",
+    "type": "movie",
+    "title": "How to Train Your Dragon",
+    "year": "2025",
+    "imdb_id": "tt26743210"
+  },
+  {
+    "tmdbId": "1297763",
+    "type": "movie",
+    "title": "Batman Ninja vs. Yakuza League",
+    "year": "2025",
+    "imdb_id": "tt32508210"
+  },
+  {
+    "tmdbId": "634649",
+    "type": "movie",
+    "title": "Spider-Man: No Way Home",
+    "year": "2021",
+    "imdb_id": "tt10872600"
+  },
+  {
+    "tmdbId": "120",
+    "type": "movie",
+    "title": "The Lord of the Rings: The Fellowship of the Ring",
+    "year": "2001",
+    "imdb_id": "tt0120737"
+  },
+  {
+    "tmdbId": "1195430",
+    "type": "movie",
+    "title": "Deva",
+    "year": "2025",
+    "imdb_id": "tt27852049"
+  },
+  {
+    "tmdbId": "1147416",
+    "type": "movie",
+    "title": "Miraculous World: London, At the Edge of Time",
+    "year": "2024",
+    "imdb_id": "tt13701202"
+  },
+  {
+    "tmdbId": "550",
+    "type": "movie",
+    "title": "Fight Club",
+    "year": "1999",
+    "imdb_id": "tt0137523"
+  },
+  {
+    "tmdbId": "793387",
+    "type": "movie",
+    "title": "Holy Night: Demon Hunters",
+    "year": "2025",
+    "imdb_id": "tt15766876"
+  },
+  {
+    "tmdbId": "1087891",
+    "type": "movie",
+    "title": "The Amateur",
+    "year": "2025",
+    "imdb_id": "tt0899043"
+  },
+  {
+    "tmdbId": "10191",
+    "type": "movie",
+    "title": "How to Train Your Dragon",
+    "year": "2010",
+    "imdb_id": "tt0892769"
+  },
+  {
+    "tmdbId": "27205",
+    "type": "movie",
+    "title": "Inception",
+    "year": "2010",
+    "imdb_id": "tt1375666"
+  },
+  {
+    "tmdbId": "315162",
+    "type": "movie",
+    "title": "Puss in Boots: The Last Wish",
+    "year": "2022",
+    "imdb_id": "tt3915174"
+  },
+  {
+    "tmdbId": "592695",
+    "type": "movie",
+    "title": "Pleasure",
+    "year": "2021",
+    "imdb_id": "tt8550054"
+  },
+  {
+    "tmdbId": "11",
+    "type": "movie",
+    "title": "Star Wars",
+    "year": "1977",
+    "imdb_id": "tt0076759"
+  },
+  {
+    "tmdbId": "956",
+    "type": "movie",
+    "title": "Mission: Impossible III",
+    "year": "2006",
+    "imdb_id": "tt0317919"
+  },
+  {
+    "tmdbId": "48650",
+    "type": "movie",
+    "title": "Room in Rome",
+    "year": "2010",
+    "imdb_id": "tt1263750"
+  },
+  {
+    "tmdbId": "1118031",
+    "type": "movie",
+    "title": "Apocalypse Z: The Beginning of the End",
+    "year": "2024",
+    "imdb_id": "tt27599851"
+  },
+  {
+    "tmdbId": "21316",
+    "type": "movie",
+    "title": "Leroy & Stitch",
+    "year": "2006",
+    "imdb_id": "tt0486761"
+  },
+  {
+    "tmdbId": "198663",
+    "type": "movie",
+    "title": "The Maze Runner",
+    "year": "2014",
+    "imdb_id": "tt1790864"
+  },
+  {
+    "tmdbId": "216015",
+    "type": "movie",
+    "title": "Fifty Shades of Grey",
+    "year": "2015",
+    "imdb_id": "tt2322441"
+  },
+  {
+    "tmdbId": "438631",
+    "type": "movie",
+    "title": "Dune",
+    "year": "2021",
+    "imdb_id": "tt1160419"
+  },
+  {
+    "tmdbId": "603692",
+    "type": "movie",
+    "title": "John Wick: Chapter 4",
+    "year": "2023",
+    "imdb_id": "tt10366206"
+  },
+  {
+    "tmdbId": "13",
+    "type": "movie",
+    "title": "Forrest Gump",
+    "year": "1994",
+    "imdb_id": "tt0109830"
+  },
+  {
+    "tmdbId": "801335",
+    "type": "movie",
+    "title": "Girl in the Basement",
+    "year": "2021",
+    "imdb_id": "tt13269536"
+  },
+  {
+    "tmdbId": "146233",
+    "type": "movie",
+    "title": "Prisoners",
+    "year": "2013",
+    "imdb_id": "tt1392214"
+  },
+  {
+    "tmdbId": "502356",
+    "type": "movie",
+    "title": "The Super Mario Bros. Movie",
+    "year": "2023",
+    "imdb_id": "tt6718170"
+  },
+  {
+    "tmdbId": "423108",
+    "type": "movie",
+    "title": "The Conjuring: The Devil Made Me Do It",
+    "year": "2021",
+    "imdb_id": "tt7069210"
+  },
+  {
+    "tmdbId": "541671",
+    "type": "movie",
+    "title": "From the World of John Wick: Ballerina",
+    "year": "2025",
+    "imdb_id": "tt7181546"
+  },
+  {
+    "tmdbId": "1097549",
+    "type": "movie",
+    "title": "Babygirl",
+    "year": "2024",
+    "imdb_id": "tt30057084"
+  },
+  {
+    "tmdbId": "19995",
+    "type": "movie",
+    "title": "Avatar",
+    "year": "2009",
+    "imdb_id": "tt0499549"
+  },
+  {
+    "tmdbId": "955",
+    "type": "movie",
+    "title": "Mission: Impossible II",
+    "year": "2000",
+    "imdb_id": "tt0120755"
+  },
+  {
+    "tmdbId": "960044",
+    "type": "movie",
+    "title": "The Edge of the Blade",
+    "year": "2023",
+    "imdb_id": "tt28106865"
+  },
+  {
+    "tmdbId": "496243",
+    "type": "movie",
+    "title": "Parasite",
+    "year": "2019",
+    "imdb_id": "tt6751668"
+  },
+  {
+    "tmdbId": "615457",
+    "type": "movie",
+    "title": "Nobody",
+    "year": "2021",
+    "imdb_id": "tt7888964"
+  },
+  {
+    "tmdbId": "774370",
+    "type": "movie",
+    "title": "Dog Man",
+    "year": "2025",
+    "imdb_id": "tt10954718"
+  },
+  {
+    "tmdbId": "76600",
+    "type": "movie",
+    "title": "Avatar: The Way of Water",
+    "year": "2022",
+    "imdb_id": "tt1630029"
+  },
+  {
+    "tmdbId": "8966",
+    "type": "movie",
+    "title": "Twilight",
+    "year": "2008",
+    "imdb_id": "tt1099212"
+  },
+  {
+    "tmdbId": "1035048",
+    "type": "movie",
+    "title": "Elevation",
+    "year": "2024",
+    "imdb_id": "tt23558280"
+  },
+  {
+    "tmdbId": "985939",
+    "type": "movie",
+    "title": "Fall",
+    "year": "2022",
+    "imdb_id": "tt15325794"
+  },
+  {
+    "tmdbId": "1388366",
+    "type": "movie",
+    "title": "Popeye the Slayer Man",
+    "year": "2025",
+    "imdb_id": "tt30956852"
+  },
+  {
+    "tmdbId": "569094",
+    "type": "movie",
+    "title": "Spider-Man: Across the Spider-Verse",
+    "year": "2023",
+    "imdb_id": "tt9362722"
+  },
+  {
+    "tmdbId": "585032",
+    "type": "movie",
+    "title": "Sa Bang-ji",
+    "year": "1988",
+    "imdb_id": "tt0396846"
+  },
+  {
+    "tmdbId": "995926",
+    "type": "movie",
+    "title": "I, the Executioner",
+    "year": "2024",
+    "imdb_id": "tt30287778"
+  },
+  {
+    "tmdbId": "1100782",
+    "type": "movie",
+    "title": "Smile 2",
+    "year": "2024",
+    "imdb_id": "tt29268110"
+  },
+  {
+    "tmdbId": "1353117",
+    "type": "movie",
+    "title": "Home Sweet Home: Rebirth",
+    "year": "2025",
+    "imdb_id": "tt29425792"
+  },
+  {
+    "tmdbId": "1251621",
+    "type": "movie",
+    "title": "Waves",
+    "year": "2024",
+    "imdb_id": "tt27587485"
+  },
+  {
+    "tmdbId": "106646",
+    "type": "movie",
+    "title": "The Wolf of Wall Street",
+    "year": "2013",
+    "imdb_id": "tt0993846"
+  },
+  {
+    "tmdbId": "1165067",
+    "type": "movie",
+    "title": "Cosmic Chaos",
+    "year": "2023",
+    "imdb_id": "tt27949946"
+  },
+  {
+    "tmdbId": "98",
+    "type": "movie",
+    "title": "Gladiator",
+    "year": "2000",
+    "imdb_id": "tt0172495"
+  },
+  {
+    "tmdbId": "436969",
+    "type": "movie",
+    "title": "The Suicide Squad",
+    "year": "2021",
+    "imdb_id": "tt6334354"
+  },
+  {
+    "tmdbId": "1307520",
+    "type": "movie",
+    "title": "The Biggest Fan",
+    "year": "2025",
+    "imdb_id": "tt31227132"
+  },
+  {
+    "tmdbId": "970450",
+    "type": "movie",
+    "title": "Werewolves",
+    "year": "2024",
+    "imdb_id": "tt15041836"
+  },
+  {
+    "tmdbId": "337167",
+    "type": "movie",
+    "title": "Fifty Shades Freed",
+    "year": "2018",
+    "imdb_id": "tt4477536"
+  },
+  {
+    "tmdbId": "823464",
+    "type": "movie",
+    "title": "Godzilla x Kong: The New Empire",
+    "year": "2024",
+    "imdb_id": "tt14539740"
+  },
+  {
+    "tmdbId": "1038392",
+    "type": "movie",
+    "title": "The Conjuring: Last Rites",
+    "year": "2025",
+    "imdb_id": "tt22898462"
+  },
+  {
+    "tmdbId": "228150",
+    "type": "movie",
+    "title": "Fury",
+    "year": "2014",
+    "imdb_id": "tt2713180"
+  },
+  {
+    "tmdbId": "672",
+    "type": "movie",
+    "title": "Harry Potter and the Chamber of Secrets",
+    "year": "2002",
+    "imdb_id": "tt0295297"
+  },
+  {
+    "tmdbId": "102651",
+    "type": "movie",
+    "title": "Maleficent",
+    "year": "2014",
+    "imdb_id": "tt1587310"
+  },
+  {
+    "tmdbId": "650033",
+    "type": "movie",
+    "title": "Free Fall",
+    "year": "2025",
+    "imdb_id": "tt14760886"
+  },
+  {
+    "tmdbId": "122",
+    "type": "movie",
+    "title": "The Lord of the Rings: The Return of the King",
+    "year": "2003",
+    "imdb_id": "tt0167260"
+  },
+  {
+    "tmdbId": "156022",
+    "type": "movie",
+    "title": "The Equalizer",
+    "year": "2014",
+    "imdb_id": "tt0455944"
+  },
+  {
+    "tmdbId": "866398",
+    "type": "movie",
+    "title": "The Beekeeper",
+    "year": "2024",
+    "imdb_id": "tt15314262"
+  },
+  {
+    "tmdbId": "1101401",
+    "type": "movie",
+    "title": "Sugar Baby",
+    "year": "2024",
+    "imdb_id": "tt27165670"
+  },
+  {
+    "tmdbId": "67396",
+    "type": "movie",
+    "title": "Day of the Warrior",
+    "year": "1996",
+    "imdb_id": "tt0116039"
+  },
+  {
+    "tmdbId": "675353",
+    "type": "movie",
+    "title": "Sonic the Hedgehog 2",
+    "year": "2022",
+    "imdb_id": "tt12412888"
+  },
+  {
+    "tmdbId": "414906",
+    "type": "movie",
+    "title": "The Batman",
+    "year": "2022",
+    "imdb_id": "tt1877830"
+  },
+  {
+    "tmdbId": "170",
+    "type": "movie",
+    "title": "28 Days Later",
+    "year": "2002",
+    "imdb_id": "tt0289043"
+  },
+  {
+    "tmdbId": "1233575",
+    "type": "movie",
+    "title": "Black Bag",
+    "year": "2025",
+    "imdb_id": "tt30988739"
+  },
+  {
+    "tmdbId": "931349",
+    "type": "movie",
+    "title": "Ash",
+    "year": "2025",
+    "imdb_id": "tt17489650"
+  },
+  {
+    "tmdbId": "557",
+    "type": "movie",
+    "title": "Spider-Man",
+    "year": "2002",
+    "imdb_id": "tt0145487"
+  },
+  {
+    "tmdbId": "18785",
+    "type": "movie",
+    "title": "The Hangover",
+    "year": "2009",
+    "imdb_id": "tt1119646"
+  },
+  {
+    "tmdbId": "1226406",
+    "type": "movie",
+    "title": "Love Hurts",
+    "year": "2025",
+    "imdb_id": "tt30788842"
+  },
+  {
+    "tmdbId": "11036",
+    "type": "movie",
+    "title": "The Notebook",
+    "year": "2004",
+    "imdb_id": "tt0332280"
+  },
+  {
+    "tmdbId": "259693",
+    "type": "movie",
+    "title": "The Conjuring 2",
+    "year": "2016",
+    "imdb_id": "tt3065204"
+  },
+  {
+    "tmdbId": "1093237",
+    "type": "movie",
+    "title": "Hurry Up Tomorrow",
+    "year": "2025",
+    "imdb_id": "tt26927452"
+  },
+  {
+    "tmdbId": "980477",
+    "type": "movie",
+    "title": "Ne Zha 2",
+    "year": "2025",
+    "imdb_id": "tt34956443"
+  },
+  {
+    "tmdbId": "22",
+    "type": "movie",
+    "title": "Pirates of the Caribbean: The Curse of the Black Pearl",
+    "year": "2003",
+    "imdb_id": "tt0325980"
+  },
+  {
+    "tmdbId": "1208808",
+    "type": "movie",
+    "title": "Turno nocturno",
+    "year": "2024",
+    "imdb_id": "tt13657394"
+  },
+  {
+    "tmdbId": "862",
+    "type": "movie",
+    "title": "Toy Story",
+    "year": "1995",
+    "imdb_id": "tt0114709"
+  },
+  {
+    "tmdbId": "673",
+    "type": "movie",
+    "title": "Harry Potter and the Prisoner of Azkaban",
+    "year": "2004",
+    "imdb_id": "tt0304141"
+  },
+  {
+    "tmdbId": "1061474",
+    "type": "movie",
+    "title": "Superman",
+    "year": "2025",
+    "imdb_id": "tt5950044"
+  },
+  {
+    "tmdbId": "1034541",
+    "type": "movie",
+    "title": "Terrifier 3",
+    "year": "2024",
+    "imdb_id": "tt27911000"
+  },
+  {
+    "tmdbId": "129",
+    "type": "movie",
+    "title": "Spirited Away",
+    "year": "2001",
+    "imdb_id": "tt0245429"
+  },
+  {
+    "tmdbId": "1195585",
+    "type": "movie",
+    "title": "The Hard Hit",
+    "year": "2023",
+    "imdb_id": "tt20419974"
+  },
+  {
+    "tmdbId": "744",
+    "type": "movie",
+    "title": "Top Gun",
+    "year": "1986",
+    "imdb_id": "tt0092099"
+  },
+  {
+    "tmdbId": "354912",
+    "type": "movie",
+    "title": "Coco",
+    "year": "2017",
+    "imdb_id": "tt2380307"
+  },
+  {
+    "tmdbId": "1059073",
+    "type": "movie",
+    "title": "Winter Spring Summer or Fall",
+    "year": "2024",
+    "imdb_id": "tt24515124"
+  },
+  {
+    "tmdbId": "150540",
+    "type": "movie",
+    "title": "Inside Out",
+    "year": "2015",
+    "imdb_id": "tt2096673"
+  },
+  {
+    "tmdbId": "299534",
+    "type": "movie",
+    "title": "Avengers: Endgame",
+    "year": "2019",
+    "imdb_id": "tt4154796"
+  },
+  {
+    "tmdbId": "957119",
+    "type": "movie",
+    "title": "Sidelined: The QB and Me",
+    "year": "2025",
+    "imdb_id": "tt19704542"
+  },
+  {
+    "tmdbId": "244786",
+    "type": "movie",
+    "title": "Whiplash",
+    "year": "2014",
+    "imdb_id": "tt2582802"
+  },
+  {
+    "tmdbId": "1357633",
+    "type": "movie",
+    "title": "Solo Leveling -ReAwakening-",
+    "year": "2024",
+    "imdb_id": "tt33428606"
+  },
+  {
+    "tmdbId": "462183",
+    "type": "movie",
+    "title": "Wild Awakening",
+    "year": "2016",
+    "imdb_id": "tt6126506"
+  },
+  {
+    "tmdbId": "204082",
+    "type": "movie",
+    "title": "Homefront",
+    "year": "2013",
+    "imdb_id": "tt2312718"
+  },
+  {
+    "tmdbId": "674",
+    "type": "movie",
+    "title": "Harry Potter and the Goblet of Fire",
+    "year": "2005",
+    "imdb_id": "tt0330373"
+  },
+  {
+    "tmdbId": "807",
+    "type": "movie",
+    "title": "Se7en",
+    "year": "1995",
+    "imdb_id": "tt0114369"
+  },
+  {
+    "tmdbId": "85430",
+    "type": "movie",
+    "title": "Girl Play",
+    "year": "2004",
+    "imdb_id": "tt0416773"
+  },
+  {
+    "tmdbId": "41264",
+    "type": "movie",
+    "title": "Africa Addio",
+    "year": "1966",
+    "imdb_id": "tt0060073"
+  },
+  {
+    "tmdbId": "324857",
+    "type": "movie",
+    "title": "Spider-Man: Into the Spider-Verse",
+    "year": "2018",
+    "imdb_id": "tt4633694"
+  },
+  {
+    "tmdbId": "82023",
+    "type": "movie",
+    "title": "Hotel Desire",
+    "year": "2011",
+    "imdb_id": "tt2080323"
+  },
+  {
+    "tmdbId": "1726",
+    "type": "movie",
+    "title": "Iron Man",
+    "year": "2008",
+    "imdb_id": "tt0371746"
+  },
+  {
+    "tmdbId": "1469239",
+    "type": "movie",
+    "title": "Karol G: Tomorrow Was Beautiful",
+    "year": "2025",
+    "imdb_id": "tt36617085"
+  },
+  {
+    "tmdbId": "284054",
+    "type": "movie",
+    "title": "Black Panther",
+    "year": "2018",
+    "imdb_id": "tt1825683"
+  },
+  {
+    "tmdbId": "1217379",
+    "type": "movie",
+    "title": "Hellhound",
+    "year": "2024",
+    "imdb_id": "tt22489042"
+  },
+  {
+    "tmdbId": "135397",
+    "type": "movie",
+    "title": "Jurassic World",
+    "year": "2015",
+    "imdb_id": "tt0369610"
+  },
+  {
+    "tmdbId": "240832",
+    "type": "movie",
+    "title": "Lucy",
+    "year": "2014",
+    "imdb_id": "tt2872732"
+  },
+  {
+    "tmdbId": "1145608",
+    "type": "movie",
+    "title": "Marcello Mio",
+    "year": "2024",
+    "imdb_id": "tt32086069"
+  },
+  {
+    "tmdbId": "748783",
+    "type": "movie",
+    "title": "The Garfield Movie",
+    "year": "2024",
+    "imdb_id": "tt5779228"
+  },
+  {
+    "tmdbId": "447365",
+    "type": "movie",
+    "title": "Guardians of the Galaxy Vol. 3",
+    "year": "2023",
+    "imdb_id": "tt6791350"
+  },
+  {
+    "tmdbId": "1457515",
+    "type": "movie",
+    "title": "Air Force Elite: Thunderbirds",
+    "year": "2025",
+    "imdb_id": "tt35628532"
+  },
+  {
+    "tmdbId": "653346",
+    "type": "movie",
+    "title": "Kingdom of the Planet of the Apes",
+    "year": "2024",
+    "imdb_id": "tt11389872"
+  },
+  {
+    "tmdbId": "1029235",
+    "type": "movie",
+    "title": "Azrael",
+    "year": "2024",
+    "imdb_id": "tt22173666"
+  },
+  {
+    "tmdbId": "348",
+    "type": "movie",
+    "title": "Alien",
+    "year": "1979",
+    "imdb_id": "tt0078748"
+  },
+  {
+    "tmdbId": "82702",
+    "type": "movie",
+    "title": "How to Train Your Dragon 2",
+    "year": "2014",
+    "imdb_id": "tt1646971"
+  },
+  {
+    "tmdbId": "585",
+    "type": "movie",
+    "title": "Monsters, Inc.",
+    "year": "2001",
+    "imdb_id": "tt0198781"
+  },
+  {
+    "tmdbId": "8587",
+    "type": "movie",
+    "title": "The Lion King",
+    "year": "1994",
+    "imdb_id": "tt0110357"
+  },
+  {
+    "tmdbId": "210577",
+    "type": "movie",
+    "title": "Gone Girl",
+    "year": "2014",
+    "imdb_id": "tt2267998"
+  },
+  {
+    "tmdbId": "645710",
+    "type": "movie",
+    "title": "The Voyeurs",
+    "year": "2021",
+    "imdb_id": "tt11235772"
+  },
+  {
+    "tmdbId": "1442538",
+    "type": "movie",
+    "title": "Elevator Lady",
+    "year": "2025",
+    "imdb_id": "tt35889144"
+  },
+  {
+    "tmdbId": "396535",
+    "type": "movie",
+    "title": "Train to Busan",
+    "year": "2016",
+    "imdb_id": "tt5700672"
+  },
+  {
+    "tmdbId": "439079",
+    "type": "movie",
+    "title": "The Nun",
+    "year": "2018",
+    "imdb_id": "tt5814060"
+  },
+  {
+    "tmdbId": "1201176",
+    "type": "movie",
+    "title": "Easter Bloody Easter",
+    "year": "2024",
+    "imdb_id": "tt29372176"
+  },
+  {
+    "tmdbId": "185652",
+    "type": "movie",
+    "title": "Female Teacher in Rope Hell",
+    "year": "1981",
+    "imdb_id": "tt0285503"
+  },
+  {
+    "tmdbId": "767",
+    "type": "movie",
+    "title": "Harry Potter and the Half-Blood Prince",
+    "year": "2009",
+    "imdb_id": "tt0417741"
+  },
+  {
+    "tmdbId": "218",
+    "type": "movie",
+    "title": "The Terminator",
+    "year": "1984",
+    "imdb_id": "tt0088247"
+  },
+  {
+    "tmdbId": "37165",
+    "type": "movie",
+    "title": "The Truman Show",
+    "year": "1998",
+    "imdb_id": "tt0120382"
+  },
+  {
+    "tmdbId": "839033",
+    "type": "movie",
+    "title": "The Lord of the Rings: The War of the Rohirrim",
+    "year": "2024",
+    "imdb_id": "tt14824600"
+  },
+  {
+    "tmdbId": "507086",
+    "type": "movie",
+    "title": "Jurassic World Dominion",
+    "year": "2022",
+    "imdb_id": "tt8041270"
+  },
+  {
+    "tmdbId": "372058",
+    "type": "movie",
+    "title": "Your Name.",
+    "year": "2016",
+    "imdb_id": "tt5311514"
+  },
+  {
+    "tmdbId": "786892",
+    "type": "movie",
+    "title": "Furiosa: A Mad Max Saga",
+    "year": "2024",
+    "imdb_id": "tt12037194"
+  },
+  {
+    "tmdbId": "707610",
+    "type": "movie",
+    "title": "Bosomy Mom",
+    "year": "2020",
+    "imdb_id": "tt12625176"
+  },
+  {
+    "tmdbId": "315635",
+    "type": "movie",
+    "title": "Spider-Man: Homecoming",
+    "year": "2017",
+    "imdb_id": "tt2250912"
+  },
+  {
+    "tmdbId": "181812",
+    "type": "movie",
+    "title": "Star Wars: The Rise of Skywalker",
+    "year": "2019",
+    "imdb_id": "tt2527338"
+  },
+  {
+    "tmdbId": "177572",
+    "type": "movie",
+    "title": "Big Hero 6",
+    "year": "2014",
+    "imdb_id": "tt2245084"
+  },
+  {
+    "tmdbId": "413846",
+    "type": "movie",
+    "title": "1992",
+    "year": "2024",
+    "imdb_id": "tt4959750"
+  },
+  {
+    "tmdbId": "330459",
+    "type": "movie",
+    "title": "Rogue One: A Star Wars Story",
+    "year": "2016",
+    "imdb_id": "tt3748528"
+  },
+  {
+    "tmdbId": "38757",
+    "type": "movie",
+    "title": "Tangled",
+    "year": "2010",
+    "imdb_id": "tt0398286"
+  },
+  {
+    "tmdbId": "568124",
+    "type": "movie",
+    "title": "Encanto",
+    "year": "2021",
+    "imdb_id": "tt2953050"
+  },
+  {
+    "tmdbId": "698687",
+    "type": "movie",
+    "title": "Transformers One",
+    "year": "2024",
+    "imdb_id": "tt8864596"
+  },
+  {
+    "tmdbId": "12445",
+    "type": "movie",
+    "title": "Harry Potter and the Deathly Hallows: Part 2",
+    "year": "2011",
+    "imdb_id": "tt1201607"
+  },
+  {
+    "tmdbId": "680",
+    "type": "movie",
+    "title": "Pulp Fiction",
+    "year": "1994",
+    "imdb_id": "tt0110912"
+  },
+  {
+    "tmdbId": "1196470",
+    "type": "movie",
+    "title": "Survive",
+    "year": "2024",
+    "imdb_id": "tt27032708"
+  },
+  {
+    "tmdbId": "426063",
+    "type": "movie",
+    "title": "Nosferatu",
+    "year": "2024",
+    "imdb_id": "tt5040012"
+  },
+  {
+    "tmdbId": "475557",
+    "type": "movie",
+    "title": "Joker",
+    "year": "2019",
+    "imdb_id": "tt7286456"
+  },
+  {
+    "tmdbId": "1138194",
+    "type": "movie",
+    "title": "Heretic",
+    "year": "2024",
+    "imdb_id": "tt28015403"
+  },
+  {
+    "tmdbId": "926670",
+    "type": "movie",
+    "title": "Henry Danger: The Movie",
+    "year": "2025",
+    "imdb_id": "tt7787524"
+  },
+  {
+    "tmdbId": "1422211",
+    "type": "movie",
+    "title": "The Pursuit of Lust",
+    "year": "2025",
+    "imdb_id": "tt35681085"
+  },
+  {
+    "tmdbId": "1138749",
+    "type": "movie",
+    "title": "The Island",
+    "year": "2023",
+    "imdb_id": "tt21853596"
+  },
+  {
+    "tmdbId": "38365",
+    "type": "movie",
+    "title": "Grown Ups",
+    "year": "2010",
+    "imdb_id": "tt1375670"
+  },
+  {
+    "tmdbId": "2062",
+    "type": "movie",
+    "title": "Ratatouille",
+    "year": "2007",
+    "imdb_id": "tt0382932"
+  },
+  {
+    "tmdbId": "1241752",
+    "type": "movie",
+    "title": "Rita",
+    "year": "2024",
+    "imdb_id": "tt31589922"
+  },
+  {
+    "tmdbId": "843527",
+    "type": "movie",
+    "title": "The Idea of You",
+    "year": "2024",
+    "imdb_id": "tt9466114"
+  },
+  {
+    "tmdbId": "640",
+    "type": "movie",
+    "title": "Catch Me If You Can",
+    "year": "2002",
+    "imdb_id": "tt0264464"
+  },
+  {
+    "tmdbId": "335983",
+    "type": "movie",
+    "title": "Venom",
+    "year": "2018",
+    "imdb_id": "tt1270797"
+  },
+  {
+    "tmdbId": "12444",
+    "type": "movie",
+    "title": "Harry Potter and the Deathly Hallows: Part 1",
+    "year": "2010",
+    "imdb_id": "tt0926084"
+  },
+  {
+    "tmdbId": "940551",
+    "type": "movie",
+    "title": "Migration",
+    "year": "2023",
+    "imdb_id": "tt6495056"
+  },
+  {
+    "tmdbId": "453395",
+    "type": "movie",
+    "title": "Doctor Strange in the Multiverse of Madness",
+    "year": "2022",
+    "imdb_id": "tt9419884"
+  },
+  {
+    "tmdbId": "863",
+    "type": "movie",
+    "title": "Toy Story 2",
+    "year": "1999",
+    "imdb_id": "tt0120363"
+  },
+  {
+    "tmdbId": "1077782",
+    "type": "movie",
+    "title": "Old Guy",
+    "year": "2024",
+    "imdb_id": "tt26442053"
+  },
+  {
+    "tmdbId": "1466938",
+    "type": "movie",
+    "title": "A Deadly American Marriage",
+    "year": "2025",
+    "imdb_id": "tt36592065"
+  },
+  {
+    "tmdbId": "109445",
+    "type": "movie",
+    "title": "Frozen",
+    "year": "2013",
+    "imdb_id": "tt2294629"
+  },
+  {
+    "tmdbId": "979275",
+    "type": "movie",
+    "title": "Mob Land",
+    "year": "2023",
+    "imdb_id": "tt20424130"
+  },
+  {
+    "tmdbId": "133521",
+    "type": "movie",
+    "title": "Shameless",
+    "year": "2012",
+    "imdb_id": "tt1927068"
+  },
+  {
+    "tmdbId": "152601",
+    "type": "movie",
+    "title": "Her",
+    "year": "2013",
+    "imdb_id": "tt1798709"
+  },
+  {
+    "tmdbId": "337404",
+    "type": "movie",
+    "title": "Cruella",
+    "year": "2021",
+    "imdb_id": "tt3228774"
+  },
+  {
+    "tmdbId": "4935",
+    "type": "movie",
+    "title": "Howl's Moving Castle",
+    "year": "2004",
+    "imdb_id": "tt0347149"
+  },
+  {
+    "tmdbId": "675",
+    "type": "movie",
+    "title": "Harry Potter and the Order of the Phoenix",
+    "year": "2007",
+    "imdb_id": "tt0373889"
+  },
+  {
+    "tmdbId": "10625",
+    "type": "movie",
+    "title": "Mean Girls",
+    "year": "2004",
+    "imdb_id": "tt0377092"
+  },
+  {
+    "tmdbId": "11324",
+    "type": "movie",
+    "title": "Shutter Island",
+    "year": "2010",
+    "imdb_id": "tt1130884"
+  },
+  {
+    "tmdbId": "667538",
+    "type": "movie",
+    "title": "Transformers: Rise of the Beasts",
+    "year": "2023",
+    "imdb_id": "tt5090568"
+  },
+  {
+    "tmdbId": "1410082",
+    "type": "movie",
+    "title": "Sniper: The Last Stand",
+    "year": "2025",
+    "imdb_id": "tt34910018"
+  },
+  {
+    "tmdbId": "976573",
+    "type": "movie",
+    "title": "Elemental",
+    "year": "2023",
+    "imdb_id": "tt15789038"
+  },
+  {
+    "tmdbId": "77338",
+    "type": "movie",
+    "title": "The Intouchables",
+    "year": "2011",
+    "imdb_id": "tt1675434"
+  },
+  {
+    "tmdbId": "122917",
+    "type": "movie",
+    "title": "The Hobbit: The Battle of the Five Armies",
+    "year": "2014",
+    "imdb_id": "tt2310332"
+  },
+  {
+    "tmdbId": "1043905",
+    "type": "movie",
+    "title": "Dirty Angels",
+    "year": "2024",
+    "imdb_id": "tt23872640"
+  },
+  {
+    "tmdbId": "559",
+    "type": "movie",
+    "title": "Spider-Man 3",
+    "year": "2007",
+    "imdb_id": "tt0413300"
+  },
+  {
+    "tmdbId": "1261050",
+    "type": "movie",
+    "title": "The Quiet Ones",
+    "year": "2024",
+    "imdb_id": "tt32887283"
+  },
+  {
+    "tmdbId": "1049171",
+    "type": "movie",
+    "title": "The Temptation",
+    "year": "2022",
+    "imdb_id": "tt18274350"
+  },
+  {
+    "tmdbId": "240",
+    "type": "movie",
+    "title": "The Godfather Part II",
+    "year": "1974",
+    "imdb_id": "tt0071562"
+  },
+  {
+    "tmdbId": "1312833",
+    "type": "movie",
+    "title": "A Knight's War",
+    "year": "2025",
+    "imdb_id": "tt27705545"
+  },
+  {
+    "tmdbId": "1084736",
+    "type": "movie",
+    "title": "The Count of Monte Cristo",
+    "year": "2024",
+    "imdb_id": "tt26446278"
+  },
+  {
+    "tmdbId": "131631",
+    "type": "movie",
+    "title": "The Hunger Games: Mockingjay - Part 1",
+    "year": "2014",
+    "imdb_id": "tt1951265"
+  },
+  {
+    "tmdbId": "911430",
+    "type": "movie",
+    "title": "F1 The Movie",
+    "year": "2025",
+    "imdb_id": "tt16311594"
+  },
+  {
+    "tmdbId": "99861",
+    "type": "movie",
+    "title": "Avengers: Age of Ultron",
+    "year": "2015",
+    "imdb_id": "tt2395427"
+  },
+  {
+    "tmdbId": "1111873",
+    "type": "movie",
+    "title": "Abigail",
+    "year": "2024",
+    "imdb_id": "tt27489557"
+  },
+  {
+    "tmdbId": "140607",
+    "type": "movie",
+    "title": "Star Wars: The Force Awakens",
+    "year": "2015",
+    "imdb_id": "tt2488496"
+  },
+  {
+    "tmdbId": "637649",
+    "type": "movie",
+    "title": "Wrath of Man",
+    "year": "2021",
+    "imdb_id": "tt11083552"
+  },
+  {
+    "tmdbId": "652",
+    "type": "movie",
+    "title": "Troy",
+    "year": "2004",
+    "imdb_id": "tt0332452"
+  },
+  {
+    "tmdbId": "9502",
+    "type": "movie",
+    "title": "Kung Fu Panda",
+    "year": "2008",
+    "imdb_id": "tt0441773"
+  },
+  {
+    "tmdbId": "1255788",
+    "type": "movie",
+    "title": "The Gardener",
+    "year": "2025",
+    "imdb_id": "tt30973842"
+  },
+  {
+    "tmdbId": "497",
+    "type": "movie",
+    "title": "The Green Mile",
+    "year": "1999",
+    "imdb_id": "tt0120689"
+  },
+  {
+    "tmdbId": "118",
+    "type": "movie",
+    "title": "Charlie and the Chocolate Factory",
+    "year": "2005",
+    "imdb_id": "tt0367594"
+  },
+  {
+    "tmdbId": "1321952",
+    "type": "movie",
+    "title": "Sofia, the Possession",
+    "year": "2024",
+    "imdb_id": "tt27844064"
+  },
+  {
+    "tmdbId": "58",
+    "type": "movie",
+    "title": "Pirates of the Caribbean: Dead Man's Chest",
+    "year": "2006",
+    "imdb_id": "tt0383574"
+  },
+  {
+    "tmdbId": "10591",
+    "type": "movie",
+    "title": "The Girl Next Door",
+    "year": "2004",
+    "imdb_id": "tt0265208"
+  },
+  {
+    "tmdbId": "695721",
+    "type": "movie",
+    "title": "The Hunger Games: The Ballad of Songbirds & Snakes",
+    "year": "2023",
+    "imdb_id": "tt10545296"
+  },
+  {
+    "tmdbId": "1084242",
+    "type": "movie",
+    "title": "Zootopia 2",
+    "year": "2025",
+    "imdb_id": "tt26443597"
+  },
+  {
+    "tmdbId": "1402",
+    "type": "movie",
+    "title": "The Pursuit of Happyness",
+    "year": "2006",
+    "imdb_id": "tt0454921"
+  },
+  {
+    "tmdbId": "166428",
+    "type": "movie",
+    "title": "How to Train Your Dragon: The Hidden World",
+    "year": "2019",
+    "imdb_id": "tt2386490"
+  },
+  {
+    "tmdbId": "16869",
+    "type": "movie",
+    "title": "Inglourious Basterds",
+    "year": "2009",
+    "imdb_id": "tt0361748"
+  },
+  {
+    "tmdbId": "974453",
+    "type": "movie",
+    "title": "Absolution",
+    "year": "2024",
+    "imdb_id": "tt8337290"
+  },
+  {
+    "tmdbId": "1143407",
+    "type": "movie",
+    "title": "Sky Force",
+    "year": "2025",
+    "imdb_id": "tt27056066"
+  },
+  {
+    "tmdbId": "250546",
+    "type": "movie",
+    "title": "Annabelle",
+    "year": "2014",
+    "imdb_id": "tt3322940"
+  },
+  {
+    "tmdbId": "38575",
+    "type": "movie",
+    "title": "The Karate Kid",
+    "year": "2010",
+    "imdb_id": "tt1155076"
+  },
+  {
+    "tmdbId": "150689",
+    "type": "movie",
+    "title": "Cinderella",
+    "year": "2015",
+    "imdb_id": "tt1661199"
+  },
+  {
+    "tmdbId": "1096838",
+    "type": "movie",
+    "title": "Here After",
+    "year": "2024",
+    "imdb_id": "tt5402714"
+  },
+  {
+    "tmdbId": "1495",
+    "type": "movie",
+    "title": "Kingdom of Heaven",
+    "year": "2005",
+    "imdb_id": "tt0320661"
+  },
+  {
+    "tmdbId": "809",
+    "type": "movie",
+    "title": "Shrek 2",
+    "year": "2004",
+    "imdb_id": "tt0298148"
+  },
+  {
+    "tmdbId": "718930",
+    "type": "movie",
+    "title": "Bullet Train",
+    "year": "2022",
+    "imdb_id": "tt12593682"
+  },
+  {
+    "tmdbId": "530385",
+    "type": "movie",
+    "title": "Midsommar",
+    "year": "2019",
+    "imdb_id": "tt8772262"
+  },
+  {
+    "tmdbId": "420818",
+    "type": "movie",
+    "title": "The Lion King",
+    "year": "2019",
+    "imdb_id": "tt6105098"
+  },
+  {
+    "tmdbId": "694",
+    "type": "movie",
+    "title": "The Shining",
+    "year": "1980",
+    "imdb_id": "tt0081505"
+  },
+  {
+    "tmdbId": "627725",
+    "type": "movie",
+    "title": "The Banker",
+    "year": "2020",
+    "imdb_id": "tt6285944"
+  },
+  {
+    "tmdbId": "333339",
+    "type": "movie",
+    "title": "Ready Player One",
+    "year": "2018",
+    "imdb_id": "tt1677720"
+  },
+  {
+    "tmdbId": "424",
+    "type": "movie",
+    "title": "Schindler's List",
+    "year": "1993",
+    "imdb_id": "tt0108052"
+  },
+  {
+    "tmdbId": "102382",
+    "type": "movie",
+    "title": "The Amazing Spider-Man 2",
+    "year": "2014",
+    "imdb_id": "tt1872181"
+  },
+  {
+    "tmdbId": "670",
+    "type": "movie",
+    "title": "Oldboy",
+    "year": "2003",
+    "imdb_id": "tt0364569"
+  },
+  {
+    "tmdbId": "516729",
+    "type": "movie",
+    "title": "Paddington in Peru",
+    "year": "2024",
+    "imdb_id": "tt5822536"
+  },
+  {
+    "tmdbId": "447277",
+    "type": "movie",
+    "title": "The Little Mermaid",
+    "year": "2023",
+    "imdb_id": "tt5971474"
+  },
+  {
+    "tmdbId": "350",
+    "type": "movie",
+    "title": "The Devil Wears Prada",
+    "year": "2006",
+    "imdb_id": "tt0458352"
+  },
+  {
+    "tmdbId": "921436",
+    "type": "movie",
+    "title": "Escape",
+    "year": "2024",
+    "imdb_id": "tt31898445"
+  },
+  {
+    "tmdbId": "285",
+    "type": "movie",
+    "title": "Pirates of the Caribbean: At World's End",
+    "year": "2007",
+    "imdb_id": "tt0449088"
+  },
+  {
+    "tmdbId": "2105",
+    "type": "movie",
+    "title": "American Pie",
+    "year": "1999",
+    "imdb_id": "tt0163651"
+  },
+  {
+    "tmdbId": "1140535",
+    "type": "movie",
+    "title": "Presence",
+    "year": "2025",
+    "imdb_id": "tt28249919"
+  },
+  {
+    "tmdbId": "1302916",
+    "type": "movie",
+    "title": "Heart Eyes",
+    "year": "2025",
+    "imdb_id": "tt32558992"
+  },
+  {
+    "tmdbId": "670292",
+    "type": "movie",
+    "title": "The Creator",
+    "year": "2023",
+    "imdb_id": "tt11858890"
+  },
+  {
+    "tmdbId": "1003596",
+    "type": "movie",
+    "title": "Avengers: Doomsday",
+    "year": "2026",
+    "imdb_id": "tt21357150"
+  },
+  {
+    "tmdbId": "857",
+    "type": "movie",
+    "title": "Saving Private Ryan",
+    "year": "1998",
+    "imdb_id": "tt0120815"
+  },
+  {
+    "tmdbId": "1930",
+    "type": "movie",
+    "title": "The Amazing Spider-Man",
+    "year": "2012",
+    "imdb_id": "tt0948470"
+  },
+  {
+    "tmdbId": "121",
+    "type": "movie",
+    "title": "The Lord of the Rings: The Two Towers",
+    "year": "2002",
+    "imdb_id": "tt0167261"
+  },
+  {
+    "tmdbId": "297",
+    "type": "movie",
+    "title": "Meet Joe Black",
+    "year": "1998",
+    "imdb_id": "tt0119643"
+  },
+  {
+    "tmdbId": "296096",
+    "type": "movie",
+    "title": "Me Before You",
+    "year": "2016",
+    "imdb_id": "tt2674426"
+  },
+  {
+    "tmdbId": "290098",
+    "type": "movie",
+    "title": "The Handmaiden",
+    "year": "2016",
+    "imdb_id": "tt4016934"
+  },
+  {
+    "tmdbId": "1137350",
+    "type": "movie",
+    "title": "The Phoenician Scheme",
+    "year": "2025",
+    "imdb_id": "tt30840798"
+  },
+  {
+    "tmdbId": "968051",
+    "type": "movie",
+    "title": "The Nun II",
+    "year": "2023",
+    "imdb_id": "tt10160976"
+  },
+  {
+    "tmdbId": "111",
+    "type": "movie",
+    "title": "Scarface",
+    "year": "1983",
+    "imdb_id": "tt0086250"
+  },
+  {
+    "tmdbId": "454626",
+    "type": "movie",
+    "title": "Sonic the Hedgehog",
+    "year": "2020",
+    "imdb_id": "tt3794354"
+  },
+  {
+    "tmdbId": "12",
+    "type": "movie",
+    "title": "Finding Nemo",
+    "year": "2003",
+    "imdb_id": "tt0266543"
+  },
+  {
+    "tmdbId": "329865",
+    "type": "movie",
+    "title": "Arrival",
+    "year": "2016",
+    "imdb_id": "tt2543164"
+  },
+  {
+    "tmdbId": "49519",
+    "type": "movie",
+    "title": "The Croods",
+    "year": "2013",
+    "imdb_id": "tt0481499"
+  },
+  {
+    "tmdbId": "1051896",
+    "type": "movie",
+    "title": "Arcadian",
+    "year": "2024",
+    "imdb_id": "tt22939186"
+  },
+  {
+    "tmdbId": "273481",
+    "type": "movie",
+    "title": "Sicario",
+    "year": "2015",
+    "imdb_id": "tt3397884"
+  },
+  {
+    "tmdbId": "324786",
+    "type": "movie",
+    "title": "Hacksaw Ridge",
+    "year": "2016",
+    "imdb_id": "tt2119532"
+  },
+  {
+    "tmdbId": "449443",
+    "type": "movie",
+    "title": "Den of Thieves",
+    "year": "2018",
+    "imdb_id": "tt1259528"
+  },
+  {
+    "tmdbId": "389",
+    "type": "movie",
+    "title": "12 Angry Men",
+    "year": "1957",
+    "imdb_id": "tt0050083"
+  },
+  {
+    "tmdbId": "1895",
+    "type": "movie",
+    "title": "Star Wars: Episode III - Revenge of the Sith",
+    "year": "2005",
+    "imdb_id": "tt0121766"
+  },
+  {
+    "tmdbId": "493922",
+    "type": "movie",
+    "title": "Hereditary",
+    "year": "2018",
+    "imdb_id": "tt7784604"
+  },
+  {
+    "tmdbId": "549509",
+    "type": "movie",
+    "title": "The Brutalist",
+    "year": "2024",
+    "imdb_id": "tt8999762"
+  },
+  {
+    "tmdbId": "1296500",
+    "type": "movie",
+    "title": "Un lío de millones",
+    "year": "2024",
+    "imdb_id": "tt32472730"
+  },
+  {
+    "tmdbId": "1301650",
+    "type": "movie",
+    "title": "Z Zone",
+    "year": "2024",
+    "imdb_id": "tt32195076"
+  },
+  {
+    "tmdbId": "298618",
+    "type": "movie",
+    "title": "The Flash",
+    "year": "2023",
+    "imdb_id": "tt0439572"
+  },
+  {
+    "tmdbId": "868759",
+    "type": "movie",
+    "title": "Ghosted",
+    "year": "2023",
+    "imdb_id": "tt15326988"
+  },
+  {
+    "tmdbId": "1022796",
+    "type": "movie",
+    "title": "Wish",
+    "year": "2023",
+    "imdb_id": "tt11304740"
+  },
+  {
+    "tmdbId": "799583",
+    "type": "movie",
+    "title": "The Ministry of Ungentlemanly Warfare",
+    "year": "2024",
+    "imdb_id": "tt5177120"
+  },
+  {
+    "tmdbId": "953",
+    "type": "movie",
+    "title": "Madagascar",
+    "year": "2005",
+    "imdb_id": "tt0351283"
+  },
+  {
+    "tmdbId": "588228",
+    "type": "movie",
+    "title": "The Tomorrow War",
+    "year": "2021",
+    "imdb_id": "tt9777666"
+  },
+  {
+    "tmdbId": "271110",
+    "type": "movie",
+    "title": "Captain America: Civil War",
+    "year": "2016",
+    "imdb_id": "tt3498820"
+  },
+  {
+    "tmdbId": "769",
+    "type": "movie",
+    "title": "GoodFellas",
+    "year": "1990",
+    "imdb_id": "tt0099685"
+  },
+  {
+    "tmdbId": "324552",
+    "type": "movie",
+    "title": "John Wick: Chapter 2",
+    "year": "2017",
+    "imdb_id": "tt4425200"
+  },
+  {
+    "tmdbId": "105",
+    "type": "movie",
+    "title": "Back to the Future",
+    "year": "1985",
+    "imdb_id": "tt0088763"
+  },
+  {
+    "tmdbId": "10674",
+    "type": "movie",
+    "title": "Mulan",
+    "year": "1998",
+    "imdb_id": "tt0120762"
+  },
+  {
+    "tmdbId": "1470082",
+    "type": "movie",
+    "title": "The Jowa Collector",
+    "year": "2025",
+    "imdb_id": "tt36454944"
+  },
+  {
+    "tmdbId": "14160",
+    "type": "movie",
+    "title": "Up",
+    "year": "2009",
+    "imdb_id": "tt1049413"
+  },
+  {
+    "tmdbId": "489",
+    "type": "movie",
+    "title": "Good Will Hunting",
+    "year": "1997",
+    "imdb_id": "tt0119217"
+  },
+  {
+    "tmdbId": "787699",
+    "type": "movie",
+    "title": "Wonka",
+    "year": "2023",
+    "imdb_id": "tt6166392"
+  },
+  {
+    "tmdbId": "49026",
+    "type": "movie",
+    "title": "The Dark Knight Rises",
+    "year": "2012",
+    "imdb_id": "tt1345836"
+  },
+  {
+    "tmdbId": "110415",
+    "type": "movie",
+    "title": "Snowpiercer",
+    "year": "2013",
+    "imdb_id": "tt1706620"
+  },
+  {
+    "tmdbId": "950784",
+    "type": "movie",
+    "title": "Flame of Recca: Final Burning",
+    "year": "2004",
+    "imdb_id": "tt5811098"
+  },
+  {
+    "tmdbId": "370663",
+    "type": "movie",
+    "title": "Below Her Mouth",
+    "year": "2017",
+    "imdb_id": "tt5073620"
+  },
+  {
+    "tmdbId": "760497",
+    "type": "movie",
+    "title": "The Match",
+    "year": "2025",
+    "imdb_id": "tt13498824"
+  },
+  {
+    "tmdbId": "359410",
+    "type": "movie",
+    "title": "Road House",
+    "year": "2024",
+    "imdb_id": "tt3359350"
+  },
+  {
+    "tmdbId": "12153",
+    "type": "movie",
+    "title": "White Chicks",
+    "year": "2004",
+    "imdb_id": "tt0381707"
+  },
+  {
+    "tmdbId": "6977",
+    "type": "movie",
+    "title": "No Country for Old Men",
+    "year": "2007",
+    "imdb_id": "tt0477348"
+  },
+  {
+    "tmdbId": "293660",
+    "type": "movie",
+    "title": "Deadpool",
+    "year": "2016",
+    "imdb_id": "tt1431045"
+  },
+  {
+    "tmdbId": "8681",
+    "type": "movie",
+    "title": "Taken",
+    "year": "2008",
+    "imdb_id": "tt0936501"
+  },
+  {
+    "tmdbId": "818647",
+    "type": "movie",
+    "title": "Through My Window",
+    "year": "2022",
+    "imdb_id": "tt14463484"
+  },
+  {
+    "tmdbId": "50620",
+    "type": "movie",
+    "title": "The Twilight Saga: Breaking Dawn - Part 2",
+    "year": "2012",
+    "imdb_id": "tt1673434"
+  },
+  {
+    "tmdbId": "2109",
+    "type": "movie",
+    "title": "Rush Hour",
+    "year": "1998",
+    "imdb_id": "tt0120812"
+  },
+  {
+    "tmdbId": "582825",
+    "type": "movie",
+    "title": "Ichigeki Sacchuu!! Hoihoi-san",
+    "year": "2004",
+    "imdb_id": "tt7107288"
+  },
+  {
+    "tmdbId": "979",
+    "type": "movie",
+    "title": "Irreversible",
+    "year": "2002",
+    "imdb_id": "tt0290673"
+  },
+  {
+    "tmdbId": "72190",
+    "type": "movie",
+    "title": "World War Z",
+    "year": "2013",
+    "imdb_id": "tt0816711"
+  },
+  {
+    "tmdbId": "245891",
+    "type": "movie",
+    "title": "John Wick",
+    "year": "2014",
+    "imdb_id": "tt2911666"
+  },
+  {
+    "tmdbId": "10138",
+    "type": "movie",
+    "title": "Iron Man 2",
+    "year": "2010",
+    "imdb_id": "tt1228705"
+  },
+  {
+    "tmdbId": "957452",
+    "type": "movie",
+    "title": "The Crow",
+    "year": "2024",
+    "imdb_id": "tt1340094"
+  },
+  {
+    "tmdbId": "1865",
+    "type": "movie",
+    "title": "Pirates of the Caribbean: On Stranger Tides",
+    "year": "2011",
+    "imdb_id": "tt1298650"
+  },
+  {
+    "tmdbId": "68718",
+    "type": "movie",
+    "title": "Django Unchained",
+    "year": "2012",
+    "imdb_id": "tt1853728"
+  },
+  {
+    "tmdbId": "566525",
+    "type": "movie",
+    "title": "Shang-Chi and the Legend of the Ten Rings",
+    "year": "2021",
+    "imdb_id": "tt9376612"
+  },
+  {
+    "tmdbId": "50619",
+    "type": "movie",
+    "title": "The Twilight Saga: Breaking Dawn - Part 1",
+    "year": "2011",
+    "imdb_id": "tt1324999"
+  },
+  {
+    "tmdbId": "106",
+    "type": "movie",
+    "title": "Predator",
+    "year": "1987",
+    "imdb_id": "tt0093773"
+  },
+  {
+    "tmdbId": "1124",
+    "type": "movie",
+    "title": "The Prestige",
+    "year": "2006",
+    "imdb_id": "tt0482571"
+  },
+  {
+    "tmdbId": "792307",
+    "type": "movie",
+    "title": "Poor Things",
+    "year": "2023",
+    "imdb_id": "tt14230458"
+  },
+  {
+    "tmdbId": "882569",
+    "type": "movie",
+    "title": "Guy Ritchie's The Covenant",
+    "year": "2023",
+    "imdb_id": "tt4873118"
+  },
+  {
+    "tmdbId": "1371094",
+    "type": "movie",
+    "title": "Dismantling an Elephant",
+    "year": "2025",
+    "imdb_id": "tt27850866"
+  },
+  {
+    "tmdbId": "840705",
+    "type": "movie",
+    "title": "Blink Twice",
+    "year": "2024",
+    "imdb_id": "tt14858658"
+  },
+  {
+    "tmdbId": "67395",
+    "type": "movie",
+    "title": "L.E.T.H.A.L. Ladies: Return to Savage Beach",
+    "year": "1998",
+    "imdb_id": "tt0127759"
+  },
+  {
+    "tmdbId": "564",
+    "type": "movie",
+    "title": "The Mummy",
+    "year": "1999",
+    "imdb_id": "tt0120616"
+  },
+  {
+    "tmdbId": "39254",
+    "type": "movie",
+    "title": "Real Steel",
+    "year": "2011",
+    "imdb_id": "tt0433035"
+  },
+  {
+    "tmdbId": "1357359",
+    "type": "movie",
+    "title": "Ejen Ali: The Movie 2",
+    "year": "2025",
+    "imdb_id": "tt33381728"
+  },
+  {
+    "tmdbId": "777443",
+    "type": "movie",
+    "title": "The Electric State",
+    "year": "2025",
+    "imdb_id": "tt7766378"
+  },
+  {
+    "tmdbId": "1333100",
+    "type": "movie",
+    "title": "Attack on Titan: THE LAST ATTACK",
+    "year": "2024",
+    "imdb_id": "tt33175825"
+  },
+  {
+    "tmdbId": "1465026",
+    "type": "movie",
+    "title": "Untold: The Fall of Favre",
+    "year": "2025",
+    "imdb_id": "tt36557720"
+  },
+  {
+    "tmdbId": "321612",
+    "type": "movie",
+    "title": "Beauty and the Beast",
+    "year": "2017",
+    "imdb_id": "tt2771200"
+  },
+  {
+    "tmdbId": "1135869",
+    "type": "movie",
+    "title": "Salome",
+    "year": "2023",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "937287",
+    "type": "movie",
+    "title": "Challengers",
+    "year": "2024",
+    "imdb_id": "tt16426418"
+  },
+  {
+    "tmdbId": "109418",
+    "type": "movie",
+    "title": "Grown Ups 2",
+    "year": "2013",
+    "imdb_id": "tt2191701"
+  },
+  {
+    "tmdbId": "425",
+    "type": "movie",
+    "title": "Ice Age",
+    "year": "2002",
+    "imdb_id": "tt0268380"
+  },
+  {
+    "tmdbId": "508442",
+    "type": "movie",
+    "title": "Soul",
+    "year": "2020",
+    "imdb_id": "tt2948372"
+  },
+  {
+    "tmdbId": "1072790",
+    "type": "movie",
+    "title": "Anyone But You",
+    "year": "2023",
+    "imdb_id": "tt26047818"
+  },
+  {
+    "tmdbId": "420809",
+    "type": "movie",
+    "title": "Maleficent: Mistress of Evil",
+    "year": "2019",
+    "imdb_id": "tt4777008"
+  },
+  {
+    "tmdbId": "1407861",
+    "type": "movie",
+    "title": "The Bayou",
+    "year": "2025",
+    "imdb_id": "tt29343289"
+  },
+  {
+    "tmdbId": "181808",
+    "type": "movie",
+    "title": "Star Wars: The Last Jedi",
+    "year": "2017",
+    "imdb_id": "tt2527336"
+  },
+  {
+    "tmdbId": "103",
+    "type": "movie",
+    "title": "Taxi Driver",
+    "year": "1976",
+    "imdb_id": "tt0075314"
+  },
+  {
+    "tmdbId": "1005331",
+    "type": "movie",
+    "title": "Carry-On",
+    "year": "2024",
+    "imdb_id": "tt21382296"
+  },
+  {
+    "tmdbId": "49051",
+    "type": "movie",
+    "title": "The Hobbit: An Unexpected Journey",
+    "year": "2012",
+    "imdb_id": "tt0903624"
+  },
+  {
+    "tmdbId": "926393",
+    "type": "movie",
+    "title": "The Equalizer 3",
+    "year": "2023",
+    "imdb_id": "tt17024450"
+  },
+  {
+    "tmdbId": "153104",
+    "type": "movie",
+    "title": "Wicked Minds",
+    "year": "2003",
+    "imdb_id": "tt0338556"
+  },
+  {
+    "tmdbId": "505642",
+    "type": "movie",
+    "title": "Black Panther: Wakanda Forever",
+    "year": "2022",
+    "imdb_id": "tt9114286"
+  },
+  {
+    "tmdbId": "214756",
+    "type": "movie",
+    "title": "Ted 2",
+    "year": "2015",
+    "imdb_id": "tt2637276"
+  },
+  {
+    "tmdbId": "288986",
+    "type": "movie",
+    "title": "The Erotic Twin",
+    "year": "1980",
+    "imdb_id": "tt0189544"
+  },
+  {
+    "tmdbId": "20352",
+    "type": "movie",
+    "title": "Despicable Me",
+    "year": "2010",
+    "imdb_id": "tt1323594"
+  },
+  {
+    "tmdbId": "1217690",
+    "type": "movie",
+    "title": "Homestead",
+    "year": "2024",
+    "imdb_id": "tt29137778"
+  },
+  {
+    "tmdbId": "546554",
+    "type": "movie",
+    "title": "Knives Out",
+    "year": "2019",
+    "imdb_id": "tt8946378"
+  },
+  {
+    "tmdbId": "140300",
+    "type": "movie",
+    "title": "Kung Fu Panda 3",
+    "year": "2016",
+    "imdb_id": "tt2267968"
+  },
+  {
+    "tmdbId": "1249385",
+    "type": "movie",
+    "title": "Ghost Game",
+    "year": "2024",
+    "imdb_id": "tt29341577"
+  },
+  {
+    "tmdbId": "545611",
+    "type": "movie",
+    "title": "Everything Everywhere All at Once",
+    "year": "2022",
+    "imdb_id": "tt6710474"
+  },
+  {
+    "tmdbId": "1062276",
+    "type": "movie",
+    "title": "Dark Match",
+    "year": "2024",
+    "imdb_id": "tt23648404"
+  },
+  {
+    "tmdbId": "458156",
+    "type": "movie",
+    "title": "John Wick: Chapter 3 - Parabellum",
+    "year": "2019",
+    "imdb_id": "tt6146586"
+  },
+  {
+    "tmdbId": "572802",
+    "type": "movie",
+    "title": "Aquaman and the Lost Kingdom",
+    "year": "2023",
+    "imdb_id": "tt9663764"
+  },
+  {
+    "tmdbId": "929590",
+    "type": "movie",
+    "title": "Civil War",
+    "year": "2024",
+    "imdb_id": "tt17279496"
+  },
+  {
+    "tmdbId": "346364",
+    "type": "movie",
+    "title": "It",
+    "year": "2017",
+    "imdb_id": "tt1396484"
+  },
+  {
+    "tmdbId": "1390681",
+    "type": "movie",
+    "title": "El Cas Àngelus. La fascinació de Dalí",
+    "year": "2024",
+    "imdb_id": "tt21920392"
+  },
+  {
+    "tmdbId": "1477884",
+    "type": "movie",
+    "title": "Thunderbolts* | A Special Look",
+    "year": "2025",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "4348",
+    "type": "movie",
+    "title": "Pride & Prejudice",
+    "year": "2005",
+    "imdb_id": "tt0414387"
+  },
+  {
+    "tmdbId": "10681",
+    "type": "movie",
+    "title": "WALL·E",
+    "year": "2008",
+    "imdb_id": "tt0910970"
+  },
+  {
+    "tmdbId": "1310086",
+    "type": "movie",
+    "title": "Off Track 2",
+    "year": "2025",
+    "imdb_id": "tt32598081"
+  },
+  {
+    "tmdbId": "10867",
+    "type": "movie",
+    "title": "Malena",
+    "year": "2000",
+    "imdb_id": "tt0213847"
+  },
+  {
+    "tmdbId": "1000837",
+    "type": "movie",
+    "title": "I'm Still Here",
+    "year": "2024",
+    "imdb_id": "tt14961016"
+  },
+  {
+    "tmdbId": "604",
+    "type": "movie",
+    "title": "The Matrix Reloaded",
+    "year": "2003",
+    "imdb_id": "tt0234215"
+  },
+  {
+    "tmdbId": "949",
+    "type": "movie",
+    "title": "Heat",
+    "year": "1995",
+    "imdb_id": "tt0113277"
+  },
+  {
+    "tmdbId": "766507",
+    "type": "movie",
+    "title": "Prey",
+    "year": "2022",
+    "imdb_id": "tt11866324"
+  },
+  {
+    "tmdbId": "122906",
+    "type": "movie",
+    "title": "About Time",
+    "year": "2013",
+    "imdb_id": "tt2194499"
+  },
+  {
+    "tmdbId": "1885",
+    "type": "movie",
+    "title": "The Karate Kid",
+    "year": "1984",
+    "imdb_id": "tt0087538"
+  },
+  {
+    "tmdbId": "746036",
+    "type": "movie",
+    "title": "The Fall Guy",
+    "year": "2024",
+    "imdb_id": "tt1684562"
+  },
+  {
+    "tmdbId": "1217876",
+    "type": "movie",
+    "title": "Ellie and the Monster Team",
+    "year": "2024",
+    "imdb_id": "tt27759885"
+  },
+  {
+    "tmdbId": "168259",
+    "type": "movie",
+    "title": "Furious 7",
+    "year": "2015",
+    "imdb_id": "tt2820852"
+  },
+  {
+    "tmdbId": "9806",
+    "type": "movie",
+    "title": "The Incredibles",
+    "year": "2004",
+    "imdb_id": "tt0317705"
+  },
+  {
+    "tmdbId": "829560",
+    "type": "movie",
+    "title": "The Next 365 Days",
+    "year": "2022",
+    "imdb_id": "tt21106646"
+  },
+  {
+    "tmdbId": "257211",
+    "type": "movie",
+    "title": "The Intern",
+    "year": "2015",
+    "imdb_id": "tt2361509"
+  },
+  {
+    "tmdbId": "1111867",
+    "type": "movie",
+    "title": "In Flames",
+    "year": "2023",
+    "imdb_id": "tt27470830"
+  },
+  {
+    "tmdbId": "37799",
+    "type": "movie",
+    "title": "The Social Network",
+    "year": "2010",
+    "imdb_id": "tt1285016"
+  },
+  {
+    "tmdbId": "4951",
+    "type": "movie",
+    "title": "10 Things I Hate About You",
+    "year": "1999",
+    "imdb_id": "tt0147800"
+  },
+  {
+    "tmdbId": "365177",
+    "type": "movie",
+    "title": "Borderlands",
+    "year": "2024",
+    "imdb_id": "tt4978420"
+  },
+  {
+    "tmdbId": "1226578",
+    "type": "movie",
+    "title": "Longlegs",
+    "year": "2024",
+    "imdb_id": "tt23468450"
+  },
+  {
+    "tmdbId": "384018",
+    "type": "movie",
+    "title": "Fast & Furious Presents: Hobbs & Shaw",
+    "year": "2019",
+    "imdb_id": "tt6806448"
+  },
+  {
+    "tmdbId": "604685",
+    "type": "movie",
+    "title": "Den of Thieves 2: Pantera",
+    "year": "2025",
+    "imdb_id": "tt8008948"
+  },
+  {
+    "tmdbId": "14161",
+    "type": "movie",
+    "title": "2012",
+    "year": "2009",
+    "imdb_id": "tt1190080"
+  },
+  {
+    "tmdbId": "137113",
+    "type": "movie",
+    "title": "Edge of Tomorrow",
+    "year": "2014",
+    "imdb_id": "tt1631867"
+  },
+  {
+    "tmdbId": "1140847",
+    "type": "movie",
+    "title": "Cinderella's Revenge",
+    "year": "2024",
+    "imdb_id": "tt28087226"
+  },
+  {
+    "tmdbId": "1100988",
+    "type": "movie",
+    "title": "28 Years Later",
+    "year": "2025",
+    "imdb_id": "tt10548174"
+  },
+  {
+    "tmdbId": "1396122",
+    "type": "movie",
+    "title": "Taandob",
+    "year": "2025",
+    "imdb_id": "tt36293840"
+  },
+  {
+    "tmdbId": "1357459",
+    "type": "movie",
+    "title": "Tatsulok",
+    "year": "2024",
+    "imdb_id": "tt33475745"
+  },
+  {
+    "tmdbId": "47971",
+    "type": "movie",
+    "title": "xXx: Return of Xander Cage",
+    "year": "2017",
+    "imdb_id": "tt1293847"
+  },
+  {
+    "tmdbId": "508943",
+    "type": "movie",
+    "title": "Luca",
+    "year": "2021",
+    "imdb_id": "tt12801262"
+  },
+  {
+    "tmdbId": "1076291",
+    "type": "movie",
+    "title": "Operation Storm",
+    "year": "2023",
+    "imdb_id": "tt15482240"
+  },
+  {
+    "tmdbId": "609681",
+    "type": "movie",
+    "title": "The Marvels",
+    "year": "2023",
+    "imdb_id": "tt10676048"
+  },
+  {
+    "tmdbId": "753342",
+    "type": "movie",
+    "title": "Napoleon",
+    "year": "2023",
+    "imdb_id": "tt13287846"
+  },
+  {
+    "tmdbId": "755679",
+    "type": "movie",
+    "title": "Fast X: Part 2",
+    "year": null,
+    "imdb_id": "tt27550022"
+  },
+  {
+    "tmdbId": "9655",
+    "type": "movie",
+    "title": "She's the Man",
+    "year": "2006",
+    "imdb_id": "tt0454945"
+  },
+  {
+    "tmdbId": "1282980",
+    "type": "movie",
+    "title": "825 Forest Road",
+    "year": "2025",
+    "imdb_id": "tt15173952"
+  },
+  {
+    "tmdbId": "345",
+    "type": "movie",
+    "title": "Eyes Wide Shut",
+    "year": "1999",
+    "imdb_id": "tt0120663"
+  },
+  {
+    "tmdbId": "639720",
+    "type": "movie",
+    "title": "IF",
+    "year": "2024",
+    "imdb_id": "tt11152168"
+  },
+  {
+    "tmdbId": "101",
+    "type": "movie",
+    "title": "Léon: The Professional",
+    "year": "1994",
+    "imdb_id": "tt0110413"
+  },
+  {
+    "tmdbId": "1304594",
+    "type": "movie",
+    "title": "Una Pequeña Confusión",
+    "year": "2024",
+    "imdb_id": "tt33372007"
+  },
+  {
+    "tmdbId": "884605",
+    "type": "movie",
+    "title": "No Hard Feelings",
+    "year": "2023",
+    "imdb_id": "tt15671028"
+  },
+  {
+    "tmdbId": "1055871",
+    "type": "movie",
+    "title": "Death Is a Problem for the Living",
+    "year": "2023",
+    "imdb_id": "tt21874230"
+  },
+  {
+    "tmdbId": "1333099",
+    "type": "movie",
+    "title": "Dalia and the Red Book",
+    "year": "2024",
+    "imdb_id": "tt9881850"
+  },
+  {
+    "tmdbId": "882598",
+    "type": "movie",
+    "title": "Smile",
+    "year": "2022",
+    "imdb_id": "tt15474916"
+  },
+  {
+    "tmdbId": "1147710",
+    "type": "movie",
+    "title": "Hijack 1971",
+    "year": "2024",
+    "imdb_id": "tt31624258"
+  },
+  {
+    "tmdbId": "854",
+    "type": "movie",
+    "title": "The Mask",
+    "year": "1994",
+    "imdb_id": "tt0110475"
+  },
+  {
+    "tmdbId": "493529",
+    "type": "movie",
+    "title": "Dungeons & Dragons: Honor Among Thieves",
+    "year": "2023",
+    "imdb_id": "tt2906216"
+  },
+  {
+    "tmdbId": "1329336",
+    "type": "movie",
+    "title": "The Bad Guys: Haunted Heist",
+    "year": "2024",
+    "imdb_id": "tt33130902"
+  },
+  {
+    "tmdbId": "4232",
+    "type": "movie",
+    "title": "Scream",
+    "year": "1996",
+    "imdb_id": "tt0117571"
+  },
+  {
+    "tmdbId": "947891",
+    "type": "movie",
+    "title": "My Old Ass",
+    "year": "2024",
+    "imdb_id": "tt18559464"
+  },
+  {
+    "tmdbId": "11224",
+    "type": "movie",
+    "title": "Cinderella",
+    "year": "1950",
+    "imdb_id": "tt0042332"
+  },
+  {
+    "tmdbId": "351286",
+    "type": "movie",
+    "title": "Jurassic World: Fallen Kingdom",
+    "year": "2018",
+    "imdb_id": "tt4881806"
+  },
+  {
+    "tmdbId": "420817",
+    "type": "movie",
+    "title": "Aladdin",
+    "year": "2019",
+    "imdb_id": "tt6139732"
+  },
+  {
+    "tmdbId": "1100099",
+    "type": "movie",
+    "title": "We Live in Time",
+    "year": "2024",
+    "imdb_id": "tt27131358"
+  },
+  {
+    "tmdbId": "930094",
+    "type": "movie",
+    "title": "Red, White & Royal Blue",
+    "year": "2023",
+    "imdb_id": "tt10172266"
+  },
+  {
+    "tmdbId": "419430",
+    "type": "movie",
+    "title": "Get Out",
+    "year": "2017",
+    "imdb_id": "tt5052448"
+  },
+  {
+    "tmdbId": "1164355",
+    "type": "movie",
+    "title": "Lembayung",
+    "year": "2024",
+    "imdb_id": "tt29899715"
+  },
+  {
+    "tmdbId": "71552",
+    "type": "movie",
+    "title": "American Reunion",
+    "year": "2012",
+    "imdb_id": "tt1605630"
+  },
+  {
+    "tmdbId": "205596",
+    "type": "movie",
+    "title": "The Imitation Game",
+    "year": "2014",
+    "imdb_id": "tt2084970"
+  },
+  {
+    "tmdbId": "801604",
+    "type": "movie",
+    "title": "Shark: The Beginning",
+    "year": "2021",
+    "imdb_id": "tt14965934"
+  },
+  {
+    "tmdbId": "507089",
+    "type": "movie",
+    "title": "Five Nights at Freddy's",
+    "year": "2023",
+    "imdb_id": "tt4589218"
+  },
+  {
+    "tmdbId": "578",
+    "type": "movie",
+    "title": "Jaws",
+    "year": "1975",
+    "imdb_id": "tt0073195"
+  },
+  {
+    "tmdbId": "1235623",
+    "type": "movie",
+    "title": "Eye for an Eye 2",
+    "year": "2024",
+    "imdb_id": "tt30972810"
+  },
+  {
+    "tmdbId": "787",
+    "type": "movie",
+    "title": "Mr. & Mrs. Smith",
+    "year": "2005",
+    "imdb_id": "tt0356910"
+  },
+  {
+    "tmdbId": "1013601",
+    "type": "movie",
+    "title": "The Alto Knights",
+    "year": "2025",
+    "imdb_id": "tt21815562"
+  },
+  {
+    "tmdbId": "9757",
+    "type": "movie",
+    "title": "Norbit",
+    "year": "2007",
+    "imdb_id": "tt0477051"
+  },
+  {
+    "tmdbId": "545609",
+    "type": "movie",
+    "title": "Extraction",
+    "year": "2020",
+    "imdb_id": "tt8936646"
+  },
+  {
+    "tmdbId": "49444",
+    "type": "movie",
+    "title": "Kung Fu Panda 2",
+    "year": "2011",
+    "imdb_id": "tt1302011"
+  },
+  {
+    "tmdbId": "128",
+    "type": "movie",
+    "title": "Princess Mononoke",
+    "year": "1997",
+    "imdb_id": "tt0119698"
+  },
+  {
+    "tmdbId": "567609",
+    "type": "movie",
+    "title": "Ready or Not",
+    "year": "2019",
+    "imdb_id": "tt7798634"
+  },
+  {
+    "tmdbId": "207703",
+    "type": "movie",
+    "title": "Kingsman: The Secret Service",
+    "year": "2015",
+    "imdb_id": "tt2802144"
+  },
+  {
+    "tmdbId": "629542",
+    "type": "movie",
+    "title": "The Bad Guys",
+    "year": "2022",
+    "imdb_id": "tt8115900"
+  },
+  {
+    "tmdbId": "49530",
+    "type": "movie",
+    "title": "In Time",
+    "year": "2011",
+    "imdb_id": "tt1637688"
+  },
+  {
+    "tmdbId": "615173",
+    "type": "movie",
+    "title": "The Witch: Part 2. The Other One",
+    "year": "2022",
+    "imdb_id": "tt13721828"
+  },
+  {
+    "tmdbId": "1125510",
+    "type": "movie",
+    "title": "The Platform 2",
+    "year": "2024",
+    "imdb_id": "tt27729779"
+  },
+  {
+    "tmdbId": "209112",
+    "type": "movie",
+    "title": "Batman v Superman: Dawn of Justice",
+    "year": "2016",
+    "imdb_id": "tt2975590"
+  },
+  {
+    "tmdbId": "68726",
+    "type": "movie",
+    "title": "Pacific Rim",
+    "year": "2013",
+    "imdb_id": "tt1663662"
+  },
+  {
+    "tmdbId": "617126",
+    "type": "movie",
+    "title": "The Fantastic Four: First Steps",
+    "year": "2025",
+    "imdb_id": "tt10676052"
+  },
+  {
+    "tmdbId": "1607",
+    "type": "movie",
+    "title": "A Bronx Tale",
+    "year": "1993",
+    "imdb_id": "tt0106489"
+  },
+  {
+    "tmdbId": "1103432",
+    "type": "movie",
+    "title": "Bloody Escape: Bats out of Hell",
+    "year": "2024",
+    "imdb_id": "tt29666664"
+  },
+  {
+    "tmdbId": "257094",
+    "type": "movie",
+    "title": "Holland",
+    "year": "2025",
+    "imdb_id": "tt3045628"
+  },
+  {
+    "tmdbId": "8835",
+    "type": "movie",
+    "title": "Legally Blonde",
+    "year": "2001",
+    "imdb_id": "tt0250494"
+  },
+  {
+    "tmdbId": "1294947",
+    "type": "movie",
+    "title": "Déjame Estar Contigo",
+    "year": "2025",
+    "imdb_id": "tt33636020"
+  },
+  {
+    "tmdbId": "519465",
+    "type": "movie",
+    "title": "Queen of Hearts",
+    "year": "2019",
+    "imdb_id": "tt8378126"
+  },
+  {
+    "tmdbId": "1175942",
+    "type": "movie",
+    "title": "The Bad Guys 2",
+    "year": "2025",
+    "imdb_id": "tt30017619"
+  },
+  {
+    "tmdbId": "337339",
+    "type": "movie",
+    "title": "The Fate of the Furious",
+    "year": "2017",
+    "imdb_id": "tt4630562"
+  },
+  {
+    "tmdbId": "275",
+    "type": "movie",
+    "title": "Fargo",
+    "year": "1996",
+    "imdb_id": "tt0116282"
+  },
+  {
+    "tmdbId": "1008042",
+    "type": "movie",
+    "title": "Talk to Me",
+    "year": "2023",
+    "imdb_id": "tt10638522"
+  },
+  {
+    "tmdbId": "263115",
+    "type": "movie",
+    "title": "Logan",
+    "year": "2017",
+    "imdb_id": "tt3315342"
+  },
+  {
+    "tmdbId": "447332",
+    "type": "movie",
+    "title": "A Quiet Place",
+    "year": "2018",
+    "imdb_id": "tt6644200"
+  },
+  {
+    "tmdbId": "529203",
+    "type": "movie",
+    "title": "The Croods: A New Age",
+    "year": "2020",
+    "imdb_id": "tt2850386"
+  },
+  {
+    "tmdbId": "917496",
+    "type": "movie",
+    "title": "Beetlejuice Beetlejuice",
+    "year": "2024",
+    "imdb_id": "tt2049403"
+  },
+  {
+    "tmdbId": "299054",
+    "type": "movie",
+    "title": "Expend4bles",
+    "year": "2023",
+    "imdb_id": "tt3291150"
+  },
+  {
+    "tmdbId": "762441",
+    "type": "movie",
+    "title": "A Quiet Place: Day One",
+    "year": "2024",
+    "imdb_id": "tt13433802"
+  },
+  {
+    "tmdbId": "940721",
+    "type": "movie",
+    "title": "Godzilla Minus One",
+    "year": "2023",
+    "imdb_id": "tt23289160"
+  },
+  {
+    "tmdbId": "851644",
+    "type": "movie",
+    "title": "20th Century Girl",
+    "year": "2022",
+    "imdb_id": "tt15340724"
+  },
+  {
+    "tmdbId": "791373",
+    "type": "movie",
+    "title": "Zack Snyder's Justice League",
+    "year": "2021",
+    "imdb_id": "tt12361974"
+  },
+  {
+    "tmdbId": "75656",
+    "type": "movie",
+    "title": "Now You See Me",
+    "year": "2013",
+    "imdb_id": "tt1670345"
+  },
+  {
+    "tmdbId": "1114513",
+    "type": "movie",
+    "title": "Speak No Evil",
+    "year": "2024",
+    "imdb_id": "tt27534307"
+  },
+  {
+    "tmdbId": "635302",
+    "type": "movie",
+    "title": "Demon Slayer -Kimetsu no Yaiba- The Movie: Mugen Train",
+    "year": "2020",
+    "imdb_id": "tt11032374"
+  },
+  {
+    "tmdbId": "474350",
+    "type": "movie",
+    "title": "It Chapter Two",
+    "year": "2019",
+    "imdb_id": "tt7349950"
+  },
+  {
+    "tmdbId": "980489",
+    "type": "movie",
+    "title": "Gran Turismo",
+    "year": "2023",
+    "imdb_id": "tt4495098"
+  },
+  {
+    "tmdbId": "1147400",
+    "type": "movie",
+    "title": "Miraculous World: Paris, Tales of Shadybug and Claw Noir",
+    "year": "2023",
+    "imdb_id": "tt29259099"
+  },
+  {
+    "tmdbId": "24021",
+    "type": "movie",
+    "title": "The Twilight Saga: Eclipse",
+    "year": "2010",
+    "imdb_id": "tt1325004"
+  },
+  {
+    "tmdbId": "1064028",
+    "type": "movie",
+    "title": "Subservience",
+    "year": "2024",
+    "imdb_id": "tt24871974"
+  },
+  {
+    "tmdbId": "1893",
+    "type": "movie",
+    "title": "Star Wars: Episode I - The Phantom Menace",
+    "year": "1999",
+    "imdb_id": "tt0120915"
+  },
+  {
+    "tmdbId": "877817",
+    "type": "movie",
+    "title": "Wolfs",
+    "year": "2024",
+    "imdb_id": "tt14257582"
+  },
+  {
+    "tmdbId": "330457",
+    "type": "movie",
+    "title": "Frozen II",
+    "year": "2019",
+    "imdb_id": "tt4520988"
+  },
+  {
+    "tmdbId": "4247",
+    "type": "movie",
+    "title": "Scary Movie",
+    "year": "2000",
+    "imdb_id": "tt0175142"
+  },
+  {
+    "tmdbId": "580489",
+    "type": "movie",
+    "title": "Venom: Let There Be Carnage",
+    "year": "2021",
+    "imdb_id": "tt7097896"
+  },
+  {
+    "tmdbId": "615777",
+    "type": "movie",
+    "title": "Babylon",
+    "year": "2022",
+    "imdb_id": "tt10640346"
+  },
+  {
+    "tmdbId": "615656",
+    "type": "movie",
+    "title": "Meg 2: The Trench",
+    "year": "2023",
+    "imdb_id": "tt9224104"
+  },
+  {
+    "tmdbId": "45243",
+    "type": "movie",
+    "title": "The Hangover Part II",
+    "year": "2011",
+    "imdb_id": "tt1411697"
+  },
+  {
+    "tmdbId": "72105",
+    "type": "movie",
+    "title": "Ted",
+    "year": "2012",
+    "imdb_id": "tt1637725"
+  },
+  {
+    "tmdbId": "944401",
+    "type": "movie",
+    "title": "Dogman",
+    "year": "2023",
+    "imdb_id": "tt17009348"
+  },
+  {
+    "tmdbId": "80321",
+    "type": "movie",
+    "title": "Madagascar 3: Europe's Most Wanted",
+    "year": "2012",
+    "imdb_id": "tt1277953"
+  },
+  {
+    "tmdbId": "68721",
+    "type": "movie",
+    "title": "Iron Man 3",
+    "year": "2013",
+    "imdb_id": "tt1300854"
+  },
+  {
+    "tmdbId": "284053",
+    "type": "movie",
+    "title": "Thor: Ragnarok",
+    "year": "2017",
+    "imdb_id": "tt3501632"
+  },
+  {
+    "tmdbId": "12155",
+    "type": "movie",
+    "title": "Alice in Wonderland",
+    "year": "2010",
+    "imdb_id": "tt1014759"
+  },
+  {
+    "tmdbId": "10195",
+    "type": "movie",
+    "title": "Thor",
+    "year": "2011",
+    "imdb_id": "tt0800369"
+  },
+  {
+    "tmdbId": "10192",
+    "type": "movie",
+    "title": "Shrek Forever After",
+    "year": "2010",
+    "imdb_id": "tt0892791"
+  },
+  {
+    "tmdbId": "420634",
+    "type": "movie",
+    "title": "Terrifier",
+    "year": "2018",
+    "imdb_id": "tt4281724"
+  },
+  {
+    "tmdbId": "1173558",
+    "type": "movie",
+    "title": "Burning Betrayal",
+    "year": "2023",
+    "imdb_id": "tt26787296"
+  },
+  {
+    "tmdbId": "10830",
+    "type": "movie",
+    "title": "Matilda",
+    "year": "1996",
+    "imdb_id": "tt0117008"
+  },
+  {
+    "tmdbId": "13475",
+    "type": "movie",
+    "title": "Star Trek",
+    "year": "2009",
+    "imdb_id": "tt0796366"
+  },
+  {
+    "tmdbId": "372049",
+    "type": "movie",
+    "title": "My Friend's Wife",
+    "year": "2015",
+    "imdb_id": "tt15311128"
+  },
+  {
+    "tmdbId": "1029880",
+    "type": "movie",
+    "title": "Nightwatch: Demons Are Forever",
+    "year": "2023",
+    "imdb_id": "tt6318608"
+  },
+  {
+    "tmdbId": "345940",
+    "type": "movie",
+    "title": "The Meg",
+    "year": "2018",
+    "imdb_id": "tt4779682"
+  },
+  {
+    "tmdbId": "616037",
+    "type": "movie",
+    "title": "Thor: Love and Thunder",
+    "year": "2022",
+    "imdb_id": "tt10648342"
+  },
+  {
+    "tmdbId": "300668",
+    "type": "movie",
+    "title": "Annihilation",
+    "year": "2018",
+    "imdb_id": "tt2798920"
+  },
+  {
+    "tmdbId": "62177",
+    "type": "movie",
+    "title": "Brave",
+    "year": "2012",
+    "imdb_id": "tt1217209"
+  },
+  {
+    "tmdbId": "96721",
+    "type": "movie",
+    "title": "Rush",
+    "year": "2013",
+    "imdb_id": "tt1979320"
+  },
+  {
+    "tmdbId": "9820",
+    "type": "movie",
+    "title": "The Parent Trap",
+    "year": "1998",
+    "imdb_id": "tt0120783"
+  },
+  {
+    "tmdbId": "1352774",
+    "type": "movie",
+    "title": "Piglet",
+    "year": "2025",
+    "imdb_id": "tt33050292"
+  },
+  {
+    "tmdbId": "661539",
+    "type": "movie",
+    "title": "A Complete Unknown",
+    "year": "2024",
+    "imdb_id": "tt11563598"
+  },
+  {
+    "tmdbId": "77",
+    "type": "movie",
+    "title": "Memento",
+    "year": "2000",
+    "imdb_id": "tt0209144"
+  },
+  {
+    "tmdbId": "220289",
+    "type": "movie",
+    "title": "Coherence",
+    "year": "2013",
+    "imdb_id": "tt2866360"
+  },
+  {
+    "tmdbId": "388",
+    "type": "movie",
+    "title": "Inside Man",
+    "year": "2006",
+    "imdb_id": "tt0454848"
+  },
+  {
+    "tmdbId": "396422",
+    "type": "movie",
+    "title": "Annabelle: Creation",
+    "year": "2017",
+    "imdb_id": "tt5140878"
+  },
+  {
+    "tmdbId": "484247",
+    "type": "movie",
+    "title": "A Simple Favor",
+    "year": "2018",
+    "imdb_id": "tt7040874"
+  },
+  {
+    "tmdbId": "18239",
+    "type": "movie",
+    "title": "The Twilight Saga: New Moon",
+    "year": "2009",
+    "imdb_id": "tt1259571"
+  },
+  {
+    "tmdbId": "353486",
+    "type": "movie",
+    "title": "Jumanji: Welcome to the Jungle",
+    "year": "2017",
+    "imdb_id": "tt2283362"
+  },
+  {
+    "tmdbId": "929204",
+    "type": "movie",
+    "title": "Wallace & Gromit: Vengeance Most Fowl",
+    "year": "2024",
+    "imdb_id": "tt17163970"
+  },
+  {
+    "tmdbId": "408",
+    "type": "movie",
+    "title": "Snow White and the Seven Dwarfs",
+    "year": "1938",
+    "imdb_id": "tt0029583"
+  },
+  {
+    "tmdbId": "810",
+    "type": "movie",
+    "title": "Shrek the Third",
+    "year": "2007",
+    "imdb_id": "tt0413267"
+  },
+  {
+    "tmdbId": "348893",
+    "type": "movie",
+    "title": "Boyka: Undisputed IV",
+    "year": "2016",
+    "imdb_id": "tt3344680"
+  },
+  {
+    "tmdbId": "1445276",
+    "type": "movie",
+    "title": "A Love Too Captivating",
+    "year": "2025",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "3933",
+    "type": "movie",
+    "title": "Corpse Bride",
+    "year": "2005",
+    "imdb_id": "tt0121164"
+  },
+  {
+    "tmdbId": "286217",
+    "type": "movie",
+    "title": "The Martian",
+    "year": "2015",
+    "imdb_id": "tt3659388"
+  },
+  {
+    "tmdbId": "381284",
+    "type": "movie",
+    "title": "Hidden Figures",
+    "year": "2016",
+    "imdb_id": "tt4846340"
+  },
+  {
+    "tmdbId": "335787",
+    "type": "movie",
+    "title": "Uncharted",
+    "year": "2022",
+    "imdb_id": "tt1464335"
+  },
+  {
+    "tmdbId": "718821",
+    "type": "movie",
+    "title": "Twisters",
+    "year": "2024",
+    "imdb_id": "tt12584954"
+  },
+  {
+    "tmdbId": "257344",
+    "type": "movie",
+    "title": "Pixels",
+    "year": "2015",
+    "imdb_id": "tt2120120"
+  },
+  {
+    "tmdbId": "73861",
+    "type": "movie",
+    "title": "A Serbian Film",
+    "year": "2010",
+    "imdb_id": "tt1273235"
+  },
+  {
+    "tmdbId": "300671",
+    "type": "movie",
+    "title": "13 Hours: The Secret Soldiers of Benghazi",
+    "year": "2016",
+    "imdb_id": "tt4172430"
+  },
+  {
+    "tmdbId": "8392",
+    "type": "movie",
+    "title": "My Neighbor Totoro",
+    "year": "1988",
+    "imdb_id": "tt0096283"
+  },
+  {
+    "tmdbId": "141052",
+    "type": "movie",
+    "title": "Justice League",
+    "year": "2017",
+    "imdb_id": "tt0974015"
+  },
+  {
+    "tmdbId": "36670",
+    "type": "movie",
+    "title": "Never Say Never Again",
+    "year": "1983",
+    "imdb_id": "tt0086006"
+  },
+  {
+    "tmdbId": "615",
+    "type": "movie",
+    "title": "The Passion of the Christ",
+    "year": "2004",
+    "imdb_id": "tt0335345"
+  },
+  {
+    "tmdbId": "607",
+    "type": "movie",
+    "title": "Men in Black",
+    "year": "1997",
+    "imdb_id": "tt0119654"
+  },
+  {
+    "tmdbId": "587727",
+    "type": "movie",
+    "title": "Busty Girlfriend",
+    "year": "2019",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "942576",
+    "type": "movie",
+    "title": "Buried in Barstow",
+    "year": "2022",
+    "imdb_id": "tt16294738"
+  },
+  {
+    "tmdbId": "923667",
+    "type": "movie",
+    "title": "Twilight of the Warriors: Walled In",
+    "year": "2024",
+    "imdb_id": "tt20316748"
+  },
+  {
+    "tmdbId": "281957",
+    "type": "movie",
+    "title": "The Revenant",
+    "year": "2015",
+    "imdb_id": "tt1663202"
+  },
+  {
+    "tmdbId": "38",
+    "type": "movie",
+    "title": "Eternal Sunshine of the Spotless Mind",
+    "year": "2004",
+    "imdb_id": "tt0338013"
+  },
+  {
+    "tmdbId": "1395724",
+    "type": "movie",
+    "title": "Chijin no Ai",
+    "year": "2024",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "438695",
+    "type": "movie",
+    "title": "Sing 2",
+    "year": "2021",
+    "imdb_id": "tt6467266"
+  },
+  {
+    "tmdbId": "850165",
+    "type": "movie",
+    "title": "The Iron Claw",
+    "year": "2023",
+    "imdb_id": "tt21064584"
+  },
+  {
+    "tmdbId": "49521",
+    "type": "movie",
+    "title": "Man of Steel",
+    "year": "2013",
+    "imdb_id": "tt0770828"
+  },
+  {
+    "tmdbId": "1579",
+    "type": "movie",
+    "title": "Apocalypto",
+    "year": "2006",
+    "imdb_id": "tt0472043"
+  },
+  {
+    "tmdbId": "91314",
+    "type": "movie",
+    "title": "Transformers: Age of Extinction",
+    "year": "2014",
+    "imdb_id": "tt2109248"
+  },
+  {
+    "tmdbId": "765897",
+    "type": "movie",
+    "title": "The Unbreakable Boy",
+    "year": "2025",
+    "imdb_id": "tt5181260"
+  },
+  {
+    "tmdbId": "85",
+    "type": "movie",
+    "title": "Raiders of the Lost Ark",
+    "year": "1981",
+    "imdb_id": "tt0082971"
+  },
+  {
+    "tmdbId": "190859",
+    "type": "movie",
+    "title": "American Sniper",
+    "year": "2014",
+    "imdb_id": "tt2179136"
+  },
+  {
+    "tmdbId": "934433",
+    "type": "movie",
+    "title": "Scream VI",
+    "year": "2023",
+    "imdb_id": "tt17663992"
+  },
+  {
+    "tmdbId": "10144",
+    "type": "movie",
+    "title": "The Little Mermaid",
+    "year": "1989",
+    "imdb_id": "tt0097757"
+  },
+  {
+    "tmdbId": "2493",
+    "type": "movie",
+    "title": "The Princess Bride",
+    "year": "1987",
+    "imdb_id": "tt0093779"
+  },
+  {
+    "tmdbId": "141",
+    "type": "movie",
+    "title": "Donnie Darko",
+    "year": "2001",
+    "imdb_id": "tt0246578"
+  },
+  {
+    "tmdbId": "38700",
+    "type": "movie",
+    "title": "Bad Boys for Life",
+    "year": "2020",
+    "imdb_id": "tt1502397"
+  },
+  {
+    "tmdbId": "297762",
+    "type": "movie",
+    "title": "Wonder Woman",
+    "year": "2017",
+    "imdb_id": "tt0451279"
+  },
+  {
+    "tmdbId": "521029",
+    "type": "movie",
+    "title": "Annabelle Comes Home",
+    "year": "2019",
+    "imdb_id": "tt8350360"
+  },
+  {
+    "tmdbId": "436270",
+    "type": "movie",
+    "title": "Black Adam",
+    "year": "2022",
+    "imdb_id": "tt6443346"
+  },
+  {
+    "tmdbId": "335",
+    "type": "movie",
+    "title": "Once Upon a Time in the West",
+    "year": "1968",
+    "imdb_id": "tt0064116"
+  },
+  {
+    "tmdbId": "87101",
+    "type": "movie",
+    "title": "Terminator Genisys",
+    "year": "2015",
+    "imdb_id": "tt1340138"
+  },
+  {
+    "tmdbId": "11688",
+    "type": "movie",
+    "title": "The Emperor's New Groove",
+    "year": "2000",
+    "imdb_id": "tt0120917"
+  },
+  {
+    "tmdbId": "974262",
+    "type": "movie",
+    "title": "Descendants: The Rise of Red",
+    "year": "2024",
+    "imdb_id": "tt20202136"
+  },
+  {
+    "tmdbId": "1562",
+    "type": "movie",
+    "title": "28 Weeks Later",
+    "year": "2007",
+    "imdb_id": "tt0463854"
+  },
+  {
+    "tmdbId": "585511",
+    "type": "movie",
+    "title": "Luck",
+    "year": "2022",
+    "imdb_id": "tt7214954"
+  },
+  {
+    "tmdbId": "259316",
+    "type": "movie",
+    "title": "Fantastic Beasts and Where to Find Them",
+    "year": "2016",
+    "imdb_id": "tt3183660"
+  },
+  {
+    "tmdbId": "496450",
+    "type": "movie",
+    "title": "Miraculous: Ladybug & Cat Noir, The Movie",
+    "year": "2023",
+    "imdb_id": "tt10364034"
+  },
+  {
+    "tmdbId": "423",
+    "type": "movie",
+    "title": "The Pianist",
+    "year": "2002",
+    "imdb_id": "tt0253474"
+  },
+  {
+    "tmdbId": "10020",
+    "type": "movie",
+    "title": "Beauty and the Beast",
+    "year": "1991",
+    "imdb_id": "tt0101414"
+  },
+  {
+    "tmdbId": "710295",
+    "type": "movie",
+    "title": "Wolf Man",
+    "year": "2025",
+    "imdb_id": "tt4216984"
+  },
+  {
+    "tmdbId": "308266",
+    "type": "movie",
+    "title": "War Dogs",
+    "year": "2016",
+    "imdb_id": "tt2005151"
+  },
+  {
+    "tmdbId": "9737",
+    "type": "movie",
+    "title": "Bad Boys",
+    "year": "1995",
+    "imdb_id": "tt0112442"
+  },
+  {
+    "tmdbId": "621",
+    "type": "movie",
+    "title": "Grease",
+    "year": "1978",
+    "imdb_id": "tt0077631"
+  },
+  {
+    "tmdbId": "13183",
+    "type": "movie",
+    "title": "Watchmen",
+    "year": "2009",
+    "imdb_id": "tt0409459"
+  },
+  {
+    "tmdbId": "1302004",
+    "type": "movie",
+    "title": "Kaskasero",
+    "year": "2024",
+    "imdb_id": "tt32792988"
+  },
+  {
+    "tmdbId": "561",
+    "type": "movie",
+    "title": "Constantine",
+    "year": "2005",
+    "imdb_id": "tt0360486"
+  },
+  {
+    "tmdbId": "6479",
+    "type": "movie",
+    "title": "I Am Legend",
+    "year": "2007",
+    "imdb_id": "tt0480249"
+  },
+  {
+    "tmdbId": "7485",
+    "type": "movie",
+    "title": "Shooter",
+    "year": "2007",
+    "imdb_id": "tt0822854"
+  },
+  {
+    "tmdbId": "176",
+    "type": "movie",
+    "title": "Saw",
+    "year": "2004",
+    "imdb_id": "tt0387564"
+  },
+  {
+    "tmdbId": "490132",
+    "type": "movie",
+    "title": "Green Book",
+    "year": "2018",
+    "imdb_id": "tt6966692"
+  },
+  {
+    "tmdbId": "1359",
+    "type": "movie",
+    "title": "American Psycho",
+    "year": "2000",
+    "imdb_id": "tt0144084"
+  },
+  {
+    "tmdbId": "50546",
+    "type": "movie",
+    "title": "Just Go with It",
+    "year": "2011",
+    "imdb_id": "tt1564367"
+  },
+  {
+    "tmdbId": "19173",
+    "type": "movie",
+    "title": "Diary of a Nymphomaniac",
+    "year": "2008",
+    "imdb_id": "tt1111890"
+  },
+  {
+    "tmdbId": "101299",
+    "type": "movie",
+    "title": "The Hunger Games: Catching Fire",
+    "year": "2013",
+    "imdb_id": "tt1951264"
+  },
+  {
+    "tmdbId": "284052",
+    "type": "movie",
+    "title": "Doctor Strange",
+    "year": "2016",
+    "imdb_id": "tt1211837"
+  },
+  {
+    "tmdbId": "516486",
+    "type": "movie",
+    "title": "Greyhound",
+    "year": "2020",
+    "imdb_id": "tt6048922"
+  },
+  {
+    "tmdbId": "9902",
+    "type": "movie",
+    "title": "Wrong Turn",
+    "year": "2003",
+    "imdb_id": "tt0295700"
+  },
+  {
+    "tmdbId": "603661",
+    "type": "movie",
+    "title": "The Hating Game",
+    "year": "2021",
+    "imdb_id": "tt8718158"
+  },
+  {
+    "tmdbId": "64682",
+    "type": "movie",
+    "title": "The Great Gatsby",
+    "year": "2013",
+    "imdb_id": "tt1343092"
+  },
+  {
+    "tmdbId": "522927",
+    "type": "movie",
+    "title": "The Forgiven",
+    "year": "2022",
+    "imdb_id": "tt3696180"
+  },
+  {
+    "tmdbId": "1291559",
+    "type": "movie",
+    "title": "Drawing Closer",
+    "year": "2024",
+    "imdb_id": "tt31078761"
+  },
+  {
+    "tmdbId": "508947",
+    "type": "movie",
+    "title": "Turning Red",
+    "year": "2022",
+    "imdb_id": "tt8097030"
+  },
+  {
+    "tmdbId": "46195",
+    "type": "movie",
+    "title": "Rio",
+    "year": "2011",
+    "imdb_id": "tt1436562"
+  },
+  {
+    "tmdbId": "341174",
+    "type": "movie",
+    "title": "Fifty Shades Darker",
+    "year": "2017",
+    "imdb_id": "tt4465564"
+  },
+  {
+    "tmdbId": "75780",
+    "type": "movie",
+    "title": "Jack Reacher",
+    "year": "2012",
+    "imdb_id": "tt0790724"
+  },
+  {
+    "tmdbId": "920",
+    "type": "movie",
+    "title": "Cars",
+    "year": "2006",
+    "imdb_id": "tt0317219"
+  },
+  {
+    "tmdbId": "812",
+    "type": "movie",
+    "title": "Aladdin",
+    "year": "1992",
+    "imdb_id": "tt0103639"
+  },
+  {
+    "tmdbId": "86331",
+    "type": "movie",
+    "title": "Desire",
+    "year": "2011",
+    "imdb_id": "tt1879030"
+  },
+  {
+    "tmdbId": "1724",
+    "type": "movie",
+    "title": "The Incredible Hulk",
+    "year": "2008",
+    "imdb_id": "tt0800080"
+  },
+  {
+    "tmdbId": "283995",
+    "type": "movie",
+    "title": "Guardians of the Galaxy Vol. 2",
+    "year": "2017",
+    "imdb_id": "tt3896198"
+  },
+  {
+    "tmdbId": "50270",
+    "type": "movie",
+    "title": "Paprika",
+    "year": "1991",
+    "imdb_id": "tt0098063"
+  },
+  {
+    "tmdbId": "4922",
+    "type": "movie",
+    "title": "The Curious Case of Benjamin Button",
+    "year": "2008",
+    "imdb_id": "tt0421715"
+  },
+  {
+    "tmdbId": "70160",
+    "type": "movie",
+    "title": "The Hunger Games",
+    "year": "2012",
+    "imdb_id": "tt1392170"
+  },
+  {
+    "tmdbId": "93456",
+    "type": "movie",
+    "title": "Despicable Me 2",
+    "year": "2013",
+    "imdb_id": "tt1690953"
+  },
+  {
+    "tmdbId": "1159311",
+    "type": "movie",
+    "title": "My Hero Academia: You're Next",
+    "year": "2024",
+    "imdb_id": "tt32176689"
+  },
+  {
+    "tmdbId": "338953",
+    "type": "movie",
+    "title": "Fantastic Beasts: The Secrets of Dumbledore",
+    "year": "2022",
+    "imdb_id": "tt4123432"
+  },
+  {
+    "tmdbId": "312221",
+    "type": "movie",
+    "title": "Creed",
+    "year": "2015",
+    "imdb_id": "tt3076658"
+  },
+  {
+    "tmdbId": "605",
+    "type": "movie",
+    "title": "The Matrix Revolutions",
+    "year": "2003",
+    "imdb_id": "tt0242653"
+  },
+  {
+    "tmdbId": "297802",
+    "type": "movie",
+    "title": "Aquaman",
+    "year": "2018",
+    "imdb_id": "tt1477834"
+  },
+  {
+    "tmdbId": "49013",
+    "type": "movie",
+    "title": "Cars 2",
+    "year": "2011",
+    "imdb_id": "tt1216475"
+  },
+  {
+    "tmdbId": "97630",
+    "type": "movie",
+    "title": "Zero Dark Thirty",
+    "year": "2012",
+    "imdb_id": "tt1790885"
+  },
+  {
+    "tmdbId": "517093",
+    "type": "movie",
+    "title": "Balkan Line",
+    "year": "2019",
+    "imdb_id": "tt5951188"
+  },
+  {
+    "tmdbId": "791042",
+    "type": "movie",
+    "title": "Levels",
+    "year": "2024",
+    "imdb_id": "tt10831486"
+  },
+  {
+    "tmdbId": "1127166",
+    "type": "movie",
+    "title": "The Tearsmith",
+    "year": "2024",
+    "imdb_id": "tt29114029"
+  },
+  {
+    "tmdbId": "335797",
+    "type": "movie",
+    "title": "Sing",
+    "year": "2016",
+    "imdb_id": "tt3470600"
+  },
+  {
+    "tmdbId": "1055110",
+    "type": "movie",
+    "title": "Female Teacher Closing the Door",
+    "year": "2021",
+    "imdb_id": "tt28097868"
+  },
+  {
+    "tmdbId": "318846",
+    "type": "movie",
+    "title": "The Big Short",
+    "year": "2015",
+    "imdb_id": "tt1596363"
+  },
+  {
+    "tmdbId": "505706",
+    "type": "movie",
+    "title": "The Golden Glove",
+    "year": "2019",
+    "imdb_id": "tt7670212"
+  },
+  {
+    "tmdbId": "1271",
+    "type": "movie",
+    "title": "300",
+    "year": "2007",
+    "imdb_id": "tt0416449"
+  },
+  {
+    "tmdbId": "508883",
+    "type": "movie",
+    "title": "The Boy and the Heron",
+    "year": "2023",
+    "imdb_id": "tt6587046"
+  },
+  {
+    "tmdbId": "301528",
+    "type": "movie",
+    "title": "Toy Story 4",
+    "year": "2019",
+    "imdb_id": "tt1979376"
+  },
+  {
+    "tmdbId": "1122099",
+    "type": "movie",
+    "title": "The Ballad of Wallis Island",
+    "year": "2025",
+    "imdb_id": "tt27674982"
+  },
+  {
+    "tmdbId": "773543",
+    "type": "movie",
+    "title": "Fib the Truth",
+    "year": "2021",
+    "imdb_id": "tt14453030"
+  },
+  {
+    "tmdbId": "24",
+    "type": "movie",
+    "title": "Kill Bill: Vol. 1",
+    "year": "2003",
+    "imdb_id": "tt0266697"
+  },
+  {
+    "tmdbId": "260346",
+    "type": "movie",
+    "title": "Taken 3",
+    "year": "2014",
+    "imdb_id": "tt2446042"
+  },
+  {
+    "tmdbId": "593643",
+    "type": "movie",
+    "title": "The Menu",
+    "year": "2022",
+    "imdb_id": "tt9764362"
+  },
+  {
+    "tmdbId": "98566",
+    "type": "movie",
+    "title": "Teenage Mutant Ninja Turtles",
+    "year": "2014",
+    "imdb_id": "tt1291150"
+  },
+  {
+    "tmdbId": "679",
+    "type": "movie",
+    "title": "Aliens",
+    "year": "1986",
+    "imdb_id": "tt0090605"
+  },
+  {
+    "tmdbId": "840326",
+    "type": "movie",
+    "title": "Sisu",
+    "year": "2022",
+    "imdb_id": "tt14846026"
+  },
+  {
+    "tmdbId": "242582",
+    "type": "movie",
+    "title": "Nightcrawler",
+    "year": "2014",
+    "imdb_id": "tt2872718"
+  },
+  {
+    "tmdbId": "627",
+    "type": "movie",
+    "title": "Trainspotting",
+    "year": "1996",
+    "imdb_id": "tt0117951"
+  },
+  {
+    "tmdbId": "550988",
+    "type": "movie",
+    "title": "Free Guy",
+    "year": "2021",
+    "imdb_id": "tt6264654"
+  },
+  {
+    "tmdbId": "1813",
+    "type": "movie",
+    "title": "The Devil's Advocate",
+    "year": "1997",
+    "imdb_id": "tt0118971"
+  },
+  {
+    "tmdbId": "1182387",
+    "type": "movie",
+    "title": "Armor",
+    "year": "2024",
+    "imdb_id": "tt29252358"
+  },
+  {
+    "tmdbId": "76492",
+    "type": "movie",
+    "title": "Hotel Transylvania",
+    "year": "2012",
+    "imdb_id": "tt0837562"
+  },
+  {
+    "tmdbId": "1086548",
+    "type": "movie",
+    "title": "Vera and the Pleasure of Others",
+    "year": "2024",
+    "imdb_id": "tt26733463"
+  },
+  {
+    "tmdbId": "524",
+    "type": "movie",
+    "title": "Casino",
+    "year": "1995",
+    "imdb_id": "tt0112641"
+  },
+  {
+    "tmdbId": "1029281",
+    "type": "movie",
+    "title": "Strange Darling",
+    "year": "2024",
+    "imdb_id": "tt22375054"
+  },
+  {
+    "tmdbId": "855",
+    "type": "movie",
+    "title": "Black Hawk Down",
+    "year": "2001",
+    "imdb_id": "tt0265086"
+  },
+  {
+    "tmdbId": "14574",
+    "type": "movie",
+    "title": "The Boy in the Striped Pyjamas",
+    "year": "2008",
+    "imdb_id": "tt0914798"
+  },
+  {
+    "tmdbId": "763215",
+    "type": "movie",
+    "title": "Damsel",
+    "year": "2024",
+    "imdb_id": "tt13452446"
+  },
+  {
+    "tmdbId": "453",
+    "type": "movie",
+    "title": "A Beautiful Mind",
+    "year": "2001",
+    "imdb_id": "tt0268978"
+  },
+  {
+    "tmdbId": "339403",
+    "type": "movie",
+    "title": "Baby Driver",
+    "year": "2017",
+    "imdb_id": "tt3890160"
+  },
+  {
+    "tmdbId": "383498",
+    "type": "movie",
+    "title": "Deadpool 2",
+    "year": "2018",
+    "imdb_id": "tt5463162"
+  },
+  {
+    "tmdbId": "889737",
+    "type": "movie",
+    "title": "Joker: Folie à Deux",
+    "year": "2024",
+    "imdb_id": "tt11315808"
+  },
+  {
+    "tmdbId": "270946",
+    "type": "movie",
+    "title": "Penguins of Madagascar",
+    "year": "2014",
+    "imdb_id": "tt1911658"
+  },
+  {
+    "tmdbId": "263472",
+    "type": "movie",
+    "title": "Knock Knock",
+    "year": "2015",
+    "imdb_id": "tt3605418"
+  },
+  {
+    "tmdbId": "1255020",
+    "type": "movie",
+    "title": "Cruel War",
+    "year": "2024",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "197",
+    "type": "movie",
+    "title": "Braveheart",
+    "year": "1995",
+    "imdb_id": "tt0112573"
+  },
+  {
+    "tmdbId": "476669",
+    "type": "movie",
+    "title": "The King's Man",
+    "year": "2021",
+    "imdb_id": "tt6856242"
+  },
+  {
+    "tmdbId": "198184",
+    "type": "movie",
+    "title": "Chappie",
+    "year": "2015",
+    "imdb_id": "tt1823672"
+  },
+  {
+    "tmdbId": "548066",
+    "type": "movie",
+    "title": "Level 16",
+    "year": "2018",
+    "imdb_id": "tt4006302"
+  },
+  {
+    "tmdbId": "10193",
+    "type": "movie",
+    "title": "Toy Story 3",
+    "year": "2010",
+    "imdb_id": "tt0435761"
+  },
+  {
+    "tmdbId": "726139",
+    "type": "movie",
+    "title": "Project Silence",
+    "year": "2024",
+    "imdb_id": "tt25808194"
+  },
+  {
+    "tmdbId": "972533",
+    "type": "movie",
+    "title": "Last Breath",
+    "year": "2025",
+    "imdb_id": "tt14403504"
+  },
+  {
+    "tmdbId": "9769",
+    "type": "movie",
+    "title": "Lolita",
+    "year": "1997",
+    "imdb_id": "tt0119558"
+  },
+  {
+    "tmdbId": "1949",
+    "type": "movie",
+    "title": "Zodiac",
+    "year": "2007",
+    "imdb_id": "tt0443706"
+  },
+  {
+    "tmdbId": "451915",
+    "type": "movie",
+    "title": "Beautiful Boy",
+    "year": "2018",
+    "imdb_id": "tt1226837"
+  },
+  {
+    "tmdbId": "619979",
+    "type": "movie",
+    "title": "Deep Water",
+    "year": "2022",
+    "imdb_id": "tt2180339"
+  },
+  {
+    "tmdbId": "44833",
+    "type": "movie",
+    "title": "Battleship",
+    "year": "2012",
+    "imdb_id": "tt1440129"
+  },
+  {
+    "tmdbId": "1001274",
+    "type": "movie",
+    "title": "Night Call",
+    "year": "2024",
+    "imdb_id": "tt16826430"
+  },
+  {
+    "tmdbId": "1201012",
+    "type": "movie",
+    "title": "Dhoom Dhaam",
+    "year": "2025",
+    "imdb_id": "tt21194868"
+  },
+  {
+    "tmdbId": "131634",
+    "type": "movie",
+    "title": "The Hunger Games: Mockingjay - Part 2",
+    "year": "2015",
+    "imdb_id": "tt1951266"
+  },
+  {
+    "tmdbId": "1265",
+    "type": "movie",
+    "title": "Bridge to Terabithia",
+    "year": "2007",
+    "imdb_id": "tt0398808"
+  },
+  {
+    "tmdbId": "10545",
+    "type": "movie",
+    "title": "The Hunchback of Notre Dame",
+    "year": "1996",
+    "imdb_id": "tt0116583"
+  },
+  {
+    "tmdbId": "585083",
+    "type": "movie",
+    "title": "Hotel Transylvania: Transformania",
+    "year": "2022",
+    "imdb_id": "tt9848626"
+  },
+  {
+    "tmdbId": "514593",
+    "type": "movie",
+    "title": "You Should Have Left",
+    "year": "2020",
+    "imdb_id": "tt8201852"
+  },
+  {
+    "tmdbId": "634492",
+    "type": "movie",
+    "title": "Madame Web",
+    "year": "2024",
+    "imdb_id": "tt11057302"
+  },
+  {
+    "tmdbId": "1371727",
+    "type": "movie",
+    "title": "Sing: Thriller",
+    "year": "2024",
+    "imdb_id": "tt33999453"
+  },
+  {
+    "tmdbId": "713704",
+    "type": "movie",
+    "title": "Evil Dead Rise",
+    "year": "2023",
+    "imdb_id": "tt13345606"
+  },
+  {
+    "tmdbId": "524434",
+    "type": "movie",
+    "title": "Eternals",
+    "year": "2021",
+    "imdb_id": "tt9032400"
+  },
+  {
+    "tmdbId": "1303055",
+    "type": "movie",
+    "title": "A Breed Apart",
+    "year": "2025",
+    "imdb_id": "tt32323148"
+  },
+  {
+    "tmdbId": "601",
+    "type": "movie",
+    "title": "E.T. the Extra-Terrestrial",
+    "year": "1982",
+    "imdb_id": "tt0083866"
+  },
+  {
+    "tmdbId": "44214",
+    "type": "movie",
+    "title": "Black Swan",
+    "year": "2010",
+    "imdb_id": "tt0947798"
+  },
+  {
+    "tmdbId": "1422",
+    "type": "movie",
+    "title": "The Departed",
+    "year": "2006",
+    "imdb_id": "tt0407887"
+  },
+  {
+    "tmdbId": "483456",
+    "type": "movie",
+    "title": "Peacemaker Kurogane: Belief",
+    "year": "2018",
+    "imdb_id": "tt9881872"
+  },
+  {
+    "tmdbId": "1311031",
+    "type": "movie",
+    "title": "Demon Slayer: Kimetsu no Yaiba Infinity Castle",
+    "year": "2025",
+    "imdb_id": "tt32820897"
+  },
+  {
+    "tmdbId": "49046",
+    "type": "movie",
+    "title": "All Quiet on the Western Front",
+    "year": "2022",
+    "imdb_id": "tt1016150"
+  },
+  {
+    "tmdbId": "1433570",
+    "type": "movie",
+    "title": "Betray: Thirst",
+    "year": "2025",
+    "imdb_id": "tt33079076"
+  },
+  {
+    "tmdbId": "43347",
+    "type": "movie",
+    "title": "Love & Other Drugs",
+    "year": "2010",
+    "imdb_id": "tt0758752"
+  },
+  {
+    "tmdbId": "22705",
+    "type": "movie",
+    "title": "Cheeky",
+    "year": "2000",
+    "imdb_id": "tt0200192"
+  },
+  {
+    "tmdbId": "531428",
+    "type": "movie",
+    "title": "Portrait of a Lady on Fire",
+    "year": "2019",
+    "imdb_id": "tt8613070"
+  },
+  {
+    "tmdbId": "646385",
+    "type": "movie",
+    "title": "Scream",
+    "year": "2022",
+    "imdb_id": "tt11245972"
+  },
+  {
+    "tmdbId": "624860",
+    "type": "movie",
+    "title": "The Matrix Resurrections",
+    "year": "2021",
+    "imdb_id": "tt10838180"
+  },
+  {
+    "tmdbId": "9552",
+    "type": "movie",
+    "title": "The Exorcist",
+    "year": "1973",
+    "imdb_id": "tt0070047"
+  },
+  {
+    "tmdbId": "254",
+    "type": "movie",
+    "title": "King Kong",
+    "year": "2005",
+    "imdb_id": "tt0360717"
+  },
+  {
+    "tmdbId": "194",
+    "type": "movie",
+    "title": "Amélie",
+    "year": "2001",
+    "imdb_id": "tt0211915"
+  },
+  {
+    "tmdbId": "9323",
+    "type": "movie",
+    "title": "Ghost in the Shell",
+    "year": "1995",
+    "imdb_id": "tt0113568"
+  },
+  {
+    "tmdbId": "373571",
+    "type": "movie",
+    "title": "Godzilla: King of the Monsters",
+    "year": "2019",
+    "imdb_id": "tt3741700"
+  },
+  {
+    "tmdbId": "565770",
+    "type": "movie",
+    "title": "Blue Beetle",
+    "year": "2023",
+    "imdb_id": "tt9362930"
+  },
+  {
+    "tmdbId": "162",
+    "type": "movie",
+    "title": "Edward Scissorhands",
+    "year": "1990",
+    "imdb_id": "tt0099487"
+  },
+  {
+    "tmdbId": "43949",
+    "type": "movie",
+    "title": "Flipped",
+    "year": "2010",
+    "imdb_id": "tt0817177"
+  },
+  {
+    "tmdbId": "697843",
+    "type": "movie",
+    "title": "Extraction 2",
+    "year": "2023",
+    "imdb_id": "tt12263384"
+  },
+  {
+    "tmdbId": "1136867",
+    "type": "movie",
+    "title": "Materialists",
+    "year": "2025",
+    "imdb_id": "tt30253473"
+  },
+  {
+    "tmdbId": "1151031",
+    "type": "movie",
+    "title": "Bring Her Back",
+    "year": "2025",
+    "imdb_id": "tt32246771"
+  },
+  {
+    "tmdbId": "50014",
+    "type": "movie",
+    "title": "The Help",
+    "year": "2011",
+    "imdb_id": "tt1454029"
+  },
+  {
+    "tmdbId": "180",
+    "type": "movie",
+    "title": "Minority Report",
+    "year": "2002",
+    "imdb_id": "tt0181689"
+  },
+  {
+    "tmdbId": "577922",
+    "type": "movie",
+    "title": "Tenet",
+    "year": "2020",
+    "imdb_id": "tt6723592"
+  },
+  {
+    "tmdbId": "127585",
+    "type": "movie",
+    "title": "X-Men: Days of Future Past",
+    "year": "2014",
+    "imdb_id": "tt1877832"
+  },
+  {
+    "tmdbId": "107",
+    "type": "movie",
+    "title": "Snatch",
+    "year": "2000",
+    "imdb_id": "tt0208092"
+  },
+  {
+    "tmdbId": "116745",
+    "type": "movie",
+    "title": "The Secret Life of Walter Mitty",
+    "year": "2013",
+    "imdb_id": "tt0359950"
+  },
+  {
+    "tmdbId": "120467",
+    "type": "movie",
+    "title": "The Grand Budapest Hotel",
+    "year": "2014",
+    "imdb_id": "tt2278388"
+  },
+  {
+    "tmdbId": "1382406",
+    "type": "movie",
+    "title": "Striking Rescue",
+    "year": "2024",
+    "imdb_id": "tt34466483"
+  },
+  {
+    "tmdbId": "450446",
+    "type": "movie",
+    "title": "FYP",
+    "year": "2016",
+    "imdb_id": ""
+  },
+  {
+    "tmdbId": "7131",
+    "type": "movie",
+    "title": "Van Helsing",
+    "year": "2004",
+    "imdb_id": "tt0338526"
+  },
+  {
+    "tmdbId": "18",
+    "type": "movie",
+    "title": "The Fifth Element",
+    "year": "1997",
+    "imdb_id": "tt0119116"
+  },
+  {
+    "tmdbId": "157350",
+    "type": "movie",
+    "title": "Divergent",
+    "year": "2014",
+    "imdb_id": "tt1840309"
+  },
+  {
+    "tmdbId": "1317088",
+    "type": "movie",
+    "title": "The Assessment",
+    "year": "2025",
+    "imdb_id": "tt32768323"
+  },
+  {
+    "tmdbId": "377",
+    "type": "movie",
+    "title": "A Nightmare on Elm Street",
+    "year": "1984",
+    "imdb_id": "tt0087800"
+  },
+  {
+    "tmdbId": "109439",
+    "type": "movie",
+    "title": "The Hangover Part III",
+    "year": "2013",
+    "imdb_id": "tt1951261"
+  },
+  {
+    "tmdbId": "76338",
+    "type": "movie",
+    "title": "Thor: The Dark World",
+    "year": "2013",
+    "imdb_id": "tt1981115"
+  },
+  {
+    "tmdbId": "395834",
+    "type": "movie",
+    "title": "Wind River",
+    "year": "2017",
+    "imdb_id": "tt5362988"
+  },
+  {
+    "tmdbId": "507241",
+    "type": "movie",
+    "title": "The Killer's Game",
+    "year": "2024",
+    "imdb_id": "tt0327785"
+  },
+  {
+    "tmdbId": "630",
+    "type": "movie",
+    "title": "The Wizard of Oz",
+    "year": "1939",
+    "imdb_id": "tt0032138"
+  },
+  {
+    "tmdbId": "50839",
+    "type": "movie",
+    "title": "Margin Call",
+    "year": "2011",
+    "imdb_id": "tt1615147"
+  },
+  {
+    "tmdbId": "44896",
+    "type": "movie",
+    "title": "Rango",
+    "year": "2011",
+    "imdb_id": "tt1192628"
+  },
+  {
+    "tmdbId": "1079091",
+    "type": "movie",
+    "title": "It Ends with Us",
+    "year": "2024",
+    "imdb_id": "tt10655524"
+  },
+  {
+    "tmdbId": "27",
+    "type": "movie",
+    "title": "9 Songs",
+    "year": "2004",
+    "imdb_id": "tt0411705"
+  },
+  {
+    "tmdbId": "260514",
+    "type": "movie",
+    "title": "Cars 3",
+    "year": "2017",
+    "imdb_id": "tt3606752"
+  },
+  {
+    "tmdbId": "9603",
+    "type": "movie",
+    "title": "Clueless",
+    "year": "1995",
+    "imdb_id": "tt0112697"
+  },
+  {
+    "tmdbId": "207",
+    "type": "movie",
+    "title": "Dead Poets Society",
+    "year": "1989",
+    "imdb_id": "tt0097165"
+  },
+  {
+    "tmdbId": "74",
+    "type": "movie",
+    "title": "War of the Worlds",
+    "year": "2005",
+    "imdb_id": "tt0407304"
+  },
+  {
+    "tmdbId": "37135",
+    "type": "movie",
+    "title": "Tarzan",
+    "year": "1999",
+    "imdb_id": "tt0120855"
+  },
+  {
+    "tmdbId": "242",
+    "type": "movie",
+    "title": "The Godfather Part III",
+    "year": "1990",
+    "imdb_id": "tt0099674"
+  },
+  {
+    "tmdbId": "264660",
+    "type": "movie",
+    "title": "Ex Machina",
+    "year": "2015",
+    "imdb_id": "tt0470752"
+  },
+  {
+    "tmdbId": "466420",
+    "type": "movie",
+    "title": "Killers of the Flower Moon",
+    "year": "2023",
+    "imdb_id": "tt5537002"
+  },
+  {
+    "tmdbId": "4011",
+    "type": "movie",
+    "title": "Beetlejuice",
+    "year": "1988",
+    "imdb_id": "tt0094721"
+  },
+  {
+    "tmdbId": "1104844",
+    "type": "movie",
+    "title": "BLUE LOCK THE MOVIE -EPISODE NAGI-",
+    "year": "2024",
+    "imdb_id": "tt28671146"
+  },
+  {
+    "tmdbId": "9470",
+    "type": "movie",
+    "title": "Kung Fu Hustle",
+    "year": "2004",
+    "imdb_id": "tt0373074"
+  },
+  {
+    "tmdbId": "1014505",
+    "type": "movie",
+    "title": "OVERLORD: The Sacred Kingdom",
+    "year": "2024",
+    "imdb_id": "tt14603848"
+  },
+  {
+    "tmdbId": "619264",
+    "type": "movie",
+    "title": "The Platform",
+    "year": "2019",
+    "imdb_id": "tt8228288"
+  },
+  {
+    "tmdbId": "770156",
+    "type": "movie",
+    "title": "Lucy Shimmers and the Prince of Peace",
+    "year": "2020",
+    "imdb_id": "tt11916254"
+  },
+  {
+    "tmdbId": "686",
+    "type": "movie",
+    "title": "Contact",
+    "year": "1997",
+    "imdb_id": "tt0118884"
+  },
+  {
+    "tmdbId": "1139566",
+    "type": "movie",
+    "title": "Through My Window 3: Looking at You",
+    "year": "2024",
+    "imdb_id": "tt28105944"
+  },
+  {
+    "tmdbId": "522627",
+    "type": "movie",
+    "title": "The Gentlemen",
+    "year": "2020",
+    "imdb_id": "tt8367814"
+  },
+  {
+    "tmdbId": "1457124",
+    "type": "movie",
+    "title": "Titanic: The Digital Resurrection",
+    "year": "2025",
+    "imdb_id": "tt36462222"
+  },
+  {
+    "tmdbId": "565",
+    "type": "movie",
+    "title": "The Ring",
+    "year": "2002",
+    "imdb_id": "tt0298130"
+  },
+  {
+    "tmdbId": "660982",
+    "type": "movie",
+    "title": "American Pie Presents: Girls' Rules",
+    "year": "2020",
+    "imdb_id": "tt11771594"
+  },
+  {
+    "tmdbId": "454983",
+    "type": "movie",
+    "title": "The Kissing Booth",
+    "year": "2018",
+    "imdb_id": "tt3799232"
+  },
+  {
+    "tmdbId": "663712",
+    "type": "movie",
+    "title": "Terrifier 2",
+    "year": "2022",
+    "imdb_id": "tt10403420"
+  },
+  {
+    "tmdbId": "581528",
+    "type": "movie",
+    "title": "The Gangster, the Cop, the Devil",
+    "year": "2019",
+    "imdb_id": "tt10208198"
+  },
+  {
+    "tmdbId": "717196",
+    "type": "movie",
+    "title": "Niko: Beyond the Northern Lights",
+    "year": "2024",
+    "imdb_id": "tt14813816"
+  },
+  {
+    "tmdbId": "666277",
+    "type": "movie",
+    "title": "Past Lives",
+    "year": "2023",
+    "imdb_id": "tt13238346"
+  },
+  {
+    "tmdbId": "166426",
+    "type": "movie",
+    "title": "Pirates of the Caribbean: Dead Men Tell No Tales",
+    "year": "2017",
+    "imdb_id": "tt1790809"
+  },
+  {
+    "tmdbId": "1151470",
+    "type": "movie",
+    "title": "The Vigilante",
+    "year": "2023",
+    "imdb_id": "tt5660834"
+  },
+  {
+    "tmdbId": "508138",
+    "type": "movie",
+    "title": "Burn",
+    "year": "2019",
+    "imdb_id": "tt8009314"
+  },
+  {
+    "tmdbId": "276907",
+    "type": "movie",
+    "title": "Legend",
+    "year": "2015",
+    "imdb_id": "tt3569230"
+  },
+  {
+    "tmdbId": "61979",
+    "type": "movie",
+    "title": "Three Steps Above Heaven",
+    "year": "2010",
+    "imdb_id": "tt1648216"
+  },
+  {
+    "tmdbId": "799766",
+    "type": "movie",
+    "title": "Better Man",
+    "year": "2024",
+    "imdb_id": "tt14260836"
+  },
+  {
+    "tmdbId": "480530",
+    "type": "movie",
+    "title": "Creed II",
+    "year": "2018",
+    "imdb_id": "tt6343314"
+  },
+  {
+    "tmdbId": "70981",
+    "type": "movie",
+    "title": "Prometheus",
+    "year": "2012",
+    "imdb_id": "tt1446714"
+  },
+  {
+    "tmdbId": "547016",
+    "type": "movie",
+    "title": "The Old Guard",
+    "year": "2020",
+    "imdb_id": "tt7556122"
+  },
+  {
+    "tmdbId": "1438208",
+    "type": "movie",
+    "title": "Blind Vacation",
+    "year": "2025",
+    "imdb_id": "tt35772353"
+  },
+  {
+    "tmdbId": "893723",
+    "type": "movie",
+    "title": "PAW Patrol: The Mighty Movie",
+    "year": "2023",
+    "imdb_id": "tt15837338"
+  },
+  {
+    "tmdbId": "820525",
+    "type": "movie",
+    "title": "After Everything",
+    "year": "2023",
+    "imdb_id": "tt15334488"
+  },
+  {
+    "tmdbId": "974950",
+    "type": "movie",
+    "title": "Emilia Pérez",
+    "year": "2024",
+    "imdb_id": "tt20221436"
+  },
+  {
+    "tmdbId": "36557",
+    "type": "movie",
+    "title": "Casino Royale",
+    "year": "2006",
+    "imdb_id": "tt0381061"
+  },
+  {
+    "tmdbId": "602",
+    "type": "movie",
+    "title": "Independence Day",
+    "year": "1996",
+    "imdb_id": "tt0116629"
+  },
+  {
+    "tmdbId": "1278",
+    "type": "movie",
+    "title": "The Dreamers",
+    "year": "2003",
+    "imdb_id": "tt0309987"
+  },
+  {
+    "tmdbId": "102899",
+    "type": "movie",
+    "title": "Ant-Man",
+    "year": "2015",
+    "imdb_id": "tt0478970"
+  },
+  {
+    "tmdbId": "1022787",
+    "type": "movie",
+    "title": "Elio",
+    "year": "2025",
+    "imdb_id": "tt4900148"
+  },
+  {
+    "tmdbId": "11631",
+    "type": "movie",
+    "title": "Mamma Mia!",
+    "year": "2008",
+    "imdb_id": "tt0795421"
+  },
+  {
+    "tmdbId": "9023",
+    "type": "movie",
+    "title": "Spirit: Stallion of the Cimarron",
+    "year": "2002",
+    "imdb_id": "tt0166813"
+  },
+  {
+    "tmdbId": "974635",
+    "type": "movie",
+    "title": "Hit Man",
+    "year": "2024",
+    "imdb_id": "tt20215968"
+  },
+  {
+    "tmdbId": "588648",
+    "type": "movie",
+    "title": "Dragonkeeper",
+    "year": "2024",
+    "imdb_id": "tt7093904"
+  },
+  {
+    "tmdbId": "1244361",
+    "type": "movie",
+    "title": "Operation Undead",
+    "year": "2024",
+    "imdb_id": "tt32750439"
+  },
+  {
+    "tmdbId": "744276",
+    "type": "movie",
+    "title": "After Ever Happy",
+    "year": "2022",
+    "imdb_id": "tt13070038"
+  },
+  {
+    "tmdbId": "1417",
+    "type": "movie",
+    "title": "Pan's Labyrinth",
+    "year": "2006",
+    "imdb_id": "tt0457430"
+  },
+  {
+    "tmdbId": "335988",
+    "type": "movie",
+    "title": "Transformers: The Last Knight",
+    "year": "2017",
+    "imdb_id": "tt3371366"
+  },
+  {
+    "tmdbId": "1032823",
+    "type": "movie",
+    "title": "Trap",
+    "year": "2024",
+    "imdb_id": "tt26753003"
+  },
+  {
+    "tmdbId": "57158",
+    "type": "movie",
+    "title": "The Hobbit: The Desolation of Smaug",
+    "year": "2013",
+    "imdb_id": "tt1170358"
+  },
+  {
+    "tmdbId": "62835",
+    "type": "movie",
+    "title": "Colombiana",
+    "year": "2011",
+    "imdb_id": "tt1657507"
+  },
+  {
+    "tmdbId": "335977",
+    "type": "movie",
+    "title": "Indiana Jones and the Dial of Destiny",
+    "year": "2023",
+    "imdb_id": "tt1462764"
+  },
+  {
+    "tmdbId": "381288",
+    "type": "movie",
+    "title": "Split",
+    "year": "2017",
+    "imdb_id": "tt4972582"
+  },
+  {
+    "tmdbId": "424783",
+    "type": "movie",
+    "title": "Bumblebee",
+    "year": "2018",
+    "imdb_id": "tt4701182"
+  },
+  {
+    "tmdbId": "10184",
+    "type": "movie",
+    "title": "He's Just Not That Into You",
+    "year": "2009",
+    "imdb_id": "tt1001508"
+  },
+  {
+    "tmdbId": "10527",
+    "type": "movie",
+    "title": "Madagascar: Escape 2 Africa",
+    "year": "2008",
+    "imdb_id": "tt0479952"
+  },
+  {
+    "tmdbId": "838209",
+    "type": "movie",
+    "title": "Exhuma",
+    "year": "2024",
+    "imdb_id": "tt27802490"
+  },
+  {
+    "tmdbId": "1140233",
+    "type": "movie",
+    "title": "Wife Swap",
+    "year": "2022",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "400535",
+    "type": "movie",
+    "title": "Sicario: Day of the Soldado",
+    "year": "2018",
+    "imdb_id": "tt5052474"
+  },
+  {
+    "tmdbId": "752",
+    "type": "movie",
+    "title": "V for Vendetta",
+    "year": "2006",
+    "imdb_id": "tt0434409"
+  },
+  {
+    "tmdbId": "370172",
+    "type": "movie",
+    "title": "No Time to Die",
+    "year": "2021",
+    "imdb_id": "tt2382320"
+  },
+  {
+    "tmdbId": "6477",
+    "type": "movie",
+    "title": "Alvin and the Chipmunks",
+    "year": "2007",
+    "imdb_id": "tt0952640"
+  },
+  {
+    "tmdbId": "28",
+    "type": "movie",
+    "title": "Apocalypse Now",
+    "year": "1979",
+    "imdb_id": "tt0078788"
+  },
+  {
+    "tmdbId": "405775",
+    "type": "movie",
+    "title": "The Wall",
+    "year": "2017",
+    "imdb_id": "tt4218696"
+  },
+  {
+    "tmdbId": "1894",
+    "type": "movie",
+    "title": "Star Wars: Episode II - Attack of the Clones",
+    "year": "2002",
+    "imdb_id": "tt0121765"
+  },
+  {
+    "tmdbId": "1933",
+    "type": "movie",
+    "title": "The Others",
+    "year": "2001",
+    "imdb_id": "tt0230600"
+  },
+  {
+    "tmdbId": "1145725",
+    "type": "movie",
+    "title": "Tyler Perry's Duplicity",
+    "year": "2025",
+    "imdb_id": "tt28239363"
+  },
+  {
+    "tmdbId": "9487",
+    "type": "movie",
+    "title": "A Bug's Life",
+    "year": "1998",
+    "imdb_id": "tt0120623"
+  },
+  {
+    "tmdbId": "1114894",
+    "type": "movie",
+    "title": "Star Trek: Section 31",
+    "year": "2025",
+    "imdb_id": "tt9603060"
+  },
+  {
+    "tmdbId": "1272149",
+    "type": "movie",
+    "title": "Bridget Jones: Mad About the Boy",
+    "year": "2025",
+    "imdb_id": "tt32063050"
+  },
+  {
+    "tmdbId": "50646",
+    "type": "movie",
+    "title": "Crazy, Stupid, Love.",
+    "year": "2011",
+    "imdb_id": "tt1570728"
+  },
+  {
+    "tmdbId": "592983",
+    "type": "movie",
+    "title": "Spellbound",
+    "year": "2024",
+    "imdb_id": "tt7215232"
+  },
+  {
+    "tmdbId": "500664",
+    "type": "movie",
+    "title": "Upgrade",
+    "year": "2018",
+    "imdb_id": "tt6499752"
+  },
+  {
+    "tmdbId": "1081012",
+    "type": "movie",
+    "title": "Aftermath",
+    "year": "2024",
+    "imdb_id": "tt26545708"
+  },
+  {
+    "tmdbId": "613504",
+    "type": "movie",
+    "title": "After We Collided",
+    "year": "2020",
+    "imdb_id": "tt10362466"
+  },
+  {
+    "tmdbId": "1033148",
+    "type": "movie",
+    "title": "Die, My Love",
+    "year": "2025",
+    "imdb_id": "tt9362736"
+  },
+  {
+    "tmdbId": "527774",
+    "type": "movie",
+    "title": "Raya and the Last Dragon",
+    "year": "2021",
+    "imdb_id": "tt5109280"
+  },
+  {
+    "tmdbId": "8856",
+    "type": "movie",
+    "title": "The Karate Kid Part II",
+    "year": "1986",
+    "imdb_id": "tt0091326"
+  },
+  {
+    "tmdbId": "387824",
+    "type": "movie",
+    "title": "Mom's Friend",
+    "year": "2015",
+    "imdb_id": ""
+  },
+  {
+    "tmdbId": "1160018",
+    "type": "movie",
+    "title": "Kill",
+    "year": "2024",
+    "imdb_id": "tt28259207"
+  },
+  {
+    "tmdbId": "114",
+    "type": "movie",
+    "title": "Pretty Woman",
+    "year": "1990",
+    "imdb_id": "tt0100405"
+  },
+  {
+    "tmdbId": "10528",
+    "type": "movie",
+    "title": "Sherlock Holmes",
+    "year": "2009",
+    "imdb_id": "tt0988045"
+  },
+  {
+    "tmdbId": "948549",
+    "type": "movie",
+    "title": "Love Lies Bleeding",
+    "year": "2024",
+    "imdb_id": "tt19637052"
+  },
+  {
+    "tmdbId": "18240",
+    "type": "movie",
+    "title": "The Proposal",
+    "year": "2009",
+    "imdb_id": "tt1041829"
+  },
+  {
+    "tmdbId": "8358",
+    "type": "movie",
+    "title": "Cast Away",
+    "year": "2000",
+    "imdb_id": "tt0162222"
+  },
+  {
+    "tmdbId": "792",
+    "type": "movie",
+    "title": "Platoon",
+    "year": "1986",
+    "imdb_id": "tt0091763"
+  },
+  {
+    "tmdbId": "402900",
+    "type": "movie",
+    "title": "Ocean's Eight",
+    "year": "2018",
+    "imdb_id": "tt5164214"
+  },
+  {
+    "tmdbId": "630586",
+    "type": "movie",
+    "title": "Wrong Turn",
+    "year": "2021",
+    "imdb_id": "tt9110170"
+  },
+  {
+    "tmdbId": "969492",
+    "type": "movie",
+    "title": "Land of Bad",
+    "year": "2024",
+    "imdb_id": "tt19864802"
+  },
+  {
+    "tmdbId": "378064",
+    "type": "movie",
+    "title": "A Silent Voice: The Movie",
+    "year": "2016",
+    "imdb_id": "tt5323662"
+  },
+  {
+    "tmdbId": "788",
+    "type": "movie",
+    "title": "Mrs. Doubtfire",
+    "year": "1993",
+    "imdb_id": "tt0107614"
+  },
+  {
+    "tmdbId": "1771",
+    "type": "movie",
+    "title": "Captain America: The First Avenger",
+    "year": "2011",
+    "imdb_id": "tt0458339"
+  },
+  {
+    "tmdbId": "9340",
+    "type": "movie",
+    "title": "The Goonies",
+    "year": "1985",
+    "imdb_id": "tt0089218"
+  },
+  {
+    "tmdbId": "26389",
+    "type": "movie",
+    "title": "From Paris with Love",
+    "year": "2010",
+    "imdb_id": "tt1179034"
+  },
+  {
+    "tmdbId": "795514",
+    "type": "movie",
+    "title": "The Fallout",
+    "year": "2021",
+    "imdb_id": "tt11847410"
+  },
+  {
+    "tmdbId": "23168",
+    "type": "movie",
+    "title": "The Town",
+    "year": "2010",
+    "imdb_id": "tt0840361"
+  },
+  {
+    "tmdbId": "536554",
+    "type": "movie",
+    "title": "M3GAN",
+    "year": "2022",
+    "imdb_id": "tt8760708"
+  },
+  {
+    "tmdbId": "1229646",
+    "type": "movie",
+    "title": "Robotia, la película",
+    "year": "2024",
+    "imdb_id": "tt30840883"
+  },
+  {
+    "tmdbId": "1188104",
+    "type": "movie",
+    "title": "The X-Treme Riders",
+    "year": "2023",
+    "imdb_id": "tt28955168"
+  },
+  {
+    "tmdbId": "339692",
+    "type": "movie",
+    "title": "Shot Caller",
+    "year": "2017",
+    "imdb_id": "tt4633690"
+  },
+  {
+    "tmdbId": "11423",
+    "type": "movie",
+    "title": "Memories of Murder",
+    "year": "2003",
+    "imdb_id": "tt0353969"
+  },
+  {
+    "tmdbId": "7345",
+    "type": "movie",
+    "title": "There Will Be Blood",
+    "year": "2007",
+    "imdb_id": "tt0469494"
+  },
+  {
+    "tmdbId": "1891",
+    "type": "movie",
+    "title": "The Empire Strikes Back",
+    "year": "1980",
+    "imdb_id": "tt0080684"
+  },
+  {
+    "tmdbId": "1077328",
+    "type": "movie",
+    "title": "Fuks 2",
+    "year": "2023",
+    "imdb_id": "tt15065788"
+  },
+  {
+    "tmdbId": "1079485",
+    "type": "movie",
+    "title": "Winnie-the-Pooh: Blood and Honey 2",
+    "year": "2024",
+    "imdb_id": "tt23330554"
+  },
+  {
+    "tmdbId": "591",
+    "type": "movie",
+    "title": "The Da Vinci Code",
+    "year": "2006",
+    "imdb_id": "tt0382625"
+  },
+  {
+    "tmdbId": "520763",
+    "type": "movie",
+    "title": "A Quiet Place Part II",
+    "year": "2021",
+    "imdb_id": "tt8332922"
+  },
+  {
+    "tmdbId": "1241320",
+    "type": "movie",
+    "title": "Kingdom 4: Return of the Great General",
+    "year": "2024",
+    "imdb_id": "tt31457736"
+  },
+  {
+    "tmdbId": "726759",
+    "type": "movie",
+    "title": "Tetris",
+    "year": "2023",
+    "imdb_id": "tt12758060"
+  },
+  {
+    "tmdbId": "197158",
+    "type": "movie",
+    "title": "Porno",
+    "year": "1981",
+    "imdb_id": "tt0261189"
+  },
+  {
+    "tmdbId": "539",
+    "type": "movie",
+    "title": "Psycho",
+    "year": "1960",
+    "imdb_id": "tt0054215"
+  },
+  {
+    "tmdbId": "76757",
+    "type": "movie",
+    "title": "Jupiter Ascending",
+    "year": "2015",
+    "imdb_id": "tt1617661"
+  },
+  {
+    "tmdbId": "15212",
+    "type": "movie",
+    "title": "Species: The Awakening",
+    "year": "2007",
+    "imdb_id": "tt0844894"
+  },
+  {
+    "tmdbId": "509",
+    "type": "movie",
+    "title": "Notting Hill",
+    "year": "1999",
+    "imdb_id": "tt0125439"
+  },
+  {
+    "tmdbId": "27578",
+    "type": "movie",
+    "title": "The Expendables",
+    "year": "2010",
+    "imdb_id": "tt1320253"
+  },
+  {
+    "tmdbId": "116149",
+    "type": "movie",
+    "title": "Paddington",
+    "year": "2014",
+    "imdb_id": "tt1109624"
+  },
+  {
+    "tmdbId": "254470",
+    "type": "movie",
+    "title": "Pitch Perfect 2",
+    "year": "2015",
+    "imdb_id": "tt2848292"
+  },
+  {
+    "tmdbId": "158852",
+    "type": "movie",
+    "title": "Tomorrowland",
+    "year": "2015",
+    "imdb_id": "tt1964418"
+  },
+  {
+    "tmdbId": "719221",
+    "type": "movie",
+    "title": "Tarot",
+    "year": "2024",
+    "imdb_id": "tt14088510"
+  },
+  {
+    "tmdbId": "13448",
+    "type": "movie",
+    "title": "Angels & Demons",
+    "year": "2009",
+    "imdb_id": "tt0808151"
+  },
+  {
+    "tmdbId": "123338",
+    "type": "movie",
+    "title": "Sex and Zen III",
+    "year": "1998",
+    "imdb_id": "tt0133196"
+  },
+  {
+    "tmdbId": "937278",
+    "type": "movie",
+    "title": "A Man Called Otto",
+    "year": "2022",
+    "imdb_id": "tt7405458"
+  },
+  {
+    "tmdbId": "516632",
+    "type": "movie",
+    "title": "The Empty Man",
+    "year": "2020",
+    "imdb_id": "tt5867314"
+  },
+  {
+    "tmdbId": "374720",
+    "type": "movie",
+    "title": "Dunkirk",
+    "year": "2017",
+    "imdb_id": "tt5013056"
+  },
+  {
+    "tmdbId": "64690",
+    "type": "movie",
+    "title": "Drive",
+    "year": "2011",
+    "imdb_id": "tt0780504"
+  },
+  {
+    "tmdbId": "2024",
+    "type": "movie",
+    "title": "The Patriot",
+    "year": "2000",
+    "imdb_id": "tt0187393"
+  },
+  {
+    "tmdbId": "594",
+    "type": "movie",
+    "title": "The Terminal",
+    "year": "2004",
+    "imdb_id": "tt0362227"
+  },
+  {
+    "tmdbId": "1250",
+    "type": "movie",
+    "title": "Ghost Rider",
+    "year": "2007",
+    "imdb_id": "tt0259324"
+  },
+  {
+    "tmdbId": "938614",
+    "type": "movie",
+    "title": "Late Night with the Devil",
+    "year": "2024",
+    "imdb_id": "tt14966898"
+  },
+  {
+    "tmdbId": "964980",
+    "type": "movie",
+    "title": "Air",
+    "year": "2023",
+    "imdb_id": "tt16419074"
+  },
+  {
+    "tmdbId": "634528",
+    "type": "movie",
+    "title": "The Marksman",
+    "year": "2021",
+    "imdb_id": "tt6902332"
+  },
+  {
+    "tmdbId": "676",
+    "type": "movie",
+    "title": "Pearl Harbor",
+    "year": "2001",
+    "imdb_id": "tt0213149"
+  },
+  {
+    "tmdbId": "562",
+    "type": "movie",
+    "title": "Die Hard",
+    "year": "1988",
+    "imdb_id": "tt0095016"
+  },
+  {
+    "tmdbId": "254128",
+    "type": "movie",
+    "title": "San Andreas",
+    "year": "2015",
+    "imdb_id": "tt2126355"
+  },
+  {
+    "tmdbId": "1098006",
+    "type": "movie",
+    "title": "Fountain of Youth",
+    "year": "2025",
+    "imdb_id": "tt27075958"
+  },
+  {
+    "tmdbId": "9476",
+    "type": "movie",
+    "title": "A Knight's Tale",
+    "year": "2001",
+    "imdb_id": "tt0183790"
+  },
+  {
+    "tmdbId": "335984",
+    "type": "movie",
+    "title": "Blade Runner 2049",
+    "year": "2017",
+    "imdb_id": "tt1856101"
+  },
+  {
+    "tmdbId": "1211472",
+    "type": "movie",
+    "title": "September 5",
+    "year": "2024",
+    "imdb_id": "tt28082769"
+  },
+  {
+    "tmdbId": "1175106",
+    "type": "movie",
+    "title": "Apple Music Live: Dominic Fike",
+    "year": "2023",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "329",
+    "type": "movie",
+    "title": "Jurassic Park",
+    "year": "1993",
+    "imdb_id": "tt0107290"
+  },
+  {
+    "tmdbId": "1124620",
+    "type": "movie",
+    "title": "The Monkey",
+    "year": "2025",
+    "imdb_id": "tt27714946"
+  },
+  {
+    "tmdbId": "1297860",
+    "type": "movie",
+    "title": "Inheritance",
+    "year": "2025",
+    "imdb_id": "tt31050620"
+  },
+  {
+    "tmdbId": "1357305",
+    "type": "movie",
+    "title": "Detective Chinatown 1900",
+    "year": "2025",
+    "imdb_id": "tt34463310"
+  },
+  {
+    "tmdbId": "989662",
+    "type": "movie",
+    "title": "A Different Man",
+    "year": "2024",
+    "imdb_id": "tt21097228"
+  },
+  {
+    "tmdbId": "1124566",
+    "type": "movie",
+    "title": "Sentimental Value",
+    "year": "2025",
+    "imdb_id": "tt27714581"
+  },
+  {
+    "tmdbId": "1071585",
+    "type": "movie",
+    "title": "M3GAN 2.0",
+    "year": "2025",
+    "imdb_id": "tt26342662"
+  },
+  {
+    "tmdbId": "766369",
+    "type": "movie",
+    "title": "Nocturnal",
+    "year": "2025",
+    "imdb_id": "tt34574758"
+  },
+  {
+    "tmdbId": "291805",
+    "type": "movie",
+    "title": "Now You See Me 2",
+    "year": "2016",
+    "imdb_id": "tt3110958"
+  },
+  {
+    "tmdbId": "1301632",
+    "type": "movie",
+    "title": "Bhool Chuk Maaf",
+    "year": "2025",
+    "imdb_id": "tt32058735"
+  },
+  {
+    "tmdbId": "272",
+    "type": "movie",
+    "title": "Batman Begins",
+    "year": "2005",
+    "imdb_id": "tt0372784"
+  },
+  {
+    "tmdbId": "277834",
+    "type": "movie",
+    "title": "Moana",
+    "year": "2016",
+    "imdb_id": "tt3521164"
+  },
+  {
+    "tmdbId": "363088",
+    "type": "movie",
+    "title": "Ant-Man and the Wasp",
+    "year": "2018",
+    "imdb_id": "tt5095030"
+  },
+  {
+    "tmdbId": "78",
+    "type": "movie",
+    "title": "Blade Runner",
+    "year": "1982",
+    "imdb_id": "tt0083658"
+  },
+  {
+    "tmdbId": "1892",
+    "type": "movie",
+    "title": "Return of the Jedi",
+    "year": "1983",
+    "imdb_id": "tt0086190"
+  },
+  {
+    "tmdbId": "1482036",
+    "type": "movie",
+    "title": "Alien Invasion: Rise of the Phoenix",
+    "year": "2025",
+    "imdb_id": "tt33115196"
+  },
+  {
+    "tmdbId": "299537",
+    "type": "movie",
+    "title": "Captain Marvel",
+    "year": "2019",
+    "imdb_id": "tt4154664"
+  },
+  {
+    "tmdbId": "282035",
+    "type": "movie",
+    "title": "The Mummy",
+    "year": "2017",
+    "imdb_id": "tt2345759"
+  },
+  {
+    "tmdbId": "1094274",
+    "type": "movie",
+    "title": "Y2K",
+    "year": "2024",
+    "imdb_id": "tt27218960"
+  },
+  {
+    "tmdbId": "1412646",
+    "type": "movie",
+    "title": "Kesari Veer",
+    "year": "2025",
+    "imdb_id": "tt32106176"
+  },
+  {
+    "tmdbId": "842859",
+    "type": "movie",
+    "title": "The Most Precious of Cargoes",
+    "year": "2024",
+    "imdb_id": "tt10462154"
+  },
+  {
+    "tmdbId": "1319738",
+    "type": "movie",
+    "title": "We Girls",
+    "year": "2025",
+    "imdb_id": "tt33014921"
+  },
+  {
+    "tmdbId": "1239655",
+    "type": "movie",
+    "title": "Friendship",
+    "year": "2025",
+    "imdb_id": "tt30505698"
+  },
+  {
+    "tmdbId": "100402",
+    "type": "movie",
+    "title": "Captain America: The Winter Soldier",
+    "year": "2014",
+    "imdb_id": "tt1843866"
+  },
+  {
+    "tmdbId": "1088096",
+    "type": "movie",
+    "title": "Goodrich",
+    "year": "2024",
+    "imdb_id": "tt10171472"
+  },
+  {
+    "tmdbId": "730251",
+    "type": "movie",
+    "title": "Happyend",
+    "year": "2024",
+    "imdb_id": "tt29279903"
+  },
+  {
+    "tmdbId": "594767",
+    "type": "movie",
+    "title": "Shazam! Fury of the Gods",
+    "year": "2023",
+    "imdb_id": "tt10151854"
+  },
+  {
+    "tmdbId": "5137",
+    "type": "movie",
+    "title": "Sky Captain and the World of Tomorrow",
+    "year": "2004",
+    "imdb_id": "tt0346156"
+  },
+  {
+    "tmdbId": "1339206",
+    "type": "movie",
+    "title": "The Surrender",
+    "year": "2025",
+    "imdb_id": "tt33270263"
+  },
+  {
+    "tmdbId": "948",
+    "type": "movie",
+    "title": "Halloween",
+    "year": "1978",
+    "imdb_id": "tt0077651"
+  },
+  {
+    "tmdbId": "568160",
+    "type": "movie",
+    "title": "Weathering with You",
+    "year": "2019",
+    "imdb_id": "tt9426210"
+  },
+  {
+    "tmdbId": "118340",
+    "type": "movie",
+    "title": "Guardians of the Galaxy",
+    "year": "2014",
+    "imdb_id": "tt2015381"
+  },
+  {
+    "tmdbId": "287947",
+    "type": "movie",
+    "title": "Shazam!",
+    "year": "2019",
+    "imdb_id": "tt0448115"
+  },
+  {
+    "tmdbId": "1257960",
+    "type": "movie",
+    "title": "Sikandar",
+    "year": "2025",
+    "imdb_id": "tt31712434"
+  },
+  {
+    "tmdbId": "591273",
+    "type": "movie",
+    "title": "Fear Street: 1994",
+    "year": "2021",
+    "imdb_id": "tt6566576"
+  },
+  {
+    "tmdbId": "1180629",
+    "type": "movie",
+    "title": "Kneecap",
+    "year": "2024",
+    "imdb_id": "tt27367464"
+  },
+  {
+    "tmdbId": "76341",
+    "type": "movie",
+    "title": "Mad Max: Fury Road",
+    "year": "2015",
+    "imdb_id": "tt1392190"
+  },
+  {
+    "tmdbId": "1102493",
+    "type": "movie",
+    "title": "Small Things Like These",
+    "year": "2024",
+    "imdb_id": "tt27196021"
+  },
+  {
+    "tmdbId": "1468706",
+    "type": "movie",
+    "title": "Project MKHEXE",
+    "year": "2025",
+    "imdb_id": "tt36615506"
+  },
+  {
+    "tmdbId": "450465",
+    "type": "movie",
+    "title": "Glass",
+    "year": "2019",
+    "imdb_id": "tt6823368"
+  },
+  {
+    "tmdbId": "206647",
+    "type": "movie",
+    "title": "Spectre",
+    "year": "2015",
+    "imdb_id": "tt2379713"
+  },
+  {
+    "tmdbId": "1000866",
+    "type": "movie",
+    "title": "Marching Band",
+    "year": "2024",
+    "imdb_id": "tt30327451"
+  },
+  {
+    "tmdbId": "1368",
+    "type": "movie",
+    "title": "First Blood",
+    "year": "1982",
+    "imdb_id": "tt0083944"
+  },
+  {
+    "tmdbId": "524047",
+    "type": "movie",
+    "title": "Greenland",
+    "year": "2020",
+    "imdb_id": "tt7737786"
+  },
+  {
+    "tmdbId": "2164",
+    "type": "movie",
+    "title": "Stargate",
+    "year": "1994",
+    "imdb_id": "tt0111282"
+  },
+  {
+    "tmdbId": "764348",
+    "type": "movie",
+    "title": "Step-Brother 2",
+    "year": "2018",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "1059128",
+    "type": "movie",
+    "title": "Queer",
+    "year": "2024",
+    "imdb_id": "tt24176060"
+  },
+  {
+    "tmdbId": "1262669",
+    "type": "movie",
+    "title": "Kapkapiii",
+    "year": "2025",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "391",
+    "type": "movie",
+    "title": "A Fistful of Dollars",
+    "year": "1964",
+    "imdb_id": "tt0058461"
+  },
+  {
+    "tmdbId": "1404734",
+    "type": "movie",
+    "title": "Mumu",
+    "year": "2025",
+    "imdb_id": "tt35635579"
+  },
+  {
+    "tmdbId": "211672",
+    "type": "movie",
+    "title": "Minions",
+    "year": "2015",
+    "imdb_id": "tt2293640"
+  },
+  {
+    "tmdbId": "9799",
+    "type": "movie",
+    "title": "The Fast and the Furious",
+    "year": "2001",
+    "imdb_id": "tt0232500"
+  },
+  {
+    "tmdbId": "1366",
+    "type": "movie",
+    "title": "Rocky",
+    "year": "1976",
+    "imdb_id": "tt0075148"
+  },
+  {
+    "tmdbId": "36658",
+    "type": "movie",
+    "title": "X2",
+    "year": "2003",
+    "imdb_id": "tt0290334"
+  },
+  {
+    "tmdbId": "1400288",
+    "type": "movie",
+    "title": "Deaf President Now!",
+    "year": "2025",
+    "imdb_id": "tt34965967"
+  },
+  {
+    "tmdbId": "1007734",
+    "type": "movie",
+    "title": "Nobody 2",
+    "year": "2025",
+    "imdb_id": "tt28996126"
+  },
+  {
+    "tmdbId": "1339772",
+    "type": "movie",
+    "title": "The Devil's Bride",
+    "year": "2025",
+    "imdb_id": "tt33051946"
+  },
+  {
+    "tmdbId": "2503",
+    "type": "movie",
+    "title": "The Bourne Ultimatum",
+    "year": "2007",
+    "imdb_id": "tt0440963"
+  },
+  {
+    "tmdbId": "95",
+    "type": "movie",
+    "title": "Armageddon",
+    "year": "1998",
+    "imdb_id": "tt0120591"
+  },
+  {
+    "tmdbId": "584",
+    "type": "movie",
+    "title": "2 Fast 2 Furious",
+    "year": "2003",
+    "imdb_id": "tt0322259"
+  },
+  {
+    "tmdbId": "1316070",
+    "type": "movie",
+    "title": "Gangstas",
+    "year": "2025",
+    "imdb_id": "tt10380908"
+  },
+  {
+    "tmdbId": "273248",
+    "type": "movie",
+    "title": "The Hateful Eight",
+    "year": "2015",
+    "imdb_id": "tt3460252"
+  },
+  {
+    "tmdbId": "89",
+    "type": "movie",
+    "title": "Indiana Jones and the Last Crusade",
+    "year": "1989",
+    "imdb_id": "tt0097576"
+  },
+  {
+    "tmdbId": "76170",
+    "type": "movie",
+    "title": "The Wolverine",
+    "year": "2013",
+    "imdb_id": "tt1430132"
+  },
+  {
+    "tmdbId": "331",
+    "type": "movie",
+    "title": "Jurassic Park III",
+    "year": "2001",
+    "imdb_id": "tt0163025"
+  },
+  {
+    "tmdbId": "348350",
+    "type": "movie",
+    "title": "Solo: A Star Wars Story",
+    "year": "2018",
+    "imdb_id": "tt3778644"
+  },
+  {
+    "tmdbId": "13804",
+    "type": "movie",
+    "title": "Fast & Furious",
+    "year": "2009",
+    "imdb_id": "tt1013752"
+  },
+  {
+    "tmdbId": "11969",
+    "type": "movie",
+    "title": "Tombstone",
+    "year": "1993",
+    "imdb_id": "tt0108358"
+  },
+  {
+    "tmdbId": "29427",
+    "type": "movie",
+    "title": "The Crazies",
+    "year": "2010",
+    "imdb_id": "tt0455407"
+  },
+  {
+    "tmdbId": "530915",
+    "type": "movie",
+    "title": "1917",
+    "year": "2019",
+    "imdb_id": "tt8579674"
+  },
+  {
+    "tmdbId": "16859",
+    "type": "movie",
+    "title": "Kiki's Delivery Service",
+    "year": "1989",
+    "imdb_id": "tt0097814"
+  },
+  {
+    "tmdbId": "959604",
+    "type": "movie",
+    "title": "Beating Hearts",
+    "year": "2024",
+    "imdb_id": "tt27490099"
+  },
+  {
+    "tmdbId": "338952",
+    "type": "movie",
+    "title": "Fantastic Beasts: The Crimes of Grindelwald",
+    "year": "2018",
+    "imdb_id": "tt4123430"
+  },
+  {
+    "tmdbId": "37724",
+    "type": "movie",
+    "title": "Skyfall",
+    "year": "2012",
+    "imdb_id": "tt1074638"
+  },
+  {
+    "tmdbId": "4488",
+    "type": "movie",
+    "title": "Friday the 13th",
+    "year": "1980",
+    "imdb_id": "tt0080761"
+  },
+  {
+    "tmdbId": "558",
+    "type": "movie",
+    "title": "Spider-Man 2",
+    "year": "2004",
+    "imdb_id": "tt0316654"
+  },
+  {
+    "tmdbId": "993710",
+    "type": "movie",
+    "title": "Back in Action",
+    "year": "2025",
+    "imdb_id": "tt21191806"
+  },
+  {
+    "tmdbId": "1078959",
+    "type": "movie",
+    "title": "A Mistake",
+    "year": "2024",
+    "imdb_id": "tt13605284"
+  },
+  {
+    "tmdbId": "1091",
+    "type": "movie",
+    "title": "The Thing",
+    "year": "1982",
+    "imdb_id": "tt0084787"
+  },
+  {
+    "tmdbId": "1225572",
+    "type": "movie",
+    "title": "Screamboat",
+    "year": "2025",
+    "imdb_id": "tt30766582"
+  },
+  {
+    "tmdbId": "568",
+    "type": "movie",
+    "title": "Apollo 13",
+    "year": "1995",
+    "imdb_id": "tt0112384"
+  },
+  {
+    "tmdbId": "330",
+    "type": "movie",
+    "title": "The Lost World: Jurassic Park",
+    "year": "1997",
+    "imdb_id": "tt0119567"
+  },
+  {
+    "tmdbId": "149",
+    "type": "movie",
+    "title": "Akira",
+    "year": "1988",
+    "imdb_id": "tt0094625"
+  },
+  {
+    "tmdbId": "1128752",
+    "type": "movie",
+    "title": "Bird",
+    "year": "2024",
+    "imdb_id": "tt28277817"
+  },
+  {
+    "tmdbId": "927",
+    "type": "movie",
+    "title": "Gremlins",
+    "year": "1984",
+    "imdb_id": "tt0087363"
+  },
+  {
+    "tmdbId": "1858",
+    "type": "movie",
+    "title": "Transformers",
+    "year": "2007",
+    "imdb_id": "tt0418279"
+  },
+  {
+    "tmdbId": "1018",
+    "type": "movie",
+    "title": "Mulholland Drive",
+    "year": "2001",
+    "imdb_id": "tt0166924"
+  },
+  {
+    "tmdbId": "1694",
+    "type": "movie",
+    "title": "Re-Animator",
+    "year": "1985",
+    "imdb_id": "tt0089885"
+  },
+  {
+    "tmdbId": "1376434",
+    "type": "movie",
+    "title": "Predator: Killer of Killers",
+    "year": "2025",
+    "imdb_id": "tt36463894"
+  },
+  {
+    "tmdbId": "1058615",
+    "type": "movie",
+    "title": "The Accidental Getaway Driver",
+    "year": "2025",
+    "imdb_id": "tt22751422"
+  },
+  {
+    "tmdbId": "713364",
+    "type": "movie",
+    "title": "Clown in a Cornfield",
+    "year": "2025",
+    "imdb_id": "tt23060698"
+  },
+  {
+    "tmdbId": "591274",
+    "type": "movie",
+    "title": "Fear Street: 1978",
+    "year": "2021",
+    "imdb_id": "tt9701940"
+  },
+  {
+    "tmdbId": "161",
+    "type": "movie",
+    "title": "Ocean's Eleven",
+    "year": "2001",
+    "imdb_id": "tt0240772"
+  },
+  {
+    "tmdbId": "280",
+    "type": "movie",
+    "title": "Terminator 2: Judgment Day",
+    "year": "1991",
+    "imdb_id": "tt0103064"
+  },
+  {
+    "tmdbId": "1137179",
+    "type": "movie",
+    "title": "Yadang: The Snitch",
+    "year": "2025",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "535033",
+    "type": "movie",
+    "title": "The Sergeant and the Tiger Moth",
+    "year": "1974",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "400090",
+    "type": "movie",
+    "title": "The Nightingale",
+    "year": "2018",
+    "imdb_id": "tt4068576"
+  },
+  {
+    "tmdbId": "959596",
+    "type": "movie",
+    "title": "Maldoror",
+    "year": "2025",
+    "imdb_id": "tt15459206"
+  },
+  {
+    "tmdbId": "1220564",
+    "type": "movie",
+    "title": "The Secret Agent",
+    "year": "2025",
+    "imdb_id": "tt27847051"
+  },
+  {
+    "tmdbId": "936108",
+    "type": "movie",
+    "title": "Smurfs",
+    "year": "2025",
+    "imdb_id": "tt18069420"
+  },
+  {
+    "tmdbId": "1412113",
+    "type": "movie",
+    "title": "Squid Game: Making Season 2",
+    "year": "2025",
+    "imdb_id": ""
+  },
+  {
+    "tmdbId": "1433719",
+    "type": "movie",
+    "title": "High Ground",
+    "year": "2025",
+    "imdb_id": "tt35669717"
+  },
+  {
+    "tmdbId": "9659",
+    "type": "movie",
+    "title": "Mad Max",
+    "year": "1979",
+    "imdb_id": "tt0079501"
+  },
+  {
+    "tmdbId": "1380682",
+    "type": "movie",
+    "title": "The Last Rodeo",
+    "year": "2025",
+    "imdb_id": "tt30908405"
+  },
+  {
+    "tmdbId": "235",
+    "type": "movie",
+    "title": "Stand by Me",
+    "year": "1986",
+    "imdb_id": "tt0092005"
+  },
+  {
+    "tmdbId": "1734",
+    "type": "movie",
+    "title": "The Mummy Returns",
+    "year": "2001",
+    "imdb_id": "tt0209163"
+  },
+  {
+    "tmdbId": "748230",
+    "type": "movie",
+    "title": "Salem's Lot",
+    "year": "2024",
+    "imdb_id": "tt10245072"
+  },
+  {
+    "tmdbId": "848326",
+    "type": "movie",
+    "title": "Rebel Moon - Part One: A Child of Fire",
+    "year": "2023",
+    "imdb_id": "tt14998742"
+  },
+  {
+    "tmdbId": "1284460",
+    "type": "movie",
+    "title": "Alpha",
+    "year": "2025",
+    "imdb_id": "tt32275943"
+  },
+  {
+    "tmdbId": "437068",
+    "type": "movie",
+    "title": "A Taxi Driver",
+    "year": "2017",
+    "imdb_id": "tt6878038"
+  },
+  {
+    "tmdbId": "515001",
+    "type": "movie",
+    "title": "Jojo Rabbit",
+    "year": "2019",
+    "imdb_id": "tt2584384"
+  },
+  {
+    "tmdbId": "274",
+    "type": "movie",
+    "title": "The Silence of the Lambs",
+    "year": "1991",
+    "imdb_id": "tt0102926"
+  },
+  {
+    "tmdbId": "51497",
+    "type": "movie",
+    "title": "Fast Five",
+    "year": "2011",
+    "imdb_id": "tt1596343"
+  },
+  {
+    "tmdbId": "706503",
+    "type": "movie",
+    "title": "Lost Bullet",
+    "year": "2020",
+    "imdb_id": "tt10456740"
+  },
+  {
+    "tmdbId": "9738",
+    "type": "movie",
+    "title": "Fantastic Four",
+    "year": "2005",
+    "imdb_id": "tt0120667"
+  },
+  {
+    "tmdbId": "1221061",
+    "type": "movie",
+    "title": "Sound of Falling",
+    "year": "2025",
+    "imdb_id": "tt28690468"
+  },
+  {
+    "tmdbId": "1155828",
+    "type": "movie",
+    "title": "Sing Sing",
+    "year": "2024",
+    "imdb_id": "tt28479262"
+  },
+  {
+    "tmdbId": "399566",
+    "type": "movie",
+    "title": "Godzilla vs. Kong",
+    "year": "2021",
+    "imdb_id": "tt5034838"
+  },
+  {
+    "tmdbId": "406",
+    "type": "movie",
+    "title": "La Haine",
+    "year": "1995",
+    "imdb_id": "tt0113247"
+  },
+  {
+    "tmdbId": "4954",
+    "type": "movie",
+    "title": "Drop Zone",
+    "year": "1994",
+    "imdb_id": "tt0109676"
+  },
+  {
+    "tmdbId": "1236471",
+    "type": "movie",
+    "title": "Everyone is Going to Die",
+    "year": "2025",
+    "imdb_id": "tt14048164"
+  },
+  {
+    "tmdbId": "760104",
+    "type": "movie",
+    "title": "X",
+    "year": "2022",
+    "imdb_id": "tt13560574"
+  },
+  {
+    "tmdbId": "81774",
+    "type": "movie",
+    "title": "Exploits of a Young Don Juan",
+    "year": "1986",
+    "imdb_id": "tt0092995"
+  },
+  {
+    "tmdbId": "425274",
+    "type": "movie",
+    "title": "Now You See Me: Now You Don't",
+    "year": "2025",
+    "imdb_id": "tt4712810"
+  },
+  {
+    "tmdbId": "1035259",
+    "type": "movie",
+    "title": "The Naked Gun",
+    "year": "2025",
+    "imdb_id": "tt3402138"
+  },
+  {
+    "tmdbId": "2501",
+    "type": "movie",
+    "title": "The Bourne Identity",
+    "year": "2002",
+    "imdb_id": "tt0258463"
+  },
+  {
+    "tmdbId": "1221404",
+    "type": "movie",
+    "title": "Crayon Shin-chan the Movie: Our Dinosaur Diary",
+    "year": "2024",
+    "imdb_id": "tt30400536"
+  },
+  {
+    "tmdbId": "500",
+    "type": "movie",
+    "title": "Reservoir Dogs",
+    "year": "1992",
+    "imdb_id": "tt0105236"
+  },
+  {
+    "tmdbId": "985",
+    "type": "movie",
+    "title": "Eraserhead",
+    "year": "1977",
+    "imdb_id": "tt0074486"
+  },
+  {
+    "tmdbId": "15",
+    "type": "movie",
+    "title": "Citizen Kane",
+    "year": "1941",
+    "imdb_id": "tt0033467"
+  },
+  {
+    "tmdbId": "966822",
+    "type": "movie",
+    "title": "Unit 234",
+    "year": "2024",
+    "imdb_id": "tt6906106"
+  },
+  {
+    "tmdbId": "87",
+    "type": "movie",
+    "title": "Indiana Jones and the Temple of Doom",
+    "year": "1984",
+    "imdb_id": "tt0087469"
+  },
+  {
+    "tmdbId": "136400",
+    "type": "movie",
+    "title": "2 Guns",
+    "year": "2013",
+    "imdb_id": "tt1272878"
+  },
+  {
+    "tmdbId": "1082424",
+    "type": "movie",
+    "title": "Jane Austen Wrecked My Life",
+    "year": "2025",
+    "imdb_id": "tt31112509"
+  },
+  {
+    "tmdbId": "62",
+    "type": "movie",
+    "title": "2001: A Space Odyssey",
+    "year": "1968",
+    "imdb_id": "tt0062622"
+  },
+  {
+    "tmdbId": "7512",
+    "type": "movie",
+    "title": "Idiocracy",
+    "year": "2006",
+    "imdb_id": "tt0387808"
+  },
+  {
+    "tmdbId": "640146",
+    "type": "movie",
+    "title": "Ant-Man and the Wasp: Quantumania",
+    "year": "2023",
+    "imdb_id": "tt10954600"
+  },
+  {
+    "tmdbId": "149870",
+    "type": "movie",
+    "title": "The Wind Rises",
+    "year": "2013",
+    "imdb_id": "tt2013293"
+  },
+  {
+    "tmdbId": "346",
+    "type": "movie",
+    "title": "Seven Samurai",
+    "year": "1954",
+    "imdb_id": "tt0047478"
+  },
+  {
+    "tmdbId": "9016",
+    "type": "movie",
+    "title": "Treasure Planet",
+    "year": "2002",
+    "imdb_id": "tt0133240"
+  },
+  {
+    "tmdbId": "395",
+    "type": "movie",
+    "title": "AVP: Alien vs. Predator",
+    "year": "2004",
+    "imdb_id": "tt0370263"
+  },
+  {
+    "tmdbId": "346648",
+    "type": "movie",
+    "title": "Paddington 2",
+    "year": "2017",
+    "imdb_id": "tt4468740"
+  },
+  {
+    "tmdbId": "36647",
+    "type": "movie",
+    "title": "Blade",
+    "year": "1998",
+    "imdb_id": "tt0120611"
+  },
+  {
+    "tmdbId": "315837",
+    "type": "movie",
+    "title": "Ghost in the Shell",
+    "year": "2017",
+    "imdb_id": "tt1219827"
+  },
+  {
+    "tmdbId": "1924",
+    "type": "movie",
+    "title": "Superman",
+    "year": "1978",
+    "imdb_id": "tt0078346"
+  },
+  {
+    "tmdbId": "9615",
+    "type": "movie",
+    "title": "The Fast and the Furious: Tokyo Drift",
+    "year": "2006",
+    "imdb_id": "tt0463985"
+  },
+  {
+    "tmdbId": "1006228",
+    "type": "movie",
+    "title": "Breakwater",
+    "year": "2023",
+    "imdb_id": "tt13924484"
+  },
+  {
+    "tmdbId": "8844",
+    "type": "movie",
+    "title": "Jumanji",
+    "year": "1995",
+    "imdb_id": "tt0113497"
+  },
+  {
+    "tmdbId": "1462313",
+    "type": "movie",
+    "title": "Sarah Silverman: PostMortem",
+    "year": "2025",
+    "imdb_id": "tt36473825"
+  },
+  {
+    "tmdbId": "591275",
+    "type": "movie",
+    "title": "Fear Street: 1666",
+    "year": "2021",
+    "imdb_id": "tt9701942"
+  },
+  {
+    "tmdbId": "1079244",
+    "type": "movie",
+    "title": "Bonhoeffer: Pastor. Spy. Assassin",
+    "year": "2024",
+    "imdb_id": "tt26237514"
+  },
+  {
+    "tmdbId": "438148",
+    "type": "movie",
+    "title": "Minions: The Rise of Gru",
+    "year": "2022",
+    "imdb_id": "tt5113044"
+  },
+  {
+    "tmdbId": "406759",
+    "type": "movie",
+    "title": "Moonfall",
+    "year": "2022",
+    "imdb_id": "tt5834426"
+  },
+  {
+    "tmdbId": "1013850",
+    "type": "movie",
+    "title": "A Real Pain",
+    "year": "2024",
+    "imdb_id": "tt21823606"
+  },
+  {
+    "tmdbId": "1020006",
+    "type": "movie",
+    "title": "Priscilla",
+    "year": "2023",
+    "imdb_id": "tt22041854"
+  },
+  {
+    "tmdbId": "957",
+    "type": "movie",
+    "title": "Spaceballs",
+    "year": "1987",
+    "imdb_id": "tt0094012"
+  },
+  {
+    "tmdbId": "9741",
+    "type": "movie",
+    "title": "Unbreakable",
+    "year": "2000",
+    "imdb_id": "tt0217869"
+  },
+  {
+    "tmdbId": "297761",
+    "type": "movie",
+    "title": "Suicide Squad",
+    "year": "2016",
+    "imdb_id": "tt1386697"
+  },
+  {
+    "tmdbId": "385128",
+    "type": "movie",
+    "title": "F9",
+    "year": "2021",
+    "imdb_id": "tt5433138"
+  },
+  {
+    "tmdbId": "126889",
+    "type": "movie",
+    "title": "Alien: Covenant",
+    "year": "2017",
+    "imdb_id": "tt2316204"
+  },
+  {
+    "tmdbId": "915935",
+    "type": "movie",
+    "title": "Anatomy of a Fall",
+    "year": "2023",
+    "imdb_id": "tt17009710"
+  },
+  {
+    "tmdbId": "429617",
+    "type": "movie",
+    "title": "Spider-Man: Far From Home",
+    "year": "2019",
+    "imdb_id": "tt6320628"
+  },
+  {
+    "tmdbId": "4588",
+    "type": "movie",
+    "title": "Lust, Caution",
+    "year": "2007",
+    "imdb_id": "tt0808357"
+  },
+  {
+    "tmdbId": "614917",
+    "type": "movie",
+    "title": "King Richard",
+    "year": "2021",
+    "imdb_id": "tt9620288"
+  },
+  {
+    "tmdbId": "9273",
+    "type": "movie",
+    "title": "Ace Ventura: When Nature Calls",
+    "year": "1995",
+    "imdb_id": "tt0112281"
+  },
+  {
+    "tmdbId": "1060046",
+    "type": "movie",
+    "title": "HIT: The Third Case",
+    "year": "2025",
+    "imdb_id": "tt23804696"
+  },
+  {
+    "tmdbId": "11360",
+    "type": "movie",
+    "title": "Dumbo",
+    "year": "1941",
+    "imdb_id": "tt0033563"
+  },
+  {
+    "tmdbId": "785084",
+    "type": "movie",
+    "title": "The Whale",
+    "year": "2022",
+    "imdb_id": "tt13833688"
+  },
+  {
+    "tmdbId": "1242898",
+    "type": "movie",
+    "title": "Predator: Badlands",
+    "year": "2025",
+    "imdb_id": "tt31227572"
+  },
+  {
+    "tmdbId": "1278827",
+    "type": "movie",
+    "title": "The Wedding Banquet",
+    "year": "2025",
+    "imdb_id": "tt32214413"
+  },
+  {
+    "tmdbId": "1144681",
+    "type": "movie",
+    "title": "Armand",
+    "year": "2024",
+    "imdb_id": "tt26745321"
+  },
+  {
+    "tmdbId": "1735",
+    "type": "movie",
+    "title": "The Mummy: Tomb of the Dragon Emperor",
+    "year": "2008",
+    "imdb_id": "tt0859163"
+  },
+  {
+    "tmdbId": "7555",
+    "type": "movie",
+    "title": "Rambo",
+    "year": "2008",
+    "imdb_id": "tt0462499"
+  },
+  {
+    "tmdbId": "782",
+    "type": "movie",
+    "title": "Gattaca",
+    "year": "1997",
+    "imdb_id": "tt0119177"
+  },
+  {
+    "tmdbId": "313369",
+    "type": "movie",
+    "title": "La La Land",
+    "year": "2016",
+    "imdb_id": "tt3783958"
+  },
+  {
+    "tmdbId": "1245993",
+    "type": "movie",
+    "title": "Caught Stealing",
+    "year": "2025",
+    "imdb_id": "tt1493274"
+  },
+  {
+    "tmdbId": "9475",
+    "type": "movie",
+    "title": "Scent of a Woman",
+    "year": "1992",
+    "imdb_id": "tt0105323"
+  },
+  {
+    "tmdbId": "1472668",
+    "type": "movie",
+    "title": "Wick Is Pain",
+    "year": "2025",
+    "imdb_id": "tt36751759"
+  },
+  {
+    "tmdbId": "1883",
+    "type": "movie",
+    "title": "Malcolm X",
+    "year": "1992",
+    "imdb_id": "tt0104797"
+  },
+  {
+    "tmdbId": "429351",
+    "type": "movie",
+    "title": "12 Strong",
+    "year": "2018",
+    "imdb_id": "tt1413492"
+  },
+  {
+    "tmdbId": "1339191",
+    "type": "movie",
+    "title": "Sunset Sunrise",
+    "year": "2025",
+    "imdb_id": "tt34420683"
+  },
+  {
+    "tmdbId": "837881",
+    "type": "movie",
+    "title": "She Said",
+    "year": "2022",
+    "imdb_id": "tt11198810"
+  },
+  {
+    "tmdbId": "533533",
+    "type": "movie",
+    "title": "TRON: Ares",
+    "year": "2025",
+    "imdb_id": "tt6604188"
+  },
+  {
+    "tmdbId": "598",
+    "type": "movie",
+    "title": "City of God",
+    "year": "2002",
+    "imdb_id": "tt0317248"
+  },
+  {
+    "tmdbId": "11153",
+    "type": "movie",
+    "title": "National Lampoon's Vacation",
+    "year": "1983",
+    "imdb_id": "tt0085995"
+  },
+  {
+    "tmdbId": "1278263",
+    "type": "movie",
+    "title": "The Seed of the Sacred Fig",
+    "year": "2024",
+    "imdb_id": "tt32178949"
+  },
+  {
+    "tmdbId": "58595",
+    "type": "movie",
+    "title": "Snow White and the Huntsman",
+    "year": "2012",
+    "imdb_id": "tt1735898"
+  },
+  {
+    "tmdbId": "72559",
+    "type": "movie",
+    "title": "G.I. Joe: Retaliation",
+    "year": "2013",
+    "imdb_id": "tt1583421"
+  },
+  {
+    "tmdbId": "88",
+    "type": "movie",
+    "title": "Dirty Dancing",
+    "year": "1987",
+    "imdb_id": "tt0092890"
+  },
+  {
+    "tmdbId": "613",
+    "type": "movie",
+    "title": "Downfall",
+    "year": "2004",
+    "imdb_id": "tt0363163"
+  },
+  {
+    "tmdbId": "619278",
+    "type": "movie",
+    "title": "Inside Man: Most Wanted",
+    "year": "2019",
+    "imdb_id": "tt7832848"
+  },
+  {
+    "tmdbId": "1208983",
+    "type": "movie",
+    "title": "Neighborhood Watch",
+    "year": "2025",
+    "imdb_id": "tt1714918"
+  },
+  {
+    "tmdbId": "615453",
+    "type": "movie",
+    "title": "Ne Zha",
+    "year": "2019",
+    "imdb_id": "tt10627720"
+  },
+  {
+    "tmdbId": "310131",
+    "type": "movie",
+    "title": "The Witch",
+    "year": "2016",
+    "imdb_id": "tt4263482"
+  },
+  {
+    "tmdbId": "10200",
+    "type": "movie",
+    "title": "The Day the Earth Stood Still",
+    "year": "2008",
+    "imdb_id": "tt0970416"
+  },
+  {
+    "tmdbId": "1086497",
+    "type": "movie",
+    "title": "The Penguin Lessons",
+    "year": "2025",
+    "imdb_id": "tt26677014"
+  },
+  {
+    "tmdbId": "10494",
+    "type": "movie",
+    "title": "Perfect Blue",
+    "year": "1998",
+    "imdb_id": "tt0156887"
+  },
+  {
+    "tmdbId": "837335",
+    "type": "movie",
+    "title": "La Chimera",
+    "year": "2023",
+    "imdb_id": "tt14561712"
+  },
+  {
+    "tmdbId": "60308",
+    "type": "movie",
+    "title": "Moneyball",
+    "year": "2011",
+    "imdb_id": "tt1210166"
+  },
+  {
+    "tmdbId": "152",
+    "type": "movie",
+    "title": "Star Trek: The Motion Picture",
+    "year": "1979",
+    "imdb_id": "tt0079945"
+  },
+  {
+    "tmdbId": "967847",
+    "type": "movie",
+    "title": "Ghostbusters: Frozen Empire",
+    "year": "2024",
+    "imdb_id": "tt21235248"
+  },
+  {
+    "tmdbId": "1276108",
+    "type": "movie",
+    "title": "Last Mile",
+    "year": "2024",
+    "imdb_id": "tt32253416"
+  },
+  {
+    "tmdbId": "843",
+    "type": "movie",
+    "title": "In the Mood for Love",
+    "year": "2000",
+    "imdb_id": "tt0118694"
+  },
+  {
+    "tmdbId": "81",
+    "type": "movie",
+    "title": "Nausicaä of the Valley of the Wind",
+    "year": "1984",
+    "imdb_id": "tt0087544"
+  },
+  {
+    "tmdbId": "710",
+    "type": "movie",
+    "title": "GoldenEye",
+    "year": "1995",
+    "imdb_id": "tt0113189"
+  },
+  {
+    "tmdbId": "65",
+    "type": "movie",
+    "title": "8 Mile",
+    "year": "2002",
+    "imdb_id": "tt0298203"
+  },
+  {
+    "tmdbId": "9645",
+    "type": "movie",
+    "title": "Ghost Ship",
+    "year": "2002",
+    "imdb_id": "tt0288477"
+  },
+  {
+    "tmdbId": "1127767",
+    "type": "movie",
+    "title": "Riff Raff",
+    "year": "2025",
+    "imdb_id": "tt27775403"
+  },
+  {
+    "tmdbId": "68",
+    "type": "movie",
+    "title": "Brazil",
+    "year": "1985",
+    "imdb_id": "tt0088846"
+  },
+  {
+    "tmdbId": "1389705",
+    "type": "movie",
+    "title": "Get Help",
+    "year": "2025",
+    "imdb_id": "tt30877814"
+  },
+  {
+    "tmdbId": "464052",
+    "type": "movie",
+    "title": "Wonder Woman 1984",
+    "year": "2020",
+    "imdb_id": "tt7126948"
+  },
+  {
+    "tmdbId": "8373",
+    "type": "movie",
+    "title": "Transformers: Revenge of the Fallen",
+    "year": "2009",
+    "imdb_id": "tt1055369"
+  },
+  {
+    "tmdbId": "935",
+    "type": "movie",
+    "title": "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
+    "year": "1964",
+    "imdb_id": "tt0057012"
+  },
+  {
+    "tmdbId": "1186563",
+    "type": "movie",
+    "title": "The Friend",
+    "year": "2025",
+    "imdb_id": "tt18108824"
+  },
+  {
+    "tmdbId": "8204",
+    "type": "movie",
+    "title": "The Spiderwick Chronicles",
+    "year": "2008",
+    "imdb_id": "tt0416236"
+  },
+  {
+    "tmdbId": "661374",
+    "type": "movie",
+    "title": "Glass Onion: A Knives Out Mystery",
+    "year": "2022",
+    "imdb_id": "tt11564570"
+  },
+  {
+    "tmdbId": "9268",
+    "type": "movie",
+    "title": "Eraser",
+    "year": "1996",
+    "imdb_id": "tt0116213"
+  },
+  {
+    "tmdbId": "1456349",
+    "type": "movie",
+    "title": "It Was Just an Accident",
+    "year": "2025",
+    "imdb_id": "tt36491653"
+  },
+  {
+    "tmdbId": "10112",
+    "type": "movie",
+    "title": "The Aristocats",
+    "year": "1970",
+    "imdb_id": "tt0065421"
+  },
+  {
+    "tmdbId": "1242015",
+    "type": "movie",
+    "title": "The Young Mother's Home",
+    "year": "2025",
+    "imdb_id": "tt32909489"
+  },
+  {
+    "tmdbId": "1181214",
+    "type": "movie",
+    "title": "Guy Manley - A Real Movie",
+    "year": "2024",
+    "imdb_id": "tt29005580"
+  },
+  {
+    "tmdbId": "1284878",
+    "type": "movie",
+    "title": "The Quilters",
+    "year": "2024",
+    "imdb_id": "tt32165461"
+  },
+  {
+    "tmdbId": "8619",
+    "type": "movie",
+    "title": "Master and Commander: The Far Side of the World",
+    "year": "2003",
+    "imdb_id": "tt0311113"
+  },
+  {
+    "tmdbId": "1062215",
+    "type": "movie",
+    "title": "Afraid",
+    "year": "2024",
+    "imdb_id": "tt24577462"
+  },
+  {
+    "tmdbId": "82992",
+    "type": "movie",
+    "title": "Fast & Furious 6",
+    "year": "2013",
+    "imdb_id": "tt1905041"
+  },
+  {
+    "tmdbId": "324852",
+    "type": "movie",
+    "title": "Despicable Me 3",
+    "year": "2017",
+    "imdb_id": "tt3469046"
+  },
+  {
+    "tmdbId": "119450",
+    "type": "movie",
+    "title": "Dawn of the Planet of the Apes",
+    "year": "2014",
+    "imdb_id": "tt2103281"
+  },
+  {
+    "tmdbId": "1109255",
+    "type": "movie",
+    "title": "Parthenope",
+    "year": "2024",
+    "imdb_id": "tt23853982"
+  },
+  {
+    "tmdbId": "1210732",
+    "type": "movie",
+    "title": "How to Make a Killing",
+    "year": "2025",
+    "imdb_id": "tt33984333"
+  },
+  {
+    "tmdbId": "534",
+    "type": "movie",
+    "title": "Terminator Salvation",
+    "year": "2009",
+    "imdb_id": "tt0438488"
+  },
+  {
+    "tmdbId": "648878",
+    "type": "movie",
+    "title": "Eddington",
+    "year": "2025",
+    "imdb_id": "tt31176520"
+  },
+  {
+    "tmdbId": "947",
+    "type": "movie",
+    "title": "Lawrence of Arabia",
+    "year": "1962",
+    "imdb_id": "tt0056172"
+  },
+  {
+    "tmdbId": "646380",
+    "type": "movie",
+    "title": "Don't Look Up",
+    "year": "2021",
+    "imdb_id": "tt11286314"
+  },
+  {
+    "tmdbId": "614930",
+    "type": "movie",
+    "title": "Teenage Mutant Ninja Turtles: Mutant Mayhem",
+    "year": "2023",
+    "imdb_id": "tt8589698"
+  },
+  {
+    "tmdbId": "1144932",
+    "type": "movie",
+    "title": "Queen of the Ring",
+    "year": "2025",
+    "imdb_id": "tt28070202"
+  },
+  {
+    "tmdbId": "7191",
+    "type": "movie",
+    "title": "Cloverfield",
+    "year": "2008",
+    "imdb_id": "tt1060277"
+  },
+  {
+    "tmdbId": "17654",
+    "type": "movie",
+    "title": "District 9",
+    "year": "2009",
+    "imdb_id": "tt1136608"
+  },
+  {
+    "tmdbId": "587",
+    "type": "movie",
+    "title": "Big Fish",
+    "year": "2003",
+    "imdb_id": "tt0319061"
+  },
+  {
+    "tmdbId": "185",
+    "type": "movie",
+    "title": "A Clockwork Orange",
+    "year": "1971",
+    "imdb_id": "tt0066921"
+  },
+  {
+    "tmdbId": "818",
+    "type": "movie",
+    "title": "Austin Powers in Goldmember",
+    "year": "2002",
+    "imdb_id": "tt0295178"
+  },
+  {
+    "tmdbId": "68735",
+    "type": "movie",
+    "title": "Warcraft",
+    "year": "2016",
+    "imdb_id": "tt0803096"
+  },
+  {
+    "tmdbId": "79871",
+    "type": "movie",
+    "title": "Crazy Love",
+    "year": "1993",
+    "imdb_id": "tt0107565"
+  },
+  {
+    "tmdbId": "142",
+    "type": "movie",
+    "title": "Brokeback Mountain",
+    "year": "2005",
+    "imdb_id": "tt0388795"
+  },
+  {
+    "tmdbId": "424139",
+    "type": "movie",
+    "title": "Halloween",
+    "year": "2018",
+    "imdb_id": "tt1502407"
+  },
+  {
+    "tmdbId": "60806",
+    "type": "movie",
+    "title": "In the Line of Duty: Smoke Jumpers",
+    "year": "1996",
+    "imdb_id": "tt0117671"
+  },
+  {
+    "tmdbId": "9480",
+    "type": "movie",
+    "title": "Daredevil",
+    "year": "2003",
+    "imdb_id": "tt0287978"
+  },
+  {
+    "tmdbId": "4547",
+    "type": "movie",
+    "title": "Panic Room",
+    "year": "2002",
+    "imdb_id": "tt0258000"
+  },
+  {
+    "tmdbId": "680027",
+    "type": "movie",
+    "title": "Altered Reality",
+    "year": "2024",
+    "imdb_id": "tt12004238"
+  },
+  {
+    "tmdbId": "1244890",
+    "type": "movie",
+    "title": "Sharp Corner",
+    "year": "2025",
+    "imdb_id": "tt9569096"
+  },
+  {
+    "tmdbId": "640351",
+    "type": "movie",
+    "title": "Película",
+    "year": "2017",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "1291526",
+    "type": "movie",
+    "title": "Womb",
+    "year": "2025",
+    "imdb_id": "tt32205746"
+  },
+  {
+    "tmdbId": "337401",
+    "type": "movie",
+    "title": "Mulan",
+    "year": "2020",
+    "imdb_id": "tt4566758"
+  },
+  {
+    "tmdbId": "842924",
+    "type": "movie",
+    "title": "The Life of Chuck",
+    "year": "2025",
+    "imdb_id": "tt12908150"
+  },
+  {
+    "tmdbId": "1300968",
+    "type": "movie",
+    "title": "The Hunger Games: Sunrise on the Reaping",
+    "year": "2026",
+    "imdb_id": "tt32558705"
+  },
+  {
+    "tmdbId": "938",
+    "type": "movie",
+    "title": "For a Few Dollars More",
+    "year": "1965",
+    "imdb_id": "tt0059578"
+  },
+  {
+    "tmdbId": "8077",
+    "type": "movie",
+    "title": "Alien³",
+    "year": "1992",
+    "imdb_id": "tt0103644"
+  },
+  {
+    "tmdbId": "7453",
+    "type": "movie",
+    "title": "The Hitchhiker's Guide to the Galaxy",
+    "year": "2005",
+    "imdb_id": "tt0371724"
+  },
+  {
+    "tmdbId": "1370",
+    "type": "movie",
+    "title": "Rambo III",
+    "year": "1988",
+    "imdb_id": "tt0095956"
+  },
+  {
+    "tmdbId": "842675",
+    "type": "movie",
+    "title": "The Wandering Earth II",
+    "year": "2023",
+    "imdb_id": "tt13539646"
+  },
+  {
+    "tmdbId": "840430",
+    "type": "movie",
+    "title": "The Holdovers",
+    "year": "2023",
+    "imdb_id": "tt14849194"
+  },
+  {
+    "tmdbId": "115",
+    "type": "movie",
+    "title": "The Big Lebowski",
+    "year": "1998",
+    "imdb_id": "tt0118715"
+  },
+  {
+    "tmdbId": "1226141",
+    "type": "movie",
+    "title": "The Last Dance",
+    "year": "2024",
+    "imdb_id": "tt31648020"
+  },
+  {
+    "tmdbId": "8247",
+    "type": "movie",
+    "title": "Jumper",
+    "year": "2008",
+    "imdb_id": "tt0489099"
+  },
+  {
+    "tmdbId": "1288070",
+    "type": "movie",
+    "title": "The Luckiest Man in America",
+    "year": "2025",
+    "imdb_id": "tt32331377"
+  },
+  {
+    "tmdbId": "664413",
+    "type": "movie",
+    "title": "365 Days",
+    "year": "2020",
+    "imdb_id": "tt10886166"
+  },
+  {
+    "tmdbId": "343611",
+    "type": "movie",
+    "title": "Jack Reacher: Never Go Back",
+    "year": "2016",
+    "imdb_id": "tt3393786"
+  },
+  {
+    "tmdbId": "2142",
+    "type": "movie",
+    "title": "Cop Land",
+    "year": "1997",
+    "imdb_id": "tt0118887"
+  },
+  {
+    "tmdbId": "608",
+    "type": "movie",
+    "title": "Men in Black II",
+    "year": "2002",
+    "imdb_id": "tt0120912"
+  },
+  {
+    "tmdbId": "298",
+    "type": "movie",
+    "title": "Ocean's Thirteen",
+    "year": "2007",
+    "imdb_id": "tt0496806"
+  },
+  {
+    "tmdbId": "9316",
+    "type": "movie",
+    "title": "Ong Bak",
+    "year": "2003",
+    "imdb_id": "tt0368909"
+  },
+  {
+    "tmdbId": "965150",
+    "type": "movie",
+    "title": "Aftersun",
+    "year": "2022",
+    "imdb_id": "tt19770238"
+  },
+  {
+    "tmdbId": "25771",
+    "type": "movie",
+    "title": "Pink Floyd: Live at Pompeii",
+    "year": "1972",
+    "imdb_id": "tt0069090"
+  },
+  {
+    "tmdbId": "9257",
+    "type": "movie",
+    "title": "S.W.A.T.",
+    "year": "2003",
+    "imdb_id": "tt0257076"
+  },
+  {
+    "tmdbId": "169",
+    "type": "movie",
+    "title": "Predator 2",
+    "year": "1990",
+    "imdb_id": "tt0100403"
+  },
+  {
+    "tmdbId": "16996",
+    "type": "movie",
+    "title": "17 Again",
+    "year": "2009",
+    "imdb_id": "tt0974661"
+  },
+  {
+    "tmdbId": "1369",
+    "type": "movie",
+    "title": "Rambo: First Blood Part II",
+    "year": "1985",
+    "imdb_id": "tt0089880"
+  },
+  {
+    "tmdbId": "1927",
+    "type": "movie",
+    "title": "Hulk",
+    "year": "2003",
+    "imdb_id": "tt0286716"
+  },
+  {
+    "tmdbId": "109428",
+    "type": "movie",
+    "title": "Evil Dead",
+    "year": "2013",
+    "imdb_id": "tt1288558"
+  },
+  {
+    "tmdbId": "1082195",
+    "type": "movie",
+    "title": "The Order",
+    "year": "2024",
+    "imdb_id": "tt26625693"
+  },
+  {
+    "tmdbId": "137106",
+    "type": "movie",
+    "title": "The Lego Movie",
+    "year": "2014",
+    "imdb_id": "tt1490017"
+  },
+  {
+    "tmdbId": "399055",
+    "type": "movie",
+    "title": "The Shape of Water",
+    "year": "2017",
+    "imdb_id": "tt5580390"
+  },
+  {
+    "tmdbId": "466272",
+    "type": "movie",
+    "title": "Once Upon a Time... in Hollywood",
+    "year": "2019",
+    "imdb_id": "tt7131622"
+  },
+  {
+    "tmdbId": "38356",
+    "type": "movie",
+    "title": "Transformers: Dark of the Moon",
+    "year": "2011",
+    "imdb_id": "tt1399103"
+  },
+  {
+    "tmdbId": "22803",
+    "type": "movie",
+    "title": "Law Abiding Citizen",
+    "year": "2009",
+    "imdb_id": "tt1197624"
+  },
+  {
+    "tmdbId": "526896",
+    "type": "movie",
+    "title": "Morbius",
+    "year": "2022",
+    "imdb_id": "tt5108870"
+  },
+  {
+    "tmdbId": "402",
+    "type": "movie",
+    "title": "Basic Instinct",
+    "year": "1992",
+    "imdb_id": "tt0103772"
+  },
+  {
+    "tmdbId": "967941",
+    "type": "movie",
+    "title": "Wicked: For Good",
+    "year": "2025",
+    "imdb_id": "tt19847976"
+  },
+  {
+    "tmdbId": "1289088",
+    "type": "movie",
+    "title": "Happy Monday(s)",
+    "year": "2025",
+    "imdb_id": "tt35875750"
+  },
+  {
+    "tmdbId": "5548",
+    "type": "movie",
+    "title": "RoboCop",
+    "year": "1987",
+    "imdb_id": "tt0093870"
+  },
+  {
+    "tmdbId": "610251",
+    "type": "movie",
+    "title": "Harbin",
+    "year": "2024",
+    "imdb_id": "tt23630030"
+  },
+  {
+    "tmdbId": "10386",
+    "type": "movie",
+    "title": "The Iron Giant",
+    "year": "1999",
+    "imdb_id": "tt0129167"
+  },
+  {
+    "tmdbId": "213",
+    "type": "movie",
+    "title": "North by Northwest",
+    "year": "1959",
+    "imdb_id": "tt0053125"
+  },
+  {
+    "tmdbId": "45612",
+    "type": "movie",
+    "title": "Source Code",
+    "year": "2011",
+    "imdb_id": "tt0945513"
+  },
+  {
+    "tmdbId": "8337",
+    "type": "movie",
+    "title": "They Live",
+    "year": "1988",
+    "imdb_id": "tt0096256"
+  },
+  {
+    "tmdbId": "10201",
+    "type": "movie",
+    "title": "Yes Man",
+    "year": "2008",
+    "imdb_id": "tt1068680"
+  },
+  {
+    "tmdbId": "44264",
+    "type": "movie",
+    "title": "True Grit",
+    "year": "2010",
+    "imdb_id": "tt1403865"
+  },
+  {
+    "tmdbId": "10142",
+    "type": "movie",
+    "title": "Casualties of War",
+    "year": "1989",
+    "imdb_id": "tt0097027"
+  },
+  {
+    "tmdbId": "163",
+    "type": "movie",
+    "title": "Ocean's Twelve",
+    "year": "2004",
+    "imdb_id": "tt0349903"
+  },
+  {
+    "tmdbId": "1571",
+    "type": "movie",
+    "title": "Live Free or Die Hard",
+    "year": "2007",
+    "imdb_id": "tt0337978"
+  },
+  {
+    "tmdbId": "10764",
+    "type": "movie",
+    "title": "Quantum of Solace",
+    "year": "2008",
+    "imdb_id": "tt0830515"
+  },
+  {
+    "tmdbId": "343668",
+    "type": "movie",
+    "title": "Kingsman: The Golden Circle",
+    "year": "2017",
+    "imdb_id": "tt4649466"
+  },
+  {
+    "tmdbId": "20526",
+    "type": "movie",
+    "title": "TRON: Legacy",
+    "year": "2010",
+    "imdb_id": "tt1104001"
+  },
+  {
+    "tmdbId": "254320",
+    "type": "movie",
+    "title": "The Lobster",
+    "year": "2015",
+    "imdb_id": "tt3464902"
+  },
+  {
+    "tmdbId": "1267905",
+    "type": "movie",
+    "title": "The Roses",
+    "year": "2025",
+    "imdb_id": "tt31973693"
+  },
+  {
+    "tmdbId": "37136",
+    "type": "movie",
+    "title": "The Naked Gun: From the Files of Police Squad!",
+    "year": "1988",
+    "imdb_id": "tt0095705"
+  },
+  {
+    "tmdbId": "322",
+    "type": "movie",
+    "title": "Mystic River",
+    "year": "2003",
+    "imdb_id": "tt0327056"
+  },
+  {
+    "tmdbId": "1948",
+    "type": "movie",
+    "title": "Crank",
+    "year": "2006",
+    "imdb_id": "tt0479884"
+  },
+  {
+    "tmdbId": "616",
+    "type": "movie",
+    "title": "The Last Samurai",
+    "year": "2003",
+    "imdb_id": "tt0325710"
+  },
+  {
+    "tmdbId": "268896",
+    "type": "movie",
+    "title": "Pacific Rim: Uprising",
+    "year": "2018",
+    "imdb_id": "tt2557478"
+  },
+  {
+    "tmdbId": "948276",
+    "type": "movie",
+    "title": "Lost Bullet 2",
+    "year": "2022",
+    "imdb_id": "tt14465706"
+  },
+  {
+    "tmdbId": "11470",
+    "type": "movie",
+    "title": "Jason X",
+    "year": "2001",
+    "imdb_id": "tt0211443"
+  },
+  {
+    "tmdbId": "979660",
+    "type": "movie",
+    "title": "Freaky Tales",
+    "year": "2025",
+    "imdb_id": "tt21942598"
+  },
+  {
+    "tmdbId": "1440641",
+    "type": "movie",
+    "title": "The Jolly Monkey",
+    "year": "2025",
+    "imdb_id": "tt35882235"
+  },
+  {
+    "tmdbId": "1465024",
+    "type": "movie",
+    "title": "Untold: The Liver King",
+    "year": "2025",
+    "imdb_id": "tt36557706"
+  },
+  {
+    "tmdbId": "1227128",
+    "type": "movie",
+    "title": "Raid 2",
+    "year": "2025",
+    "imdb_id": "tt28089700"
+  },
+  {
+    "tmdbId": "1229910",
+    "type": "movie",
+    "title": "Kryptic",
+    "year": "2025",
+    "imdb_id": "tt22697898"
+  },
+  {
+    "tmdbId": "984",
+    "type": "movie",
+    "title": "Dirty Harry",
+    "year": "1971",
+    "imdb_id": "tt0066999"
+  },
+  {
+    "tmdbId": "8273",
+    "type": "movie",
+    "title": "American Wedding",
+    "year": "2003",
+    "imdb_id": "tt0328828"
+  },
+  {
+    "tmdbId": "440021",
+    "type": "movie",
+    "title": "Happy Death Day",
+    "year": "2017",
+    "imdb_id": "tt5308322"
+  },
+  {
+    "tmdbId": "1481939",
+    "type": "movie",
+    "title": "MMA Cop",
+    "year": "2025",
+    "imdb_id": "tt21361374"
+  },
+  {
+    "tmdbId": "1287819",
+    "type": "movie",
+    "title": "A Samurai in Time",
+    "year": "2024",
+    "imdb_id": "tt32277931"
+  },
+  {
+    "tmdbId": "11674",
+    "type": "movie",
+    "title": "101 Dalmatians",
+    "year": "1996",
+    "imdb_id": "tt0115433"
+  },
+  {
+    "tmdbId": "1151272",
+    "type": "movie",
+    "title": "Sirât",
+    "year": "2025",
+    "imdb_id": "tt32298285"
+  },
+  {
+    "tmdbId": "1465245",
+    "type": "movie",
+    "title": "Ten Hours",
+    "year": "2025",
+    "imdb_id": "tt29456794"
+  },
+  {
+    "tmdbId": "522938",
+    "type": "movie",
+    "title": "Rambo: Last Blood",
+    "year": "2019",
+    "imdb_id": "tt1206885"
+  },
+  {
+    "tmdbId": "739405",
+    "type": "movie",
+    "title": "Operation Fortune: Ruse de Guerre",
+    "year": "2023",
+    "imdb_id": "tt7985704"
+  },
+  {
+    "tmdbId": "479455",
+    "type": "movie",
+    "title": "Men in Black: International",
+    "year": "2019",
+    "imdb_id": "tt2283336"
+  },
+  {
+    "tmdbId": "9928",
+    "type": "movie",
+    "title": "Robots",
+    "year": "2005",
+    "imdb_id": "tt0358082"
+  },
+  {
+    "tmdbId": "267860",
+    "type": "movie",
+    "title": "London Has Fallen",
+    "year": "2016",
+    "imdb_id": "tt3300542"
+  },
+  {
+    "tmdbId": "747",
+    "type": "movie",
+    "title": "Shaun of the Dead",
+    "year": "2004",
+    "imdb_id": "tt0365748"
+  },
+  {
+    "tmdbId": "1083782",
+    "type": "movie",
+    "title": "Seven Veils",
+    "year": "2025",
+    "imdb_id": "tt26671415"
+  },
+  {
+    "tmdbId": "1374",
+    "type": "movie",
+    "title": "Rocky IV",
+    "year": "1985",
+    "imdb_id": "tt0089927"
+  },
+  {
+    "tmdbId": "87421",
+    "type": "movie",
+    "title": "Riddick",
+    "year": "2013",
+    "imdb_id": "tt1411250"
+  },
+  {
+    "tmdbId": "563",
+    "type": "movie",
+    "title": "Starship Troopers",
+    "year": "1997",
+    "imdb_id": "tt0120201"
+  },
+  {
+    "tmdbId": "841",
+    "type": "movie",
+    "title": "Dune",
+    "year": "1984",
+    "imdb_id": "tt0087182"
+  },
+  {
+    "tmdbId": "631843",
+    "type": "movie",
+    "title": "Old",
+    "year": "2021",
+    "imdb_id": "tt10954652"
+  },
+  {
+    "tmdbId": "460465",
+    "type": "movie",
+    "title": "Mortal Kombat",
+    "year": "2021",
+    "imdb_id": "tt0293429"
+  },
+  {
+    "tmdbId": "433",
+    "type": "movie",
+    "title": "Mary Poppins",
+    "year": "1964",
+    "imdb_id": "tt0058331"
+  },
+  {
+    "tmdbId": "723072",
+    "type": "movie",
+    "title": "Host",
+    "year": "2020",
+    "imdb_id": "tt12749596"
+  },
+  {
+    "tmdbId": "639933",
+    "type": "movie",
+    "title": "The Northman",
+    "year": "2022",
+    "imdb_id": "tt11138512"
+  },
+  {
+    "tmdbId": "11319",
+    "type": "movie",
+    "title": "The Rescuers",
+    "year": "1977",
+    "imdb_id": "tt0076618"
+  },
+  {
+    "tmdbId": "1452",
+    "type": "movie",
+    "title": "Superman Returns",
+    "year": "2006",
+    "imdb_id": "tt0348150"
+  },
+  {
+    "tmdbId": "10398",
+    "type": "movie",
+    "title": "Double Jeopardy",
+    "year": "1999",
+    "imdb_id": "tt0150377"
+  },
+  {
+    "tmdbId": "559682",
+    "type": "movie",
+    "title": "Sex Exchange",
+    "year": "2018",
+    "imdb_id": null
+  },
+  {
+    "tmdbId": "813",
+    "type": "movie",
+    "title": "Airplane!",
+    "year": "1980",
+    "imdb_id": "tt0080339"
+  },
+  {
+    "tmdbId": "9003",
+    "type": "movie",
+    "title": "Hellraiser",
+    "year": "1987",
+    "imdb_id": "tt0093177"
+  },
+  {
+    "tmdbId": "9620",
+    "type": "movie",
+    "title": "Paycheck",
+    "year": "2003",
+    "imdb_id": "tt0338337"
+  },
+  {
+    "tmdbId": "1103",
+    "type": "movie",
+    "title": "Escape from New York",
+    "year": "1981",
+    "imdb_id": "tt0082340"
+  },
+  {
+    "tmdbId": "414",
+    "type": "movie",
+    "title": "Batman Forever",
+    "year": "1995",
+    "imdb_id": "tt0112462"
+  },
+  {
+    "tmdbId": "424694",
+    "type": "movie",
+    "title": "Bohemian Rhapsody",
+    "year": "2018",
+    "imdb_id": "tt1727824"
+  },
+  {
+    "tmdbId": "9802",
+    "type": "movie",
+    "title": "The Rock",
+    "year": "1996",
+    "imdb_id": "tt0117500"
+  },
+  {
+    "tmdbId": "316029",
+    "type": "movie",
+    "title": "The Greatest Showman",
+    "year": "2017",
+    "imdb_id": "tt1485796"
+  },
+  {
+    "tmdbId": "966238",
+    "type": "movie",
+    "title": "La Cocina",
+    "year": "2024",
+    "imdb_id": "tt19864832"
+  },
+  {
+    "tmdbId": "649609",
+    "type": "movie",
+    "title": "Renfield",
+    "year": "2023",
+    "imdb_id": "tt11358390"
+  },
+  {
+    "tmdbId": "974663",
+    "type": "movie",
+    "title": "200% Wolf",
+    "year": "2024",
+    "imdb_id": "tt27722575"
+  },
+  {
+    "tmdbId": "10066",
+    "type": "movie",
+    "title": "House of Wax",
+    "year": "2005",
+    "imdb_id": "tt0397065"
+  },
+  {
+    "tmdbId": "219",
+    "type": "movie",
+    "title": "Volver",
+    "year": "2006",
+    "imdb_id": "tt0441909"
+  },
+  {
+    "tmdbId": "61791",
+    "type": "movie",
+    "title": "Rise of the Planet of the Apes",
+    "year": "2011",
+    "imdb_id": "tt1318514"
+  },
+  {
+    "tmdbId": "12721",
+    "type": "movie",
+    "title": "No Retreat, No Surrender",
+    "year": "1986",
+    "imdb_id": "tt0089695"
+  },
+  {
+    "tmdbId": "398818",
+    "type": "movie",
+    "title": "Call Me by Your Name",
+    "year": "2017",
+    "imdb_id": "tt5726616"
+  },
+  {
+    "tmdbId": "1086637",
+    "type": "movie",
+    "title": "Pangolin: Kulu's Journey",
+    "year": "2025",
+    "imdb_id": "tt27931052"
+  },
+  {
+    "tmdbId": "771",
+    "type": "movie",
+    "title": "Home Alone",
+    "year": "1990",
+    "imdb_id": "tt0099785"
+  },
+  {
+    "tmdbId": "757725",
+    "type": "movie",
+    "title": "Shadow Force",
+    "year": "2025",
+    "imdb_id": "tt11092020"
+  },
+  {
+    "tmdbId": "503919",
+    "type": "movie",
+    "title": "The Lighthouse",
+    "year": "2019",
+    "imdb_id": "tt7984734"
+  },
+  {
+    "tmdbId": "278154",
+    "type": "movie",
+    "title": "Ice Age: Collision Course",
+    "year": "2016",
+    "imdb_id": "tt3416828"
+  },
+  {
+    "tmdbId": "2667",
+    "type": "movie",
+    "title": "The Blair Witch Project",
+    "year": "1999",
+    "imdb_id": "tt0185937"
+  },
+  {
+    "tmdbId": "980078",
+    "type": "movie",
+    "title": "Winnie the Pooh: Blood and Honey",
+    "year": "2023",
+    "imdb_id": "tt19623240"
+  },
+  {
+    "tmdbId": "718789",
+    "type": "movie",
+    "title": "Lightyear",
+    "year": "2022",
+    "imdb_id": "tt10298810"
+  },
+  {
+    "tmdbId": "848538",
+    "type": "movie",
+    "title": "Argylle",
+    "year": "2024",
+    "imdb_id": "tt15009428"
+  },
+  {
+    "tmdbId": "359724",
+    "type": "movie",
+    "title": "Ford v Ferrari",
+    "year": "2019",
+    "imdb_id": "tt1950186"
+  },
+  {
+    "tmdbId": "19908",
+    "type": "movie",
+    "title": "Zombieland",
+    "year": "2009",
+    "imdb_id": "tt1156398"
+  },
+  {
+    "tmdbId": "25237",
+    "type": "movie",
+    "title": "Come and See",
+    "year": "1985",
+    "imdb_id": "tt0091251"
+  },
+  {
+    "tmdbId": "324668",
+    "type": "movie",
+    "title": "Jason Bourne",
+    "year": "2016",
+    "imdb_id": "tt4196776"
+  },
+  {
+    "tmdbId": "107846",
+    "type": "movie",
+    "title": "Escape Plan",
+    "year": "2013",
+    "imdb_id": "tt1211956"
+  },
+  {
+    "tmdbId": "8321",
+    "type": "movie",
+    "title": "In Bruges",
+    "year": "2008",
+    "imdb_id": "tt0780536"
+  },
+  {
+    "tmdbId": "9348",
+    "type": "movie",
+    "title": "Species",
+    "year": "1995",
+    "imdb_id": "tt0114508"
+  },
+  {
+    "tmdbId": "1084153",
+    "type": "movie",
+    "title": "Sneaks",
+    "year": "2025",
+    "imdb_id": "tt9254940"
+  },
+  {
+    "tmdbId": "761851",
+    "type": "movie",
+    "title": "His Only Son",
+    "year": "2023",
+    "imdb_id": "tt8277246"
+  },
+  {
+    "tmdbId": "379686",
+    "type": "movie",
+    "title": "Space Jam: A New Legacy",
+    "year": "2021",
+    "imdb_id": "tt3554046"
+  },
+  {
+    "tmdbId": "881366",
+    "type": "movie",
+    "title": "The End",
+    "year": "2024",
+    "imdb_id": "tt15551346"
+  },
+  {
+    "tmdbId": "306947",
+    "type": "movie",
+    "title": "The Invitation",
+    "year": "2016",
+    "imdb_id": "tt2400463"
+  },
+  {
+    "tmdbId": "11527",
+    "type": "movie",
+    "title": "Excalibur",
+    "year": "1981",
+    "imdb_id": "tt0082348"
+  },
+  {
+    "tmdbId": "600",
+    "type": "movie",
+    "title": "Full Metal Jacket",
+    "year": "1987",
+    "imdb_id": "tt0093058"
+  },
+  {
+    "tmdbId": "10997",
+    "type": "movie",
+    "title": "Farewell My Concubine",
+    "year": "1993",
+    "imdb_id": "tt0106332"
+  },
+  {
+    "tmdbId": "931",
+    "type": "movie",
+    "title": "Don't Look Now",
+    "year": "1973",
+    "imdb_id": "tt0069995"
+  },
+  {
+    "tmdbId": "46738",
+    "type": "movie",
+    "title": "Incendies",
+    "year": "2010",
+    "imdb_id": "tt1255953"
+  },
+  {
+    "tmdbId": "20982",
+    "type": "movie",
+    "title": "Naruto Shippuden the Movie",
+    "year": "2007",
+    "imdb_id": "tt0988982"
+  },
+  {
+    "tmdbId": "1045021",
+    "type": "movie",
+    "title": "Thug Life",
+    "year": "2025",
+    "imdb_id": "tt23398540"
+  },
+  {
+    "tmdbId": "1261148",
+    "type": "movie",
+    "title": "The Deceased",
+    "year": "2025",
+    "imdb_id": "tt34960278"
+  },
+  {
+    "tmdbId": "8840",
+    "type": "movie",
+    "title": "DragonHeart",
+    "year": "1996",
+    "imdb_id": "tt0116136"
+  },
+  {
+    "tmdbId": "404368",
+    "type": "movie",
+    "title": "Ralph Breaks the Internet",
+    "year": "2018",
+    "imdb_id": "tt5848272"
+  },
+  {
+    "tmdbId": "1878",
+    "type": "movie",
+    "title": "Fear and Loathing in Las Vegas",
+    "year": "1998",
+    "imdb_id": "tt0120669"
+  },
+  {
+    "tmdbId": "34851",
+    "type": "movie",
+    "title": "Predators",
+    "year": "2010",
+    "imdb_id": "tt1424381"
+  },
+  {
+    "tmdbId": "9665",
+    "type": "movie",
+    "title": "Glory",
+    "year": "1989",
+    "imdb_id": "tt0097441"
+  },
+  {
+    "tmdbId": "535167",
+    "type": "movie",
+    "title": "The Wandering Earth",
+    "year": "2019",
+    "imdb_id": "tt7605074"
+  },
+  {
+    "tmdbId": "1593",
+    "type": "movie",
+    "title": "Night at the Museum",
+    "year": "2006",
+    "imdb_id": "tt0477347"
+  },
+  {
+    "tmdbId": "423204",
+    "type": "movie",
+    "title": "Angel Has Fallen",
+    "year": "2019",
+    "imdb_id": "tt6189022"
+  },
+  {
+    "tmdbId": "1244492",
+    "type": "movie",
+    "title": "Look Back",
+    "year": "2024",
+    "imdb_id": "tt31711040"
+  },
+  {
+    "tmdbId": "11362",
+    "type": "movie",
+    "title": "The Count of Monte Cristo",
+    "year": "2002",
+    "imdb_id": "tt0245844"
+  },
+  {
+    "tmdbId": "924",
+    "type": "movie",
+    "title": "Dawn of the Dead",
+    "year": "2004",
+    "imdb_id": "tt0363547"
+  },
+  {
+    "tmdbId": "2252",
+    "type": "movie",
+    "title": "Eastern Promises",
+    "year": "2007",
+    "imdb_id": "tt0765443"
+  },
+  {
+    "tmdbId": "655",
+    "type": "movie",
+    "title": "Paris, Texas",
+    "year": "1984",
+    "imdb_id": "tt0087884"
+  },
+  {
+    "tmdbId": "24128",
+    "type": "movie",
+    "title": "Stop Making Sense",
+    "year": "1984",
+    "imdb_id": "tt0088178"
+  },
+  {
+    "tmdbId": "163394",
+    "type": "movie",
+    "title": "Doraemon: Nobita and the Spiral City",
+    "year": "1997",
+    "imdb_id": "tt1147510"
+  },
+  {
+    "tmdbId": "16307",
+    "type": "movie",
+    "title": "The Wicker Man",
+    "year": "1973",
+    "imdb_id": "tt0070917"
+  },
+  {
+    "tmdbId": "1911",
+    "type": "movie",
+    "title": "The 13th Warrior",
+    "year": "1999",
+    "imdb_id": "tt0120657"
+  },
+  {
+    "tmdbId": "15121",
+    "type": "movie",
+    "title": "The Sound of Music",
+    "year": "1965",
+    "imdb_id": "tt0059742"
+  },
+  {
+    "tmdbId": "1371",
+    "type": "movie",
+    "title": "Rocky III",
+    "year": "1982",
+    "imdb_id": "tt0084602"
+  },
+  {
+    "tmdbId": "86828",
+    "type": "movie",
+    "title": "Absolutely Anything",
+    "year": "2015",
+    "imdb_id": "tt1727770"
+  },
+  {
+    "tmdbId": "11906",
+    "type": "movie",
+    "title": "Suspiria",
+    "year": "1977",
+    "imdb_id": "tt0076786"
+  },
+  {
+    "tmdbId": "94329",
+    "type": "movie",
+    "title": "The Raid",
+    "year": "2012",
+    "imdb_id": "tt1899353"
+  },
+  {
+    "tmdbId": "5175",
+    "type": "movie",
+    "title": "Rush Hour 2",
+    "year": "2001",
+    "imdb_id": "tt0266915"
+  },
+  {
+    "tmdbId": "69526",
+    "type": "movie",
+    "title": "The Assassination Bureau",
+    "year": "1969",
+    "imdb_id": "tt0064045"
+  },
+  {
+    "tmdbId": "1290182",
+    "type": "movie",
+    "title": "You Are the Apple of My Eye",
+    "year": "2025",
+    "imdb_id": "tt33381920"
+  },
+  {
+    "tmdbId": "9654",
+    "type": "movie",
+    "title": "The Italian Job",
+    "year": "2003",
+    "imdb_id": "tt0317740"
+  },
+  {
+    "tmdbId": "1284856",
+    "type": "movie",
+    "title": "Fé para o Impossível",
+    "year": "2025",
+    "imdb_id": "tt32282525"
+  },
+  {
+    "tmdbId": "75",
+    "type": "movie",
+    "title": "Mars Attacks!",
+    "year": "1996",
+    "imdb_id": "tt0116996"
+  },
+  {
+    "tmdbId": "4909",
+    "type": "movie",
+    "title": "The Day of the Jackal",
+    "year": "1973",
+    "imdb_id": "tt0069947"
+  },
+  {
+    "tmdbId": "21422",
+    "type": "movie",
+    "title": "Detective Conan: The Time Bombed Skyscraper",
+    "year": "1997",
+    "imdb_id": "tt0131479"
+  },
+  {
+    "tmdbId": "260513",
+    "type": "movie",
+    "title": "Incredibles 2",
+    "year": "2018",
+    "imdb_id": "tt3606756"
+  },
+  {
+    "tmdbId": "1026470",
+    "type": "movie",
+    "title": "Silent Roar",
+    "year": "2025",
+    "imdb_id": "tt15359618"
+  },
+  {
+    "tmdbId": "677179",
+    "type": "movie",
+    "title": "Creed III",
+    "year": "2023",
+    "imdb_id": "tt11145118"
+  },
+  {
+    "tmdbId": "814776",
+    "type": "movie",
+    "title": "Bottoms",
+    "year": "2023",
+    "imdb_id": "tt17527468"
+  },
+  {
+    "tmdbId": "1487",
+    "type": "movie",
+    "title": "Hellboy",
+    "year": "2004",
+    "imdb_id": "tt0167190"
+  },
+  {
+    "tmdbId": "2486",
+    "type": "movie",
+    "title": "Eragon",
+    "year": "2006",
+    "imdb_id": "tt0449010"
+  },
+  {
+    "tmdbId": "27576",
+    "type": "movie",
+    "title": "Salt",
+    "year": "2010",
+    "imdb_id": "tt0944835"
+  },
+  {
+    "tmdbId": "5651",
+    "type": "movie",
+    "title": "Up!",
+    "year": "1976",
+    "imdb_id": "tt0075376"
   }
 ]

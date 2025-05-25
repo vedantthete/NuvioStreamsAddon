@@ -1,0 +1,57 @@
+{
+  "adult": false,
+  "backdrop_path": "/nqfgAh16N1w5T5LVodFG30QhnKP.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 99,
+      "name": "Documentary"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81588273",
+  "id": 1466938,
+  "imdb_id": "tt36592065",
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_title": "A Deadly American Marriage",
+  "overview": "Murder or self-defense? Told from both sides, this documentary explores the killing of Jason Corbett during a dispute with his wife and her father.",
+  "popularity": 17.4904,
+  "poster_path": "/2DiydymXoLD9KUGZKorBNapshl1.jpg",
+  "production_companies": [
+    {
+      "id": 95614,
+      "logo_path": "/2Xj5SBxYZvcrAQZv5nCrbBhtNH1.png",
+      "name": "Knickerbockerglory TV",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    }
+  ],
+  "release_date": "2025-05-09",
+  "revenue": 0,
+  "runtime": 103,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "A Deadly American Marriage",
+  "video": false,
+  "vote_average": 6.656,
+  "vote_count": 32
+}

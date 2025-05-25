@@ -1,0 +1,82 @@
+{
+  "adult": false,
+  "backdrop_path": "/hD2SN5bbqxk0kcRmsATJkXObgnZ.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81566553",
+  "id": 1405338,
+  "imdb_id": "tt35111035",
+  "origin_country": [
+    "JP"
+  ],
+  "original_language": "ja",
+  "original_title": "Demon City 鬼ゴロシ",
+  "overview": "Framed for his family's murder and left for dead, an ex-hitman will stop at nothing to exact revenge on the masked \"demons\" who have taken over his city.",
+  "popularity": 34.014,
+  "poster_path": "/g5PqsFFrayyRL1Ldgib2lMYuJXg.jpg",
+  "production_companies": [
+    {
+      "id": 185004,
+      "logo_path": "/tyHnxjQJLH6h4iDQKhN5iqebWmX.png",
+      "name": "Netflix",
+      "origin_country": "JP"
+    },
+    {
+      "id": 14602,
+      "logo_path": "/t9eqx5QCHtu8LxxgYzivqrJAosp.png",
+      "name": "AMUSE",
+      "origin_country": "JP"
+    },
+    {
+      "id": 3361,
+      "logo_path": "/sDKWkiVJRY0gn1j5NBseGKlgFyY.png",
+      "name": "Digital Frontier",
+      "origin_country": "JP"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "JP",
+      "name": "Japan"
+    }
+  ],
+  "release_date": "2025-02-26",
+  "revenue": 0,
+  "runtime": 106,
+  "spoken_languages": [
+    {
+      "english_name": "Hindi",
+      "iso_639_1": "hi",
+      "name": "हिन्दी"
+    },
+    {
+      "english_name": "Japanese",
+      "iso_639_1": "ja",
+      "name": "日本語"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Killing isn't enough when there's hell to pay.",
+  "title": "Demon City",
+  "video": false,
+  "vote_average": 6.989,
+  "vote_count": 235
+}

@@ -1,0 +1,67 @@
+{
+  "adult": false,
+  "backdrop_path": "/hRn5oyuhrVFjLwDpe73UvqgvPht.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    }
+  ],
+  "homepage": "https://cccv.to/holynightkorea",
+  "id": 793387,
+  "imdb_id": "tt15766876",
+  "origin_country": [
+    "KR"
+  ],
+  "original_language": "ko",
+  "original_title": "거룩한 밤: 데몬 헌터스",
+  "overview": "When a devil-worshipping criminal network plunges Seoul into chaos, the police turn to Holy Night—a trio of supernatural demon hunters—to restore order and defeat the rising evil.",
+  "popularity": 28.0202,
+  "poster_path": "/v3Mo77Qjp6pctpD4eJaNT6kFRSB.jpg",
+  "production_companies": [
+    {
+      "id": 129217,
+      "logo_path": "/s5rN5NUfE9yx21Yh0CuLULAGH5Y.png",
+      "name": "Big Punch Pictures",
+      "origin_country": "KR"
+    },
+    {
+      "id": 159339,
+      "logo_path": "/for2e6A1vUs6YwDAwcXRiL1MgtV.png",
+      "name": "Nova Film",
+      "origin_country": "KR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "KR",
+      "name": "South Korea"
+    }
+  ],
+  "release_date": "2025-04-30",
+  "revenue": 2263569,
+  "runtime": 92,
+  "spoken_languages": [
+    {
+      "english_name": "Korean",
+      "iso_639_1": "ko",
+      "name": "한국어/조선말"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Beat up to the salvation.",
+  "title": "Holy Night: Demon Hunters",
+  "video": false,
+  "vote_average": 5.9,
+  "vote_count": 4
+}

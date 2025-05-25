@@ -1,0 +1,64 @@
+{
+  "adult": false,
+  "backdrop_path": "/v4qYzIO4qMyfUKuno37D6VUiLCp.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "",
+  "id": 1049171,
+  "imdb_id": "tt18274350",
+  "origin_country": [
+    "IT"
+  ],
+  "original_language": "it",
+  "original_title": "Perfetta illusione",
+  "overview": "Toni leads a normal life with his wife Paola but full of enthusiasm and passion. The chance meeting with the young and wealthy Chiara will rekindle in him the desire to redeem himself and to realize his secret dream: to become an artist. The paths of the three will intertwine in a dangerous love triangle that will change the course of their lives forever.",
+  "popularity": 15.6784,
+  "poster_path": "/8ccC602WlexR43eoCscwIySfKVZ.jpg",
+  "production_companies": [
+    {
+      "id": 94370,
+      "logo_path": "/js6kgKVGM2sLtxS95IT3z8dBdIF.png",
+      "name": "Mompracem",
+      "origin_country": "IT"
+    },
+    {
+      "id": 1583,
+      "logo_path": "/gKP4egMJOi5rksdnplfPV1wa0sd.png",
+      "name": "RAI",
+      "origin_country": "IT"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "IT",
+      "name": "Italy"
+    }
+  ],
+  "release_date": "2022-12-15",
+  "revenue": 0,
+  "runtime": 88,
+  "spoken_languages": [
+    {
+      "english_name": "French",
+      "iso_639_1": "fr",
+      "name": "Français"
+    },
+    {
+      "english_name": "Italian",
+      "iso_639_1": "it",
+      "name": "Italiano"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Temptation",
+  "video": false,
+  "vote_average": 5.411,
+  "vote_count": 28
+}

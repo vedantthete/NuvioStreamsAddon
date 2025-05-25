@@ -1,0 +1,54 @@
+{
+  "adult": false,
+  "backdrop_path": "/m2mzlsJjE3UAqeUB5fLUkpWg4Iq.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    }
+  ],
+  "homepage": "",
+  "id": 1165067,
+  "imdb_id": "tt27949946",
+  "origin_country": [
+    "CA",
+    "US",
+    "GB"
+  ],
+  "original_language": "en",
+  "original_title": "Cosmic Chaos",
+  "overview": "Battles in virtual reality, survival in a post-apocalyptic wasteland, a Soviet spaceship giving a distress signal - Fantastic stories created with advanced special effects and passion.",
+  "popularity": 23.9913,
+  "poster_path": "/mClzWv7gBqgXfjZXp49Enyoex1v.jpg",
+  "production_companies": [
+    {
+      "id": 180745,
+      "logo_path": null,
+      "name": "Hewes Pictures",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [],
+  "release_date": "2023-08-03",
+  "revenue": 0,
+  "runtime": 0,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "In space... there is only chaos.",
+  "title": "Cosmic Chaos",
+  "video": false,
+  "vote_average": 5.958,
+  "vote_count": 48
+}

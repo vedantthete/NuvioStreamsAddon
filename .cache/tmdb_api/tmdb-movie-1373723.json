@@ -1,0 +1,45 @@
+{
+  "adult": false,
+  "backdrop_path": "/ibF5XVxTzf1ayzZrmiJqgeQ39Qk.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 10752,
+      "name": "War"
+    }
+  ],
+  "homepage": "",
+  "id": 1373723,
+  "imdb_id": "tt32044730",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "The Codes of War",
+  "overview": "War stories about family, ethics and honor include the true story of two U.S. Marines who in a span of six seconds, must stand their ground to stop a suicide truck bomb, a Navy Corpsman who attempts to hold on to his humanity, and a WW2 soldier who gets separated from his squad and is forced to re-evaluate his code.",
+  "popularity": 29.2712,
+  "poster_path": "/oXeiQAfRK90pxxhP5iKPXQqAIN1.jpg",
+  "production_companies": [],
+  "production_countries": [],
+  "release_date": "2025-03-20",
+  "revenue": 0,
+  "runtime": 92,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Codes of War",
+  "video": false,
+  "vote_average": 6.1,
+  "vote_count": 60
+}

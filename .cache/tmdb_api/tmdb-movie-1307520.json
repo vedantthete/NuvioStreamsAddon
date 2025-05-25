@@ -1,0 +1,64 @@
+{
+  "adult": false,
+  "backdrop_path": "/iznPd7PLnCBA1G50M4DuA9wvCIy.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81677543",
+  "id": 1307520,
+  "imdb_id": "tt31227132",
+  "origin_country": [
+    "FR",
+    "MX"
+  ],
+  "original_language": "es",
+  "original_title": "La más fan",
+  "overview": "Canceled in Hollywood, star Lana Cruz heads to her hometown for a comeback. Enter Polly, her fan-turned-frenemy. Can Lana dodge drama and reclaim her fame?",
+  "popularity": 23.8477,
+  "poster_path": "/wgUmsekYPOt9ZQ8ero91qRnmhQY.jpg",
+  "production_companies": [
+    {
+      "id": 9,
+      "logo_path": "/nda3dTUYdDrJ6rZqBpYvY865aDv.png",
+      "name": "Gaumont",
+      "origin_country": "FR"
+    },
+    {
+      "id": 228488,
+      "logo_path": "/bVewn2motj4B6MPCJa94GM1i1IO.png",
+      "name": "Pasajero",
+      "origin_country": "MX"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    },
+    {
+      "iso_3166_1": "MX",
+      "name": "Mexico"
+    }
+  ],
+  "release_date": "2025-05-01",
+  "revenue": 0,
+  "runtime": 91,
+  "spoken_languages": [
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Biggest Fan",
+  "video": false,
+  "vote_average": 5.911,
+  "vote_count": 28
+}

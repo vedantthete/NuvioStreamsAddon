@@ -1,0 +1,63 @@
+{
+  "adult": false,
+  "backdrop_path": "/kXxriYfAWtMJNHGHVYr09c37L07.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "",
+  "id": 650033,
+  "imdb_id": "tt14760886",
+  "origin_country": [
+    "RU"
+  ],
+  "original_language": "ru",
+  "original_title": "Свободное падение",
+  "overview": "In the near future, humanity has successfully colonized space and build a giant orbital station \"Delta\". Max is a repairman working on the station. After a disaster caused by a proton storm, he is left alone without his crew members, drifting into space. His space suit is broken, he is exhausted, and he lacks communication with people. But suddenly a dispatcher named Anna comes to help. She is the only one who can guide Max through difficulties and get him to the station. Max has to risk everything to save his life, but he has no idea what Anna is up to.",
+  "popularity": 22.0869,
+  "poster_path": "/tB66c6dnu9dG60mta8TF8zmeGJn.jpg",
+  "production_companies": [
+    {
+      "id": 125614,
+      "logo_path": "/qKgQZkGs9fwcw3yRFDtqiYPApRL.png",
+      "name": "Plan 9",
+      "origin_country": "RU"
+    },
+    {
+      "id": 125613,
+      "logo_path": "/4igxnZjJeSStLiMWf7xDCEaJWUN.png",
+      "name": "Kinoprime Foundation",
+      "origin_country": "RU"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "RU",
+      "name": "Russia"
+    }
+  ],
+  "release_date": "2025-05-21",
+  "revenue": 0,
+  "runtime": 90,
+  "spoken_languages": [
+    {
+      "english_name": "Russian",
+      "iso_639_1": "ru",
+      "name": "Pусский"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Free Fall",
+  "video": false,
+  "vote_average": 4.6,
+  "vote_count": 5
+}

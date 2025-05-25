@@ -1,0 +1,77 @@
+{
+  "adult": false,
+  "backdrop_path": "/5FzFpmoZ4sJZXimbiXlRAA8SvEa.jpg",
+  "belongs_to_collection": null,
+  "budget": 12000000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "",
+  "id": 1029235,
+  "imdb_id": "tt22173666",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Azrael",
+  "overview": "In a world where no one speaks, a devout female hunts down a young woman who has escaped her imprisonment. Recaptured by its ruthless leaders, Azrael is due to be sacrificed to pacify an ancient evil deep within the surrounding wilderness.",
+  "popularity": 21.3353,
+  "poster_path": "/qpdFKDvJS7oLKTcBLXOaMwUESbs.jpg",
+  "production_companies": [
+    {
+      "id": 184518,
+      "logo_path": "/lOouI8ibBzhLI4qvku74FPUVT8t.png",
+      "name": "C2 Motion Picture Group",
+      "origin_country": "US"
+    },
+    {
+      "id": 6144,
+      "logo_path": "/iarVMSGDqo8sAHPxz6duesUBRXG.png",
+      "name": "Homeless Bob Production",
+      "origin_country": "EE"
+    },
+    {
+      "id": 232289,
+      "logo_path": "/bV35YIaGQvRtjsD2r8KdlvYDKrp.png",
+      "name": "Traffic.",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "EE",
+      "name": "Estonia"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2024-09-27",
+  "revenue": 631272,
+  "runtime": 86,
+  "spoken_languages": [
+    {
+      "english_name": "Esperanto",
+      "iso_639_1": "eo",
+      "name": "Esperanto"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Many years after the rapture… Among the survivors, some are driven to renounce their sin of Speech.",
+  "title": "Azrael",
+  "video": false,
+  "vote_average": 6.005,
+  "vote_count": 307
+}

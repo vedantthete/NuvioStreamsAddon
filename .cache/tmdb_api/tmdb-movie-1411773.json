@@ -1,0 +1,99 @@
+{
+  "adult": false,
+  "backdrop_path": "/rRIz3KweJDjnJ4GtCZJT3JPEYgL.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    }
+  ],
+  "homepage": "",
+  "id": 1411773,
+  "imdb_id": "tt15682498",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "The Last Stand of Ellen Cole",
+  "overview": "When an evil contractor goes to extreme measures to evict a testy tenant who is standing in the way of his new project, he fails to take into account that this seemingly harmless old woman is a trained killer and will do anything to protect her beloved home.",
+  "popularity": 32.2355,
+  "poster_path": "/oq1pGVQ2t3Cy4v7sA4LRhNjtZuJ.jpg",
+  "production_companies": [
+    {
+      "id": 508,
+      "logo_path": "/7cxRWzi4LsVm4Utfpr1hfARNurT.png",
+      "name": "Regency Enterprises",
+      "origin_country": "US"
+    },
+    {
+      "id": 234133,
+      "logo_path": "/cC5yrLeOvQQS3WF0oWnEhpzFYqb.png",
+      "name": "QCODE",
+      "origin_country": "US"
+    },
+    {
+      "id": 7625,
+      "logo_path": "/kzq4ibnNeZrp00zpBWv3st1QCOh.png",
+      "name": "Automatik Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 85465,
+      "logo_path": "/oxx1bmXDQxeBsvYZmCxMtfJ5wa3.png",
+      "name": "Oddfellows Entertainment",
+      "origin_country": "CA"
+    },
+    {
+      "id": 84988,
+      "logo_path": "/rzpfuMEMDQnmqp0YTFMEqgfDrxY.png",
+      "name": "42",
+      "origin_country": "GB"
+    },
+    {
+      "id": 62408,
+      "logo_path": null,
+      "name": "Subzero Film Entertainment",
+      "origin_country": "FI"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    },
+    {
+      "iso_3166_1": "CA",
+      "name": "Canada"
+    },
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    },
+    {
+      "iso_3166_1": "FI",
+      "name": "Finland"
+    }
+  ],
+  "release_date": "2024-10-18",
+  "revenue": 0,
+  "runtime": 92,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Last Stand of Ellen Cole",
+  "video": false,
+  "vote_average": 8.045,
+  "vote_count": 11
+}

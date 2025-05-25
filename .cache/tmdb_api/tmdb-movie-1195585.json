@@ -1,0 +1,79 @@
+{
+  "adult": false,
+  "backdrop_path": "/fzv87rT0jlAkh5Uf9PpIlUj6Nj8.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    }
+  ],
+  "homepage": "",
+  "id": 1195585,
+  "imdb_id": "tt20419974",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "The Hard Hit",
+  "overview": "An Interpol agent hunting the head of a global crime syndicate tracks his target to Las Vegas, but when the criminal organization kills his wife and daughter, he goes above the law to get his revenge.",
+  "popularity": 21.7948,
+  "poster_path": "/whkFbOZTamHeugEG95jvQehSzAH.jpg",
+  "production_companies": [
+    {
+      "id": 211845,
+      "logo_path": null,
+      "name": "Dbuck Films",
+      "origin_country": ""
+    },
+    {
+      "id": 211846,
+      "logo_path": null,
+      "name": "Irish Productions",
+      "origin_country": ""
+    },
+    {
+      "id": 211847,
+      "logo_path": null,
+      "name": "Ohlsen Productions",
+      "origin_country": ""
+    },
+    {
+      "id": 211848,
+      "logo_path": null,
+      "name": "Tc Photography",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2023-10-20",
+  "revenue": 0,
+  "runtime": 76,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Hard Hit",
+  "video": false,
+  "vote_average": 6.8,
+  "vote_count": 18
+}

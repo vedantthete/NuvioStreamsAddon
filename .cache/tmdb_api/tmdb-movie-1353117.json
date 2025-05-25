@@ -1,0 +1,98 @@
+{
+  "adult": false,
+  "backdrop_path": "/wmqpE7p2dUCEgCnovuovoNXaCXr.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    }
+  ],
+  "homepage": "",
+  "id": 1353117,
+  "imdb_id": "tt29425792",
+  "origin_country": [
+    "US",
+    "TH"
+  ],
+  "original_language": "en",
+  "original_title": "Home Sweet Home: Rebirth",
+  "overview": "When a city is overrun with a demonically-possessed crowd, a cop must find the source of evil to save his family.",
+  "popularity": 23.1695,
+  "poster_path": "/9rCBCm9cyI4JfLEhx3EncyncMR3.jpg",
+  "production_companies": [
+    {
+      "id": 168678,
+      "logo_path": null,
+      "name": "Altit Media Group",
+      "origin_country": "US"
+    },
+    {
+      "id": 37875,
+      "logo_path": "/otUxCHvTyFmUZ3VJbeJDFQV0zJ9.png",
+      "name": "Film Frame Productions",
+      "origin_country": "TH"
+    },
+    {
+      "id": 238314,
+      "logo_path": null,
+      "name": "Unexpected",
+      "origin_country": ""
+    },
+    {
+      "id": 238355,
+      "logo_path": null,
+      "name": "YGGDrazil Group",
+      "origin_country": "TH"
+    },
+    {
+      "id": 209371,
+      "logo_path": null,
+      "name": "Diamond Media",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "TH",
+      "name": "Thailand"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-03-20",
+  "revenue": 235,
+  "runtime": 93,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "The gates of hell have been opened.",
+  "title": "Home Sweet Home: Rebirth",
+  "video": false,
+  "vote_average": 6.1,
+  "vote_count": 66
+}

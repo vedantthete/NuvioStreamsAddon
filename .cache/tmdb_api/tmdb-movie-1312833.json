@@ -1,0 +1,67 @@
+{
+  "adult": false,
+  "backdrop_path": "/cJCW78MZsyyXBKHo4V25WctK00V.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    }
+  ],
+  "homepage": "https://epic-pictures.com/film/a-knights-war",
+  "id": 1312833,
+  "imdb_id": "tt27705545",
+  "origin_country": [
+    "CA"
+  ],
+  "original_language": "en",
+  "original_title": "A Knight's War",
+  "overview": "A fearless knight braves a deadly realm to save the Chosen One’s soul. Facing witches, demons, and brutal foes, he discovers her return could ignite chaos and doom humanity.",
+  "popularity": 16.5904,
+  "poster_path": "/janjdSMrTRGtPrI1p9uOX66jv7x.jpg",
+  "production_companies": [
+    {
+      "id": 155512,
+      "logo_path": "/sECtS6Zu5pnmMunWmDdZBZ0sZ1J.png",
+      "name": "High Rise Studio",
+      "origin_country": "CA"
+    },
+    {
+      "id": 153351,
+      "logo_path": "/dMusWUKSqpqXQOh0WiXHSmRBTci.png",
+      "name": "Dread",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CA",
+      "name": "Canada"
+    }
+  ],
+  "release_date": "2025-02-07",
+  "revenue": 0,
+  "runtime": 103,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "No gods. No mercy.",
+  "title": "A Knight's War",
+  "video": false,
+  "vote_average": 5.4,
+  "vote_count": 19
+}

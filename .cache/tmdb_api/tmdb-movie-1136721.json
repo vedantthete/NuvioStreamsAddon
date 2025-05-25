@@ -1,0 +1,53 @@
+{
+  "adult": false,
+  "backdrop_path": "/nyZjhvcmeXcr8H2Xx6JzKEAxPph.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    }
+  ],
+  "homepage": "",
+  "id": 1136721,
+  "imdb_id": "tt27761801",
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_title": "The Glenarma Tapes",
+  "overview": "In Spring 2020 when five students and two faculty members from the Mid Ulster College of Art go missing in a forest on the north coast of Ireland. What happened on the day they disappeared has remained a mystery - until now.",
+  "popularity": 26.6189,
+  "poster_path": "/m0kojZkP1vcK9F8XSWfw9haJHKz.jpg",
+  "production_companies": [
+    {
+      "id": 19343,
+      "logo_path": null,
+      "name": "Village Films",
+      "origin_country": "GR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    }
+  ],
+  "release_date": "2024-04-02",
+  "revenue": 0,
+  "runtime": 96,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Glenarma Tapes",
+  "video": false,
+  "vote_average": 6.077,
+  "vote_count": 13
+}

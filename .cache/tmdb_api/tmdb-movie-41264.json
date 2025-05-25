@@ -1,0 +1,57 @@
+{
+  "adult": false,
+  "backdrop_path": "/g961TJZSGL8RzWGwpFK3Us77SfM.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 99,
+      "name": "Documentary"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    }
+  ],
+  "homepage": "",
+  "id": 41264,
+  "imdb_id": "tt0060073",
+  "origin_country": [
+    "IT"
+  ],
+  "original_language": "it",
+  "original_title": "Africa Addio",
+  "overview": "A chronicle of the violence that occurred in much of the African continent throughout the 1960s. As many African countries were transitioning from colonial rule to other forms of government, violent political upheavals were frequent. Revolutions in Zanzibar and Kenya in which thousands were killed are shown, the violence not only political; there is also extensive footage of hunters and poachers slaughtering different types of wild animals.",
+  "popularity": 18.0495,
+  "poster_path": "/fPLzCid2gk7eOCrYlXIBU24bTpO.jpg",
+  "production_companies": [
+    {
+      "id": 9387,
+      "logo_path": null,
+      "name": "Cineriz",
+      "origin_country": "IT"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "IT",
+      "name": "Italy"
+    }
+  ],
+  "release_date": "1966-02-11",
+  "revenue": 2000000,
+  "runtime": 138,
+  "spoken_languages": [
+    {
+      "english_name": "Italian",
+      "iso_639_1": "it",
+      "name": "Italiano"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Every Scene Looks You Straight in the Eye... and Spits!",
+  "title": "Africa Addio",
+  "video": false,
+  "vote_average": 6.417,
+  "vote_count": 42
+}

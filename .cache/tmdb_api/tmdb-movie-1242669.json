@@ -1,0 +1,102 @@
+{
+  "adult": false,
+  "backdrop_path": "/n8Vh6cdEvn8XtnmoEeqzomv6SYJ.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    }
+  ],
+  "homepage": "",
+  "id": 1242669,
+  "imdb_id": "tt7972570",
+  "origin_country": [
+    "BE",
+    "FI",
+    "NO",
+    "NL"
+  ],
+  "original_language": "en",
+  "original_title": "Mr. K",
+  "overview": "Mr. K, a traveling magician, finds himself in a Kafkaesque nightmare when he can’t find the exit of the hotel, he has slept in. His attempts to get out only pull him deeper, entangling him further with the hotel and its curious inhabitants.",
+  "popularity": 32.2119,
+  "poster_path": "/lRpGcAYC7cm1QnInz8P3xHvm7cV.jpg",
+  "production_companies": [
+    {
+      "id": 3134,
+      "logo_path": "/1w7LQKO5fNzovefxGReUpZlM8e9.png",
+      "name": "A Private View",
+      "origin_country": "BE"
+    },
+    {
+      "id": 96382,
+      "logo_path": "/wUXwnNUC1jKyUSwOoVPfdBcqdbP.png",
+      "name": "The Film Kitchen",
+      "origin_country": "NL"
+    },
+    {
+      "id": 131466,
+      "logo_path": null,
+      "name": "TAKE 1",
+      "origin_country": "NO"
+    },
+    {
+      "id": 60439,
+      "logo_path": "/wXrkCgSBWhF4cjbztPoWtDtOJqj.png",
+      "name": "Avrotros",
+      "origin_country": "NL"
+    },
+    {
+      "id": 135903,
+      "logo_path": "/gWqxZsaJ1CGoyLqC670cw3T5KzV.png",
+      "name": "Aurora Studios",
+      "origin_country": "FI"
+    },
+    {
+      "id": 2345,
+      "logo_path": "/nozBgqHmM9A22IHkghTnLiUrM7Q.png",
+      "name": "Lemming Film",
+      "origin_country": "NL"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "BE",
+      "name": "Belgium"
+    },
+    {
+      "iso_3166_1": "FI",
+      "name": "Finland"
+    },
+    {
+      "iso_3166_1": "NL",
+      "name": "Netherlands"
+    },
+    {
+      "iso_3166_1": "NO",
+      "name": "Norway"
+    }
+  ],
+  "release_date": "2025-01-16",
+  "revenue": 0,
+  "runtime": 95,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Mr. K",
+  "video": false,
+  "vote_average": 5.8,
+  "vote_count": 13
+}

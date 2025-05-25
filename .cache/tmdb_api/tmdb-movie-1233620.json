@@ -1,0 +1,53 @@
+{
+  "adult": false,
+  "backdrop_path": "/8FmvRL0XPAdCFRs4w2wcYBwuKUO.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "",
+  "id": 1233620,
+  "imdb_id": "tt34723784",
+  "origin_country": [
+    "MX"
+  ],
+  "original_language": "es",
+  "original_title": "¡Qué Huevos, Sofía!",
+  "overview": "Sofia gives everything for the company where she works, but the position she was promised is given to the owner's niece. She and other colleagues, tired of working for an unbearable boss, quit to start their own bakery. What they did not consider is that their ex-boss will not rest until he sees them fail.",
+  "popularity": 97.0973,
+  "poster_path": "/hhfWpdNmPwU1VV7zhNA1nOMbHkH.jpg",
+  "production_companies": [
+    {
+      "id": 159756,
+      "logo_path": null,
+      "name": "Sastre Films",
+      "origin_country": "MX"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "MX",
+      "name": "Mexico"
+    }
+  ],
+  "release_date": "2025-02-27",
+  "revenue": 0,
+  "runtime": 106,
+  "spoken_languages": [
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "¡Qué Huevos, Sofía!",
+  "video": false,
+  "vote_average": 8.375,
+  "vote_count": 8
+}

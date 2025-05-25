@@ -1,0 +1,41 @@
+{
+  "adult": false,
+  "backdrop_path": "/q1MB7lJGCjJghpAw1nRxNHYhSW4.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 99,
+      "name": "Documentary"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81673111",
+  "id": 1457515,
+  "imdb_id": "tt35628532",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Air Force Elite: Thunderbirds",
+  "overview": "The elite pilots of the Air Force Thunderbirds display exceptional skill, trust and courage during a high-stakes training season.",
+  "popularity": 25.0238,
+  "poster_path": "/hsJtBhMxNDGzW5KcQ9qz3EQGnEt.jpg",
+  "production_companies": [],
+  "production_countries": [],
+  "release_date": "2025-05-22",
+  "revenue": 0,
+  "runtime": 91,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Air Force Elite: Thunderbirds",
+  "video": false,
+  "vote_average": 7.1,
+  "vote_count": 9
+}

@@ -1,0 +1,89 @@
+{
+  "adult": false,
+  "backdrop_path": "/3mrli3xsGrAieQks7KsBUm2LpCg.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "https://www.lionsgate.com/movies/mob-land",
+  "id": 979275,
+  "imdb_id": "tt20424130",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Mob Land",
+  "overview": "A sheriff tries to keep the peace when a desperate family man violently robs a pill mill with his brother-in-law, alerting an enforcer for the New Orleans mafia.",
+  "popularity": 16.9754,
+  "poster_path": "/mcz8oi9oCgq1wkA3Wz2kluE94pE.jpg",
+  "production_companies": [
+    {
+      "id": 68628,
+      "logo_path": "/ez4m0Hw5puaHjNvGEcf6YbFaaNL.png",
+      "name": "308 Enterprises",
+      "origin_country": "CA"
+    },
+    {
+      "id": 20312,
+      "logo_path": "/iYmytRQt5jqlBIEaMQ0Cb6iAHh8.png",
+      "name": "TPC",
+      "origin_country": "US"
+    },
+    {
+      "id": 121204,
+      "logo_path": "/vbtvY4IxgUZk713rkmoTO4MHIac.png",
+      "name": "BondIt Media Capital",
+      "origin_country": "US"
+    },
+    {
+      "id": 170350,
+      "logo_path": "/6xu1OMCIcAsXMkHaSHEo58EVizG.png",
+      "name": "Grandave Capital",
+      "origin_country": "US"
+    },
+    {
+      "id": 210594,
+      "logo_path": null,
+      "name": "Three Point Capital",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CA",
+      "name": "Canada"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2023-08-04",
+  "revenue": 0,
+  "runtime": 111,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Crime. Family.",
+  "title": "Mob Land",
+  "video": false,
+  "vote_average": 5.4,
+  "vote_count": 83
+}

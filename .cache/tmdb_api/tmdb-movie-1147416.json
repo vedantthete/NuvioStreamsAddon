@@ -1,0 +1,76 @@
+{
+  "adult": false,
+  "backdrop_path": "/cBTwQKMd7Vn6rGTGBtoFLIfj7uM.jpg",
+  "belongs_to_collection": {
+    "id": 822306,
+    "name": "Miraculous World",
+    "poster_path": "/jaQiXB7ZCiW8zUCnuZ7sf73yX4Z.jpg",
+    "backdrop_path": "/fL266xNoCgTa4rGHzfRdLHpQnJ1.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    }
+  ],
+  "homepage": "",
+  "id": 1147416,
+  "imdb_id": "tt13701202",
+  "origin_country": [
+    "FR"
+  ],
+  "original_language": "fr",
+  "original_title": "Miraculous World : Londres, la course contre le temps",
+  "overview": "To save the future from a terrible fate, Marinette becomes Chronobug and teams up with Bunnyx to defeat a mysterious opponent who travels through time. Who is this new supervillain, and why are they obsessed with exposing Marinette's secret superhero identity? Marinette's only hope is to defeat her new opponent to prevent the end of Ladybug and time itself!",
+  "popularity": 29.9757,
+  "poster_path": "/6AtoMpHvs9pxd30KsyK8QmJ9W9M.jpg",
+  "production_companies": [
+    {
+      "id": 79650,
+      "logo_path": null,
+      "name": "Zagtoon",
+      "origin_country": "FR"
+    },
+    {
+      "id": 35136,
+      "logo_path": "/lhGOKiuEls3KiWigu1hbvrqUP68.png",
+      "name": "Method Animation",
+      "origin_country": "FR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    }
+  ],
+  "release_date": "2024-11-14",
+  "revenue": 0,
+  "runtime": 50,
+  "spoken_languages": [
+    {
+      "english_name": "French",
+      "iso_639_1": "fr",
+      "name": "Français"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Miraculous World: London, At the Edge of Time",
+  "video": false,
+  "vote_average": 7.333,
+  "vote_count": 261
+}

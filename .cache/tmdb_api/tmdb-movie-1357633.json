@@ -1,0 +1,71 @@
+{
+  "adult": false,
+  "backdrop_path": "/hlfu6g0h0D65SjkVhQBU20zePTl.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    }
+  ],
+  "homepage": "https://www.sololevelingreawakening.com",
+  "id": 1357633,
+  "imdb_id": "tt33428606",
+  "origin_country": [
+    "JP"
+  ],
+  "original_language": "ja",
+  "original_title": "俺だけレベルアップな件 -ReAwakening-",
+  "overview": "Over a decade after 'gates' connecting worlds appeared, awakening 'hunters' with superpowers, weakest hunter Sung Jinwoo encounters a double dungeon and accepts a mysterious quest, becoming the only one able to level up, changing his fate. A catch-up recap of the first season coupled with an exclusive sneak peek of the first two episodes of the highly anticipated second season in one momentous theatrical fan experience.",
+  "popularity": 21.0498,
+  "poster_path": "/dblIFen0bNZAq8icJXHwrjfymDW.jpg",
+  "production_companies": [
+    {
+      "id": 2883,
+      "logo_path": "/rDYExnBV61jGQnkhVVrPN4Yl7O1.png",
+      "name": "Aniplex",
+      "origin_country": "JP"
+    },
+    {
+      "id": 13113,
+      "logo_path": "/xV5tPYKZhP2Ko9dOh5A3FahuKsx.png",
+      "name": "A-1 Pictures",
+      "origin_country": "JP"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "JP",
+      "name": "Japan"
+    }
+  ],
+  "release_date": "2024-11-26",
+  "revenue": 6331827,
+  "runtime": 116,
+  "spoken_languages": [
+    {
+      "english_name": "Japanese",
+      "iso_639_1": "ja",
+      "name": "日本語"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Solo Leveling -ReAwakening-",
+  "video": false,
+  "vote_average": 6.936,
+  "vote_count": 220
+}
