@@ -3,6 +3,30 @@ const cheerio = require('cheerio');
 const fs = require('fs').promises;
 const path = require('path');
 
+// Helper function to fetch stream size using a HEAD request
+const fetchStreamSize = async (url) => {
+    try {
+        // For m3u8, Content-Length is for the playlist file, not the stream segments.
+        if (url.toLowerCase().includes('.m3u8')) {
+            return 'Playlist (size N/A)'; // Indicate HLS playlist
+        }
+        const response = await axios.head(url, { timeout: 5000 }); // 5-second timeout for HEAD request
+        if (response.headers['content-length']) {
+            const sizeInBytes = parseInt(response.headers['content-length'], 10);
+            if (!isNaN(sizeInBytes)) {
+                if (sizeInBytes < 1024) return `${sizeInBytes} B`;
+                if (sizeInBytes < 1024 * 1024) return `${(sizeInBytes / 1024).toFixed(2)} KB`;
+                if (sizeInBytes < 1024 * 1024 * 1024) return `${(sizeInBytes / (1024 * 1024)).toFixed(2)} MB`;
+                return `${(sizeInBytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
+            }
+        }
+        return 'Unknown size';
+    } catch (error) {
+        // console.warn(`  Could not fetch size for ${url}: ${error.message}`);
+        return 'Unknown size';
+    }
+};
+
 // Constants from unified_scraper.js
 // MODIFICATION: Remove hardcoded SCRAPER_API_KEY
 // const SCRAPER_API_KEY = '96845d13e7a0a0d40fb4f148cd135ddc'; 
@@ -739,13 +763,28 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
         }
     }
     
+    // Fetch sizes for all streams concurrently
+    if (allStreams.length > 0) {
+        console.time(`getStreamsFromTmdbId_fetchStreamSizes_${tmdbType}_${tmdbId}`);
+        const sizePromises = allStreams.map(async (stream) => {
+            stream.size = await fetchStreamSize(stream.url);
+            return stream; // Return the modified stream
+        });
+        // await Promise.all(sizePromises); // This already modifies streams in place, but to be safe, reassign
+        const streamsWithSizes = await Promise.all(sizePromises);
+        console.timeEnd(`getStreamsFromTmdbId_fetchStreamSizes_${tmdbType}_${tmdbId}`);
+        // allStreams = streamsWithSizes; // Not strictly necessary as objects are modified by reference, but good practice
+    } else {
+        // If allStreams is empty, no need to reassign or do anything.
+    }
+
     // Sort streams by quality before returning
     const sortedStreams = sortStreamsByQuality(allStreams);
     
     if (sortedStreams.length > 0) {
         console.log(`Found ${sortedStreams.length} streams (sorted by quality):`);
         sortedStreams.forEach((stream, i) => {
-            console.log(`  ${i+1}. ${stream.quality}: ${stream.title}`);
+            console.log(`  ${i+1}. ${stream.quality} (${stream.size || 'Unknown size'}): ${stream.title}`);
         });
     }
     console.timeEnd(mainTimerLabel);
@@ -1098,6 +1137,34 @@ function parseQualityFromLabel(label) {
     return "ORG";
 }
 
+// Helper function to parse size string to bytes
+const parseSizeToBytes = (sizeString) => {
+    if (!sizeString || typeof sizeString !== 'string') return Number.MAX_SAFE_INTEGER;
+
+    const sizeLower = sizeString.toLowerCase();
+
+    if (sizeLower.includes('unknown') || sizeLower.includes('n/a')) {
+        return Number.MAX_SAFE_INTEGER; // Sort unknown/NA sizes last
+    }
+
+    const units = {
+        gb: 1024 * 1024 * 1024,
+        mb: 1024 * 1024,
+        kb: 1024,
+        b: 1
+    };
+
+    const match = sizeString.match(/([\d.]+)\s*(gb|mb|kb|b)/i);
+    if (match && match[1] && match[2]) {
+        const value = parseFloat(match[1]);
+        const unit = match[2].toLowerCase();
+        if (!isNaN(value) && units[unit]) {
+            return Math.floor(value * units[unit]);
+        }
+    }
+    return Number.MAX_SAFE_INTEGER; // Fallback for unparsed strings
+};
+
 // Utility function to sort streams by quality in order of resolution
 function sortStreamsByQuality(streams) {
     // Since Stremio displays streams from bottom to top,
@@ -1112,16 +1179,22 @@ function sortStreamsByQuality(streams) {
     };
     
     return [...streams].sort((a, b) => {
-        // Get quality values with fallback to "ORG"
         const qualityA = a.quality || "ORG";
         const qualityB = b.quality || "ORG";
         
-        // Get sort order with fallback to highest number (put at bottom)
         const orderA = qualityOrder[qualityA] || 10;
         const orderB = qualityOrder[qualityB] || 10;
         
-        // Lower value will appear at the bottom in Stremio (top of our list)
-        return orderA - orderB;
+        // First, compare by quality order
+        if (orderA !== orderB) {
+            return orderA - orderB;
+        }
+        
+        // If qualities are the same, compare by size (descending - larger sizes first)
+        const sizeAInBytes = parseSizeToBytes(a.size);
+        const sizeBInBytes = parseSizeToBytes(b.size);
+        
+        return sizeBInBytes - sizeAInBytes;
     });
 }
 

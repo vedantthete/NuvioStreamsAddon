@@ -67,6 +67,7 @@ async function runScraperInteractive() {
       streams.forEach((stream, index) => {
         console.log(`${index + 1}. Title: ${stream.title}`);
         console.log(`   Quality: ${stream.quality}`);
+        console.log(`   Size: ${stream.size || 'Unknown size'}`);
         console.log(`   URL: ${stream.url}\n`);
       });
     } else {

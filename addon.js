@@ -128,7 +128,7 @@ builder.defineStreamHandler(async (args) => {
 
             return {
                 name: `ShowBox - ${qualityLabel}`, // Primary label in Stremio UI, e.g., "ShowBox - 1080p", "ShowBox - ORG"
-                title: displayTitle, // MODIFIED: Use the potentially shortened title for TV episodes
+                title: `${displayTitle}\n${stream.size || ''}`, // MODIFIED: Add size to the title on a new line
                 url: stream.url,
                 type: 'url', // CRITICAL: This is the type of the stream itself, not the content
                 availability: 2, 
