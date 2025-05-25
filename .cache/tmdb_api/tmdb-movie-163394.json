@@ -1,0 +1,66 @@
+{
+  "adult": false,
+  "backdrop_path": "/m5uDx0xQhu2wA3Fc4AiqINrvdaT.jpg",
+  "belongs_to_collection": {
+    "id": 148065,
+    "name": "Doraemon Movies",
+    "poster_path": "/4TLSP1KD1uAlp2q1rTrc6SFlktX.jpg",
+    "backdrop_path": "/ii3bjKdqurBH8OZAGnKyfsZTde7.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    }
+  ],
+  "homepage": "",
+  "id": 163394,
+  "imdb_id": "tt1147510",
+  "origin_country": [
+    "JP"
+  ],
+  "original_language": "ja",
+  "original_title": "映画ドラえもん のび太のねじ巻き都市冒険記",
+  "overview": "When Doraemon and Nobita win a tiny planet through a lottery, they make use of a screw to bring several toys to life and create a toy town.",
+  "popularity": 2.2711,
+  "poster_path": "/mEmOqdiYe1sVL4y5fmy7aF22t2z.jpg",
+  "production_companies": [
+    {
+      "id": 882,
+      "logo_path": "/fRSWWjquvzcHjACbtF53utZFIll.png",
+      "name": "TOHO",
+      "origin_country": "JP"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "JP",
+      "name": "Japan"
+    }
+  ],
+  "release_date": "1997-03-08",
+  "revenue": 31200000,
+  "runtime": 99,
+  "spoken_languages": [
+    {
+      "english_name": "Japanese",
+      "iso_639_1": "ja",
+      "name": "日本語"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Doraemon: Nobita and the Spiral City",
+  "video": false,
+  "vote_average": 6.86,
+  "vote_count": 25
+}

@@ -1,0 +1,67 @@
+{
+  "adult": false,
+  "backdrop_path": "/87BbeDdGDQmAActINpiJFjC4Alw.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    }
+  ],
+  "homepage": "",
+  "id": 1440641,
+  "imdb_id": "tt35882235",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "The Jolly Monkey",
+  "overview": "40 years ago, families disappeared near the isolated Jolly Monkey motel. Today, the family of the owners return to discuss what to do with the place. One by one they are killed by a someone dressed as the motel's mascot and need to escape.",
+  "popularity": 1.1833,
+  "poster_path": "/1LT0coCoXTBwCITMTpZX2jbqBTY.jpg",
+  "production_companies": [
+    {
+      "id": 1311,
+      "logo_path": "/ic2bTizdzRLDVzAvN7MXdUg3WQV.png",
+      "name": "The Asylum",
+      "origin_country": "US"
+    },
+    {
+      "id": 179669,
+      "logo_path": null,
+      "name": "Wave of the Wand Productions",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-02-28",
+  "revenue": 0,
+  "runtime": 93,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "You can't hide.",
+  "title": "The Jolly Monkey",
+  "video": false,
+  "vote_average": 1,
+  "vote_count": 2
+}

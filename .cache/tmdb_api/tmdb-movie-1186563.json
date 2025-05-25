@@ -1,0 +1,59 @@
+{
+  "adult": false,
+  "backdrop_path": "/ctepmnTOnVKRLQXX4VdD2AsJFnv.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://bleeckerstreetmedia.com/the-friend",
+  "id": 1186563,
+  "imdb_id": "tt18108824",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "The Friend",
+  "overview": "When a solitary writer adopts and bonds with a Great Dane that belonged to a late friend, she begins to come to terms with her past and her own creative inner life.",
+  "popularity": 4.0115,
+  "poster_path": "/zGgycGRhPbP54omtSLwPJlUGWUk.jpg",
+  "production_companies": [
+    {
+      "id": 210065,
+      "logo_path": null,
+      "name": "Big Creek Projects",
+      "origin_country": "US"
+    },
+    {
+      "id": 123420,
+      "logo_path": "/hljaOO48h8RAnB6vsVyQ65DFkGP.png",
+      "name": "3dot Productions",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-03-28",
+  "revenue": 3159310,
+  "runtime": 120,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Friend",
+  "video": false,
+  "vote_average": 6.3,
+  "vote_count": 21
+}

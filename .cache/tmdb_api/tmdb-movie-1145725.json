@@ -1,0 +1,57 @@
+{
+  "adult": false,
+  "backdrop_path": "/nT0tpSovSldMoKQywsf46R9dXbe.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.amazon.com/dp/B0DWFJ4DZL",
+  "id": 1145725,
+  "imdb_id": "tt28239363",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Tyler Perry's Duplicity",
+  "overview": "High-powered attorney Marley faces her most personal case yet when she is tasked with uncovering the truth behind the murder of her best friend Fela’s husband. With the help of her boyfriend – a former cop turned private investigator – Marley’s search for what really happened leads her down a treacherous maze of deception and betrayal.",
+  "popularity": 10.5074,
+  "poster_path": "/pYrmTaOnMgvS59OKSxkCSrhISoL.jpg",
+  "production_companies": [
+    {
+      "id": 3096,
+      "logo_path": "/fkZTZ4veYYr3lwr2riVrVAOfeqD.png",
+      "name": "Tyler Perry Studios",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-03-19",
+  "revenue": 0,
+  "runtime": 109,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Justice isn't black and white.",
+  "title": "Tyler Perry's Duplicity",
+  "video": false,
+  "vote_average": 6.6,
+  "vote_count": 114
+}

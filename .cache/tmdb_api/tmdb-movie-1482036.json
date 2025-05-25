@@ -1,0 +1,63 @@
+{
+  "adult": false,
+  "backdrop_path": "/bKuOFs4qPpQr5ellcvd3gLXN9y1.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    }
+  ],
+  "homepage": "https://wonderphil.biz/production/alieninvasion",
+  "id": 1482036,
+  "imdb_id": "tt33115196",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Alien Invasion: Rise of the Phoenix",
+  "overview": "An asteroid shower lands in a remote section of the Grand Canyon and begins to spread mysterious pods. Meanwhile, scientists on a space station that has been hit by the same asteroid shower, discover that a pod has mutated into a creature and is threatening the ship. Now the scientists and a team on Earth must learn to defeat this alien force, fighting fire with fire, fighting stone with stone.",
+  "popularity": 4.2785,
+  "poster_path": "/jQydQDc5lBOUBvft8PuOUQ7r4NY.jpg",
+  "production_companies": [
+    {
+      "id": 64610,
+      "logo_path": null,
+      "name": "WonderPhil Entertainment",
+      "origin_country": ""
+    },
+    {
+      "id": 262619,
+      "logo_path": null,
+      "name": "American Widescreen Pictures",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    },
+    {
+      "iso_3166_1": "IT",
+      "name": "Italy"
+    }
+  ],
+  "release_date": "2025-03-11",
+  "revenue": 0,
+  "runtime": 90,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "The fight for survival begins.",
+  "title": "Alien Invasion: Rise of the Phoenix",
+  "video": false,
+  "vote_average": 3,
+  "vote_count": 1
+}

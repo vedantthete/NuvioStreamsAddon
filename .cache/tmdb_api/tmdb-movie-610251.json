@@ -1,0 +1,86 @@
+{
+  "adult": false,
+  "backdrop_path": "/v3gkLh6xWdh4qprFbt27C7h4P1l.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 36,
+      "name": "History"
+    },
+    {
+      "id": 10752,
+      "name": "War"
+    }
+  ],
+  "homepage": "https://wellgousa.com/films/harbin",
+  "id": 610251,
+  "imdb_id": "tt23630030",
+  "origin_country": [
+    "KR"
+  ],
+  "original_language": "ko",
+  "original_title": "하얼빈",
+  "overview": "In 1909, several years after Korea is forced into becoming a Japanese colony, freedom fighters plot the daring assassination of Japan's prime minister during their quest for independence.",
+  "popularity": 4.5975,
+  "poster_path": "/oNA9eRaFCLlFKRZlzYEldPZlFpg.jpg",
+  "production_companies": [
+    {
+      "id": 108532,
+      "logo_path": "/lHzoqEuTPHwKSFiBx9skKpp9vCc.png",
+      "name": "Hive Media Corp",
+      "origin_country": "KR"
+    },
+    {
+      "id": 126331,
+      "logo_path": null,
+      "name": "Gemstone Pictures",
+      "origin_country": "KR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "KR",
+      "name": "South Korea"
+    }
+  ],
+  "release_date": "2024-12-24",
+  "revenue": 31399844,
+  "runtime": 108,
+  "spoken_languages": [
+    {
+      "english_name": "Korean",
+      "iso_639_1": "ko",
+      "name": "한국어/조선말"
+    },
+    {
+      "english_name": "Mandarin",
+      "iso_639_1": "zh",
+      "name": "普通话"
+    },
+    {
+      "english_name": "Japanese",
+      "iso_639_1": "ja",
+      "name": "日本語"
+    },
+    {
+      "english_name": "Russian",
+      "iso_639_1": "ru",
+      "name": "Pусский"
+    }
+  ],
+  "status": "Released",
+  "tagline": "One goal. One mission. The old wolf must fall.",
+  "title": "Harbin",
+  "video": false,
+  "vote_average": 8,
+  "vote_count": 19
+}

@@ -1,0 +1,94 @@
+{
+  "adult": false,
+  "backdrop_path": "/94cS0mzODEoNIXFT7nhPcI8V4IJ.jpg",
+  "belongs_to_collection": {
+    "id": 1073029,
+    "name": "Wandering Earth Collection",
+    "poster_path": "/6qWFQkZfCmDmaAIQlXlBJWNga3k.jpg",
+    "backdrop_path": "/dDG37QLsERXFowAOfWYLwcsag4r.jpg"
+  },
+  "budget": 73800000,
+  "genres": [
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    }
+  ],
+  "homepage": "https://trinitycineasia.com/in-cinemas/the-wandering-earth-ii/",
+  "id": 842675,
+  "imdb_id": "tt13539646",
+  "origin_country": [
+    "CN"
+  ],
+  "original_language": "zh",
+  "original_title": "流浪地球2",
+  "overview": "Humans built huge engines on the surface of the earth to find a new home. But the road to the universe is perilous. In order to save earth, young people once again have to step forward to start a race against time for life and death.",
+  "popularity": 9.8137,
+  "poster_path": "/jAZzFYS36UFT0SKhKVmEY7qShal.jpg",
+  "production_companies": [
+    {
+      "id": 14714,
+      "logo_path": "/dSHaVKtBCpMU5VP9wMbTkqov62i.png",
+      "name": "China Film Group Corporation",
+      "origin_country": "CN"
+    },
+    {
+      "id": 191194,
+      "logo_path": null,
+      "name": "Guo Fan Culture and Media",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CN",
+      "name": "China"
+    }
+  ],
+  "release_date": "2023-01-22",
+  "revenue": 615023132,
+  "runtime": 173,
+  "spoken_languages": [
+    {
+      "english_name": "Mandarin",
+      "iso_639_1": "zh",
+      "name": "普通话"
+    },
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    },
+    {
+      "english_name": "French",
+      "iso_639_1": "fr",
+      "name": "Français"
+    },
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Japanese",
+      "iso_639_1": "ja",
+      "name": "日本語"
+    },
+    {
+      "english_name": "Portuguese",
+      "iso_639_1": "pt",
+      "name": "Português"
+    },
+    {
+      "english_name": "Russian",
+      "iso_639_1": "ru",
+      "name": "Pусский"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Wandering Earth II",
+  "video": false,
+  "vote_average": 7.3,
+  "vote_count": 621
+}

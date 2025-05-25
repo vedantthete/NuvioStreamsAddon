@@ -1,0 +1,64 @@
+{
+  "adult": false,
+  "backdrop_path": "/565aguZFphtZ5K3LvILDFvFx5B7.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 99,
+      "name": "Documentary"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81725537",
+  "id": 1465024,
+  "imdb_id": "tt36557706",
+  "origin_country": [
+    "US",
+    "GB"
+  ],
+  "original_language": "en",
+  "original_title": "Untold: The Liver King",
+  "overview": "He built a supplement empire by devouring raw meat on social media. And he had the muscles to prove it. But, really, how did the Liver King get so huge?",
+  "popularity": 8.9845,
+  "poster_path": "/iLA1XTD0Ns4B0WUy1bSsBLp9Le4.jpg",
+  "production_companies": [
+    {
+      "id": 205628,
+      "logo_path": "/whxjFDZ4DUta8eruK8fV6F2Ekk4.png",
+      "name": "Candle True Stories",
+      "origin_country": "US"
+    },
+    {
+      "id": 205627,
+      "logo_path": null,
+      "name": "Bitachon365",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-05-12",
+  "revenue": 0,
+  "runtime": 68,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Untold: The Liver King",
+  "video": false,
+  "vote_average": 6,
+  "vote_count": 13
+}

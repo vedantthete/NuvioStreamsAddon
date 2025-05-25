@@ -1,0 +1,80 @@
+{
+  "adult": false,
+  "backdrop_path": "/bWKzdvrsrUoSt9btMESUipZ6SBf.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    }
+  ],
+  "homepage": "",
+  "id": 1229646,
+  "imdb_id": "tt30840883",
+  "origin_country": [
+    "AR",
+    "ES"
+  ],
+  "original_language": "es",
+  "original_title": "Robotia, la película",
+  "overview": "",
+  "popularity": 10.5568,
+  "poster_path": "/uRH4QEaa38Pz7xOiBJDaWp50s8g.jpg",
+  "production_companies": [
+    {
+      "id": 218131,
+      "logo_path": null,
+      "name": "Malabar Animation Studio",
+      "origin_country": ""
+    },
+    {
+      "id": 115709,
+      "logo_path": null,
+      "name": "Dibulitoon Studio",
+      "origin_country": "ES"
+    },
+    {
+      "id": 191472,
+      "logo_path": null,
+      "name": "Paycom Cinema",
+      "origin_country": ""
+    },
+    {
+      "id": 218132,
+      "logo_path": null,
+      "name": "Tropics Creative",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "AR",
+      "name": "Argentina"
+    },
+    {
+      "iso_3166_1": "ES",
+      "name": "Spain"
+    }
+  ],
+  "release_date": "2024-06-07",
+  "revenue": 0,
+  "runtime": 0,
+  "spoken_languages": [
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Robotia, la película",
+  "video": false,
+  "vote_average": 7.5,
+  "vote_count": 12
+}

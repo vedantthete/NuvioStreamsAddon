@@ -1,0 +1,79 @@
+{
+  "adult": false,
+  "backdrop_path": "/3SOunz2Z0qcOVlrkYFj20HquziB.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    }
+  ],
+  "homepage": "https://www.paramountplus.com/movies/video/hxLi_fyTiqdAOtq1_cSt2HXQuj9mkZJh/",
+  "id": 1114894,
+  "imdb_id": "tt9603060",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Star Trek: Section 31",
+  "overview": "Emperor Philippa Georgiou joins a secret division of Starfleet tasked with protecting the United Federation of Planets and faces the sins of her past.",
+  "popularity": 10.786,
+  "poster_path": "/fNu6P4jYU55Cb3CC2SndtAKvois.jpg",
+  "production_companies": [
+    {
+      "id": 90517,
+      "logo_path": "/uq7itRpnnb1LX1VDDaJg64pKFmT.png",
+      "name": "Secret Hideout",
+      "origin_country": "US"
+    },
+    {
+      "id": 51670,
+      "logo_path": "/sFDn8bWLh9sE2dPxaa0xUUYL6zS.png",
+      "name": "Roddenberry Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 1081,
+      "logo_path": "/19kn4jVvpc3sAL3YpZNb3elhSMl.png",
+      "name": "CBS Studios",
+      "origin_country": "US"
+    },
+    {
+      "id": 251307,
+      "logo_path": null,
+      "name": "Action This Day!",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-01-15",
+  "revenue": 0,
+  "runtime": 96,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "To protect the light, they fight in shadow.",
+  "title": "Star Trek: Section 31",
+  "video": false,
+  "vote_average": 4.795,
+  "vote_count": 264
+}

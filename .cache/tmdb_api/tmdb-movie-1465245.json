@@ -1,0 +1,45 @@
+{
+  "adult": false,
+  "backdrop_path": "/1GbJDREvDhpaAs6BJXLbY3X5Gsw.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "",
+  "id": 1465245,
+  "imdb_id": "tt29456794",
+  "origin_country": [
+    "IN"
+  ],
+  "original_language": "ta",
+  "original_title": "டென் ஹவர்ஸ்",
+  "overview": "A bus murder investigation unfolds, revealing possible scenarios and suspects. As everyone undergoes questioning, hidden layers of the case begin to surface.",
+  "popularity": 2.5146,
+  "poster_path": "/zpy3tsUxCo2nQ1g2iLKiOEmZZaW.jpg",
+  "production_companies": [],
+  "production_countries": [],
+  "release_date": "2025-04-18",
+  "revenue": 0,
+  "runtime": 118,
+  "spoken_languages": [
+    {
+      "english_name": "Tamil",
+      "iso_639_1": "ta",
+      "name": "தமிழ்"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Ten Hours",
+  "video": false,
+  "vote_average": 6.667,
+  "vote_count": 3
+}

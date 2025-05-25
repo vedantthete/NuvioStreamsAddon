@@ -1,0 +1,58 @@
+{
+  "adult": false,
+  "backdrop_path": "/i6mfwRuHfogErPUrrAAjFyZcAfS.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "",
+  "id": 5651,
+  "imdb_id": "tt0075376",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Up!",
+  "overview": "Adolf Hitler is hiding out in California under the identity of Adolf Schwartz; however, he is soon murdered by a mysterious assailant. This coincides with the arrival of a mysterious woman in a nearby town. Whatever the case might be, nobody seems interested in investigating the crime, but there are many who are interested in her.",
+  "popularity": 3.1509,
+  "poster_path": "/kU6wvyu8yxIf7IynQmn8P0Gi6fN.jpg",
+  "production_companies": [
+    {
+      "id": 1876,
+      "logo_path": null,
+      "name": "RM Films International",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "1976-10-01",
+  "revenue": 0,
+  "runtime": 80,
+  "spoken_languages": [
+    {
+      "english_name": "German",
+      "iso_639_1": "de",
+      "name": "Deutsch"
+    },
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "If you don't see Up! … you'll feel down!",
+  "title": "Up!",
+  "video": false,
+  "vote_average": 5.6,
+  "vote_count": 94
+}

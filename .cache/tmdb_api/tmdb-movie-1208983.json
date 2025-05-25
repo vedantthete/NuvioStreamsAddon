@@ -1,0 +1,93 @@
+{
+  "adult": false,
+  "backdrop_path": "/2OKBeiYlEBwWs8LUaZbYl7ZPJZE.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "",
+  "id": 1208983,
+  "imdb_id": "tt1714918",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Neighborhood Watch",
+  "overview": "When a mentally ill young man thinks he witnesses an abduction and the police refuse to believe him, he reluctantly turns to his next door neighbor – a bitter, retired security guard – to help him find the missing woman.",
+  "popularity": 4.5577,
+  "poster_path": "/AuUzPikexITqE1eD87dv7Ost9Jx.jpg",
+  "production_companies": [
+    {
+      "id": 7579,
+      "logo_path": "/a4siBqtQZuQacF2oku8KHrmokv3.png",
+      "name": "Redwire Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 198179,
+      "logo_path": "/ct4wmzYtS2prZnitm4iuMxRAMsR.png",
+      "name": "Filmopoly",
+      "origin_country": "US"
+    },
+    {
+      "id": 102719,
+      "logo_path": "/nl18a9fHKCmhBqmN6pcU5wY3AhF.png",
+      "name": "Pollywog Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 23337,
+      "logo_path": null,
+      "name": "Torchlight Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 256277,
+      "logo_path": null,
+      "name": "Beer Money Worldwide",
+      "origin_country": "US"
+    },
+    {
+      "id": 142122,
+      "logo_path": "/oqZHKDB4izafodDDD9BABNNq7VN.png",
+      "name": "Lucky 13 Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 126513,
+      "logo_path": null,
+      "name": "Lane E Productions",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-04-25",
+  "revenue": 7136,
+  "runtime": 92,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Neighborhood Watch",
+  "video": false,
+  "vote_average": 6.475,
+  "vote_count": 40
+}

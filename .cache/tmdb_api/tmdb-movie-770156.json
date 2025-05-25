@@ -1,0 +1,63 @@
+{
+  "adult": false,
+  "backdrop_path": "/7KR1nKGaYqPuFBnqP7XBIX0DZlR.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    }
+  ],
+  "homepage": "",
+  "id": 770156,
+  "imdb_id": "tt11916254",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Lucy Shimmers and the Prince of Peace",
+  "overview": "Second chances start when a hardened criminal crosses paths with a precocious little girl who is helped by an angel to change hearts during the holiday season.",
+  "popularity": 9.9424,
+  "poster_path": "/yfnJ5qIYx7q33fY4jqv9Pu95RSg.jpg",
+  "production_companies": [
+    {
+      "id": 176675,
+      "logo_path": null,
+      "name": "Rob Diamond Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 176674,
+      "logo_path": "/60DG5vScQorCVJPUp2EowKWFatC.png",
+      "name": "Future Movie Productions",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2020-10-19",
+  "revenue": 0,
+  "runtime": 87,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Lucy Shimmers and the Prince of Peace",
+  "video": false,
+  "vote_average": 8.352,
+  "vote_count": 307
+}

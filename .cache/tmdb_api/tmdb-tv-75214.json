@@ -1,0 +1,139 @@
+{
+  "adult": false,
+  "backdrop_path": "/uKtyR5VqjefVgYQ64Hy1ch2BVFo.jpg",
+  "created_by": [],
+  "episode_run_time": [
+    25
+  ],
+  "first_air_date": "2018-01-11",
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "http://tv.violet-evergarden.jp",
+  "id": 75214,
+  "in_production": false,
+  "languages": [
+    "ja"
+  ],
+  "last_air_date": "2018-04-05",
+  "last_episode_to_air": {
+    "id": 1461563,
+    "name": "Episode 13",
+    "overview": "The signing ceremony concludes, officially bringing an end to the war. While writing letters for an air show, Violet composes a letter to the Major.",
+    "vote_average": 8.3,
+    "vote_count": 12,
+    "air_date": "2018-04-05",
+    "episode_number": 13,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 24,
+    "season_number": 1,
+    "show_id": 75214,
+    "still_path": "/9iVaitlzFBUmjNIE8tUyP99udWk.jpg"
+  },
+  "name": "Violet Evergarden",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 614,
+      "logo_path": "/hSdroyVthq3CynxTIIY7lnS8w1.png",
+      "name": "Tokyo MX",
+      "origin_country": "JP"
+    }
+  ],
+  "number_of_episodes": 13,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "JP"
+  ],
+  "original_language": "ja",
+  "original_name": "ヴァイオレット・エヴァーガーデン",
+  "overview": "The war is over, and Violet Evergarden needs a job. Scarred and emotionless, she takes a job as a letter writer to understand herself and her past.",
+  "popularity": 9.0714,
+  "poster_path": "/61EwFPqc0r1uJo6la49J55F8bQ8.jpg",
+  "production_companies": [
+    {
+      "id": 5438,
+      "logo_path": "/leZ8GPCL0GneHHayPVnXtB3p0We.png",
+      "name": "Kyoto Animation",
+      "origin_country": "JP"
+    },
+    {
+      "id": 9148,
+      "logo_path": "/rtW3NadfF4kR5mTW00ahiFxw6k7.png",
+      "name": "Pony Canyon",
+      "origin_country": "JP"
+    },
+    {
+      "id": 86839,
+      "logo_path": "/cnOJAkVVmKZLIzmgw4fRRZ2dctT.png",
+      "name": "ABC Animation",
+      "origin_country": "JP"
+    },
+    {
+      "id": 6683,
+      "logo_path": "/reCkuk3GEomdx5gQpsm15Zl1sgX.png",
+      "name": "Lantis",
+      "origin_country": "JP"
+    },
+    {
+      "id": 155307,
+      "logo_path": null,
+      "name": "Miracle Bus",
+      "origin_country": "JP"
+    },
+    {
+      "id": 244119,
+      "logo_path": null,
+      "name": "Rakuonsha",
+      "origin_country": "JP"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "JP",
+      "name": "Japan"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2018-07-04",
+      "episode_count": 1,
+      "id": 105906,
+      "name": "Specials",
+      "overview": "",
+      "poster_path": "/nyKPHrXznNPPiyfYrIe1mKLePNz.jpg",
+      "season_number": 0,
+      "vote_average": 0
+    },
+    {
+      "air_date": "2018-01-11",
+      "episode_count": 13,
+      "id": 95592,
+      "name": "Season 1",
+      "overview": "The war is over, and Violet Evergarden needs a job. Scarred and emotionless, she takes a job as a letter writer to understand herself and her past.",
+      "poster_path": "/t7FYO9WpiuUmaw30WSMzozwH90c.jpg",
+      "season_number": 1,
+      "vote_average": 7.8
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "Japanese",
+      "iso_639_1": "ja",
+      "name": "日本語"
+    }
+  ],
+  "status": "Ended",
+  "tagline": "An inspiring tale of love and letters",
+  "type": "Scripted",
+  "vote_average": 8.5,
+  "vote_count": 844
+}

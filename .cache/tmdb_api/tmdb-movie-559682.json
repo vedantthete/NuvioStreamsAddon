@@ -1,0 +1,50 @@
+{
+  "adult": false,
+  "backdrop_path": "/7Wv1GSb9qyvVgpVWhps369kPqm8.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    }
+  ],
+  "homepage": "",
+  "id": 559682,
+  "imdb_id": null,
+  "origin_country": [
+    "KR"
+  ],
+  "original_language": "ko",
+  "original_title": "후배부부와 교환섹스",
+  "overview": "When extreme cold freezes the pipes at a married couple's home, they go next door for a few days. While there, the couples become closer than they were before.",
+  "popularity": 4.1387,
+  "poster_path": "/fY2WhvTXFNIcYK3zgjbbEqiNSek.jpg",
+  "production_companies": [],
+  "production_countries": [
+    {
+      "iso_3166_1": "KR",
+      "name": "South Korea"
+    }
+  ],
+  "release_date": "2018-06-29",
+  "revenue": 0,
+  "runtime": 69,
+  "spoken_languages": [
+    {
+      "english_name": "Korean",
+      "iso_639_1": "ko",
+      "name": "한국어/조선말"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Sex Exchange",
+  "video": true,
+  "vote_average": 5.583,
+  "vote_count": 18
+}

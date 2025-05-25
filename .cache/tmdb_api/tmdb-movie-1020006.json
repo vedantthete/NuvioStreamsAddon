@@ -1,0 +1,67 @@
+{
+  "adult": false,
+  "backdrop_path": "/zz219ZRGo0vVIzvKttjx5nXOc2N.jpg",
+  "belongs_to_collection": null,
+  "budget": 20000000,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    }
+  ],
+  "homepage": "http://a24films.com/films/priscilla",
+  "id": 1020006,
+  "imdb_id": "tt22041854",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Priscilla",
+  "overview": "When teenage Priscilla Beaulieu meets Elvis Presley at a party, the man who is already a meteoric rock-and-roll superstar becomes someone entirely unexpected in private moments: a thrilling crush, an ally in loneliness, a vulnerable best friend.",
+  "popularity": 6.5241,
+  "poster_path": "/uDCeELWWpsNq7ErM61Yuq70WAE9.jpg",
+  "production_companies": [
+    {
+      "id": 128344,
+      "logo_path": "/zNBa6RAZ5TKWZUEhxx6sxc9tdrr.png",
+      "name": "The Apartment Pictures",
+      "origin_country": "IT"
+    },
+    {
+      "id": 70,
+      "logo_path": "/ueaENQkPcy8rlr5fGZVBXKOhlBh.png",
+      "name": "American Zoetrope",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "IT",
+      "name": "Italy"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2023-10-27",
+  "revenue": 30140906,
+  "runtime": 113,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Wife to the king. Icon to the world. Destined for more.",
+  "title": "Priscilla",
+  "video": false,
+  "vote_average": 6.8,
+  "vote_count": 894
+}

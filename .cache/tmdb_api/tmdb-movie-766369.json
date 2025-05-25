@@ -1,0 +1,63 @@
+{
+  "adult": false,
+  "backdrop_path": "/t0gMBj6bglENkhulbUsmNwfREht.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "",
+  "id": 766369,
+  "imdb_id": "tt34574758",
+  "origin_country": [
+    "KR"
+  ],
+  "original_language": "ko",
+  "original_title": "브로큰",
+  "overview": "Min-tae, a once-notorious gangster who now leads a peaceful retired life, discovers the bloody corpse of his only next of kin: his younger brother Seok-tae. With his brother’s missing wife Moon-young as the prime suspect, Min-tae uncovers a suspicious last phone call between her and a mysterious novelist, sparking a vicious hunt for the truth despite his seemingly deceitful former crime syndicate and the police in hot pursuit.",
+  "popularity": 5.6292,
+  "poster_path": "/b1lSMgSGRmHjIDdkRSt6qTG6MRB.jpg",
+  "production_companies": [
+    {
+      "id": 27133,
+      "logo_path": "/2hAfEWVO5JGBzHFjPHWFwPU9r55.png",
+      "name": "Sanai Pictures",
+      "origin_country": "KR"
+    },
+    {
+      "id": 249837,
+      "logo_path": null,
+      "name": "Eulji Creative",
+      "origin_country": "KR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "KR",
+      "name": "South Korea"
+    }
+  ],
+  "release_date": "2025-02-05",
+  "revenue": 0,
+  "runtime": 100,
+  "spoken_languages": [
+    {
+      "english_name": "Korean",
+      "iso_639_1": "ko",
+      "name": "한국어/조선말"
+    }
+  ],
+  "status": "Released",
+  "tagline": "No mercy, no escape, just vengeance.",
+  "title": "Nocturnal",
+  "video": false,
+  "vote_average": 6.1,
+  "vote_count": 21
+}

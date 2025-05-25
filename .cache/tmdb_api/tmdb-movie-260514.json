@@ -1,0 +1,70 @@
+{
+  "adult": false,
+  "backdrop_path": "/86TlYSntBzD4pxLNM6U3GoOfGdD.jpg",
+  "belongs_to_collection": {
+    "id": 87118,
+    "name": "Cars Collection",
+    "poster_path": "/uq3N2SFj1Y06zA6LzCQPkmBdaaE.jpg",
+    "backdrop_path": "/5Y4nBvDDcBZmvuwxDYR3pvlm9aS.jpg"
+  },
+  "budget": 175000000,
+  "genres": [
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    }
+  ],
+  "homepage": "http://cars.disney.com",
+  "id": 260514,
+  "imdb_id": "tt3606752",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Cars 3",
+  "overview": "Blindsided by a new generation of blazing-fast racers, the legendary Lightning McQueen is suddenly pushed out of the sport he loves. To get back in the game, he will need the help of an eager young race technician with her own plan to win, inspiration from the late Fabulous Hudson Hornet, and a few unexpected turns. Proving that #95 isn't through yet will test the heart of a champion on Piston Cup Racing’s biggest stage!",
+  "popularity": 10.8565,
+  "poster_path": "/fyy1nDC8wm553FCiBDojkJmKLCs.jpg",
+  "production_companies": [
+    {
+      "id": 3,
+      "logo_path": "/1TjvGVDMYsj6JBxOAkUHpPEwLf7.png",
+      "name": "Pixar",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2017-06-15",
+  "revenue": 383925276,
+  "runtime": 102,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "From this moment, everything will change.",
+  "title": "Cars 3",
+  "video": false,
+  "vote_average": 6.854,
+  "vote_count": 6013
+}

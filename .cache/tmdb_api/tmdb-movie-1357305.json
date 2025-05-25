@@ -1,0 +1,110 @@
+{
+  "adult": false,
+  "backdrop_path": "/6ykQysq6kfZ6Yw5C4dkhcZRd5QI.jpg",
+  "belongs_to_collection": {
+    "id": 525451,
+    "name": "Detective Chinatown Collection",
+    "poster_path": "/7yhWk325Bbt0fkXvx8d3XsReb5O.jpg",
+    "backdrop_path": "/9RpnmshC8LFe0XIAEsPqXqrEfZY.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    }
+  ],
+  "homepage": "",
+  "id": 1357305,
+  "imdb_id": "tt34463310",
+  "origin_country": [
+    "CN"
+  ],
+  "original_language": "zh",
+  "original_title": "唐探1900",
+  "overview": "In 1900, a white woman was murdered in Chinatown in San Francisco, and the suspect was a Chinese man. The murder caused social shock, and people demanded the closure of Chinatown.",
+  "popularity": 4.3069,
+  "poster_path": "/g3GsgIlH3fA4RxhNOAMvSbVWyfW.jpg",
+  "production_companies": [
+    {
+      "id": 148030,
+      "logo_path": "/4kegl7jMg4uSYDTSWocPtMU7o9Y.png",
+      "name": "As One Production",
+      "origin_country": "CN"
+    },
+    {
+      "id": 160606,
+      "logo_path": null,
+      "name": "Tianjin Maoyan Weiying Culture Media",
+      "origin_country": "CN"
+    },
+    {
+      "id": 98983,
+      "logo_path": null,
+      "name": "Shanghai Ruyi Film & TV Production",
+      "origin_country": "CN"
+    },
+    {
+      "id": 232865,
+      "logo_path": null,
+      "name": "北京乐开花影业有限公司",
+      "origin_country": ""
+    },
+    {
+      "id": 14714,
+      "logo_path": "/dSHaVKtBCpMU5VP9wMbTkqov62i.png",
+      "name": "China Film Group Corporation",
+      "origin_country": "CN"
+    },
+    {
+      "id": 78952,
+      "logo_path": "/zRBHUxapVA1FLR3dSa0xcLvzn1D.png",
+      "name": "Wanda Pictures",
+      "origin_country": "CN"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CN",
+      "name": "China"
+    },
+    {
+      "iso_3166_1": "HK",
+      "name": "Hong Kong"
+    }
+  ],
+  "release_date": "2025-01-29",
+  "revenue": 4,
+  "runtime": 135,
+  "spoken_languages": [
+    {
+      "english_name": "Mandarin",
+      "iso_639_1": "zh",
+      "name": "普通话"
+    },
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Navajo",
+      "iso_639_1": "nv",
+      "name": ""
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Detective Chinatown 1900",
+  "video": false,
+  "vote_average": 6.3,
+  "vote_count": 62
+}

@@ -1,0 +1,70 @@
+{
+  "adult": false,
+  "backdrop_path": "/dSlofjxxcTSLmnH6602WsSSELU5.jpg",
+  "belongs_to_collection": {
+    "id": 57971,
+    "name": "The Rescuers Collection",
+    "poster_path": "/6OGgrYU7bWFritfSW76uvCklM0.jpg",
+    "backdrop_path": "/5LxWcUb02pWN0FkNyDPYq34JV1M.jpg"
+  },
+  "budget": 7500000,
+  "genres": [
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    }
+  ],
+  "homepage": "",
+  "id": 11319,
+  "imdb_id": "tt0076618",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "The Rescuers",
+  "overview": "Two agents of the mouse-run International Rescue Aid Society search for a little orphan girl kidnapped by sinister treasure hunters.",
+  "popularity": 3.9773,
+  "poster_path": "/9jpDjrRyvv9Nw0piXOpHHQTfxw9.jpg",
+  "production_companies": [
+    {
+      "id": 3166,
+      "logo_path": "/vyyv4Gy9nPqAZKElPm2izLlEaVS.png",
+      "name": "Walt Disney Productions",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "1977-06-22",
+  "revenue": 169015869,
+  "runtime": 78,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Two tiny agents vs. the world's wickedest woman in a dazzling animated adventure!",
+  "title": "The Rescuers",
+  "video": false,
+  "vote_average": 6.8,
+  "vote_count": 2548
+}

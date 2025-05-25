@@ -1,0 +1,63 @@
+{
+  "adult": false,
+  "backdrop_path": "/p15kf4M6Wc5IvwhVSQRRJLcucGF.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "https://screamboatmovie.com/",
+  "id": 1225572,
+  "imdb_id": "tt30766582",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Screamboat",
+  "overview": "A late-night boat ride turns into a desperate fight for survival in New York City when a mischievous mouse becomes a monstrous reality.",
+  "popularity": 4.9571,
+  "poster_path": "/Ak6jQfWJ8tAwYLrF8CbJ1C1mAnM.jpg",
+  "production_companies": [
+    {
+      "id": 183793,
+      "logo_path": null,
+      "name": "Sleight of Hand Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 114220,
+      "logo_path": "/b5n3DtfUySREkq4Xi962zMg69qq.png",
+      "name": "Fuzz on the Lens Productions",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-03-20",
+  "revenue": 282916,
+  "runtime": 102,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "A scream is a wish your heart makes.",
+  "title": "Screamboat",
+  "video": false,
+  "vote_average": 4.7,
+  "vote_count": 26
+}

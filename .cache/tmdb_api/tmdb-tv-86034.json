@@ -1,0 +1,208 @@
+{
+  "adult": false,
+  "backdrop_path": "/1lL1ts7dzTUp0eOTHvMqfw6zFJn.jpg",
+  "created_by": [
+    {
+      "id": 3695817,
+      "credit_id": "66efdc737300a5ba213b423b",
+      "name": "Ryo Shirakome",
+      "original_name": "白米良",
+      "gender": 2,
+      "profile_path": null
+    }
+  ],
+  "episode_run_time": [
+    24
+  ],
+  "first_air_date": "2019-07-08",
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 10759,
+      "name": "Action & Adventure"
+    },
+    {
+      "id": 10765,
+      "name": "Sci-Fi & Fantasy"
+    }
+  ],
+  "homepage": "https://arifureta.com",
+  "id": 86034,
+  "in_production": false,
+  "languages": [
+    "ja"
+  ],
+  "last_air_date": "2025-02-17",
+  "last_episode_to_air": {
+    "id": 5630157,
+    "name": "The Key to the World",
+    "overview": "Hajime and Yue attempt to harness their new power to realize their ultimate goal - creating a way home.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-02-17",
+    "episode_number": 16,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 24,
+    "season_number": 3,
+    "show_id": 86034,
+    "still_path": "/gRcAcDz4LQexGnjIau55ZFwYC8U.jpg"
+  },
+  "name": "Arifureta: From Commonplace to World's Strongest",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 173,
+      "logo_path": "/fERjndErEpveJmQZccJbJDi93rj.png",
+      "name": "AT-X",
+      "origin_country": "JP"
+    }
+  ],
+  "number_of_episodes": 41,
+  "number_of_seasons": 3,
+  "origin_country": [
+    "JP"
+  ],
+  "original_language": "ja",
+  "original_name": "ありふれた職業で世界最強",
+  "overview": "Hajime Nagumo and his high school class are suddenly summoned to a fantastical land as heroes. But while most of his classmates have powerful stats and abilities, Hajime does not. Underappreciated and unprepared, he tumbles into the depths of a monster-infested dungeon where voracity and sacrifice are his only options. To thrive in this savage world, he’ll have no choice but to welcome the abyss.",
+  "popularity": 3.2591,
+  "poster_path": "/kB9tdE00Z5zWIJQux1jiYvRyPIC.jpg",
+  "production_companies": [
+    {
+      "id": 42519,
+      "logo_path": null,
+      "name": "asread.",
+      "origin_country": "JP"
+    },
+    {
+      "id": 12569,
+      "logo_path": "/pROt6mT15AC5aTadf7NRBRiTVo3.png",
+      "name": "White Fox",
+      "origin_country": "JP"
+    },
+    {
+      "id": 172950,
+      "logo_path": "/nNFRxh5PkH51TXGG8xqXs3lQRAl.png",
+      "name": "studio MOTHER",
+      "origin_country": "JP"
+    },
+    {
+      "id": 6683,
+      "logo_path": "/reCkuk3GEomdx5gQpsm15Zl1sgX.png",
+      "name": "Lantis",
+      "origin_country": "JP"
+    },
+    {
+      "id": 173072,
+      "logo_path": "/yzjCLHAKJaU4TaqoKMRn7DopNnr.png",
+      "name": "OVERLAP",
+      "origin_country": "JP"
+    },
+    {
+      "id": 142186,
+      "logo_path": "/bdXTOuU7PdsDtQngyM7vb47zePs.png",
+      "name": "Hakuhodo DY Music & Pictures",
+      "origin_country": "JP"
+    },
+    {
+      "id": 113034,
+      "logo_path": "/hL98ifueUh5UdbiQnTRop1Q551z.png",
+      "name": "FuRyu",
+      "origin_country": "JP"
+    },
+    {
+      "id": 17981,
+      "logo_path": "/8UABNMysukRi4udTHYxcNUMbPR1.png",
+      "name": "AT-X",
+      "origin_country": "JP"
+    },
+    {
+      "id": 648,
+      "logo_path": "/s811As3dkcqSgl4nEWEVYfJVVxh.png",
+      "name": "Sony Music Entertainment",
+      "origin_country": "JP"
+    },
+    {
+      "id": 165700,
+      "logo_path": "/vec1PZPimQg3U8n6I2TKo2uYoOd.png",
+      "name": "Toranoana",
+      "origin_country": "JP"
+    },
+    {
+      "id": 136217,
+      "logo_path": "/dBYuplhBgeOsGPQOI0LukWNbFWE.png",
+      "name": "Bandai Namco Arts",
+      "origin_country": "JP"
+    },
+    {
+      "id": 42196,
+      "logo_path": "/nQNmHvcmaT0zk1Rf0TYtLYO5MpI.png",
+      "name": "Bushiroad",
+      "origin_country": "JP"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "JP",
+      "name": "Japan"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2019-07-08",
+      "episode_count": 48,
+      "id": 129684,
+      "name": "Specials",
+      "overview": "",
+      "poster_path": "/2pJ2kMIdXMhc2VFqygGVy41DDnM.jpg",
+      "season_number": 0,
+      "vote_average": 0
+    },
+    {
+      "air_date": "2019-07-08",
+      "episode_count": 13,
+      "id": 117117,
+      "name": "Season 1",
+      "overview": "The ordinary life of 17-year-old otaku Hajime Nagumo is disrupted when he and his classmates are summoned to a fantasy world and tasked with saving mankind. While his classmates are gifted with impressive abilities useful in combat, Hajime is belittled for only gaining an inferior transmutation skill that lacks any real offensive power.\n\nDuring an expedition in the Great Orcus Labyrinth, Hajime is betrayed by one of his classmates, plummeting him to the bottom of an abyss. Though he survives the fall, Hajime is faced with menacing monsters and misfortunes that send him spiraling into a grim nightmare. Desperate to live and return home one day, he resolves to fight for his survival—only to meet an imprisoned vampire he names Yue, who is also seeking to escape the labyrinth. Taking an interest in him, Yue and a few others along the way accompany Hajime on his journey to find a way back home, while steadily transforming from commonplace to the world's strongest.",
+      "poster_path": "/eFsZ8eyLoRGlnUaVEZkipF79VC6.jpg",
+      "season_number": 1,
+      "vote_average": 7
+    },
+    {
+      "air_date": "2022-01-13",
+      "episode_count": 12,
+      "id": 213264,
+      "name": "Season 2",
+      "overview": "After rescuing his former classmates from the perils of a labyrinth—a mythical place that grants a divine magic to whosoever triumphs over its trials—Nagumo Hajime emerges victorious, while the new heroes of the fantasy world Tortus must face their first major failure. Together with his traveling companions and the new team member Kaori Shirasaki, Nagumo resumes his journey to conquer all labyrinths and eventually return to his original world.\n\nMeanwhile, the heroes from Earth try learning from their mistakes and prepare for the demon army's invasion. As the final confrontation looms closer, new and old enemies start setting their evil plans in motion. Once more, Nagumo must prove that he can prevail against the most formidable opponents, all while protecting the ones he holds closest to his heart.",
+      "poster_path": "/qmBtElMz9Hf4vFLX3w4HFkVI1gg.jpg",
+      "season_number": 2,
+      "vote_average": 6.9
+    },
+    {
+      "air_date": "2024-10-14",
+      "episode_count": 16,
+      "id": 310100,
+      "name": "Season 3",
+      "overview": "En route to conquer a Great Labyrinth, Hajime Nagumo is sidetracked by a tragedy that befalls his party member Shea Haulia. After encountering a group of rabbitmen caught in an ambush, Nagumo learns that members of Shea's Haulia Tribe have been abducted by soldiers of the Hoelscher Empire. To alleviate the anxiety of Shea, whose father may be in mortal danger, Nagumo decides to head toward the empire and rescue the missing Haulias.\n\nAfter arriving at his destination, Hajime is caught up in political turmoil between the empire and the Heiligh Kingdom. As princess Liliana S. B. Heiligh tries to formalize an alliance with the empire to protect her weakened kingdom against demon attacks, the Haulia Tribe plans to assassinate Emperor Gahard D. Hoelscher to free all rabbitmen from the empire's threat. Determined to protect his allies at any cost, Hajime will need to ignore all political considerations and unleash his unstoppable power on anyone who may stand in his way.",
+      "poster_path": "/eqhk39Xm9lzGmzDQdyiu3enasjE.jpg",
+      "season_number": 3,
+      "vote_average": 10
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "Japanese",
+      "iso_639_1": "ja",
+      "name": "日本語"
+    }
+  ],
+  "status": "Ended",
+  "tagline": "—and so, the boy surpassed the “strongest.”",
+  "type": "Scripted",
+  "vote_average": 8.516,
+  "vote_count": 594
+}

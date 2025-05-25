@@ -1,0 +1,130 @@
+{
+  "adult": false,
+  "backdrop_path": "/lpCUO57WSukC8NWfg0Kufl5rt58.jpg",
+  "created_by": [
+    {
+      "id": 1764521,
+      "credit_id": "63b3fe881d1bf400a71d760e",
+      "name": "Yang Hui-seung",
+      "original_name": "Yang Hui-seung",
+      "gender": 1,
+      "profile_path": "/vW1RbpxmoWLuyD6oTzYQqtlJupl.jpg"
+    },
+    {
+      "id": 2313225,
+      "credit_id": "64c6cb5f95ce24011e5989ea",
+      "name": "Kim Soo-jin",
+      "original_name": "Kim Soo-jin",
+      "gender": 0,
+      "profile_path": null
+    },
+    {
+      "id": 1853572,
+      "credit_id": "64c6cb4e63aad20209a5871a",
+      "name": "Oh Hyun-jong",
+      "original_name": "Oh Hyun-jong",
+      "gender": 2,
+      "profile_path": "/iv4xA36b18oj7saQ8SOy2NkiqRy.jpg"
+    }
+  ],
+  "episode_run_time": [
+    65
+  ],
+  "first_air_date": "2016-11-16",
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "http://www.imbc.com/broad/tv/drama/bokjoo/",
+  "id": 68349,
+  "in_production": false,
+  "languages": [
+    "ko",
+    "es"
+  ],
+  "last_air_date": "2017-01-11",
+  "last_episode_to_air": {
+    "id": 1255330,
+    "name": "Spring, Youth and Us Again",
+    "overview": "Joon-hyung goes to the hospital to see Chang-gul, who asks him to hide the operation from Bok-joo so she can focus on her training.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2017-01-11",
+    "episode_number": 16,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 59,
+    "season_number": 1,
+    "show_id": 68349,
+    "still_path": "/yAYRRS1VPuD074CO5BgDJxa3Avz.jpg"
+  },
+  "name": "Weightlifting Fairy Kim Bok-joo",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 97,
+      "logo_path": "/pOSCKaZhndUFYtxHXjQOV6xJi1s.png",
+      "name": "MBC",
+      "origin_country": "KR"
+    }
+  ],
+  "number_of_episodes": 16,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "KR"
+  ],
+  "original_language": "ko",
+  "original_name": "역도요정 김복주",
+  "overview": "A competitive swimmer crosses paths with his childhood friend, a rising weight lifting star, and realizes that she has a secret crush on his cousin.",
+  "popularity": 8.7542,
+  "poster_path": "/oARcy8kubYekRqii04obOlvw442.jpg",
+  "production_companies": [
+    {
+      "id": 70599,
+      "logo_path": "/6BPMZOHO2nkp7i3NYpy4287Kl4Y.png",
+      "name": "Chorokbaem Media",
+      "origin_country": "KR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "KR",
+      "name": "South Korea"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2016-11-16",
+      "episode_count": 16,
+      "id": 81254,
+      "name": "Season 1",
+      "overview": "A rising weight lifting star crosses paths with a childhood friend, a competitive swimmer, and realizes that she has a secret crush on his cousin.",
+      "poster_path": "/cfjJCdaxa6PehFrpPp4lLQlqi8i.jpg",
+      "season_number": 1,
+      "vote_average": 8.7
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "Korean",
+      "iso_639_1": "ko",
+      "name": "한국어/조선말"
+    },
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Ended",
+  "tagline": "Do you like Messi?",
+  "type": "Miniseries",
+  "vote_average": 8.516,
+  "vote_count": 892
+}

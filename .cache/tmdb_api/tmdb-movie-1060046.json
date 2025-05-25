@@ -1,0 +1,64 @@
+{
+  "adult": false,
+  "backdrop_path": "/sulb7RwIiO77n1XNM2VhldUFDW1.jpg",
+  "belongs_to_collection": {
+    "id": 918344,
+    "name": "HIT Verse",
+    "poster_path": "/dVgCr5wtKZhFzCDi3L8319ch6rg.jpg",
+    "backdrop_path": null
+  },
+  "budget": 7000000,
+  "genres": [
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 28,
+      "name": "Action"
+    }
+  ],
+  "homepage": "",
+  "id": 1060046,
+  "imdb_id": "tt23804696",
+  "origin_country": [],
+  "original_language": "te",
+  "original_title": "హిట్: ది థర్డ్ కేస్",
+  "overview": "Arjun Sarkaar, an SP in HIT at Visakhapatnam, gets assigned to a case for HIT in Jammu and Kashmir to catch a group of serial killers who are responsible for the gruesome murders of several people.",
+  "popularity": 5.5875,
+  "poster_path": "/wT9tGyFol4RBwkjESXUWeBdnLJn.jpg",
+  "production_companies": [
+    {
+      "id": 100143,
+      "logo_path": null,
+      "name": "Wall Poster Cinema",
+      "origin_country": "IN"
+    },
+    {
+      "id": 259393,
+      "logo_path": null,
+      "name": "Unanimous Productions",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "IN",
+      "name": "India"
+    }
+  ],
+  "release_date": "2025-04-30",
+  "revenue": 0,
+  "runtime": 157,
+  "spoken_languages": [],
+  "status": "Released",
+  "tagline": "",
+  "title": "HIT: The Third Case",
+  "video": false,
+  "vote_average": 8.6,
+  "vote_count": 11
+}

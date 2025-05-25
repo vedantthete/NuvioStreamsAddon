@@ -1,0 +1,65 @@
+{
+  "adult": false,
+  "backdrop_path": "/fog8Vbeg1KOZAucucPxgYpXJ0a0.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 99,
+      "name": "Documentary"
+    }
+  ],
+  "homepage": "",
+  "id": 1472668,
+  "imdb_id": "tt36751759",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Wick Is Pain",
+  "overview": "Witness the never-before-seen footage and true story behind the John Wick phenomenon – from independent film to billion-dollar franchise.",
+  "popularity": 6.5724,
+  "poster_path": "/ctZ9bjmCYyfFt3cUepc9axr0zHs.jpg",
+  "production_companies": [
+    {
+      "id": 1632,
+      "logo_path": "/cisLn1YAUuptXVBa0xjq7ST9cH0.png",
+      "name": "Lionsgate",
+      "origin_country": "US"
+    },
+    {
+      "id": 23008,
+      "logo_path": "/5SarYupipdiejsEqUkwu1SpYfru.png",
+      "name": "87Eleven",
+      "origin_country": "US"
+    },
+    {
+      "id": 120268,
+      "logo_path": "/iv31nXw6IoA4ydUYVIHSYP4RL2T.png",
+      "name": "Narrator",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-05-08",
+  "revenue": 0,
+  "runtime": 126,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "How the legend was made.",
+  "title": "Wick Is Pain",
+  "video": false,
+  "vote_average": 7.521,
+  "vote_count": 24
+}

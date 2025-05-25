@@ -121,17 +121,34 @@ async function fetchShowDetailsAndEpisodes(showId) {
     return showDetails;
 }
 
-
 async function main() {
     console.log("Starting TMDB data fetch...");
-    const allMedia = [];
-    const processedIds = new Set(); // To avoid duplicates from different categories
+    const allMedia = []; // This will store NEWLY fetched items in this run
+    let existingMedia = [];
+    const processedIds = new Set(); // To avoid duplicates and items already in the master list
+
+    try {
+        const fileContent = await fs.readFile(OUTPUT_FILE, 'utf8');
+        if (fileContent) {
+            existingMedia = JSON.parse(fileContent);
+            for (const mediaItem of existingMedia) {
+                if (mediaItem && mediaItem.tmdbId) {
+                    processedIds.add(String(mediaItem.tmdbId));
+                }
+            }
+            console.log(`Loaded ${existingMedia.length} existing media items from ${OUTPUT_FILE}. ${processedIds.size} unique IDs pre-processed.`);
+        }
+    } catch (error) {
+        if (error.code === 'ENOENT') {
+            console.log(`${OUTPUT_FILE} not found. Will create a new one.`);
+        } else {
+            console.error(`Error reading or parsing ${OUTPUT_FILE}: ${error.message}. Starting with an empty list of existing media.`);
+        }
+        existingMedia = []; // Ensure it's empty on error or if file not found
+    }
 
     const categories = [
-        { type: 'movie', endpoint: '/movie/popular', fetchFunction: fetchMovieDetails, label: "Popular Movies" },
-        { type: 'movie', endpoint: '/trending/movie/week', fetchFunction: fetchMovieDetails, label: "Trending Movies" },
-        { type: 'tv', endpoint: '/tv/popular', fetchFunction: fetchShowDetailsAndEpisodes, label: "Popular TV Shows" },
-        { type: 'tv', endpoint: '/trending/tv/week', fetchFunction: fetchShowDetailsAndEpisodes, label: "Trending TV Shows" },
+        // Popular and Trending movies/shows removed as per request
         { type: 'tv', endpoint: '/tv/top_rated', fetchFunction: fetchShowDetailsAndEpisodes, label: "Top Rated TV Shows", minVoteCount: 500 }
     ];
 
@@ -153,20 +170,20 @@ async function main() {
 
             const details = await category.fetchFunction(item.id);
             if (details) {
-                allMedia.push(details);
-                processedIds.add(String(item.id));
+                allMedia.push(details); // Add new item to allMedia
+                processedIds.add(String(details.tmdbId)); // Add to processedIds for this run to prevent re-adding if somehow duplicated in API results
                 count++;
                 console.log(`    Processed ${category.type} #${count}: ${details.title} (${details.year})`);
             }
             await delay(300); // Delay between fetching full details for each item
         }
-        console.log(`Fetched ${count} new items from ${category.label}. Total media items: ${allMedia.length}
-`);
+        console.log(`Fetched ${count} new items from ${category.label}. Total media items: ${allMedia.length}`);
     }
 
     try {
-        await fs.writeFile(OUTPUT_FILE, JSON.stringify(allMedia, null, 2));
-        console.log(`Successfully wrote ${allMedia.length} media items to ${OUTPUT_FILE}`);
+        const combinedMedia = [...existingMedia, ...allMedia]; // Combine existing list with newly fetched items
+        await fs.writeFile(OUTPUT_FILE, JSON.stringify(combinedMedia, null, 2));
+        console.log(`Added ${allMedia.length} new media items. Successfully wrote ${combinedMedia.length} total media items to ${OUTPUT_FILE}`);
     } catch (error) {
         console.error(`Error writing to ${OUTPUT_FILE}: ${error.message}`);
     }

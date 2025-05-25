@@ -1,0 +1,144 @@
+{
+  "adult": false,
+  "backdrop_path": "/uxpYsuTkfSMdTzR2LIkkjMiaybv.jpg",
+  "created_by": [
+    {
+      "id": 190473,
+      "credit_id": "52570d9f760ee3776a08e4ba",
+      "name": "Scott Fellows",
+      "original_name": "Scott Fellows",
+      "gender": 2,
+      "profile_path": null
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2004-09-12",
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 10762,
+      "name": "Kids"
+    }
+  ],
+  "homepage": "",
+  "id": 1600,
+  "in_production": false,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2007-06-08",
+  "last_episode_to_air": {
+    "id": 82202,
+    "name": "Guide to: Field Trips, Permission Slips, Signs and Weasels (2)",
+    "overview": "Coming Soon!",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2007-06-08",
+    "episode_number": 22,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 24,
+    "season_number": 3,
+    "show_id": 1600,
+    "still_path": null
+  },
+  "name": "Ned's Declassified School Survival Guide",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 13,
+      "logo_path": "/aYkLXz4dxHgOrFNH7Jv7Cpy56Ms.png",
+      "name": "Nickelodeon",
+      "origin_country": "US"
+    }
+  ],
+  "number_of_episodes": 55,
+  "number_of_seasons": 3,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "Ned's Declassified School Survival Guide",
+  "overview": "The whacky adventures of Ned Bigby and his best pals Moze and Cookie at James K. Polk Middle School, as \"every-kid\" Ned shatters the fourth wall to share tips and tricks on navigating middle school or junior high hurdles. Ned's not super cool, and he has no superpowers. He is, however, witty, well-groomed, upbeat and self-aware. Moreover, with more than a little help from his two best friends, he's equipped to conquer middle school minefields. From crushing bullies to crushes, from off- the-wall, mean and cool teachers to pop quizzes, elections and detentions, Ned knows that nothing, including the seventh grade, is as bad as it seems, and friendship matters most.",
+  "popularity": 27.7782,
+  "poster_path": "/3kUXoJFmj6vOdmqMMoiYZj0eY2F.jpg",
+  "production_companies": [
+    {
+      "id": 19528,
+      "logo_path": null,
+      "name": "ApolloProScreen Filmproduktion",
+      "origin_country": "DE"
+    },
+    {
+      "id": 53592,
+      "logo_path": null,
+      "name": "Dolphin Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 56591,
+      "logo_path": null,
+      "name": "Jack Mackie Pictures",
+      "origin_country": ""
+    },
+    {
+      "id": 5371,
+      "logo_path": "/2GFJ3jJ7dhjqcOGj41aTwd3OhQT.png",
+      "name": "Nickelodeon Productions",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2004-09-12",
+      "episode_count": 13,
+      "id": 4404,
+      "name": "Season 1",
+      "overview": "Middle schooler Ned Bigby assembles a survival guide for kids just like him to prepare them for the ups and downs of adolescence.",
+      "poster_path": "/4mFSo2P2FvZE2TpPIc47rT4RuYN.jpg",
+      "season_number": 1,
+      "vote_average": 8
+    },
+    {
+      "air_date": "2005-10-01",
+      "episode_count": 20,
+      "id": 4405,
+      "name": "Season 2",
+      "overview": "Alongside his pals Cookie and Moze, Ned tackles a new semester with an ambitious to-do list while sharing his own tips on how to survive middle school.",
+      "poster_path": "/qTVyAsagnlFyhq8Gay9pFPPLt5N.jpg",
+      "season_number": 2,
+      "vote_average": 8
+    },
+    {
+      "air_date": "2006-09-24",
+      "episode_count": 22,
+      "id": 4406,
+      "name": "Season 3",
+      "overview": "",
+      "poster_path": "/nmQJ1vR8fOhDHFriYrkImnGNz26.jpg",
+      "season_number": 3,
+      "vote_average": 0
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Ended",
+  "tagline": "",
+  "type": "Scripted",
+  "vote_average": 8.5,
+  "vote_count": 966
+}

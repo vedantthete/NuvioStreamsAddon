@@ -1,0 +1,78 @@
+{
+  "adult": false,
+  "backdrop_path": "/nBEFrdcVhwceGSFw83RksxY9Blg.jpg",
+  "belongs_to_collection": null,
+  "budget": 65000000,
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    }
+  ],
+  "homepage": "https://www.renfieldmovie.com",
+  "id": 649609,
+  "imdb_id": "tt11358390",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Renfield",
+  "overview": "Having grown sick and tired of his centuries as Dracula's lackey, Renfield finds a new lease on life — and maybe even redemption — when he falls for feisty, perennially angry traffic cop Rebecca Quincy.",
+  "popularity": 4.618,
+  "poster_path": "/p6yUjhvNGQpFZilKwOKbxQ1eHlo.jpg",
+  "production_companies": [
+    {
+      "id": 50032,
+      "logo_path": "/ojrMksdtR7Bs2vwERU1LCrjv7vx.png",
+      "name": "Skybound Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 33,
+      "logo_path": "/3wwjVpkZtnog6lSKzWDjvw2Yi00.png",
+      "name": "Universal Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 197279,
+      "logo_path": null,
+      "name": "Giant Wildcat",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2023-04-07",
+  "revenue": 26874347,
+  "runtime": 93,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Thai",
+      "iso_639_1": "th",
+      "name": "ภาษาไทย"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Sucks to be him.",
+  "title": "Renfield",
+  "video": false,
+  "vote_average": 6.486,
+  "vote_count": 1877
+}

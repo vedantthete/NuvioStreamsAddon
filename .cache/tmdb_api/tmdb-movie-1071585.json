@@ -1,0 +1,84 @@
+{
+  "adult": false,
+  "backdrop_path": "/vX0AZfa1LDmbrOaokyhZIxYVLIf.jpg",
+  "belongs_to_collection": {
+    "id": 1071588,
+    "name": "M3GAN Collection",
+    "poster_path": "/fS57wFKda3h5dtWS3sc9JffE05R.jpg",
+    "backdrop_path": "/uXEJwb8y67vFLaJb4wvHbSH6PjT.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    }
+  ],
+  "homepage": "https://www.m3ganmovie.com",
+  "id": 1071585,
+  "imdb_id": "tt26342662",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "M3GAN 2.0",
+  "overview": "After the underlying tech for M3GAN is stolen and misused by a powerful defense contractor to create a military-grade weapon known as Amelia, M3GAN's creator Gemma realizes that the only option is to resurrect M3GAN and give her a few upgrades, making her faster, stronger, and more lethal.",
+  "popularity": 7.3936,
+  "poster_path": "/hq0ONyCxMNirXetaEjDY7iOp29p.jpg",
+  "production_companies": [
+    {
+      "id": 3172,
+      "logo_path": "/rzKluDcRkIwHZK2pHsiT667A2Kw.png",
+      "name": "Blumhouse Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 76907,
+      "logo_path": "/ygMQtjsKX7BZkCQhQZY82lgnCUO.png",
+      "name": "Atomic Monster",
+      "origin_country": "US"
+    },
+    {
+      "id": 89115,
+      "logo_path": "/zQwTHJVIruUlGsa7zIdfXuSm9GG.png",
+      "name": "Divide / Conquer",
+      "origin_country": "US"
+    },
+    {
+      "id": 33,
+      "logo_path": "/3wwjVpkZtnog6lSKzWDjvw2Yi00.png",
+      "name": "Universal Pictures",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-06-25",
+  "revenue": 0,
+  "runtime": 120,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Post Production",
+  "tagline": "Miss me?",
+  "title": "M3GAN 2.0",
+  "video": false,
+  "vote_average": 0,
+  "vote_count": 0
+}

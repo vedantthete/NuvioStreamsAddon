@@ -1,0 +1,82 @@
+{
+  "adult": false,
+  "backdrop_path": "/elZZLzhDzjRIIkGcIK0FGmZSUaq.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    }
+  ],
+  "homepage": "https://www.lionsgate.com/movies/freaky-tales",
+  "id": 979660,
+  "imdb_id": "tt21942598",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Freaky Tales",
+  "overview": "In 1987 Oakland, a mysterious force guides The Town's underdogs in four interconnected tales: teen punks defend their turf against Nazi skinheads, a rap duo battles for hip-hop immortality, a weary henchman gets a shot at redemption, and an NBA All-Star settles the score.",
+  "popularity": 5.3722,
+  "poster_path": "/lo5mfglsGeMYmAkSRXs9DATNJxk.jpg",
+  "production_companies": [
+    {
+      "id": 79426,
+      "logo_path": "/8aEC7xem9YwHNCDojSFEPQgoFC3.png",
+      "name": "MACRO",
+      "origin_country": "US"
+    },
+    {
+      "id": 8147,
+      "logo_path": "/q6HOAdSNgCbeOqwoMVRc6REgbXF.png",
+      "name": "Entertainment One",
+      "origin_country": "CA"
+    },
+    {
+      "id": 74103,
+      "logo_path": null,
+      "name": "Gowanus Projections",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CA",
+      "name": "Canada"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-04-04",
+  "revenue": 400000,
+  "runtime": 107,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Korean",
+      "iso_639_1": "ko",
+      "name": "한국어/조선말"
+    }
+  ],
+  "status": "Released",
+  "tagline": "In 1987, Oakland was hella freaky.",
+  "title": "Freaky Tales",
+  "video": false,
+  "vote_average": 6.589,
+  "vote_count": 62
+}

@@ -1,0 +1,98 @@
+{
+  "adult": false,
+  "backdrop_path": "/aACb16EooaTSWGHwjsoeGe8DmyF.jpg",
+  "belongs_to_collection": null,
+  "budget": 32000000,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.palacefilms.com.au/parthenope",
+  "id": 1109255,
+  "imdb_id": "tt23853982",
+  "origin_country": [
+    "IT"
+  ],
+  "original_language": "it",
+  "original_title": "Parthenope",
+  "overview": "Parthenope, born in the sea near Naples in 1950, is beautiful, enigmatic, and intelligent. She is shamelessly courted by many. However, beauty comes at a cost.",
+  "popularity": 8.2107,
+  "poster_path": "/uhMIPArCsAzMKRMtLj2VDqAd6ZO.jpg",
+  "production_companies": [
+    {
+      "id": 128344,
+      "logo_path": "/zNBa6RAZ5TKWZUEhxx6sxc9tdrr.png",
+      "name": "The Apartment Pictures",
+      "origin_country": "IT"
+    },
+    {
+      "id": 7981,
+      "logo_path": "/6Yv1gIAuGkHS5Vis4UjnqHhCPWV.png",
+      "name": "Pathé",
+      "origin_country": "FR"
+    },
+    {
+      "id": 207505,
+      "logo_path": "/4ze8MU9ehNgWlVqTVTsWZo3iFmn.png",
+      "name": "Numero10",
+      "origin_country": "IT"
+    },
+    {
+      "id": 237344,
+      "logo_path": "/3fFS8oipevuYlXVbOaqmHYUTyBx.png",
+      "name": "Saint Laurent Productions",
+      "origin_country": "FR"
+    },
+    {
+      "id": 228664,
+      "logo_path": "/rKNzL97WA26KnyeUUycdJDggxLq.png",
+      "name": "PiperFilm",
+      "origin_country": "IT"
+    },
+    {
+      "id": 209127,
+      "logo_path": "/6kby8aYYQX7RqPGs0DPIGMtG2Sg.png",
+      "name": "Logical Content Ventures",
+      "origin_country": "FR"
+    },
+    {
+      "id": 139680,
+      "logo_path": "/kfmKLkXqqrScA5l7aYcROQSqeTz.png",
+      "name": "Saint Laurent",
+      "origin_country": "FR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    },
+    {
+      "iso_3166_1": "IT",
+      "name": "Italy"
+    }
+  ],
+  "release_date": "2024-10-24",
+  "revenue": 10361110,
+  "runtime": 137,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Italian",
+      "iso_639_1": "it",
+      "name": "Italiano"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Is she a siren or a myth?",
+  "title": "Parthenope",
+  "video": false,
+  "vote_average": 6.793,
+  "vote_count": 559
+}

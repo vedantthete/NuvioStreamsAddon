@@ -1,0 +1,101 @@
+{
+  "adult": false,
+  "backdrop_path": "/now7huridSv1NH6kUxVQGuAgVNw.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    }
+  ],
+  "homepage": "",
+  "id": 1276108,
+  "imdb_id": "tt32253416",
+  "origin_country": [
+    "JP"
+  ],
+  "original_language": "ja",
+  "original_title": "ラストマイル",
+  "overview": "On the night before ‘Black Friday,’ which is the one of the busiest commerce days, a cardboard box, that is delivered from the world's largest shopping site, explodes. Soon after, a series of mysterious explosion cases occurs. The entire nation becomes terrorized by the shocking events. Funado Erena has just began to work as the center director for a large distribution warehouse that covers three-quarters of the Kanto area. Erena must gain control over this unprecedented situation with team manager Nashimoto Ko.",
+  "popularity": 2.5465,
+  "poster_path": "/rCs6Jbyfs7HDNEmLwGXK32vlsXG.jpg",
+  "production_companies": [
+    {
+      "id": 139446,
+      "logo_path": "/4uMH3FFbHgK5dKBiGMXKQCM8ln9.png",
+      "name": "TBS Sparkle",
+      "origin_country": "JP"
+    },
+    {
+      "id": 882,
+      "logo_path": "/fRSWWjquvzcHjACbtF53utZFIll.png",
+      "name": "TOHO",
+      "origin_country": "JP"
+    },
+    {
+      "id": 1393,
+      "logo_path": "/lUACMATs6jcscXIrzNCQzbvNVN5.png",
+      "name": "TBS",
+      "origin_country": "JP"
+    },
+    {
+      "id": 3363,
+      "logo_path": "/sj3vD7n63bTCih7bcf6GnWvRf1Q.png",
+      "name": "MBS",
+      "origin_country": "JP"
+    },
+    {
+      "id": 12384,
+      "logo_path": "/qNooLje0YQh1y3y9LUM2Y5QCtiF.png",
+      "name": "CBC",
+      "origin_country": "JP"
+    },
+    {
+      "id": 12385,
+      "logo_path": "/piV4KOvWfuxhZUkDbdb5ZWDEpRJ.png",
+      "name": "RKB Mainichi Broadcasting Corporation",
+      "origin_country": "JP"
+    },
+    {
+      "id": 7093,
+      "logo_path": "/noWiZlQLfjCyDAUJlA0miLClsHI.png",
+      "name": "Hokkaido Broadcasting Co.",
+      "origin_country": "JP"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "JP",
+      "name": "Japan"
+    }
+  ],
+  "release_date": "2024-08-23",
+  "revenue": 37164152,
+  "runtime": 128,
+  "spoken_languages": [
+    {
+      "english_name": "Japanese",
+      "iso_639_1": "ja",
+      "name": "日本語"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Last Mile",
+  "video": false,
+  "vote_average": 6.917,
+  "vote_count": 12
+}

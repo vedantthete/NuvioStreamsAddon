@@ -1,0 +1,80 @@
+{
+  "adult": false,
+  "backdrop_path": "/bNTUgxHYaDmLo1SfRtahcM16XMi.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "",
+  "id": 1086497,
+  "imdb_id": "tt26677014",
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_title": "The Penguin Lessons",
+  "overview": "In 1976, as Argentina descends into violence and chaos, a world-weary English teacher regains his compassion for others thanks to an unlikely friendship with a penguin.",
+  "popularity": 7.5705,
+  "poster_path": "/uz7eucj2EgBLC0KVjkiCbVrvuX9.jpg",
+  "production_companies": [
+    {
+      "id": 84988,
+      "logo_path": "/rzpfuMEMDQnmqp0YTFMEqgfDrxY.png",
+      "name": "42",
+      "origin_country": "GB"
+    },
+    {
+      "id": 11068,
+      "logo_path": "/jOdUllzDZRFy0tPIFDEwpP4Mpv4.png",
+      "name": "Nostromo Pictures",
+      "origin_country": "ES"
+    },
+    {
+      "id": 202067,
+      "logo_path": null,
+      "name": "Rolling Dice",
+      "origin_country": ""
+    },
+    {
+      "id": 153971,
+      "logo_path": "/fKr7g5Q4NFl94TOijKgzmhtb9eu.png",
+      "name": "Intake Films",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "ES",
+      "name": "Spain"
+    },
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    }
+  ],
+  "release_date": "2025-03-27",
+  "revenue": 6668700,
+  "runtime": 111,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "In 1976 Argentina, on the eve of a political revolution, a teacher and his students at an exclusive boys school are enlightened by an unusual guest.",
+  "title": "The Penguin Lessons",
+  "video": false,
+  "vote_average": 7.188,
+  "vote_count": 32
+}

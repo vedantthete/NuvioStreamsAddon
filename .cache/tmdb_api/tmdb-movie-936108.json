@@ -1,0 +1,95 @@
+{
+  "adult": false,
+  "backdrop_path": "/4fsyGmrZrCq9ndkoMLXrLPyMSpf.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    }
+  ],
+  "homepage": "https://www.smurfs.movie",
+  "id": 936108,
+  "imdb_id": "tt18069420",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Smurfs",
+  "overview": "When Papa Smurf is mysteriously taken by evil wizards, Razamel and Gargamel, Smurfette leads the Smurfs on a mission into the real world to save him. With the help of new friends, the Smurfs must discover what defines their destiny to save the universe.",
+  "popularity": 7.1981,
+  "poster_path": "/3dwNXK6A5Jmw7h4JRqsq2tQIreQ.jpg",
+  "production_companies": [
+    {
+      "id": 24955,
+      "logo_path": "/pUZAeCMZlLBBUItAl11Ip2XikdD.png",
+      "name": "Paramount Animation",
+      "origin_country": "US"
+    },
+    {
+      "id": 95063,
+      "logo_path": null,
+      "name": "Marcy Media",
+      "origin_country": ""
+    },
+    {
+      "id": 152873,
+      "logo_path": "/4OhVzKPHCbDjz6Y21EmdJlKatu1.png",
+      "name": "Peyo Productions",
+      "origin_country": "BE"
+    },
+    {
+      "id": 136987,
+      "logo_path": null,
+      "name": "Cinesite",
+      "origin_country": "US"
+    },
+    {
+      "id": 4,
+      "logo_path": "/gz66EfNoYPqHTYI4q9UEN4CbHRc.png",
+      "name": "Paramount Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 216687,
+      "logo_path": "/kKVYqekveOvLK1IgqdJojLjQvtu.png",
+      "name": "Domain Entertainment",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    },
+    {
+      "iso_3166_1": "BE",
+      "name": "Belgium"
+    }
+  ],
+  "release_date": "2025-07-10",
+  "revenue": 0,
+  "runtime": 0,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Post Production",
+  "tagline": "Adventure comes out of the blue.",
+  "title": "Smurfs",
+  "video": false,
+  "vote_average": 0,
+  "vote_count": 0
+}

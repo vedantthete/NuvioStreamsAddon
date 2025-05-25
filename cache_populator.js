@@ -15,6 +15,7 @@ const SCRAPER_API_KEYS = [
     '96845d13e7a0a0d40fb4f148cd135ddc'
 ];
 let currentApiKeyIndex = 0;
+const MAX_ALLOWED_SEASONS = 25; // Define the maximum number of seasons allowed
 
 // Simple delay function
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -29,6 +30,12 @@ function getNextScraperApiKey() {
 async function populateCacheForMediaItem(mediaItem) {
     const apiKey = getNextScraperApiKey();
     console.log(`\nProcessing: ${mediaItem.title} (${mediaItem.type} - ${mediaItem.tmdbId}) with API key ...${apiKey.slice(-4)}`);
+
+    // Explicitly skip "One Piece"
+    if (mediaItem.type === 'tv' && mediaItem.title && mediaItem.title.toLowerCase() === 'one piece') {
+        console.log(`  Skipping TV show "One Piece" (ID: ${mediaItem.tmdbId}) explicitly by title.`);
+        return;
+    }
 
     // 1. Get ShowBox URL (this also caches TMDB data for the item)
     const tmdbInfo = await getShowboxUrlFromTmdbInfo(mediaItem.type, mediaItem.tmdbId, apiKey);
@@ -54,23 +61,42 @@ async function populateCacheForMediaItem(mediaItem) {
         const febboxUrl = shareInfo.febbox_share_url;
         console.log(`  Processing FebBox URL for caching: ${febboxUrl}`);
 
-        if (mediaItem.type === 'tv' && mediaItem.seasons && mediaItem.seasons.length > 0) {
-            for (const season of mediaItem.seasons) {
-                console.log(`    Caching season ${season.season_number} for ${mediaItem.title}`);
-                // Call processShowWithSeasonsEpisodes to cache main FebBox page and specific season folder HTML
-                // We pass an empty array for allStreams as we don't want to collect them here.
-                // We also pass null for episodeNum to indicate we are processing for the whole season page context.
-                try {
-                    await processShowWithSeasonsEpisodes(febboxUrl, mediaItem.title, season.season_number, null, [], apiKey);
-                    console.log(`      Cached FebBox main page and season ${season.season_number} folder list for ${febboxUrl}`);
-                } catch (e) {
-                    console.error(`      Error processing season ${season.season_number} for ${mediaItem.title} at ${febboxUrl}: ${e.message}`);
+        if (mediaItem.type === 'tv') {
+            // Check for excessive seasons BEFORE processing them
+            if (mediaItem.seasons && mediaItem.seasons.length > MAX_ALLOWED_SEASONS) {
+                console.log(`  Skipping TV show ${mediaItem.title} (ID: ${mediaItem.tmdbId}) due to excessive seasons: ${mediaItem.seasons.length} (max allowed: ${MAX_ALLOWED_SEASONS}).`);
+                // If we skip here, we might still want to cache the main FebBox page if it contains all episodes directly,
+                // or we might decide to skip this FebBox URL entirely for this show.
+                // For now, let's return from populateCacheForMediaItem to skip all processing for this show.
+                return; // This will skip the entire media item if it has too many seasons.
+            }
+
+            if (mediaItem.seasons && mediaItem.seasons.length > 0) {
+                for (const season of mediaItem.seasons) {
+                    console.log(`    Caching season ${season.season_number} for ${mediaItem.title}`);
+                    // Call processShowWithSeasonsEpisodes to cache main FebBox page and specific season folder HTML
+                    // We pass an empty array for allStreams as we don't want to collect them here.
+                    // We also pass null for episodeNum to indicate we are processing for the whole season page context.
+                    try {
+                        await processShowWithSeasonsEpisodes(febboxUrl, mediaItem.title, season.season_number, null, [], apiKey);
+                        console.log(`      Cached FebBox main page and season ${season.season_number} folder list for ${febboxUrl}`);
+                    } catch (e) {
+                        console.error(`      Error processing season ${season.season_number} for ${mediaItem.title} at ${febboxUrl}: ${e.message}`);
+                    }
+                    await delay(500); // Delay between processing each season
                 }
-                await delay(500); // Delay between processing each season
+            } else {
+                // For movies, or TV shows where season details weren't fetched/available in master list,
+                // just fetch and cache the main FebBox share page.
+                try {
+                    await extractFidsFromFebboxPage(febboxUrl, apiKey);
+                    console.log(`    Cached main FebBox page for ${febboxUrl}`);
+                } catch (e) {
+                    console.error(`    Error extracting FIDs/caching for ${febboxUrl}: ${e.message}`);
+                }
             }
         } else {
-            // For movies, or TV shows where season details weren't fetched/available in master list,
-            // just fetch and cache the main FebBox share page.
+            // For movies, just fetch and cache the main FebBox share page.
             try {
                 await extractFidsFromFebboxPage(febboxUrl, apiKey);
                 console.log(`    Cached main FebBox page for ${febboxUrl}`);

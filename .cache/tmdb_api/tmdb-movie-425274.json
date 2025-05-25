@@ -1,0 +1,68 @@
+{
+  "adult": false,
+  "backdrop_path": "/tvDx5r5D4lrNKD2PavLhx2sFnT6.jpg",
+  "belongs_to_collection": {
+    "id": 382685,
+    "name": "Now You See Me Collection",
+    "poster_path": "/n2B51uCX5r960pFbEl9jMbTMuvq.jpg",
+    "backdrop_path": "/scBzORmLqP00h8hPKS19TLtyRQm.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    }
+  ],
+  "homepage": "https://nowyouseeme.movie",
+  "id": 425274,
+  "imdb_id": "tt4712810",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Now You See Me: Now You Don't",
+  "overview": "The Four Horsemen return along with a new generation of illusionists performing mind-melding twists, turns, surprises, and magic unlike anything ever captured on film.",
+  "popularity": 6.7752,
+  "poster_path": "/oD3Eey4e4Z259XLm3eD3WGcoJAh.jpg",
+  "production_companies": [
+    {
+      "id": 90517,
+      "logo_path": "/uq7itRpnnb1LX1VDDaJg64pKFmT.png",
+      "name": "Secret Hideout",
+      "origin_country": "US"
+    },
+    {
+      "id": 1632,
+      "logo_path": "/cisLn1YAUuptXVBa0xjq7ST9cH0.png",
+      "name": "Lionsgate",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-11-12",
+  "revenue": 0,
+  "runtime": 0,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Post Production",
+  "tagline": "Unlock the illusion.",
+  "title": "Now You See Me: Now You Don't",
+  "video": false,
+  "vote_average": 0,
+  "vote_count": 0
+}

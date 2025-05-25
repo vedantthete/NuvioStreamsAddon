@@ -1,0 +1,100 @@
+{
+  "adult": false,
+  "backdrop_path": "/hkJhGayONXn96CqIRM9GhWKnlCf.jpg",
+  "belongs_to_collection": {
+    "id": 499270,
+    "name": "Overlord Collection",
+    "poster_path": "/nnInOIF8cU6xtOu2ttDcb4RD8p0.jpg",
+    "backdrop_path": "/lMdci6AXv6fHtTowisqMPlQN8Nw.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    }
+  ],
+  "homepage": "",
+  "id": 1014505,
+  "imdb_id": "tt14603848",
+  "origin_country": [
+    "JP"
+  ],
+  "original_language": "ja",
+  "original_title": "劇場版「オーバーロード」聖王国編",
+  "overview": "After twelve years of playing his favorite MMORPG game, Momonga logs in for the last time only to find himself transported into its world playing it indefinitely. Throughout his adventures, his avatar ascends to the title of Sorcerer King Ains Ooal Gown. Once prosperous but now on the brink of ruin, The Sacred Kingdom enjoyed years of peace after construction of an enormous wall protecting them from neighboring invasions. But, one day this comes to an end when the Demon Emperor Jaldabaoth arrives with an army of villainous demi-humans. Fearing invasion of their own lands, the neighboring territory of the Slane Theocracy is forced to beg their enemies at the Sorcerer Kingdom for help. Heeding the call, Momonga, now known as the Sorcerer King Ains Ooal Gown, rallies the Sorcerer Kingdom and its undead army to join the fight alongside the Sacred Kingdom and the Slane Theocracy in hopes to defeat the Demon Emperor.",
+  "popularity": 11.2064,
+  "poster_path": "/jEvytxNa5mfW7VAUmDWsZtIdATc.jpg",
+  "production_companies": [
+    {
+      "id": 2073,
+      "logo_path": "/tWxRSaKmRJNTcmtlXsmn5R4KOSU.png",
+      "name": "KADOKAWA",
+      "origin_country": "JP"
+    },
+    {
+      "id": 3464,
+      "logo_path": "/9k0nr75nwnNeT2MHerf1OXJN0hj.png",
+      "name": "Madhouse",
+      "origin_country": "JP"
+    },
+    {
+      "id": 156047,
+      "logo_path": "/bR1IGv2EUNaLGPIA3jRgbATUaX8.png",
+      "name": "Bit grooove promotion",
+      "origin_country": "JP"
+    },
+    {
+      "id": 142186,
+      "logo_path": "/bdXTOuU7PdsDtQngyM7vb47zePs.png",
+      "name": "Hakuhodo DY Music & Pictures",
+      "origin_country": "JP"
+    },
+    {
+      "id": 17981,
+      "logo_path": "/8UABNMysukRi4udTHYxcNUMbPR1.png",
+      "name": "AT-X",
+      "origin_country": "JP"
+    },
+    {
+      "id": 9070,
+      "logo_path": "/hF6wiZa36H54RtJC2O4P1bdyGEW.png",
+      "name": "NTT Docomo",
+      "origin_country": "JP"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "JP",
+      "name": "Japan"
+    }
+  ],
+  "release_date": "2024-09-20",
+  "revenue": 7614966,
+  "runtime": 134,
+  "spoken_languages": [
+    {
+      "english_name": "Japanese",
+      "iso_639_1": "ja",
+      "name": "日本語"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "OVERLORD: The Sacred Kingdom",
+  "video": false,
+  "vote_average": 7.819,
+  "vote_count": 102
+}

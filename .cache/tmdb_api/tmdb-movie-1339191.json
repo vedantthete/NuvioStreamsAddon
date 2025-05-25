@@ -1,0 +1,65 @@
+{
+  "adult": false,
+  "backdrop_path": "/ugxianvtk6Lne7piuztN2sdliR7.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "",
+  "id": 1339191,
+  "imdb_id": "tt34420683",
+  "origin_country": [
+    "JP"
+  ],
+  "original_language": "ja",
+  "original_title": "サンセット・サンライズ",
+  "overview": "In the context of COVID-19, Jin Zuo, who was forced to work remotely due to the pandemic, decided to move from the city to Sanli, where he could enjoy fishing, in search of a new lifestyle. But gradually, we found that there were problems such as \"empty houses\" in the local area.",
+  "popularity": 1.2531,
+  "poster_path": "/9NxOPBJPX5q0J8qpOGQ5U7lSL4u.jpg",
+  "production_companies": [
+    {
+      "id": 3627,
+      "logo_path": "/pBfPYpzg5o3EoBPfrFKzTRi8MGr.png",
+      "name": "Warner Bros. Japan",
+      "origin_country": "JP"
+    },
+    {
+      "id": 12424,
+      "logo_path": "/nBer3gCkrK5yCG3Q0sJhFSuwZIk.png",
+      "name": "TV Man Union",
+      "origin_country": "JP"
+    },
+    {
+      "id": 192350,
+      "logo_path": "/7En7WIQ19gnPrS8fE8k4xiBCyUD.png",
+      "name": "murmur",
+      "origin_country": "JP"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "JP",
+      "name": "Japan"
+    }
+  ],
+  "release_date": "2025-01-17",
+  "revenue": 0,
+  "runtime": 0,
+  "spoken_languages": [
+    {
+      "english_name": "Japanese",
+      "iso_639_1": "ja",
+      "name": "日本語"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Sunset Sunrise",
+  "video": false,
+  "vote_average": 9,
+  "vote_count": 1
+}

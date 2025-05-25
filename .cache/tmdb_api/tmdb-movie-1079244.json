@@ -1,0 +1,77 @@
+{
+  "adult": false,
+  "backdrop_path": "/7e9tSzepYj8ZNbVF9P7KJ3BLlxD.jpg",
+  "belongs_to_collection": null,
+  "budget": 25000000,
+  "genres": [
+    {
+      "id": 36,
+      "name": "History"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10752,
+      "name": "War"
+    }
+  ],
+  "homepage": "https://www.angel.com/movies/bonhoeffer",
+  "id": 1079244,
+  "imdb_id": "tt26237514",
+  "origin_country": [
+    "BE",
+    "IE"
+  ],
+  "original_language": "en",
+  "original_title": "Bonhoeffer: Pastor. Spy. Assassin",
+  "overview": "As the world teeters on the brink of annihilation, Dietrich Bonhoeffer joins a deadly plot to assassinate Hitler, risking his faith and fate to save millions of Jews from genocide.",
+  "popularity": 5.1049,
+  "poster_path": "/9WtImcI6k9XOcnPmSeN2Kzpf4ay.jpg",
+  "production_companies": [
+    {
+      "id": 213833,
+      "logo_path": null,
+      "name": "Crow's Nest Productions",
+      "origin_country": "IE"
+    },
+    {
+      "id": 106374,
+      "logo_path": null,
+      "name": "Fontana",
+      "origin_country": "BE"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "BE",
+      "name": "Belgium"
+    },
+    {
+      "iso_3166_1": "IE",
+      "name": "Ireland"
+    }
+  ],
+  "release_date": "2024-11-20",
+  "revenue": 12165702,
+  "runtime": 132,
+  "spoken_languages": [
+    {
+      "english_name": "German",
+      "iso_639_1": "de",
+      "name": "Deutsch"
+    },
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "In an impossible time, it takes impossible courage.",
+  "title": "Bonhoeffer: Pastor. Spy. Assassin",
+  "video": false,
+  "vote_average": 6.86,
+  "vote_count": 43
+}

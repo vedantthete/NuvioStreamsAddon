@@ -1,0 +1,99 @@
+{
+  "adult": false,
+  "backdrop_path": "/96w2p3xKIgvuSTJsNVnvNFqOhPJ.jpg",
+  "belongs_to_collection": null,
+  "budget": 8000000,
+  "genres": [
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+  "homepage": "https://www.theassessmentmovie.com/movie/the-assessment",
+  "id": 1317088,
+  "imdb_id": "tt32768323",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "The Assessment",
+  "overview": "In a climate change-ravaged world, a utopian society optimizes life, including parenthood assessments. A successful couple faces scrutiny by an evaluator over seven days to determine their fitness for childbearing.",
+  "popularity": 17.9227,
+  "poster_path": "/o1K7be85FAauSbVPzCQ0GjOXUqu.jpg",
+  "production_companies": [
+    {
+      "id": 20037,
+      "logo_path": "/6W92BtQOutAi9KFp0aeb41RBH95.png",
+      "name": "Augenschein Filmproduktion",
+      "origin_country": "DE"
+    },
+    {
+      "id": 11752,
+      "logo_path": null,
+      "name": "Number 9 Films",
+      "origin_country": "GB"
+    },
+    {
+      "id": 173619,
+      "logo_path": null,
+      "name": "Project Infinity",
+      "origin_country": "US"
+    },
+    {
+      "id": 33603,
+      "logo_path": "/K1SdQd49Kx3QRx0djfHbzeotCz.png",
+      "name": "Shivhans Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 187664,
+      "logo_path": null,
+      "name": "Woolley/Karlsen Productions",
+      "origin_country": "GB"
+    },
+    {
+      "id": 215366,
+      "logo_path": "/nqC8DP7bKR8Kf6cNRTGWdG87jrU.png",
+      "name": "Tiki Tāne Pictures",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "DE",
+      "name": "Germany"
+    },
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-03-21",
+  "revenue": 279328,
+  "runtime": 115,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Would you pass?",
+  "title": "The Assessment",
+  "video": false,
+  "vote_average": 6.92,
+  "vote_count": 137
+}

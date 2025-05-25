@@ -1,0 +1,83 @@
+{
+  "adult": false,
+  "backdrop_path": "/rtpFIgy1YYw3kx7PCyNhi6xmEFb.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 36,
+      "name": "History"
+    }
+  ],
+  "homepage": "https://www.lionsgatefilms.co.uk/releases/smallthingslikethese",
+  "id": 1102493,
+  "imdb_id": "tt27196021",
+  "origin_country": [
+    "IE"
+  ],
+  "original_language": "en",
+  "original_title": "Small Things Like These",
+  "overview": "In 1985, while working as a coal merchant to support his family, Bill Furlong discovers disturbing secrets kept by the local convent and uncovers truths of his own; forcing him to confront his past and the complicit silence of a small Irish town controlled by the Catholic Church.",
+  "popularity": 7.0682,
+  "poster_path": "/rdcO38cbWFg002nXg5QYtk7Tz4L.jpg",
+  "production_companies": [
+    {
+      "id": 187968,
+      "logo_path": "/xdVAEg1biNrQw5nnMXKswPCRpkq.png",
+      "name": "Artists Equity",
+      "origin_country": "US"
+    },
+    {
+      "id": 196153,
+      "logo_path": "/rdZiokZcHdb51C0uCTDjJyUBfc4.png",
+      "name": "Big Things Films",
+      "origin_country": "IE"
+    },
+    {
+      "id": 196154,
+      "logo_path": "/2G9j4oHgrWw3TUS1o53vNE6tQyR.png",
+      "name": "Wilder Content",
+      "origin_country": "BE"
+    },
+    {
+      "id": 1898,
+      "logo_path": "/8ix6SGlJiyuUDxLBtY8E0PY2G7w.png",
+      "name": "Fís Éireann/Screen Ireland",
+      "origin_country": "IE"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "BE",
+      "name": "Belgium"
+    },
+    {
+      "iso_3166_1": "IE",
+      "name": "Ireland"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2024-11-01",
+  "revenue": 10604490,
+  "runtime": 99,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "If you want to get on in life, there’s things you have to ignore so you can keep on.",
+  "title": "Small Things Like These",
+  "video": false,
+  "vote_average": 6.789,
+  "vote_count": 275
+}

@@ -1,0 +1,91 @@
+{
+  "adult": false,
+  "backdrop_path": "/kPKwqHl2rYsi9rFWJWA6afKdmlT.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 37,
+      "name": "Western"
+    }
+  ],
+  "homepage": "https://www.transmissionfilms.com.au/films/the-nightingale",
+  "id": 400090,
+  "imdb_id": "tt4068576",
+  "origin_country": [
+    "AU",
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "The Nightingale",
+  "overview": "In 1825, Clare, a 21-year-old Irish convict, chases a British soldier through the rugged Tasmanian wilderness, bent on revenge for a terrible act of violence he committed against her family. She enlists the services of an Aboriginal tracker who is also marked by trauma from his own violence-filled past.",
+  "popularity": 4.3352,
+  "poster_path": "/9nRpZmvdEgq8hMu1rNyc90XQtH6.jpg",
+  "production_companies": [
+    {
+      "id": 32301,
+      "logo_path": "/5VG9QRUCSDez359VNqcTmOLOH3C.png",
+      "name": "Causeway Films",
+      "origin_country": "AU"
+    },
+    {
+      "id": 100610,
+      "logo_path": "/81WtvTYVr4WsWm2ZLfwR48TrDBT.png",
+      "name": "Made Up Stories",
+      "origin_country": "US"
+    },
+    {
+      "id": 7584,
+      "logo_path": "/eGkfvvyf4fJTvBUR1xt1669IPA3.png",
+      "name": "Screen Australia",
+      "origin_country": "AU"
+    },
+    {
+      "id": 2806,
+      "logo_path": "/vxOhCbpsRBh10m6LZ3HyImTYpPY.png",
+      "name": "South Australian Film Corporation",
+      "origin_country": "AU"
+    },
+    {
+      "id": 7493,
+      "logo_path": "/fHitYiGUCkRafgt6VPYQlXWLkdp.png",
+      "name": "FilmNation Entertainment",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "AU",
+      "name": "Australia"
+    }
+  ],
+  "release_date": "2018-09-23",
+  "revenue": 855756,
+  "runtime": 136,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Irish",
+      "iso_639_1": "ga",
+      "name": "Gaeilge"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Her song will not be silenced.",
+  "title": "The Nightingale",
+  "video": false,
+  "vote_average": 7.049,
+  "vote_count": 593
+}

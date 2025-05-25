@@ -1,0 +1,65 @@
+{
+  "adult": false,
+  "backdrop_path": "/XNVdWNgiAHu8y4BsJv5ndUHXxN.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    }
+  ],
+  "homepage": "https://www.bbc.co.uk/programmes/m0022179",
+  "id": 929204,
+  "imdb_id": "tt17163970",
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_title": "Wallace & Gromit: Vengeance Most Fowl",
+  "overview": "Gromit’s concern that Wallace is becoming too dependent on his inventions proves justified, when Wallace invents a “smart” gnome that seems to develop a mind of its own. When it emerges that a vengeful figure from the past might be masterminding things, it falls to Gromit to battle sinister forces and save his master… or Wallace may never be able to invent again!",
+  "popularity": 12.6133,
+  "poster_path": "/6BxK38ehxuX2dJmZIMpJcVNbYks.jpg",
+  "production_companies": [
+    {
+      "id": 297,
+      "logo_path": "/58TnhYZqbMYgkHM6lg7dJoYJ4RH.png",
+      "name": "Aardman",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    }
+  ],
+  "release_date": "2024-12-18",
+  "revenue": 191452,
+  "runtime": 79,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "New friends. Old enemies.",
+  "title": "Wallace & Gromit: Vengeance Most Fowl",
+  "video": false,
+  "vote_average": 7.548,
+  "vote_count": 486
+}

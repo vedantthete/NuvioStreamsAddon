@@ -1,0 +1,93 @@
+{
+  "adult": false,
+  "backdrop_path": "/nEH7XUCeWsEuJtGgWUVUl6MEQW0.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 36,
+      "name": "History"
+    }
+  ],
+  "homepage": "https://www.september5movie.com",
+  "id": 1211472,
+  "imdb_id": "tt28082769",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "September 5",
+  "overview": "During the 1972 Munich Olympics, an American sports broadcasting crew finds itself thrust into covering the hostage crisis involving Israeli athletes.",
+  "popularity": 5.85,
+  "poster_path": "/3kcQOLwYKGPwyjiynFsvP8vHvRn.jpg",
+  "production_companies": [
+    {
+      "id": 120797,
+      "logo_path": "/wtUx4hKpiOWT7OKDkbTyuWVcwPq.png",
+      "name": "BerghausWöbke Filmproduktion",
+      "origin_country": "DE"
+    },
+    {
+      "id": 174772,
+      "logo_path": "/ykUW7TUEOonqrygtyTYc6ToMXhK.png",
+      "name": "Projected Picture Works",
+      "origin_country": "US"
+    },
+    {
+      "id": 47,
+      "logo_path": "/i7Z9ot2o3N5Sa3HrF09kniFs2y8.png",
+      "name": "Constantin Film",
+      "origin_country": "DE"
+    },
+    {
+      "id": 103125,
+      "logo_path": null,
+      "name": "Edgar Reitz Filmproduktion",
+      "origin_country": "DE"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "DE",
+      "name": "Germany"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2024-11-07",
+  "revenue": 852000,
+  "runtime": 94,
+  "spoken_languages": [
+    {
+      "english_name": "German",
+      "iso_639_1": "de",
+      "name": "Deutsch"
+    },
+    {
+      "english_name": "Hebrew",
+      "iso_639_1": "he",
+      "name": "עִבְרִית"
+    },
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "The day terror went live.",
+  "title": "September 5",
+  "video": false,
+  "vote_average": 7.061,
+  "vote_count": 334
+}

@@ -1,0 +1,63 @@
+{
+  "adult": false,
+  "backdrop_path": "/j8ndWRvcIGhmTyDeBNeCakH4Xdr.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 36,
+      "name": "History"
+    }
+  ],
+  "homepage": "",
+  "id": 960044,
+  "imdb_id": "tt28106865",
+  "origin_country": [
+    "FR"
+  ],
+  "original_language": "fr",
+  "original_title": "Une affaire d'honneur",
+  "overview": "In 1887, at a time when duels are in vogue in Paris, Clément Lacaze and Marie-Rose Astié meet. He's a charismatic master of arms; she's a feminist, far ahead of her time. Clément gets caught in a spiral of violence and decides to initiate Marie-Rose in the art of dueling. The two must work together to save face. How far will they go to defend their honor?",
+  "popularity": 19.5717,
+  "poster_path": "/5cgk31QGJ5Z2oatbskPNDU8bbwq.jpg",
+  "production_companies": [
+    {
+      "id": 9,
+      "logo_path": "/nda3dTUYdDrJ6rZqBpYvY865aDv.png",
+      "name": "Gaumont",
+      "origin_country": "FR"
+    },
+    {
+      "id": 83,
+      "logo_path": "/9OQ0rm55xtlgX7KcAKMUePJSrQc.png",
+      "name": "France 2 Cinéma",
+      "origin_country": "FR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    }
+  ],
+  "release_date": "2023-12-27",
+  "revenue": 0,
+  "runtime": 101,
+  "spoken_languages": [
+    {
+      "english_name": "French",
+      "iso_639_1": "fr",
+      "name": "Français"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Edge of the Blade",
+  "video": false,
+  "vote_average": 6.6,
+  "vote_count": 76
+}

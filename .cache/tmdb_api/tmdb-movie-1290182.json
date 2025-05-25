@@ -1,0 +1,67 @@
+{
+  "adult": false,
+  "backdrop_path": "/vE4shrUSRT639qkoeGnDG1l18Kc.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "",
+  "id": 1290182,
+  "imdb_id": "tt33381920",
+  "origin_country": [
+    "KR"
+  ],
+  "original_language": "ko",
+  "original_title": "그 시절, 우리가 좋아했던 소녀",
+  "overview": "A group of close friends who attend a private school all have a debilitating crush on the sunny star pupil, Sun-ah. The only member of the group who claims not to is Jin-woo, but he ends up loving her as well.",
+  "popularity": 5.1854,
+  "poster_path": "/bBnyDM1gWBLd91K245iVKH19t42.jpg",
+  "production_companies": [
+    {
+      "id": 136116,
+      "logo_path": "/1XKVQUmobbqEr2HHL9ohcowNDN2.png",
+      "name": "Studio Take",
+      "origin_country": "KR"
+    },
+    {
+      "id": 140061,
+      "logo_path": null,
+      "name": "Jayuro Pictures",
+      "origin_country": "KR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "KR",
+      "name": "South Korea"
+    }
+  ],
+  "release_date": "2025-02-21",
+  "revenue": 302086,
+  "runtime": 102,
+  "spoken_languages": [
+    {
+      "english_name": "Korean",
+      "iso_639_1": "ko",
+      "name": "한국어/조선말"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Sharing every heartbeat.",
+  "title": "You Are the Apple of My Eye",
+  "video": false,
+  "vote_average": 8.2,
+  "vote_count": 6
+}

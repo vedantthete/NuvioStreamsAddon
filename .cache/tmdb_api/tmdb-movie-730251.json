@@ -1,0 +1,112 @@
+{
+  "adult": false,
+  "backdrop_path": "/shWIpYYqbgpUUefpPj1VrYbPonE.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://magnify-films.com/happyend",
+  "id": 730251,
+  "imdb_id": "tt29279903",
+  "origin_country": [
+    "JP"
+  ],
+  "original_language": "ja",
+  "original_title": "Happyend",
+  "overview": "A near-future city in Japan awaits destruction as it's rocked by a series of foreshocks that predict a larger, more disastrous quake on the horizon. With the anxiety looming over them, a group of teenage best friends and musicians get into typical teenager trouble that tests the strength of their relationships.",
+  "popularity": 2.7175,
+  "poster_path": "/sxvVlA9Y2yqlGUDHR0d00Ht79V1.jpg",
+  "production_companies": [
+    {
+      "id": 108191,
+      "logo_path": "/75bTMGTS7NEazJRg7uaeGReynKU.png",
+      "name": "Cineric Creative",
+      "origin_country": "US"
+    },
+    {
+      "id": 204575,
+      "logo_path": "/7pjTsox3kXeT2bv4lNGXePnymqc.png",
+      "name": "Cinema Inutile",
+      "origin_country": "US"
+    },
+    {
+      "id": 137865,
+      "logo_path": null,
+      "name": "Zakkubalan",
+      "origin_country": "US"
+    },
+    {
+      "id": 249355,
+      "logo_path": null,
+      "name": "K-Garage",
+      "origin_country": ""
+    },
+    {
+      "id": 149522,
+      "logo_path": "/iFSOhZejd4p6o8me3cCGhfBXC5X.png",
+      "name": "Sons of Rigor",
+      "origin_country": "GB"
+    },
+    {
+      "id": 191842,
+      "logo_path": "/aGne4vOerQTqqMLnGLRzaDGYCtx.png",
+      "name": "Spark Features",
+      "origin_country": "US"
+    },
+    {
+      "id": 221553,
+      "logo_path": "/jlcdARivqz1Q3VFLYUvkxbLvXIH.png",
+      "name": "Purple Tree Content",
+      "origin_country": "SG"
+    },
+    {
+      "id": 95425,
+      "logo_path": "/AbMalyMcfqq8uFuzv2rwszdyui6.png",
+      "name": "Giraffe Pictures",
+      "origin_country": "SG"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    },
+    {
+      "iso_3166_1": "JP",
+      "name": "Japan"
+    },
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    },
+    {
+      "iso_3166_1": "SG",
+      "name": "Singapore"
+    }
+  ],
+  "release_date": "2024-10-04",
+  "revenue": 0,
+  "runtime": 113,
+  "spoken_languages": [
+    {
+      "english_name": "Mandarin",
+      "iso_639_1": "zh",
+      "name": "普通话"
+    },
+    {
+      "english_name": "Japanese",
+      "iso_639_1": "ja",
+      "name": "日本語"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Something big is about to change.",
+  "title": "Happyend",
+  "video": false,
+  "vote_average": 7.2,
+  "vote_count": 8
+}

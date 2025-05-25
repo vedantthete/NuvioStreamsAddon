@@ -1,0 +1,87 @@
+{
+  "adult": false,
+  "backdrop_path": "/copmI0NqXbJMNOzGzHKMh4JIBJo.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    }
+  ],
+  "homepage": "",
+  "id": 1319738,
+  "imdb_id": "tt33014921",
+  "origin_country": [
+    "CN"
+  ],
+  "original_language": "zh",
+  "original_title": "向阳·花",
+  "overview": "Black Girl is a deaf-mute prisoner. Prison guard Deng Hong found White Fox, a prisoner who understands sign language, to supervise her transformation. The two made money together after serving their sentences, met Deng outside the prison.",
+  "popularity": 7.6826,
+  "poster_path": "/kEwqo3MUkvs16LCyIuBNnBvLWqm.jpg",
+  "production_companies": [
+    {
+      "id": 261272,
+      "logo_path": null,
+      "name": "北京美拉文化传媒有限公司",
+      "origin_country": ""
+    },
+    {
+      "id": 261273,
+      "logo_path": null,
+      "name": "上海拾谷影业有限公司",
+      "origin_country": ""
+    },
+    {
+      "id": 261274,
+      "logo_path": null,
+      "name": "霍尔果斯联瑞影业有限公司",
+      "origin_country": ""
+    },
+    {
+      "id": 261275,
+      "logo_path": null,
+      "name": "重庆新航海影视文化有限公司",
+      "origin_country": ""
+    },
+    {
+      "id": 261276,
+      "logo_path": null,
+      "name": "爱奇艺影业（北京）有限公司",
+      "origin_country": ""
+    },
+    {
+      "id": 191908,
+      "logo_path": null,
+      "name": "中国电影股份有限公司",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CN",
+      "name": "China"
+    }
+  ],
+  "release_date": "2025-04-04",
+  "revenue": 30700000,
+  "runtime": 124,
+  "spoken_languages": [
+    {
+      "english_name": "Mandarin",
+      "iso_639_1": "zh",
+      "name": "普通话"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Risk everything, fight to live.",
+  "title": "We Girls",
+  "video": false,
+  "vote_average": 5.5,
+  "vote_count": 2
+}

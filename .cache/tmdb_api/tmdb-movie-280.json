@@ -1,0 +1,93 @@
+{
+  "adult": false,
+  "backdrop_path": "/8MksSPtPvqcSDruLdpibPmTP7LY.jpg",
+  "belongs_to_collection": {
+    "id": 528,
+    "name": "The Terminator Collection",
+    "poster_path": "/kpZxdNsAV7qTdTLwKM5NLqa7GEo.jpg",
+    "backdrop_path": "/jz9usvWv5DrQGtjauEU4KSzgb8M.jpg"
+  },
+  "budget": 102000000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    }
+  ],
+  "homepage": "https://www.lionsgate.com/movies/terminator-2-judgment-day",
+  "id": 280,
+  "imdb_id": "tt0103064",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Terminator 2: Judgment Day",
+  "overview": "Set ten years after the events of the original, James Cameron’s classic sci-fi action flick tells the story of a second attempt to get rid of rebellion leader John Connor, this time targeting the boy himself. However, the rebellion has sent a reprogrammed terminator to protect Connor.",
+  "popularity": 14.8901,
+  "poster_path": "/5M0j0B18abtBI5gi2RhfjjurTqb.jpg",
+  "production_companies": [
+    {
+      "id": 275,
+      "logo_path": "/2MxNWlN5b3UXt1OfmznsWEQzFwq.png",
+      "name": "Carolco Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 1280,
+      "logo_path": null,
+      "name": "Pacific Western",
+      "origin_country": "US"
+    },
+    {
+      "id": 574,
+      "logo_path": "/nLNW1TeFUYU0M5U0qmYUzOIwlB6.png",
+      "name": "Lightstorm Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 183,
+      "logo_path": "/eadyph99FClrWlnE0jPniwOcvvw.png",
+      "name": "Le Studio Canal+",
+      "origin_country": "FR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "1991-07-03",
+  "revenue": 520000000,
+  "runtime": 137,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "It's nothing personal.",
+  "title": "Terminator 2: Judgment Day",
+  "video": false,
+  "vote_average": 8.126,
+  "vote_count": 13322
+}

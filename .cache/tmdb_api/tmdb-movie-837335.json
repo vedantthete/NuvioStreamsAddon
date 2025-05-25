@@ -1,0 +1,124 @@
+{
+  "adult": false,
+  "backdrop_path": "/210V8lN8FL3F4dXjpvjZSlEKykD.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "https://neonrated.com/films/la-chimera",
+  "id": 837335,
+  "imdb_id": "tt14561712",
+  "origin_country": [
+    "IT"
+  ],
+  "original_language": "it",
+  "original_title": "La chimera",
+  "overview": "Just out of jail, rumpled English archaeologist Arthur reconnects with his wayward crew of tombaroli accomplices – a happy-go-lucky collective of itinerant grave-robbers who survive by looting Etruscan tombs and fencing the ancient treasures they dig up.",
+  "popularity": 2.3189,
+  "poster_path": "/lDaUha09CumsoSAt9MIRbS9WBNH.jpg",
+  "production_companies": [
+    {
+      "id": 76129,
+      "logo_path": "/wadqq2xlU1fWkRT2BSOb2VDyDVZ.png",
+      "name": "Tempesta",
+      "origin_country": "IT"
+    },
+    {
+      "id": 155990,
+      "logo_path": "/py9VaywwK6KVi94YwrxSKVg1gkh.png",
+      "name": "RAI Cinema",
+      "origin_country": "IT"
+    },
+    {
+      "id": 33279,
+      "logo_path": "/4cWgpF6cLunSrG4fSdBPT2gF8ie.png",
+      "name": "Ad Vitam Production",
+      "origin_country": "FR"
+    },
+    {
+      "id": 2715,
+      "logo_path": "/hEojI1NMV4UH9j09J4HDnFDCwUB.png",
+      "name": "Amka Films",
+      "origin_country": "CH"
+    },
+    {
+      "id": 94,
+      "logo_path": "/huC7HqorvUThGIrENrbcHmQVUA0.png",
+      "name": "ARTE France Cinéma",
+      "origin_country": "FR"
+    },
+    {
+      "id": 20960,
+      "logo_path": "/9mO8Z3dcW6ISVMeCv7TbXtWXdGl.png",
+      "name": "RSI",
+      "origin_country": "CH"
+    },
+    {
+      "id": 178407,
+      "logo_path": "/wao9Q0lnrPlrqpouG2QRZ09fRZw.png",
+      "name": "TRT Sinema",
+      "origin_country": "TR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    },
+    {
+      "iso_3166_1": "IT",
+      "name": "Italy"
+    },
+    {
+      "iso_3166_1": "CH",
+      "name": "Switzerland"
+    },
+    {
+      "iso_3166_1": "TR",
+      "name": "Turkey"
+    }
+  ],
+  "release_date": "2023-10-12",
+  "revenue": 4933288,
+  "runtime": 131,
+  "spoken_languages": [
+    {
+      "english_name": "French",
+      "iso_639_1": "fr",
+      "name": "Français"
+    },
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Italian",
+      "iso_639_1": "it",
+      "name": "Italiano"
+    },
+    {
+      "english_name": "Portuguese",
+      "iso_639_1": "pt",
+      "name": "Português"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "La Chimera",
+  "video": false,
+  "vote_average": 7.289,
+  "vote_count": 458
+}

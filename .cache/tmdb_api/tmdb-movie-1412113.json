@@ -1,0 +1,46 @@
+{
+  "adult": false,
+  "backdrop_path": "/jgrImRKhsRXaa6wlSsQPnFRUQbH.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 99,
+      "name": "Documentary"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81922471",
+  "id": 1412113,
+  "imdb_id": "",
+  "origin_country": [
+    "KR"
+  ],
+  "original_language": "ko",
+  "original_title": "오징어 게임: 시즌2 제작 이야기",
+  "overview": "From set designs to character arcs, get exclusive cast and director interviews on how Season 2 of the globally most-watched series was brought to life.",
+  "popularity": 10.2044,
+  "poster_path": "/yQGaui0bQ5Ai3KIFBB45nTeIqad.jpg",
+  "production_companies": [],
+  "production_countries": [
+    {
+      "iso_3166_1": "KR",
+      "name": "South Korea"
+    }
+  ],
+  "release_date": "2025-01-02",
+  "revenue": 0,
+  "runtime": 28,
+  "spoken_languages": [
+    {
+      "english_name": "Korean",
+      "iso_639_1": "ko",
+      "name": "한국어/조선말"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Squid Game: Making Season 2",
+  "video": false,
+  "vote_average": 8.5,
+  "vote_count": 403
+}

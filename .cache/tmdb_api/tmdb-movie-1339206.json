@@ -1,0 +1,61 @@
+{
+  "adult": false,
+  "backdrop_path": "/6prlDNn0CY5ZcxkP33GH5tIGOMd.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    }
+  ],
+  "homepage": "",
+  "id": 1339206,
+  "imdb_id": "tt33270263",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "The Surrender",
+  "overview": "A fraught mother-daughter relationship is put to a terrifying test when the family patriarch dies, and the grieving mother hires a mysterious stranger to bring her husband back from the dead.",
+  "popularity": 10.009,
+  "poster_path": "/t45V9B1kSvwVpupWie1t9e1YWXe.jpg",
+  "production_companies": [
+    {
+      "id": 237315,
+      "logo_path": null,
+      "name": "Codependent Films",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    },
+    {
+      "iso_3166_1": "CA",
+      "name": "Canada"
+    }
+  ],
+  "release_date": "2025-03-09",
+  "revenue": 0,
+  "runtime": 95,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Surrender",
+  "video": false,
+  "vote_average": 6.2,
+  "vote_count": 5
+}

@@ -1,0 +1,74 @@
+{
+  "adult": false,
+  "backdrop_path": "/mkxGpqh4yOYqtENv01IrDcesFRf.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81307099",
+  "id": 993710,
+  "imdb_id": "tt21191806",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Back in Action",
+  "overview": "Fifteen years after vanishing from the CIA to start a family, elite spies Matt and Emily jump back into the world of espionage when their cover is blown.",
+  "popularity": 21.1247,
+  "poster_path": "/3L3l6LsiLGHkTG4RFB2aBA6BttB.jpg",
+  "production_companies": [
+    {
+      "id": 7076,
+      "logo_path": "/8BFxn9NUWSgp0ndih569Gm62xiC.png",
+      "name": "Chernin Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 121737,
+      "logo_path": null,
+      "name": "Exhibit A",
+      "origin_country": "US"
+    },
+    {
+      "id": 228007,
+      "logo_path": null,
+      "name": "Good One",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-01-15",
+  "revenue": 0,
+  "runtime": 114,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Polish",
+      "iso_639_1": "pl",
+      "name": "Polski"
+    }
+  ],
+  "status": "Released",
+  "tagline": "They're living their best lies.",
+  "title": "Back in Action",
+  "video": false,
+  "vote_average": 6.449,
+  "vote_count": 1227
+}

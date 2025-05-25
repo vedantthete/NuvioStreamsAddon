@@ -1,0 +1,97 @@
+{
+  "adult": false,
+  "backdrop_path": "/7dp5f7YPNBSuDJ1F2ae96eCzuSU.jpg",
+  "belongs_to_collection": null,
+  "budget": 135000000,
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 37,
+      "name": "Western"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    }
+  ],
+  "homepage": "http://www.rangomovie.com/",
+  "id": 44896,
+  "imdb_id": "tt1192628",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Rango",
+  "overview": "When Rango, a lost family pet, accidentally winds up in the gritty, gun-slinging town of Dirt, the less-than-courageous lizard suddenly finds he stands out. Welcomed as the last hope the town has been waiting for, new Sheriff Rango is forced to play his new role to the hilt.",
+  "popularity": 11.1324,
+  "poster_path": "/A5MP1guV8pbruieG0tnpPIbaJtt.jpg",
+  "production_companies": [
+    {
+      "id": 4,
+      "logo_path": "/gz66EfNoYPqHTYI4q9UEN4CbHRc.png",
+      "name": "Paramount Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 10262,
+      "logo_path": "/zpPSqldofcdVAsdJrYQbggxFM1F.png",
+      "name": "Blind Wink",
+      "origin_country": "US"
+    },
+    {
+      "id": 2348,
+      "logo_path": "/m31fQvZJuUvAgxoqTiCGYFBfZYe.png",
+      "name": "Nickelodeon Movies",
+      "origin_country": "US"
+    },
+    {
+      "id": 3281,
+      "logo_path": "/pfmb82VUfN9VKB1YuBSY69WVNVm.png",
+      "name": "GK Films",
+      "origin_country": "GB"
+    },
+    {
+      "id": 8805,
+      "logo_path": "/77RCtjFOnX2cbQ24z4q7IDzqZV4.png",
+      "name": "Industrial Light & Magic",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2011-03-02",
+  "revenue": 245700000,
+  "runtime": 112,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Heroes come in all different colors.",
+  "title": "Rango",
+  "video": false,
+  "vote_average": 6.874,
+  "vote_count": 6676
+}

@@ -1,0 +1,62 @@
+{
+  "adult": false,
+  "backdrop_path": "/ebyxeBh56QNXxSJgTnmz7fXAlwk.jpg",
+  "belongs_to_collection": {
+    "id": 399,
+    "name": "Predator Collection",
+    "poster_path": "/mm2t5dd1QFxtX6X56Z9U5ucsIb1.jpg",
+    "backdrop_path": "/u1CTqTYRUVyLwlEd1z1VJrVBp0J.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    }
+  ],
+  "homepage": "",
+  "id": 1242898,
+  "imdb_id": "tt31227572",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Predator: Badlands",
+  "overview": "Cast out from its clan, an alien hunter and an unlikely ally embark on a treacherous journey in search of the ultimate adversary.",
+  "popularity": 4.7822,
+  "poster_path": "/pHpq9yNUIo6aDoCXEBzjSolywgz.jpg",
+  "production_companies": [
+    {
+      "id": 127928,
+      "logo_path": "/h0rjX5vjW5r8yEnUBStFarjcLT4.png",
+      "name": "20th Century Studios",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-11-05",
+  "revenue": 0,
+  "runtime": 0,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Post Production",
+  "tagline": "First hunt. Last chance.",
+  "title": "Predator: Badlands",
+  "video": false,
+  "vote_average": 0,
+  "vote_count": 0
+}

@@ -1,0 +1,57 @@
+{
+  "adult": false,
+  "backdrop_path": "/sTp8K0SfcC2RQef1Tu160z3niHO.jpg",
+  "belongs_to_collection": null,
+  "budget": 1800000,
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 10752,
+      "name": "War"
+    }
+  ],
+  "homepage": "",
+  "id": 935,
+  "imdb_id": "tt0057012",
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_title": "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
+  "overview": "After the insane General Jack D. Ripper initiates a nuclear strike on the Soviet Union, a war room full of politicians, generals and a Russian diplomat all frantically try to stop the nuclear strike.",
+  "popularity": 6.5933,
+  "poster_path": "/6x7MzQ6BOMlRzam1StcmPO9v61g.jpg",
+  "production_companies": [
+    {
+      "id": 88,
+      "logo_path": null,
+      "name": "Hawk Films",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    }
+  ],
+  "release_date": "1964-01-29",
+  "revenue": 9500000,
+  "runtime": 95,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "The hot-line suspense comedy.",
+  "title": "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
+  "video": false,
+  "vote_average": 8.117,
+  "vote_count": 5779
+}

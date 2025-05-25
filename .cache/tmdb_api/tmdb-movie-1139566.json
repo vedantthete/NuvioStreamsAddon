@@ -1,0 +1,72 @@
+{
+  "adult": false,
+  "backdrop_path": "/iWzu3dVJGNfQUkLfK9xpTWoi5mh.jpg",
+  "belongs_to_collection": {
+    "id": 1130226,
+    "name": "Through My Window Collection",
+    "poster_path": "/f7tfLoj37Px1JgJzQThB5m0JfGQ.jpg",
+    "backdrop_path": "/5MqZnov12DSGxUhkrOGqqCMy5fb.jpg"
+  },
+  "budget": 0,
+  "genres": [
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81484069",
+  "id": 1139566,
+  "imdb_id": "tt28105944",
+  "origin_country": [
+    "ES"
+  ],
+  "original_language": "es",
+  "original_title": "A través de mi ventana 3: A través de tu mirada",
+  "overview": "After the events of the summer, Ares and Raquel they don't see a way forward in their relationship and decide to go separate ways. But when they meet again in the winter in Barcelona, the love and desire they feel for each other is undeniable. Will they be able to find a way to get back together?",
+  "popularity": 10.5533,
+  "poster_path": "/gwpTgtwVAwmvivBN8rAQABpx9Am.jpg",
+  "production_companies": [
+    {
+      "id": 11068,
+      "logo_path": "/jOdUllzDZRFy0tPIFDEwpP4Mpv4.png",
+      "name": "Nostromo Pictures",
+      "origin_country": "ES"
+    },
+    {
+      "id": 182897,
+      "logo_path": "/5jZX93pvheCYowROn9LAz499FC5.png",
+      "name": "Wattpad WEBTOON Studios",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "ES",
+      "name": "Spain"
+    }
+  ],
+  "release_date": "2024-02-23",
+  "revenue": 0,
+  "runtime": 105,
+  "spoken_languages": [
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Through My Window 3: Looking at You",
+  "video": false,
+  "vote_average": 6.935,
+  "vote_count": 619
+}

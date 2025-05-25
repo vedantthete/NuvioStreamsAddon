@@ -1,0 +1,73 @@
+{
+  "adult": false,
+  "backdrop_path": "/ltIxMsVJD9iiD5V4SBp4kv3KhVb.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "",
+  "id": 1033148,
+  "imdb_id": "tt9362736",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Die, My Love",
+  "overview": "A woman living in a remote rural area is driven to the brink of insanity by marriage and motherhood.",
+  "popularity": 10.1277,
+  "poster_path": "/u0yStEhfSgp8NqlOf5AAgN7KiaJ.jpg",
+  "production_companies": [
+    {
+      "id": 117188,
+      "logo_path": null,
+      "name": "Excellent Cadaver",
+      "origin_country": "US"
+    },
+    {
+      "id": 23243,
+      "logo_path": "/cBPyrhXhGKzxUdL4Fkg801HZ4W.png",
+      "name": "Sikelia Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 33681,
+      "logo_path": "/dHx2nsV9AC7IBlKN2dk1FDImvOz.png",
+      "name": "Black Label Media",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-05-17",
+  "revenue": 0,
+  "runtime": 118,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Love Madness, Madness Love.",
+  "title": "Die, My Love",
+  "video": false,
+  "vote_average": 0,
+  "vote_count": 0
+}

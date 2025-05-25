@@ -1,0 +1,77 @@
+{
+  "adult": false,
+  "backdrop_path": "/mavcbtmNrEnGGIxFPyT5js6PSE2.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "https://caughtstealing.movie",
+  "id": 1245993,
+  "imdb_id": "tt1493274",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Caught Stealing",
+  "overview": "Hank Thompson, a burned-out former baseball player, is unwittingly plunged into a wild fight for survival in the downtown criminal underworld of '90s New York City.",
+  "popularity": 7.3418,
+  "poster_path": "/gJGI7urRHi3y4BmKyu9KCT0FyKI.jpg",
+  "production_companies": [
+    {
+      "id": 7503,
+      "logo_path": "/3K8wbNkTn7O4wX89ucnp1ZYR1XF.png",
+      "name": "Protozoa Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 5,
+      "logo_path": "/71BqEFAF4V3qjjMPCpLuyJFB9A.png",
+      "name": "Columbia Pictures",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2025-08-27",
+  "revenue": 0,
+  "runtime": 0,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Yiddish",
+      "iso_639_1": "yi",
+      "name": ""
+    },
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Post Production",
+  "tagline": "",
+  "title": "Caught Stealing",
+  "video": false,
+  "vote_average": 0,
+  "vote_count": 0
+}

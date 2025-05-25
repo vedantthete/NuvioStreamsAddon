@@ -1,0 +1,105 @@
+{
+  "adult": false,
+  "backdrop_path": null,
+  "created_by": [],
+  "episode_run_time": [
+    30
+  ],
+  "first_air_date": "2005-12-08",
+  "genres": [
+    {
+      "id": 10765,
+      "name": "Sci-Fi & Fantasy"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.rubytreefilms.com/portfolio/shadow-hunter/",
+  "id": 12313,
+  "in_production": false,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2006-03-02",
+  "last_episode_to_air": {
+    "id": 2403045,
+    "name": "Morning Star",
+    "overview": "Clary's last shot at waking her mother up means she must turn to an old enemy for help. Jace deals with Hodge's betrayal and wages an internal battle.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2006-03-02",
+    "episode_number": 13,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 44,
+    "season_number": 1,
+    "show_id": 12313,
+    "still_path": null
+  },
+  "name": "Shadow Hunter",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 170,
+      "logo_path": "/l0TrgNyJsY0yV1hTggk9eWDtV5I.png",
+      "name": "Space",
+      "origin_country": "CA"
+    }
+  ],
+  "number_of_episodes": 13,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "CA"
+  ],
+  "original_language": "en",
+  "original_name": "Shadow Hunter",
+  "overview": "A documentary series about the paranormal, hosted by Darryll Walsh, a ghost hunter, best-selling author and doctor of parapsychology.",
+  "popularity": 0.671,
+  "poster_path": null,
+  "production_companies": [
+    {
+      "id": 122046,
+      "logo_path": null,
+      "name": "Sorcery Films",
+      "origin_country": "CA"
+    },
+    {
+      "id": 79459,
+      "logo_path": "/xGJFaJPSZI5AEoS5kGhVFe6Ci2B.png",
+      "name": "Ocean Entertainment",
+      "origin_country": "CA"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CA",
+      "name": "Canada"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2005-12-08",
+      "episode_count": 13,
+      "id": 160343,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 1,
+      "vote_average": 0
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Ended",
+  "tagline": "",
+  "type": "Documentary",
+  "vote_average": 8.547,
+  "vote_count": 921
+}

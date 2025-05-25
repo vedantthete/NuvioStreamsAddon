@@ -1,0 +1,114 @@
+{
+  "adult": false,
+  "backdrop_path": "/bKhhWhoV6B1Kq1wKRSWGDBhLv9Z.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 36,
+      "name": "History"
+    }
+  ],
+  "homepage": "https://www.studiocanal.com/title/the-most-precious-of-cargoes-2024/",
+  "id": 842859,
+  "imdb_id": "tt10462154",
+  "origin_country": [
+    "BE",
+    "FR"
+  ],
+  "original_language": "fr",
+  "original_title": "La plus précieuse des marchandises",
+  "overview": "Once upon a time, a poor woodcutter and his wife lived in a great forest. Cold, hunger, poverty, and a war raging all around them meant their lives were very hard.  One day, the woodcutter's wife rescues a baby. A baby girl thrown from one of the many trains that constantly pass through the forest. This baby, this \"most precious of cargoes\", will transform the lives of the poor woodcutter's wife and her husband, as well as those whose paths the child will cross—including the man who threw her from the train. And some will try to protect her, whatever the cost. Their story will reveal the worst and the best in the hearts of men.",
+  "popularity": 3.5912,
+  "poster_path": "/jh5zlkFEkgL0UIkL9CoZGLl0e7t.jpg",
+  "production_companies": [
+    {
+      "id": 207,
+      "logo_path": "/uskenzq65wJe0cT0D8StQI3hJnO.png",
+      "name": "Agat Films & Cie / Ex Nihilo",
+      "origin_country": "FR"
+    },
+    {
+      "id": 1926,
+      "logo_path": "/eSnbNBmDyok9rcpWxYRaBjTaq1n.png",
+      "name": "Les Films du Fleuve",
+      "origin_country": "BE"
+    },
+    {
+      "id": 694,
+      "logo_path": "/5LEHONGkZBIoWvp1ygHOF8iyi1M.png",
+      "name": "StudioCanal",
+      "origin_country": "FR"
+    },
+    {
+      "id": 3144,
+      "logo_path": "/1aCUp3Lu2PU3uDupxP3L4Jwr8m.png",
+      "name": "Prima Linéa Productions",
+      "origin_country": "FR"
+    },
+    {
+      "id": 94916,
+      "logo_path": null,
+      "name": "Les Compagnons du Cinéma",
+      "origin_country": "FR"
+    },
+    {
+      "id": 11797,
+      "logo_path": "/61JT9Ldht918n04Q73l2KhCjss.png",
+      "name": "VOO",
+      "origin_country": "BE"
+    },
+    {
+      "id": 792,
+      "logo_path": "/cRhBQP1FFNugNxKkO1pUgeD2Rkr.png",
+      "name": "RTBF",
+      "origin_country": "BE"
+    },
+    {
+      "id": 591,
+      "logo_path": "/q5I5RDwMEiqoNmfaJgd2LraEOJY.png",
+      "name": "France 3 Cinéma",
+      "origin_country": "FR"
+    },
+    {
+      "id": 24430,
+      "logo_path": "/7ZIwXTA5QVD6feybiITOL6OYJPJ.png",
+      "name": "BeTV",
+      "origin_country": "BE"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    },
+    {
+      "iso_3166_1": "BE",
+      "name": "Belgium"
+    }
+  ],
+  "release_date": "2024-11-20",
+  "revenue": 4286828,
+  "runtime": 80,
+  "spoken_languages": [
+    {
+      "english_name": "French",
+      "iso_639_1": "fr",
+      "name": "Français"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Most Precious of Cargoes",
+  "video": false,
+  "vote_average": 7.5,
+  "vote_count": 97
+}
