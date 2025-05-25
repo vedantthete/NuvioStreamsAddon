@@ -60,6 +60,7 @@ const saveToCache = async (cacheKey, content, subDir = '') => {
 // TMDB helper function to get ShowBox URL from TMDB ID
 // MODIFICATION: Accept scraperApiKey
 const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId, scraperApiKey) => {
+    console.time('getShowboxUrlFromTmdbInfo_total');
     const cacheSubDir = 'tmdb_api';
     const cacheKey = `tmdb-${tmdbType}-${tmdbId}.json`;
     const cachedTmdbData = await getFromCache(cacheKey, cacheSubDir);
@@ -69,6 +70,7 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId, scraperApiKey) => {
     if (!tmdbData) {
         const tmdbApiUrl = `${TMDB_BASE_URL}/${tmdbType}/${tmdbId}?api_key=${TMDB_API_KEY}`;
         console.log(`  Fetching TMDB data from: ${tmdbApiUrl}`);
+        console.time('getShowboxUrlFromTmdbInfo_tmdbApiCall');
         try {
             const response = await axios.get(tmdbApiUrl, { timeout: 10000 });
             tmdbData = response.data;
@@ -76,6 +78,8 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId, scraperApiKey) => {
                 await saveToCache(cacheKey, tmdbData, cacheSubDir);
             } else {
                 console.log(`  TMDB API call succeeded but returned no data for ${tmdbType}/${tmdbId}.`);
+                console.timeEnd('getShowboxUrlFromTmdbInfo_tmdbApiCall');
+                console.timeEnd('getShowboxUrlFromTmdbInfo_total');
                 return null;
             }
         } catch (error) {
@@ -84,11 +88,17 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId, scraperApiKey) => {
             if (error.response && error.response.status === 401) {
                 console.error("  TMDB API Error: Unauthorized. Check if your TMDB_API_KEY is valid and active.");
             }
+            console.timeEnd('getShowboxUrlFromTmdbInfo_tmdbApiCall');
+            console.timeEnd('getShowboxUrlFromTmdbInfo_total');
             return null;
         }
+        console.timeEnd('getShowboxUrlFromTmdbInfo_tmdbApiCall');
     }
 
-    if (!tmdbData) return null;
+    if (!tmdbData) {
+        console.timeEnd('getShowboxUrlFromTmdbInfo_total');
+        return null;
+    }
 
     let title = null;
     let year = null;
@@ -135,6 +145,7 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId, scraperApiKey) => {
     }
 
     console.log(`  Constructed ShowBox URL: ${constructedShowboxUrl}`);
+    console.timeEnd('getShowboxUrlFromTmdbInfo_total');
     return { showboxUrl: constructedShowboxUrl, year: year, title: title };
 };
 
@@ -142,6 +153,7 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId, scraperApiKey) => {
 // MODIFICATION: Accept scraperApiKey
 const fetchSourcesForSingleFid = async (fidToProcess, shareKey, scraperApiKey) => {
     console.log(`  Fetching fresh player data for video FID: ${fidToProcess} (Share: ${shareKey}) - Caching disabled for these links.`);
+    console.time(`fetchSourcesForSingleFid_${fidToProcess}`);
     
     const scraperApiPayloadForPost = {
         // MODIFICATION: Use passed scraperApiKey
@@ -163,7 +175,7 @@ const fetchSourcesForSingleFid = async (fidToProcess, shareKey, scraperApiKey) =
         const response = await axios.post(SCRAPER_API_URL, targetPostData.toString(), {
             params: scraperApiPayloadForPost,
             headers: headers,
-            timeout: 20000
+            timeout: 20000 // MODIFICATION: Consider increasing this if timeouts persist
         });
         const playerContent = response.data;
 
@@ -197,10 +209,12 @@ const fetchSourcesForSingleFid = async (fidToProcess, shareKey, scraperApiKey) =
         if (fidVideoLinks.length > 0) {
             console.log(`    Extracted ${fidVideoLinks.length} fresh video link(s) for FID ${fidToProcess}`);
         }
+        console.timeEnd(`fetchSourcesForSingleFid_${fidToProcess}`);
         return fidVideoLinks;
     } catch (error) {
         console.log(`    Request error for FID ${fidToProcess}: ${error.message}`);
         console.log(`    Fresh fetch failed for FID ${fidToProcess}.`);
+        console.timeEnd(`fetchSourcesForSingleFid_${fidToProcess}`);
         return [];
     }
 };
@@ -222,6 +236,7 @@ class ShowBoxScraper {
         const cacheSubDir = 'showbox_generic';
         const simpleUrlKey = url.replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9_.-]/g, '_');
         const cacheKey = `${simpleUrlKey}${isJsonExpected ? '.json' : '.html'}`;
+        const timerLabel = `ShowBoxScraper_makeRequest_${simpleUrlKey}`;
 
         const cachedData = await getFromCache(cacheKey, cacheSubDir);
         if (cachedData) {
@@ -231,6 +246,7 @@ class ShowBoxScraper {
         }
 
         console.log(`ShowBoxScraper: Making request to: ${url} via ScraperAPI`);
+        console.time(timerLabel);
  
         const payload = {
             // MODIFICATION: Use stored scraperApiKey
@@ -255,10 +271,12 @@ class ShowBoxScraper {
             if (responseData) {
                 await saveToCache(cacheKey, responseData, cacheSubDir);
             }
+            console.timeEnd(timerLabel);
             return responseData;
         } catch (error) {
             const errorMessage = error.response ? `${error.message} (Status: ${error.response.status})` : error.message;
             console.log(`ShowBoxScraper: Request failed for ${url}: ${errorMessage}`);
+            console.timeEnd(timerLabel);
             return null;
         }
     }
@@ -360,85 +378,105 @@ class ShowBoxScraper {
     }
 
     async extractFebboxShareLinks(showboxUrl) {
+        const timerLabel = `extractFebboxShareLinks_total_${showboxUrl.replace(/[^a-zA-Z0-9]/g, '')}`;
         console.log(`ShowBoxScraper: Attempting to extract FebBox share link from: ${showboxUrl}`);
-        
-        let htmlContent = null;
-        let contentInfo = this.extractContentIdAndType(showboxUrl, null);
-
-        if (!contentInfo || !contentInfo.id || !contentInfo.type) {
-            console.log("ShowBoxScraper: ID/Type not in URL, fetching HTML.");
-            htmlContent = await this._makeRequest(showboxUrl);
-            if (!htmlContent) {
-                console.log(`ShowBoxScraper: Failed to fetch HTML for ${showboxUrl}.`);
-                return [];
-            }
-            contentInfo = this.extractContentIdAndType(showboxUrl, htmlContent);
-        }
-
-        if (!contentInfo || !contentInfo.id || !contentInfo.type) {
-            console.log(`ShowBoxScraper: Could not determine content ID/type for ${showboxUrl}.`);
-            return [];
-        }
-
-        const { id: contentId, type: contentType, title } = contentInfo;
-
-        if (htmlContent) {
-            const $ = cheerio.load(htmlContent);
-            let directFebboxLink = null;
-
-            $('a[href*="febbox.com/share/"]').each((i, elem) => {
-                const href = $(elem).attr('href');
-                if (href && href.includes("febbox.com/share/")) {
-                    directFebboxLink = href;
-                    return false;
-                }
-            });
-
-            if (!directFebboxLink) {
-                const scriptContents = $('script').map((i, el) => $(el).html()).get().join('\n');
-                const shareKeyMatch = scriptContents.match(/['"](https?:\/\/www\.febbox\.com\/share\/[a-zA-Z0-9]+)['"]/);
-                if (shareKeyMatch && shareKeyMatch[1]) {
-                    directFebboxLink = shareKeyMatch[1];
-                }
-            }
-
-            if (directFebboxLink) {
-                return [{
-                    "showbox_title": title,
-                    "febbox_share_url": directFebboxLink,
-                    "showbox_content_id": contentId,
-                    "showbox_content_type": contentType
-                }];
-            }
-        }
-
-        // API call if direct parsing didn't work
-        console.log(`ShowBoxScraper: Making API call for ${title} (ID: ${contentId}, Type: ${contentType})`);
-        const shareApiUrl = `https://www.showbox.media/index/share_link?id=${contentId}&type=${contentType}`;
-        const apiResponseStr = await this._makeRequest(shareApiUrl, true);
-
-        if (!apiResponseStr) {
-            console.log(`ShowBoxScraper: Failed to get response from ShowBox share_link API`);
-            return [];
-        }
+        console.time(timerLabel);
         
         try {
-            const apiResponseJson = (typeof apiResponseStr === 'string') ? JSON.parse(apiResponseStr) : apiResponseStr;
-            if (apiResponseJson.code === 1 && apiResponseJson.data && apiResponseJson.data.link) {
-                const febboxShareUrl = apiResponseJson.data.link;
-                console.log(`ShowBoxScraper: Successfully fetched FebBox URL: ${febboxShareUrl}`);
-                return [{
-                    "showbox_title": title,
-                    "febbox_share_url": febboxShareUrl,
-                    "showbox_content_id": contentId,
-                    "showbox_content_type": contentType
-                }];
-            } else {
-                console.log(`ShowBoxScraper: ShowBox share_link API did not succeed for '${title}'.`);
+            let htmlContent = null;
+            let contentInfo = this.extractContentIdAndType(showboxUrl, null);
+
+            if (!contentInfo || !contentInfo.id || !contentInfo.type) {
+                console.log("ShowBoxScraper: ID/Type not in URL, fetching HTML.");
+                htmlContent = await this._makeRequest(showboxUrl);
+                if (!htmlContent) {
+                    console.log(`ShowBoxScraper: Failed to fetch HTML for ${showboxUrl}.`);
+                    console.timeEnd(timerLabel);
+                    return [];
+                }
+                contentInfo = this.extractContentIdAndType(showboxUrl, htmlContent);
+            }
+
+            if (!contentInfo || !contentInfo.id || !contentInfo.type) {
+                console.log(`ShowBoxScraper: Could not determine content ID/type for ${showboxUrl}.`);
+                console.timeEnd(timerLabel);
                 return [];
             }
-        } catch (e) {
-            console.log(`ShowBoxScraper: Error decoding JSON from ShowBox share_link API: ${e.message}`);
+
+            const { id: contentId, type: contentType, title } = contentInfo;
+
+            if (htmlContent) {
+                const $ = cheerio.load(htmlContent);
+                let directFebboxLink = null;
+
+                $('a[href*="febbox.com/share/"]').each((i, elem) => {
+                    const href = $(elem).attr('href');
+                    if (href && href.includes("febbox.com/share/")) {
+                        directFebboxLink = href;
+                        return false;
+                    }
+                });
+
+                if (!directFebboxLink) {
+                    const scriptContents = $('script').map((i, el) => $(el).html()).get().join('\n');
+                    const shareKeyMatch = scriptContents.match(/['"](https?:\/\/www\.febbox\.com\/share\/[a-zA-Z0-9]+)['"]/);
+                    if (shareKeyMatch && shareKeyMatch[1]) {
+                        directFebboxLink = shareKeyMatch[1];
+                    }
+                }
+
+                if (directFebboxLink) {
+                    console.log(`ShowBoxScraper: Successfully fetched FebBox URL: ${directFebboxLink} from HTML`);
+                    console.timeEnd(timerLabel);
+                    return [{
+                        "showbox_title": title,
+                        "febbox_share_url": directFebboxLink,
+                        "showbox_content_id": contentId,
+                        "showbox_content_type": contentType
+                    }];
+                }
+            }
+
+            // API call if direct parsing didn't work
+            console.log(`ShowBoxScraper: Making API call for ${title} (ID: ${contentId}, Type: ${contentType})`);
+            const shareApiUrl = `https://www.showbox.media/index/share_link?id=${contentId}&type=${contentType}`;
+            const apiTimerLabel = `extractFebboxShareLinks_apiCall_${contentId}`;
+            console.time(apiTimerLabel);
+            const apiResponseStr = await this._makeRequest(shareApiUrl, true);
+            console.timeEnd(apiTimerLabel);
+
+            if (!apiResponseStr) {
+                console.log(`ShowBoxScraper: Failed to get response from ShowBox share_link API`);
+                console.timeEnd(timerLabel);
+                return [];
+            }
+            
+            try {
+                const apiResponseJson = (typeof apiResponseStr === 'string') ? JSON.parse(apiResponseStr) : apiResponseStr;
+                if (apiResponseJson.code === 1 && apiResponseJson.data && apiResponseJson.data.link) {
+                    const febboxShareUrl = apiResponseJson.data.link;
+                    console.log(`ShowBoxScraper: Successfully fetched FebBox URL: ${febboxShareUrl} from API`);
+                    console.timeEnd(timerLabel);
+                    return [{
+                        "showbox_title": title,
+                        "febbox_share_url": febboxShareUrl,
+                        "showbox_content_id": contentId,
+                        "showbox_content_type": contentType
+                    }];
+                } else {
+                    console.log(`ShowBoxScraper: ShowBox share_link API did not succeed for '${title}'.`);
+                    console.timeEnd(timerLabel);
+                    return [];
+                }
+            } catch (e) {
+                console.log(`ShowBoxScraper: Error decoding JSON from ShowBox share_link API: ${e.message}`);
+                console.timeEnd(timerLabel);
+                return [];
+            }
+        } catch (error) {
+            // Catch any unexpected errors from the outer logic
+            console.error(`ShowBoxScraper: Unexpected error in extractFebboxShareLinks for ${showboxUrl}: ${error.message}`);
+            console.timeEnd(timerLabel);
             return [];
         }
     }
@@ -447,6 +485,9 @@ class ShowBoxScraper {
 // Function to extract FIDs from FebBox share page
 // MODIFICATION: Accept scraperApiKey
 const extractFidsFromFebboxPage = async (febboxUrl, scraperApiKey) => {
+    const timerLabel = `extractFidsFromFebboxPage_total_${febboxUrl.replace(/[^a-zA-Z0-9]/g, '')}`;
+    console.time(timerLabel);
+    let directSources = []; // Initialize directSources
     const cacheSubDir = 'febbox_page_html';
     const simpleUrlKey = febboxUrl.replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9_.-]/g, '_');
     const cacheKey = `${simpleUrlKey}.html`;
@@ -455,21 +496,25 @@ const extractFidsFromFebboxPage = async (febboxUrl, scraperApiKey) => {
 
     if (!contentHtml) {
         const headers = { 'Cookie': FEBBOX_COOKIE };
-        // MODIFICATION: Use passed scraperApiKey
         const payloadInitial = { api_key: scraperApiKey, url: febboxUrl, keep_headers: 'true' };
+        const fetchTimerLabel = `extractFidsFromFebboxPage_fetch_${febboxUrl.replace(/[^a-zA-Z0-9]/g, '')}`;
         try {
             console.log(`Fetching FebBox page content from URL: ${febboxUrl}`);
+            console.time(fetchTimerLabel);
             const response = await axios.get(SCRAPER_API_URL, { 
                 params: payloadInitial, 
                 headers: headers, 
                 timeout: 20000 
             });
+            console.timeEnd(fetchTimerLabel);
             contentHtml = response.data;
             if (typeof contentHtml === 'string' && contentHtml.length > 0) {
                 await saveToCache(cacheKey, contentHtml, cacheSubDir);
             }
         } catch (error) {
             console.log(`Failed to fetch FebBox page: ${error.message}`);
+            if (fetchTimerLabel) console.timeEnd(fetchTimerLabel); // Ensure timer ends on error if started
+            console.timeEnd(timerLabel);
             return { fids: [], shareKey: null };
         }
     }
@@ -487,6 +532,7 @@ const extractFidsFromFebboxPage = async (febboxUrl, scraperApiKey) => {
 
     if (!shareKey) {
         console.log(`Warning: Could not extract share_key from ${febboxUrl}`);
+        console.timeEnd(timerLabel);
         return { fids: [], shareKey: null };
     }
 
@@ -502,13 +548,14 @@ const extractFidsFromFebboxPage = async (febboxUrl, scraperApiKey) => {
             try {
                 const sourcesJsArrayString = sourcesMatchDirect[1];
                 const sourcesData = JSON.parse(sourcesJsArrayString);
+                directSources = sourcesData.map(source => ({
+                    label: String(source.label || 'Default'),
+                    url: String(source.file)
+                })).filter(source => !!source.url);
                 return { 
                     fids: [], 
                     shareKey,
-                    directSources: sourcesData.map(source => ({
-                        label: String(source.label || 'Default'),
-                        url: String(source.file)
-                    })).filter(source => !!source.url)
+                    directSources
                 };
             } catch (e) {
                 console.log(`Error decoding direct jwplayer sources: ${e.message}`);
@@ -518,8 +565,10 @@ const extractFidsFromFebboxPage = async (febboxUrl, scraperApiKey) => {
 
     // File list check
     const fileElements = $('div.file');
-    if (fileElements.length === 0) {
-        return { fids: [], shareKey };
+    if (fileElements.length === 0 && !(directSources && directSources.length > 0) ) { // Check if directSources also not found
+        console.log(`No files or direct sources found on FebBox page: ${febboxUrl}`);
+        console.timeEnd(timerLabel);
+        return { fids: [], shareKey, directSources: [] }; // Return empty directSources as well
     }
 
     fileElements.each((index, element) => {
@@ -531,14 +580,17 @@ const extractFidsFromFebboxPage = async (febboxUrl, scraperApiKey) => {
         videoFidsFound.push(dataId);
     });
 
-    return { fids: [...new Set(videoFidsFound)], shareKey };
+    console.timeEnd(timerLabel);
+    return { fids: [...new Set(videoFidsFound)], shareKey, directSources }; // ensure directSources is always an array
 };
 
 // Function to convert IMDb ID to TMDB ID using TMDB API
 // MODIFICATION: Accept scraperApiKey (though not directly used for TMDB calls here, kept for consistency if future needs arise)
 const convertImdbToTmdb = async (imdbId, scraperApiKey) => {
+    console.time(`convertImdbToTmdb_total_${imdbId}`);
     if (!imdbId || !imdbId.startsWith('tt')) {
         console.log('  Invalid IMDb ID format provided for conversion.', imdbId);
+        console.timeEnd(`convertImdbToTmdb_total_${imdbId}`);
         return null;
     }
     console.log(`  Attempting to convert IMDb ID: ${imdbId} to TMDB ID.`);
@@ -551,6 +603,7 @@ const convertImdbToTmdb = async (imdbId, scraperApiKey) => {
         console.log(`    IMDb to TMDB conversion found in CACHE for ${imdbId}:`, cachedData);
         // Ensure cached data has the expected structure
         if (cachedData.tmdbId && cachedData.tmdbType) {
+            console.timeEnd(`convertImdbToTmdb_total_${imdbId}`);
             return cachedData;
         }
         console.log('    Cached data for IMDb conversion is malformed. Fetching fresh.');
@@ -558,9 +611,11 @@ const convertImdbToTmdb = async (imdbId, scraperApiKey) => {
 
     const findApiUrl = `${TMDB_BASE_URL}/find/${imdbId}?api_key=${TMDB_API_KEY}&external_source=imdb_id`;
     console.log(`    Fetching from TMDB find API: ${findApiUrl}`);
+    console.time(`convertImdbToTmdb_apiCall_${imdbId}`);
 
     try {
         const response = await axios.get(findApiUrl, { timeout: 10000 });
+        console.timeEnd(`convertImdbToTmdb_apiCall_${imdbId}`);
         const findResults = response.data;
 
         if (findResults) {
@@ -581,15 +636,18 @@ const convertImdbToTmdb = async (imdbId, scraperApiKey) => {
             if (result && result.tmdbId && result.tmdbType) {
                 console.log(`    Successfully converted IMDb ID ${imdbId} to TMDB ${result.tmdbType} ID ${result.tmdbId} (${result.title})`);
                 await saveToCache(cacheKey, result, cacheSubDir);
+                console.timeEnd(`convertImdbToTmdb_total_${imdbId}`);
                 return result;
             } else {
                  console.log(`    Could not convert IMDb ID ${imdbId} to a usable TMDB movie/tv ID.`);
             }
         }
     } catch (error) {
+        if (console.timeEnd && typeof console.timeEnd === 'function') console.timeEnd(`convertImdbToTmdb_apiCall_${imdbId}`); // Ensure timer ends on error
         const errorMessage = error.response ? `${error.message} (Status: ${error.response.status})` : error.message;
         console.log(`    Error during TMDB find API call for IMDb ID ${imdbId}: ${errorMessage}`);
     }
+    console.timeEnd(`convertImdbToTmdb_total_${imdbId}`);
     return null;
 };
 
@@ -597,6 +655,8 @@ const convertImdbToTmdb = async (imdbId, scraperApiKey) => {
 // This will be a function to get streams from a TMDB ID
 // MODIFICATION: Accept scraperApiKey
 const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeNum = null, scraperApiKey) => {
+    const mainTimerLabel = `getStreamsFromTmdbId_total_${tmdbType}_${tmdbId}` + (seasonNum ? `_s${seasonNum}` : '') + (episodeNum ? `_e${episodeNum}` : '');
+    console.time(mainTimerLabel);
     console.log(`Getting streams for TMDB ${tmdbType}/${tmdbId}${seasonNum !== null ? `, Season ${seasonNum}` : ''}${episodeNum !== null ? `, Episode ${episodeNum}` : ''}`);
     
     // First, get the ShowBox URL from TMDB ID
@@ -604,6 +664,7 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
     const tmdbInfo = await getShowboxUrlFromTmdbInfo(tmdbType, tmdbId, scraperApiKey);
     if (!tmdbInfo || !tmdbInfo.showboxUrl) {
         console.log(`Could not construct ShowBox URL for TMDB ${tmdbType}/${tmdbId}`);
+        console.timeEnd(mainTimerLabel);
         return [];
     }
     const showboxUrl = tmdbInfo.showboxUrl;
@@ -616,6 +677,7 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
     const febboxShareInfos = await showboxScraper.extractFebboxShareLinks(showboxUrl);
     if (!febboxShareInfos || febboxShareInfos.length === 0) {
         console.log(`No FebBox share links found for ${showboxUrl}`);
+        console.timeEnd(mainTimerLabel);
         return [];
     }
     
@@ -657,19 +719,22 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
             
             // Process FIDs
             if (fids.length > 0 && shareKey) {
-                for (const fid of fids) {
-                    // MODIFICATION: Pass scraperApiKey
-                    const sources = await fetchSourcesForSingleFid(fid, shareKey, scraperApiKey);
+                console.time(`getStreamsFromTmdbId_fetchFids_concurrent_${shareInfo.febbox_share_url.replace(/[^a-zA-Z0-9]/g, '')}`);
+                const fidPromises = fids.map(fid => fetchSourcesForSingleFid(fid, shareKey, scraperApiKey));
+                const fidSourcesArray = await Promise.all(fidPromises);
+                console.timeEnd(`getStreamsFromTmdbId_fetchFids_concurrent_${shareInfo.febbox_share_url.replace(/[^a-zA-Z0-9]/g, '')}`);
+
+                for (const sources of fidSourcesArray) {
                     for (const source of sources) {
                         allStreams.push({
-                            title: `${baseStreamTitle} - ${source.label}`, // MODIFICATION: Use baseStreamTitle
+                            title: `${baseStreamTitle} - ${source.label}`, 
                             url: source.url,
                             quality: parseQualityFromLabel(source.label)
                         });
                     }
                 }
-            } else {
-                console.log(`No FIDs or share key found for ${febboxUrl}`);
+            } else if (!directSources || directSources.length === 0) { // only log if no FIDs AND no direct sources
+                console.log(`No FIDs or share key found, and no direct sources for ${febboxUrl}`);
             }
         }
     }
@@ -683,13 +748,15 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
             console.log(`  ${i+1}. ${stream.quality}: ${stream.title}`);
         });
     }
-    
+    console.timeEnd(mainTimerLabel);
     return sortedStreams;
 };
 
 // Function to handle TV shows with seasons and episodes
 // MODIFICATION: Accept scraperApiKey
 const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum, episodeNum, allStreams, scraperApiKey) => {
+    const processTimerLabel = `processShowWithSeasonsEpisodes_total_s${seasonNum}` + (episodeNum ? `_e${episodeNum}` : '');
+    console.time(processTimerLabel);
     console.log(`Processing TV Show: ${showboxTitle}, Season: ${seasonNum}, Episode: ${episodeNum !== null ? episodeNum : 'all'}`);
     
     // Cache for the main FebBox page
@@ -702,10 +769,11 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     
     if (!contentHtml) {
         // If not cached, fetch the HTML content
+        const fetchMainPageTimer = `processShowWithSeasonsEpisodes_fetchMainPage_s${seasonNum}`;
+        console.time(fetchMainPageTimer);
         try {
             const response = await axios.get(SCRAPER_API_URL, {
                 params: {
-                    // MODIFICATION: Use passed scraperApiKey
                     api_key: scraperApiKey,
                     url: febboxUrl,
                     keep_headers: 'true'
@@ -720,14 +788,18 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
             if (typeof contentHtml === 'string' && contentHtml.length > 0) {
                 await saveToCache(cacheKeyMain, contentHtml, cacheSubDirMain);
             }
+            console.timeEnd(fetchMainPageTimer);
         } catch (error) {
             console.log(`Failed to fetch HTML content from ${febboxUrl}: ${error.message}`);
+            console.timeEnd(fetchMainPageTimer); // End timer on error
+            console.timeEnd(processTimerLabel);
             return;
         }
     }
     
     if (!contentHtml) {
         console.log(`No HTML content available for ${febboxUrl}`);
+        console.timeEnd(processTimerLabel);
         return;
     }
     
@@ -737,6 +809,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     
     if (!shareKey) {
         console.log(`Could not extract share_key from ${febboxUrl}`);
+        console.timeEnd(processTimerLabel);
         return;
     }
     
@@ -758,7 +831,9 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     if (folders.length === 0) {
         console.log(`No season folders found on ${febboxUrl}`);
         // It might be directly files, so try the original logic as fallback
+        console.time(`processShowWithSeasonsEpisodes_fallbackDirect_s${seasonNum}`);
         const { fids, directSources } = await extractFidsFromFebboxPage(febboxUrl, scraperApiKey);
+        console.timeEnd(`processShowWithSeasonsEpisodes_fallbackDirect_s${seasonNum}`);
         
         if (directSources && directSources.length > 0) {
             for (const source of directSources) {
@@ -768,12 +843,17 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
                     quality: parseQualityFromLabel(source.label)
                 });
             }
+            console.timeEnd(processTimerLabel);
             return;
         }
         
         if (fids.length > 0) {
-            for (const fid of fids) {
-                const sources = await fetchSourcesForSingleFid(fid, shareKey, scraperApiKey);
+            console.time(`processShowWithSeasonsEpisodes_fallbackFids_s${seasonNum}_concurrent`);
+            const fallbackFidPromises = fids.map(fid => fetchSourcesForSingleFid(fid, shareKey, scraperApiKey));
+            const fallbackFidSourcesArray = await Promise.all(fallbackFidPromises);
+            console.timeEnd(`processShowWithSeasonsEpisodes_fallbackFids_s${seasonNum}_concurrent`);
+
+            for (const sources of fallbackFidSourcesArray) {
                 for (const source of sources) {
                     allStreams.push({
                         title: `${showboxTitle} - ${source.label}`,
@@ -783,6 +863,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
                 }
             }
         }
+        console.timeEnd(processTimerLabel);
         return;
     }
     
@@ -810,6 +891,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     
     if (!selectedFolder) {
         console.log(`Could not find season ${seasonNum} folder in ${febboxUrl}`);
+        console.timeEnd(processTimerLabel);
         return;
     }
     
@@ -824,10 +906,11 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     
     if (!folderHtml) {
         // If not cached, fetch the folder content
+        const fetchFolderTimer = `processShowWithSeasonsEpisodes_fetchFolder_s${seasonNum}_id${selectedFolder.id}`;
+        console.time(fetchFolderTimer);
         try {
             const folderResponse = await axios.get(SCRAPER_API_URL, {
                 params: {
-                    // MODIFICATION: Use passed scraperApiKey
                     api_key: scraperApiKey,
                     url: `${FEBBOX_FILE_SHARE_LIST_URL}?share_key=${shareKey}&parent_id=${selectedFolder.id}&is_html=1&pwd=`,
                     keep_headers: 'true'
@@ -846,20 +929,26 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
                 folderHtml = folderResponse.data;
             } else {
                 console.log(`Invalid response format from folder API for ${selectedFolder.id}`);
+                console.timeEnd(fetchFolderTimer);
+                console.timeEnd(processTimerLabel);
                 return;
             }
             
             if (folderHtml) {
                 await saveToCache(cacheKeyFolder, folderHtml, cacheSubDirFolder);
             }
+            console.timeEnd(fetchFolderTimer);
         } catch (error) {
             console.log(`Failed to fetch folder content for ${selectedFolder.id}: ${error.message}`);
+            console.timeEnd(fetchFolderTimer); // End timer on error
+            console.timeEnd(processTimerLabel);
             return;
         }
     }
     
     if (!folderHtml) {
         console.log(`No folder HTML content available for folder ${selectedFolder.id}`);
+        console.timeEnd(processTimerLabel);
         return;
     }
     
@@ -906,6 +995,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         
         if (!selectedEpisode) {
             console.log(`Could not find episode ${episodeNum} in season folder ${selectedFolder.name}`);
+            console.timeEnd(processTimerLabel);
             return;
         }
         
@@ -917,20 +1007,28 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     }
     
     // Get video sources for each episode FID
-    for (const fid of episodeFids) {
-        const sources = await fetchSourcesForSingleFid(fid, shareKey, scraperApiKey);
+    if (episodeFids.length > 0) {
+      const episodeTimerLabel = `processShowWithSeasonsEpisodes_fetchEpisodeSources_s${seasonNum}` + (episodeNum ? `_e${episodeNum}`: '_allEp_concurrent');
+      console.time(episodeTimerLabel);
+      const episodeSourcePromises = episodeFids.map(fid => fetchSourcesForSingleFid(fid, shareKey, scraperApiKey).then(sources => ({ fid, sources })));
+      const episodeSourcesResults = await Promise.all(episodeSourcePromises);
+      console.timeEnd(episodeTimerLabel);
+
+      for (const result of episodeSourcesResults) {
+        const { fid, sources } = result;
         for (const source of sources) {
-            // Find the episode detail for this FID to include in title
             const episodeDetail = episodeDetails.find(ep => ep.fid === fid);
             const episodeName = episodeDetail ? episodeDetail.name : '';
             
             allStreams.push({
-                title: `${showboxTitle} - S${seasonNum}${episodeNum ? `E${episodeNum}` : ''} - ${episodeName} - ${source.label}`,
+                title: `${showboxTitle} - S${seasonNum}${episodeNum && selectedEpisode && fid === selectedEpisode.fid ? `E${episodeNum}` : (episodeDetail ? `E${episodeDetail.episodeNum}`: '')} - ${episodeName} - ${source.label}`,
                 url: source.url,
                 quality: parseQualityFromLabel(source.label)
             });
         }
+      }
     }
+    console.timeEnd(processTimerLabel);
 };
 
 // Helper function to get episode number from filename
