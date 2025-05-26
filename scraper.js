@@ -94,51 +94,104 @@ const saveToCache = async (cacheKey, content, subDir = '') => {
     }
 };
 
+// NEW FUNCTION: Search ShowBox and extract the most relevant URL
+const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaYear, showboxScraperInstance) => {
+    const searchUrl = `https://www.showbox.media/search?keyword=${encodeURIComponent(searchTerm)}`;
+    console.log(`  Searching ShowBox with URL: ${searchUrl}`);
+
+    const htmlContent = await showboxScraperInstance._makeRequest(searchUrl);
+    if (!htmlContent) {
+        console.log(`  Failed to fetch ShowBox search results for: ${searchTerm}`);
+        return null;
+    }
+
+    const $ = cheerio.load(htmlContent);
+    let bestMatchUrl = null;
+    let highestScore = -1;
+
+    // Helper for simple string similarity (case-insensitive, removes non-alphanumeric)
+    const simplifyString = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const simplifiedTmdbTitle = simplifyString(originalTmdbTitle);
+
+    $('div.film-poster').each((i, elem) => {
+        const linkElement = $(elem).find('a.film-poster-ahref');
+        const itemTitle = linkElement.attr('title');
+        const itemHref = linkElement.attr('href');
+
+        if (itemTitle && itemHref) {
+            const simplifiedItemTitle = simplifyString(itemTitle);
+            
+            // Attempt to extract year from title if present, e.g., "Title (YYYY)"
+            let itemYear = null;
+            const yearMatch = itemTitle.match(/\((\d{4})\)$/);
+            if (yearMatch && yearMatch[1]) {
+                itemYear = yearMatch[1];
+            }
+
+            // Scoring logic (can be improved)
+            let score = 0;
+            if (simplifiedItemTitle.includes(simplifiedTmdbTitle) || simplifiedTmdbTitle.includes(simplifiedItemTitle)) {
+                score += 5; // Strong bonus for substring match
+            }
+            // Add more sophisticated string similarity if needed (e.g., Levenshtein)
+            if (mediaYear && itemYear && mediaYear === itemYear) {
+                score += 5; // Strong bonus for year match
+            } else if (mediaYear && itemYear) {
+                score -= 2; // Penalty for year mismatch
+            }
+            
+            // For series, the title might be just the series name, year might not be in the poster title
+            // but the link structure might confirm /tv/
+             if (itemHref.startsWith('/tv/') && searchTerm.toLowerCase().includes(simplifiedItemTitle)) {
+                // If it's a TV show and the search term includes the item title (e.g. search "Andor 2022", item "Andor")
+                score += 2;
+            }
+
+
+            if (score > highestScore) {
+                highestScore = score;
+                bestMatchUrl = itemHref;
+            }
+        }
+    });
+
+    if (bestMatchUrl) {
+        const fullUrl = `https://www.showbox.media${bestMatchUrl}`;
+        console.log(`  Found best match on ShowBox: ${fullUrl} (Score: ${highestScore})`);
+        return fullUrl;
+    } else {
+        console.log(`  No suitable match found on ShowBox search for: ${searchTerm}`);
+        return null;
+    }
+};
+
 // TMDB helper function to get ShowBox URL from TMDB ID
-// MODIFICATION: Accept scraperApiKey -> MODIFICATION: Remove scraperApiKey parameter
+// MODIFICATION: Remove scraperApiKey parameter
 const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId) => {
     console.time('getShowboxUrlFromTmdbInfo_total');
     const cacheSubDir = 'tmdb_api';
     const cacheKey = `tmdb-${tmdbType}-${tmdbId}.json`;
-    const cachedTmdbData = await getFromCache(cacheKey, cacheSubDir);
-
-    let tmdbData = cachedTmdbData;
-
+    let tmdbData = await getFromCache(cacheKey, cacheSubDir);
     if (!tmdbData) {
         const tmdbApiUrl = `${TMDB_BASE_URL}/${tmdbType}/${tmdbId}?api_key=${TMDB_API_KEY}`;
         console.log(`  Fetching TMDB data from: ${tmdbApiUrl}`);
-        console.time('getShowboxUrlFromTmdbInfo_tmdbApiCall');
         try {
             const response = await axios.get(tmdbApiUrl, { timeout: 10000 });
             tmdbData = response.data;
-            if (tmdbData) {
-                await saveToCache(cacheKey, tmdbData, cacheSubDir);
-            } else {
-                console.log(`  TMDB API call succeeded but returned no data for ${tmdbType}/${tmdbId}.`);
-                console.timeEnd('getShowboxUrlFromTmdbInfo_tmdbApiCall');
-                console.timeEnd('getShowboxUrlFromTmdbInfo_total');
-                return null;
-            }
-        } catch (error) {
-            const errorMessage = error.response ? `${error.message} (Status: ${error.response.status})` : error.message;
-            console.log(`  Error fetching data from TMDB for ${tmdbType}/${tmdbId}: ${errorMessage}`);
-            if (error.response && error.response.status === 401) {
-                console.error("  TMDB API Error: Unauthorized. Check if your TMDB_API_KEY is valid and active.");
-            }
-            console.timeEnd('getShowboxUrlFromTmdbInfo_tmdbApiCall');
-            console.timeEnd('getShowboxUrlFromTmdbInfo_total');
-            return null;
-        }
-        console.timeEnd('getShowboxUrlFromTmdbInfo_tmdbApiCall');
+            if (tmdbData) await saveToCache(cacheKey, tmdbData, cacheSubDir);
+            else { console.log('No TMDB data'); return null; }
+        } catch (error) { console.log('Error fetching TMDB', error); return null; }
     }
-
-    if (!tmdbData) {
-        console.timeEnd('getShowboxUrlFromTmdbInfo_total');
+    // Ensure tmdbData is available
+     if (!tmdbData) {
+        console.log(`  Could not fetch TMDB data for ${tmdbType}/${tmdbId}. Cannot proceed to ShowBox search.`);
         return null;
     }
 
+
     let title = null;
     let year = null;
+    // let originalTitleForShowbox = null; // Removed the Andor specific fix for now
 
     if (tmdbType === 'movie') {
         title = tmdbData.title || tmdbData.original_title;
@@ -148,46 +201,42 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId) => {
     } else if (tmdbType === 'tv') {
         title = tmdbData.name || tmdbData.original_name;
         let rawFirstAirDate = tmdbData.first_air_date;
-        if (rawFirstAirDate === "") {
-            console.log(`  Raw TV TMDB data for ${tmdbId} (first_air_date) is an EMPTY STRING.`);
-        } else {
-            console.log(`  Raw TV TMDB data for ${tmdbId} (first_air_date):`, rawFirstAirDate);
-        }
-
         if (rawFirstAirDate && String(rawFirstAirDate).length >= 4) {
             year = String(rawFirstAirDate).substring(0, 4);
         }
     }
 
-    const safeTitle = title || "untitled";
-    const slug = safeTitle.toLowerCase()
-        .replace(/[\/\\_:,.'"()?!]+/g, ' ')
-        .replace(/&/g, 'and')
-        .replace(/[^a-z0-9\s-]/g, '')
-        .trim()
-        .replace(/\s+/g, '-')
-        .replace(/-+/g, '-')
-        .replace(/^-+|-+$/g, '');
-
-    const showboxPrefix = tmdbType === 'movie' ? 'm' : 't';
-    let constructedShowboxUrl = `https://www.showbox.media/${tmdbType}/${showboxPrefix}-`;
-
-    if (slug && slug !== 'untitled') {
-        constructedShowboxUrl += `${slug}-`;
+    if (!title) {
+        console.log(`  Could not determine title from TMDB data for ${tmdbType}/${tmdbId}.`);
+        return null;
     }
-    if (year) {
-        constructedShowboxUrl += `${year}`;
-    } else if (constructedShowboxUrl.endsWith('-')) {
-        constructedShowboxUrl = constructedShowboxUrl.slice(0, -1);
-    }
+    
+    const searchTerm = year ? `${title} ${year}` : title;
+    console.log(`  Preparing to search ShowBox with term: "${searchTerm}" (Original TMDB title: "${title}", Year: ${year || 'N/A'})`);
 
-    console.log(`  Constructed ShowBox URL: ${constructedShowboxUrl}`);
-    console.timeEnd('getShowboxUrlFromTmdbInfo_total');
-    return { showboxUrl: constructedShowboxUrl, year: year, title: title };
+    // We need an instance of ShowBoxScraper to call _makeRequest
+    // Assuming ShowBoxScraper is instantiated somewhere accessible or we pass it
+    // For now, let's assume getStreamsFromTmdbId (the caller) will pass it,
+    // or we instantiate it here if this function is called standalone.
+    // THIS IS A TEMPORARY SIMPLIFICATION - ShowBoxScraper instance needs to be handled properly.
+    const showboxScraperInstance = new ShowBoxScraper(); // Simplified for now
+
+    const showboxUrl = await _searchAndExtractShowboxUrl(searchTerm, title, year, showboxScraperInstance);
+
+    if (!showboxUrl) {
+        console.log(`  Could not find a ShowBox URL via search for: ${title}`);
+        // Fallback to old slug construction as a last resort? Or just fail?
+        // For now, let's just fail if search fails.
+        return null;
+    }
+    
+    // The year and title here are from TMDB, which is fine.
+    // The showboxUrl is now the one found from search.
+    return { showboxUrl: showboxUrl, year: year, title: title };
 };
 
 // Function to fetch sources for a single FID
-// MODIFICATION: Accept scraperApiKey -> MODIFICATION: Remove scraperApiKey
+// MODIFICATION: Remove scraperApiKey parameter
 const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => {
     console.log(`  Fetching player data for video FID: ${fidToProcess} (Share: ${shareKey}) - Caching disabled for these links.`);
     console.time(`fetchSourcesForSingleFid_${fidToProcess}`);

@@ -12,7 +12,6 @@ const question = (query) => new Promise((resolve) => rl.question(query, resolve)
 const SCRAPER_API_KEY = process.env.SCRAPER_API_KEY_VALUE || '97b86e829812f220d98e737205778cab';
 
 async function runScraperInteractive() {
-  console.time('runScraperInteractive_total');
   try {
     // Let user choose which scraper to use
     console.log("\n==== SCRAPER MODE SELECTION ====");
@@ -94,6 +93,9 @@ async function runScraperInteractive() {
     }
 
     console.log(`\nFetching streams for TMDB ID: ${tmdbId}, Type: ${type}${seasonNum ? ', Season: ' + seasonNum : ''}${episodeNum ? ', Episode: ' + episodeNum : ''}...`);
+    
+    // Start the timer right before making the API calls
+    console.time('scraping_execution_time');
 
     const streams = await getStreamsFromTmdbId(type, tmdbId, seasonNum, episodeNum, SCRAPER_API_KEY);
 
@@ -123,8 +125,13 @@ async function runScraperInteractive() {
     console.error(error);
   } finally {
     rl.close();
-    console.timeEnd('runScraperInteractive_total');
   }
 }
 
-runScraperInteractive(); 
+// Wait for readline interface to fully close before ending timer
+runScraperInteractive().then(() => {
+  // Add a small delay to ensure all cleanup is complete
+  setTimeout(() => {
+    console.timeEnd('scraping_execution_time');
+  }, 100);
+}); 
