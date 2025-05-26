@@ -1,0 +1,124 @@
+{
+  "adult": false,
+  "backdrop_path": "/xYtMLZ76qJiVDLWMYr3m4jjM39n.jpg",
+  "created_by": [
+    {
+      "id": 3164259,
+      "credit_id": "67e3c15316a3c5c224f0a210",
+      "name": "Catherine Moulton",
+      "original_name": "Catherine Moulton",
+      "gender": 1,
+      "profile_path": null
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2025-05-18",
+  "genres": [
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    }
+  ],
+  "homepage": "https://www.itv.com/watch/code-of-silence/10a5340/upcoming",
+  "id": 287355,
+  "in_production": true,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2025-05-25",
+  "last_episode_to_air": {
+    "id": 6074596,
+    "name": "Episode 3",
+    "overview": "Alison's risky tactics identify the gang's target, but her deception and the gang's escalating violence threaten to unravel her relationship with Liam.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-25",
+    "episode_number": 3,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 60,
+    "season_number": 1,
+    "show_id": 287355,
+    "still_path": "/ak6e98jZcfZP6cHGi4wXhLJU9YD.jpg"
+  },
+  "name": "Code of Silence",
+  "next_episode_to_air": {
+    "id": 6074598,
+    "name": "Episode 4",
+    "overview": "Alison joins Liam on a luxury trip where she scrabbles for clues about his plans while torn between her growing feelings for him and the police's doubts.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-26",
+    "episode_number": 4,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 60,
+    "season_number": 1,
+    "show_id": 287355,
+    "still_path": "/n89W9YVxxMMGEVRTIllCImtH6SI.jpg"
+  },
+  "networks": [
+    {
+      "id": 9,
+      "logo_path": "/oz9pjTHnBUmlju8OkaTymhKbh6C.png",
+      "name": "ITV1",
+      "origin_country": "GB"
+    }
+  ],
+  "number_of_episodes": 6,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_name": "Code of Silence",
+  "overview": "A deaf catering worker who is struggling to make ends meet is called upon by a police detective superintendent to lip-read the conversations of criminals.",
+  "popularity": 4.6305,
+  "poster_path": "/3kmYqsvNR1KYGprklktlSoxNSFx.jpg",
+  "production_companies": [
+    {
+      "id": 5100,
+      "logo_path": "/utZoiSvzfUPQMK3WmKgLTemHOOQ.png",
+      "name": "Mammoth Screen",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2025-05-18",
+      "episode_count": 6,
+      "id": 448106,
+      "name": "Series 1",
+      "overview": "",
+      "poster_path": "/pnzy1eZQVawbDR6583zCAxGqlwa.jpg",
+      "season_number": 1,
+      "vote_average": 0
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "",
+  "type": "Scripted",
+  "vote_average": 8,
+  "vote_count": 5
+}

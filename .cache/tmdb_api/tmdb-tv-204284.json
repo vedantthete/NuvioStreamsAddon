@@ -1,0 +1,124 @@
+{
+  "adult": false,
+  "backdrop_path": "/iFPbB1II79kZNPbT7ePx2W06cd2.jpg",
+  "created_by": [
+    {
+      "id": 1212667,
+      "credit_id": "62acd122a5d849005391a686",
+      "name": "Nathan Fielder",
+      "original_name": "Nathan Fielder",
+      "gender": 2,
+      "profile_path": "/eHJEoEck6eFEVaumhCMWpIHtIIr.jpg"
+    }
+  ],
+  "episode_run_time": [
+    30
+  ],
+  "first_air_date": "2022-07-15",
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 99,
+      "name": "Documentary"
+    }
+  ],
+  "homepage": "https://www.hbo.com/the-rehearsal",
+  "id": 204284,
+  "in_production": true,
+  "languages": [
+    "en",
+    "es"
+  ],
+  "last_air_date": "2025-05-18",
+  "last_episode_to_air": {
+    "id": 6013099,
+    "name": "My Controls",
+    "overview": "Nathan makes a big bet.",
+    "vote_average": 10,
+    "vote_count": 1,
+    "air_date": "2025-05-25",
+    "episode_number": 6,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 59,
+    "season_number": 2,
+    "show_id": 204284,
+    "still_path": "/zbsgYc17QXmWWOCdXKXi9xPzz3g.jpg"
+  },
+  "name": "The Rehearsal",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 49,
+      "logo_path": "/tuomPhY2UtuPTqqFnKMVHvSb724.png",
+      "name": "HBO",
+      "origin_country": "US"
+    }
+  ],
+  "number_of_episodes": 12,
+  "number_of_seasons": 2,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "The Rehearsal",
+  "overview": "With a construction crew, a legion of actors, and seemingly unlimited resources, Nathan Fielder allows ordinary people to prepare for life’s biggest moments by “rehearsing” them in carefully crafted simulations of his own design. When a single misstep could shatter your entire world, why leave life to chance?",
+  "popularity": 9.1459,
+  "poster_path": "/mIevNYxovnH4sR22qkUmAgS5vdv.jpg",
+  "production_companies": [
+    {
+      "id": 178370,
+      "logo_path": null,
+      "name": "Rise Management",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2022-07-15",
+      "episode_count": 6,
+      "id": 297810,
+      "name": "Season 1",
+      "overview": "Nathan Fielder helps people prepare for life’s most difficult moments by staging meticulously crafted rehearsals of real-world events, but what starts as rehearsing life’s hardest decisions spirals into a shocking experiment in control, identity, and obsession.",
+      "poster_path": "/uI2nDcPa92UDK6c88J4Mni7yHqR.jpg",
+      "season_number": 1,
+      "vote_average": 8.6
+    },
+    {
+      "air_date": "2025-04-20",
+      "episode_count": 6,
+      "id": 444322,
+      "name": "Season 2",
+      "overview": "In season two, the urgency of Fielder's project grows as he decides to put his resources toward an issue that affects us all.",
+      "poster_path": "/mIevNYxovnH4sR22qkUmAgS5vdv.jpg",
+      "season_number": 2,
+      "vote_average": 9.7
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "Some connections are easy to miss.",
+  "type": "Documentary",
+  "vote_average": 8,
+  "vote_count": 187
+}

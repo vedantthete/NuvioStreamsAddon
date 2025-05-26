@@ -13,7 +13,7 @@ if (process.env.SCRAPER_MODE === 'api') {
 }
 
 // Destructure the required functions from the selected scraper
-const { getStreamsFromTmdbId, convertImdbToTmdb, isScraperApiKeyNeeded } = scraper;
+const { getStreamsFromTmdbId, convertImdbToTmdb } = scraper;
 
 const manifest = require('./manifest.json');
 
@@ -66,18 +66,6 @@ builder.defineStreamHandler(async (args) => {
         console.log("  No ScraperAPI Key configured by user.");
     }
 
-    if (isScraperApiKeyNeeded() && !userScraperApiKey) {
-        console.log("  ScraperAPI key is required but not configured by the user.");
-        return {
-            streams: [{
-                name: "Configuration Error",
-                title: "Please configure your ScraperAPI Key in the addon settings.",
-                type: "url",
-                url: "#configurationError"
-            }]
-        };
-    }
-    
     if (type !== 'movie' && type !== 'series') {
         return { streams: [] };
     }

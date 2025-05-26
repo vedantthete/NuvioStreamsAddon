@@ -5,8 +5,21 @@ const cheerio = require('cheerio');
 const fs = require('fs').promises;
 const path = require('path');
 
+// MODIFICATION: Removed SCRAPER_API_BASE_URL
+
 // Helper function to fetch stream size using a HEAD request
 const fetchStreamSize = async (url) => {
+    const cacheSubDir = 'stream_sizes';
+    // Create a cache key from the URL, ensuring it's filename-safe
+    const urlCacheKey = url.replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9_.-]/g, '_') + '.txt';
+
+    const cachedSize = await getFromCache(urlCacheKey, cacheSubDir);
+    if (cachedSize !== null) { // Check for null specifically, as 'Unknown size' is a valid cached string
+        // console.log(`  CACHE HIT for stream size: ${url} -> ${cachedSize}`);
+        return cachedSize;
+    }
+    // console.log(`  CACHE MISS for stream size: ${url}`);
+
     try {
         // For m3u8, Content-Length is for the playlist file, not the stream segments.
         if (url.toLowerCase().includes('.m3u8')) {
@@ -25,12 +38,13 @@ const fetchStreamSize = async (url) => {
         return 'Unknown size';
     } catch (error) {
         // console.warn(`  Could not fetch size for ${url}: ${error.message}`);
+        // Cache the error/unknown result too, to prevent re-fetching a known problematic URL quickly
+        await saveToCache(urlCacheKey, 'Unknown size', cacheSubDir);
         return 'Unknown size';
     }
 };
 
-// Constants from unified_scraper.js
-// MODIFICATION: Remove hardcoded SCRAPER_API_KEY
+// MODIFICATION: Removed hardcoded SCRAPER_API_KEY
 // const SCRAPER_API_KEY = '96845d13e7a0a0d40fb4f148cd135ddc'; 
 const FEBBOX_COOKIE = 'ui=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDgwNjYzMjgsIm5iZiI6MTc0ODA2NjMyOCwiZXhwIjoxNzc5MTcwMzQ4LCJkYXRhIjp7InVpZCI6NzgyNDcwLCJ0b2tlbiI6ImUwMTAyNjIyOWMyOTVlOTFlOTY0MWJjZWZiZGE4MGUxIn19.Za7tx60gu8rq9pLw1LVuIjROaBJzgF_MV049B8NO3L8';
 const FEBBOX_PLAYER_URL = "https://www.febbox.com/file/player";
@@ -96,12 +110,22 @@ const saveToCache = async (cacheKey, content, subDir = '') => {
 
 // NEW FUNCTION: Search ShowBox and extract the most relevant URL
 const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaYear, showboxScraperInstance) => {
+    const cacheSubDir = 'showbox_search_results';
+    const searchTermKey = searchTerm.replace(/[^a-zA-Z0-9_.-]/g, '_') + '.txt'; // .txt because it stores a URL string
+    const cachedBestUrl = await getFromCache(searchTermKey, cacheSubDir);
+    if (cachedBestUrl) {
+        console.log(`  CACHE HIT for ShowBox search best match URL (${searchTerm}): ${cachedBestUrl}`);
+        return cachedBestUrl;
+    }
+    // console.log(`  CACHE MISS for ShowBox search best match URL (${searchTerm})`);
+
     const searchUrl = `https://www.showbox.media/search?keyword=${encodeURIComponent(searchTerm)}`;
     console.log(`  Searching ShowBox with URL: ${searchUrl}`);
 
     const htmlContent = await showboxScraperInstance._makeRequest(searchUrl);
     if (!htmlContent) {
         console.log(`  Failed to fetch ShowBox search results for: ${searchTerm}`);
+        await saveToCache(searchTermKey, 'NO_MATCH_FOUND', cacheSubDir); // Cache indication of no match
         return null;
     }
 
@@ -158,9 +182,13 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
     if (bestMatchUrl) {
         const fullUrl = `https://www.showbox.media${bestMatchUrl}`;
         console.log(`  Found best match on ShowBox: ${fullUrl} (Score: ${highestScore})`);
+        await saveToCache(searchTermKey, fullUrl, cacheSubDir); // Cache the found full URL
         return fullUrl;
     } else {
         console.log(`  No suitable match found on ShowBox search for: ${searchTerm}`);
+        // Cache the fact that no match was found to avoid re-searching for a known miss (optional, depends on how often new content appears)
+        // For now, let's cache null or a specific string like "NO_MATCH_FOUND"
+        await saveToCache(searchTermKey, 'NO_MATCH_FOUND', cacheSubDir); // Cache indication of no match
         return null;
     }
 };
@@ -183,7 +211,7 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId) => {
         } catch (error) { console.log('Error fetching TMDB', error); return null; }
     }
     // Ensure tmdbData is available
-     if (!tmdbData) {
+    if (!tmdbData) {
         console.log(`  Could not fetch TMDB data for ${tmdbType}/${tmdbId}. Cannot proceed to ShowBox search.`);
         return null;
     }
@@ -250,21 +278,24 @@ const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => {
         'Content-Type': 'application/x-www-form-urlencoded'
     };
 
-    const useScraperApi = process.env.USE_SCRAPER_API === 'true';
-    const scraperApiKey = process.env.SCRAPER_API_KEY_VALUE;
+    // MODIFICATION: Removed ScraperAPI conditional logic
+    // const useScraperApi = process.env.USE_SCRAPER_API === 'true';
+    // const scraperApiKey = process.env.SCRAPER_API_KEY_VALUE;
 
     let finalPostUrl = FEBBOX_PLAYER_URL;
     let postDataForAxios = targetPostData.toString();
     let axiosConfig = { headers: baseHeaders, timeout: 20000 };
 
-    if (useScraperApi && scraperApiKey) {
-        finalPostUrl = SCRAPER_API_URL;
-        axiosConfig.params = { api_key: scraperApiKey, url: FEBBOX_PLAYER_URL, keep_headers: 'true' };
-        // postDataForAxios remains targetPostData.toString(), as it's the body for ScraperAPI POST
-        console.log(`  Fetching player data for FID ${fidToProcess} via ScraperAPI POST to ${FEBBOX_PLAYER_URL}`);
-    } else {
-        console.log(`  Fetching fresh player data for video FID: ${fidToProcess} (Share: ${shareKey}) directly to ${FEBBOX_PLAYER_URL}`);
-    }
+    // if (useScraperApi && scraperApiKey) {
+    //     finalPostUrl = SCRAPER_API_BASE_URL; // Use defined base URL
+    //     axiosConfig.params = { api_key: scraperApiKey, url: FEBBOX_PLAYER_URL, keep_headers: 'true' };
+    //     // postDataForAxios remains targetPostData.toString(), as it's the body for ScraperAPI POST
+    //     console.log(`  Fetching player data for FID ${fidToProcess} via ScraperAPI POST to ${FEBBOX_PLAYER_URL}`);
+    // } else {
+    //     console.log(`  Fetching fresh player data for video FID: ${fidToProcess} (Share: ${shareKey}) directly to ${FEBBOX_PLAYER_URL}`);
+    // }
+    console.log(`  Fetching fresh player data for video FID: ${fidToProcess} (Share: ${shareKey}) directly to ${FEBBOX_PLAYER_URL}`);
+
 
     try {
         const response = await axios.post(finalPostUrl, postDataForAxios, axiosConfig);
@@ -609,29 +640,42 @@ const extractFidsFromFebboxPage = async (febboxUrl) => {
     const timerLabel = `extractFidsFromFebboxPage_total_${febboxUrl.replace(/[^a-zA-Z0-9]/g, '')}`;
     console.time(timerLabel);
     let directSources = []; // Initialize directSources
-    const cacheSubDir = 'febbox_page_html';
+    const cacheSubDirHtml = 'febbox_page_html';
+    const cacheSubDirParsed = 'febbox_parsed_page'; // New subdir for parsed data
     const simpleUrlKey = febboxUrl.replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9_.-]/g, '_');
-    const cacheKey = `${simpleUrlKey}.html`;
+    const cacheKeyHtml = `${simpleUrlKey}.html`;
+    const cacheKeyParsed = `${simpleUrlKey}.json`; // Parsed data will be JSON
 
-    let contentHtml = await getFromCache(cacheKey, cacheSubDir);
+    // Check for cached parsed data first
+    const cachedParsedData = await getFromCache(cacheKeyParsed, cacheSubDirParsed);
+    if (cachedParsedData && typeof cachedParsedData === 'object') { // Ensure it's an object
+        console.log(`  CACHE HIT for parsed FebBox page data: ${febboxUrl}`);
+        console.timeEnd(timerLabel);
+        return cachedParsedData; // Return { fids, shareKey, directSources }
+    }
+    // console.log(`  CACHE MISS for parsed FebBox page data: ${febboxUrl}`);
+
+    let contentHtml = await getFromCache(cacheKeyHtml, cacheSubDirHtml);
 
     if (!contentHtml) {
         const baseHeaders = { 'Cookie': FEBBOX_COOKIE };
         const fetchTimerLabel = `extractFidsFromFebboxPage_fetch_${febboxUrl.replace(/[^a-zA-Z0-9]/g, '')}`;
         
-        const useScraperApi = process.env.USE_SCRAPER_API === 'true';
-        const scraperApiKey = process.env.SCRAPER_API_KEY_VALUE;
+        // MODIFICATION: Removed ScraperAPI conditional logic
+        // const useScraperApi = process.env.USE_SCRAPER_API === 'true';
+        // const scraperApiKey = process.env.SCRAPER_API_KEY_VALUE;
 
         let finalGetUrl = febboxUrl;
         let axiosConfig = { headers: baseHeaders, timeout: 20000 };
 
-        if (useScraperApi && scraperApiKey) {
-            finalGetUrl = SCRAPER_API_URL;
-            axiosConfig.params = { api_key: scraperApiKey, url: febboxUrl, keep_headers: 'true' };
-            console.log(`Fetching FebBox page content from URL: ${febboxUrl} via ScraperAPI`);
-        } else {
-            console.log(`Fetching FebBox page content from URL: ${febboxUrl} directly`);
-        }
+        // if (useScraperApi && scraperApiKey) {
+        //     finalGetUrl = SCRAPER_API_BASE_URL; // Use defined base URL
+        //     axiosConfig.params = { api_key: scraperApiKey, url: febboxUrl, keep_headers: 'true' };
+        //     console.log(`Fetching FebBox page content from URL: ${febboxUrl} via ScraperAPI`);
+        // } else {
+        //     console.log(`Fetching FebBox page content from URL: ${febboxUrl} directly`);
+        // }
+        console.log(`Fetching FebBox page content from URL: ${febboxUrl} directly`);
 
         try {
             console.time(fetchTimerLabel);
@@ -639,7 +683,7 @@ const extractFidsFromFebboxPage = async (febboxUrl) => {
             console.timeEnd(fetchTimerLabel);
             contentHtml = response.data;
             if (typeof contentHtml === 'string' && contentHtml.length > 0) {
-                await saveToCache(cacheKey, contentHtml, cacheSubDir);
+                await saveToCache(cacheKeyHtml, contentHtml, cacheSubDirHtml);
             }
         } catch (error) {
             console.log(`Failed to fetch FebBox page: ${error.message}`);
@@ -710,8 +754,12 @@ const extractFidsFromFebboxPage = async (febboxUrl) => {
         videoFidsFound.push(dataId);
     });
 
+    // At the end of the function, before returning, save the parsed data
+    const parsedResult = { fids: [...new Set(videoFidsFound)], shareKey, directSources };
+    await saveToCache(cacheKeyParsed, parsedResult, cacheSubDirParsed);
+    // console.log(`  SAVED PARSED FebBox page data to cache: ${febboxUrl}`);
     console.timeEnd(timerLabel);
-    return { fids: [...new Set(videoFidsFound)], shareKey, directSources }; // ensure directSources is always an array
+    return parsedResult;
 };
 
 // Function to convert IMDb ID to TMDB ID using TMDB API
@@ -914,12 +962,13 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
 
 // Function to handle TV shows with seasons and episodes
 // MODIFICATION: Accept scraperApiKey -> MODIFICATION: Remove scraperApiKey
-const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum, episodeNum, allStreams) => {
-    const processTimerLabel = `processShowWithSeasonsEpisodes_total_s${seasonNum}` + (episodeNum ? `_e${episodeNum}` : '');
+// New parameter: resolveFids, defaults to true. If false, skips fetching sources for FIDs.
+const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum, episodeNum, allStreams, resolveFids = true) => {
+    const processTimerLabel = `processShowWithSeasonsEpisodes_total_s${seasonNum}` + (episodeNum ? `_e${episodeNum}` : '_all') + (resolveFids ? '_resolve' : '_noresolve');
     console.time(processTimerLabel);
-    console.log(`Processing TV Show: ${showboxTitle}, Season: ${seasonNum}, Episode: ${episodeNum !== null ? episodeNum : 'all'}`);
+    console.log(`Processing TV Show: ${showboxTitle}, Season: ${seasonNum}, Episode: ${episodeNum !== null ? episodeNum : 'all'}${resolveFids ? '' : ' (FIDs not resolved)'}`);
     
-    let selectedEpisode = null; // MODIFICATION: Declare selectedEpisode at function scope
+    let selectedEpisode = null; // Ensure selectedEpisode is declared here
 
     // Cache for the main FebBox page
     const cacheSubDirMain = 'febbox_page_html';
@@ -934,21 +983,23 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         const fetchMainPageTimer = `processShowWithSeasonsEpisodes_fetchMainPage_s${seasonNum}`;
         console.time(fetchMainPageTimer);
 
-        const useScraperApi = process.env.USE_SCRAPER_API === 'true';
-        const scraperApiKey = process.env.SCRAPER_API_KEY_VALUE;
+        // MODIFICATION: Removed ScraperAPI conditional logic
+        // const useScraperApi = process.env.USE_SCRAPER_API === 'true';
+        // const scraperApiKey = process.env.SCRAPER_API_KEY_VALUE;
         let finalFebboxUrl = febboxUrl;
         let axiosConfigMainPage = {
             headers: { 'Cookie': FEBBOX_COOKIE },
-            timeout: 20000
+                timeout: 20000
         };
 
-        if (useScraperApi && scraperApiKey) {
-            finalFebboxUrl = SCRAPER_API_URL;
-            axiosConfigMainPage.params = { api_key: scraperApiKey, url: febboxUrl, keep_headers: 'true' };
-            console.log(`Fetching main FebBox page ${febboxUrl} via ScraperAPI`);
-        } else {
-            console.log(`Fetching main FebBox page ${febboxUrl} directly`);
-        }
+        // if (useScraperApi && scraperApiKey) {
+        //     finalFebboxUrl = SCRAPER_API_BASE_URL; // Use defined base URL
+        //     axiosConfigMainPage.params = { api_key: scraperApiKey, url: febboxUrl, keep_headers: 'true' };
+        //     console.log(`Fetching main FebBox page ${febboxUrl} via ScraperAPI`);
+        // } else {
+        //     console.log(`Fetching main FebBox page ${febboxUrl} directly`);
+        // }
+        console.log(`Fetching main FebBox page ${febboxUrl} directly`);
 
         try {
             const response = await axios.get(finalFebboxUrl, axiosConfigMainPage);
@@ -1070,93 +1121,119 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     console.log(`Found season folder: ${selectedFolder.name} (ID: ${selectedFolder.id})`);
     
     // Cache for season folder content
-    const cacheSubDirFolder = 'febbox_season_folders';
-    const cacheKeyFolder = `share-${shareKey}_folder-${selectedFolder.id}.html`;
+    const cacheSubDirFolderHtml = 'febbox_season_folders'; 
+    const cacheSubDirFolderParsed = 'febbox_parsed_season_folders'; 
+    const cacheKeyFolderHtml = `share-${shareKey}_folder-${selectedFolder.id}.html`;
+    const cacheKeyFolderParsed = `share-${shareKey}_folder-${selectedFolder.id}_parsed.json`;
     
-    // Try to get folder content from cache first
-    let folderHtml = await getFromCache(cacheKeyFolder, cacheSubDirFolder);
-    
-    if (!folderHtml) {
-        // If not cached, fetch the folder content
-        const fetchFolderTimer = `processShowWithSeasonsEpisodes_fetchFolder_s${seasonNum}_id${selectedFolder.id}`;
-        console.time(fetchFolderTimer);
-        try {
-            const targetFolderListUrl = `${FEBBOX_FILE_SHARE_LIST_URL}?share_key=${shareKey}&parent_id=${selectedFolder.id}&is_html=1&pwd=`;
-            
-            const useScraperApi = process.env.USE_SCRAPER_API === 'true';
-            const scraperApiKey = process.env.SCRAPER_API_KEY_VALUE;
-            let finalFolderUrl = targetFolderListUrl;
-            let axiosConfigFolder = {
-                headers: {
-                    'Cookie': FEBBOX_COOKIE,
-                    'Referer': febboxUrl,
-                    'X-Requested-With': 'XMLHttpRequest'
-                },
-                timeout: 20000
-            };
+    let folderHtml = null; 
+    let episodeDetails = []; // Declare episodeDetails here, initialized as an empty array
+    let episodeFids = []; // Declare episodeFids here, initialized as an empty array
 
-            if (useScraperApi && scraperApiKey) {
-                finalFolderUrl = SCRAPER_API_URL;
-                axiosConfigFolder.params = { api_key: scraperApiKey, url: targetFolderListUrl, keep_headers: 'true' };
-                console.log(`Fetching FebBox folder ${targetFolderListUrl} via ScraperAPI`);
-            } else {
+    const cachedParsedEpisodeList = await getFromCache(cacheKeyFolderParsed, cacheSubDirFolderParsed);
+    if (cachedParsedEpisodeList && Array.isArray(cachedParsedEpisodeList)) {
+        console.log(`  CACHE HIT for parsed episode list: Season ${seasonNum}, Folder ${selectedFolder.id}`);
+        episodeDetails.push(...cachedParsedEpisodeList); // Populate if cache hit
+    } else {
+        // Parsed list not in cache, so we need to process HTML
+        // console.log(`  CACHE MISS for parsed episode list: Season ${seasonNum}, Folder ${selectedFolder.id}`);
+        folderHtml = await getFromCache(cacheKeyFolderHtml, cacheSubDirFolderHtml); // Assign to the higher-scoped folderHtml
+        
+        if (!folderHtml) {
+            const fetchFolderTimer = `processShowWithSeasonsEpisodes_fetchFolder_s${seasonNum}_id${selectedFolder.id}`;
+            console.time(fetchFolderTimer);
+            try {
+                const targetFolderListUrl = `${FEBBOX_FILE_SHARE_LIST_URL}?share_key=${shareKey}&parent_id=${selectedFolder.id}&is_html=1&pwd=`;
+                
+                // MODIFICATION: Removed ScraperAPI conditional logic
+                // const useScraperApi = process.env.USE_SCRAPER_API === 'true';
+                // const scraperApiKey = process.env.SCRAPER_API_KEY_VALUE;
+                let finalFolderUrl = targetFolderListUrl;
+                let axiosConfigFolder = {
+                    headers: {
+                        'Cookie': FEBBOX_COOKIE,
+                        'Referer': febboxUrl,
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    timeout: 20000
+                };
+
+                // if (useScraperApi && scraperApiKey) {
+                //     finalFolderUrl = SCRAPER_API_BASE_URL; // Use defined base URL
+                //     axiosConfigFolder.params = { api_key: scraperApiKey, url: targetFolderListUrl, keep_headers: 'true' };
+                //     console.log(`Fetching FebBox folder ${targetFolderListUrl} via ScraperAPI`);
+                // } else {
+                //     console.log(`Fetching FebBox folder ${targetFolderListUrl} directly`);
+                // }
                 console.log(`Fetching FebBox folder ${targetFolderListUrl} directly`);
-            }
 
-            const folderResponse = await axios.get(finalFolderUrl, axiosConfigFolder);
-            
-            if (folderResponse.data && typeof folderResponse.data === 'object' && folderResponse.data.html) {
-                folderHtml = folderResponse.data.html;
-            } else if (typeof folderResponse.data === 'string') {
-                folderHtml = folderResponse.data;
-            } else {
-                console.log(`Invalid response format from folder API for ${selectedFolder.id}`);
+                const folderResponse = await axios.get(finalFolderUrl, axiosConfigFolder);
+                
+                if (folderResponse.data && typeof folderResponse.data === 'object' && folderResponse.data.html) {
+                    folderHtml = folderResponse.data.html;
+                } else if (typeof folderResponse.data === 'string') {
+                    folderHtml = folderResponse.data;
+                } else {
+                    console.log(`Invalid response format from folder API for ${selectedFolder.id}`);
+                    console.timeEnd(fetchFolderTimer);
+                    console.timeEnd(processTimerLabel);
+                    return;
+                }
+                
+                if (folderHtml) {
+                    await saveToCache(cacheKeyFolderHtml, folderHtml, cacheSubDirFolderHtml);
+                }
                 console.timeEnd(fetchFolderTimer);
+            } catch (error) {
+                console.log(`Failed to fetch folder content for ${selectedFolder.id}: ${error.message}`);
+                // console.timeEnd(fetchFolderTimer); // fetchFolderTimer might not be defined if cache hit for HTML but miss for parsed
                 console.timeEnd(processTimerLabel);
                 return;
             }
-            
-            if (folderHtml) {
-                await saveToCache(cacheKeyFolder, folderHtml, cacheSubDirFolder);
-            }
-            console.timeEnd(fetchFolderTimer);
-        } catch (error) {
-            console.log(`Failed to fetch folder content for ${selectedFolder.id}: ${error.message}`);
-            console.timeEnd(fetchFolderTimer); // End timer on error
+        }
+    }
+    
+    // If episodeDetails is populated from cache, folderHtml might be null. That's okay.
+    // If episodeDetails is still empty, we must have folderHtml to parse.
+    if (episodeDetails.length === 0) { // Only proceed if we didn't get data from parsed cache
+        if (!folderHtml) { // If still no folderHtml (e.g. HTML cache miss and fetch fail), then error out
+            console.log(`No folder HTML content available (and no cached parsed list) for folder ${selectedFolder.id}`);
             console.timeEnd(processTimerLabel);
             return;
         }
-    }
-    
-    if (!folderHtml) {
-        console.log(`No folder HTML content available for folder ${selectedFolder.id}`);
-        console.timeEnd(processTimerLabel);
-        return;
-    }
-    
-    const $folder = cheerio.load(folderHtml);
-    const episodeFids = [];
-    const episodeDetails = [];
-    
-    $folder('div.file').each((index, element) => {
-        const feEl = $folder(element);
-        const dataId = feEl.attr('data-id');
-        if (!dataId || !/^\d+$/.test(dataId) || feEl.hasClass('open_dir')) {
-            return; // Skip folders or invalid IDs
-        }
-        
-        const fileNameEl = feEl.find('p.file_name');
-        const fileName = fileNameEl.length ? fileNameEl.text().trim() : `File_${dataId}`;
-        
-        episodeDetails.push({ 
-            fid: dataId, 
-            name: fileName,
-            episodeNum: getEpisodeNumberFromName(fileName)
+
+        // Parse the folderHtml since we didn't have a cached parsed list
+        const $folder = cheerio.load(folderHtml);
+        $folder('div.file').each((index, element) => {
+            const feEl = $folder(element);
+            const dataId = feEl.attr('data-id');
+            if (!dataId || !/^\d+$/.test(dataId) || feEl.hasClass('open_dir')) {
+                return; 
+            }
+            
+            const fileNameEl = feEl.find('p.file_name');
+            const fileName = fileNameEl.length ? fileNameEl.text().trim() : `File_${dataId}`;
+            
+            episodeDetails.push({ 
+                fid: dataId, 
+                name: fileName,
+                episodeNum: getEpisodeNumberFromName(fileName)
+            });
         });
-    });
+
+        // After parsing, save the extracted episodeDetails to its cache
+        // This will also save an empty array if parsing yields no episodes, preventing re-parsing of empty folders
+        await saveToCache(cacheKeyFolderParsed, episodeDetails, cacheSubDirFolderParsed);
+        if (episodeDetails.length > 0) {
+            // console.log(`  SAVED PARSED episode list to cache: Season ${seasonNum}, Folder ${selectedFolder.id}`);
+        }
+    }
     
-    // Sort episodes by their number
-    episodeDetails.sort((a, b) => a.episodeNum - b.episodeNum);
+    // Sort episodes by their number (whether from cache or freshly parsed)
+    // Ensure episodeDetails is sorted if populated
+    if(episodeDetails.length > 0) {
+      episodeDetails.sort((a, b) => a.episodeNum - b.episodeNum);
+    }
     
     // If episode number specified, find matching episode
     if (episodeNum !== null) {
@@ -1180,14 +1257,19 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         }
         
         console.log(`Found episode: ${selectedEpisode.name} (FID: ${selectedEpisode.fid})`);
-        episodeFids.push(selectedEpisode.fid);
+        episodeFids.push(selectedEpisode.fid); // Now episodeFids is already declared
     } else {
         // If no episode specified, process all episodes
-        episodeFids.push(...episodeDetails.map(ep => ep.fid));
+        // Ensure episodeDetails is populated before mapping
+        if (episodeDetails.length > 0) {
+            episodeFids.push(...episodeDetails.map(ep => ep.fid)); // episodeFids is already declared
+        } else {
+            console.log(`  No episode details found for folder ${selectedFolder.name} to extract FIDs for all episodes.`);
+        }
     }
     
     // Get video sources for each episode FID
-    if (episodeFids.length > 0) {
+    if (resolveFids && episodeFids.length > 0) { // Check resolveFids flag here
       const episodeTimerLabel = `processShowWithSeasonsEpisodes_fetchEpisodeSources_s${seasonNum}` + (episodeNum ? `_e${episodeNum}`: '_allEp_concurrent');
       console.time(episodeTimerLabel);
       const episodeSourcePromises = episodeFids.map(fid => fetchSourcesForSingleFid(fid, shareKey).then(sources => ({ fid, sources })));
@@ -1209,6 +1291,8 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
             });
         }
       }
+    } else if (!resolveFids && episodeFids.length > 0) {
+        console.log(`  Skipping FID resolution for ${episodeFids.length} episodes in S${seasonNum} as per request.`);
     }
     console.timeEnd(processTimerLabel);
 };
@@ -1382,17 +1466,18 @@ function sortStreamsByQuality(streams) {
 ensureCacheDir(CACHE_DIR).catch(console.error);
 
 // MODIFICATION: Add isScraperApiKeyNeeded function -> MODIFICATION: Update to reflect no ScraperAPI
-const isScraperApiKeyNeeded = () => {
+// const isScraperApiKeyNeeded = () => {
     // Since core functionalities no longer use ScraperAPI
     // MODIFICATION: Reflect conditional ScraperAPI usage
-    return process.env.USE_SCRAPER_API === 'true'; 
-};
+//    return process.env.USE_SCRAPER_API === 'true'; 
+// };
+// MODIFICATION: isScraperApiKeyNeeded removed
 
 module.exports = {
     getStreamsFromTmdbId,
     parseQualityFromLabel,
     convertImdbToTmdb,
-    isScraperApiKeyNeeded,
+    // isScraperApiKeyNeeded, // MODIFICATION: Removed
     // Functions needed by cache_populator.js
     getShowboxUrlFromTmdbInfo,
     ShowBoxScraper, 

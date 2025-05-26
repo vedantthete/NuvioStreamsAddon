@@ -1,0 +1,118 @@
+{
+  "adult": false,
+  "backdrop_path": "/shiCVH3B2J3ICB2BGm8SnWD97Nd.jpg",
+  "created_by": [
+    {
+      "id": 2605460,
+      "credit_id": "6682ef964c8f19a024ef6a4b",
+      "name": "Molly Smith Metzler",
+      "original_name": "Molly Smith Metzler",
+      "gender": 1,
+      "profile_path": null
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2025-05-22",
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81589551",
+  "id": 246992,
+  "in_production": false,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2025-05-22",
+  "last_episode_to_air": {
+    "id": 6057949,
+    "name": "Siren Song",
+    "overview": "As the gala kicks off, the conflict between Michaela and Simone comes to a head. Peter has a realization. Devon considers her options.",
+    "vote_average": 9,
+    "vote_count": 1,
+    "air_date": "2025-05-22",
+    "episode_number": 5,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 63,
+    "season_number": 1,
+    "show_id": 246992,
+    "still_path": "/zzLRs2UAXaitsRAqyRxNfpPj3cC.jpg"
+  },
+  "name": "Sirens",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 213,
+      "logo_path": "/wwemzKWzjKYJFfCeiB57q3r4Bcm.png",
+      "name": "Netflix",
+      "origin_country": ""
+    }
+  ],
+  "number_of_episodes": 5,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "Sirens",
+  "overview": "Worried about her sister's too-close relationship with her billionaire boss, a scrappy everywoman seeks answers at a lavish seaside estate.",
+  "popularity": 43.2027,
+  "poster_path": "/39TnPl0JjDwOMKzDwWnCMoBxUCn.jpg",
+  "production_companies": [
+    {
+      "id": 221390,
+      "logo_path": null,
+      "name": "Quiet Coyote",
+      "origin_country": "US"
+    },
+    {
+      "id": 82968,
+      "logo_path": "/gRROMOG5bpF6TIDMbfaa5gnFFzl.png",
+      "name": "LuckyChap Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 263116,
+      "logo_path": null,
+      "name": "On the Verge Entertainment",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2025-05-22",
+      "episode_count": 5,
+      "id": 380209,
+      "name": "Limited Series",
+      "overview": "",
+      "poster_path": "/ouqNppeDmiWDf4otuZJQ7j0P2Kl.jpg",
+      "season_number": 1,
+      "vote_average": 8.7
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Ended",
+  "tagline": "Not all songs are sweet.",
+  "type": "Miniseries",
+  "vote_average": 6.9,
+  "vote_count": 28
+}

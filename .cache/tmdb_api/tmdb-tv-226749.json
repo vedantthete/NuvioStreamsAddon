@@ -1,0 +1,136 @@
+{
+  "adult": false,
+  "backdrop_path": "/OWYWI6Kjel95QvXMA6LiB6ZepL.jpg",
+  "created_by": [
+    {
+      "id": 8676,
+      "credit_id": "682efa75f9ae293269343e4a",
+      "name": "Dean Devlin",
+      "original_name": "Dean Devlin",
+      "gender": 2,
+      "profile_path": "/lO8HDHI3aVrpVubWb2DH1jeqM40.jpg"
+    },
+    {
+      "id": 19535,
+      "credit_id": "682efa77c92c408b553af7bd",
+      "name": "John Rogers",
+      "original_name": "John Rogers",
+      "gender": 2,
+      "profile_path": "/6VxilKl6oIlxiyet26LabZIW8mG.jpg"
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2025-05-25",
+  "genres": [
+    {
+      "id": 10759,
+      "name": "Action & Adventure"
+    }
+  ],
+  "homepage": "https://www.tntdrama.com/shows/the-librarians-the-next-chapter",
+  "id": 226749,
+  "in_production": true,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2025-05-25",
+  "last_episode_to_air": {
+    "id": 6237185,
+    "name": "And the Deadly Drekavac",
+    "overview": "When a Librarian from 200 years ago reappears today, he brings back to life a long-closed magical Library and accidentally resurrects an evil Drekavac. The Librarian, along with a quickly assembled team, must stop the Drekavac before it can kill and multiply.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-25",
+    "episode_number": 1,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 50,
+    "season_number": 1,
+    "show_id": 226749,
+    "still_path": "/v0DOO3apf7liOmPl5GOBoVr00rc.jpg"
+  },
+  "name": "The Librarians: The Next Chapter",
+  "next_episode_to_air": {
+    "id": 6237180,
+    "name": "And the Dance of Doom",
+    "overview": "Our newly assembled Librarians crew investigates a mysterious \"dancing sickness,\" leading them to a showdown with a powerful magical factioneer at a professional ballet company.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-26",
+    "episode_number": 2,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 44,
+    "season_number": 1,
+    "show_id": 226749,
+    "still_path": "/iIg49lK0rFlQwHqgHz8tvdOsQQL.jpg"
+  },
+  "networks": [
+    {
+      "id": 41,
+      "logo_path": "/6ISsKwa2XUhSC6oBtHZjYf6xFqv.png",
+      "name": "TNT",
+      "origin_country": "US"
+    }
+  ],
+  "number_of_episodes": 12,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "The Librarians: The Next Chapter",
+  "overview": "A Librarian from the past time travels to the present and finds himself stuck here. When he returns to his castle, which is now a museum, he inadvertently releases magic across the continent. He is given a new team to help him clean up the mess he made, forming a new team of Librarians.",
+  "popularity": 4.9762,
+  "poster_path": "/w2PhnfYgY1yjxnUc1M4Jp5CjXvD.jpg",
+  "production_companies": [
+    {
+      "id": 3241,
+      "logo_path": "/kRAMCgp7zAmd1UnCPBHiEiopSm9.png",
+      "name": "Electric Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 137474,
+      "logo_path": "/QHSGa3v3rQUj6onVxiSOtvm1Mb.png",
+      "name": "Balkanic Media",
+      "origin_country": "US"
+    },
+    {
+      "id": 237127,
+      "logo_path": null,
+      "name": "The CW Studios",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2025-05-25",
+      "episode_count": 12,
+      "id": 341398,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/w2PhnfYgY1yjxnUc1M4Jp5CjXvD.jpg",
+      "season_number": 1,
+      "vote_average": 0
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "A brand new adventure begins.",
+  "type": "Scripted",
+  "vote_average": 0,
+  "vote_count": 0
+}

@@ -1,0 +1,122 @@
+{
+  "adult": false,
+  "backdrop_path": "/8NX2kBLHS6vSrl8Lg3Y2JAqzmy9.jpg",
+  "created_by": [
+    {
+      "id": 1274663,
+      "credit_id": "657cb50aec8a4300e09bf7b4",
+      "name": "Jonathan Tropper",
+      "original_name": "Jonathan Tropper",
+      "gender": 2,
+      "profile_path": "/t6ztR16asT1JV3oIQIcLDB1DMsj.jpg"
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2025-04-10",
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://tv.apple.com/show/umc.cmc.74o37kzay0yuuub8iumddjsg",
+  "id": 241609,
+  "in_production": true,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2025-05-22",
+  "last_episode_to_air": {
+    "id": 5778800,
+    "name": "When Did We Become These People?",
+    "overview": "Coop tries getting back what he's lost. Mel and Sam clash. Coop, Nick, and Barney have a boys' night.",
+    "vote_average": 4.5,
+    "vote_count": 2,
+    "air_date": "2025-05-22",
+    "episode_number": 8,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 49,
+    "season_number": 1,
+    "show_id": 241609,
+    "still_path": "/qrpPMEsIB7aZQXRLYC7w1tChglh.jpg"
+  },
+  "name": "Your Friends & Neighbors",
+  "next_episode_to_air": {
+    "id": 5778802,
+    "name": "Everything Becomes Symbol and Irony",
+    "overview": "Coop fights for his freedom.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-29",
+    "episode_number": 9,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 61,
+    "season_number": 1,
+    "show_id": 241609,
+    "still_path": "/cA5jJifibMVW48uZWpDV6BFy4Ag.jpg"
+  },
+  "networks": [
+    {
+      "id": 2552,
+      "logo_path": "/4KAy34EHvRM25Ih8wb82AuGU7zJ.png",
+      "name": "Apple TV+",
+      "origin_country": ""
+    }
+  ],
+  "number_of_episodes": 9,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "Your Friends & Neighbors",
+  "overview": "When a financial titan suddenly finds himself divorced and jobless, he starts robbing his wealthy neighbors to stay afloat. Stealing from his own social circle strangely exhilarates him—but he gradually gets tangled in a deadly web.",
+  "popularity": 36.2189,
+  "poster_path": "/5Red8BT8N0YaWumXMQhuoGP40Ox.jpg",
+  "production_companies": [
+    {
+      "id": 194232,
+      "logo_path": "/oE7H93u8sy5vvW5EH3fpCp68vvB.png",
+      "name": "Apple Studios",
+      "origin_country": "US"
+    },
+    {
+      "id": 94284,
+      "logo_path": null,
+      "name": "Tropper Ink Productions",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2025-04-10",
+      "episode_count": 9,
+      "id": 369915,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/5Red8BT8N0YaWumXMQhuoGP40Ox.jpg",
+      "season_number": 1,
+      "vote_average": 5.8
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "Live your best lie.",
+  "type": "Scripted",
+  "vote_average": 6.9,
+  "vote_count": 44
+}

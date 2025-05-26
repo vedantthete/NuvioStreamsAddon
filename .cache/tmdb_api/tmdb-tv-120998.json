@@ -1,0 +1,148 @@
+{
+  "adult": false,
+  "backdrop_path": "/ccOzCmrglAjRGtqv5ClTaBEsWt8.jpg",
+  "created_by": [
+    {
+      "id": 67367,
+      "credit_id": "60512a401d820f003dcd701b",
+      "name": "Rian Johnson",
+      "original_name": "Rian Johnson",
+      "gender": 2,
+      "profile_path": "/uPWwvdppeZVKPbYcjXKU8zyuAVh.jpg"
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2023-01-26",
+  "genres": [
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    }
+  ],
+  "homepage": "https://www.peacocktv.com/stream-tv/poker-face",
+  "id": 120998,
+  "in_production": true,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2025-05-22",
+  "last_episode_to_air": {
+    "id": 6041742,
+    "name": "Hometown Hero",
+    "overview": "While working as a ball girl for a bad minor league team, Charlie suspects foul play in the death of one of the players.",
+    "vote_average": 3,
+    "vote_count": 3,
+    "air_date": "2025-05-22",
+    "episode_number": 5,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 48,
+    "season_number": 2,
+    "show_id": 120998,
+    "still_path": "/t3q5dyz4BP1PyXTbPmYYVdm2KzJ.jpg"
+  },
+  "name": "Poker Face",
+  "next_episode_to_air": {
+    "id": 6041743,
+    "name": "Sloppy Joseph",
+    "overview": "Charlie gets caught up in the politics of an elementary school classroom when a harmless talent show performance is upstaged by a student's diabolical plot involving the class pet.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-29",
+    "episode_number": 6,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": null,
+    "season_number": 2,
+    "show_id": 120998,
+    "still_path": null
+  },
+  "networks": [
+    {
+      "id": 3353,
+      "logo_path": "/gIAcGTjKKr0KOHL5s4O36roJ8p7.png",
+      "name": "Peacock",
+      "origin_country": "US"
+    }
+  ],
+  "number_of_episodes": 22,
+  "number_of_seasons": 2,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "Poker Face",
+  "overview": "Follow Charlie Cale, a woman with an extraordinary ability to tell when someone is lying, as she hits the road and, at every stop, encounters a new cast of characters and crimes she can't help but solve.",
+  "popularity": 27.5457,
+  "poster_path": "/sQxgo6z2nEzq1kfXdktRIWtje3B.jpg",
+  "production_companies": [
+    {
+      "id": 150969,
+      "logo_path": "/7oS9vcqTqm4m7x1GP0zBZaRkiPw.png",
+      "name": "Animal Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 2531,
+      "logo_path": "/9MfCJ2G6Nrf9yyRj4tAgPmMiDcn.png",
+      "name": "MRC",
+      "origin_country": "US"
+    },
+    {
+      "id": 37871,
+      "logo_path": "/aUOo1S2AabqQnRrXK6XuObWPDyK.png",
+      "name": "T-Street",
+      "origin_country": "US"
+    },
+    {
+      "id": 225256,
+      "logo_path": null,
+      "name": "Zucks.",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2023-01-26",
+      "episode_count": 10,
+      "id": 186440,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/8Xm5dyMQC9whMJKnGdFugUAW73C.jpg",
+      "season_number": 1,
+      "vote_average": 7.2
+    },
+    {
+      "air_date": "2025-05-08",
+      "episode_count": 12,
+      "id": 445980,
+      "name": "Season 2",
+      "overview": "From minor league baseball to big box retail, from funeral homes to alligator farms and even a grade school talent show, Charlie navigates her crime solving existential road-trip with deadpan wit, human empathy, and her signature uncanny lie-detecting ability.",
+      "poster_path": "/sQxgo6z2nEzq1kfXdktRIWtje3B.jpg",
+      "season_number": 2,
+      "vote_average": 4.9
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "Murder mysteries can take detours.",
+  "type": "Scripted",
+  "vote_average": 7.625,
+  "vote_count": 367
+}

@@ -1,0 +1,156 @@
+{
+  "adult": false,
+  "backdrop_path": "/4h1hvQ5ejTBtsceNP4KfZ4sBmoC.jpg",
+  "created_by": [
+    {
+      "id": 126180,
+      "credit_id": "68201c4ea9d34f77027e75d0",
+      "name": "David Alexanian",
+      "original_name": "David Alexanian",
+      "gender": 2,
+      "profile_path": "/3Lawo1DbwQeznVgq7sLqhOvXgtR.jpg"
+    },
+    {
+      "id": 69751,
+      "credit_id": "68201c5497a5e2ce612d1426",
+      "name": "Charley Boorman",
+      "original_name": "Charley Boorman",
+      "gender": 2,
+      "profile_path": "/7aUStN1A5RcQMYS1PZyL2Vlcbfj.jpg"
+    },
+    {
+      "id": 1203461,
+      "credit_id": "68201c5aa031e88cc15a24fb",
+      "name": "Russ Malkin",
+      "original_name": "Russ Malkin",
+      "gender": 2,
+      "profile_path": "/dqBgAOG7EAtXP6Im4asjSrzgY7a.jpg"
+    },
+    {
+      "id": 3061,
+      "credit_id": "68201c66bf87fc43702d149e",
+      "name": "Ewan McGregor",
+      "original_name": "Ewan McGregor",
+      "gender": 2,
+      "profile_path": "/h7thH2xZeicwK7a3Pkr4cCzXkSu.jpg"
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2025-05-09",
+  "genres": [
+    {
+      "id": 99,
+      "name": "Documentary"
+    }
+  ],
+  "homepage": "https://tv.apple.com/show/umc.cmc.26p8x4co2wl0ztetek4gmkf6r",
+  "id": 262594,
+  "in_production": true,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2025-05-23",
+  "last_episode_to_air": {
+    "id": 5938539,
+    "name": "Fjord Focus",
+    "overview": "Ewan and Charley wind their way through Norway's scenic roads and fjords, gobsmacked by Viking churches and ancient rock formations.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-23",
+    "episode_number": 4,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 43,
+    "season_number": 1,
+    "show_id": 262594,
+    "still_path": "/qwOrpVLEfI11ndMR6TLK8Qy7Syj.jpg"
+  },
+  "name": "Long Way Home",
+  "next_episode_to_air": {
+    "id": 5938540,
+    "name": "Ice, Snow, and Bears",
+    "overview": "The guys temporarily ditch their bikes to fly to Svalbard, an archipelago in the Arctic where the effects of climate change are glaringly real.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-30",
+    "episode_number": 5,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 39,
+    "season_number": 1,
+    "show_id": 262594,
+    "still_path": "/3ePjcGZdzWNd8WPGWy7d5v0HU4x.jpg"
+  },
+  "networks": [
+    {
+      "id": 2552,
+      "logo_path": "/4KAy34EHvRM25Ih8wb82AuGU7zJ.png",
+      "name": "Apple TV+",
+      "origin_country": ""
+    }
+  ],
+  "number_of_episodes": 10,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_name": "Long Way Home",
+  "overview": "Best friends Ewan McGregor and Charley Boorman gear up for their fourth Long Way series—this time going from Ewan's home in Scotland to Charley's in England. They'll take the scenic route, of course, through 17 European countries on cranky old bikes.",
+  "popularity": 14.4425,
+  "poster_path": "/tI4RXkgAxc0WUYvPR0XbOUsGvP3.jpg",
+  "production_companies": [
+    {
+      "id": 24617,
+      "logo_path": null,
+      "name": "Big Earth",
+      "origin_country": "GB"
+    },
+    {
+      "id": 7301,
+      "logo_path": "/zRE17rVN5eRlU1BwVYTVa8nVs7H.png",
+      "name": "Elixir Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 261976,
+      "logo_path": null,
+      "name": "Long Way Round",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2025-05-09",
+      "episode_count": 10,
+      "id": 407930,
+      "name": "Miniseries",
+      "overview": "",
+      "poster_path": "/tI4RXkgAxc0WUYvPR0XbOUsGvP3.jpg",
+      "season_number": 1,
+      "vote_average": 0
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "17 countries. Another epic adventure.",
+  "type": "Miniseries",
+  "vote_average": 7.3,
+  "vote_count": 3
+}

@@ -5,28 +5,35 @@ const path = require('path');
 const TMDB_API_KEY = '439c478a771f35c05022f9feabcca01c'; // From scraper.js
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const OUTPUT_FILE = path.join(__dirname, 'tmdb_master_list.json');
-const MAX_PAGES_PER_CATEGORY = 50; // Fetch top N pages for popular/trending
-const MAX_ITEMS_PER_CATEGORY = 1000; // Limit total items from each category
+// const MAX_PAGES_PER_CATEGORY = 50; // No longer needed
+// const MAX_ITEMS_PER_CATEGORY = 1000; // No longer needed
+// const GIST_CSV_URL = 'https://gist.githubusercontent.com/hcgiub001/8ac97085513734eb51a5fca7657bdba5/raw/tmdb.imdb.list.001'; // REMOVE
+
+const TRAKT_API_URL = 'https://api.trakt.tv';
+const TRAKT_CLIENT_ID = 'be696ed9c455935bde7cb0188fd3ee87588e442d00e93b3d7e0f76bd52d5d336';
+const TRAKT_API_VERSION = '2';
+const TRAKT_ITEMS_PER_PAGE_LIMIT = 50; // Renamed from TRAKT_ITEMS_PER_LIST_LIMIT
+const TRAKT_MAX_PAGES_PER_LIST = 3;   // Fetch up to 3 pages per Trakt list
 
 // Simple delay function to be respectful to the API
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-let requestCount = 0;
-const MAX_REQUESTS_PER_SECOND = 20; // TMDB allows up to 40-50, being conservative
-let lastRequestTime = Date.now();
+let tmdbRequestCount = 0; // Renamed from requestCount for clarity
+const MAX_TMDB_REQUESTS_PER_SECOND = 20;
+let lastTmdbRequestTime = Date.now(); // Renamed for clarity
 
 async function makeTmdbRequest(url, params = {}) {
-    requestCount++;
+    tmdbRequestCount++;
     const currentTime = Date.now();
-    if (requestCount >= MAX_REQUESTS_PER_SECOND && (currentTime - lastRequestTime) < 1000) {
-        const timeToWait = 1000 - (currentTime - lastRequestTime);
-        // console.log(`Rate limit approaching, waiting for ${timeToWait}ms...`);
+    if (tmdbRequestCount >= MAX_TMDB_REQUESTS_PER_SECOND && (currentTime - lastTmdbRequestTime) < 1000) {
+        const timeToWait = 1000 - (currentTime - lastTmdbRequestTime);
+        // console.log(`TMDB Rate limit approaching, waiting for ${timeToWait}ms...`);
         await delay(timeToWait);
-        requestCount = 0; // Reset count after waiting
-        lastRequestTime = Date.now();
-    } else if ((currentTime - lastRequestTime) >= 1000) {
-        requestCount = 1; // Reset count if a second has passed
-        lastRequestTime = currentTime;
+        tmdbRequestCount = 0; 
+        lastTmdbRequestTime = Date.now();
+    } else if ((currentTime - lastTmdbRequestTime) >= 1000) {
+        tmdbRequestCount = 1; 
+        lastTmdbRequestTime = currentTime;
     }
 
     try {
@@ -40,37 +47,32 @@ async function makeTmdbRequest(url, params = {}) {
         const errorMessage = error.response ? `${error.message} (Status: ${error.response.status})` : error.message;
         console.error(`Error fetching TMDB data from ${url}: ${errorMessage}`);
         if (error.response && error.response.status === 429) {
-            console.error("Rate limit hit hard. Waiting longer...");
-            await delay(10000); // Wait 10 seconds if hit rate limit
+            console.error("TMDB Rate limit hit hard. Waiting longer...");
+            await delay(10000); 
         }
         return null;
     }
 }
 
-async function fetchPaginatedTmdbData(endpoint, itemLimit) {
-    let allResults = [];
-    let currentPage = 1;
-    let totalPages = 1; // Initialize, will be updated by first API call
+// Remove fetchPaginatedTmdbData function - no longer used
+// // ... existing code ...
+// async function fetchPaginatedTmdbData(endpoint, itemLimit) {
+// // ... existing code ...
+// }
 
-    console.log(`Fetching paginated data from ${endpoint}...`);
-    while (currentPage <= totalPages && currentPage <= MAX_PAGES_PER_CATEGORY && allResults.length < itemLimit) {
-        const data = await makeTmdbRequest(endpoint, { page: currentPage });
-        if (data && data.results) {
-            allResults.push(...data.results);
-            totalPages = data.total_pages; // Update total pages from API response
-            console.log(`  Fetched page ${currentPage}/${totalPages} for ${endpoint}. Items so far: ${allResults.length}`);
-        } else {
-            console.log(`  No data or results on page ${currentPage} for ${endpoint}. Stopping.`);
-            break; // Stop if no data or results
-        }
-        currentPage++;
-        if (allResults.length >= itemLimit) break;
-        await delay(200); // Be nice to TMDB API between pages
-    }
-    return allResults.slice(0, itemLimit);
-}
+// Remove fetchGistCsvData function
+// // ... existing code ...
+// async function fetchGistCsvData() {
+// // ... existing code ...
+// }
 
-async function fetchMovieDetails(movieId) {
+// Remove getTmdbMediaType function (will get type='tv' from Trakt shows, or fetchMovieDetails if needed)
+// // ... existing code ...
+// async function getTmdbMediaType(tmdbId) {
+// // ... existing code ...
+// }
+
+async function fetchMovieDetails(movieId) { // Keep this, might be useful if Trakt provides movies too
     const data = await makeTmdbRequest(`/movie/${movieId}`);
     if (!data) return null;
     return {
@@ -78,11 +80,11 @@ async function fetchMovieDetails(movieId) {
         type: 'movie',
         title: data.title || data.original_title,
         year: data.release_date ? String(data.release_date).substring(0, 4) : null,
-        imdb_id: data.imdb_id
+        imdb_id: data.imdb_id // Keep imdb_id
     };
 }
 
-async function fetchShowDetailsAndEpisodes(showId) {
+async function fetchShowDetailsAndEpisodes(showId) { // Keep this
     const showData = await makeTmdbRequest(`/tv/${showId}`);
     if (!showData) return null;
 
@@ -95,37 +97,125 @@ async function fetchShowDetailsAndEpisodes(showId) {
         seasons: []
     };
 
-    console.log(`  Fetching seasons for TV Show: ${showDetails.title} (ID: ${showId})`);
+    // console.log(`  Fetching seasons for TV Show: ${showDetails.title} (ID: ${showId})`); // Reduced verbosity
     for (const season of showData.seasons) {
-        // Skip "Specials" (season_number 0) as they often cause issues or have no standard content
-        if (season.season_number === 0) continue;
+        if (season.season_number === 0) continue; 
 
-        console.log(`    Fetching episodes for Season ${season.season_number} of ${showDetails.title}`);
+        // console.log(`    Fetching episodes for Season ${season.season_number} of ${showDetails.title}`); // Reduced verbosity
         const seasonData = await makeTmdbRequest(`/tv/${showId}/season/${season.season_number}`);
-        await delay(100); // Delay between fetching each season
+        await delay(100); 
         if (seasonData && seasonData.episodes) {
             const seasonInfo = {
                 season_number: season.season_number,
                 episodes: seasonData.episodes.map(ep => ({
                     episode_number: ep.episode_number,
                     title: ep.name,
-                    tmdb_id: String(ep.id), // Episode TMDB ID, might be useful later
+                    tmdb_id: String(ep.id), 
                     air_date: ep.air_date
                 }))
             };
             showDetails.seasons.push(seasonInfo);
         } else {
-            console.log(`    Could not fetch episodes for Season ${season.season_number} of ${showDetails.title}`);
+            // console.log(`    Could not fetch episodes for Season ${season.season_number} of ${showDetails.title}`); // Reduced verbosity
         }
     }
     return showDetails;
 }
 
+// Generalized function to fetch data from various Trakt lists
+async function fetchTraktListData(endpointPath, itemType) {
+    console.log(`Fetching Trakt.tv ${itemType} list from ${endpointPath} (up to ${TRAKT_MAX_PAGES_PER_LIST} pages, ${TRAKT_ITEMS_PER_PAGE_LIMIT} items/page)...`);
+    let allFetchedItems = [];
+
+    for (let page = 1; page <= TRAKT_MAX_PAGES_PER_LIST; page++) {
+        console.log(`  Fetching page ${page} for ${endpointPath}...`);
+        try {
+            const response = await axios.get(`${TRAKT_API_URL}${endpointPath}`, {
+                params: {
+                    page: page,
+                    limit: TRAKT_ITEMS_PER_PAGE_LIMIT,
+                    extended: 'ids'
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'trakt-api-key': TRAKT_CLIENT_ID,
+                    'trakt-api-version': TRAKT_API_VERSION
+                },
+                timeout: 20000
+            });
+
+            if (response.data && Array.isArray(response.data)) {
+                if (response.data.length === 0) {
+                    console.log(`    Page ${page} for ${endpointPath} returned no items. Stopping pagination for this list.`);
+                    break; 
+                }
+
+                // Diagnostic log for movie endpoints
+                if (itemType === 'movie') {
+                    console.log(`    RAW DATA (Page ${page}, ${endpointPath}): ${response.data.length} items received. First item raw:`, JSON.stringify(response.data[0], null, 2));
+                }
+
+                const itemsFromPage = response.data.map(item => {
+                    let sourceItem;
+                    if (itemType === 'show') {
+                        sourceItem = item.show;
+                    } else { // itemType === 'movie'
+                        // Handle potential structures for movie items from Trakt
+                        if (item.movie) { // e.g., /movies/trending seems to have item.movie
+                            sourceItem = item.movie;
+                        } else { // e.g., /movies/popular previously seemed to have item as the movie object itself
+                            sourceItem = item;
+                        }
+                    }
+                    
+                    if (!sourceItem || !sourceItem.ids || !sourceItem.ids.tmdb) {
+                         if (itemType === 'movie' && (page === 1)) { 
+                            // console.log(`    DIAGNOSTIC (Movie Filter): Item filtered out. Raw item:`, JSON.stringify(item, null, 2), `Reason: Missing sourceItem, sourceItem.ids, or sourceItem.ids.tmdb. SourceItem was:`, JSON.stringify(sourceItem, null, 2));
+                        }
+                        return null;
+                    }
+                    return {
+                        title: sourceItem.title,
+                        year: sourceItem.year,
+                        tmdbId: String(sourceItem.ids.tmdb),
+                        imdbId: sourceItem.ids.imdb ? String(sourceItem.ids.imdb) : null,
+                        type: itemType === 'show' ? 'tv' : 'movie'
+                    };
+                }).filter(item => item && item.tmdbId);
+
+                allFetchedItems.push(...itemsFromPage);
+                console.log(`    Fetched ${itemsFromPage.length} valid items from page ${page} for ${endpointPath}.`);
+                
+                // If fewer items than limit are returned, it's likely the last page
+                if (response.data.length < TRAKT_ITEMS_PER_PAGE_LIMIT) {
+                    console.log(`    Page ${page} for ${endpointPath} returned fewer items than limit. Assuming last page for this list.`);
+                    break;
+                }
+
+            } else {
+                console.error(`  No data or unexpected format received from Trakt.tv (Page ${page}, ${endpointPath}).`);
+                // Optionally break or continue based on desired error handling for a single page failure
+                break; 
+            }
+        } catch (error) {
+            const errorMessage = error.response ? `${error.message} (Status: ${error.response.status} - ${error.response.data ? JSON.stringify(error.response.data) : ''})` : error.message;
+            console.error(`  Error fetching from Trakt.tv (Page ${page}, ${endpointPath}): ${errorMessage}`);
+            // If one page fails, we might want to stop trying for this list
+            break; 
+        }
+        if (page < TRAKT_MAX_PAGES_PER_LIST) {
+             await delay(500); // Brief delay between fetching pages of the same list
+        }
+    }
+    console.log(`Successfully fetched a total of ${allFetchedItems.length} ${itemType}s with TMDB IDs from Trakt.tv endpoint ${endpointPath} over ${TRAKT_MAX_PAGES_PER_LIST} page(s).`);
+    return allFetchedItems;
+}
+
 async function main() {
-    console.log("Starting TMDB data fetch...");
-    const allMedia = []; // This will store NEWLY fetched items in this run
+    console.log("Starting TMDB data fetch (Source: Trakt.tv lists)...");
+    // const allNewMedia = []; // This will be replaced by direct additions to masterData
     let existingMedia = [];
-    const processedIds = new Set(); // To avoid duplicates and items already in the master list
+    const processedTmdbIds = new Set(); // Keeps track of TMDB IDs already in masterData or processed in this run
 
     try {
         const fileContent = await fs.readFile(OUTPUT_FILE, 'utf8');
@@ -133,61 +223,99 @@ async function main() {
             existingMedia = JSON.parse(fileContent);
             for (const mediaItem of existingMedia) {
                 if (mediaItem && mediaItem.tmdbId) {
-                    processedIds.add(String(mediaItem.tmdbId));
+                    processedTmdbIds.add(String(mediaItem.tmdbId));
                 }
             }
-            console.log(`Loaded ${existingMedia.length} existing media items from ${OUTPUT_FILE}. ${processedIds.size} unique IDs pre-processed.`);
+            console.log(`Loaded ${existingMedia.length} existing media items. ${processedTmdbIds.size} unique TMDB IDs pre-processed.`);
         }
     } catch (error) {
-        if (error.code === 'ENOENT') {
-            console.log(`${OUTPUT_FILE} not found. Will create a new one.`);
-        } else {
-            console.error(`Error reading or parsing ${OUTPUT_FILE}: ${error.message}. Starting with an empty list of existing media.`);
-        }
-        existingMedia = []; // Ensure it's empty on error or if file not found
+        if (error.code === 'ENOENT') console.log(`${OUTPUT_FILE} not found. Will create a new one if items are added.`);
+        else console.error(`Error reading ${OUTPUT_FILE}: ${error.message}. Starting fresh.`);
+        existingMedia = [];
     }
 
-    const categories = [
-        // Popular and Trending movies/shows removed as per request
-        { type: 'tv', endpoint: '/tv/top_rated', fetchFunction: fetchShowDetailsAndEpisodes, label: "Top Rated TV Shows", minVoteCount: 500 }
+    let masterData = [...existingMedia]; // This will be the live list, updated and saved periodically
+    let totalTmdbDetailsFetchedThisRun = 0; // Counts TMDB detail fetches in this run
+    let itemsAppendedToMasterFileThisRun = 0; // Counts items actually added to masterData and thus to the file this run
+
+    const traktEndpointsToFetch = [
+        { path: '/shows/trending', type: 'show', label: 'Trending Shows' },
+        { path: '/shows/popular', type: 'show', label: 'Popular Shows' },
+        { path: '/shows/streaming', type: 'show', label: 'Streaming Shows' },
+        { path: '/movies/trending', type: 'movie', label: 'Trending Movies' },
+        { path: '/movies/popular', type: 'movie', label: 'Popular Movies' },
+        { path: '/movies/streaming', type: 'movie', label: 'Streaming Movies' }
     ];
 
-    for (const category of categories) {
-        console.log(`Fetching ${category.label}...`);
-        const items = await fetchPaginatedTmdbData(category.endpoint, MAX_ITEMS_PER_CATEGORY);
-        let count = 0;
-        for (const item of items) {
-            if (processedIds.has(String(item.id))) {
-                // console.log(`  Skipping already processed ID: ${item.id} (${item.title || item.name})`);
-                continue;
-            }
+    for (const endpoint of traktEndpointsToFetch) {
+        console.log(`\n--- Processing Trakt List: ${endpoint.label} ---`);
+        const traktItems = await fetchTraktListData(endpoint.path, endpoint.type);
+        let itemsAddedFromThisListToFile = 0;
+        let itemsDetailedFromThisList = 0;
 
-            // Check for minimum vote count if specified for the category
-            if (category.minVoteCount && item.vote_count < category.minVoteCount) {
-                // console.log(`  Skipping ${item.name || item.title} due to low vote count: ${item.vote_count} (needed ${category.minVoteCount})`);
-                continue;
-            }
+        if (traktItems.length > 0) {
+            for (const traktItem of traktItems) {
+                if (!traktItem.tmdbId) continue;
+                
+                // Check if we already have full details for this TMDB ID (either from file or this run)
+                if (processedTmdbIds.has(traktItem.tmdbId)) {
+                    // console.log(`  Skipping "${traktItem.title}" (TMDB ID: ${traktItem.tmdbId}) - already processed or in master list.`);
+                    continue;
+                }
 
-            const details = await category.fetchFunction(item.id);
-            if (details) {
-                allMedia.push(details); // Add new item to allMedia
-                processedIds.add(String(details.tmdbId)); // Add to processedIds for this run to prevent re-adding if somehow duplicated in API results
-                count++;
-                console.log(`    Processed ${category.type} #${count}: ${details.title} (${details.year})`);
+                console.log(`  Fetching TMDB details for "${traktItem.title}" (Type: ${traktItem.type}, TMDB ID: ${traktItem.tmdbId}) from Trakt list "${endpoint.label}"`);
+                let details = null;
+                if (traktItem.type === 'tv') {
+                    details = await fetchShowDetailsAndEpisodes(traktItem.tmdbId);
+                } else if (traktItem.type === 'movie') {
+                    details = await fetchMovieDetails(traktItem.tmdbId);
+                }
+                totalTmdbDetailsFetchedThisRun++; // Count each attempt to fetch details
+
+                if (details) {
+                    itemsDetailedFromThisList++;
+                    if (!details.imdb_id && traktItem.imdbId) {
+                        details.imdb_id = traktItem.imdbId;
+                        console.log(`    Used IMDb ID from Trakt (${traktItem.imdbId}) for "${details.title}".`);
+                    }
+                    
+                    // This check is slightly redundant if processedTmdbIds is managed perfectly,
+                    // but good as a final safeguard before modifying masterData.
+                    if (!processedTmdbIds.has(details.tmdbId)) {
+                        masterData.push(details);
+                        processedTmdbIds.add(details.tmdbId); // Ensure this ID is marked as processed
+                        itemsAddedFromThisListToFile++;
+                        itemsAppendedToMasterFileThisRun++;
+                    }
+                    console.log(`    Processed from "${endpoint.label}": ${details.title} (${details.year || 'N/A'})`);
+                } else {
+                    console.log(`    Could not fetch TMDB details for "${traktItem.title}" (TMDB ID: ${traktItem.tmdbId})`);
+                }
+                await delay(350);
             }
-            await delay(300); // Delay between fetching full details for each item
+            console.log(`  Fetched TMDB details for ${itemsDetailedFromThisList} items from Trakt list "${endpoint.label}".`);
+            if (itemsAddedFromThisListToFile > 0) {
+                try {
+                    await fs.writeFile(OUTPUT_FILE, JSON.stringify(masterData, null, 2));
+                    console.log(`  SUCCESS: Saved ${itemsAddedFromThisListToFile} new item(s) to master list after "${endpoint.label}". List total: ${masterData.length}.`);
+                } catch (error) {
+                    console.error(`  ERROR writing to ${OUTPUT_FILE} after "${endpoint.label}": ${error.message}`);
+                }
+            } else {
+                console.log(`  No new items were added to the master list from "${endpoint.label}".`);
+            }
         }
-        console.log(`Fetched ${count} new items from ${category.label}. Total media items: ${allMedia.length}`);
     }
 
-    try {
-        const combinedMedia = [...existingMedia, ...allMedia]; // Combine existing list with newly fetched items
-        await fs.writeFile(OUTPUT_FILE, JSON.stringify(combinedMedia, null, 2));
-        console.log(`Added ${allMedia.length} new media items. Successfully wrote ${combinedMedia.length} total media items to ${OUTPUT_FILE}`);
-    } catch (error) {
-        console.error(`Error writing to ${OUTPUT_FILE}: ${error.message}`);
+    console.log(`\n--- Run Summary ---`);
+    console.log(`Total TMDB detail fetch attempts this run: ${totalTmdbDetailsFetchedThisRun}`);
+    console.log(`Total new items appended to the master list this run: ${itemsAppendedToMasterFileThisRun}`);
+    if (masterData.length === 0 && itemsAppendedToMasterFileThisRun === 0 && existingMedia.length === 0) {
+         console.log(`No items were processed and the master list remains empty or was not created.`);
+    } else {
+        console.log(`Master list now contains ${masterData.length} items.`);
     }
-    console.log("TMDB data fetch completed.");
+    console.log("TMDB data fetch (from Trakt.tv lists) completed.");
 }
 
-main();
+main(); // Keep main invocation

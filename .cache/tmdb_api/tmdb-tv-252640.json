@@ -1,0 +1,128 @@
+{
+  "adult": false,
+  "backdrop_path": "/1SLimeCtDZhk9CCKj4qr435yvPT.jpg",
+  "created_by": [
+    {
+      "id": 2428541,
+      "credit_id": "68058166059fbcecf6aaa9e8",
+      "name": "Kennedy Xu",
+      "original_name": "Kennedy Xu",
+      "gender": 0,
+      "profile_path": null
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2025-05-18",
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://v.youku.com/v_show/id_XNjI4Njg5ODgzNg==.html",
+  "id": 252640,
+  "in_production": true,
+  "languages": [
+    "zh"
+  ],
+  "last_air_date": "2025-05-25",
+  "last_episode_to_air": {
+    "id": 6229756,
+    "name": "Episode 18",
+    "overview": "",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-25",
+    "episode_number": 18,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 45,
+    "season_number": 1,
+    "show_id": 252640,
+    "still_path": "/zJcwOkhFnAiCGyHa57vtATOZzi9.jpg"
+  },
+  "name": "Legend of Zang Hai",
+  "next_episode_to_air": {
+    "id": 6229757,
+    "name": "Episode 19",
+    "overview": "",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-26",
+    "episode_number": 19,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 45,
+    "season_number": 1,
+    "show_id": 252640,
+    "still_path": "/mJflRaC1OnjR1YShv6FD3pCopcE.jpg"
+  },
+  "networks": [
+    {
+      "id": 521,
+      "logo_path": "/2aXk02xBwG2Nhu4lftabfqSpwY3.png",
+      "name": "CCTV-8",
+      "origin_country": "CN"
+    },
+    {
+      "id": 1419,
+      "logo_path": "/w2TeR3fvPZ9a617tNIF1oOfyPtk.png",
+      "name": "Youku",
+      "origin_country": "CN"
+    }
+  ],
+  "number_of_episodes": 40,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "CN"
+  ],
+  "original_language": "zh",
+  "original_name": "藏海传",
+  "overview": "\"Legend of Zang Hai\" follows the son of Imperial Astronomer Kuai Duo. Consumed by vengeance, he spends a decade honing his skills. Assuming the name Zang Hai, he ventures into the capital to uncover the truth, avenge his family, and restore justice.",
+  "popularity": 41.5503,
+  "poster_path": "/6Nn2qwv2GrQ1cHkrgwCeSdEbbw8.jpg",
+  "production_companies": [
+    {
+      "id": 38617,
+      "logo_path": null,
+      "name": "Quantum Entertainment",
+      "origin_country": ""
+    },
+    {
+      "id": 48460,
+      "logo_path": "/7m3BMwdstKRqw7qg5vSYW2S0HrR.png",
+      "name": "Youku",
+      "origin_country": "CN"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CN",
+      "name": "China"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2025-05-18",
+      "episode_count": 40,
+      "id": 389942,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/2rDqR6f4WBJiCFJ1CQ8kUU2THMG.jpg",
+      "season_number": 1,
+      "vote_average": 10
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "Mandarin",
+      "iso_639_1": "zh",
+      "name": "普通话"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "",
+  "type": "Scripted",
+  "vote_average": 8.2,
+  "vote_count": 5
+}

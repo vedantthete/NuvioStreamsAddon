@@ -1,0 +1,122 @@
+{
+  "adult": false,
+  "backdrop_path": "/8o7Sc9wMvZB2ZiKcR7JZ4l19xgZ.jpg",
+  "created_by": [
+    {
+      "id": 81200,
+      "credit_id": "661fd89a6a300b014b326185",
+      "name": "Conan O'Brien",
+      "original_name": "Conan O'Brien",
+      "gender": 2,
+      "profile_path": "/deRbViPut0t80miscBpP2DhBJU5.jpg"
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2024-04-18",
+  "genres": [
+    {
+      "id": 99,
+      "name": "Documentary"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "https://play.max.com/show/64e28eee-b3cc-4e08-b071-5a795b911dd2",
+  "id": 226698,
+  "in_production": true,
+  "languages": [
+    "en",
+    "no"
+  ],
+  "last_air_date": "2025-05-15",
+  "last_episode_to_air": {
+    "id": 6141980,
+    "name": "Austria",
+    "overview": "In Austria, Conan gifts merchandise to a loyal listener, sings with a local choir, and assists an immigrant fan with his citizenship application.",
+    "vote_average": 9,
+    "vote_count": 1,
+    "air_date": "2025-05-22",
+    "episode_number": 3,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 43,
+    "season_number": 2,
+    "show_id": 226698,
+    "still_path": "/1i66yNIUk7KP1r0o4hge03iTdOs.jpg"
+  },
+  "name": "Conan O'Brien Must Go",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 6783,
+      "logo_path": "/rAb4M1LjGpWASxpk6Va791A7Nkw.png",
+      "name": "Max",
+      "origin_country": ""
+    }
+  ],
+  "number_of_episodes": 7,
+  "number_of_seasons": 2,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "Conan O'Brien Must Go",
+  "overview": "Conan O'Brien visits new friends he met through his podcast, \"Conan O'Brien Needs a Fan,\" where he dives deep with listeners from across the country and the world.",
+  "popularity": 6.7986,
+  "poster_path": "/x0Rt2LBQ1nuRq51lKyvETERU5zs.jpg",
+  "production_companies": [
+    {
+      "id": 65126,
+      "logo_path": null,
+      "name": "Conaco",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2024-04-18",
+      "episode_count": 4,
+      "id": 341297,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/xtmomdVX0FRPrBbdXgLTxFqf5SI.jpg",
+      "season_number": 1,
+      "vote_average": 9.2
+    },
+    {
+      "air_date": "2025-05-08",
+      "episode_count": 3,
+      "id": 452278,
+      "name": "Season 2",
+      "overview": "",
+      "poster_path": "/x0Rt2LBQ1nuRq51lKyvETERU5zs.jpg",
+      "season_number": 2,
+      "vote_average": 8.3
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Norwegian",
+      "iso_639_1": "no",
+      "name": "Norsk"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "Boldly going where no one asked him to.",
+  "type": "Documentary",
+  "vote_average": 8.1,
+  "vote_count": 25
+}

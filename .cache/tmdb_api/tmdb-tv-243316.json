@@ -1,0 +1,134 @@
+{
+  "adult": false,
+  "backdrop_path": "/bZ0t3ySdAYUl2GtsvKzFyBp7rIL.jpg",
+  "created_by": [
+    {
+      "id": 1237538,
+      "credit_id": "659e25739590e3014ac0569a",
+      "name": "Tracey Wigfield",
+      "original_name": "Tracey Wigfield",
+      "gender": 1,
+      "profile_path": "/fy99MUs2jiy5gXQpRnlu8Q5NJZ2.jpg"
+    },
+    {
+      "id": 56323,
+      "credit_id": "659e2561d6590b025cb261cf",
+      "name": "Tina Fey",
+      "original_name": "Tina Fey",
+      "gender": 1,
+      "profile_path": "/yPTAi1iucXf85UpiFPtyiTSM6do.jpg"
+    },
+    {
+      "id": 1532801,
+      "credit_id": "659e256d9bcd0f00ee83136d",
+      "name": "Lang Fisher",
+      "original_name": "Lang Fisher",
+      "gender": 1,
+      "profile_path": null
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2025-05-01",
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81750702",
+  "id": 243316,
+  "in_production": true,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2025-05-01",
+  "last_episode_to_air": {
+    "id": 6062811,
+    "name": "Fun",
+    "overview": "A twist of fate forces Anne and Ginny to confront their complicated feelings about one another. Jack and Kate's standoff comes to a head.",
+    "vote_average": 3.6,
+    "vote_count": 5,
+    "air_date": "2025-05-01",
+    "episode_number": 8,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 36,
+    "season_number": 1,
+    "show_id": 243316,
+    "still_path": "/bW3rJbhxmKINBBLRXXYtCsLNQ03.jpg"
+  },
+  "name": "The Four Seasons",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 213,
+      "logo_path": "/wwemzKWzjKYJFfCeiB57q3r4Bcm.png",
+      "name": "Netflix",
+      "origin_country": ""
+    }
+  ],
+  "number_of_episodes": 8,
+  "number_of_seasons": 2,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "The Four Seasons",
+  "overview": "The decades-long friendship between three married couples is tested when one divorces, complicating their tradition of quarterly weekend getaways.",
+  "popularity": 9.3817,
+  "poster_path": "/w09XeYl096pwES8riRMZwEA9rnh.jpg",
+  "production_companies": [
+    {
+      "id": 26727,
+      "logo_path": "/jeTxdjXhzgKZyLr3l9MllkTn3fy.png",
+      "name": "Universal Television",
+      "origin_country": "US"
+    },
+    {
+      "id": 26402,
+      "logo_path": "/1BFbFgEhD1tJShFTYPNt87q99rD.png",
+      "name": "Little Stranger",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2025-05-01",
+      "episode_count": 8,
+      "id": 373681,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/w09XeYl096pwES8riRMZwEA9rnh.jpg",
+      "season_number": 1,
+      "vote_average": 3.9
+    },
+    {
+      "air_date": null,
+      "episode_count": 0,
+      "id": 456605,
+      "name": "Season 2",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 2,
+      "vote_average": 0
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "Three couples. Four trips. A lot to unpack.",
+  "type": "Scripted",
+  "vote_average": 6.727,
+  "vote_count": 55
+}

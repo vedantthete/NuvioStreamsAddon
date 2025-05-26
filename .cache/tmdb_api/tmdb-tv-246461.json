@@ -1,0 +1,148 @@
+{
+  "adult": false,
+  "backdrop_path": "/uZf1hJBTwcOVX0GSAm7BRuWEuEm.jpg",
+  "created_by": [
+    {
+      "id": 81218,
+      "credit_id": "65ce4606a275020186969ef6",
+      "name": "Brendan Foley",
+      "original_name": "Brendan Foley",
+      "gender": 2,
+      "profile_path": null
+    }
+  ],
+  "episode_run_time": [
+    42
+  ],
+  "first_air_date": "2025-04-16",
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    }
+  ],
+  "homepage": "https://www.cwtv.com/shows/sherlock-and-daughter/",
+  "id": 246461,
+  "in_production": true,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2025-05-07",
+  "last_episode_to_air": {
+    "id": 5756033,
+    "name": "Doubting Thomas",
+    "overview": "Sherlock searches for the missing jewels and their connection to the kidnapping of his friends; he turns to the insurance investigator, Birtwistle, for his assistance.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-21",
+    "episode_number": 5,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 42,
+    "season_number": 1,
+    "show_id": 246461,
+    "still_path": "/56aEPAAnNMW0SDRTO0AUIuY39ch.jpg"
+  },
+  "name": "Sherlock & Daughter",
+  "next_episode_to_air": {
+    "id": 5756034,
+    "name": "Sound Connections",
+    "overview": "As Sherlock and Amelia identify the villains surrounding them on all sides, Holmes repays a favor to his oldest enemy, arranging a meeting between Professor Moriarty and the young Australian man who has suddenly become very close to Amelia.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-28",
+    "episode_number": 6,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 43,
+    "season_number": 1,
+    "show_id": 246461,
+    "still_path": "/LsPHy22ABwa9TpAZvF0x9WKxR.jpg"
+  },
+  "networks": [
+    {
+      "id": 71,
+      "logo_path": "/hEpcdJ4O6eitG9ADSnDXNUrlovS.png",
+      "name": "The CW",
+      "origin_country": "US"
+    }
+  ],
+  "number_of_episodes": 8,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "Sherlock & Daughter",
+  "overview": "Sherlock Holmes faces a sinister case risking friends' lives. American Amelia joins, seeking her father after her mother's murder. Despite differences, they solve a conspiracy and her mother's case.",
+  "popularity": 40.1598,
+  "poster_path": "/ifh5NNMzUEqErsHmeKjjGblbOav.jpg",
+  "production_companies": [
+    {
+      "id": 220904,
+      "logo_path": "/lAIaDFdQERkG1P2t1D5xTAmf67H.png",
+      "name": "Escapade Media",
+      "origin_country": "AU"
+    },
+    {
+      "id": 200638,
+      "logo_path": "/nyuEFLftC58EtQTPnpfDbRWZbv2.png",
+      "name": "StoryFirst Media",
+      "origin_country": "US"
+    },
+    {
+      "id": 115012,
+      "logo_path": "/rMMWaTIfs7Yq0ZFIKaiNLpoJaqd.png",
+      "name": "Starlings Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 221039,
+      "logo_path": null,
+      "name": "Albion Television",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "AU",
+      "name": "Australia"
+    },
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2025-04-16",
+      "episode_count": 8,
+      "id": 379252,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/ifh5NNMzUEqErsHmeKjjGblbOav.jpg",
+      "season_number": 1,
+      "vote_average": 8
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "",
+  "type": "Scripted",
+  "vote_average": 6.462,
+  "vote_count": 13
+}

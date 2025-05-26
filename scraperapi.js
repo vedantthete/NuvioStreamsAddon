@@ -169,7 +169,7 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId, scraperApiKey) => {
             else { console.log('No TMDB data'); console.timeEnd('getShowboxUrlFromTmdbInfo_total'); return null; }
         } catch (error) { console.log('Error fetching TMDB', error); console.timeEnd('getShowboxUrlFromTmdbInfo_total'); return null; }
     }
-     if (!tmdbData) {
+    if (!tmdbData) {
         console.log(`  Could not fetch TMDB data for ${tmdbType}/${tmdbId}. Cannot proceed to ShowBox search.`);
         console.timeEnd('getShowboxUrlFromTmdbInfo_total');
         return null;
