@@ -1,0 +1,107 @@
+{
+  "adult": false,
+  "backdrop_path": "/zGT6zikFjC5wRROXbPIipKahZn8.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    }
+  ],
+  "homepage": "",
+  "id": 850439,
+  "imdb_id": "tt15010692",
+  "origin_country": [
+    "GB"
+  ],
+  "original_language": "en",
+  "original_title": "The Damned",
+  "overview": "A 19th-century widow is tasked with making an impossible choice when, during an especially cruel winter, a ship sinks off the coast of her impoverished Icelandic fishing village. Any attempt to rescue survivors risks further depleting the starving villagers’ supplies.",
+  "popularity": 1.9747,
+  "poster_path": "/fAXDQny8kEquc1BImiQHhYMGSsW.jpg",
+  "production_companies": [
+    {
+      "id": 114130,
+      "logo_path": "/4qWbeq1VqAH1RSCBFvCNkkY5Qi8.png",
+      "name": "Ley Line Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 129815,
+      "logo_path": "/qbCmnVTQEuFqrVkbxn3i9P7Jrcw.png",
+      "name": "Wild Atlantic Pictures",
+      "origin_country": "IE"
+    },
+    {
+      "id": 1898,
+      "logo_path": "/8ix6SGlJiyuUDxLBtY8E0PY2G7w.png",
+      "name": "Fís Éireann/Screen Ireland",
+      "origin_country": "IE"
+    },
+    {
+      "id": 96298,
+      "logo_path": "/nqVjp9VNzrdubGpleGzASt6fasy.png",
+      "name": "Join Motion Pictures",
+      "origin_country": "IS"
+    },
+    {
+      "id": 53509,
+      "logo_path": "/xmJMAss7BDsQPvODjYkDQKiNhUX.png",
+      "name": "Wrong Men",
+      "origin_country": "BE"
+    },
+    {
+      "id": 20277,
+      "logo_path": "/aomeUwZLIBjGXHfuZq7HTVk7UNb.png",
+      "name": "Protagonist Pictures",
+      "origin_country": "GB"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "IE",
+      "name": "Ireland"
+    },
+    {
+      "iso_3166_1": "GB",
+      "name": "United Kingdom"
+    },
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    },
+    {
+      "iso_3166_1": "IS",
+      "name": "Iceland"
+    },
+    {
+      "iso_3166_1": "BE",
+      "name": "Belgium"
+    }
+  ],
+  "release_date": "2025-01-03",
+  "revenue": 1352553,
+  "runtime": 89,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Damned",
+  "video": false,
+  "vote_average": 6,
+  "vote_count": 66
+}
