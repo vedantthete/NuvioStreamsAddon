@@ -1,0 +1,118 @@
+{
+  "adult": false,
+  "backdrop_path": "/clIn3tF321TcsajGGNoWMGcz0ii.jpg",
+  "created_by": [
+    {
+      "id": 1325729,
+      "credit_id": "65ef767a0e597b01480325c6",
+      "name": "Pablo Alén",
+      "original_name": "Pablo Alén",
+      "gender": 2,
+      "profile_path": null
+    },
+    {
+      "id": 1325730,
+      "credit_id": "65ef7684bb10570187585707",
+      "name": "Breixo Corral",
+      "original_name": "Breixo Corral",
+      "gender": 2,
+      "profile_path": null
+    },
+    {
+      "id": 1263628,
+      "credit_id": "65ef7671e19de901860acbf6",
+      "name": "Carlos Montero",
+      "original_name": "Carlos Montero",
+      "gender": 2,
+      "profile_path": "/frBHENPeEk10a9cs7hL1emISyCB.jpg"
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2025-05-16",
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81327488",
+  "id": 248716,
+  "in_production": true,
+  "languages": [
+    "es"
+  ],
+  "last_air_date": "2025-05-16",
+  "last_episode_to_air": {
+    "id": 5206431,
+    "name": "Decide",
+    "overview": "As the paper receives an offer it can't refuse, the truth of a past crime is revealed, leaving the future of Federico's legacy hanging in the balance.",
+    "vote_average": 6,
+    "vote_count": 1,
+    "air_date": "2025-05-16",
+    "episode_number": 8,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 48,
+    "season_number": 1,
+    "show_id": 248716,
+    "still_path": "/qvuSTIAws1mXB7s4MPStU0lRsOG.jpg"
+  },
+  "name": "Rotten Legacy",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 213,
+      "logo_path": "/wwemzKWzjKYJFfCeiB57q3r4Bcm.png",
+      "name": "Netflix",
+      "origin_country": ""
+    }
+  ],
+  "number_of_episodes": 8,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "ES"
+  ],
+  "original_language": "es",
+  "original_name": "Legado",
+  "overview": "After a grave illness, a media mogul discovers his children's tactics threaten the empire he carefully built — and he'll do whatever it takes to save it.",
+  "popularity": 13.1017,
+  "poster_path": "/cbfVpoQDQEtaQ7z3H43waHvX2o3.jpg",
+  "production_companies": [
+    {
+      "id": 203540,
+      "logo_path": "/5jFkttGQ1UCJDGYYMSY8jfwu6BF.png",
+      "name": "El Desorden Crea",
+      "origin_country": "ES"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "ES",
+      "name": "Spain"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2025-05-16",
+      "episode_count": 8,
+      "id": 383166,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/ukH0h0CMQj09j1oGuA8uEyPTYuo.jpg",
+      "season_number": 1,
+      "vote_average": 6
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "",
+  "type": "Scripted",
+  "vote_average": 6.6,
+  "vote_count": 8
+}

@@ -1,0 +1,113 @@
+{
+  "adult": false,
+  "backdrop_path": "/fJZW6Xri0AYa8IK5TlWhcCGB7sk.jpg",
+  "created_by": [],
+  "episode_run_time": [],
+  "first_air_date": "2025-05-31",
+  "genres": [
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 10759,
+      "name": "Action & Adventure"
+    }
+  ],
+  "homepage": "https://www.primevideo.com/detail/0TYT0VL3JOSCA9K3JDK3U8OHKY/ref=atv_sso_std",
+  "id": 231280,
+  "in_production": true,
+  "languages": [
+    "ko"
+  ],
+  "last_air_date": null,
+  "last_episode_to_air": null,
+  "name": "Good Boy",
+  "next_episode_to_air": {
+    "id": 4600250,
+    "name": "Episode 1",
+    "overview": "",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-31",
+    "episode_number": 1,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": null,
+    "season_number": 1,
+    "show_id": 231280,
+    "still_path": null
+  },
+  "networks": [
+    {
+      "id": 885,
+      "logo_path": "/44I4aVlasm8Blb8WPGXTkMYuZJF.png",
+      "name": "JTBC",
+      "origin_country": "KR"
+    }
+  ],
+  "number_of_episodes": 16,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "KR"
+  ],
+  "original_language": "ko",
+  "original_name": "굿보이",
+  "overview": "Olympic medalists join the police force through a special recruitment program, trading medals for badges as they tackle violent crimes and injustices with their athletic skills.",
+  "popularity": 7.081,
+  "poster_path": "/mTWbD5XzP5WzcJHVlvYd6Hx1waS.jpg",
+  "production_companies": [
+    {
+      "id": 86981,
+      "logo_path": "/8FwCT7KohE031xFLBeRMZlbuzSr.png",
+      "name": "SLL",
+      "origin_country": "KR"
+    },
+    {
+      "id": 106996,
+      "logo_path": "/stmGVs6UmgfqE9BYNB5lXjy5gQm.png",
+      "name": "Studio & New",
+      "origin_country": "KR"
+    },
+    {
+      "id": 172185,
+      "logo_path": "/u89w62EzN9WxzSxFEfHaZ09LXc7.png",
+      "name": "DramaHouse",
+      "origin_country": "KR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "KR",
+      "name": "South Korea"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2025-05-31",
+      "episode_count": 16,
+      "id": 350002,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/8FNRww84pPWCWByAzsUJjtm60HB.jpg",
+      "season_number": 1,
+      "vote_average": 0
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "Korean",
+      "iso_639_1": "ko",
+      "name": "한국어/조선말"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "",
+  "type": "Scripted",
+  "vote_average": 0,
+  "vote_count": 0
+}

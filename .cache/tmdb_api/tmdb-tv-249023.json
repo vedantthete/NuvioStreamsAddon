@@ -1,0 +1,132 @@
+{
+  "adult": false,
+  "backdrop_path": "/w3mBUviE0R9jYHoPLP5IP8vAbJ8.jpg",
+  "created_by": [
+    {
+      "id": 2971702,
+      "credit_id": "65f309ef6dea3a017c7c8fae",
+      "name": "Stacey Aglok MacDonald",
+      "original_name": "Stacey Aglok MacDonald",
+      "gender": 0,
+      "profile_path": null
+    },
+    {
+      "id": 1357328,
+      "credit_id": "65f309f9c49048018619f819",
+      "name": "Alethea Arnaquq-Baril",
+      "original_name": "Alethea Arnaquq-Baril",
+      "gender": 1,
+      "profile_path": "/2qnfxx6JN0XEymM6sqLKicUs6on.jpg"
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2025-01-07",
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    }
+  ],
+  "homepage": "https://gem.cbc.ca/north-of-north",
+  "id": 249023,
+  "in_production": true,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2025-02-18",
+  "last_episode_to_air": {
+    "id": 5791432,
+    "name": "Bad Influences",
+    "overview": "Siaja and Helen put the final touches on their pitch for the polar research station, when Helen is pulled away. Siaja uses this opportunity to view the only available apartment in town with Kuuk’s help.",
+    "vote_average": 10,
+    "vote_count": 1,
+    "air_date": "2025-02-18",
+    "episode_number": 8,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 25,
+    "season_number": 1,
+    "show_id": 249023,
+    "still_path": "/A7iysMH99eaN0I9gK84WTMdTnib.jpg"
+  },
+  "name": "North of North",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 23,
+      "logo_path": "/cw5WW6cc9UANam4A6o1BDua9njN.png",
+      "name": "CBC Television",
+      "origin_country": "CA"
+    },
+    {
+      "id": 477,
+      "logo_path": "/qqTeEEAdCEfvYlTFXll8uu8Ld8K.png",
+      "name": "Aboriginal Peoples Television Network",
+      "origin_country": "CA"
+    }
+  ],
+  "number_of_episodes": 8,
+  "number_of_seasons": 2,
+  "origin_country": [
+    "CA"
+  ],
+  "original_language": "en",
+  "original_name": "North of North",
+  "overview": "A young Inuk woman wants to build a new future for herself after a spontaneous and extremely public exit from her marriage. It won't be easy in a small Arctic town where everybody knows your business.",
+  "popularity": 5.1227,
+  "poster_path": "/yAtcsq5ciJ6TBfGzM0b6BzVCaPA.jpg",
+  "production_companies": [
+    {
+      "id": 177664,
+      "logo_path": "/1BDguism7M4ao9N8lP1rTlxrgmL.png",
+      "name": "Red Marrow Media",
+      "origin_country": "CA"
+    },
+    {
+      "id": 88009,
+      "logo_path": null,
+      "name": "Northwood Entertainment",
+      "origin_country": "CA"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "CA",
+      "name": "Canada"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2025-01-07",
+      "episode_count": 8,
+      "id": 383646,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/yAtcsq5ciJ6TBfGzM0b6BzVCaPA.jpg",
+      "season_number": 1,
+      "vote_average": 8
+    },
+    {
+      "air_date": null,
+      "episode_count": 0,
+      "id": 454050,
+      "name": "Season 2",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 2,
+      "vote_average": 0
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "Cold town. Hot mess.",
+  "type": "Scripted",
+  "vote_average": 6.286,
+  "vote_count": 21
+}

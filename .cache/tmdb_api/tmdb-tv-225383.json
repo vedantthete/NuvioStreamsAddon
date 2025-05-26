@@ -1,0 +1,126 @@
+{
+  "adult": false,
+  "backdrop_path": "/7MuTFS9bT8p5e8gucHFM4m0E9u.jpg",
+  "created_by": [
+    {
+      "id": 1222946,
+      "credit_id": "6449e197a39d0b048124733c",
+      "name": "Amy Sherman-Palladino",
+      "original_name": "Amy Sherman-Palladino",
+      "gender": 1,
+      "profile_path": "/v8OGBnKfmnfvlPhkluiRo5fkpQM.jpg"
+    },
+    {
+      "id": 1213784,
+      "credit_id": "6449e1c1e72fe804df7eccf3",
+      "name": "Daniel Palladino",
+      "original_name": "Daniel Palladino",
+      "gender": 2,
+      "profile_path": "/qoN9uQghK3PdGGfKFvWY5AogWgG.jpg"
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2025-04-24",
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.amazon.com/gp/video/detail/B0DWLWMM8Z",
+  "id": 225383,
+  "in_production": true,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2025-04-24",
+  "last_episode_to_air": {
+    "id": 6029227,
+    "name": "The Offer",
+    "overview": "Jack makes a bold decision about a new artistic director, putting him at odds with Genevieve. Tobias’ new piece premieres, and Cheyenne dances a heartfelt solo while questioning the choices she’s made.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-04-24",
+    "episode_number": 8,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 75,
+    "season_number": 1,
+    "show_id": 225383,
+    "still_path": "/b8BIvQ8jPABYmgBLUsVmq7VSEE1.jpg"
+  },
+  "name": "Étoile",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 1024,
+      "logo_path": "/w7HfLNm9CWwRmAMU58udl2L7We7.png",
+      "name": "Prime Video",
+      "origin_country": ""
+    }
+  ],
+  "number_of_episodes": 8,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "Étoile",
+  "overview": "In an ambitious gambit to save their storied institutions, two world-renowned ballet companies in New York City and Paris swap their most talented stars. From the Executive Producers of The Marvelous Mrs. Maisel comes a bold new series celebrating the beauty, humor, and unpredictability of a life devoted to the arts, both on stage and off.",
+  "popularity": 14.2013,
+  "poster_path": "/e56elhedMQT2gJa9Hxix9IEBUoC.jpg",
+  "production_companies": [
+    {
+      "id": 210099,
+      "logo_path": "/d6HwljzlOzxJ4tXlrpRkNZaZMWL.png",
+      "name": "Amazon MGM Studios",
+      "origin_country": "US"
+    },
+    {
+      "id": 6831,
+      "logo_path": "/fWSI4EjIDEEzCNJC8OTPX9Pdbxv.png",
+      "name": "Big Indie Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 74996,
+      "logo_path": null,
+      "name": "Dorothy Parker Drank Here Productions",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2025-04-24",
+      "episode_count": 8,
+      "id": 338740,
+      "name": "Season 1",
+      "overview": "In an ambitious gambit to save their storied institutions, two world-renowned ballet companies in New York City and Paris swap their most talented stars. From the Executive Producers of The Marvelous Mrs. Maisel comes a bold new series celebrating the beauty, humor, and unpredictability of a life devoted to the arts, both on stage and off.",
+      "poster_path": "/e56elhedMQT2gJa9Hxix9IEBUoC.jpg",
+      "season_number": 1,
+      "vote_average": 0
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "The stage is set.",
+  "type": "Scripted",
+  "vote_average": 7.6,
+  "vote_count": 11
+}

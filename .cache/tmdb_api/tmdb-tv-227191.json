@@ -1,0 +1,130 @@
+{
+  "adult": false,
+  "backdrop_path": "/tJSAxxjCtbtZYMBQkfxvdgqXsz5.jpg",
+  "created_by": [
+    {
+      "id": 1024391,
+      "credit_id": "647038f113a320013385e437",
+      "name": "Yoon Jong-bin",
+      "original_name": "윤종빈",
+      "gender": 2,
+      "profile_path": "/du17CLt0uH1ixScQJl2tL5UAII3.jpg"
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2025-05-21",
+  "genres": [
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.disneyplus.com/browse/entity-b29d5852-c94c-4d05-beb9-bfd2f227fd12",
+  "id": 227191,
+  "in_production": true,
+  "languages": [
+    "ko"
+  ],
+  "last_air_date": "2025-05-21",
+  "last_episode_to_air": {
+    "id": 6139917,
+    "name": "Episode 6",
+    "overview": "The meaning behind the drawings on the puzzle pieces is uncovered.",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-21",
+    "episode_number": 6,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 58,
+    "season_number": 1,
+    "show_id": 227191,
+    "still_path": "/gqOFOzM2ezDC4VaYcUDU8EG3Td1.jpg"
+  },
+  "name": "Nine Puzzles",
+  "next_episode_to_air": {
+    "id": 6139918,
+    "name": "Episode 7",
+    "overview": "",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-05-28",
+    "episode_number": 7,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": null,
+    "season_number": 1,
+    "show_id": 227191,
+    "still_path": null
+  },
+  "networks": [
+    {
+      "id": 2739,
+      "logo_path": "/1edZOYAfoyZyZ3rklNSiUpXX30Q.png",
+      "name": "Disney+",
+      "origin_country": ""
+    }
+  ],
+  "number_of_episodes": 11,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "KR"
+  ],
+  "original_language": "ko",
+  "original_name": "나인 퍼즐",
+  "overview": "Ten years after discovering her murdered uncle, Ena and Detective Hansaem must cooperate to stop a series of similar murders - each linked by strange puzzle pieces.",
+  "popularity": 61.1466,
+  "poster_path": "/eQWEWCOg5LZLu2AihfMueiHGw1Y.jpg",
+  "production_companies": [
+    {
+      "id": 139214,
+      "logo_path": "/1aHsO2tVEdJfIBYCy0G4VpWYDY8.png",
+      "name": "Kakao Entertainment",
+      "origin_country": "KR"
+    },
+    {
+      "id": 88974,
+      "logo_path": "/yDG44v8mA0LTw32ZMYcXI4Rsnye.png",
+      "name": "Moonlight Film",
+      "origin_country": "KR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "KR",
+      "name": "South Korea"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2025-05-21",
+      "episode_count": 11,
+      "id": 342452,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/gvK1jmdaKrQ0pBOsRkBBCLYhgV2.jpg",
+      "season_number": 1,
+      "vote_average": 7.7
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "Korean",
+      "iso_639_1": "ko",
+      "name": "한국어/조선말"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "",
+  "type": "Scripted",
+  "vote_average": 6.4,
+  "vote_count": 7
+}

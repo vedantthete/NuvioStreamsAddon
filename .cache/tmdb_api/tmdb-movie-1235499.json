@@ -1,0 +1,76 @@
+{
+  "adult": false,
+  "backdrop_path": "/sfhhJmKJBidavKSnCd8ZIMFOOup.jpg",
+  "belongs_to_collection": null,
+  "budget": 2000000,
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "http://thelastshowgirl.com",
+  "id": 1235499,
+  "imdb_id": "tt31193791",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "The Last Showgirl",
+  "overview": "When the glittering Las Vegas revue she has headlined for decades announces it will soon close, a glamorous showgirl must reconcile with the decisions she’s made and the community she has built as she plans her next act.",
+  "popularity": 5.367,
+  "poster_path": "/o70dV2jjGd6TmYTMOY9b34OLzDK.jpg",
+  "production_companies": [
+    {
+      "id": 149330,
+      "logo_path": "/okZ4fCfuMAgWqHo1J6VIP8zq0BH.png",
+      "name": "Utopia",
+      "origin_country": "US"
+    },
+    {
+      "id": 168240,
+      "logo_path": "/gMs3AWkhaIOnqHjMMAv4Z7OGjKO.png",
+      "name": "Pinky Promise",
+      "origin_country": "US"
+    },
+    {
+      "id": 76629,
+      "logo_path": null,
+      "name": "Digital Ignition Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 52053,
+      "logo_path": "/grMLc37nDRnKrMsKXcrHm76boxI.png",
+      "name": "High Frequency Entertainment",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2024-12-13",
+  "revenue": 6380079,
+  "runtime": 89,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "French",
+      "iso_639_1": "fr",
+      "name": "Français"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Last Showgirl",
+  "video": false,
+  "vote_average": 6.489,
+  "vote_count": 140
+}

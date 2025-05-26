@@ -1,0 +1,124 @@
+{
+  "adult": false,
+  "backdrop_path": "/xlXNcdpqlxZqLOWBr4qNuKm8hEx.jpg",
+  "created_by": [
+    {
+      "id": 3068035,
+      "credit_id": "67b866ff7434200c2822853a",
+      "name": "Jennifer Cacicio",
+      "original_name": "Jennifer Cacicio",
+      "gender": 0,
+      "profile_path": null
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2025-03-20",
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    }
+  ],
+  "homepage": "https://www.paramountplus.com/shows/happy-face/",
+  "id": 243217,
+  "in_production": true,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2025-05-01",
+  "last_episode_to_air": {
+    "id": 5945802,
+    "name": "The Star",
+    "overview": "Melissa solves the case. Keith suffers an attack. Ben faces consequences for his actions.",
+    "vote_average": 8,
+    "vote_count": 1,
+    "air_date": "2025-05-01",
+    "episode_number": 8,
+    "episode_type": "finale",
+    "production_code": "",
+    "runtime": 55,
+    "season_number": 1,
+    "show_id": 243217,
+    "still_path": "/gGi9pkyJWbGElPqy0YFqNNN3MJN.jpg"
+  },
+  "name": "Happy Face",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 4330,
+      "logo_path": "/fi83B1oztoS47xxcemFdPMhIzK.png",
+      "name": "Paramount+",
+      "origin_country": "US"
+    }
+  ],
+  "number_of_episodes": 8,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "Happy Face",
+  "overview": "The story of Melissa Reed, daughter of Keith Jesperson, aka the Happy Face Killer. After decades of no contact, Keith forces his way back into his daughter’s life, and Melissa must find out if an innocent man is going to be put to death for a crime her father committed. In the process, she must face a reckoning of her own identity.",
+  "popularity": 15.6918,
+  "poster_path": "/sGHZrYxOU2U2JLrmYO12qGl1VK4.jpg",
+  "production_companies": [
+    {
+      "id": 1081,
+      "logo_path": "/19kn4jVvpc3sAL3YpZNb3elhSMl.png",
+      "name": "CBS Studios",
+      "origin_country": "US"
+    },
+    {
+      "id": 68995,
+      "logo_path": null,
+      "name": "King Size Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 216001,
+      "logo_path": "/9U01KtN9i1nQMsbU7Oys4kktRn.png",
+      "name": "iHeartPodcasts",
+      "origin_country": "US"
+    },
+    {
+      "id": 112037,
+      "logo_path": null,
+      "name": "Semi-Formal Productions",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2025-03-20",
+      "episode_count": 8,
+      "id": 373456,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/sGHZrYxOU2U2JLrmYO12qGl1VK4.jpg",
+      "season_number": 1,
+      "vote_average": 7.5
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "Melissa, you can't hide forever.",
+  "type": "Scripted",
+  "vote_average": 7.333,
+  "vote_count": 33
+}
