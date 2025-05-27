@@ -53,7 +53,10 @@ const FEBBOX_FILE_SHARE_LIST_URL = "https://www.febbox.com/file/file_share_list"
 // const SCRAPER_API_URL = 'https://api.scraperapi.com/';
 const TMDB_API_KEY = '439c478a771f35c05022f9feabcca01c';
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
-const CACHE_DIR = path.join(__dirname, '.cache');
+// Determine cache directory based on environment
+// Use /tmp/.cache when running on Vercel, otherwise use local .cache directory
+const CACHE_DIR = process.env.VERCEL ? path.join('/tmp', '.cache') : path.join(__dirname, '.cache');
+console.log(`Using cache directory: ${CACHE_DIR}`);
 // MODIFICATION: Remove hardcoded SHOWBOX_PROXY_URL, will use environment variable
 // const SHOWBOX_PROXY_URL = "https://starlit-valkyrie-39f5ab.netlify.app/?destination="; 
 
