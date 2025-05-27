@@ -118,7 +118,8 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
     const cachedBestUrl = await getFromCache(searchTermKey, cacheSubDir);
     if (cachedBestUrl) {
         console.log(`  CACHE HIT for ShowBox search best match URL (${searchTerm}): ${cachedBestUrl}`);
-        return cachedBestUrl;
+        if (cachedBestUrl === 'NO_MATCH_FOUND') return { url: null, score: -1 };
+        return { url: cachedBestUrl, score: 10 }; // Assume a good score for a cached valid URL
     }
     // console.log(`  CACHE MISS for ShowBox search best match URL (${searchTerm})`);
 
@@ -129,7 +130,7 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
     if (!htmlContent) {
         console.log(`  Failed to fetch ShowBox search results for: ${searchTerm}`);
         await saveToCache(searchTermKey, 'NO_MATCH_FOUND', cacheSubDir); // Cache indication of no match
-        return null;
+        return { url: null, score: -1 };
     }
 
     const $ = cheerio.load(htmlContent);
@@ -186,13 +187,13 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
         const fullUrl = `https://www.showbox.media${bestMatchUrl}`;
         console.log(`  Found best match on ShowBox: ${fullUrl} (Score: ${highestScore})`);
         await saveToCache(searchTermKey, fullUrl, cacheSubDir); // Cache the found full URL
-        return fullUrl;
+        return { url: fullUrl, score: highestScore };
     } else {
         console.log(`  No suitable match found on ShowBox search for: ${searchTerm}`);
         // Cache the fact that no match was found to avoid re-searching for a known miss (optional, depends on how often new content appears)
         // For now, let's cache null or a specific string like "NO_MATCH_FOUND"
         await saveToCache(searchTermKey, 'NO_MATCH_FOUND', cacheSubDir); // Cache indication of no match
-        return null;
+        return { url: null, score: -1 };
     }
 };
 
@@ -252,7 +253,32 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId) => {
     // THIS IS A TEMPORARY SIMPLIFICATION - ShowBoxScraper instance needs to be handled properly.
     const showboxScraperInstance = new ShowBoxScraper(); // Simplified for now
 
-    const showboxUrl = await _searchAndExtractShowboxUrl(searchTerm, title, year, showboxScraperInstance);
+    // First attempt: Search with title + year
+    let searchResult = await _searchAndExtractShowboxUrl(searchTerm, title, year, showboxScraperInstance);
+    let showboxUrl = searchResult.url;
+    let matchScore = searchResult.score;
+
+    // If the first attempt is poor (no URL or low score), try searching with title only
+    // Define a low score threshold, e.g., 2. If score is below this, try without year.
+    const lowScoreThreshold = 2;
+    if (!showboxUrl || matchScore < lowScoreThreshold) {
+        console.log(`  Initial search for "${searchTerm}" yielded a poor result (URL: ${showboxUrl}, Score: ${matchScore}). Retrying search without year.`);
+        const searchTermWithoutYear = title; // Search with title only
+        const fallbackSearchResult = await _searchAndExtractShowboxUrl(searchTermWithoutYear, title, null, showboxScraperInstance);
+        
+        // Use fallback if it's better or if the initial search failed completely
+        if (fallbackSearchResult.url && fallbackSearchResult.score > matchScore) {
+            console.log(`  Fallback search for "${searchTermWithoutYear}" provided a better result (URL: ${fallbackSearchResult.url}, Score: ${fallbackSearchResult.score}).`);
+            showboxUrl = fallbackSearchResult.url;
+            matchScore = fallbackSearchResult.score; // Update score to reflect the better match
+        } else if (fallbackSearchResult.url && !showboxUrl) {
+            console.log(`  Fallback search for "${searchTermWithoutYear}" provided a result (URL: ${fallbackSearchResult.url}, Score: ${fallbackSearchResult.score}) where initial search failed.`);
+            showboxUrl = fallbackSearchResult.url;
+            matchScore = fallbackSearchResult.score;
+        } else {
+            console.log(`  Fallback search for "${searchTermWithoutYear}" did not yield a better result. Sticking with initial result (URL: ${showboxUrl}, Score: ${matchScore}).`);
+        }
+    }
 
     if (!showboxUrl) {
         console.log(`  Could not find a ShowBox URL via search for: ${title}`);
