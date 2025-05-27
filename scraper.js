@@ -4,6 +4,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs').promises;
 const path = require('path');
+const crypto = require('crypto');
 
 // MODIFICATION: Removed SCRAPER_API_BASE_URL
 
@@ -114,28 +115,90 @@ const saveToCache = async (cacheKey, content, subDir = '') => {
 // NEW FUNCTION: Search ShowBox and extract the most relevant URL
 const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaYear, showboxScraperInstance) => {
     const cacheSubDir = 'showbox_search_results';
-    const searchTermKey = searchTerm.replace(/[^a-zA-Z0-9_.-]/g, '_') + '.txt'; // .txt because it stores a URL string
+    
+    // Add a cache version to invalidate previous incorrect cached results
+    const CACHE_VERSION = "v2"; // Increment this whenever the search algorithm significantly changes
+    
+    // Create a proper hash for the cache key to avoid filename issues with special characters
+    const cacheKeyData = `${CACHE_VERSION}_${originalTmdbTitle}_${mediaYear || 'noYear'}`;
+    const cacheKeyHash = crypto.createHash('md5').update(cacheKeyData).digest('hex');
+    const searchTermKey = `${cacheKeyHash}.txt`;
+    
+    // Log what we're looking for to help with debugging
+    console.log(`  Searching for ShowBox match for: "${originalTmdbTitle}" (${mediaYear || 'N/A'}) [Cache key: ${cacheKeyHash}]`);
+    
     const cachedBestUrl = await getFromCache(searchTermKey, cacheSubDir);
     if (cachedBestUrl) {
-        console.log(`  CACHE HIT for ShowBox search best match URL (${searchTerm}): ${cachedBestUrl}`);
+        console.log(`  CACHE HIT for ShowBox search best match URL (${originalTmdbTitle} ${mediaYear || ''}): ${cachedBestUrl}`);
         if (cachedBestUrl === 'NO_MATCH_FOUND') return { url: null, score: -1 };
         return { url: cachedBestUrl, score: 10 }; // Assume a good score for a cached valid URL
     }
-    // console.log(`  CACHE MISS for ShowBox search best match URL (${searchTerm})`);
+    
+    // Special characters often cause search issues, create a cleaned version of the search term
+    // Replace special characters with spaces, ensure words are properly separated
+    const cleanedSearchTerm = searchTerm.replace(/[&\-_:;,.]/g, ' ').replace(/\s+/g, ' ').trim();
+    console.log(`  CACHE MISS for ShowBox search. Using cleaned search term: "${cleanedSearchTerm}" (Original: "${searchTerm}")`);
 
-    const searchUrl = `https://www.showbox.media/search?keyword=${encodeURIComponent(searchTerm)}`;
-    console.log(`  Searching ShowBox with URL: ${searchUrl}`);
+    // Try multiple search strategies if needed
+    const searchStrategies = [
+        { term: cleanedSearchTerm, description: "cleaned search term" }
+    ];
+    
+    // For titles with "&", create specific search strategies
+    if (originalTmdbTitle.includes('&')) {
+        // Try with "and" instead of "&" (very common replacement)
+        const andTitle = originalTmdbTitle.replace(/&/g, 'and');
+        if (mediaYear) {
+            searchStrategies.push({ term: `${andTitle} ${mediaYear}`, description: "& replaced with 'and', with year" });
+        }
+        searchStrategies.push({ term: andTitle, description: "& replaced with 'and'" });
+        
+        // Try with just the first part before "&"
+        const firstPart = originalTmdbTitle.split('&')[0].trim();
+        if (firstPart.length > 3 && mediaYear) {
+            searchStrategies.push({ term: `${firstPart} ${mediaYear}`, description: "first part before &, with year" });
+        }
+    }
+    
+    // Add TMDB title with year as a strategy (if not already in the strategies)
+    if (mediaYear && !searchStrategies.some(s => s.term === `${originalTmdbTitle} ${mediaYear}`)) {
+        searchStrategies.push({ term: `${originalTmdbTitle} ${mediaYear}`, description: "original TMDB title with year" });
+    }
+    
+    // Add original TMDB title only
+    searchStrategies.push({ term: originalTmdbTitle, description: "original TMDB title only" });
+    
+    // Add direct year search for popular movies (especially if the title is very common)
+    if (mediaYear) {
+        searchStrategies.push({ term: mediaYear, description: "year only (for popular movies)" });
+    }
+    
+    // If the title contains multiple words, add a search with just the first part to catch shortened titles
+    const titleWords = originalTmdbTitle.split(/\s+/);
+    if (titleWords.length > 1) {
+        const firstWord = titleWords[0];
+        if (firstWord.length > 3 && !searchStrategies.some(s => s.term === firstWord)) { // Only use significant first words
+            searchStrategies.push({ 
+                term: mediaYear ? `${firstWord} ${mediaYear}` : firstWord,
+                description: "first word of title" 
+            });
+        }
+    }
+    
+    let bestResult = { url: null, score: -1, strategy: null };
+    
+    for (const strategy of searchStrategies) {
+        const searchUrl = `https://www.showbox.media/search?keyword=${encodeURIComponent(strategy.term)}`;
+        console.log(`  Searching ShowBox with URL: ${searchUrl} (Strategy: ${strategy.description})`);
 
     const htmlContent = await showboxScraperInstance._makeRequest(searchUrl);
     if (!htmlContent) {
-        console.log(`  Failed to fetch ShowBox search results for: ${searchTerm}`);
-        await saveToCache(searchTermKey, 'NO_MATCH_FOUND', cacheSubDir); // Cache indication of no match
-        return { url: null, score: -1 };
+            console.log(`  Failed to fetch ShowBox search results for strategy: ${strategy.description}`);
+            continue; // Try next strategy
     }
 
     const $ = cheerio.load(htmlContent);
-    let bestMatchUrl = null;
-    let highestScore = -1;
+        const searchResults = [];
 
     // Helper for simple string similarity (case-insensitive, removes non-alphanumeric)
     const simplifyString = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -156,43 +219,141 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
                 itemYear = yearMatch[1];
             }
 
-            // Scoring logic (can be improved)
+                // IMPROVED SCORING LOGIC
             let score = 0;
-            if (simplifiedItemTitle.includes(simplifiedTmdbTitle) || simplifiedTmdbTitle.includes(simplifiedItemTitle)) {
-                score += 5; // Strong bonus for substring match
+                
+                // Exact title match (case-insensitive)
+                if (itemTitle.toLowerCase() === originalTmdbTitle.toLowerCase()) {
+                    score += 10; // Strong bonus for exact match
+                }
+                // Simplified title contains the entire simplified TMDB title
+                else if (simplifiedItemTitle.includes(simplifiedTmdbTitle)) {
+                    score += 7; // Good bonus for containing the entire title
+                }
+                // TMDB title contains the simplified item title (could be abbreviation/shortened)
+                else if (simplifiedTmdbTitle.includes(simplifiedItemTitle) && simplifiedItemTitle.length > 3) {
+                    score += 3; // Small bonus for being contained in the TMDB title
+                }
+                
+                // Word-by-word match calculation for multi-word titles
+                const tmdbWords = originalTmdbTitle.toLowerCase().split(/\s+/);
+                const itemWords = itemTitle.toLowerCase().split(/\s+/);
+                
+                let wordMatchCount = 0;
+                for (const tmdbWord of tmdbWords) {
+                    if (tmdbWord.length <= 2) continue; // Skip very short words
+                    if (itemWords.some(itemWord => itemWord.includes(tmdbWord) || tmdbWord.includes(itemWord))) {
+                        wordMatchCount++;
+                    }
+                }
+                
+                // Add score based on percentage of words matched
+                if (tmdbWords.length > 0) {
+                    const wordMatchPercent = wordMatchCount / tmdbWords.length;
+                    score += wordMatchPercent * 5; // Up to 5 points for word matches
+                }
+                
+                // STRICT YEAR MATCHING
+                if (mediaYear && itemYear) {
+                    if (mediaYear === itemYear) {
+                        score += 8; // Strong bonus for exact year match
+                    } else {
+                        // Small penalty for year mismatch, larger for bigger differences
+                        const yearDiff = Math.abs(parseInt(mediaYear) - parseInt(itemYear));
+                        if (yearDiff <= 1) {
+                            score -= 1; // Small penalty for 1 year difference
+                        } else {
+                            score -= Math.min(5, yearDiff) * 2; // Larger penalty for bigger differences
+                        }
+                    }
+                } else if (mediaYear && !itemYear) {
+                    // If we have a year but the item doesn't, apply a small penalty
+                    score -= 2;
+                }
+                
+                // Media type matching - bonus for matching the expected type
+                const isMovie = itemHref.includes('/movie/');
+                const isTv = itemHref.includes('/tv/');
+                
+                // Expected type based on URL (very basic logic - could be improved)
+                const expectedTypeIsMovie = !mediaYear || parseInt(mediaYear) >= 1900; // Most common scenario
+                
+                if ((expectedTypeIsMovie && isMovie) || (!expectedTypeIsMovie && isTv)) {
+                    score += 3; // Bonus for matching expected type
+                } else if ((expectedTypeIsMovie && isTv) || (!expectedTypeIsMovie && isMovie)) {
+                    score -= 3; // Penalty for wrong type
+                }
+                
+                searchResults.push({
+                    title: itemTitle,
+                    href: itemHref,
+                    year: itemYear,
+                    score: score,
+                    isMovie: isMovie,
+                    isTv: isTv
+                });
             }
-            // Add more sophisticated string similarity if needed (e.g., Levenshtein)
-            if (mediaYear && itemYear && mediaYear === itemYear) {
-                score += 5; // Strong bonus for year match
-            } else if (mediaYear && itemYear) {
-                score -= 2; // Penalty for year mismatch
-            }
+        });
+        
+        // Sort by score and pick the best one
+        searchResults.sort((a, b) => b.score - a.score);
+
+        if (searchResults.length > 0) {
+            console.log(`  Search results for strategy "${strategy.description}":`);
+            searchResults.slice(0, 3).forEach((result, i) => {
+                console.log(`    ${i+1}. Title: "${result.title}", Year: ${result.year || 'N/A'}, Score: ${result.score.toFixed(1)}, URL: ${result.href}`);
+            });
             
-            // For series, the title might be just the series name, year might not be in the poster title
-            // but the link structure might confirm /tv/
-             if (itemHref.startsWith('/tv/') && searchTerm.toLowerCase().includes(simplifiedItemTitle)) {
-                // If it's a TV show and the search term includes the item title (e.g. search "Andor 2022", item "Andor")
-                score += 2;
+            const bestMatch = searchResults[0];
+            if (bestMatch.score > bestResult.score) {
+                bestResult = {
+                    url: `https://www.showbox.media${bestMatch.href}`,
+                    score: bestMatch.score,
+                    strategy: strategy.description
+                };
             }
-
-
-            if (score > highestScore) {
-                highestScore = score;
-                bestMatchUrl = itemHref;
-            }
-        }
-    });
-
-    if (bestMatchUrl) {
-        const fullUrl = `https://www.showbox.media${bestMatchUrl}`;
-        console.log(`  Found best match on ShowBox: ${fullUrl} (Score: ${highestScore})`);
-        await saveToCache(searchTermKey, fullUrl, cacheSubDir); // Cache the found full URL
-        return { url: fullUrl, score: highestScore };
     } else {
-        console.log(`  No suitable match found on ShowBox search for: ${searchTerm}`);
-        // Cache the fact that no match was found to avoid re-searching for a known miss (optional, depends on how often new content appears)
-        // For now, let's cache null or a specific string like "NO_MATCH_FOUND"
-        await saveToCache(searchTermKey, 'NO_MATCH_FOUND', cacheSubDir); // Cache indication of no match
+            console.log(`  No results found for strategy "${strategy.description}"`);
+        }
+        
+        // If we found a really good match (score > 10), don't try more strategies
+        if (bestResult.score > 10) {
+            console.log(`  Found excellent match with score ${bestResult.score.toFixed(1)} using strategy "${bestResult.strategy}", stopping search`);
+            break;
+        }
+    }
+
+    // Final decision based on all strategies
+    if (bestResult.url) {
+        // Analyze match confidence based on score and exact year match
+        let matchConfidence = "HIGH";
+        if (bestResult.score < 8) {
+            matchConfidence = "LOW";
+        } else if (bestResult.score < 15) {
+            matchConfidence = "MEDIUM";
+        }
+        
+        // Check if URL contains the correct year (if we have a media year)
+        let yearInUrl = false;
+        if (mediaYear) {
+            yearInUrl = bestResult.url.includes(mediaYear);
+        }
+        
+        const confidenceWarning = matchConfidence !== "HIGH" ? 
+            `[⚠️ ${matchConfidence} CONFIDENCE MATCH - may not be correct]` : "";
+        
+        console.log(`  Best overall match: ${bestResult.url} (Score: ${bestResult.score.toFixed(1)}, Strategy: ${bestResult.strategy}) ${confidenceWarning}`);
+        
+        // Add extra warning for suspicious year mismatches
+        if (mediaYear && !yearInUrl && matchConfidence !== "HIGH") {
+            console.log(`  ⚠️ WARNING: Year ${mediaYear} not found in URL path. This may be the wrong content!`);
+        }
+        
+        await saveToCache(searchTermKey, bestResult.url, cacheSubDir);
+        return { url: bestResult.url, score: bestResult.score };
+    } else {
+        console.log(`  No suitable match found on ShowBox search for: ${originalTmdbTitle} (${mediaYear || 'N/A'})`);
+        await saveToCache(searchTermKey, 'NO_MATCH_FOUND', cacheSubDir);
         return { url: null, score: -1 };
     }
 };
