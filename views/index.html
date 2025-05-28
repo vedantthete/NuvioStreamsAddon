@@ -379,6 +379,24 @@
             text-transform: uppercase;
         }
         
+        .provider-info-note {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            padding: 0.75rem 0.25rem;
+            margin-top: 0.5rem; /* Space above this note */
+            margin-bottom: 1.25rem; /* Space below this note before disclaimer */
+            text-align: left;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+        }
+        
+        .provider-info-note .info-icon {
+            font-size: 1rem; /* Slightly larger icon */
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+
         .disclaimer {
             background-color: rgba(15, 15, 15, 0.7);
             border-radius: 0.6rem;
@@ -510,10 +528,22 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 0.75rem;
+            width: 100%;
+            justify-content: center;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
         
         .more-addons-btn:hover {
             background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 163, 255, 0.3);
         }
         
         .more-addons-btn .arrow {
@@ -659,6 +689,11 @@
             <div class="card-body">
                 <p>Your gateway to high-quality streaming on Stremio. Enjoy movies and TV shows from multiple sources with our powerful addon.</p>
                 
+                <button class="more-addons-btn" id="moreAddonsBtn">
+                    More Addons by TapFrame
+                    <span class="arrow">→</span>
+                </button>
+                
                 <div class="providers">
                     <h2>Available Providers</h2>
                     <div class="provider-item">
@@ -678,6 +713,11 @@
                     </div>
                 </div>
                 
+                <div class="provider-info-note">
+                    <span class="info-icon">💡</span> 
+                    <span>The flag emoji (e.g., 🇺🇸, 🇬🇧) next to ShowBox stream names indicates the server location, not the content's language.</span>
+                </div>
+
                 <div class="disclaimer">
                     <div class="disclaimer-header">
                         <span class="disclaimer-icon">ℹ️</span>
@@ -697,11 +737,6 @@
                 <div class="footer-text">
                     Developed by <a href="https://github.com/tapframe" target="_blank" class="github-link">TapFrame</a>
                 </div>
-                
-                <button class="more-addons-btn" id="moreAddonsBtn">
-                    More Addons by TapFrame
-                    <span class="arrow">→</span>
-                </button>
             </div>
         </div>
         
