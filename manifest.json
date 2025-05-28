@@ -10,7 +10,7 @@
   "behaviorHints": {
     "adult": false,
     "p2p": false,
-    "configurable": true
+    "configurable": false
   },
   "config": [
     {
@@ -18,7 +18,7 @@
       "type": "text",
       "title": "ScraperAPI Key",
       "description": "Enter your ScraperAPI.com API key.",
-      "required": true
+      "required": false
     }
   ]
 } 

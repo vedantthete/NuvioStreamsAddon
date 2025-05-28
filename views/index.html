@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuvio Streams Addon</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <style>
+        :root {
+            --primary: #00a3ff;
+            --primary-hover: #0084ff;
+            --secondary: #00c16e;
+            --secondary-hover: #00a65c;
+            --dc-universe: #ff0048;
+            --dc-universe-hover: #c8003a;
+            --star-wars: #ffe81f;
+            --star-wars-hover: #d4bf1a;
+            --background: #000000;
+            --card: #0a0a0a;
+            --text: #ffffff;
+            --text-light: #b0b0b0;
+            --border: #222222;
+            --highlight: #333333;
+            --coming-soon: #6742d9;
+            --nuvio-app: #8c52ff;
+            --nuvio-app-hover: #7038e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 0.5rem;
+            background: linear-gradient(135deg, #000000 0%, #050505 100%);
+            overflow-x: hidden;
+        }
+        
+        .cards-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            max-width: 850px;
+            width: 100%;
+            perspective: 1000px;
+            z-index: 1;
+        }
+        
+        .cards-container.expanded {
+            justify-content: space-between;
+        }
+        
+        .card {
+            background-color: var(--card);
+            border-radius: 0.8rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 1px solid #181818;
+            position: relative;
+            transform-origin: center center;
+        }
+        
+        /* Always-on Outer Glow for Main Card */
+        .card:before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), transparent, var(--secondary));
+            z-index: -1; 
+            border-radius: 0.9rem;
+            opacity: 0.4; /* Always visible, subtle */
+            transition: opacity 0.4s ease-out;
+        }
+        
+        .card:hover:before {
+            opacity: 0.7; /* Intensify on hover */
+        }
+
+        /* Inner Glow for Main Card when Expanded */
+        .main-card:after {
+            content: "";
+            position: absolute;
+            inset: 1px; /* Creates a 1px gap for the border, effectively inside */
+            border-radius: inherit; /* Match parent card's rounding */
+            background: linear-gradient(165deg, rgba(0,163,255,0.2), rgba(0,193,110,0.2));
+            z-index: 0; /* Behind content, on top of card background */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out 0.3s; /* Delayed appearance */
+            pointer-events: none; /* Ensure it doesn't block interactions */
+        }
+
+        .expanded .main-card:after {
+            opacity: 1; /* Show inner glow when expanded */
+        }
+        
+        .expanded .main-card {
+            transform: translateX(-20%) scale(0.95);
+        }
+        
+        .catalog-container {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 400px;
+            opacity: 0;
+            transform: translateX(100px) scale(0.9);
+            pointer-events: none;
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .expanded .catalog-container {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            pointer-events: all;
+        }
+        
+        .catalog-card {
+            background-color: var(--card);
+            border-radius: 0.8rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            padding: 1.25rem;
+            border: 1px solid #181818;
+            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .expanded .catalog-card {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .expanded .catalog-card:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+        
+        .expanded .catalog-card:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+        
+        .expanded .catalog-card:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+        
+        /* Always-on Outer Glow for Catalog Cards */
+        .catalog-card:before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            border-radius: 0.9rem;
+            opacity: 0.4; /* Always visible, subtle */
+            transition: opacity 0.4s ease-out;
+        }
+        
+        .catalog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+        
+        .catalog-card:hover:before {
+            opacity: 0.7; /* Intensify on hover */
+        }
+        
+        .dc-universe-card:before {
+            background: linear-gradient(45deg, var(--dc-universe), transparent);
+        }
+        
+        .star-wars-card:before {
+            background: linear-gradient(45deg, var(--star-wars), transparent);
+        }
+        
+        .catalog-logo, .card-header, .card-body, .card-footer {
+            position: relative; /* Ensure content is above pseudo-elements */
+            z-index: 1;
+        }
+        
+        .catalog-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--text);
+            background: rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dc-universe-logo {
+            background: linear-gradient(135deg, var(--dc-universe), #2a0010);
+        }
+        
+        .star-wars-logo {
+            background: linear-gradient(135deg, var(--star-wars), #443b00);
+            color: #000;
+        }
+        
+        .catalog-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .catalog-desc {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        
+        .install-catalog-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .dc-universe-btn {
+            background: linear-gradient(135deg, var(--dc-universe) 0%, var(--dc-universe-hover) 100%);
+        }
+        
+        .star-wars-btn {
+            background: linear-gradient(135deg, var(--star-wars) 0%, var(--star-wars-hover) 100%);
+            color: #000;
+        }
+        
+        .install-catalog-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 163, 255, 0.3); /* Default primary color shadow */
+        }
+        .dc-universe-btn:hover { box-shadow: 0 6px 15px rgba(255,0,72,0.3); }
+        .star-wars-btn:hover { box-shadow: 0 6px 15px rgba(255,232,31,0.3); }
+        
+        .card-header {
+            padding: 1.5rem 1.5rem 1rem;
+            text-align: center;
+            /* position: relative; z-index: 1 already added above */
+        }
+        
+        .logo {
+            max-width: 180px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-body {
+            padding: 0 1.5rem 1.5rem;
+            /* position: relative; z-index: 1 already added above */
+        }
+        
+        p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            font-weight: 300;
+        }
+        
+        .providers {
+            background-color: rgba(15, 15, 15, 0.7);
+            border-radius: 0.6rem;
+            padding: 1rem;
+            margin-bottom: 1.25rem;
+            margin-top: 1.5rem;
+            border: 1px solid var(--border);
+        }
+        
+        .providers h2 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            opacity: 0.9;
+        }
+        
+        .provider-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .provider-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .provider-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+        }
+        
+        .showbox-icon {
+            background: linear-gradient(135deg, #ff7a00, #ff0050);
+        }
+        
+        .xprime-icon {
+            background: linear-gradient(135deg, #00a3ff, #00c16e);
+        }
+        
+        .coming-soon-icon {
+            background: linear-gradient(135deg, #6742d9, #9f7aea);
+        }
+        
+        .provider-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+        
+        .coming-soon {
+            font-size: 0.7rem;
+            color: #9f7aea;
+            font-weight: 500;
+            margin-left: 0.5rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        .disclaimer {
+            background-color: rgba(15, 15, 15, 0.7);
+            border-radius: 0.6rem;
+            padding: 1rem;
+            margin: 1.25rem 0;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        
+        .disclaimer-header {
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+        }
+        
+        .disclaimer-icon {
+            margin-right: 0.4rem;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+        
+        .disclaimer p {
+            font-size: 0.8rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        
+        .disclaimer p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        
+        .btn {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.7rem 1rem;
+            border-radius: 0.6rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 163, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-hover) 100%);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 193, 110, 0.3);
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.7rem 1.5rem;
+            background-color: rgba(10, 10, 10, 0.95);
+            color: white;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 400;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border-left: 3px solid var(--primary);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            pointer-events: none;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-5px);
+        }
+        
+        .card-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            background-color: rgba(15, 15, 15, 0.5);
+            /* position: relative; z-index: 1 already added above */
+        }
+        
+        .footer-text {
+            color: var(--text-light);
+            font-size: 0.75rem;
+            font-weight: 300;
+            margin-bottom: 0.6rem;
+        }
+        
+        .more-addons-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            color: var(--text);
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.75rem;
+        }
+        
+        .more-addons-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .more-addons-btn .arrow {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .expanded .more-addons-btn .arrow {
+            transform: rotate(180deg);
+        }
+        
+        .github-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        
+        .github-link:hover {
+            color: var(--text);
+        }
+        
+        .close-catalog {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: scale(0);
+            z-index: 3;
+        }
+        
+        .expanded .close-catalog {
+            opacity: 1;
+            transform: scale(1);
+            transition-delay: 0.3s;
+        }
+        
+        .close-catalog:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 900px) {
+            .cards-container.expanded {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+            
+            .expanded .main-card {
+                transform: translateY(-2%) scale(0.95);
+            }
+            
+            .catalog-container {
+                position: relative;
+                width: 100%;
+                max-width: 400px;
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Nuvio App Card Styles */
+        .nuvio-app-card {
+            border: 1px solid rgba(140, 82, 255, 0.3);
+            position: relative;
+            overflow: visible;
+            animation: pulse 2s infinite;
+        }
+        
+        .nuvio-app-card:before {
+            background: linear-gradient(45deg, var(--nuvio-app), var(--primary), var(--secondary));
+            background-size: 200% 200%;
+            animation: gradientFlow 10s ease infinite;
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(140, 82, 255, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(140, 82, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(140, 82, 255, 0); }
+        }
+        
+        .nuvio-app-logo {
+            background: linear-gradient(135deg, var(--nuvio-app), #3a1980);
+            transform: scale(1.1);
+            position: relative;
+        }
+        
+        .nuvio-app-btn {
+            background: linear-gradient(135deg, var(--nuvio-app) 0%, var(--nuvio-app-hover) 100%);
+        }
+        
+        .nuvio-app-btn:hover {
+            box-shadow: 0 6px 15px rgba(140, 82, 255, 0.4);
+        }
+        
+        .new-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(135deg, #ff3a3a, #ff7c7c);
+            color: white;
+            border-radius: 20px;
+            padding: 5px 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(255, 58, 58, 0.3);
+            z-index: 2;
+            transform: rotate(5deg);
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cards-container" id="cardsContainer">
+        <div class="card main-card">
+            <div class="card-header">
+                <img src="https://raw.githubusercontent.com/tapframe/NuvioStreaming/main/assets/titlelogo.png" alt="Nuvio Streams Logo" class="logo">
+                <h1>Nuvio Streams Addon</h1>
+            </div>
+            <div class="card-body">
+                <p>Your gateway to high-quality streaming on Stremio. Enjoy movies and TV shows from multiple sources with our powerful addon.</p>
+                
+                <div class="providers">
+                    <h2>Available Providers</h2>
+                    <div class="provider-item">
+                        <div class="provider-icon showbox-icon">💎</div>
+                        <div class="provider-name">ShowBox</div>
+                    </div>
+                    <div class="provider-item">
+                        <div class="provider-icon xprime-icon">⚡</div>
+                        <div class="provider-name">Xprime.tv</div>
+                    </div>
+                    <div class="provider-item">
+                        <div class="provider-icon coming-soon-icon">🔍</div>
+                        <div class="provider-name">More providers</div>
+                        <span class="coming-soon">Coming soon</span>
+                    </div>
+                </div>
+                
+                <div class="disclaimer">
+                    <div class="disclaimer-header">
+                        <span class="disclaimer-icon">ℹ️</span>
+                        <span>Disclaimer</span>
+                    </div>
+                    <p>Nuvio Streams is a scraper-based addon that aggregates content from various providers. We do not own or host any of the content provided.</p>
+                    <p>Providers may become unavailable without prior notification. We will make every effort to maintain provider functionality, but availability cannot be guaranteed.</p>
+                </div>
+                
+                <div class="buttons">
+                    <a href="#" id="installLink" class="btn btn-primary">Install Addon</a>
+                    <button id="copyLink" class="btn btn-secondary">Copy Manifest</button>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="footer-text">Nuvio Streams Addon • Seamless Streaming, Elevated</span>
+                <div class="footer-text">
+                    Developed by <a href="https://github.com/tapframe" target="_blank" class="github-link">TapFrame</a>
+                </div>
+                
+                <button class="more-addons-btn" id="moreAddonsBtn">
+                    More Addons by TapFrame
+                    <span class="arrow">→</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="catalog-container">
+            <button class="close-catalog" id="closeCatalog">×</button>
+            
+            <div class="catalog-card dc-universe-card">
+                <div class="catalog-logo dc-universe-logo">⚡</div>
+                <h3 class="catalog-title">DC Universe Catalog</h3>
+                <p class="catalog-desc">Explore the complete DC Universe with this catalog addon for Stremio. Discover movies, TV shows, and animated content from the world of DC Comics.</p>
+                <a href="https://addon-dc-cq85.onrender.com/configure" target="_blank" class="install-catalog-btn dc-universe-btn">Install Addon</a>
+            </div>
+            
+            <div class="catalog-card star-wars-card">
+                <div class="catalog-logo star-wars-logo">✦</div>
+                <h3 class="catalog-title">Star Wars Universe</h3>
+                <p class="catalog-desc">Journey to a galaxy far, far away with this comprehensive Star Wars catalog addon. Includes movies, series, and animated shows from the Star Wars universe.</p>
+                <a href="https://addon-star-wars-u9e3.onrender.com/configure" target="_blank" class="install-catalog-btn star-wars-btn">Install Addon</a>
+            </div>
+            
+            <!-- New Nuvio App Promo -->
+            <div class="catalog-card nuvio-app-card">
+                <div class="new-badge">Coming Soon</div>
+                <div class="catalog-logo nuvio-app-logo">📱</div>
+                <h3 class="catalog-title">Nuvio Streaming App</h3>
+                <p class="catalog-desc">Experience the power of Nuvio on your mobile device! Our upcoming iOS and Android app features more built-in providers and an enhanced streaming experience.</p>
+                <a href="https://github.com/tapframe/NuvioStreaming" target="_blank" class="install-catalog-btn nuvio-app-btn">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Manifest link copied to clipboard!</div>
+
+    <script>
+        const cardsContainer = document.getElementById('cardsContainer');
+        const moreAddonsBtn = document.getElementById('moreAddonsBtn');
+        const closeCatalog = document.getElementById('closeCatalog');
+        const installLink = document.getElementById('installLink');
+        const copyLinkBtn = document.getElementById('copyLink');
+        const toast = document.getElementById('toast');
+
+        // Dynamically set the install link
+        const manifestUrl = window.location.origin + '/manifest.json';
+        const installProtocolUrl = 'stremio://' + manifestUrl.replace(/^https?:\/\//, '');
+        if (installLink) {
+            installLink.href = installProtocolUrl;
+        }
+
+        const handleMoreAddonsClick = function() {
+            if (cardsContainer) {
+                cardsContainer.classList.toggle('expanded');
+            }
+        };
+
+        const handleCloseCatalogClick = function() {
+            if (cardsContainer) {
+                cardsContainer.classList.remove('expanded');
+            }
+        };
+
+        function updateLayoutForScreenSize() {
+            const isMobile = window.innerWidth <= 900;
+
+            if (isMobile) {
+                if (cardsContainer) cardsContainer.classList.add('expanded');
+                if (moreAddonsBtn) moreAddonsBtn.style.display = 'none';
+                if (closeCatalog) closeCatalog.style.display = 'none';
+
+                // Remove desktop event listeners if they were attached
+                if (moreAddonsBtn) moreAddonsBtn.removeEventListener('click', handleMoreAddonsClick);
+                if (closeCatalog) closeCatalog.removeEventListener('click', handleCloseCatalogClick);
+
+            } else { // Desktop view
+                if (moreAddonsBtn) moreAddonsBtn.style.display = 'inline-flex';
+                // For closeCatalog, CSS handles visibility based on .expanded, 
+                // so just ensure it's not explicitly set to 'none' from mobile view.
+                if (closeCatalog) closeCatalog.style.display = ''; 
+                
+                // Add/Re-add desktop event listeners (ensuring no duplicates)
+                if (moreAddonsBtn) {
+                    moreAddonsBtn.removeEventListener('click', handleMoreAddonsClick); 
+                    moreAddonsBtn.addEventListener('click', handleMoreAddonsClick);
+                }
+                if (closeCatalog) {
+                    closeCatalog.removeEventListener('click', handleCloseCatalogClick); 
+                    closeCatalog.addEventListener('click', handleCloseCatalogClick);
+                }
+            }
+        }
+
+        // Initial layout update
+        updateLayoutForScreenSize();
+
+        // Update layout on window resize
+        window.addEventListener('resize', updateLayoutForScreenSize);
+
+        // Copy manifest link to clipboard
+        if (copyLinkBtn) {
+            copyLinkBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(manifestUrl);
+                    if (toast) {
+                        toast.classList.add('show');
+                        setTimeout(() => {
+                            toast.classList.remove('show');
+                        }, 3000);
+                    }
+                } catch (err) {
+                    console.error('Failed to copy: ', err);
+                }
+            });
+        }
+    </script>
+</body>
+</html> 
