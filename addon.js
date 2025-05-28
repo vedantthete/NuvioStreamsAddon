@@ -21,7 +21,7 @@ if (process.env.SCRAPER_MODE === 'api') {
 }
 
 // Destructure the required functions from the selected scraper
-const { getStreamsFromTmdbId, convertImdbToTmdb } = scraper;
+const { getStreamsFromTmdbId, convertImdbToTmdb, sortStreamsByQuality } = scraper;
 
 const manifest = require('./manifest.json');
 
@@ -249,8 +249,12 @@ builder.defineStreamHandler(async (args) => {
         console.log(`  No streams found from any provider for TMDB ${tmdbTypeFromId}/${tmdbId}`);
         return { streams: [] };
     }
+    
+    // Sort all combined streams by quality before mapping
+    const sortedCombinedStreams = sortStreamsByQuality(combinedRawStreams);
+    console.log(`Total streams after sorting: ${sortedCombinedStreams.length}`);
         
-    const stremioStreamObjects = combinedRawStreams.map((stream) => {
+    const stremioStreamObjects = sortedCombinedStreams.map((stream) => {
         const qualityLabel = stream.quality || 'UNK'; // UNK for unknown
         
         let displayTitle;

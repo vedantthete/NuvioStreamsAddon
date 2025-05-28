@@ -1672,5 +1672,6 @@ module.exports = {
     getShowboxUrlFromTmdbInfo,
     ShowBoxScraper, 
     extractFidsFromFebboxPage,
-    processShowWithSeasonsEpisodes
+    processShowWithSeasonsEpisodes,
+    sortStreamsByQuality // Add sortStreamsByQuality to exports
 }; 
