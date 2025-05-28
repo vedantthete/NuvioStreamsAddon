@@ -268,7 +268,7 @@ builder.defineStreamHandler(async (args) => {
         if (stream.provider === 'Xprime.tv') {
             providerDisplayName = 'XPRIME ⚡';
         } else if (stream.provider === 'ShowBox') {
-            providerDisplayName = 'ShowBox 💎';
+            providerDisplayName = 'ShowBox';
         }
 
         let nameDisplay;
