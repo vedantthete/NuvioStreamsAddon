@@ -6,6 +6,46 @@ const fs = require('fs').promises;
 const path = require('path');
 const crypto = require('crypto');
 
+// Add cookie rotation functionality
+let cookieIndex = 0;
+let cookieCache = null;
+
+// Function to load cookies from cookies.txt
+const loadCookies = async () => {
+    try {
+        const cookiesPath = path.join(__dirname, 'cookies.txt');
+        const cookiesContent = await fs.readFile(cookiesPath, 'utf-8');
+        return cookiesContent
+            .split('\n')
+            .filter(line => line.trim().length > 0)
+            .map(cookie => cookie.trim());
+    } catch (error) {
+        console.warn(`Warning: Could not load cookies from cookies.txt: ${error.message}`);
+        return [];
+    }
+};
+
+// Function to get the next cookie in rotation
+const getNextCookie = async () => {
+    // Load cookies if not already loaded
+    if (cookieCache === null) {
+        cookieCache = await loadCookies();
+        console.log(`Loaded ${cookieCache.length} cookies from cookies.txt`);
+    }
+    
+    // If no cookies available, return empty string
+    if (!cookieCache || cookieCache.length === 0) {
+        return '';
+    }
+    
+    // Get next cookie in rotation
+    const cookie = cookieCache[cookieIndex];
+    cookieIndex = (cookieIndex + 1) % cookieCache.length;
+    console.log(`Using cookie ${cookieIndex} of ${cookieCache.length}`);
+    
+    return cookie;
+};
+
 // MODIFICATION: Removed SCRAPER_API_BASE_URL
 
 // Helper function to fetch stream size using a HEAD request
@@ -47,7 +87,6 @@ const fetchStreamSize = async (url) => {
 
 // MODIFICATION: Removed hardcoded SCRAPER_API_KEY
 // const SCRAPER_API_KEY = '96845d13e7a0a0d40fb4f148cd135ddc'; 
-const FEBBOX_COOKIE = 'ui=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDgwNjYzMjgsIm5iZiI6MTc0ODA2NjMyOCwiZXhwIjoxNzc5MTcwMzQ4LCJkYXRhIjp7InVpZCI6NzgyNDcwLCJ0b2tlbiI6ImUwMTAyNjIyOWMyOTVlOTFlOTY0MWJjZWZiZGE4MGUxIn19.Za7tx60gu8rq9pLw1LVuIjROaBJzgF_MV049B8NO3L8';
 const FEBBOX_PLAYER_URL = "https://www.febbox.com/file/player";
 const FEBBOX_FILE_SHARE_LIST_URL = "https://www.febbox.com/file/file_share_list";
 // MODIFICATION: Remove SCRAPER_API_URL
@@ -463,8 +502,11 @@ const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => {
     targetPostData.append('fid', fidToProcess);
     targetPostData.append('share_key', shareKey);
 
+    // Get next cookie in rotation
+    const nextCookie = await getNextCookie();
+    
     const baseHeaders = {
-        'Cookie': FEBBOX_COOKIE,
+        'Cookie': `ui=${nextCookie}`,
         'Content-Type': 'application/x-www-form-urlencoded'
     };
 
@@ -848,7 +890,10 @@ const extractFidsFromFebboxPage = async (febboxUrl) => {
     let contentHtml = await getFromCache(cacheKeyHtml, cacheSubDirHtml);
 
     if (!contentHtml) {
-        const baseHeaders = { 'Cookie': FEBBOX_COOKIE };
+        // Get next cookie in rotation
+        const nextCookie = await getNextCookie();
+        
+        const baseHeaders = { 'Cookie': `ui=${nextCookie}` };
         const fetchTimerLabel = `extractFidsFromFebboxPage_fetch_${febboxUrl.replace(/[^a-zA-Z0-9]/g, '')}`;
         
         // MODIFICATION: Removed ScraperAPI conditional logic
@@ -1173,22 +1218,19 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         const fetchMainPageTimer = `processShowWithSeasonsEpisodes_fetchMainPage_s${seasonNum}`;
         console.time(fetchMainPageTimer);
 
+        // Get next cookie in rotation
+        const nextCookie = await getNextCookie();
+        
         // MODIFICATION: Removed ScraperAPI conditional logic
         // const useScraperApi = process.env.USE_SCRAPER_API === 'true';
         // const scraperApiKey = process.env.SCRAPER_API_KEY_VALUE;
         let finalFebboxUrl = febboxUrl;
         let axiosConfigMainPage = {
-            headers: { 'Cookie': FEBBOX_COOKIE },
-                timeout: 20000
+            headers: { 'Cookie': `ui=${nextCookie}` },
+            timeout: 20000
         };
 
-        // if (useScraperApi && scraperApiKey) {
-        //     finalFebboxUrl = SCRAPER_API_BASE_URL; // Use defined base URL
-        //     axiosConfigMainPage.params = { api_key: scraperApiKey, url: febboxUrl, keep_headers: 'true' };
-        //     console.log(`Fetching main FebBox page ${febboxUrl} via ScraperAPI`);
-        // } else {
-        //     console.log(`Fetching main FebBox page ${febboxUrl} directly`);
-        // }
+        // ... existing code ...
         console.log(`Fetching main FebBox page ${febboxUrl} directly`);
 
         try {
@@ -1335,50 +1377,30 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
             try {
                 const targetFolderListUrl = `${FEBBOX_FILE_SHARE_LIST_URL}?share_key=${shareKey}&parent_id=${selectedFolder.id}&is_html=1&pwd=`;
                 
+                // Get next cookie in rotation
+                const nextCookie = await getNextCookie();
+                
                 // MODIFICATION: Removed ScraperAPI conditional logic
                 // const useScraperApi = process.env.USE_SCRAPER_API === 'true';
                 // const scraperApiKey = process.env.SCRAPER_API_KEY_VALUE;
                 let finalFolderUrl = targetFolderListUrl;
                 let axiosConfigFolder = {
                     headers: {
-                        'Cookie': FEBBOX_COOKIE,
+                        'Cookie': `ui=${nextCookie}`,
                         'Referer': febboxUrl,
                         'X-Requested-With': 'XMLHttpRequest'
                     },
                     timeout: 20000
                 };
 
-                // if (useScraperApi && scraperApiKey) {
-                //     finalFolderUrl = SCRAPER_API_BASE_URL; // Use defined base URL
-                //     axiosConfigFolder.params = { api_key: scraperApiKey, url: targetFolderListUrl, keep_headers: 'true' };
-                //     console.log(`Fetching FebBox folder ${targetFolderListUrl} via ScraperAPI`);
-                // } else {
-                //     console.log(`Fetching FebBox folder ${targetFolderListUrl} directly`);
-                // }
+                // ... existing code ...
                 console.log(`Fetching FebBox folder ${targetFolderListUrl} directly`);
 
                 const folderResponse = await axios.get(finalFolderUrl, axiosConfigFolder);
                 
-                if (folderResponse.data && typeof folderResponse.data === 'object' && folderResponse.data.html) {
-                    folderHtml = folderResponse.data.html;
-                } else if (typeof folderResponse.data === 'string') {
-                    folderHtml = folderResponse.data;
-                } else {
-                    console.log(`Invalid response format from folder API for ${selectedFolder.id}`);
-                    console.timeEnd(fetchFolderTimer);
-                    console.timeEnd(processTimerLabel);
-                    return;
-                }
-                
-                if (folderHtml) {
-                    await saveToCache(cacheKeyFolderHtml, folderHtml, cacheSubDirFolderHtml);
-                }
-                console.timeEnd(fetchFolderTimer);
+                // ... existing code ...
             } catch (error) {
-                console.log(`Failed to fetch folder content for ${selectedFolder.id}: ${error.message}`);
-                // console.timeEnd(fetchFolderTimer); // fetchFolderTimer might not be defined if cache hit for HTML but miss for parsed
-                console.timeEnd(processTimerLabel);
-                return;
+                // ... existing code ...
             }
         }
     }
@@ -1655,13 +1677,13 @@ function sortStreamsByQuality(streams) {
 // Initialize the cache directory
 ensureCacheDir(CACHE_DIR).catch(console.error);
 
-// MODIFICATION: Add isScraperApiKeyNeeded function -> MODIFICATION: Update to reflect no ScraperAPI
-// const isScraperApiKeyNeeded = () => {
-    // Since core functionalities no longer use ScraperAPI
-    // MODIFICATION: Reflect conditional ScraperAPI usage
-//    return process.env.USE_SCRAPER_API === 'true'; 
-// };
-// MODIFICATION: isScraperApiKeyNeeded removed
+// Initialize cookies
+loadCookies().then(cookies => {
+    cookieCache = cookies;
+    console.log(`Initialized ${cookies.length} cookies from cookies.txt`);
+}).catch(err => {
+    console.warn(`Failed to initialize cookies: ${err.message}`);
+});
 
 module.exports = {
     getStreamsFromTmdbId,
