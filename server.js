@@ -41,7 +41,7 @@ app.use(async (req, res, next) => {
         // Decode the cookie value from the URL query parameter
         try {
             req.userCookie = decodeURIComponent(userSuppliedCookie);
-            // console.log(`Using user-supplied cookie from URL: ${req.userCookie.substring(0,30)}...`);
+            console.log(`Using user-supplied cookie from URL. Length: ${req.userCookie.length} characters`);
         } catch (e) {
             console.error('Error decoding cookie from URL parameter:', e.message);
             // Potentially handle error, like ignoring malformed cookie
@@ -51,8 +51,15 @@ app.use(async (req, res, next) => {
     // Store region preference if provided
     if (userRegionPreference) {
         req.userRegion = userRegionPreference;
+        // Store uppercase version for consistency
+        req.userRegion = req.userRegion.toUpperCase();
         console.log(`Received region preference from URL: ${req.userRegion}`);
     }
+
+    // Log the full URL for debugging (mask the cookie value)
+    const fullUrl = req.originalUrl || req.url;
+    const maskedUrl = fullUrl.replace(/cookie=([^&]+)/, 'cookie=[MASKED]');
+    console.log(`Incoming request: ${maskedUrl}`);
 
     next();
 });
@@ -113,17 +120,23 @@ const createCustomRouter = (currentAddonInterface) => {
         // Make cookie available if provided
         if (req.userCookie) {
             global.currentRequestUserCookie = req.userCookie;
+            console.log(`[server.js] Setting user cookie for this request (length: ${req.userCookie.length})`);
         }
         
         // Make region preference available if provided
         if (req.userRegion) {
             global.currentRequestRegionPreference = req.userRegion;
+            console.log(`[server.js] Setting region preference for this request: ${req.userRegion}`);
+        } else {
+            // Reset for safety
+            global.currentRequestRegionPreference = null;
         }
         
         res.on('finish', () => {
             // Clean up the global variables after the request is handled
             global.currentRequestUserCookie = null;
             global.currentRequestRegionPreference = null;
+            console.log(`[server.js] Cleared cookie and region preference after request processing`);
         });
         
         return originalRouter(req, res, next);

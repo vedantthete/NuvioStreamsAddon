@@ -29,126 +29,43 @@ const loadFallbackCookies = async () => {
 };
 
 // Add configurable default region
-const DEFAULT_OSS_REGION = process.env.FEBBOX_REGION || 'AUTO';
+const DEFAULT_OSS_REGION = process.env.FEBBOX_REGION || 'USA7';
 console.log(`Using FebBox region setting: ${DEFAULT_OSS_REGION}`);
 
 // Global variable to store the user's region preference from the request
 global.currentRequestRegionPreference = null;
 
 // New function to detect the user's region from FebBox
-const detectUserRegion = async (userToken) => {
+const detectUserRegion = async (userToken, regionPreference = null) => {
     // First priority: Check if request included a region preference
-    if (global.currentRequestRegionPreference) {
-        console.log(`[CookieManager] Using region from request: ${global.currentRequestRegionPreference}`);
-        return global.currentRequestRegionPreference;
+    if (regionPreference) {
+        console.log(`[CookieManager] Using region from parameter: ${regionPreference}`);
+        return regionPreference;
     }
     
-    // Second priority: Check if env variable is set to a specific region
-    if (DEFAULT_OSS_REGION !== 'AUTO') {
-        console.log(`[CookieManager] Using configured FebBox region: ${DEFAULT_OSS_REGION}`);
-        return DEFAULT_OSS_REGION;
-    }
-
-    // Third priority: Auto-detect from FebBox and IP geolocation
-    try {
-        console.log('[CookieManager] Attempting to auto-detect FebBox region...');
-        const response = await axios.get('https://www.febbox.com/', {
-            headers: { 'Cookie': `ui=${userToken}` },
-            maxRedirects: 0,
-            validateStatus: status => status >= 200 && status < 400, // Accept redirects
-            timeout: 10000 // 10 second timeout
-        });
-        
-        // Extract Set-Cookie headers
-        const cookies = response.headers['set-cookie'] || [];
-        for (const cookie of cookies) {
-            if (cookie.includes('oss_group=')) {
-                const match = cookie.match(/oss_group=([^;]+)/);
-                if (match) {
-                    console.log(`[CookieManager] Successfully detected oss_group: ${match[1]}`);
-                    return match[1];
-                }
-            }
-        }
-        
-        // Also check for cookies in response.headers.cookie if set-cookie not found
-        const headerCookies = response.headers.cookie;
-        if (headerCookies && headerCookies.includes('oss_group=')) {
-            const match = headerCookies.match(/oss_group=([^;]+)/);
-            if (match) {
-                console.log(`[CookieManager] Detected oss_group from response headers: ${match[1]}`);
-                return match[1];
-            }
-        }
-        
-        // Check if the region might be in the body as a JavaScript variable
-        if (typeof response.data === 'string' && response.data.includes('oss_group')) {
-            const bodyMatch = response.data.match(/oss_group\s*=\s*['"]([^'"]+)['"]/);
-            if (bodyMatch) {
-                console.log(`[CookieManager] Detected oss_group from page body: ${bodyMatch[1]}`);
-                return bodyMatch[1];
-            }
-        }
-        
-        console.log('[CookieManager] Could not detect region, using backup value');
-        // Try to detect geographically appropriate default region
-        try {
-            const ipResponse = await axios.get('https://ipinfo.io/json', { timeout: 3000 });
-            const countryCode = ipResponse?.data?.country;
-            if (countryCode) {
-                // Map country codes to likely best regions
-                const regionMap = {
-                    'GB': 'UK3',
-                    'UK': 'UK3',
-                    'US': 'USA7',
-                    'CA': 'USA7',
-                    'AU': 'APC2',
-                    'NZ': 'APC2',
-                    'SG': 'APC2',
-                    'JP': 'APC2',
-                    'HK': 'APC2'
-                    // Add more mappings as needed
-                };
-                const geoRegion = regionMap[countryCode] || 'USA7'; // Default to USA7 if not in map
-                console.log(`[CookieManager] Selected region ${geoRegion} based on detected country ${countryCode}`);
-                return geoRegion;
-            }
-        } catch (geoError) {
-            console.log(`[CookieManager] Error detecting country: ${geoError.message}`);
-        }
-        
-        return 'USA7'; // Fallback default
-    } catch (error) {
-        console.log(`[CookieManager] Error detecting region: ${error.message}. Using default region`);
-        return 'USA7'; // Default on error
-    }
+    // If no region preference provided, return a default instead of auto-detecting
+    console.log(`[CookieManager] No region specified, using default: ${DEFAULT_OSS_REGION}`);
+    return DEFAULT_OSS_REGION;
 };
 
 // Function to get the appropriate cookie for a request
-const getCookieForRequest = async () => {
+const getCookieForRequest = async (regionPreference = null) => {
     // Reset the detected region for each new request to ensure we use the latest preference
-    detectedOssGroup = null;
+    let detectedOssGroup = null;
     
-    // First, determine which region to use, prioritizing the request parameter
-    if (global.currentRequestRegionPreference) {
-        console.log(`[CookieManager] Using explicit region from request: ${global.currentRequestRegionPreference}`);
-        detectedOssGroup = global.currentRequestRegionPreference;
-    } else if (DEFAULT_OSS_REGION !== 'AUTO') {
-        console.log(`[CookieManager] Using configured region from environment: ${DEFAULT_OSS_REGION}`);
-        detectedOssGroup = DEFAULT_OSS_REGION;
+    // First, determine which region to use, prioritizing the parameter
+    if (regionPreference) {
+        console.log(`[CookieManager] Using explicit region from parameter: ${regionPreference}`);
+        detectedOssGroup = regionPreference;
     } else {
-        // Only auto-detect if no explicit region was provided
-        console.log('[CookieManager] No explicit region preference, will auto-detect');
+        // If no explicit region, use the configured default
+        console.log(`[CookieManager] No explicit region preference provided, using default: ${DEFAULT_OSS_REGION}`);
+        detectedOssGroup = DEFAULT_OSS_REGION;
     }
     
     // 1. Prioritize user-supplied cookie (passed via global.currentRequestUserCookie)
     if (global.currentRequestUserCookie) {
         console.log('[CookieManager] Using user-supplied cookie from manifest URL.');
-        
-        // If no region was explicitly set, detect it
-        if (!detectedOssGroup) {
-            detectedOssGroup = await detectUserRegion(global.currentRequestUserCookie);
-        }
         
         // ALWAYS add the oss_group to ensure it overrides any default in the cookie
         if (detectedOssGroup) {
@@ -167,11 +84,6 @@ const getCookieForRequest = async () => {
     if (!cookieCache || cookieCache.length === 0) {
         console.log('[CookieManager] No fallback cookies available in cookies.txt.');
         
-        // If no region was explicitly set yet, detect it
-        if (!detectedOssGroup) {
-            detectedOssGroup = await detectUserRegion('');
-        }
-        
         // Return just the region as a cookie if we have one
         if (detectedOssGroup) {
             console.log(`[CookieManager] No cookie available, using only region: ${detectedOssGroup}`);
@@ -184,11 +96,6 @@ const getCookieForRequest = async () => {
     const currentFallbackIndex = cookieIndex + 1; // For 1-based logging
     cookieIndex = (cookieIndex + 1) % cookieCache.length;
     console.log(`[CookieManager] Using fallback cookie ${currentFallbackIndex} of ${cookieCache.length} from cookies.txt.`);
-    
-    // If no region was explicitly set yet, detect it
-    if (!detectedOssGroup) {
-        detectedOssGroup = await detectUserRegion('');
-    }
     
     // ALWAYS add the oss_group to ensure it overrides any default
     if (detectedOssGroup) {
@@ -302,7 +209,7 @@ const saveToCache = async (cacheKey, content, subDir = '') => {
 };
 
 // NEW FUNCTION: Search ShowBox and extract the most relevant URL
-const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaYear, showboxScraperInstance, tmdbType) => {
+const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaYear, showboxScraperInstance, tmdbType, regionPreference = null) => {
     const cacheSubDir = 'showbox_search_results';
     
     // Add a cache version to invalidate previous incorrect cached results
@@ -564,7 +471,7 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
 
 // TMDB helper function to get ShowBox URL from TMDB ID
 // MODIFICATION: Remove scraperApiKey parameter
-const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId) => {
+const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId, regionPreference = null) => {
     console.time('getShowboxUrlFromTmdbInfo_total');
     const cacheSubDir = 'tmdb_api';
     const cacheKey = `tmdb-${tmdbType}-${tmdbId}.json`;
@@ -616,10 +523,10 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId) => {
     // For now, let's assume getStreamsFromTmdbId (the caller) will pass it,
     // or we instantiate it here if this function is called standalone.
     // THIS IS A TEMPORARY SIMPLIFICATION - ShowBoxScraper instance needs to be handled properly.
-    const showboxScraperInstance = new ShowBoxScraper(); // Simplified for now
+    const showboxScraperInstance = new ShowBoxScraper(regionPreference); // Pass regionPreference
 
     // First attempt: Search with title + year
-    let searchResult = await _searchAndExtractShowboxUrl(searchTerm, title, year, showboxScraperInstance, tmdbType);
+    let searchResult = await _searchAndExtractShowboxUrl(searchTerm, title, year, showboxScraperInstance, tmdbType, regionPreference);
     let showboxUrl = searchResult.url;
     let matchScore = searchResult.score;
 
@@ -629,7 +536,7 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId) => {
     if (!showboxUrl || matchScore < lowScoreThreshold) {
         console.log(`  Initial search for "${searchTerm}" yielded a poor result (URL: ${showboxUrl}, Score: ${matchScore}). Retrying search without year.`);
         const searchTermWithoutYear = title; // Search with title only
-        const fallbackSearchResult = await _searchAndExtractShowboxUrl(searchTermWithoutYear, title, null, showboxScraperInstance, tmdbType);
+        const fallbackSearchResult = await _searchAndExtractShowboxUrl(searchTermWithoutYear, title, null, showboxScraperInstance, tmdbType, regionPreference);
         
         // Use fallback if it's better or if the initial search failed completely
         if (fallbackSearchResult.url && fallbackSearchResult.score > matchScore) {
@@ -659,7 +566,7 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId) => {
 
 // Function to fetch sources for a single FID
 // MODIFICATION: Remove scraperApiKey parameter
-const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => { // Removed lookupId parameter
+const fetchSourcesForSingleFid = async (fidToProcess, shareKey, regionPreference = null) => { // Removed lookupId parameter
     // console.log(`  Fetching player data for video FID: ${fidToProcess} (Share: ${shareKey}) - Caching disabled for these links.`);
     // console.time(`fetchSourcesForSingleFid_${fidToProcess}`);
     
@@ -667,7 +574,7 @@ const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => { // Removed 
     targetPostData.append('fid', fidToProcess);
     targetPostData.append('share_key', shareKey);
 
-    const cookieForRequest = await getCookieForRequest(); // Simplified cookie call
+    const cookieForRequest = await getCookieForRequest(regionPreference); // Pass region preference
 
     const baseHeaders = {
         'Cookie': `ui=${cookieForRequest}`,
@@ -750,7 +657,10 @@ const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => { // Removed 
 // ShowBox scraper class
 class ShowBoxScraper {
     // MODIFICATION: Constructor accepts scraperApiKey -> MODIFICATION: Constructor no longer needs scraperApiKey
-    constructor() {
+    constructor(regionPreference = null) {
+        // Store the region preference
+        this.regionPreference = regionPreference;
+        
         // MODIFICATION: baseUrl is now the ShowBox base or not strictly needed if full URLs are used
         // this.baseUrl = SCRAPER_API_URL; // Removed
         // this.scraperApiKey = scraperApiKey; // Store it -> Removed
@@ -794,10 +704,19 @@ class ShowBoxScraper {
             console.log(`ShowBoxScraper: Making direct request to: ${url}`);
         }
         
-        // const proxiedUrl = `${SHOWBOX_PROXY_URL}${encodeURIComponent(url)}`; // Old way
-        // console.log(`ShowBoxScraper: Making request to: ${url} via Proxy: ${SHOWBOX_PROXY_URL}`); // Old log
-        // console.log(`ShowBoxScraper: Making direct request to: ${url}`); // Old log
         console.time(timerLabel);
+
+        // Get the cookie with region preference if site requires it
+        let cookieValue = null;
+        if (url.includes('febbox.com')) {
+            if (this.regionPreference) {
+                console.log(`[ShowBoxScraper] Getting cookie with explicit region preference: ${this.regionPreference}`);
+                cookieValue = await getCookieForRequest(this.regionPreference);
+            } else {
+                console.log(`[ShowBoxScraper] Getting cookie with default region (no preference specified)`);
+                cookieValue = await getCookieForRequest(null);
+            }
+        }
  
         const currentHeaders = { ...this.baseHeaders };
         if (isJsonExpected) {
@@ -807,9 +726,13 @@ class ShowBoxScraper {
             currentHeaders['Sec-Fetch-Mode'] = 'cors'; 
             delete currentHeaders['Upgrade-Insecure-Requests'];
         }
+        
+        // Add cookie to headers if available
+        if (cookieValue) {
+            currentHeaders['Cookie'] = `ui=${cookieValue}`;
+        }
 
         try {
-            // MODIFICATION: Direct GET request to the URL -> MODIFICATION: Use proxiedUrl -> MODIFICATION: Use requestUrl
             const response = await axios.get(requestUrl, { 
                 headers: currentHeaders, 
                 timeout: 30000 // Consider increasing if proxy adds significant latency
@@ -1032,7 +955,7 @@ class ShowBoxScraper {
 
 // Function to extract FIDs from FebBox share page
 // MODIFICATION: Accept scraperApiKey -> MODIFICATION: Remove scraperApiKey
-const extractFidsFromFebboxPage = async (febboxUrl) => { // Removed lookupId parameter
+const extractFidsFromFebboxPage = async (febboxUrl, regionPreference = null) => { // Removed lookupId parameter
     const timerLabel = `extractFidsFromFebboxPage_total_${febboxUrl.replace(/[^a-zA-Z0-9]/g, '')}`;
     // console.time(timerLabel);
     let directSources = []; // Initialize directSources
@@ -1054,7 +977,7 @@ const extractFidsFromFebboxPage = async (febboxUrl) => { // Removed lookupId par
     let contentHtml = await getFromCache(cacheKeyHtml, cacheSubDirHtml);
 
     if (!contentHtml) {
-        const cookieForRequest = await getCookieForRequest(); // Simplified cookie call
+        const cookieForRequest = await getCookieForRequest(regionPreference); // Pass region preference
         const baseHeaders = { 'Cookie': `ui=${cookieForRequest}` };
         const fetchTimerLabel = `extractFidsFromFebboxPage_fetch_${febboxUrl.replace(/[^a-zA-Z0-9]/g, '')}`;
         
@@ -1162,7 +1085,7 @@ const extractFidsFromFebboxPage = async (febboxUrl) => { // Removed lookupId par
 // Function to convert IMDb ID to TMDB ID using TMDB API
 // MODIFICATION: Accept scraperApiKey (though not directly used for TMDB calls here, kept for consistency if future needs arise)
 // -> MODIFICATION: Remove scraperApiKey parameter as it's not used for TMDB.
-const convertImdbToTmdb = async (imdbId) => {
+const convertImdbToTmdb = async (imdbId, regionPreference = null) => {
     console.time(`convertImdbToTmdb_total_${imdbId}`);
     if (!imdbId || !imdbId.startsWith('tt')) {
         console.log('  Invalid IMDb ID format provided for conversion.', imdbId);
@@ -1230,7 +1153,7 @@ const convertImdbToTmdb = async (imdbId) => {
 // Exposed API for the Stremio addon
 // This will be a function to get streams from a TMDB ID
 // MODIFICATION: Accept scraperApiKey -> MODIFICATION: Remove scraperApiKey
-const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeNum = null) => {
+const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeNum = null, regionPreference = null) => {
     // REMOVE: lookupId creation and initial cookie call for lookupId, as cookie is now per-request context
     // const lookupId = `${tmdbType}_${tmdbId}_...`;
     // await getInitialCookieForLookup(lookupId);
@@ -1240,7 +1163,7 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
     console.log(`Getting streams for TMDB ${tmdbType}/${tmdbId}${seasonNum !== null ? `, Season ${seasonNum}` : ''}${episodeNum !== null ? `, Episode ${episodeNum}` : ''}`);
     
     // Then, get the ShowBox URL from TMDB ID
-    const tmdbInfo = await getShowboxUrlFromTmdbInfo(tmdbType, tmdbId);
+    const tmdbInfo = await getShowboxUrlFromTmdbInfo(tmdbType, tmdbId, regionPreference);
     if (!tmdbInfo || !tmdbInfo.showboxUrl) {
         console.log(`Could not construct ShowBox URL for TMDB ${tmdbType}/${tmdbId}`);
         console.timeEnd(mainTimerLabel);
@@ -1251,7 +1174,7 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
     // const originalTmdbMediaTitle = tmdbInfo.title; // Title from TMDB, if needed later
 
     // Then, get FebBox link from ShowBox
-    const showboxScraper = new ShowBoxScraper();
+    const showboxScraper = new ShowBoxScraper(regionPreference);
     const febboxShareInfos = await showboxScraper.extractFebboxShareLinks(showboxUrl);
     if (!febboxShareInfos || febboxShareInfos.length === 0) {
         console.log(`No FebBox share links found for ${showboxUrl}`);
@@ -1274,13 +1197,12 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
         
         // For TV shows, handle season and episode
         if (tmdbType === 'tv' && seasonNum !== null) {
-            // Pass baseStreamTitle (which will be just show name for TV)
-            // REMOVE: lookupId parameter from processShowWithSeasonsEpisodes call
-            await processShowWithSeasonsEpisodes(febboxUrl, baseStreamTitle, seasonNum, episodeNum, allStreams);
+            // Pass baseStreamTitle (which will be just show name for TV) and regionPreference
+            await processShowWithSeasonsEpisodes(febboxUrl, baseStreamTitle, seasonNum, episodeNum, allStreams, true, regionPreference);
         } else {
             // Handle movies or TV shows without season/episode specified (old behavior)
-            // Extract FIDs from FebBox page - REMOVE lookupId
-            const { fids, shareKey, directSources } = await extractFidsFromFebboxPage(febboxUrl);
+            // Extract FIDs from FebBox page - Pass regionPreference
+            const { fids, shareKey, directSources } = await extractFidsFromFebboxPage(febboxUrl, regionPreference);
             
             // If we have direct sources from player setup
             if (directSources && directSources.length > 0) {
@@ -1309,8 +1231,8 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
             // Process FIDs
             if (fids.length > 0 && shareKey) {
                 // console.time(...);
-                // REMOVE lookupId from fetchSourcesForSingleFid call
-                const fidPromises = fids.map(fid => fetchSourcesForSingleFid(fid, shareKey));
+                // Pass regionPreference to fetchSourcesForSingleFid
+                const fidPromises = fids.map(fid => fetchSourcesForSingleFid(fid, shareKey, regionPreference));
                 const fidSourcesArray = await Promise.all(fidPromises);
                 // console.timeEnd(...);
                 // ... (fidSourcesArray processing) ...
@@ -1402,7 +1324,7 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
 // Function to handle TV shows with seasons and episodes
 // MODIFICATION: Accept scraperApiKey -> MODIFICATION: Remove scraperApiKey
 // New parameter: resolveFids, defaults to true. If false, skips fetching sources for FIDs.
-const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum, episodeNum, allStreams, resolveFids = true) => { // Removed lookupId parameter
+const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum, episodeNum, allStreams, resolveFids = true, regionPreference = null) => { // Removed lookupId parameter
     const processTimerLabel = `processShowWithSeasonsEpisodes_total_s${seasonNum}` + (episodeNum ? `_e${episodeNum}` : '_all') + (resolveFids ? '_resolve' : '_noresolve');
     console.time(processTimerLabel);
     console.log(`Processing TV Show: ${showboxTitle}, Season: ${seasonNum}, Episode: ${episodeNum !== null ? episodeNum : 'all'}${resolveFids ? '' : ' (FIDs not resolved)'}`);
@@ -1422,7 +1344,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         const fetchMainPageTimer = `processShowWithSeasonsEpisodes_fetchMainPage_s${seasonNum}`;
         console.time(fetchMainPageTimer);
 
-        const cookieForRequest = await getCookieForRequest(); // Simplified cookie call
+        const cookieForRequest = await getCookieForRequest(regionPreference); // Pass region preference
 
         // MODIFICATION: Removed ScraperAPI conditional logic
         // const useScraperApi = process.env.USE_SCRAPER_API === 'true';
@@ -1486,7 +1408,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         console.log(`No season folders found on ${febboxUrl}`);
         // It might be directly files, so try the original logic as fallback
         console.time(`processShowWithSeasonsEpisodes_fallbackDirect_s${seasonNum}`);
-        const { fids, directSources } = await extractFidsFromFebboxPage(febboxUrl);
+        const { fids, directSources } = await extractFidsFromFebboxPage(febboxUrl, regionPreference);
         console.timeEnd(`processShowWithSeasonsEpisodes_fallbackDirect_s${seasonNum}`);
         
         if (directSources && directSources.length > 0) {
@@ -1505,7 +1427,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         
         if (fids.length > 0) {
             console.time(`processShowWithSeasonsEpisodes_fallbackFids_s${seasonNum}_concurrent`);
-            const fallbackFidPromises = fids.map(fid => fetchSourcesForSingleFid(fid, shareKey));
+            const fallbackFidPromises = fids.map(fid => fetchSourcesForSingleFid(fid, shareKey, regionPreference));
             const fallbackFidSourcesArray = await Promise.all(fallbackFidPromises);
             console.timeEnd(`processShowWithSeasonsEpisodes_fallbackFids_s${seasonNum}_concurrent`);
 
@@ -1580,7 +1502,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
             try {
                 const targetFolderListUrl = `${FEBBOX_FILE_SHARE_LIST_URL}?share_key=${shareKey}&parent_id=${selectedFolder.id}&is_html=1&pwd=`;
                 
-                const cookieForRequestFolder = await getCookieForRequest(); // Simplified cookie call
+                const cookieForRequestFolder = await getCookieForRequest(regionPreference); // Simplified cookie call
                 let finalFolderUrl = targetFolderListUrl;
                 let axiosConfigFolder = {
                     headers: {
@@ -1713,7 +1635,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     if (resolveFids && episodeFids.length > 0) { // Check resolveFids flag here
       const episodeTimerLabel = `processShowWithSeasonsEpisodes_fetchEpisodeSources_s${seasonNum}` + (episodeNum ? `_e${episodeNum}`: '_allEp_concurrent');
       console.time(episodeTimerLabel);
-      const episodeSourcePromises = episodeFids.map(fid => fetchSourcesForSingleFid(fid, shareKey).then(sources => ({ fid, sources })));
+      const episodeSourcePromises = episodeFids.map(fid => fetchSourcesForSingleFid(fid, shareKey, regionPreference).then(sources => ({ fid, sources })));
       const episodeSourcesResults = await Promise.all(episodeSourcePromises);
       console.timeEnd(episodeTimerLabel);
 

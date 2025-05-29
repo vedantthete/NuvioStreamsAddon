@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Nuvio Streams Addon</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
     <style>
@@ -50,10 +50,11 @@
             display: flex;
             justify-content: center;
             transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-            max-width: 850px;
+            max-width: 1050px;
             width: 100%;
             perspective: 1000px;
             z-index: 1;
+            padding: 0 0.5rem;
         }
         
         .cards-container.expanded {
@@ -65,11 +66,13 @@
             border-radius: 0.8rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             width: 100%;
-            max-width: 400px;
+            max-width: 650px;
             transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
             border: 1px solid #181818;
             position: relative;
             transform-origin: center center;
+            overflow: hidden; /* Prevent children from overflowing */
+            box-sizing: border-box; /* Include padding and border in the element's width and height */
         }
         
         /* Always-on Outer Glow for Main Card */
@@ -85,6 +88,7 @@
             border-radius: 0.9rem;
             opacity: 0.4; /* Always visible, subtle */
             transition: opacity 0.4s ease-out;
+            pointer-events: none; /* Ensure it doesn't block interactions */
         }
         
         .card:hover:before {
@@ -293,25 +297,30 @@
         }
         
         .card-body {
-            padding: 0 1.5rem 1.5rem;
+            padding: 1.5rem 2rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            overflow: visible;
             /* position: relative; z-index: 1 already added above */
         }
         
-        p {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 1.25rem;
-            font-weight: 300;
+        .card-body > p {
+            margin-bottom: 0;
+        }
+        
+        .card-body .full-width {
+            grid-column: 1 / -1;
         }
         
         .providers {
             background-color: rgba(15, 15, 15, 0.7);
             border-radius: 0.6rem;
             padding: 1rem;
-            margin-bottom: 1.25rem;
-            margin-top: 1.5rem;
+            margin-bottom: 0;
+            margin-top: 0;
             border: 1px solid var(--border);
+            height: 100%;
         }
         
         .providers h2 {
@@ -390,34 +399,41 @@
         .provider-info-note {
             font-size: 0.8rem;
             color: var(--text-light);
-            padding: 0.75rem 0.25rem;
-            margin-top: 0.5rem; /* Space above this note */
-            margin-bottom: 1.25rem; /* Space below this note before disclaimer */
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0;
             text-align: left;
             line-height: 1.5;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
+            background-color: rgba(15, 15, 15, 0.4);
+            border-radius: 0.6rem;
+            border: 1px solid var(--border);
+            height: calc(100% - 1rem);
         }
         
         .provider-info-note .info-icon {
-            font-size: 1rem; /* Slightly larger icon */
+            font-size: 1rem;
             margin-right: 0.5rem;
             color: var(--primary);
+            flex-shrink: 0;
+            margin-top: 0.1rem;
         }
 
         .disclaimer {
             background-color: rgba(15, 15, 15, 0.7);
             border-radius: 0.6rem;
             padding: 1rem;
-            margin: 1.25rem 0;
+            margin: 0;
             border: 1px solid var(--border);
             position: relative;
+            grid-column: 1 / -1; /* Make it span full width */
         }
         
         .disclaimer-header {
             font-size: 0.85rem;
             font-weight: 500;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             color: var(--text);
             opacity: 0.9;
             display: flex;
@@ -430,20 +446,25 @@
             font-size: 0.85rem;
         }
         
-        .disclaimer p {
-            font-size: 0.8rem;
-            line-height: 1.5;
-            margin-bottom: 0.5rem;
+        .disclaimer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
         }
         
-        .disclaimer p:last-child {
+        .disclaimer-content p {
+            flex: 1;
+            min-width: 240px;
             margin-bottom: 0;
+            font-size: 0.8rem;
+            line-height: 1.4;
         }
         
         .buttons {
             display: flex;
             gap: 0.75rem;
             margin-top: 1.5rem;
+            grid-column: 1 / -1;
         }
         
         .btn {
@@ -462,6 +483,7 @@
             outline: none;
             letter-spacing: 0.5px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
         }
         
         .btn-primary {
@@ -501,6 +523,9 @@
             border-left: 3px solid var(--primary);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
             pointer-events: none;
+            width: calc(100% - 2rem);
+            max-width: 500px;
+            text-align: center;
         }
         
         .toast.show {
@@ -536,12 +561,11 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 0.75rem;
+            margin-bottom: 1.5rem;
             width: 100%;
             justify-content: center;
             padding: 0.75rem 1rem;
             font-size: 0.9rem;
-            margin-top: 1rem;
-            margin-bottom: 1.5rem;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
             color: white;
             border: none;
@@ -622,11 +646,205 @@
                 max-width: 400px;
                 margin-top: 1rem;
             }
+            
+            .providers, .provider-info-note {
+                grid-column: 1 / -1;
+            }
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 700px) {
+            .card-body {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1rem 1.25rem 1.5rem;
+            }
+            
+            .card {
+                max-width: 400px;
+                overflow: hidden;
+            }
+            
+            .disclaimer-content {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .disclaimer-content p {
+                min-width: 100%;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .cookie-form {
+                grid-template-columns: 1fr;
+                width: 100%;
+            }
+            
             .buttons {
                 flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .logo {
+                max-width: 150px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+            }
+            
+            .how-to-get-btn {
+                margin-left: 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .cookie-config-container {
+                margin-bottom: 0.75rem;
+                width: 100%;
+            }
+
+            .provider-info-note, .providers {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+            
+            .cards-container {
+                padding: 0;
+                max-width: 100vw;
+                width: 100vw;
+            }
+            
+            .card {
+                border-radius: 0;
+                max-width: 100%;
+                width: 100vw;
+                margin: 0;
+                border-left: none;
+                border-right: none;
+            }
+            
+            .card:before {
+                border-radius: 0;
+                opacity: 0.3;
+            }
+            
+            .card-body {
+                padding: 0.75rem 1rem 1.25rem;
+                gap: 0.75rem;
+            }
+            
+            .card-header {
+                padding: 1.25rem 1.25rem 0.75rem;
+            }
+            
+            .card-footer {
+                padding: 0.75rem 1rem;
+            }
+            
+            .providers, .provider-info-note, .disclaimer {
+                padding: 0.75rem;
+                border-radius: 0.5rem;
+            }
+            
+            .cookie-config {
+                padding: 0.75rem;
+                border-radius: 0.5rem;
+            }
+            
+            .toggle-text {
+                font-size: 0.9rem;
+            }
+            
+            .recommended-tag {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.5rem;
+            }
+            
+            .toast {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+                width: calc(100% - 1.5rem);
+                bottom: 1rem;
+            }
+            
+            /* Adjust long text fields */
+            .manifest-url-box span {
+                font-size: 0.7rem;
+            }
+            
+            .provider-detail {
+                display: none; /* Hide provider details on very small screens */
+            }
+            
+            .cookie-input, #regionSelector {
+                font-size: 0.8rem;
+                padding: 0.6rem 0.75rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 0.75rem;
+                font-size: 0.85rem;
+            }
+            
+            .video-tutorial-panel {
+                width: 100%;
+                right: -100%;
+                padding: 15px;
+            }
+            
+            .video-tutorial-panel.show {
+                right: 0;
+            }
+            
+            .step-text {
+                font-size: 0.85rem;
+            }
+            
+            .close-tutorial {
+                font-size: 1.8rem;
+                padding: 5px;
+            }
+            
+            /* Fix for personalized addon section */
+            .manifest-result {
+                padding: 0.75rem;
+                margin-bottom: 1rem;
+            }
+            
+            .manifest-url-box {
+                padding: 0.75rem;
+            }
+            
+            .manifest-url-box span {
+                font-size: 0.75rem;
+                line-height: 1.3;
+            }
+            
+            .copy-btn {
+                width: 100%;
+                padding: 0.6rem 0;
+            }
+            
+            #personalizedManifest {
+                margin-bottom: 1rem;
+            }
+            
+            .cookie-config {
+                overflow: visible;
             }
         }
 
@@ -750,31 +968,43 @@
             border: 1px solid var(--border);
             position: relative;
             overflow: hidden;
-            max-height: 700px; /* Increased from 500px */
+            max-height: 700px;
             opacity: 1;
             transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, padding 0.5s ease-in-out;
         }
-
+        
+        .cookie-config p {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 0.75rem;
+        }
+        
         .cookie-config.collapsed {
             max-height: 0;
             opacity: 0;
             padding-top: 0;
             padding-bottom: 0;
-            border-top-width: 0; /* Collapse border smoothly */
-            border-bottom-width: 0; /* Collapse border smoothly */
-            margin-bottom: 0; /* Remove margin when collapsed */
+            border-top-width: 0;
+            border-bottom-width: 0;
+            margin-bottom: 0;
         }
 
         .cookie-form {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 0.4fr;
             gap: 0.5rem;
             margin: 1rem 0;
-            flex-wrap: wrap;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .cookie-form .button-group {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 0.5rem;
         }
 
         .cookie-input {
-            flex: 1;
-            min-width: 250px;
             padding: 0.65rem 1rem;
             border-radius: 0.5rem;
             border: 1px solid var(--border);
@@ -783,6 +1013,9 @@
             font-size: 0.9rem;
             outline: none;
             transition: all 0.3s ease;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .cookie-input:focus {
@@ -800,6 +1033,8 @@
             padding: 1rem;
             border: 1px solid rgba(0, 163, 255, 0.2);
             transition: all 0.3s ease;
+            margin-bottom: 1rem;
+            overflow: visible;
         }
 
         .manifest-result h4 {
@@ -812,25 +1047,27 @@
         .manifest-note {
             font-size: 0.75rem;
             color: var(--text-light);
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
         }
 
         .manifest-url-box {
             display: flex;
+            flex-direction: column;
             background: rgba(0, 0, 0, 0.3);
-            padding: 0.5rem;
+            padding: 0.75rem;
             border-radius: 0.4rem;
-            margin-bottom: 0.75rem;
-            align-items: center;
+            margin-bottom: 1rem;
             border: 1px solid var(--border);
+            overflow: visible;
         }
 
         .manifest-url-box span {
-            flex: 1;
+            width: 100%;
             font-size: 0.8rem;
             word-break: break-all;
-            color: var(--text-light);
-            padding-right: 0.5rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
         }
 
         .copy-btn {
@@ -838,19 +1075,20 @@
             border: 1px solid rgba(0, 163, 255, 0.3);
             color: var(--primary);
             border-radius: 0.3rem;
-            padding: 0.3rem 0.5rem;
-            font-size: 0.75rem;
+            padding: 0.5rem;
+            font-size: 0.8rem;
             cursor: pointer;
             transition: all 0.3s ease;
-        }
-
-        .copy-btn:hover {
-            background-color: rgba(0, 163, 255, 0.2);
+            align-self: flex-end;
+            width: auto;
+            min-width: 70px;
+            text-align: center;
         }
 
         .install-personal-container {
             display: flex;
             justify-content: center;
+            margin-top: 0.5rem;
         }
 
         /* Video Tutorial Panel Styles */
@@ -977,6 +1215,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-left: 0.5rem;
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
         }
         
         .how-to-get-btn:hover {
@@ -1007,6 +1246,45 @@
         .tutorial-warning p:last-child {
             margin-bottom: 0;
         }
+
+        /* Add this new style for the two-column layout */
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 700px) {
+            .two-column-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .server-selection-note {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        /* Mobile and touch optimization */
+        @media (hover: none) {
+            /* Increase touch targets for mobile */
+            .btn, .toggle-btn, .how-to-get-btn, .more-addons-btn {
+                min-height: 44px; /* Apple's recommended minimum touch target size */
+            }
+            
+            .cookie-input, #regionSelector {
+                height: 44px;
+            }
+            
+            /* Remove hover effects that don't work well on touch devices */
+            .btn:hover, .how-to-get-btn:hover, .more-addons-btn:hover {
+                transform: none;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+        }
     </style>
 </head>
 <body>
@@ -1017,9 +1295,9 @@
                 <h1>Nuvio Streams Addon</h1>
             </div>
             <div class="card-body">
-                <p>Your gateway to high-quality streaming on Stremio. Enjoy movies and TV shows from multiple sources with our powerful addon.</p>
+                <p class="full-width">Your gateway to high-quality streaming on Stremio. Enjoy movies and TV shows from multiple sources with our powerful addon.</p>
                 
-                <button class="more-addons-btn" id="moreAddonsBtn">
+                <button class="more-addons-btn full-width" id="moreAddonsBtn">
                     More Addons by TapFrame
                     <span class="arrow">→</span>
                 </button>
@@ -1058,13 +1336,14 @@
                         <span class="disclaimer-icon">ℹ️</span>
                         <span>Disclaimer</span>
                     </div>
-                    <p>Nuvio Streams is a scraper-based addon that aggregates content from various providers. I do not own or host any of the content provided.</p>
-                    <p>Providers (including ShowBox) may become unavailable without prior notification. I will make every effort to maintain provider functionality, but availability cannot be guaranteed.</p>
-                    <p><strong>Important:</strong> As an independent developer, I cannot control when streaming sources may disappear. I'll try to maintain this addon as much as possible, but some providers may stop working unexpectedly.</p>
+                    <div class="disclaimer-content">
+                        <p>Nuvio Streams is a scraper-based addon that aggregates content from various providers. I do not own or host any of the content provided.</p>
+                        <p>Providers (including ShowBox) may become unavailable without notice. As an independent developer, I'll make every effort to maintain functionality, but sources may stop working unexpectedly.</p>
+                    </div>
                 </div>
                 
                 <!-- Add Cookie Configuration Section -->
-                <div class="cookie-config-container">
+                <div class="cookie-config-container full-width">
                     <div class="cookie-header">
                         <button id="toggleCookieSection" class="toggle-btn">
                             <span class="toggle-icon">▼</span>
@@ -1075,20 +1354,33 @@
                     
                     <div class="cookie-config" id="cookieConfigSection">
                         <p>ShowBox fetches content from a cloud storage provider called FebBox. Each FebBox user gets 100GB/month of fast streaming before speeds are reduced.</p>
-                        <p><strong>Why use your own cookie?</strong> Without personalization, you'll share cookies with other addon users, which can exhaust the 100GB quota quickly and result in slow or failed streams. Additionally, when not using a personal cookie, ShowBox streams will be limited to sizes below 9GB. With your own cookie, you'll have your personal 100GB quota for fast, reliable streams, and no size restrictions on ShowBox content.</p>
+                        <p><strong>Why use your own cookie?</strong> Without personalization, you'll share cookies with other addon users, which can exhaust the 100GB quota quickly and result in slow or failed streams. When not using a personal cookie, ShowBox streams are limited to sizes below 9GB.</p>
                         
                         <div class="cookie-form">
                             <input type="text" id="cookieInput" placeholder="Enter your token" class="cookie-input">
-                            <!-- Add Server Region Selector -->
-                            <select id="regionSelector" class="cookie-input" style="flex: 0.4; min-width: 100px;">
-                                <option value="AUTO">Auto Detect</option>
-                                <option value="UK3">UK Servers</option>
-                                <option value="USA7">US Servers</option>
-                                <option value="APC2">Asia/Pacific</option>
+                            <!-- Server Region Selector -->
+                            <select id="regionSelector" class="cookie-input">
+                                <option value="USA7">US East</option>
+                                <option value="USA6">US West</option>
+                                <option value="USA5">US Middle</option>
+                                <option value="UK3">United Kingdom</option>
+                                <option value="CA1">Canada</option>
+                                <option value="FR1">France</option>
+                                <option value="DE2">Germany</option>
+                                <option value="HK1">Hong Kong</option>
+                                <option value="IN1">India</option>
+                                <option value="AU1">Australia</option>
+                                <option value="SZ">China</option>
                             </select>
-                            <button id="setCookieBtn" class="btn btn-secondary">Set Cookie</button>
-                            <button id="howToGetBtn" class="how-to-get-btn">How to Get</button>
+                            <div class="button-group">
+                                <button id="setCookieBtn" class="btn btn-secondary">Set Cookie</button>
+                                <button id="howToGetBtn" class="how-to-get-btn">How to Get</button>
+                            </div>
                         </div>
+                        
+                        <p class="server-selection-note" style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-light);">
+                            <strong>Server Selection:</strong> Choose the server region closest to your physical location for best performance. Different regions may have different content availability and speed. If a region doesn't work well, try another one.
+                        </p>
                         
                         <div id="personalizedManifest" class="personalized-manifest">
                             <div class="manifest-result" style="display:none;">
@@ -1299,6 +1591,16 @@
         const copyPersonalLinkBtn = document.getElementById('copyPersonalLink');
         const installPersonalLinkAnchor = document.getElementById('installPersonalLink');
 
+        // Add a listener for region changes
+        if (regionSelector) {
+            regionSelector.addEventListener('change', () => {
+                const regionValue = regionSelector.value;
+                toast.textContent = `Region changed to ${regionValue}. Click 'Set Cookie' to apply.`;
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 3000);
+            });
+        }
+
         if (setCookieBtn) {
             setCookieBtn.addEventListener('click', () => {
                 const cookieValue = cookieInput.value.trim();
@@ -1324,7 +1626,6 @@
                 const personalizedInstallUrl = `stremio://${personalizedManifestURL.replace(/^https?:\/\//, '')}`;
 
                 personalManifestUrlSpan.textContent = personalizedManifestURL;
-                // installPersonalLinkAnchor.href = personalizedInstallUrl; // No longer needed here
                 manifestResult.style.display = 'block';
 
                 // Update main buttons
@@ -1332,10 +1633,12 @@
                 currentInstallUrl = personalizedInstallUrl;
                 if (installLink) installLink.href = currentInstallUrl;
 
-                // Hide buttons within the personalized box
-                if (installPersonalLinkAnchor) installPersonalLinkAnchor.style.display = 'none';
-                if (copyPersonalLinkBtn) copyPersonalLinkBtn.style.display = 'none';
-
+                // Show buttons within the personalized box for better mobile UX
+                if (installPersonalLinkAnchor) installPersonalLinkAnchor.style.display = 'inline-flex';
+                if (copyPersonalLinkBtn) copyPersonalLinkBtn.style.display = 'inline-block';
+                
+                // Update install personal link href
+                if (installPersonalLinkAnchor) installPersonalLinkAnchor.href = personalizedInstallUrl;
 
                 toast.textContent = `Personalized manifest ready with ${regionValue} region! Main buttons updated.`;
                 toast.classList.add('show');

@@ -92,8 +92,32 @@ builder.defineStreamHandler(async (args) => {
     };
 
     const userScraperApiKey = (config && config.scraperApiKey) ? config.scraperApiKey : null;
-
+    
+    // Extract the region preference - first check from config, then from global.currentRequestRegionPreference
+    let userRegionPreference = null;
+    
+    // Check config first
+    if (config && config.region) {
+        userRegionPreference = config.region;
+        console.log(`[addon.js] Using region from config: ${userRegionPreference}`);
+    } 
+    // Then check global
+    else if (global.currentRequestRegionPreference) {
+        userRegionPreference = global.currentRequestRegionPreference;
+        console.log(`[addon.js] Using region from URL parameter: ${userRegionPreference}`);
+    }
+    
+    // Log the request information in a more detailed way
     console.log(`Stream request for Stremio type: '${type}', id: '${id}'`);
+    console.log(`Request config: ${JSON.stringify({
+        hasScraperApiKey: !!userScraperApiKey,
+        regionPreference: userRegionPreference || 'none'
+    })}`);
+    
+    if (!userRegionPreference) {
+        console.log(`[addon.js] No region preference found in request config or URL parameters`);
+    }
+
     if (userScraperApiKey) {
         const maskedApiKey = userScraperApiKey.length > 8 
             ? `${userScraperApiKey.substring(0, 4)}...${userScraperApiKey.substring(userScraperApiKey.length - 4)}` 
@@ -196,7 +220,7 @@ builder.defineStreamHandler(async (args) => {
     // --- Parallel Fetching of Streams ---
     console.log('Initiating parallel fetch for ShowBox, Xprime.tv, HollyMovieHD, and Soaper TV streams (in that priority order after ShowBox)...');
 
-    const showBoxPromise = getStreamsFromTmdbId(tmdbTypeFromId, tmdbId, seasonNum, episodeNum, userScraperApiKey)
+    const showBoxPromise = getStreamsFromTmdbId(tmdbTypeFromId, tmdbId, seasonNum, episodeNum, userRegionPreference)
         .then(streams => {
             if (streams && streams.length > 0) {
                 console.log(`  Successfully fetched ${streams.length} streams from ShowBox.`);
@@ -426,6 +450,12 @@ builder.defineStreamHandler(async (args) => {
         console.log(`... and ${stremioStreamObjects.length - 3} more streams`);
     }
     console.log("--- END Stremio Stream Objects to be sent ---");
+
+    // Clean up the global region preference after use
+    if (userRegionPreference) {
+        global.currentRequestRegionPreference = null;
+        console.log(`Cleared region preference after stream processing`);
+    }
 
     return {
         streams: stremioStreamObjects

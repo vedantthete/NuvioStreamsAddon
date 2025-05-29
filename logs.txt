@@ -1,0 +1,358 @@
+PS F:\ADDONS\MBOXAIO> npm start
+
+> stremio-showbox-scraper@0.1.0 start
+> node server.js
+
+Using proxy/direct mode with scraper.js
+Current DISABLE_CACHE value: 'true' (Type: string)
+Using FebBox region setting: AUTO
+Using cache directory: F:\ADDONS\MBOXAIO\.cache
+(node:5316) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Nuvio Streams Addon landing page available at http://localhost:7777
+Default Addon Manifest available at: http://localhost:7777/manifest.json
+To generate a personalized manifest, append ?cookie=YOUR_URL_ENCODED_COOKIE to the manifest URL.
+Example: http://localhost:7777/manifest.json?cookie=ui%3Dyourcookievalue
+Install example: stremio://localhost:7777/manifest.json?cookie=ui%3Dyourcookievalue
+Loaded 9 fallback cookies from cookies.txt
+Received region preference from URL: UK3
+Stream request for Stremio type: 'movie', id: 'tt28309594'
+  No ScraperAPI Key configured by user.
+  Received IMDb ID: tt28309594. Attempting to convert to TMDB ID.
+  Attempting to convert IMDb ID: tt28309594 to TMDB ID.
+  CACHE DISABLED: Skipping read for tmdb_external_id\imdb-tt28309594.json
+    Fetching from TMDB find API: https://api.themoviedb.org/3/find/tt28309594?api_key=439c478a771f35c05022f9feabcca01c&external_source=imdb_id
+Received region preference from URL: USA7
+Stream request for Stremio type: 'movie', id: 'tt28309594'
+  No ScraperAPI Key configured by user.
+  Received IMDb ID: tt28309594. Attempting to convert to TMDB ID.
+  Attempting to convert IMDb ID: tt28309594 to TMDB ID.
+  CACHE DISABLED: Skipping read for tmdb_external_id\imdb-tt28309594.json
+(node:5316) Warning: Label 'convertImdbToTmdb_total_tt28309594' already exists for console.time()
+    Fetching from TMDB find API: https://api.themoviedb.org/3/find/tt28309594?api_key=439c478a771f35c05022f9feabcca01c&external_source=imdb_id
+(node:5316) Warning: Label 'convertImdbToTmdb_apiCall_tt28309594' already exists for console.time()
+convertImdbToTmdb_apiCall_tt28309594: 545.344ms
+    Successfully converted IMDb ID tt28309594 to TMDB movie ID 1151039 (Nonnas)
+  CACHE DISABLED: Skipping write for tmdb_external_id\imdb-tt28309594.json
+convertImdbToTmdb_total_tt28309594: 546.555ms
+  Successfully converted IMDb ID tt28309594 to TMDB movie ID 1151039 (Nonnas)
+Fetching details from TMDB: https://api.themoviedb.org/3/movie/1151039?api_key=439c478a771f35c05022f9feabcca01c&language=en-US
+    Successfully converted IMDb ID tt28309594 to TMDB movie ID 1151039 (Nonnas)
+  CACHE DISABLED: Skipping write for tmdb_external_id\imdb-tt28309594.json
+  Successfully converted IMDb ID tt28309594 to TMDB movie ID 1151039 (Nonnas)
+Fetching details from TMDB: https://api.themoviedb.org/3/movie/1151039?api_key=439c478a771f35c05022f9feabcca01c&language=en-US
+(node:5316) Warning: No such label 'convertImdbToTmdb_apiCall_tt28309594' for console.timeEnd()
+(node:5316) Warning: No such label 'convertImdbToTmdb_total_tt28309594' for console.timeEnd()
+  Fetched/Confirmed TMDB details: Title='Nonnas', Year='2025'
+Initiating parallel fetch for ShowBox, Xprime.tv, HollyMovieHD, and Soaper TV streams (in that priority order after ShowBox)...
+Getting streams for TMDB movie/1151039
+  CACHE DISABLED: Skipping read for tmdb_api\tmdb-movie-1151039.json
+[Xprime.tv] Attempting to fetch streams for 'Nonnas' (2025), Type: movie, S: null, E: null
+[Xprime.tv] Using proxy: https://starlit-valkyrie-39f5ab.netlify.app
+[Xprime.tv] Fetching from: https://starlit-valkyrie-39f5ab.netlify.app/?destination=https%3A%2F%2Fbackend.xprime.tv%2Fprimebox%3Fname%3DNonnas%26year%3D2025%26fallback_year%3D2025
+[Soaper TV] Attempting to fetch streams for TMDB ID: 1151039, Type: movie
+[Soaper TV] Fetching TMDB info from: https://api.themoviedb.org/3/movie/1151039?api_key=439c478a771f35c05022f9feabcca01c
+[HollyMovieHD] Fetching streams for TMDB ID: 1151039 (Type: movie)
+[HollyMovieHD] Requesting initial data from: https://reyna.bludclart.com/api/source/hollymoviehd/1151039?vrf=53883b15b1feff6823647b410ec5b91b287b8f915f82d338cbbcc8d8bf782bb3
+[HollyMovieHD] Fetching: https://reyna.bludclart.com/api/source/hollymoviehd/1151039?vrf=53883b15b1feff6823647b410ec5b91b287b8f915f82d338cbbcc8d8bf782bb3 (via proxy)
+  Fetching TMDB data from: https://api.themoviedb.org/3/movie/1151039?api_key=439c478a771f35c05022f9feabcca01c
+  Fetched/Confirmed TMDB details: Title='Nonnas', Year='2025'
+Initiating parallel fetch for ShowBox, Xprime.tv, HollyMovieHD, and Soaper TV streams (in that priority order after ShowBox)...
+Getting streams for TMDB movie/1151039
+  CACHE DISABLED: Skipping read for tmdb_api\tmdb-movie-1151039.json
+[Xprime.tv] Attempting to fetch streams for 'Nonnas' (2025), Type: movie, S: null, E: null
+[Xprime.tv] Using proxy: https://starlit-valkyrie-39f5ab.netlify.app
+[Xprime.tv] Fetching from: https://starlit-valkyrie-39f5ab.netlify.app/?destination=https%3A%2F%2Fbackend.xprime.tv%2Fprimebox%3Fname%3DNonnas%26year%3D2025%26fallback_year%3D2025
+[Soaper TV] Attempting to fetch streams for TMDB ID: 1151039, Type: movie
+[Soaper TV] Fetching TMDB info from: https://api.themoviedb.org/3/movie/1151039?api_key=439c478a771f35c05022f9feabcca01c
+[HollyMovieHD] Fetching streams for TMDB ID: 1151039 (Type: movie)
+[HollyMovieHD] Requesting initial data from: https://reyna.bludclart.com/api/source/hollymoviehd/1151039?vrf=53883b15b1feff6823647b410ec5b91b287b8f915f82d338cbbcc8d8bf782bb3
+[HollyMovieHD] Fetching: https://reyna.bludclart.com/api/source/hollymoviehd/1151039?vrf=53883b15b1feff6823647b410ec5b91b287b8f915f82d338cbbcc8d8bf782bb3 (via proxy)
+  Fetching TMDB data from: https://api.themoviedb.org/3/movie/1151039?api_key=439c478a771f35c05022f9feabcca01c
+(node:5316) Warning: Label 'getStreamsFromTmdbId_total_movie_1151039' already exists for console.time()
+(node:5316) Warning: Label 'getShowboxUrlFromTmdbInfo_total' already exists for console.time()
+[Soaper TV] TMDB Info: "Nonnas" (2025)
+[Soaper TV] Fetching: /search.html?keyword=Nonnas (via proxy: https://starlit-valkyrie-39f5ab.netlify.app/?destination=https%3A%2F%2Fsoaper.cc%2Fsearch.html%3Fkey...)
+[Soaper TV] TMDB Info: "Nonnas" (2025)
+[Soaper TV] Fetching: /search.html?keyword=Nonnas (via proxy: https://starlit-valkyrie-39f5ab.netlify.app/?destination=https%3A%2F%2Fsoaper.cc%2Fsearch.html%3Fkey...)
+[HollyMovieHD] Main Playlist URL from API: https://gstream.hollymoviehd.cc/streamsvr/Qne0_vZviT/0-3?e=TGpKRENqMlQ3YTVTNE1LRjZsOUN0RHNOY0JrazNQd1VXZXFKeEdIZTMxbz0A
+[HollyMovieHD] Fetching: https://gstream.hollymoviehd.cc/streamsvr/Qne0_vZviT/0-3?e=TGpKRENqMlQ3YTVTNE1LRjZsOUN0RHNOY0JrazNQd1VXZXFKeEdIZTMxbz0A (via proxy)
+[HollyMovieHD] Main Playlist URL from API: https://gstream.hollymoviehd.cc/streamsvr/Qne0_vZviT/0-3?e=TGpKRENqMlQ3YTVTNE1LRjZsOUN0RHNOY0JrazNQd1VXZXFKeEdIZTMxbz0A
+[HollyMovieHD] Fetching: https://gstream.hollymoviehd.cc/streamsvr/Qne0_vZviT/0-3?e=TGpKRENqMlQ3YTVTNE1LRjZsOUN0RHNOY0JrazNQd1VXZXFKeEdIZTMxbz0A (via proxy)
+  CACHE DISABLED: Skipping write for tmdb_api\tmdb-movie-1151039.json
+  Preparing to search ShowBox with term: "Nonnas 2025" (Original TMDB title: "Nonnas", Year: 2025)
+  Searching for ShowBox match for: "Nonnas" (2025) [Cache key: 67d4d2e1f88c187480a6aea17cacab13]
+  CACHE DISABLED: Skipping read for showbox_search_results\67d4d2e1f88c187480a6aea17cacab13.txt
+  CACHE MISS for ShowBox search. Using cleaned search term: "Nonnas 2025" (Original: "Nonnas 2025")
+  Searching ShowBox with URL: https://www.showbox.media/search?keyword=Nonnas%202025 (Strategy: cleaned search term)
+  CACHE DISABLED: Skipping read for showbox_generic\www.showbox.media_search_keyword_Nonnas_202025.html
+ShowBoxScraper: Making request to: https://www.showbox.media/search?keyword=Nonnas%202025 via Proxy: https://starlit-valkyrie-39f5ab.netlify.app/?destination=
+  CACHE DISABLED: Skipping write for tmdb_api\tmdb-movie-1151039.json
+  Preparing to search ShowBox with term: "Nonnas 2025" (Original TMDB title: "Nonnas", Year: 2025)
+  Searching for ShowBox match for: "Nonnas" (2025) [Cache key: 67d4d2e1f88c187480a6aea17cacab13]
+  CACHE DISABLED: Skipping read for showbox_search_results\67d4d2e1f88c187480a6aea17cacab13.txt
+  CACHE MISS for ShowBox search. Using cleaned search term: "Nonnas 2025" (Original: "Nonnas 2025")
+  Searching ShowBox with URL: https://www.showbox.media/search?keyword=Nonnas%202025 (Strategy: cleaned search term)
+  CACHE DISABLED: Skipping read for showbox_generic\www.showbox.media_search_keyword_Nonnas_202025.html
+ShowBoxScraper: Making request to: https://www.showbox.media/search?keyword=Nonnas%202025 via Proxy: https://starlit-valkyrie-39f5ab.netlify.app/?destination=
+(node:5316) Warning: Label 'ShowBoxScraper_makeRequest_www.showbox.media_search_keyword_Nonnas_202025' already exists for console.time()    
+[Xprime.tv] CACHE DISABLED: Skipping read for xprime_stream_sizes\8cccfc1c66002a77e7eee6ad813a9a9f.txt
+[Xprime.tv] CACHE DISABLED: Skipping read for xprime_stream_sizes\493f6a3e61a409ed4be9f78c552a8dd1.txt
+[Xprime.tv] CACHE DISABLED: Skipping read for xprime_stream_sizes\d8b5b97f185616d429f5f1851e2a0727.txt
+[Xprime.tv] CACHE DISABLED: Skipping read for xprime_stream_sizes\8cccfc1c66002a77e7eee6ad813a9a9f.txt
+[Xprime.tv] CACHE DISABLED: Skipping read for xprime_stream_sizes\493f6a3e61a409ed4be9f78c552a8dd1.txt
+[Xprime.tv] CACHE DISABLED: Skipping read for xprime_stream_sizes\d8b5b97f185616d429f5f1851e2a0727.txt
+(node:5316) Warning: Label '[Xprime.tv] Fetch stream sizes' already exists for console.time()
+[HollyMovieHD] Playlist is not a master playlist with variants, or has no variants. Using main URL.
+[HollyMovieHD] Extracted 1 stream options.
+  Successfully fetched 1 streams from HollyMovieHD.
+[HollyMovieHD] Playlist is not a master playlist with variants, or has no variants. Using main URL.
+[HollyMovieHD] Extracted 1 stream options.
+  Successfully fetched 1 streams from HollyMovieHD.
+[Xprime.tv] CACHE DISABLED: Skipping write for xprime_stream_sizes\8cccfc1c66002a77e7eee6ad813a9a9f.txt
+[Xprime.tv] CACHE DISABLED: Skipping write for xprime_stream_sizes\493f6a3e61a409ed4be9f78c552a8dd1.txt
+[Xprime.tv] CACHE DISABLED: Skipping write for xprime_stream_sizes\493f6a3e61a409ed4be9f78c552a8dd1.txt
+[Xprime.tv] CACHE DISABLED: Skipping write for xprime_stream_sizes\8cccfc1c66002a77e7eee6ad813a9a9f.txt
+  CACHE DISABLED: Skipping write for showbox_generic\www.showbox.media_search_keyword_Nonnas_202025.html
+ShowBoxScraper_makeRequest_www.showbox.media_search_keyword_Nonnas_202025: 326.31ms
+  Search results for strategy "cleaned search term":
+    1. Title: "Nonnas", Year: N/A, Score: 20.0, URL: /movie/m-nonnas-2025
+  Found excellent match with score 20.0 using strategy "cleaned search term", stopping search
+  Best overall match: https://www.showbox.media/movie/m-nonnas-2025 (Score: 20.0, Strategy: cleaned search term)
+  CACHE DISABLED: Skipping write for showbox_search_results\67d4d2e1f88c187480a6aea17cacab13.txt
+ShowBoxScraper: Attempting to extract FebBox share link from: https://www.showbox.media/movie/m-nonnas-2025
+ShowBoxScraper: ID/Type not in URL, fetching HTML.
+  CACHE DISABLED: Skipping read for showbox_generic\www.showbox.media_movie_m-nonnas-2025.html
+ShowBoxScraper: Making request to: https://www.showbox.media/movie/m-nonnas-2025 via Proxy: https://starlit-valkyrie-39f5ab.netlify.app/?destination=
+[Xprime.tv] CACHE DISABLED: Skipping write for xprime_stream_sizes\d8b5b97f185616d429f5f1851e2a0727.txt
+[Xprime.tv] Fetch stream sizes: 191.119ms
+[Xprime.tv] Found 3 streams with sizes.
+  Successfully fetched 3 streams from Xprime.tv.
+[Xprime.tv] CACHE DISABLED: Skipping write for xprime_stream_sizes\d8b5b97f185616d429f5f1851e2a0727.txt
+[Xprime.tv] Found 3 streams with sizes.
+  Successfully fetched 3 streams from Xprime.tv.
+(node:5316) Warning: No such label '[Xprime.tv] Fetch stream sizes' for console.timeEnd()
+  CACHE DISABLED: Skipping write for showbox_generic\www.showbox.media_search_keyword_Nonnas_202025.html
+  Search results for strategy "cleaned search term":
+    1. Title: "Nonnas", Year: N/A, Score: 20.0, URL: /movie/m-nonnas-2025
+  Found excellent match with score 20.0 using strategy "cleaned search term", stopping search
+  Best overall match: https://www.showbox.media/movie/m-nonnas-2025 (Score: 20.0, Strategy: cleaned search term)
+  CACHE DISABLED: Skipping write for showbox_search_results\67d4d2e1f88c187480a6aea17cacab13.txt
+ShowBoxScraper: Attempting to extract FebBox share link from: https://www.showbox.media/movie/m-nonnas-2025
+ShowBoxScraper: ID/Type not in URL, fetching HTML.
+  CACHE DISABLED: Skipping read for showbox_generic\www.showbox.media_movie_m-nonnas-2025.html
+ShowBoxScraper: Making request to: https://www.showbox.media/movie/m-nonnas-2025 via Proxy: https://starlit-valkyrie-39f5ab.netlify.app/?destination=
+(node:5316) Warning: No such label 'ShowBoxScraper_makeRequest_www.showbox.media_search_keyword_Nonnas_202025' for console.timeEnd()        
+(node:5316) Warning: Label 'extractFebboxShareLinks_total_httpswwwshowboxmediamoviemnonnas2025' already exists for console.time()
+(node:5316) Warning: Label 'ShowBoxScraper_makeRequest_www.showbox.media_movie_m-nonnas-2025' already exists for console.time()
+  CACHE DISABLED: Skipping write for showbox_generic\www.showbox.media_movie_m-nonnas-2025.html
+ShowBoxScraper_makeRequest_www.showbox.media_movie_m-nonnas-2025: 137.5ms
+ShowBoxScraper: Making API call for Nonnas (ID: 70579, Type: 1)
+  CACHE DISABLED: Skipping read for showbox_generic\www.showbox.media_index_share_link_id_70579_type_1.json
+ShowBoxScraper: Making request to: https://www.showbox.media/index/share_link?id=70579&type=1 via Proxy: https://starlit-valkyrie-39f5ab.netlify.app/?destination=
+  CACHE DISABLED: Skipping write for showbox_generic\www.showbox.media_movie_m-nonnas-2025.html
+ShowBoxScraper: Making API call for Nonnas (ID: 70579, Type: 1)
+  CACHE DISABLED: Skipping read for showbox_generic\www.showbox.media_index_share_link_id_70579_type_1.json
+ShowBoxScraper: Making request to: https://www.showbox.media/index/share_link?id=70579&type=1 via Proxy: https://starlit-valkyrie-39f5ab.netlify.app/?destination=
+(node:5316) Warning: No such label 'ShowBoxScraper_makeRequest_www.showbox.media_movie_m-nonnas-2025' for console.timeEnd()
+(node:5316) Warning: Label 'extractFebboxShareLinks_apiCall_70579' already exists for console.time()
+(node:5316) Warning: Label 'ShowBoxScraper_makeRequest_www.showbox.media_index_share_link_id_70579_type_1' already exists for console.time()
+  CACHE DISABLED: Skipping write for showbox_generic\www.showbox.media_index_share_link_id_70579_type_1.json
+ShowBoxScraper_makeRequest_www.showbox.media_index_share_link_id_70579_type_1: 104.184ms
+extractFebboxShareLinks_apiCall_70579: 104.796ms
+ShowBoxScraper: Successfully fetched FebBox URL: https://www.febbox.com/share/7crS6VQw from API
+extractFebboxShareLinks_total_httpswwwshowboxmediamoviemnonnas2025: 270.293ms
+Processing FebBox URL: https://www.febbox.com/share/7crS6VQw (Nonnas (2025))
+  CACHE DISABLED: Skipping read for febbox_parsed_page\www.febbox.com_share_7crS6VQw.json
+  CACHE DISABLED: Skipping read for febbox_page_html\www.febbox.com_share_7crS6VQw.html
+[CookieManager] No explicit region preference from request, will auto-detect if necessary.
+[CookieManager] Using fallback cookie 1 of 9 from cookies.txt.
+[CookieManager] Attempting to auto-detect FebBox region...
+[Soaper TV] Found 1 search results for "Nonnas".
+[Soaper TV] Found matching SoaperTV content: "Nonnas" (2025) at /movie_5aDYRmvg7Q.html
+[Soaper TV] Fetching: /movie_5aDYRmvg7Q.html (via proxy: https://starlit-valkyrie-39f5ab.netlify.app/?destination=https%3A%2F%2Fsoaper.cc%2Fmovie_5aDYRmvg7Q....)
+  CACHE DISABLED: Skipping write for showbox_generic\www.showbox.media_index_share_link_id_70579_type_1.json
+ShowBoxScraper: Successfully fetched FebBox URL: https://www.febbox.com/share/7crS6VQw from API
+Processing FebBox URL: https://www.febbox.com/share/7crS6VQw (Nonnas (2025))
+  CACHE DISABLED: Skipping read for febbox_parsed_page\www.febbox.com_share_7crS6VQw.json
+  CACHE DISABLED: Skipping read for febbox_page_html\www.febbox.com_share_7crS6VQw.html
+[CookieManager] No explicit region preference from request, will auto-detect if necessary.
+[CookieManager] Using fallback cookie 2 of 9 from cookies.txt.
+[CookieManager] Attempting to auto-detect FebBox region...
+(node:5316) Warning: No such label 'ShowBoxScraper_makeRequest_www.showbox.media_index_share_link_id_70579_type_1' for console.timeEnd()    
+(node:5316) Warning: No such label 'extractFebboxShareLinks_apiCall_70579' for console.timeEnd()
+(node:5316) Warning: No such label 'extractFebboxShareLinks_total_httpswwwshowboxmediamoviemnonnas2025' for console.timeEnd()
+[CookieManager] Could not detect region, using backup value
+[CookieManager] Could not detect region, using backup value
+[Soaper TV] Found pass value: 5aDYRmvg7Q
+[Soaper TV] Requesting stream info from /home/index/getMInfoAjax with pass 5aDYRmvg7Q.
+[Soaper TV] Fetching: /home/index/getMInfoAjax (via proxy: https://starlit-valkyrie-39f5ab.netlify.app/?destination=https%3A%2F%2Fsoaper.cc%2Fhome%2Findex%2Fge...)
+[CookieManager] Selected region USA7 based on detected country IN
+[CookieManager] Applying region: USA7 to fallback cookie
+Fetching FebBox page content from URL: https://www.febbox.com/share/7crS6VQw directly
+[CookieManager] Selected region USA7 based on detected country IN
+[CookieManager] Applying region: USA7 to fallback cookie
+Fetching FebBox page content from URL: https://www.febbox.com/share/7crS6VQw directly
+[Soaper TV] Found stream source: https://soaper.cc/home/index/M3U8?key=8wVNAwr1XKCWjrzqv534Fw48OwjqQ6IvyaB7bvaoc0paONn2jbheAPlM32zrFWPjLleE6NhnOjV13x85T41lE4yPnRtV341PPQVjU4a0Ax0.m3u8
+  Successfully fetched 1 streams from Soaper TV.
+  CACHE DISABLED: Skipping write for febbox_page_html\www.febbox.com_share_7crS6VQw.html
+  CACHE DISABLED: Skipping write for febbox_parsed_page\www.febbox.com_share_7crS6VQw.json
+[CookieManager] No explicit region preference from request, will auto-detect if necessary.
+[CookieManager] Using fallback cookie 3 of 9 from cookies.txt.
+[CookieManager] Attempting to auto-detect FebBox region...
+[CookieManager] No explicit region preference from request, will auto-detect if necessary.
+[CookieManager] Using fallback cookie 4 of 9 from cookies.txt.
+[CookieManager] Attempting to auto-detect FebBox region...
+  CACHE DISABLED: Skipping write for febbox_page_html\www.febbox.com_share_7crS6VQw.html
+  CACHE DISABLED: Skipping write for febbox_parsed_page\www.febbox.com_share_7crS6VQw.json
+[CookieManager] No explicit region preference from request, will auto-detect if necessary.
+[CookieManager] Using fallback cookie 5 of 9 from cookies.txt.
+[CookieManager] Attempting to auto-detect FebBox region...
+[CookieManager] No explicit region preference from request, will auto-detect if necessary.
+[CookieManager] Using fallback cookie 6 of 9 from cookies.txt.
+[CookieManager] Attempting to auto-detect FebBox region...
+[CookieManager] Could not detect region, using backup value
+[CookieManager] Could not detect region, using backup value
+[CookieManager] Could not detect region, using backup value
+[CookieManager] Could not detect region, using backup value
+[CookieManager] Selected region USA7 based on detected country IN
+[CookieManager] Applying region: USA7 to fallback cookie
+  Fetching fresh player data for video FID: 21967638 (Share: 7crS6VQw) directly to https://www.febbox.com/file/player
+[CookieManager] Selected region USA7 based on detected country IN
+[CookieManager] Applying region: USA7 to fallback cookie
+  Fetching fresh player data for video FID: 22630075 (Share: 7crS6VQw) directly to https://www.febbox.com/file/player
+[CookieManager] Selected region USA7 based on detected country IN
+[CookieManager] Applying region: USA7 to fallback cookie
+  Fetching fresh player data for video FID: 22630075 (Share: 7crS6VQw) directly to https://www.febbox.com/file/player
+[CookieManager] Selected region USA7 based on detected country IN
+[CookieManager] Applying region: USA7 to fallback cookie
+  Fetching fresh player data for video FID: 21967638 (Share: 7crS6VQw) directly to https://www.febbox.com/file/player
+    Extracted 5 fresh video link(s) for FID 22630075
+    Extracted 3 fresh video link(s) for FID 21967638
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas15.shegu.net_vip_p1_org_movie_3_7_9_70579_movie.70579.2025.original.2304443.20250522093551.mkv_KEY1_d5gqy5B9nusfeCQm_d6AhA_KEY2_1748555941_KEY3_791771_KEY4_world_KEY5_Nonnas.2025.2160p.4K.WEB.x265.10bit.AAC5.1-_5BYTS.MX_5D.mkv_KEY7_febbox_video_quality_list_v3_KEY8_791771.txt
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas16.shegu.net_vip_p1_movie_mp4_h264_2025_7_9_70579_movie.70579.2025.1080p.H264.20250522100305.mp4_KEY1_-f9KOy8r2uU2CXN7bzKAUA_KEY2_1748555941_KEY3_791771_KEY4_world_KEY7_febbox_video_quality_list_v3_KEY8_791771.txt
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas09.shegu.net_vip_p1_movie_mp4_h264_2025_7_9_70579_movie.70579.2025.4K.H265.20250522205813.mp4_KEY1_4RyvzovIygA_XXylRVzKXg_KEY2_1748555941_KEY3_791771_KEY4_world_KEY7_febbox_video_quality_list_v3_KEY8_791771.txt
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas20.shegu.net_vip_p1_movie_mp4_h264_2025_7_9_70579_movie.70579.2025.720p.H264.20250522205813.mp4_KEY1_vFPAjAKtrovoBI8ptA7vaQ_KEY2_1748555941_KEY3_791771_KEY4_world_KEY7_febbox_video_quality_list_v3_KEY8_791771.txt
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas18.shegu.net_vip_p1_movie_mp4_h264_2025_7_9_70579_movie.70579.2025.360p.H264.20250522100305.mp4_KEY1_xwZiWyh8iXOS5-MnZvx4kQ_KEY2_1748555941_KEY3_791771_KEY4_world_KEY7_febbox_video_quality_list_v3_KEY8_791771.txt
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas25-1.shegu.net_vip_p1_org_movie_9_7_9_70579_movie.70579.2025.original.2303049.20250509170935.mkv_KEY1_4T4-AhMROsNi1GMkTzQHhQ_KEY2_1748555941_KEY3_791773_KEY4_world_KEY5_Nonnas_2025_1080p_WEB-DL_HEVC_x265-RMTeam.mkv_KEY7_febbox_video_quality_list_v3_KEY8_791773.txt
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas16-1.shegu.net_vip_p1_movie_mp4_h264_2025_7_9_70579_movie.70579.2025.1080p.H264.20250509171246.mp4_KEY1_fqa5lZUsDOu8K-89JSUGPg_KEY2_1748555941_KEY3_791773_KEY4_world_KEY7_febbox_video_quality_list_v3_KEY8_791773.txt        
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas16.shegu.net_vip_p1_movie_mp4_h264_2025_7_9_70579_movie.70579.2025.360p.H264.20250509171246.mp4_KEY1_sASgrkODP5L_0vLghWzypw_KEY2_1748555941_KEY3_791773_KEY4_world_KEY7_febbox_video_quality_list_v3_KEY8_791773.txt
+    Extracted 3 fresh video link(s) for FID 21967638
+    Extracted 5 fresh video link(s) for FID 22630075
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas15.shegu.net_vip_p1_org_movie_3_7_9_70579_movie.70579.2025.original.2304443.20250522093551.mkv_KEY1_-xUaF5nTXqw_y1CFUCSKNg_KEY2_1748555941_KEY3_791774_KEY4_world_KEY5_Nonnas.2025.2160p.4K.WEB.x265.10bit.AAC5.1-_5BYTS.MX_5D.mkv_KEY7_febbox_video_quality_list_v3_KEY8_791774.txt
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas16.shegu.net_vip_p1_movie_mp4_h264_2025_7_9_70579_movie.70579.2025.1080p.H264.20250522100305.mp4_KEY1_p3fTte_Qkf0oi855en-1EA_KEY2_1748555941_KEY3_791774_KEY4_world_KEY7_febbox_video_quality_list_v3_KEY8_791774.txt
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas09-1.shegu.net_vip_p1_movie_mp4_h264_2025_7_9_70579_movie.70579.2025.4K.H265.20250522205813.mp4_KEY1_M3QaO1SqdVKISbOTt1syCg_KEY2_1748555941_KEY3_791774_KEY4_world_KEY7_febbox_video_quality_list_v3_KEY8_791774.txt
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas20-1.shegu.net_vip_p1_movie_mp4_h264_2025_7_9_70579_movie.70579.2025.720p.H264.20250522205813.mp4_KEY1_4uD40nmJfOAkpbmtY0368Q_KEY2_1748555941_KEY3_791774_KEY4_world_KEY7_febbox_video_quality_list_v3_KEY8_791774.txt
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas18.shegu.net_vip_p1_movie_mp4_h264_2025_7_9_70579_movie.70579.2025.360p.H264.20250522100305.mp4_KEY1_zxFhjuNUyGyI6C4Ik66SJg_KEY2_1748555941_KEY3_791774_KEY4_world_KEY7_febbox_video_quality_list_v3_KEY8_791774.txt
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas25.shegu.net_vip_p1_org_movie_9_7_9_70579_movie.70579.2025.original.2303049.20250509170935.mkv_KEY1_8sy5FaOGbGFgOfwVekvqmg_KEY2_1748555941_KEY3_791775_KEY4_world_KEY5_Nonnas_2025_1080p_WEB-DL_HEVC_x265-RMTeam.mkv_KEY7_febbox_video_quality_list_v3_KEY8_791775.txt
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas16-1.shegu.net_vip_p1_movie_mp4_h264_2025_7_9_70579_movie.70579.2025.1080p.H264.20250509171246.mp4_KEY1_8GKg-MpxU57V5e5L-FzUDQ_KEY2_1748555941_KEY3_791775_KEY4_world_KEY7_febbox_video_quality_list_v3_KEY8_791775.txt        
+  CACHE DISABLED: Skipping read for stream_sizes\usa7-nas16.shegu.net_vip_p1_movie_mp4_h264_2025_7_9_70579_movie.70579.2025.360p.H264.20250509171246.mp4_KEY1_rVF-WX5REXfiB_s7uR_MQg_KEY2_1748555941_KEY3_791775_KEY4_world_KEY7_febbox_video_quality_list_v3_KEY8_791775.txt
+(node:5316) Warning: Label 'getStreamsFromTmdbId_fetchStreamSizes_movie_1151039' already exists for console.time()
+getStreamsFromTmdbId_fetchStreamSizes_movie_1151039: 738.137ms
+  Filtering out potential ShowBox low-quality stream: Nonnas (2025) - 360P (360p)
+  Filtering out potential ShowBox low-quality stream: Nonnas (2025) - 360P (360p)
+[SizeLimit] No personal cookie detected. Applying 9GB size limit to ShowBox streams.
+Found 6 streams (sorted, ShowBox-low-quality-filtered, and size-limited if applicable):
+  1. ORG (5.10 GB) [H.265, AAC, 10-bit]: Nonnas (2025) - ORG
+  2. ORG (999.14 MB) [H.265]: Nonnas (2025) - ORG
+  3. 2160p (2.10 GB) [No codec info]: Nonnas (2025) - 4K
+  4. 1080p (2.48 GB) [No codec info]: Nonnas (2025) - 1080P
+  5. 1080p (1.10 GB) [No codec info]: Nonnas (2025) - 1080P
+  6. 720p (287.01 MB) [No codec info]: Nonnas (2025) - 720P
+getStreamsFromTmdbId_total_movie_1151039: 4.099s
+  Successfully fetched 6 streams from ShowBox.
+  Filtering out potential ShowBox low-quality stream: Nonnas (2025) - 360P (360p)
+  Filtering out potential ShowBox low-quality stream: Nonnas (2025) - 360P (360p)
+[SizeLimit] No personal cookie detected. Applying 9GB size limit to ShowBox streams.
+Found 6 streams (sorted, ShowBox-low-quality-filtered, and size-limited if applicable):
+  1. ORG (5.10 GB) [H.265, AAC, 10-bit]: Nonnas (2025) - ORG
+  2. ORG (999.14 MB) [H.265]: Nonnas (2025) - ORG
+  3. 2160p (2.10 GB) [No codec info]: Nonnas (2025) - 4K
+  4. 1080p (2.48 GB) [No codec info]: Nonnas (2025) - 1080P
+  5. 1080p (1.10 GB) [No codec info]: Nonnas (2025) - 1080P
+  6. 720p (287.01 MB) [No codec info]: Nonnas (2025) - 720P
+  Successfully fetched 6 streams from ShowBox.
+Total raw streams after provider-ordered fetch: 11
+Total streams after provider-ordered sorting: 11
+--- BEGIN Stremio Stream Objects to be sent ---
+[
+  {
+    "name": "🇺🇸 ShowBox - ORG",
+    "title": "Nonnas (2025)\n5.10 GB • 🎞️ H.265 • 🎧 AAC • ⚙️ 10-bit",
+    "url": "https://usa7-nas15.shegu.net/vip/p1/org_movie/3/7/9/70579/movie.70579.2025.original.2304443.20250522093551.mkv?KEY1=-xUaF5nTXqw_y1CFUCSKNg&KEY2=1748555941&KEY3=791774&KEY4=world&KEY5=Nonnas.2025.2160p.4K.WEB.x265.10bit.AAC5.1-%5BYTS.MX%5D.mkv&KEY7=febbox_video_quality_list_v3&KEY8=791774",
+    "type": "url",
+    "availability": 2,
+    "behaviorHints": {
+      "notWebReady": true
+    }
+  },
+  {
+    "name": "🇺🇸 ShowBox - ORG",
+    "title": "Nonnas (2025)\n999.14 MB • 🎞️ H.265",
+    "url": "https://usa7-nas25.shegu.net/vip/p1/org_movie/9/7/9/70579/movie.70579.2025.original.2303049.20250509170935.mkv?KEY1=8sy5FaOGbGFgOfwVekvqmg&KEY2=1748555941&KEY3=791775&KEY4=world&KEY5=Nonnas+2025+1080p+WEB-DL+HEVC+x265-RMTeam.mkv&KEY7=febbox_video_quality_list_v3&KEY8=791775",
+    "type": "url",
+    "availability": 2,
+    "behaviorHints": {
+      "notWebReady": true
+    }
+  },
+  {
+    "name": "🇺🇸 ShowBox - 2160p",
+    "title": "Nonnas (2025)\n2.10 GB",
+    "url": "https://usa7-nas09-1.shegu.net/vip/p1/movie_mp4_h264/2025/7/9/70579/movie.70579.2025.4K.H265.20250522205813.mp4?KEY1=M3QaO1SqdVKISbOTt1syCg&KEY2=1748555941&KEY3=791774&KEY4=world&KEY7=febbox_video_quality_list_v3&KEY8=791774",
+    "type": "url",
+    "availability": 2,
+    "behaviorHints": {
+      "notWebReady": true
+    }
+  }
+]
+... and 8 more streams
+--- END Stremio Stream Objects to be sent ---
+(node:5316) Warning: No such label 'getStreamsFromTmdbId_fetchStreamSizes_movie_1151039' for console.timeEnd()
+(node:5316) Warning: No such label 'getStreamsFromTmdbId_total_movie_1151039' for console.timeEnd()
+[Soaper TV] Found 1 search results for "Nonnas".
+[Soaper TV] Found matching SoaperTV content: "Nonnas" (2025) at /movie_5aDYRmvg7Q.html
+[Soaper TV] Fetching: /movie_5aDYRmvg7Q.html (via proxy: https://starlit-valkyrie-39f5ab.netlify.app/?destination=https%3A%2F%2Fsoaper.cc%2Fmovie_5aDYRmvg7Q....)
+[Soaper TV] Found pass value: 5aDYRmvg7Q
+[Soaper TV] Requesting stream info from /home/index/getMInfoAjax with pass 5aDYRmvg7Q.
+[Soaper TV] Fetching: /home/index/getMInfoAjax (via proxy: https://starlit-valkyrie-39f5ab.netlify.app/?destination=https%3A%2F%2Fsoaper.cc%2Fhome%2Findex%2Fge...)
+[Soaper TV] Found stream source: https://soaper.cc/home/index/M3U8?key=yo9yWoaJxdUrzm18M90wt1dZn1VrXzu6y7dbK67rHylMv01mWMHdXM49EJv6tem75634dBIzBE4L7Y8wTyZEYynqPxT23oY99l2Jt1njJej.m3u8
+  Successfully fetched 1 streams from Soaper TV.
+Total raw streams after provider-ordered fetch: 11
+Total streams after provider-ordered sorting: 11
+--- BEGIN Stremio Stream Objects to be sent ---
+[
+  {
+    "name": "🇺🇸 ShowBox - ORG",
+    "title": "Nonnas (2025)\n5.10 GB • 🎞️ H.265 • 🎧 AAC • ⚙️ 10-bit",
+    "url": "https://usa7-nas15.shegu.net/vip/p1/org_movie/3/7/9/70579/movie.70579.2025.original.2304443.20250522093551.mkv?KEY1=d5gqy5B9nusfeCQm_d6AhA&KEY2=1748555941&KEY3=791771&KEY4=world&KEY5=Nonnas.2025.2160p.4K.WEB.x265.10bit.AAC5.1-%5BYTS.MX%5D.mkv&KEY7=febbox_video_quality_list_v3&KEY8=791771",
+    "type": "url",
+    "availability": 2,
+    "behaviorHints": {
+      "notWebReady": true
+    }
+  },
+  {
+    "name": "🇺🇸 ShowBox - ORG",
+    "title": "Nonnas (2025)\n999.14 MB • 🎞️ H.265",
+    "url": "https://usa7-nas25-1.shegu.net/vip/p1/org_movie/9/7/9/70579/movie.70579.2025.original.2303049.20250509170935.mkv?KEY1=4T4-AhMROsNi1GMkTzQHhQ&KEY2=1748555941&KEY3=791773&KEY4=world&KEY5=Nonnas+2025+1080p+WEB-DL+HEVC+x265-RMTeam.mkv&KEY7=febbox_video_quality_list_v3&KEY8=791773",
+    "type": "url",
+    "availability": 2,
+    "behaviorHints": {
+      "notWebReady": true
+    }
+  },
+  {
+    "name": "🇺🇸 ShowBox - 2160p",
+    "title": "Nonnas (2025)\n2.10 GB",
+    "url": "https://usa7-nas09.shegu.net/vip/p1/movie_mp4_h264/2025/7/9/70579/movie.70579.2025.4K.H265.20250522205813.mp4?KEY1=4RyvzovIygA_XXylRVzKXg&KEY2=1748555941&KEY3=791771&KEY4=world&KEY7=febbox_video_quality_list_v3&KEY8=791771",
+    "type": "url",
+    "availability": 2,
+    "behaviorHints": {
+      "notWebReady": true
+    }
+  }
+]
+... and 8 more streams
+--- END Stremio Stream Objects to be sent ---
