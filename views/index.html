@@ -687,31 +687,82 @@
         }
         
         /* Cookie Configuration Styles */
-        .cookie-config {
-            background-color: rgba(15, 15, 15, 0.7);
-            border-radius: 0.6rem;
-            padding: 1rem;
+        .cookie-config-container {
             margin-bottom: 1.25rem;
-            border: 1px solid var(--border);
-            position: relative;
         }
 
-        .section-header {
+        .cookie-header {
             display: flex;
             align-items: center;
             margin-bottom: 0.75rem;
         }
 
-        .section-icon {
-            font-size: 1.2rem;
+        .toggle-btn {
+            background: none;
+            border: none;
+            font: inherit;
+            cursor: pointer;
+            outline: inherit;
+            font-size: 1rem;
+            color: var(--text);
             margin-right: 0.5rem;
         }
 
-        .section-header span:last-child {
-            font-size: 1rem;
+        .toggle-icon {
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-btn.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .toggle-text {
             font-weight: 500;
             color: var(--text);
             opacity: 0.9;
+        }
+
+        .recommended-tag {
+            background: linear-gradient(135deg, #ff3a3a, var(--primary));
+            border-radius: 0.3rem;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 2px 6px rgba(255, 58, 58, 0.3);
+            animation: pulse-tag 2s infinite;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: auto;
+        }
+        
+        @keyframes pulse-tag {
+            0% { box-shadow: 0 0 0 0 rgba(255, 58, 58, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(255, 58, 58, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 58, 58, 0); }
+        }
+
+        .cookie-config {
+            background-color: rgba(15, 15, 15, 0.7);
+            border-radius: 0.6rem;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            max-height: 500px; /* Adjust as needed, should be larger than content height */
+            opacity: 1;
+            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, padding 0.5s ease-in-out;
+        }
+
+        .cookie-config.collapsed {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            border-top-width: 0; /* Collapse border smoothly */
+            border-bottom-width: 0; /* Collapse border smoothly */
+            margin-bottom: 0; /* Remove margin when collapsed */
         }
 
         .cookie-form {
@@ -857,28 +908,35 @@
                 </div>
                 
                 <!-- Add Cookie Configuration Section -->
-                <div class="cookie-config" id="cookieConfigSection">
-                    <div class="section-header">
-                        <span class="section-icon">🍪</span>
-                        <span>Personal Cookie Configuration</span>
-                    </div>
-                    <p>Use your own cookie to improve stream quality and reliability. Enter your FebBox cookie below to get a personalized manifest URL.</p>
-                    
-                    <div class="cookie-form">
-                        <input type="text" id="cookieInput" placeholder="Enter your ui=... cookie" class="cookie-input">
-                        <button id="setCookieBtn" class="btn btn-secondary">Set Cookie</button>
+                <div class="cookie-config-container">
+                    <div class="cookie-header">
+                        <button id="toggleCookieSection" class="toggle-btn">
+                            <span class="toggle-icon">▼</span>
+                            <span class="toggle-text">Personal Cookie Configuration</span>
+                        </button>
+                        <span class="recommended-tag">Extremely Recommended</span>
                     </div>
                     
-                    <div id="personalizedManifest" class="personalized-manifest">
-                        <div class="manifest-result" style="display:none;">
-                            <h4>Your Personalized Addon</h4>
-                            <p class="manifest-note">This URL is unique to you and includes your cookie. Keep it private.</p>
-                            <div class="manifest-url-box">
-                                <span id="personalManifestUrl"></span>
-                                <button id="copyPersonalLink" class="copy-btn">Copy</button>
-                            </div>
-                            <div class="install-personal-container">
-                                <a href="#" id="installPersonalLink" class="btn btn-primary">Install Personalized Addon</a>
+                    <div class="cookie-config" id="cookieConfigSection">
+                        <p>ShowBox fetches content from a cloud storage provider called FebBox. Each FebBox user gets 100GB/month of fast streaming before speeds are reduced.</p>
+                        <p><strong>Why use your own cookie?</strong> Without personalization, you'll share cookies with other addon users, which can exhaust the 100GB quota quickly and result in slow or failed streams. With your own cookie, you'll have your personal 100GB quota for fast, reliable streams.</p>
+                        
+                        <div class="cookie-form">
+                            <input type="text" id="cookieInput" placeholder="Enter your ui=... cookie" class="cookie-input">
+                            <button id="setCookieBtn" class="btn btn-secondary">Set Cookie</button>
+                        </div>
+                        
+                        <div id="personalizedManifest" class="personalized-manifest">
+                            <div class="manifest-result" style="display:none;">
+                                <h4>Your Personalized Addon</h4>
+                                <p class="manifest-note">This URL is unique to you and includes your cookie. Keep it private.</p>
+                                <div class="manifest-url-box">
+                                    <span id="personalManifestUrl"></span>
+                                    <button id="copyPersonalLink" class="copy-btn">Copy</button>
+                                </div>
+                                <div class="install-personal-container">
+                                    <a href="#" id="installPersonalLink" class="btn btn-primary">Install Personalized Addon</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1083,6 +1141,29 @@
 
         // Call prefill function on page load
         prefillCookieFromUrl();
+
+        // Cookie section toggle functionality
+        const toggleCookieBtn = document.getElementById('toggleCookieSection');
+        const cookieConfigSection = document.getElementById('cookieConfigSection');
+        
+        if (toggleCookieBtn && cookieConfigSection) {
+            // Set initial state to expanded (remove collapsed class if present from HTML)
+            cookieConfigSection.classList.remove('collapsed');
+            toggleCookieBtn.classList.remove('collapsed');
+            const initialIcon = toggleCookieBtn.querySelector('.toggle-icon');
+            if (initialIcon) initialIcon.textContent = '▼';
+
+            toggleCookieBtn.addEventListener('click', () => {
+                const isCollapsed = cookieConfigSection.classList.toggle('collapsed');
+                toggleCookieBtn.classList.toggle('collapsed', isCollapsed);
+                
+                // Update the toggle icon - handled by CSS :before content now
+                // const toggleIcon = toggleCookieBtn.querySelector('.toggle-icon');
+                // if (toggleIcon) {
+                //    toggleIcon.textContent = isCollapsed ? '▶' : '▼'; 
+                // }
+            });
+        }
 
     </script>
 </body>
