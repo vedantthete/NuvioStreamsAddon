@@ -1374,11 +1374,30 @@
         
         .cookie-input-container .cookie-input {
             flex-grow: 1; /* Make input field take remaining space */
-            /* margin-right: 0.5rem; */ /* Removed space for check button */
+            margin-right: 0.5rem; /* Add some space before the new check button */
         }
 
-        /* Styles for the new inline check button - REMOVED */
-        /* .inline-check-btn { ... } */
+        /* Styles for the new inline check button */
+        .inline-check-btn {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            background-color: rgba(0, 163, 255, 0.15);
+            border: 1px solid rgba(0, 163, 255, 0.4);
+            color: var(--primary);
+            border-radius: 0.4rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-shrink: 0; /* Prevent button from shrinking */
+        }
+
+        .inline-check-btn:hover {
+            background-color: rgba(0, 163, 255, 0.3);
+        }
+
+        .inline-check-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
 
     </style>
 </head>
@@ -1455,7 +1474,7 @@
                             <div class="cookie-input-container">
                                 <span id="cookieStatusIndicator" class="cookie-status-indicator"></span>
                                 <input type="text" id="cookieInput" placeholder="Enter your token" class="cookie-input">
-                                <!-- <button id="checkCookieBtn" class="inline-check-btn">Check</button> --> <!-- Removed Check Button -->
+                                <button id="checkCookieBtn" class="inline-check-btn">Check</button>
                             </div>
                             <!-- Server Region Selector -->
                             <select id="regionSelector" class="cookie-input">
@@ -1715,17 +1734,17 @@
                     setCookieBtn.style.opacity = '0.6';
                     setCookieBtn.style.cursor = 'not-allowed';
                 }
-                // if (checkCookieBtn) checkCookieBtn.disabled = false; // Removed
+                if (checkCookieBtn) checkCookieBtn.disabled = false; // Re-enable check button
                 return false;
             }
 
-            cookieStatusIndicator.className = 'cookie-status-indicator pending'; 
+            cookieStatusIndicator.className = 'cookie-status-indicator pending'; // Set to pending
             if (setCookieBtn) {
-                setCookieBtn.disabled = true; 
+                setCookieBtn.disabled = true; // Disable while pending
                 setCookieBtn.style.opacity = '0.6';
                 setCookieBtn.style.cursor = 'not-allowed';
             }
-            // if (checkCookieBtn) checkCookieBtn.disabled = true; // Removed
+            if (checkCookieBtn) checkCookieBtn.disabled = true; // Disable check button while pending
 
             try {
                 // IMPORTANT: You need to create this backend endpoint in your server.js
@@ -1747,8 +1766,8 @@
                          setCookieBtn.style.opacity = '0.6';
                          setCookieBtn.style.cursor = 'not-allowed';
                     }
-                    // if (checkCookieBtn) checkCookieBtn.disabled = false; // Removed
-                    toast.textContent = `Error validating: ${errorData.message || response.statusText}`;
+                    if (checkCookieBtn) checkCookieBtn.disabled = false; // Re-enable check button
+                    toast.textContent = "Not a valid token."; // Generic error message
                     toast.classList.add('show');
                     setTimeout(() => { toast.classList.remove('show'); }, 4000);
                     return false;
@@ -1759,25 +1778,24 @@
                 if (result.isValid) {
                     cookieStatusIndicator.className = 'cookie-status-indicator valid';
                     if (setCookieBtn) {
-                        setCookieBtn.disabled = false; 
+                        setCookieBtn.disabled = false; // Enable on valid
                         setCookieBtn.style.opacity = '1';
                         setCookieBtn.style.cursor = 'pointer';
                     }
-                    // if (checkCookieBtn) checkCookieBtn.disabled = false; // Removed
+                    if (checkCookieBtn) checkCookieBtn.disabled = false; // Re-enable check button
                     return true;
                 } else {
                     cookieStatusIndicator.className = 'cookie-status-indicator invalid';
                     if (setCookieBtn) {
-                        setCookieBtn.disabled = true; 
+                        setCookieBtn.disabled = true; // Disable on invalid
                         setCookieBtn.style.opacity = '0.6';
                         setCookieBtn.style.cursor = 'not-allowed';
                     }
-                    // if (checkCookieBtn) checkCookieBtn.disabled = false; // Removed
-                    if (result.message) {
-                        toast.textContent = `Cookie Invalid: ${result.message}`;
-                        toast.classList.add('show');
-                        setTimeout(() => { toast.classList.remove('show'); }, 4000);
-                    }
+                    if (checkCookieBtn) checkCookieBtn.disabled = false; // Re-enable check button
+                    // Show generic message instead of result.message
+                    toast.textContent = "Not a valid token."; 
+                    toast.classList.add('show');
+                    setTimeout(() => { toast.classList.remove('show'); }, 4000);
                     return false;
                 }
             } catch (error) {
@@ -1788,8 +1806,8 @@
                     setCookieBtn.style.opacity = '0.6';
                     setCookieBtn.style.cursor = 'not-allowed';
                 }
-                // if (checkCookieBtn) checkCookieBtn.disabled = false; // Removed
-                toast.textContent = "Failed to check cookie validity. API might be down.";
+                if (checkCookieBtn) checkCookieBtn.disabled = false; // Re-enable check button
+                toast.textContent = "Not a valid token."; // Generic error message
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 4000);
                 return false;
@@ -1798,10 +1816,10 @@
 
         // --- Event listener for cookie input ---
         if (cookieInput) {
-            // Check on blur (when user clicks away) - Keep this for users who prefer it or for touch devices
+            // Check on blur (when user clicks away)
             cookieInput.addEventListener('blur', () => {
                 const cookieValue = cookieInput.value.trim();
-                if (cookieValue) { 
+                if (cookieValue) { // Only check if there's a value
                     if (!cookieStatusIndicator.classList.contains('pending')) {
                         checkCookieOnServer(cookieValue);
                     }
@@ -1812,68 +1830,82 @@
                         setCookieBtn.style.opacity = '0.6';
                         setCookieBtn.style.cursor = 'not-allowed';
                     }
+                    if (checkCookieBtn) checkCookieBtn.disabled = true; 
                 }
             });
 
-            // Debounced function for server-side check
-            const debouncedCheck = debounce((value) => {
-                checkCookieOnServer(value);
-            }, 750); // 750ms delay after user stops typing
+            // Handle input changes for immediate UI feedback and debounced check button state
+            const debouncedUpdateCheckButtonState = debounce(() => {
+                if (checkCookieBtn) {
+                    checkCookieBtn.disabled = (cookieInput.value.trim() === '');
+                }
+            }, 150); // Short debounce for check button enable/disable
 
             cookieInput.addEventListener('input', () => {
                 const cookieValue = cookieInput.value.trim();
 
-                // Immediate reaction: If the cookie was valid and is now being modified
+                // Immediate reaction: If the cookie was valid and is now being modified,
+                // reset the status and force re-check before Set Cookie can be used.
                 if (cookieStatusIndicator.classList.contains('valid')) {
-                    cookieStatusIndicator.className = 'cookie-status-indicator'; 
+                    cookieStatusIndicator.className = 'cookie-status-indicator'; // Reset to neutral gray
                     if (setCookieBtn) {
-                        setCookieBtn.disabled = true; 
+                        setCookieBtn.disabled = true; // Disable Set Cookie button
                         setCookieBtn.style.opacity = '0.6';
                         setCookieBtn.style.cursor = 'not-allowed';
                     }
+                    
+                    // Also hide personalized manifest and revert main buttons to default
                     if (manifestResult) manifestResult.style.display = 'none';
                     currentManifestUrlToCopy = defaultManifestUrl;
                     currentInstallUrl = defaultInstallProtocolUrl;
                     if (installLink) installLink.href = currentInstallUrl;
 
                     if (!toast.textContent.startsWith("Cookie modified")) {
-                        toast.textContent = "Cookie modified. Auto-checking soon..."; 
+                        toast.textContent = "Cookie modified. Please 'Check' to re-validate.";
                         toast.classList.add('show');
                         setTimeout(() => { 
-                            if (toast.textContent.startsWith("Cookie modified")) {
+                            if (toast.textContent === "Cookie modified. Please 'Check' to re-validate.") {
                                 toast.classList.remove('show'); 
                             }
-                        }, 2500); // Shorter display for this informational toast
+                        }, 3500);
                     }
                 }
                 
-                // If input becomes empty, reset UI immediately and cancel any pending check
+                // If input becomes empty, also reset Set Cookie button, indicator, and personalized manifest section
                 if (cookieValue === '') {
                     cookieStatusIndicator.className = 'cookie-status-indicator';
-                    if (setCookieBtn) {
+                     if (setCookieBtn) {
                         setCookieBtn.disabled = true;
                         setCookieBtn.style.opacity = '0.6';
                         setCookieBtn.style.cursor = 'not-allowed';
                     }
+                    // Hide personalized manifest and revert main buttons if input is cleared
                     if (manifestResult) manifestResult.style.display = 'none';
                     currentManifestUrlToCopy = defaultManifestUrl;
                     currentInstallUrl = defaultInstallProtocolUrl;
                     if (installLink) installLink.href = currentInstallUrl;
-                    
-                    // Cancel any pending debounced check if input is cleared
-                    debounce(() => {}, 0)(); // Clears pending from the same debounce instance
-                    cookieStatusIndicator.className = 'cookie-status-indicator'; // Ensure pending is cleared
-
-                } else {
-                    // If there is text, start/restart the debounced check
-                    cookieStatusIndicator.className = 'cookie-status-indicator pending'; // Show pending immediately
-                    debouncedCheck(cookieValue);
                 }
+
+                // Update check button state (debounced)
+                debouncedUpdateCheckButtonState();
             }); 
         }
 
-        // --- Event listener for the new inline check button - REMOVED ---
-        // if (checkCookieBtn && cookieInput) { ... }
+        // --- Event listener for the new inline check button ---
+        if (checkCookieBtn && cookieInput) {
+            checkCookieBtn.addEventListener('click', () => {
+                const cookieValue = cookieInput.value.trim();
+                if (cookieValue) {
+                    checkCookieOnServer(cookieValue);
+                } else {
+                    toast.textContent = "Please enter a cookie to check.";
+                    toast.classList.add('show');
+                    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                }
+            });
+            // Initially disable if input is empty
+            checkCookieBtn.disabled = (cookieInput.value.trim() === ''); 
+        }
 
         // Add a listener for region changes
         if (regionSelector) {
