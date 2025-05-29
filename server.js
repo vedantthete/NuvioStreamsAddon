@@ -70,6 +70,46 @@ app.use(async (req, res, next) => {
 // REMOVE: API endpoint to verify a cookie exists (/api/check-cookie)
 // app.get('/api/check-cookie', async (req, res) => { ... });
 
+// Add middleware to extract cookie and region preference from request queries
+app.use((req, res, next) => {
+    const userCookie = req.query.cookie;
+    const userRegionPreference = req.query.region ? req.query.region.toUpperCase() : null;
+    
+    // Set these values as globals for backward compatibility
+    global.currentRequestUserCookie = userCookie || null;
+    global.currentRequestRegionPreference = userRegionPreference || null;
+    
+    // Log the cookie and region preference for debugging
+    if (req.path === '/manifest.json' || req.path === '/stream') {
+        console.log(`Request to ${req.path}: User cookie provided: ${userCookie ? 'Yes (length: ' + userCookie.length + ')' : 'No'}`);
+        console.log(`Request to ${req.path}: Region preference: ${userRegionPreference || 'None'}`);
+        
+        // Log the full URL with cookie masked for privacy
+        const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+        const maskedUrl = userCookie ? 
+            fullUrl.replace(userCookie, '***COOKIE-MASKED***') : 
+            fullUrl;
+        console.log(`Full request URL: ${maskedUrl}`);
+    }
+    
+    // Also extract from stremio-addon-sdk config that might be passed in the request body
+    if (req.path === '/stream' && req.body && req.body.config) {
+        // If not already set from query params, try to get from config
+        if (!global.currentRequestUserCookie && req.body.config.cookie) {
+            global.currentRequestUserCookie = req.body.config.cookie;
+        }
+        if (!global.currentRequestRegionPreference && req.body.config.region) {
+            global.currentRequestRegionPreference = req.body.config.region.toUpperCase();
+        }
+        
+        // Add these directly to the config so addon.js can access them
+        req.body.config.cookie = global.currentRequestUserCookie;
+        req.body.config.region = global.currentRequestRegionPreference;
+    }
+    
+    next();
+});
+
 // Serve a customized version of manifest.json
 app.get('/manifest.json', async (req, res) => {
     try {
@@ -144,6 +184,45 @@ const createCustomRouter = (currentAddonInterface) => {
 };
 
 app.use(createCustomRouter(addonInterface));
+
+// Add middleware to clean up global variables after the request is complete
+app.use((req, res, next) => {
+    // Store the original end function
+    const originalEnd = res.end;
+
+    // Override the end function to clean up globals after response is sent
+    res.end = function() {
+        // Call the original end function with all arguments
+        originalEnd.apply(res, arguments);
+        
+        // Clean up global variables 
+        if (global.currentRequestUserCookie || global.currentRequestRegionPreference) {
+            console.log('Cleaning up global cookie and region preference after request');
+            global.currentRequestUserCookie = null;
+            global.currentRequestRegionPreference = null;
+        }
+    };
+    
+    next();
+});
+
+// Add a new endpoint to check region status and fallbacks
+app.get('/api/region-status', (req, res) => {
+  const status = {
+    regionAvailability: global.regionAvailabilityStatus || {},
+    usedFallback: global.usedRegionFallback || null,
+    lastRequestedRegion: global.lastRequestedRegion || null
+  };
+  
+  // Reset the fallback notification after it's been fetched once
+  if (global.usedRegionFallback) {
+    const fallbackInfo = {...global.usedRegionFallback};
+    global.usedRegionFallback = null;
+    status.usedFallback = fallbackInfo;
+  }
+  
+  res.json(status);
+});
 
 const PORT = process.env.PORT || 7777;
 

@@ -93,25 +93,33 @@ builder.defineStreamHandler(async (args) => {
 
     const userScraperApiKey = (config && config.scraperApiKey) ? config.scraperApiKey : null;
     
-    // Extract the region preference - first check from config, then from global.currentRequestRegionPreference
+    // Extract the region preference directly from config - don't use global variable
     let userRegionPreference = null;
+    let userCookie = null;
     
     // Check config first
     if (config && config.region) {
         userRegionPreference = config.region;
         console.log(`[addon.js] Using region from config: ${userRegionPreference}`);
     } 
-    // Then check global
+    // Then check global - for backward compatibility
     else if (global.currentRequestRegionPreference) {
         userRegionPreference = global.currentRequestRegionPreference;
         console.log(`[addon.js] Using region from URL parameter: ${userRegionPreference}`);
+    }
+
+    // Extract user cookie from global - for backward compatibility
+    if (global.currentRequestUserCookie) {
+        userCookie = global.currentRequestUserCookie;
+        console.log(`[addon.js] Using cookie from URL parameter (length: ${userCookie.length})`);
     }
     
     // Log the request information in a more detailed way
     console.log(`Stream request for Stremio type: '${type}', id: '${id}'`);
     console.log(`Request config: ${JSON.stringify({
         hasScraperApiKey: !!userScraperApiKey,
-        regionPreference: userRegionPreference || 'none'
+        regionPreference: userRegionPreference || 'none',
+        hasCookie: !!userCookie
     })}`);
     
     if (!userRegionPreference) {
@@ -163,7 +171,8 @@ builder.defineStreamHandler(async (args) => {
             console.log(`  Parsed season ${seasonNum}, episode ${episodeNum} from IMDb ID parts`);
         }
         
-        const conversionResult = await convertImdbToTmdb(baseImdbId, userScraperApiKey);
+        // Pass userRegionPreference and userCookie directly to convertImdbToTmdb
+        const conversionResult = await convertImdbToTmdb(baseImdbId, userRegionPreference);
         if (conversionResult && conversionResult.tmdbId && conversionResult.tmdbType) {
             tmdbId = conversionResult.tmdbId;
             tmdbTypeFromId = conversionResult.tmdbType;
@@ -220,7 +229,8 @@ builder.defineStreamHandler(async (args) => {
     // --- Parallel Fetching of Streams ---
     console.log('Initiating parallel fetch for ShowBox, Xprime.tv, HollyMovieHD, and Soaper TV streams (in that priority order after ShowBox)...');
 
-    const showBoxPromise = getStreamsFromTmdbId(tmdbTypeFromId, tmdbId, seasonNum, episodeNum, userRegionPreference)
+    // Pass userRegionPreference and userCookie directly to getStreamsFromTmdbId
+    const showBoxPromise = getStreamsFromTmdbId(tmdbTypeFromId, tmdbId, seasonNum, episodeNum, userRegionPreference, userCookie)
         .then(streams => {
             if (streams && streams.length > 0) {
                 console.log(`  Successfully fetched ${streams.length} streams from ShowBox.`);
@@ -451,11 +461,8 @@ builder.defineStreamHandler(async (args) => {
     }
     console.log("--- END Stremio Stream Objects to be sent ---");
 
-    // Clean up the global region preference after use
-    if (userRegionPreference) {
-        global.currentRequestRegionPreference = null;
-        console.log(`Cleared region preference after stream processing`);
-    }
+    // No need to clean up global variables since we're not using them anymore
+    console.log(`Request for ${id} completed successfully`);
 
     return {
         streams: stremioStreamObjects
