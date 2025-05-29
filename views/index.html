@@ -685,6 +685,122 @@
             transform: rotate(5deg);
             letter-spacing: 0.5px;
         }
+        
+        /* Cookie Configuration Styles */
+        .cookie-config {
+            background-color: rgba(15, 15, 15, 0.7);
+            border-radius: 0.6rem;
+            padding: 1rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-icon {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        .section-header span:last-child {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        .cookie-form {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .cookie-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 0.65rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            background-color: rgba(20, 20, 20, 0.9);
+            color: var(--text);
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .cookie-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 163, 255, 0.2);
+        }
+
+        .personalized-manifest {
+            margin-top: 1rem;
+        }
+
+        .manifest-result {
+            background-color: rgba(10, 10, 10, 0.8);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            border: 1px solid rgba(0, 163, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .manifest-result h4 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .manifest-note {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .manifest-url-box {
+            display: flex;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem;
+            border-radius: 0.4rem;
+            margin-bottom: 0.75rem;
+            align-items: center;
+            border: 1px solid var(--border);
+        }
+
+        .manifest-url-box span {
+            flex: 1;
+            font-size: 0.8rem;
+            word-break: break-all;
+            color: var(--text-light);
+            padding-right: 0.5rem;
+        }
+
+        .copy-btn {
+            background-color: rgba(0, 163, 255, 0.1);
+            border: 1px solid rgba(0, 163, 255, 0.3);
+            color: var(--primary);
+            border-radius: 0.3rem;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: rgba(0, 163, 255, 0.2);
+        }
+
+        .install-personal-container {
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -740,6 +856,34 @@
                     <p>Providers may become unavailable without prior notification. We will make every effort to maintain provider functionality, but availability cannot be guaranteed.</p>
                 </div>
                 
+                <!-- Add Cookie Configuration Section -->
+                <div class="cookie-config" id="cookieConfigSection">
+                    <div class="section-header">
+                        <span class="section-icon">🍪</span>
+                        <span>Personal Cookie Configuration</span>
+                    </div>
+                    <p>Use your own cookie to improve stream quality and reliability. Enter your FebBox cookie below to get a personalized manifest URL.</p>
+                    
+                    <div class="cookie-form">
+                        <input type="text" id="cookieInput" placeholder="Enter your ui=... cookie" class="cookie-input">
+                        <button id="setCookieBtn" class="btn btn-secondary">Set Cookie</button>
+                    </div>
+                    
+                    <div id="personalizedManifest" class="personalized-manifest">
+                        <div class="manifest-result" style="display:none;">
+                            <h4>Your Personalized Addon</h4>
+                            <p class="manifest-note">This URL is unique to you and includes your cookie. Keep it private.</p>
+                            <div class="manifest-url-box">
+                                <span id="personalManifestUrl"></span>
+                                <button id="copyPersonalLink" class="copy-btn">Copy</button>
+                            </div>
+                            <div class="install-personal-container">
+                                <a href="#" id="installPersonalLink" class="btn btn-primary">Install Personalized Addon</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="buttons">
                     <a href="#" id="installLink" class="btn btn-primary">Install Addon</a>
                     <button id="copyLink" class="btn btn-secondary">Copy Manifest</button>
@@ -791,13 +935,14 @@
         const copyLinkBtn = document.getElementById('copyLink');
         const toast = document.getElementById('toast');
 
-        // Dynamically set the install link
-        const manifestUrl = window.location.origin + '/manifest.json';
-        const installProtocolUrl = 'stremio://' + manifestUrl.replace(/^https?:\/\//, '');
+        // --- Default Manifest Setup ---
+        const defaultManifestUrl = window.location.origin + '/manifest.json';
+        const defaultInstallProtocolUrl = 'stremio://' + defaultManifestUrl.replace(/^https?:\/\//, '');
         if (installLink) {
-            installLink.href = installProtocolUrl;
+            installLink.href = defaultInstallProtocolUrl;
         }
 
+        // --- UI Interaction for More Addons (unchanged) ---
         const handleMoreAddonsClick = function() {
             if (cardsContainer) {
                 cardsContainer.classList.toggle('expanded');
@@ -846,22 +991,72 @@
         // Update layout on window resize
         window.addEventListener('resize', updateLayoutForScreenSize);
 
-        // Copy manifest link to clipboard
+        // --- Copy Default Manifest Link (unchanged) ---
         if (copyLinkBtn) {
             copyLinkBtn.addEventListener('click', async () => {
                 try {
-                    await navigator.clipboard.writeText(manifestUrl);
-                    if (toast) {
-                        toast.classList.add('show');
-                        setTimeout(() => {
-                            toast.classList.remove('show');
-                        }, 3000);
-                    }
+                    await navigator.clipboard.writeText(defaultManifestUrl);
+                    toast.textContent = "Default manifest link copied!";
+                    toast.classList.add('show');
+                    setTimeout(() => { toast.classList.remove('show'); }, 3000);
                 } catch (err) {
-                    console.error('Failed to copy: ', err);
+                    console.error('Failed to copy default manifest: ', err);
                 }
             });
         }
+
+        // --- New Cookie Configuration Functionality (Client-Side Only) ---
+        const cookieInput = document.getElementById('cookieInput');
+        const setCookieBtn = document.getElementById('setCookieBtn');
+        const manifestResult = document.querySelector('.manifest-result');
+        const personalManifestUrlSpan = document.getElementById('personalManifestUrl');
+        const copyPersonalLinkBtn = document.getElementById('copyPersonalLink');
+        const installPersonalLinkAnchor = document.getElementById('installPersonalLink');
+
+        if (setCookieBtn) {
+            setCookieBtn.addEventListener('click', () => {
+                const cookieValue = cookieInput.value.trim();
+                if (!cookieValue) {
+                    toast.textContent = "Please enter your FebBox cookie.";
+                    toast.classList.add('show');
+                    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                    return;
+                }
+
+                // URL-encode the cookie to make it safe for a query parameter
+                const encodedCookie = encodeURIComponent(cookieValue);
+                const personalizedManifestURL = `${window.location.origin}/manifest.json?cookie=${encodedCookie}`;
+                const personalizedInstallUrl = `stremio://${personalizedManifestURL.replace(/^https?:\/\//, '')}`;
+
+                personalManifestUrlSpan.textContent = personalizedManifestURL;
+                installPersonalLinkAnchor.href = personalizedInstallUrl;
+                manifestResult.style.display = 'block';
+
+                toast.textContent = "Personalized manifest ready!";
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 3000);
+            });
+        }
+
+        if (copyPersonalLinkBtn) {
+            copyPersonalLinkBtn.addEventListener('click', async () => {
+                const urlToCopy = personalManifestUrlSpan.textContent;
+                if (!urlToCopy) return;
+                try {
+                    await navigator.clipboard.writeText(urlToCopy);
+                    copyPersonalLinkBtn.textContent = "Copied!";
+                    toast.textContent = "Personalized manifest link copied!";
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        copyPersonalLinkBtn.textContent = "Copy";
+                        toast.classList.remove('show');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy personalized manifest: ', err);
+                }
+            });
+        }
+
     </script>
 </body>
 </html> 

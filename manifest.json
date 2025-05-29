@@ -10,7 +10,7 @@
   "behaviorHints": {
     "adult": false,
     "p2p": false,
-    "configurable": false
+    "configurable": true
   },
   "config": [
     {

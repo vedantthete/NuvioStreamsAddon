@@ -6,47 +6,56 @@ const fs = require('fs').promises;
 const path = require('path');
 const crypto = require('crypto');
 
-// Add cookie rotation functionality
+// --- Cookie Management ---
 let cookieIndex = 0;
-let cookieCache = null;
+let cookieCache = null; // This will store cookies from cookies.txt for fallback
 
-// Function to load cookies from cookies.txt
-const loadCookies = async () => {
+// Function to load cookies from cookies.txt (for fallback)
+const loadFallbackCookies = async () => {
     try {
         const cookiesPath = path.join(__dirname, 'cookies.txt');
         const cookiesContent = await fs.readFile(cookiesPath, 'utf-8');
-        return cookiesContent
+        const loadedCookies = cookiesContent
             .split('\n')
             .filter(line => line.trim().length > 0)
             .map(cookie => cookie.trim());
+        console.log(`Loaded ${loadedCookies.length} fallback cookies from cookies.txt`);
+        return loadedCookies;
     } catch (error) {
-        console.warn(`Warning: Could not load cookies from cookies.txt: ${error.message}`);
+        console.warn(`Warning: Could not load fallback cookies from cookies.txt: ${error.message}`);
         return [];
     }
 };
 
-// Function to get the next cookie in rotation
-const getNextCookie = async () => {
-    // Load cookies if not already loaded
+// Function to get the appropriate cookie for a request
+const getCookieForRequest = async () => {
+    // 1. Prioritize user-supplied cookie (passed via global.currentRequestUserCookie)
+    if (global.currentRequestUserCookie) {
+        console.log('[CookieManager] Using user-supplied cookie from manifest URL.');
+        return global.currentRequestUserCookie;
+    }
+
+    // 2. Fallback to rotating cookies from cookies.txt
     if (cookieCache === null) {
-        cookieCache = await loadCookies();
-        console.log(`Loaded ${cookieCache.length} cookies from cookies.txt`);
+        cookieCache = await loadFallbackCookies();
     }
     
-    // If no cookies available, return empty string
     if (!cookieCache || cookieCache.length === 0) {
-        return '';
+        console.log('[CookieManager] No fallback cookies available in cookies.txt.');
+        return ''; // No fallback cookies available
     }
     
-    // Get next cookie in rotation
-    const cookie = cookieCache[cookieIndex];
+    const fallbackCookie = cookieCache[cookieIndex];
+    const currentFallbackIndex = cookieIndex + 1; // For 1-based logging
     cookieIndex = (cookieIndex + 1) % cookieCache.length;
-    console.log(`Using cookie ${cookieIndex} of ${cookieCache.length}`);
-    
-    return cookie;
+    console.log(`[CookieManager] Using fallback cookie ${currentFallbackIndex} of ${cookieCache.length} from cookies.txt.`);
+    return fallbackCookie;
 };
 
-// MODIFICATION: Removed SCRAPER_API_BASE_URL
+// REMOVE: Old cookie functions like getInitialCookieForLookup, activeCookieMap, etc.
+// const activeCookieMap = new Map();
+// const getInitialCookieForLookup = async (lookupId) => { ... };
+// const getNextCookie = async () => { ... }; // This is now handled by getCookieForRequest
 
 // Helper function to fetch stream size using a HEAD request
 const fetchStreamSize = async (url) => {
@@ -509,19 +518,18 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId) => {
 
 // Function to fetch sources for a single FID
 // MODIFICATION: Remove scraperApiKey parameter
-const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => {
-    console.log(`  Fetching player data for video FID: ${fidToProcess} (Share: ${shareKey}) - Caching disabled for these links.`);
-    console.time(`fetchSourcesForSingleFid_${fidToProcess}`);
+const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => { // Removed lookupId parameter
+    // console.log(`  Fetching player data for video FID: ${fidToProcess} (Share: ${shareKey}) - Caching disabled for these links.`);
+    // console.time(`fetchSourcesForSingleFid_${fidToProcess}`);
     
     const targetPostData = new URLSearchParams();
     targetPostData.append('fid', fidToProcess);
     targetPostData.append('share_key', shareKey);
 
-    // Get next cookie in rotation
-    const nextCookie = await getNextCookie();
+    const cookieForRequest = await getCookieForRequest(); // Simplified cookie call
     
     const baseHeaders = {
-        'Cookie': `ui=${nextCookie}`,
+        'Cookie': `ui=${cookieForRequest}`,
         'Content-Type': 'application/x-www-form-urlencoded'
     };
 
@@ -588,12 +596,12 @@ const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => {
         if (fidVideoLinks.length > 0) {
             console.log(`    Extracted ${fidVideoLinks.length} fresh video link(s) for FID ${fidToProcess}`);
         }
-        console.timeEnd(`fetchSourcesForSingleFid_${fidToProcess}`);
+        // console.timeEnd(`fetchSourcesForSingleFid_${fidToProcess}`);
         return fidVideoLinks;
     } catch (error) {
         console.log(`    Request error for FID ${fidToProcess}: ${error.message}`);
         console.log(`    Fresh fetch failed for FID ${fidToProcess}.`);
-        console.timeEnd(`fetchSourcesForSingleFid_${fidToProcess}`);
+        // console.timeEnd(`fetchSourcesForSingleFid_${fidToProcess}`);
         return [];
     }
 };
@@ -883,9 +891,9 @@ class ShowBoxScraper {
 
 // Function to extract FIDs from FebBox share page
 // MODIFICATION: Accept scraperApiKey -> MODIFICATION: Remove scraperApiKey
-const extractFidsFromFebboxPage = async (febboxUrl) => {
+const extractFidsFromFebboxPage = async (febboxUrl) => { // Removed lookupId parameter
     const timerLabel = `extractFidsFromFebboxPage_total_${febboxUrl.replace(/[^a-zA-Z0-9]/g, '')}`;
-    console.time(timerLabel);
+    // console.time(timerLabel);
     let directSources = []; // Initialize directSources
     const cacheSubDirHtml = 'febbox_page_html';
     const cacheSubDirParsed = 'febbox_parsed_page'; // New subdir for parsed data
@@ -896,8 +904,8 @@ const extractFidsFromFebboxPage = async (febboxUrl) => {
     // Check for cached parsed data first
     const cachedParsedData = await getFromCache(cacheKeyParsed, cacheSubDirParsed);
     if (cachedParsedData && typeof cachedParsedData === 'object') { // Ensure it's an object
-        console.log(`  CACHE HIT for parsed FebBox page data: ${febboxUrl}`);
-        console.timeEnd(timerLabel);
+        // console.log(`  CACHE HIT for parsed FebBox page data: ${febboxUrl}`);
+        // console.timeEnd(timerLabel);
         return cachedParsedData; // Return { fids, shareKey, directSources }
     }
     // console.log(`  CACHE MISS for parsed FebBox page data: ${febboxUrl}`);
@@ -905,10 +913,8 @@ const extractFidsFromFebboxPage = async (febboxUrl) => {
     let contentHtml = await getFromCache(cacheKeyHtml, cacheSubDirHtml);
 
     if (!contentHtml) {
-        // Get next cookie in rotation
-        const nextCookie = await getNextCookie();
-        
-        const baseHeaders = { 'Cookie': `ui=${nextCookie}` };
+        const cookieForRequest = await getCookieForRequest(); // Simplified cookie call
+        const baseHeaders = { 'Cookie': `ui=${cookieForRequest}` };
         const fetchTimerLabel = `extractFidsFromFebboxPage_fetch_${febboxUrl.replace(/[^a-zA-Z0-9]/g, '')}`;
         
         // MODIFICATION: Removed ScraperAPI conditional logic
@@ -928,9 +934,9 @@ const extractFidsFromFebboxPage = async (febboxUrl) => {
         console.log(`Fetching FebBox page content from URL: ${febboxUrl} directly`);
 
         try {
-            console.time(fetchTimerLabel);
+            // console.time(fetchTimerLabel);
             const response = await axios.get(finalGetUrl, axiosConfig);
-            console.timeEnd(fetchTimerLabel);
+            // console.timeEnd(fetchTimerLabel);
             contentHtml = response.data;
             if (typeof contentHtml === 'string' && contentHtml.length > 0) {
                 await saveToCache(cacheKeyHtml, contentHtml, cacheSubDirHtml);
@@ -938,7 +944,7 @@ const extractFidsFromFebboxPage = async (febboxUrl) => {
         } catch (error) {
             console.log(`Failed to fetch FebBox page: ${error.message}`);
             if (fetchTimerLabel) console.timeEnd(fetchTimerLabel); // Ensure timer ends on error if started
-            console.timeEnd(timerLabel);
+            // console.timeEnd(timerLabel);
             return { fids: [], shareKey: null };
         }
     }
@@ -956,7 +962,7 @@ const extractFidsFromFebboxPage = async (febboxUrl) => {
 
     if (!shareKey) {
         console.log(`Warning: Could not extract share_key from ${febboxUrl}`);
-        console.timeEnd(timerLabel);
+        // console.timeEnd(timerLabel);
         return { fids: [], shareKey: null };
     }
 
@@ -991,7 +997,7 @@ const extractFidsFromFebboxPage = async (febboxUrl) => {
     const fileElements = $('div.file');
     if (fileElements.length === 0 && !(directSources && directSources.length > 0) ) { // Check if directSources also not found
         console.log(`No files or direct sources found on FebBox page: ${febboxUrl}`);
-        console.timeEnd(timerLabel);
+        // console.timeEnd(timerLabel);
         return { fids: [], shareKey, directSources: [] }; // Return empty directSources as well
     }
 
@@ -1008,7 +1014,7 @@ const extractFidsFromFebboxPage = async (febboxUrl) => {
     const parsedResult = { fids: [...new Set(videoFidsFound)], shareKey, directSources };
     await saveToCache(cacheKeyParsed, parsedResult, cacheSubDirParsed);
     // console.log(`  SAVED PARSED FebBox page data to cache: ${febboxUrl}`);
-    console.timeEnd(timerLabel);
+    // console.timeEnd(timerLabel);
     return parsedResult;
 };
 
@@ -1084,12 +1090,15 @@ const convertImdbToTmdb = async (imdbId) => {
 // This will be a function to get streams from a TMDB ID
 // MODIFICATION: Accept scraperApiKey -> MODIFICATION: Remove scraperApiKey
 const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeNum = null) => {
+    // REMOVE: lookupId creation and initial cookie call for lookupId, as cookie is now per-request context
+    // const lookupId = `${tmdbType}_${tmdbId}_...`;
+    // await getInitialCookieForLookup(lookupId);
+    
     const mainTimerLabel = `getStreamsFromTmdbId_total_${tmdbType}_${tmdbId}` + (seasonNum ? `_s${seasonNum}` : '') + (episodeNum ? `_e${episodeNum}` : '');
     console.time(mainTimerLabel);
     console.log(`Getting streams for TMDB ${tmdbType}/${tmdbId}${seasonNum !== null ? `, Season ${seasonNum}` : ''}${episodeNum !== null ? `, Episode ${episodeNum}` : ''}`);
     
-    // First, get the ShowBox URL from TMDB ID
-    // MODIFICATION: Pass scraperApiKey -> MODIFICATION: No longer passing scraperApiKey
+    // Then, get the ShowBox URL from TMDB ID
     const tmdbInfo = await getShowboxUrlFromTmdbInfo(tmdbType, tmdbId);
     if (!tmdbInfo || !tmdbInfo.showboxUrl) {
         console.log(`Could not construct ShowBox URL for TMDB ${tmdbType}/${tmdbId}`);
@@ -1101,7 +1110,6 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
     // const originalTmdbMediaTitle = tmdbInfo.title; // Title from TMDB, if needed later
 
     // Then, get FebBox link from ShowBox
-    // MODIFICATION: Pass scraperApiKey to ShowBoxScraper constructor -> MODIFICATION: ShowBoxScraper constructor doesn't take scraperApiKey
     const showboxScraper = new ShowBoxScraper();
     const febboxShareInfos = await showboxScraper.extractFebboxShareLinks(showboxUrl);
     if (!febboxShareInfos || febboxShareInfos.length === 0) {
@@ -1126,12 +1134,11 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
         // For TV shows, handle season and episode
         if (tmdbType === 'tv' && seasonNum !== null) {
             // Pass baseStreamTitle (which will be just show name for TV)
-            // MODIFICATION: Pass scraperApiKey -> MODIFICATION: No longer passing scraperApiKey
+            // REMOVE: lookupId parameter from processShowWithSeasonsEpisodes call
             await processShowWithSeasonsEpisodes(febboxUrl, baseStreamTitle, seasonNum, episodeNum, allStreams);
         } else {
             // Handle movies or TV shows without season/episode specified (old behavior)
-            // Extract FIDs from FebBox page
-            // MODIFICATION: Pass scraperApiKey -> MODIFICATION: No longer passing scraperApiKey
+            // Extract FIDs from FebBox page - REMOVE lookupId
             const { fids, shareKey, directSources } = await extractFidsFromFebboxPage(febboxUrl);
             
             // If we have direct sources from player setup
@@ -1160,10 +1167,12 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
             
             // Process FIDs
             if (fids.length > 0 && shareKey) {
-                console.time(`getStreamsFromTmdbId_fetchFids_concurrent_${shareInfo.febbox_share_url.replace(/[^a-zA-Z0-9]/g, '')}`);
+                // console.time(...);
+                // REMOVE lookupId from fetchSourcesForSingleFid call
                 const fidPromises = fids.map(fid => fetchSourcesForSingleFid(fid, shareKey));
                 const fidSourcesArray = await Promise.all(fidPromises);
-                console.timeEnd(`getStreamsFromTmdbId_fetchFids_concurrent_${shareInfo.febbox_share_url.replace(/[^a-zA-Z0-9]/g, '')}`);
+                // console.timeEnd(...);
+                // ... (fidSourcesArray processing) ...
 
                 for (const sources of fidSourcesArray) {
                     for (const source of sources) {
@@ -1237,7 +1246,7 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
 // Function to handle TV shows with seasons and episodes
 // MODIFICATION: Accept scraperApiKey -> MODIFICATION: Remove scraperApiKey
 // New parameter: resolveFids, defaults to true. If false, skips fetching sources for FIDs.
-const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum, episodeNum, allStreams, resolveFids = true) => {
+const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum, episodeNum, allStreams, resolveFids = true) => { // Removed lookupId parameter
     const processTimerLabel = `processShowWithSeasonsEpisodes_total_s${seasonNum}` + (episodeNum ? `_e${episodeNum}` : '_all') + (resolveFids ? '_resolve' : '_noresolve');
     console.time(processTimerLabel);
     console.log(`Processing TV Show: ${showboxTitle}, Season: ${seasonNum}, Episode: ${episodeNum !== null ? episodeNum : 'all'}${resolveFids ? '' : ' (FIDs not resolved)'}`);
@@ -1257,15 +1266,14 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         const fetchMainPageTimer = `processShowWithSeasonsEpisodes_fetchMainPage_s${seasonNum}`;
         console.time(fetchMainPageTimer);
 
-        // Get next cookie in rotation
-        const nextCookie = await getNextCookie();
+        const cookieForRequest = await getCookieForRequest(); // Simplified cookie call
         
         // MODIFICATION: Removed ScraperAPI conditional logic
         // const useScraperApi = process.env.USE_SCRAPER_API === 'true';
         // const scraperApiKey = process.env.SCRAPER_API_KEY_VALUE;
         let finalFebboxUrl = febboxUrl;
         let axiosConfigMainPage = {
-            headers: { 'Cookie': `ui=${nextCookie}` },
+            headers: { 'Cookie': `ui=${cookieForRequest}` },
             timeout: 20000
         };
 
@@ -1416,13 +1424,11 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
             try {
                 const targetFolderListUrl = `${FEBBOX_FILE_SHARE_LIST_URL}?share_key=${shareKey}&parent_id=${selectedFolder.id}&is_html=1&pwd=`;
                 
-                // Get next cookie in rotation
-                const nextCookie = await getNextCookie();
-                
+                const cookieForRequestFolder = await getCookieForRequest(); // Simplified cookie call
                 let finalFolderUrl = targetFolderListUrl;
                 let axiosConfigFolder = {
                     headers: {
-                        'Cookie': `ui=${nextCookie}`,
+                        'Cookie': `ui=${cookieForRequestFolder}`,
                         'Referer': febboxUrl,
                         'X-Requested-With': 'XMLHttpRequest'
                     },
@@ -1551,7 +1557,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     if (resolveFids && episodeFids.length > 0) { // Check resolveFids flag here
       const episodeTimerLabel = `processShowWithSeasonsEpisodes_fetchEpisodeSources_s${seasonNum}` + (episodeNum ? `_e${episodeNum}`: '_allEp_concurrent');
       console.time(episodeTimerLabel);
-      const episodeSourcePromises = episodeFids.map(fid => fetchSourcesForSingleFid(fid, shareKey).then(sources => ({ fid, sources })));
+      const episodeSourcePromises = episodeFids.map(fid => fetchSourcesForSingleFid(fid, shareKey));
       const episodeSourcesResults = await Promise.all(episodeSourcePromises);
       console.timeEnd(episodeTimerLabel);
 
@@ -1744,23 +1750,21 @@ function sortStreamsByQuality(streams) {
 // Initialize the cache directory
 ensureCacheDir(CACHE_DIR).catch(console.error);
 
-// Initialize cookies
-loadCookies().then(cookies => {
-    cookieCache = cookies;
-    console.log(`Initialized ${cookies.length} cookies from cookies.txt`);
+// Initialize fallback cookies on startup (optional, can be lazy-loaded too)
+loadFallbackCookies().then(fallbackCookies => {
+    cookieCache = fallbackCookies; // Store loaded fallback cookies
+    // console.log(`Initialized ${cookieCache ? cookieCache.length : 0} fallback cookies.`);
 }).catch(err => {
-    console.warn(`Failed to initialize cookies: ${err.message}`);
+    console.warn(`Failed to initialize fallback cookies: ${err.message}`);
 });
 
 module.exports = {
     getStreamsFromTmdbId,
     parseQualityFromLabel,
     convertImdbToTmdb,
-    // isScraperApiKeyNeeded, // MODIFICATION: Removed
-    // Functions needed by cache_populator.js
     getShowboxUrlFromTmdbInfo,
     ShowBoxScraper, 
     extractFidsFromFebboxPage,
     processShowWithSeasonsEpisodes,
-    sortStreamsByQuality // Add sortStreamsByQuality to exports
+    sortStreamsByQuality
 }; 
