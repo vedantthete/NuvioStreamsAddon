@@ -1572,7 +1572,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     if (resolveFids && episodeFids.length > 0) { // Check resolveFids flag here
       const episodeTimerLabel = `processShowWithSeasonsEpisodes_fetchEpisodeSources_s${seasonNum}` + (episodeNum ? `_e${episodeNum}`: '_allEp_concurrent');
       console.time(episodeTimerLabel);
-      const episodeSourcePromises = episodeFids.map(fid => fetchSourcesForSingleFid(fid, shareKey));
+      const episodeSourcePromises = episodeFids.map(fid => fetchSourcesForSingleFid(fid, shareKey).then(sources => ({ fid, sources })));
       const episodeSourcesResults = await Promise.all(episodeSourcePromises);
       console.timeEnd(episodeTimerLabel);
 

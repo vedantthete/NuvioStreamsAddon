@@ -35,7 +35,7 @@ After receiving feedback and working on improvements, I'm excited to announce **
 
 >**Note:** The addon is now available both through its dedicated website and on the official Stremio Community Addons page. You can install or configure it from either location.
 
-# Personalized Configuration (New Feature)
+# Personalized Configuration  (New Feature)
 
 A key new feature in v0.2.0 is the ability to use your own cookie for one of the main providers:
 
@@ -71,6 +71,10 @@ A: I'm always looking for reliable providers to add. With this update, I've alre
 
 If you encounter issues, you can DM me or comment below. Please understand that it may take time to find solutions or alternative providers.
 
+**Contributing to Development:**
+
+The Nuvio Streams GitHub repository is currently private. However, if you're a developer interested in contributing to the project (e.g., by helping to fix providers, add new features, or improve the codebase), please send me a Direct Message (DM). If there's enough interest, I'm open to making the repository public to facilitate collaboration!
+
 # Support Development
 
 If you find this addon useful and want to support its development: [**Buy Me a Coffee**](https://buymeacoffee.com/tapframe)
@@ -82,4 +86,4 @@ Your support helps me:
 * Cover hosting costs and infrastructure expenses
 * Develop more Stremio addons in the future
 
-**Follow me on GitHub:** [https://github.com/tapframe](https://github.com/tapframe) 
+**Follow me on GitHub:** [https://github.com/tapframe](https://github.com/tapframe) (Currently private, see 'Contributing to Development' above for details on potential collaboration) 
