@@ -6,6 +6,7 @@ const addonInterface = require('./addon');
 const path = require('path');
 const cors = require('cors');
 const crypto = require('crypto'); // For generating a simple hash for personalized manifest ID
+const axios = require('axios'); // Added axios for HTTP requests
 // body-parser is not strictly needed if we remove the POST /api/set-cookie endpoint and don't have other JSON POST bodies to parse for now.
 // const bodyParser = require('body-parser'); 
 
@@ -17,6 +18,8 @@ const app = express();
 
 // Enable CORS for all routes
 app.use(cors());
+
+app.use(express.json()); // Middleware to parse JSON bodies, needed for /api/validate-cookie
 
 // REMOVE: bodyParser.json() if no other routes need it.
 // app.use(bodyParser.json());
@@ -50,9 +53,7 @@ app.use(async (req, res, next) => {
 
     // Store region preference if provided
     if (userRegionPreference) {
-        req.userRegion = userRegionPreference;
-        // Store uppercase version for consistency
-        req.userRegion = req.userRegion.toUpperCase();
+        req.userRegion = userRegionPreference.toUpperCase();
         console.log(`Received region preference from URL: ${req.userRegion}`);
     }
 
@@ -69,6 +70,132 @@ app.use(async (req, res, next) => {
 
 // REMOVE: API endpoint to verify a cookie exists (/api/check-cookie)
 // app.get('/api/check-cookie', async (req, res) => { ... });
+
+// New API endpoint to validate FebBox cookie
+app.post('/api/validate-cookie', async (req, res) => {
+    const { cookie } = req.body;
+
+    if (!cookie || typeof cookie !== 'string' || cookie.trim() === '') {
+        return res.status(400).json({ isValid: false, message: 'Cookie is required.' });
+    }
+
+    const FEBBOX_TEST_SHARE_URL = 'https://www.febbox.com/share/cbaV67Kp'; // A known public share
+    const FEBBOX_PLAYER_URL = 'https://www.febbox.com/file/player';
+    const cookieForRequest = cookie.startsWith('ui=') ? cookie : `ui=${cookie}`;
+
+    console.log(`[validate-cookie] Testing cookie: ${cookie.substring(0, 15)}...`);
+
+    try {
+        // Step 1: Try to access the public share page
+        console.log(`[validate-cookie] Step 1: Accessing ${FEBBOX_TEST_SHARE_URL}`);
+        const sharePageResponse = await axios.get(FEBBOX_TEST_SHARE_URL, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0',
+                'Accept': 'text/html',
+                'Cookie': cookieForRequest
+            },
+            timeout: 10000,
+            maxRedirects: 0,
+            validateStatus: () => true // Accept all statuses to analyze them
+        });
+
+        if (sharePageResponse.status !== 200 || !sharePageResponse.data || typeof sharePageResponse.data !== 'string') {
+            let message = 'Failed to load test share page.';
+            if (sharePageResponse.status === 301 || sharePageResponse.status === 302) {
+                const location = sharePageResponse.headers.location || '';
+                message = location.includes('/login') || location.includes('/passport') 
+                    ? 'Redirected to login page.' 
+                    : `Redirected from share page (${location}).`;
+            } else {
+                message = `Share page access error: Status ${sharePageResponse.status}.`;
+            }
+            console.log(`[validate-cookie] Step 1 FAILED: ${message}`);
+            return res.json({ isValid: false, message });
+        }
+        
+        const htmlContent = sharePageResponse.data;
+        console.log('[validate-cookie] Step 1 SUCCESS: Share page accessed.');
+
+        // Step 2: Extract FID and Share Key from the share page HTML
+        let fid = null;
+        let shareKey = null;
+
+        const fidMatches = htmlContent.match(/div\s+class="file[^"]*"\s+data-id="(\d+)"/gi);
+        if (fidMatches) {
+            for (const match of fidMatches) {
+                const fidFromMatch = match.match(/data-id="(\d+)"/i);
+                if (fidFromMatch && fidFromMatch[1] && fidFromMatch[1] !== '0') {
+                    fid = fidFromMatch[1]; // Use the first valid non-zero FID
+                    break;
+                }
+            }
+        }
+
+        let shareKeyMatch = htmlContent.match(/var\s+share_key\s*=\s*['"]([a-zA-Z0-9]+)['"]/);
+        if (!shareKeyMatch) shareKeyMatch = htmlContent.match(/share_key:\s*['"]([a-zA-Z0-9]+)['"]/);
+        if (!shareKeyMatch) shareKeyMatch = htmlContent.match(/shareid\s*=\s*['"]([a-zA-Z0-9]+)['"]/);
+        if (shareKeyMatch) {
+            shareKey = shareKeyMatch[1];
+        } else {
+            // Fallback: try to get share_key from the test URL itself
+            const urlParts = FEBBOX_TEST_SHARE_URL.split('/');
+            const potentialKey = urlParts[urlParts.length -1];
+            if (/^[a-zA-Z0-9]+$/.test(potentialKey)) shareKey = potentialKey;
+        }
+
+        if (!fid || !shareKey) {
+            const message = 'Could not extract necessary FID or Share Key from the test page.';
+            console.log(`[validate-cookie] Step 2 FAILED: ${message} (FID: ${fid}, ShareKey: ${shareKey})`);
+            return res.json({ isValid: false, message });
+        }
+        console.log(`[validate-cookie] Step 2 SUCCESS: Extracted FID: ${fid}, ShareKey: ${shareKey}`);
+
+        // Step 3: Attempt to fetch player sources with extracted FID and Share Key
+        console.log(`[validate-cookie] Step 3: Accessing player with FID ${fid}, ShareKey ${shareKey}`);
+        const playerPostData = new URLSearchParams();
+        playerPostData.append('fid', fid);
+        playerPostData.append('share_key', shareKey);
+
+        const playerResponse = await axios.post(FEBBOX_PLAYER_URL, playerPostData.toString(), {
+            headers: {
+                'User-Agent': 'Mozilla/5.0',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cookie': cookieForRequest
+            },
+            timeout: 15000
+        });
+
+        if (playerResponse.data && typeof playerResponse.data === 'string') {
+            if (playerResponse.data.includes('sources = [') || 
+                (playerResponse.data.includes('http') && (playerResponse.data.includes('.mp4') || playerResponse.data.includes('.m3u8')))) {
+                console.log('[validate-cookie] Step 3 SUCCESS: Player sources found. Cookie is VALID.');
+                return res.json({ isValid: true, message: 'Cookie successfully fetched video sources.' });
+            }
+        }
+        
+        // If we reach here, player did not return expected sources
+        let playerResponseMessage = 'Player did not return valid video sources.';
+        if (playerResponse.data && typeof playerResponse.data === 'object') {
+             // FebBox often returns JSON like {code: -1, msg: "user not found"}
+            playerResponseMessage = playerResponse.data.msg || JSON.stringify(playerResponse.data).substring(0,100);
+        } else if (playerResponse.data && typeof playerResponse.data === 'string') {
+            playerResponseMessage = `Player returned: ${playerResponse.data.substring(0,100)}...`;
+        }
+
+        console.log(`[validate-cookie] Step 3 FAILED: ${playerResponseMessage}`);
+        return res.json({ isValid: false, message: playerResponseMessage });
+
+    } catch (error) {
+        console.error('[validate-cookie] Error during validation process:', error.message);
+        let errorMessage = 'Failed to validate cookie.';
+        if (error.code === 'ECONNABORTED') {
+            errorMessage = 'Validation timed out connecting to FebBox.';
+        } else if (error.response) {
+            errorMessage = `FebBox server error: ${error.response.status}`;
+        }
+        return res.status(500).json({ isValid: false, message: errorMessage });
+    }
+});
 
 // Add middleware to extract cookie and region preference from request queries
 app.use((req, res, next) => {

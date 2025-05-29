@@ -1322,6 +1322,64 @@
             color: #00c16e;
             font-weight: 500;
         }
+
+        /* Styles for cookie status indicator */
+        .cookie-input-container {
+            position: relative;
+            display: flex; 
+            align-items: center;
+            width: 100%; /* Ensure container takes full width of its grid cell */
+        }
+
+        #cookieStatusIndicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #555; /* Default/neutral gray */
+            margin-right: 8px; 
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            flex-shrink: 0; 
+        }
+
+        #cookieStatusIndicator.valid {
+            background-color: #28a745; /* Green */
+            box-shadow: 0 0 6px #28a745;
+        }
+
+        #cookieStatusIndicator.invalid {
+            background-color: #dc3545; /* Red */
+            box-shadow: 0 0 6px #dc3545;
+        }
+
+        #cookieStatusIndicator.pending {
+            background-color: #ffc107; /* Yellow */
+            box-shadow: 0 0 6px #ffc107;
+            animation: pulse-yellow 1.5s infinite ease-in-out;
+        }
+        
+        @keyframes pulse-yellow {
+            0% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.25);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+        }
+        
+        .cookie-input-container .cookie-input {
+            flex-grow: 1; /* Make input field take remaining space */
+            /* margin-right: 0.5rem; */ /* Removed space for check button */
+        }
+
+        /* Styles for the new inline check button - REMOVED */
+        /* .inline-check-btn { ... } */
+
     </style>
 </head>
 <body>
@@ -1394,7 +1452,11 @@
                         <p><strong>Why use your own cookie?</strong> Without personalization, you'll share cookies with other addon users, which can exhaust the 100GB quota quickly and result in slow or failed streams. When not using a personal cookie, ShowBox streams are limited to sizes below 9GB.</p>
                         
                         <div class="cookie-form">
-                            <input type="text" id="cookieInput" placeholder="Enter your token" class="cookie-input">
+                            <div class="cookie-input-container">
+                                <span id="cookieStatusIndicator" class="cookie-status-indicator"></span>
+                                <input type="text" id="cookieInput" placeholder="Enter your token" class="cookie-input">
+                                <!-- <button id="checkCookieBtn" class="inline-check-btn">Check</button> --> <!-- Removed Check Button -->
+                            </div>
                             <!-- Server Region Selector -->
                             <select id="regionSelector" class="cookie-input">
                                 <option value="USA7">US East</option>
@@ -1622,6 +1684,196 @@
         const setCookieBtn = document.getElementById('setCookieBtn');
         const manifestResult = document.querySelector('.manifest-result');
         const personalManifestUrlSpan = document.getElementById('personalManifestUrl');
+        const checkCookieBtn = document.getElementById('checkCookieBtn'); // Get the new check button
+
+        // --- Add new elements for cookie status ---
+        const cookieStatusIndicator = document.getElementById('cookieStatusIndicator');
+
+        // --- Disable Set Cookie button initially ---
+        if (setCookieBtn) {
+            setCookieBtn.disabled = true;
+            setCookieBtn.style.opacity = '0.6'; // Visual cue for disabled state
+            setCookieBtn.style.cursor = 'not-allowed';
+        }
+
+        // --- Debounce function ---
+        function debounce(func, delay) {
+            let timeout;
+            return function(...args) {
+                const context = this;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), delay);
+            };
+        }
+
+        // --- Function to check cookie validity via backend API ---
+        async function checkCookieOnServer(cookieValue) {
+            if (!cookieValue || cookieValue.length < 10) { // Basic check
+                cookieStatusIndicator.className = 'cookie-status-indicator invalid';
+                if (setCookieBtn) {
+                    setCookieBtn.disabled = true;
+                    setCookieBtn.style.opacity = '0.6';
+                    setCookieBtn.style.cursor = 'not-allowed';
+                }
+                // if (checkCookieBtn) checkCookieBtn.disabled = false; // Removed
+                return false;
+            }
+
+            cookieStatusIndicator.className = 'cookie-status-indicator pending'; 
+            if (setCookieBtn) {
+                setCookieBtn.disabled = true; 
+                setCookieBtn.style.opacity = '0.6';
+                setCookieBtn.style.cursor = 'not-allowed';
+            }
+            // if (checkCookieBtn) checkCookieBtn.disabled = true; // Removed
+
+            try {
+                // IMPORTANT: You need to create this backend endpoint in your server.js
+                const response = await fetch('/api/validate-cookie', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ cookie: cookieValue }),
+                });
+
+                if (!response.ok) {
+                    // Handle HTTP errors (e.g., 500, 404)
+                    const errorData = await response.json().catch(() => ({ message: 'Server error or invalid response' }));
+                    console.error('Server error validating cookie:', response.status, errorData.message);
+                    cookieStatusIndicator.className = 'cookie-status-indicator invalid';
+                    if (setCookieBtn) {
+                         setCookieBtn.disabled = true;
+                         setCookieBtn.style.opacity = '0.6';
+                         setCookieBtn.style.cursor = 'not-allowed';
+                    }
+                    // if (checkCookieBtn) checkCookieBtn.disabled = false; // Removed
+                    toast.textContent = `Error validating: ${errorData.message || response.statusText}`;
+                    toast.classList.add('show');
+                    setTimeout(() => { toast.classList.remove('show'); }, 4000);
+                    return false;
+                }
+
+                const result = await response.json();
+
+                if (result.isValid) {
+                    cookieStatusIndicator.className = 'cookie-status-indicator valid';
+                    if (setCookieBtn) {
+                        setCookieBtn.disabled = false; 
+                        setCookieBtn.style.opacity = '1';
+                        setCookieBtn.style.cursor = 'pointer';
+                    }
+                    // if (checkCookieBtn) checkCookieBtn.disabled = false; // Removed
+                    return true;
+                } else {
+                    cookieStatusIndicator.className = 'cookie-status-indicator invalid';
+                    if (setCookieBtn) {
+                        setCookieBtn.disabled = true; 
+                        setCookieBtn.style.opacity = '0.6';
+                        setCookieBtn.style.cursor = 'not-allowed';
+                    }
+                    // if (checkCookieBtn) checkCookieBtn.disabled = false; // Removed
+                    if (result.message) {
+                        toast.textContent = `Cookie Invalid: ${result.message}`;
+                        toast.classList.add('show');
+                        setTimeout(() => { toast.classList.remove('show'); }, 4000);
+                    }
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error calling /api/validate-cookie:', error);
+                cookieStatusIndicator.className = 'cookie-status-indicator invalid';
+                if (setCookieBtn) {
+                    setCookieBtn.disabled = true;
+                    setCookieBtn.style.opacity = '0.6';
+                    setCookieBtn.style.cursor = 'not-allowed';
+                }
+                // if (checkCookieBtn) checkCookieBtn.disabled = false; // Removed
+                toast.textContent = "Failed to check cookie validity. API might be down.";
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 4000);
+                return false;
+            }
+        }
+
+        // --- Event listener for cookie input ---
+        if (cookieInput) {
+            // Check on blur (when user clicks away) - Keep this for users who prefer it or for touch devices
+            cookieInput.addEventListener('blur', () => {
+                const cookieValue = cookieInput.value.trim();
+                if (cookieValue) { 
+                    if (!cookieStatusIndicator.classList.contains('pending')) {
+                        checkCookieOnServer(cookieValue);
+                    }
+                } else {
+                    cookieStatusIndicator.className = 'cookie-status-indicator'; 
+                    if (setCookieBtn) {
+                        setCookieBtn.disabled = true; 
+                        setCookieBtn.style.opacity = '0.6';
+                        setCookieBtn.style.cursor = 'not-allowed';
+                    }
+                }
+            });
+
+            // Debounced function for server-side check
+            const debouncedCheck = debounce((value) => {
+                checkCookieOnServer(value);
+            }, 750); // 750ms delay after user stops typing
+
+            cookieInput.addEventListener('input', () => {
+                const cookieValue = cookieInput.value.trim();
+
+                // Immediate reaction: If the cookie was valid and is now being modified
+                if (cookieStatusIndicator.classList.contains('valid')) {
+                    cookieStatusIndicator.className = 'cookie-status-indicator'; 
+                    if (setCookieBtn) {
+                        setCookieBtn.disabled = true; 
+                        setCookieBtn.style.opacity = '0.6';
+                        setCookieBtn.style.cursor = 'not-allowed';
+                    }
+                    if (manifestResult) manifestResult.style.display = 'none';
+                    currentManifestUrlToCopy = defaultManifestUrl;
+                    currentInstallUrl = defaultInstallProtocolUrl;
+                    if (installLink) installLink.href = currentInstallUrl;
+
+                    if (!toast.textContent.startsWith("Cookie modified")) {
+                        toast.textContent = "Cookie modified. Auto-checking soon..."; 
+                        toast.classList.add('show');
+                        setTimeout(() => { 
+                            if (toast.textContent.startsWith("Cookie modified")) {
+                                toast.classList.remove('show'); 
+                            }
+                        }, 2500); // Shorter display for this informational toast
+                    }
+                }
+                
+                // If input becomes empty, reset UI immediately and cancel any pending check
+                if (cookieValue === '') {
+                    cookieStatusIndicator.className = 'cookie-status-indicator';
+                    if (setCookieBtn) {
+                        setCookieBtn.disabled = true;
+                        setCookieBtn.style.opacity = '0.6';
+                        setCookieBtn.style.cursor = 'not-allowed';
+                    }
+                    if (manifestResult) manifestResult.style.display = 'none';
+                    currentManifestUrlToCopy = defaultManifestUrl;
+                    currentInstallUrl = defaultInstallProtocolUrl;
+                    if (installLink) installLink.href = currentInstallUrl;
+                    
+                    // Cancel any pending debounced check if input is cleared
+                    debounce(() => {}, 0)(); // Clears pending from the same debounce instance
+                    cookieStatusIndicator.className = 'cookie-status-indicator'; // Ensure pending is cleared
+
+                } else {
+                    // If there is text, start/restart the debounced check
+                    cookieStatusIndicator.className = 'cookie-status-indicator pending'; // Show pending immediately
+                    debouncedCheck(cookieValue);
+                }
+            }); 
+        }
+
+        // --- Event listener for the new inline check button - REMOVED ---
+        // if (checkCookieBtn && cookieInput) { ... }
 
         // Add a listener for region changes
         if (regionSelector) {
@@ -1643,11 +1895,32 @@
         }
 
         if (setCookieBtn) {
-            // Keep the original event listener with region status checking
-            setCookieBtn.addEventListener('click', () => {
+            // Make it async
+            setCookieBtn.addEventListener('click', async () => {
                 const cookieValue = cookieInput.value.trim();
                 const regionValue = regionSelector.value;
                 
+                // Perform server-side cookie validation before generating manifest
+                if (cookieValue) { // Only validate if there's a cookie
+                    const isValid = await checkCookieOnServer(cookieValue);
+                    if (!isValid) {
+                        toast.textContent = "Cookie is invalid. Please check and try again.";
+                        if (!toast.classList.contains('show')) { // Avoid overlapping toasts
+                           toast.classList.add('show');
+                           setTimeout(() => { toast.classList.remove('show'); }, 4000);
+                        }
+                        // Do not proceed to generate manifest if cookie is invalid
+                        // Optionally clear the personalized manifest section:
+                        // currentManifestUrlToCopy = defaultManifestUrl;
+                        // currentInstallUrl = defaultInstallProtocolUrl;
+                        // if (installLink) installLink.href = currentInstallUrl;
+                        // manifestResult.style.display = 'none';
+                        return; 
+                    }
+                } else { // No cookie entered
+                     cookieStatusIndicator.className = 'cookie-status-indicator'; // Reset to neutral
+                }
+
                 if (!cookieValue) {
                     toast.textContent = "Please enter your FebBox cookie.";
                     toast.classList.add('show');
@@ -1838,6 +2111,10 @@
         // Call this when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             startRegionStatusCheck();
+            // Initialize indicator if cookie is pre-filled
+            if (cookieInput && cookieInput.value.trim()) {
+                checkCookieOnServer(cookieInput.value.trim());
+            }
         });
         
         // Modify the setCookieBtn event listener to restart region checks when region changes
