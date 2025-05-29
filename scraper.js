@@ -527,7 +527,7 @@ const fetchSourcesForSingleFid = async (fidToProcess, shareKey) => { // Removed 
     targetPostData.append('share_key', shareKey);
 
     const cookieForRequest = await getCookieForRequest(); // Simplified cookie call
-    
+
     const baseHeaders = {
         'Cookie': `ui=${cookieForRequest}`,
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -1282,14 +1282,14 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         console.time(fetchMainPageTimer);
 
         const cookieForRequest = await getCookieForRequest(); // Simplified cookie call
-        
+
         // MODIFICATION: Removed ScraperAPI conditional logic
         // const useScraperApi = process.env.USE_SCRAPER_API === 'true';
         // const scraperApiKey = process.env.SCRAPER_API_KEY_VALUE;
         let finalFebboxUrl = febboxUrl;
         let axiosConfigMainPage = {
             headers: { 'Cookie': `ui=${cookieForRequest}` },
-            timeout: 20000
+                timeout: 20000
         };
 
         // ... existing code ...
@@ -1769,7 +1769,7 @@ function sortStreamsByQuality(streams) {
         const sizeBInBytes = parseSizeToBytes(b.size);
         
         if (sizeAInBytes !== sizeBInBytes) {
-            return sizeBInBytes - sizeAInBytes; 
+        return sizeBInBytes - sizeAInBytes;
         }
 
         // If quality AND size are the same, compare by provider

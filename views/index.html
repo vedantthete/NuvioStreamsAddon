@@ -906,10 +906,28 @@
             border-radius: 8px;
             overflow: hidden;
             background-color: #000;
+            position: relative;
         }
         
         .video-player {
             width: 100%;
+        }
+        
+        .video-warning-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px;
+            font-size: 0.75rem;
+            text-align: center;
+        }
+        
+        .video-warning-overlay span {
+            color: rgba(255, 58, 58, 0.9);
+            font-weight: bold;
         }
         
         .tutorial-steps {
@@ -964,6 +982,31 @@
         .how-to-get-btn:hover {
             background-color: rgba(0, 163, 255, 0.2);
         }
+        
+        .tutorial-warning {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: rgba(255, 58, 58, 0.1);
+            border: 1px solid rgba(255, 58, 58, 0.3);
+        }
+        
+        .tutorial-warning h3 {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
+        .tutorial-warning p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .tutorial-warning p:last-child {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -1015,8 +1058,9 @@
                         <span class="disclaimer-icon">ℹ️</span>
                         <span>Disclaimer</span>
                     </div>
-                    <p>Nuvio Streams is a scraper-based addon that aggregates content from various providers. We do not own or host any of the content provided.</p>
-                    <p>Providers may become unavailable without prior notification. We will make every effort to maintain provider functionality, but availability cannot be guaranteed.</p>
+                    <p>Nuvio Streams is a scraper-based addon that aggregates content from various providers. I do not own or host any of the content provided.</p>
+                    <p>Providers (including ShowBox) may become unavailable without prior notification. I will make every effort to maintain provider functionality, but availability cannot be guaranteed.</p>
+                    <p><strong>Important:</strong> As an independent developer, I cannot control when streaming sources may disappear. I'll try to maintain this addon as much as possible, but some providers may stop working unexpectedly.</p>
                 </div>
                 
                 <!-- Add Cookie Configuration Section -->
@@ -1063,7 +1107,7 @@
             <div class="card-footer">
                 <span class="footer-text">Nuvio Streams Addon • Seamless Streaming, Elevated</span>
                 <div class="footer-text">
-                    Developed by <a href="https://github.com/tapframe" target="_blank" class="github-link">TapFrame</a>
+                    Developed by <a href="https://github.com/tapframe" target="_blank" class="github-link">TapFrame</a> 
                 </div>
             </div>
         </div>
@@ -1104,10 +1148,7 @@
             <button class="close-tutorial" id="closeTutorial">×</button>
         </div>
         <div class="video-container">
-            <video class="video-player" controls>
-                <source src="/static/febboxsetup.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <iframe class="video-player" src="https://drive.google.com/file/d/1sP7AcxBRZWSgYT3rdOD5_gJsBODEkTSe/preview" allowfullscreen frameborder="0"></iframe>
         </div>
         <div class="tutorial-steps">
             <h3>Text Instructions:</h3>
@@ -1135,6 +1176,11 @@
                 <div class="step-number">6</div>
                 <div class="step-text">Copy the value of this cookie (it starts with 'ey' usually) and paste it into the cookie input field</div>
             </div>
+        </div>
+        <div class="tutorial-warning">
+            <h3>Important Notice:</h3>
+            <p>As an independent developer, I want to make it clear that Nuvio Streams is just a scraper addon. Providers like ShowBox may disappear without notice for reasons beyond my control.</p>
+            <p>I'll do my best to maintain this addon, but can't guarantee all sources will always work. Using your own cookie is the best way to maximize reliability while sources are available.</p>
         </div>
     </div>
 
@@ -1345,11 +1391,7 @@
         if (closeTutorialBtn) {
             closeTutorialBtn.addEventListener('click', () => {
                 videoTutorialPanel.classList.remove('show');
-                // Pause the video when closing the panel
-                const videoPlayer = videoTutorialPanel.querySelector('video');
-                if (videoPlayer) {
-                    videoPlayer.pause();
-                }
+                // Note: Can't directly pause iframe videos
             });
         }
 

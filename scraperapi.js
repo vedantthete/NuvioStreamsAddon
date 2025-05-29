@@ -967,14 +967,18 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
             console.timeEnd(`processShowWithSeasonsEpisodes_fallbackFids_s${seasonNum}_concurrent`);
 
             for (const sources of fallbackFidSourcesArray) {
-                for (const source of sources) {
-                    const streamTitle = `${showboxTitle} - ${source.label}`;
-                    allStreams.push({
-                        title: streamTitle, 
-                        url: source.url,
-                        quality: parseQualityFromLabel(source.label),
-                        codecs: extractCodecDetails(source.detailedFilename || streamTitle) 
-                    });
+                if (Array.isArray(sources)) {
+                    for (const source of sources) {
+                        const streamTitle = `${showboxTitle} - ${source.label}`;
+                        allStreams.push({
+                            title: streamTitle, 
+                            url: source.url,
+                            quality: parseQualityFromLabel(source.label),
+                            codecs: extractCodecDetails(source.detailedFilename || streamTitle) 
+                        });
+                    }
+                } else {
+                    console.warn(`  [processShowWithSeasonsEpisodes] Warning: sources for FID ${fids[0]} is not an array:`, sources);
                 }
             }
         }
