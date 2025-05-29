@@ -852,6 +852,118 @@
             display: flex;
             justify-content: center;
         }
+
+        /* Video Tutorial Panel Styles */
+        .video-tutorial-panel {
+            position: fixed;
+            right: -420px; /* Start offscreen */
+            top: 0;
+            width: 400px;
+            height: 100%;
+            background-color: rgba(15, 15, 15, 0.95);
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+            transition: right 0.4s ease-in-out;
+            z-index: 100;
+            padding: 20px;
+            overflow-y: auto;
+            border-left: 2px solid var(--primary);
+        }
+        
+        .video-tutorial-panel.show {
+            right: 0;
+        }
+        
+        .tutorial-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .tutorial-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .close-tutorial {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        
+        .close-tutorial:hover {
+            color: var(--text);
+        }
+        
+        .video-container {
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #000;
+        }
+        
+        .video-player {
+            width: 100%;
+        }
+        
+        .tutorial-steps {
+            margin-bottom: 20px;
+        }
+        
+        .tutorial-steps h3 {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .step {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background-color: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .step-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+        
+        .how-to-get-btn {
+            background-color: rgba(0, 163, 255, 0.1);
+            border: 1px solid rgba(0, 163, 255, 0.3);
+            color: var(--primary);
+            border-radius: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 0.5rem;
+        }
+        
+        .how-to-get-btn:hover {
+            background-color: rgba(0, 163, 255, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -922,8 +1034,9 @@
                         <p><strong>Why use your own cookie?</strong> Without personalization, you'll share cookies with other addon users, which can exhaust the 100GB quota quickly and result in slow or failed streams. Additionally, when not using a personal cookie, ShowBox streams will be limited to sizes below 9GB. With your own cookie, you'll have your personal 100GB quota for fast, reliable streams, and no size restrictions on ShowBox content.</p>
                         
                         <div class="cookie-form">
-                            <input type="text" id="cookieInput" placeholder="Enter your ui=... cookie" class="cookie-input">
+                            <input type="text" id="cookieInput" placeholder="Enter your token" class="cookie-input">
                             <button id="setCookieBtn" class="btn btn-secondary">Set Cookie</button>
+                            <button id="howToGetBtn" class="how-to-get-btn">How to Get</button>
                         </div>
                         
                         <div id="personalizedManifest" class="personalized-manifest">
@@ -984,6 +1097,46 @@
     </div>
 
     <div id="toast" class="toast">Manifest link copied to clipboard!</div>
+
+    <div class="video-tutorial-panel" id="videoTutorialPanel">
+        <div class="tutorial-header">
+            <h2 class="tutorial-title">How to Get a FebBox Cookie</h2>
+            <button class="close-tutorial" id="closeTutorial">×</button>
+        </div>
+        <div class="video-container">
+            <video class="video-player" controls>
+                <source src="/static/febboxsetup.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="tutorial-steps">
+            <h3>Text Instructions:</h3>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-text">Log in to FebBox using your Google account at <a href="https://www.febbox.com" target="_blank">www.febbox.com</a></div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-text">Right-click anywhere on the page and select "Inspect" or "Inspect Element"</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-text">Navigate to the "Application" tab in the developer tools</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-text">In the left sidebar, expand "Storage" → "Cookies" and select "febbox.com"</div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-text">Scroll down through the list of cookies until you find one named "ui"</div>
+            </div>
+            <div class="step">
+                <div class="step-number">6</div>
+                <div class="step-text">Copy the value of this cookie (it starts with 'ey' usually) and paste it into the cookie input field</div>
+            </div>
+        </div>
+    </div>
 
     <script>
         const cardsContainer = document.getElementById('cardsContainer');
@@ -1181,6 +1334,28 @@
                 // if (toggleIcon) {
                 //    toggleIcon.textContent = isCollapsed ? '▶' : '▼'; 
                 // }
+            });
+        }
+
+        // Video tutorial panel functionality
+        const videoTutorialPanel = document.getElementById('videoTutorialPanel');
+        const closeTutorialBtn = document.getElementById('closeTutorial');
+        const howToGetBtn = document.getElementById('howToGetBtn');
+
+        if (closeTutorialBtn) {
+            closeTutorialBtn.addEventListener('click', () => {
+                videoTutorialPanel.classList.remove('show');
+                // Pause the video when closing the panel
+                const videoPlayer = videoTutorialPanel.querySelector('video');
+                if (videoPlayer) {
+                    videoPlayer.pause();
+                }
+            });
+        }
+
+        if (howToGetBtn && videoTutorialPanel) {
+            howToGetBtn.addEventListener('click', () => {
+                videoTutorialPanel.classList.add('show');
             });
         }
 

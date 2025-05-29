@@ -1741,6 +1741,16 @@ function sortStreamsByQuality(streams) {
         "480p": 5,
         "360p": 6     // 360p will show at the bottom
     };
+
+    // Provider sort order: lower number means earlier in array (lower in Stremio UI for same quality/size)
+    const providerSortKeys = {
+        'HollyMovieHD': 1,
+        'Soaper TV': 2,
+        'Xprime.tv': 3,
+        'ShowBox': 4,
+        // Default for unknown providers
+        default: 99 
+    };
     
     return [...streams].sort((a, b) => {
         const qualityA = a.quality || "ORG";
@@ -1754,11 +1764,22 @@ function sortStreamsByQuality(streams) {
             return orderA - orderB;
         }
         
-        // If qualities are the same, compare by size (descending - larger sizes first)
+        // If qualities are the same, compare by size (descending - larger sizes first means earlier in array)
         const sizeAInBytes = parseSizeToBytes(a.size);
         const sizeBInBytes = parseSizeToBytes(b.size);
         
-        return sizeBInBytes - sizeAInBytes;
+        if (sizeAInBytes !== sizeBInBytes) {
+            return sizeBInBytes - sizeAInBytes; 
+        }
+
+        // If quality AND size are the same, compare by provider
+        const providerA = a.provider || 'default';
+        const providerB = b.provider || 'default';
+
+        const providerOrderA = providerSortKeys[providerA] || providerSortKeys.default;
+        const providerOrderB = providerSortKeys[providerB] || providerSortKeys.default;
+
+        return providerOrderA - providerOrderB;
     });
 }
 

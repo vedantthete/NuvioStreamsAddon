@@ -24,6 +24,9 @@ app.use(cors());
 // Serve static files from the 'views' directory (for the landing page)
 app.use(express.static(path.join(__dirname, 'views')));
 
+// Serve static files from the 'static' directory (for videos, images, etc.)
+app.use('/static', express.static(path.join(__dirname, 'static')));
+
 // Add route to render the main configuration page also at /configure
 app.get('/configure', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'index.html'));
