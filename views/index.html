@@ -1079,6 +1079,13 @@
                         
                         <div class="cookie-form">
                             <input type="text" id="cookieInput" placeholder="Enter your token" class="cookie-input">
+                            <!-- Add Server Region Selector -->
+                            <select id="regionSelector" class="cookie-input" style="flex: 0.4; min-width: 100px;">
+                                <option value="AUTO">Auto Detect</option>
+                                <option value="UK3">UK Servers</option>
+                                <option value="USA7">US Servers</option>
+                                <option value="APC2">Asia/Pacific</option>
+                            </select>
                             <button id="setCookieBtn" class="btn btn-secondary">Set Cookie</button>
                             <button id="howToGetBtn" class="how-to-get-btn">How to Get</button>
                         </div>
@@ -1086,7 +1093,7 @@
                         <div id="personalizedManifest" class="personalized-manifest">
                             <div class="manifest-result" style="display:none;">
                                 <h4>Your Personalized Addon</h4>
-                                <p class="manifest-note">This URL is unique to you and includes your cookie. Keep it private.</p>
+                                <p class="manifest-note">This URL is unique to you and includes your cookie and server region. Keep it private.</p>
                                 <div class="manifest-url-box">
                                     <span id="personalManifestUrl"></span>
                                     <button id="copyPersonalLink" class="copy-btn">Copy</button>
@@ -1285,6 +1292,7 @@
 
         // --- New Cookie Configuration Functionality (Client-Side Only) ---
         const cookieInput = document.getElementById('cookieInput');
+        const regionSelector = document.getElementById('regionSelector');
         const setCookieBtn = document.getElementById('setCookieBtn');
         const manifestResult = document.querySelector('.manifest-result');
         const personalManifestUrlSpan = document.getElementById('personalManifestUrl');
@@ -1294,6 +1302,8 @@
         if (setCookieBtn) {
             setCookieBtn.addEventListener('click', () => {
                 const cookieValue = cookieInput.value.trim();
+                const regionValue = regionSelector.value;
+                
                 if (!cookieValue) {
                     toast.textContent = "Please enter your FebBox cookie.";
                     toast.classList.add('show');
@@ -1310,7 +1320,7 @@
 
                 // URL-encode the cookie to make it safe for a query parameter
                 const encodedCookie = encodeURIComponent(cookieValue);
-                const personalizedManifestURL = `${window.location.origin}/manifest.json?cookie=${encodedCookie}`;
+                const personalizedManifestURL = `${window.location.origin}/manifest.json?cookie=${encodedCookie}&region=${regionValue}`;
                 const personalizedInstallUrl = `stremio://${personalizedManifestURL.replace(/^https?:\/\//, '')}`;
 
                 personalManifestUrlSpan.textContent = personalizedManifestURL;
@@ -1327,38 +1337,46 @@
                 if (copyPersonalLinkBtn) copyPersonalLinkBtn.style.display = 'none';
 
 
-                toast.textContent = "Personalized manifest ready! Main buttons updated.";
+                toast.textContent = `Personalized manifest ready with ${regionValue} region! Main buttons updated.`;
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 3000);
             });
         }
 
-        // Function to pre-fill cookie from URL query parameter
-        const prefillCookieFromUrl = () => {
+        // Function to pre-fill cookie and region from URL query parameters
+        const prefillFromUrl = () => {
             const urlParams = new URLSearchParams(window.location.search);
             const cookieFromUrl = urlParams.get('cookie');
+            const regionFromUrl = urlParams.get('region');
+            
             if (cookieFromUrl && cookieInput) {
                 try {
                     const decodedCookie = decodeURIComponent(cookieFromUrl);
                     cookieInput.value = decodedCookie;
-                    // Optionally, automatically process this pre-filled cookie
-                    if (setCookieBtn) {
-                        setCookieBtn.click(); // Simulate click to process and show manifest
-                        toast.textContent = "Cookie loaded from URL and processed!";
-                        toast.classList.add('show');
-                        setTimeout(() => { toast.classList.remove('show'); }, 3500);
-                    }
                 } catch (e) {
                     console.error("Error decoding cookie from URL for pre-fill:", e.message);
-                    toast.textContent = "Error decoding cookie from URL.";
-                    toast.classList.add('show');
-                    setTimeout(() => { toast.classList.remove('show'); }, 3500);
                 }
+            }
+            
+            if (regionFromUrl && regionSelector) {
+                // Check if the region exists in options
+                const regionExists = Array.from(regionSelector.options).some(option => option.value === regionFromUrl);
+                if (regionExists) {
+                    regionSelector.value = regionFromUrl;
+                }
+            }
+            
+            // Optionally, automatically process pre-filled values
+            if ((cookieFromUrl || regionFromUrl) && setCookieBtn) {
+                setCookieBtn.click(); // Simulate click to process and show manifest
+                toast.textContent = "Settings loaded from URL and processed!";
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 3500);
             }
         };
 
         // Call prefill function on page load
-        prefillCookieFromUrl();
+        prefillFromUrl();
 
         // Cookie section toggle functionality
         const toggleCookieBtn = document.getElementById('toggleCookieSection');

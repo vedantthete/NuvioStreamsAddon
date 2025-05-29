@@ -32,6 +32,18 @@ This addon is primarily for Stremio users who:
 
 **Important Reminder:** While I strive to keep Nuvio Streams functional, there's **no guarantee that the addon or its sources will last long-term.** External provider sites can change or shut down without notice, which directly impacts the addon's ability to find streams.
 
+# Personal Cookie Token Setup (Key New Feature)
+
+A key new feature in v0.2.0 is the ability to use your own cookie for one of the main providers:
+
+* **Why personalize?** Without personalization, you'll share limited bandwidth with other addon users and be restricted to smaller file sizes (under 9GB)
+* **Benefits of personalization:** Your own dedicated 100GB monthly quota, faster speeds, and no file size restrictions
+* **How to set it up:** Visit the addon's configuration page and follow the step-by-step instructions to get and set your own cookie
+
+This feature is **Extremely Recommended** for the best experience, especially if you want access to larger, higher-quality streams including 4K, HDR, Dolby Vision content.
+
+>**Future Notice:** Due to extremely limited resources, I plan to eventually transition this addon to only support personalized cookies. If the addon and providers are still operational in the coming months, non-personalized access will likely be phased out. I strongly encourage setting up your personal cookie now to ensure continued access.
+
 # Where to find it:
 
 # Nuvio Streaming Addon for Stremio
@@ -41,23 +53,11 @@ This addon is primarily for Stremio users who:
 **Installation Links:**
 
 * [**Nuvio Streams Addon (Main Page)**](https://nuvioaddon.vercel.app) \- *Install or configure here.*
-* [**Stremio Community Addons Page**](https://beta.stremio-addons.net/addons/nuvio-streams) \- *You can also install from the official community list!*
+* [**Stremio Community Addons Page**](https://beta.stremio-addons.net/addons/nuvio-streams) \- *You can also install from the official community list!, Go to the page > Install > Configure(recommended)/Install*
 
 **Support the addon on the Community Page!** If you find Nuvio Streams useful, please consider **giving it a star ⭐ on the Stremio Community Addons page**. It helps a lot with visibility and lets others know you appreciate the addon!
 
 You can install or configure the addon from either of the links above.
-
-# Personal Cookie Token Setup (Key New Feature)
-
-A key new feature in v0.2.0 is the ability to use your own cookie for one of the main providers:
-
-* **Why personalize?** Without personalization, you'll share limited bandwidth with other addon users and be restricted to smaller file sizes (under 9GB)
-* **Benefits of personalization:** Your own dedicated 100GB monthly quota, faster speeds, and no file size restrictions
-* **How to set it up:** Visit the addon's configuration page (accessible via the installation links). **A detailed tutorial on how to get your cookie token is available on the main addon installation page.**
-
-This feature is **Extremely Recommended** for the best experience, especially if you want access to larger, higher-quality streams including 4K, HDR, Dolby Vision content.
-
->**Future Notice:** Due to extremely limited resources, I plan to eventually transition this addon to only support personalized cookies. If the addon and providers are still operational in the coming months, non-personalized access will likely be phased out. I strongly encourage setting up your personal cookie now to ensure continued access.
 
 # Frequently Asked Questions:
 

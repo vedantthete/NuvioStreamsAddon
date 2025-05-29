@@ -9,6 +9,7 @@ const crypto = require('crypto');
 // --- Cookie Management ---
 let cookieIndex = 0;
 let cookieCache = null; // This will store cookies from cookies.txt for fallback
+let detectedOssGroup = null; // To store the detected oss_group value
 
 // Function to load cookies from cookies.txt (for fallback)
 const loadFallbackCookies = async () => {
@@ -27,12 +28,135 @@ const loadFallbackCookies = async () => {
     }
 };
 
+// Add configurable default region
+const DEFAULT_OSS_REGION = process.env.FEBBOX_REGION || 'AUTO';
+console.log(`Using FebBox region setting: ${DEFAULT_OSS_REGION}`);
+
+// Global variable to store the user's region preference from the request
+global.currentRequestRegionPreference = null;
+
+// New function to detect the user's region from FebBox
+const detectUserRegion = async (userToken) => {
+    // First priority: Check if request included a region preference
+    if (global.currentRequestRegionPreference) {
+        console.log(`[CookieManager] Using region from request: ${global.currentRequestRegionPreference}`);
+        return global.currentRequestRegionPreference;
+    }
+    
+    // Second priority: Check if env variable is set to a specific region
+    if (DEFAULT_OSS_REGION !== 'AUTO') {
+        console.log(`[CookieManager] Using configured FebBox region: ${DEFAULT_OSS_REGION}`);
+        return DEFAULT_OSS_REGION;
+    }
+
+    // Third priority: Auto-detect from FebBox and IP geolocation
+    try {
+        console.log('[CookieManager] Attempting to auto-detect FebBox region...');
+        const response = await axios.get('https://www.febbox.com/', {
+            headers: { 'Cookie': `ui=${userToken}` },
+            maxRedirects: 0,
+            validateStatus: status => status >= 200 && status < 400, // Accept redirects
+            timeout: 10000 // 10 second timeout
+        });
+        
+        // Extract Set-Cookie headers
+        const cookies = response.headers['set-cookie'] || [];
+        for (const cookie of cookies) {
+            if (cookie.includes('oss_group=')) {
+                const match = cookie.match(/oss_group=([^;]+)/);
+                if (match) {
+                    console.log(`[CookieManager] Successfully detected oss_group: ${match[1]}`);
+                    return match[1];
+                }
+            }
+        }
+        
+        // Also check for cookies in response.headers.cookie if set-cookie not found
+        const headerCookies = response.headers.cookie;
+        if (headerCookies && headerCookies.includes('oss_group=')) {
+            const match = headerCookies.match(/oss_group=([^;]+)/);
+            if (match) {
+                console.log(`[CookieManager] Detected oss_group from response headers: ${match[1]}`);
+                return match[1];
+            }
+        }
+        
+        // Check if the region might be in the body as a JavaScript variable
+        if (typeof response.data === 'string' && response.data.includes('oss_group')) {
+            const bodyMatch = response.data.match(/oss_group\s*=\s*['"]([^'"]+)['"]/);
+            if (bodyMatch) {
+                console.log(`[CookieManager] Detected oss_group from page body: ${bodyMatch[1]}`);
+                return bodyMatch[1];
+            }
+        }
+        
+        console.log('[CookieManager] Could not detect region, using backup value');
+        // Try to detect geographically appropriate default region
+        try {
+            const ipResponse = await axios.get('https://ipinfo.io/json', { timeout: 3000 });
+            const countryCode = ipResponse?.data?.country;
+            if (countryCode) {
+                // Map country codes to likely best regions
+                const regionMap = {
+                    'GB': 'UK3',
+                    'UK': 'UK3',
+                    'US': 'USA7',
+                    'CA': 'USA7',
+                    'AU': 'APC2',
+                    'NZ': 'APC2',
+                    'SG': 'APC2',
+                    'JP': 'APC2',
+                    'HK': 'APC2'
+                    // Add more mappings as needed
+                };
+                const geoRegion = regionMap[countryCode] || 'USA7'; // Default to USA7 if not in map
+                console.log(`[CookieManager] Selected region ${geoRegion} based on detected country ${countryCode}`);
+                return geoRegion;
+            }
+        } catch (geoError) {
+            console.log(`[CookieManager] Error detecting country: ${geoError.message}`);
+        }
+        
+        return 'USA7'; // Fallback default
+    } catch (error) {
+        console.log(`[CookieManager] Error detecting region: ${error.message}. Using default region`);
+        return 'USA7'; // Default on error
+    }
+};
+
 // Function to get the appropriate cookie for a request
 const getCookieForRequest = async () => {
+    // Reset the detected region for each new request to ensure we use the latest preference
+    detectedOssGroup = null;
+    
+    // First, determine which region to use, prioritizing the request parameter
+    if (global.currentRequestRegionPreference) {
+        console.log(`[CookieManager] Using explicit region from request: ${global.currentRequestRegionPreference}`);
+        detectedOssGroup = global.currentRequestRegionPreference;
+    } else if (DEFAULT_OSS_REGION !== 'AUTO') {
+        console.log(`[CookieManager] Using configured region from environment: ${DEFAULT_OSS_REGION}`);
+        detectedOssGroup = DEFAULT_OSS_REGION;
+    } else {
+        // Only auto-detect if no explicit region was provided
+        console.log('[CookieManager] No explicit region preference, will auto-detect');
+    }
+    
     // 1. Prioritize user-supplied cookie (passed via global.currentRequestUserCookie)
     if (global.currentRequestUserCookie) {
         console.log('[CookieManager] Using user-supplied cookie from manifest URL.');
-        return global.currentRequestUserCookie;
+        
+        // If no region was explicitly set, detect it
+        if (!detectedOssGroup) {
+            detectedOssGroup = await detectUserRegion(global.currentRequestUserCookie);
+        }
+        
+        // ALWAYS add the oss_group to ensure it overrides any default in the cookie
+        if (detectedOssGroup) {
+            console.log(`[CookieManager] Applying region: ${detectedOssGroup} to cookie`);
+            return global.currentRequestUserCookie + `; oss_group=${detectedOssGroup}`;
+        } else {
+            return global.currentRequestUserCookie;
+        }
     }
 
     // 2. Fallback to rotating cookies from cookies.txt
@@ -42,20 +166,37 @@ const getCookieForRequest = async () => {
     
     if (!cookieCache || cookieCache.length === 0) {
         console.log('[CookieManager] No fallback cookies available in cookies.txt.');
-        return ''; // No fallback cookies available
+        
+        // If no region was explicitly set yet, detect it
+        if (!detectedOssGroup) {
+            detectedOssGroup = await detectUserRegion('');
+        }
+        
+        // Return just the region as a cookie if we have one
+        if (detectedOssGroup) {
+            console.log(`[CookieManager] No cookie available, using only region: ${detectedOssGroup}`);
+            return `oss_group=${detectedOssGroup}`;
+        }
+        return '';
     }
     
     const fallbackCookie = cookieCache[cookieIndex];
     const currentFallbackIndex = cookieIndex + 1; // For 1-based logging
     cookieIndex = (cookieIndex + 1) % cookieCache.length;
     console.log(`[CookieManager] Using fallback cookie ${currentFallbackIndex} of ${cookieCache.length} from cookies.txt.`);
+    
+    // If no region was explicitly set yet, detect it
+    if (!detectedOssGroup) {
+        detectedOssGroup = await detectUserRegion('');
+    }
+    
+    // ALWAYS add the oss_group to ensure it overrides any default
+    if (detectedOssGroup) {
+        console.log(`[CookieManager] Applying region: ${detectedOssGroup} to fallback cookie`);
+        return fallbackCookie + `; oss_group=${detectedOssGroup}`;
+    }
     return fallbackCookie;
 };
-
-// REMOVE: Old cookie functions like getInitialCookieForLookup, activeCookieMap, etc.
-// const activeCookieMap = new Map();
-// const getInitialCookieForLookup = async (lookupId) => { ... };
-// const getNextCookie = async () => { ... }; // This is now handled by getCookieForRequest
 
 // Helper function to fetch stream size using a HEAD request
 const fetchStreamSize = async (url) => {

@@ -35,6 +35,8 @@ app.get('/configure', (req, res) => {
 // Middleware to extract user-supplied cookie from request query
 app.use(async (req, res, next) => {
     const userSuppliedCookie = req.query.cookie; 
+    const userRegionPreference = req.query.region;
+
     if (userSuppliedCookie) {
         // Decode the cookie value from the URL query parameter
         try {
@@ -45,6 +47,13 @@ app.use(async (req, res, next) => {
             // Potentially handle error, like ignoring malformed cookie
         }
     }
+
+    // Store region preference if provided
+    if (userRegionPreference) {
+        req.userRegion = userRegionPreference;
+        console.log(`Received region preference from URL: ${req.userRegion}`);
+    }
+
     next();
 });
 
@@ -58,19 +67,28 @@ app.use(async (req, res, next) => {
 app.get('/manifest.json', async (req, res) => {
     try {
         const userCookie = req.query.cookie; // Get cookie directly from query
+        const userRegion = req.query.region; // Get region directly from query
         const originalManifest = addonInterface.manifest;
         let personalizedManifest = { ...originalManifest };
 
-        if (userCookie) {
-            // Create a simple identifier from the cookie for the manifest ID and Name
-            // This avoids putting the actual cookie in the manifest ID/Name
-            const cookieIdentifier = crypto.createHash('md5').update(userCookie).digest('hex').substring(0, 8);
+        if (userCookie || userRegion) {
+            // Create a simple identifier from the cookie and/or region for the manifest ID and Name
+            let identifierSource = userCookie || '';
+            if (userRegion) identifierSource += `-${userRegion}`;
+            const cookieIdentifier = crypto.createHash('md5').update(identifierSource).digest('hex').substring(0, 8);
             
-            personalizedManifest.id = `${originalManifest.id}_cookie_${cookieIdentifier}`;
-            personalizedManifest.name = `${originalManifest.name} (Personalized)`;
-            personalizedManifest.description = `${originalManifest.description} (Using your provided cookie for enhanced access.)`;
-            // Add a flag to indicate personalization (optional, for addon logic or Stremio UI if supported)
-            personalizedManifest.isCookiePersonalized = true; 
+            personalizedManifest.id = `${originalManifest.id}_${cookieIdentifier}`;
+            
+            let personalizationText = [];
+            if (userCookie) personalizationText.push("Cookie");
+            if (userRegion) personalizationText.push(`${userRegion} Region`);
+            
+            personalizedManifest.name = `${originalManifest.name} (${personalizationText.join(', ')})`;
+            personalizedManifest.description = `${originalManifest.description} (Using your ${personalizationText.join(' and ')} for enhanced access.)`;
+            
+            // Add flags to indicate personalization
+            if (userCookie) personalizedManifest.isCookiePersonalized = true;
+            if (userRegion) personalizedManifest.isRegionPersonalized = true;
         }
         
         res.setHeader('Content-Type', 'application/json');
@@ -92,17 +110,22 @@ const createCustomRouter = (currentAddonInterface) => {
     const originalRouter = getRouter(currentAddonInterface);
     
     return (req, res, next) => {
+        // Make cookie available if provided
         if (req.userCookie) {
-            // Make the cookie available to addon.js (and subsequently scraper.js)
-            // Using global might have concurrency issues in a high-load server, but for typical addon usage it's simpler.
-            // A more robust solution might involve request-scoped context if the SDK supports it.
             global.currentRequestUserCookie = req.userCookie;
-            
-            res.on('finish', () => {
-                // Clean up the global variable after the request is handled
-                global.currentRequestUserCookie = null;
-            });
         }
+        
+        // Make region preference available if provided
+        if (req.userRegion) {
+            global.currentRequestRegionPreference = req.userRegion;
+        }
+        
+        res.on('finish', () => {
+            // Clean up the global variables after the request is handled
+            global.currentRequestUserCookie = null;
+            global.currentRequestRegionPreference = null;
+        });
+        
         return originalRouter(req, res, next);
     };
 };
