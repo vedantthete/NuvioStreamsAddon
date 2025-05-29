@@ -1,8 +1,8 @@
 {
   "code": 1,
   "msg": "success",
-  "server_runtime": 0.02279,
-  "server_name": "usa4-febbox-web-02",
+  "server_runtime": 0.02577,
+  "server_name": "usa4-febbox-web-01",
   "data": {
     "link": "https://www.febbox.com/share/3EmY7IWE"
   }

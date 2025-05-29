@@ -25,42 +25,28 @@
   ],
   "homepage": "https://www.hulu.com/the-handmaids-tale",
   "id": 69478,
-  "in_production": true,
+  "in_production": false,
   "languages": [
     "en"
   ],
-  "last_air_date": "2025-05-20",
+  "last_air_date": "2025-05-27",
   "last_episode_to_air": {
-    "id": 5978371,
-    "name": "Execution",
-    "overview": "June faces her biggest challenge as Gilead cracks down on the rebels.",
-    "vote_average": 7.125,
-    "vote_count": 8,
-    "air_date": "2025-05-20",
-    "episode_number": 9,
-    "episode_type": "standard",
-    "production_code": "",
-    "runtime": 57,
-    "season_number": 6,
-    "show_id": 69478,
-    "still_path": "/l57odz9WkSGB1kYzklNgcwFmWkl.jpg"
-  },
-  "name": "The Handmaid's Tale",
-  "next_episode_to_air": {
     "id": 5978372,
     "name": "The Handmaid's Tale",
     "overview": "June reflects on her experiences in Gilead and decides what to do next.",
-    "vote_average": 0,
-    "vote_count": 0,
+    "vote_average": 4.857,
+    "vote_count": 7,
     "air_date": "2025-05-27",
     "episode_number": 10,
     "episode_type": "finale",
     "production_code": "",
-    "runtime": 55,
+    "runtime": 56,
     "season_number": 6,
     "show_id": 69478,
-    "still_path": "/kfAIh4uLElr6CN7Ma23B5FaajhK.jpg"
+    "still_path": "/tKMf9Rh7QDldpgHCg3zsYr43IU1.jpg"
   },
+  "name": "The Handmaid's Tale",
+  "next_episode_to_air": null,
   "networks": [
     {
       "id": 453,
@@ -76,9 +62,9 @@
   ],
   "original_language": "en",
   "original_name": "The Handmaid's Tale",
-  "overview": "Set in a dystopian future, a woman is forced to live as a concubine under a fundamentalist theocratic dictatorship. A TV adaptation of Margaret Atwood's novel.",
-  "popularity": 135.4846,
-  "poster_path": "/qdWEaWkIQIjANGFeskheXpP0mm1.jpg",
+  "overview": "Set in a dystopian future, a woman is forced to live as a concubine under a fundamentalist theocratic dictatorship.",
+  "popularity": 157.3545,
+  "poster_path": "/tFTJ3YbOor3BtabI96QehXxEBii.jpg",
   "production_companies": [
     {
       "id": 2230,
@@ -90,7 +76,7 @@
       "id": 91405,
       "logo_path": null,
       "name": "White Oak Pictures",
-      "origin_country": ""
+      "origin_country": "US"
     },
     {
       "id": 8867,
@@ -99,17 +85,19 @@
       "origin_country": "US"
     },
     {
-      "id": 10278,
+      "id": 186866,
       "logo_path": null,
-      "name": "MGM/UA Television",
+      "name": "Toluca Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 20815,
+      "logo_path": null,
+      "name": "The Littlefield Company",
       "origin_country": "US"
     }
   ],
   "production_countries": [
-    {
-      "iso_3166_1": "CA",
-      "name": "Canada"
-    },
     {
       "iso_3166_1": "US",
       "name": "United States of America"
@@ -181,10 +169,10 @@
       "episode_count": 10,
       "id": 442084,
       "name": "Season 6",
-      "overview": "June’s unyielding spirit and determination pull her back into the fight to take down Gilead. Luke and Moira join the resistance. Serena tries to reform Gilead while Commander Lawrence and Aunt Lydia reckon with what they have wrought, and Nick faces challenging tests of character. This final chapter of June’s journey highlights the importance of hope, courage, solidarity, and resilience in the pursuit of justice and freedom.",
+      "overview": "June's unyielding spirit and determination pull her back into the fight to take down Gilead. Luke and Moira join the resistance. Serena tries to reform Gilead while Commander Lawrence and Aunt Lydia reckon with what they have wrought, and Nick faces challenging tests of character. This final chapter of June's journey highlights the importance of hope, courage, solidarity, and resilience in the pursuit of justice and freedom.",
       "poster_path": "/6FAbw3h5Vkomx1M8R3BBEbLbaq3.jpg",
       "season_number": 6,
-      "vote_average": 6.7
+      "vote_average": 6.1
     }
   ],
   "spoken_languages": [
@@ -194,9 +182,9 @@
       "name": "English"
     }
   ],
-  "status": "Returning Series",
+  "status": "Ended",
   "tagline": "The revolution is here.",
   "type": "Scripted",
-  "vote_average": 8.184,
-  "vote_count": 2904
+  "vote_average": 8.181,
+  "vote_count": 2908
 }

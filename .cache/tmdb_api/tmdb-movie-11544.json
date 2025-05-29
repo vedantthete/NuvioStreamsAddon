@@ -1,6 +1,6 @@
 {
   "adult": false,
-  "backdrop_path": "/w102m4HoCP5uxhW8Yh7Hv7QShix.jpg",
+  "backdrop_path": "/aIglP9Z5gtkQf7Fidb4NRv2gfDj.jpg",
   "belongs_to_collection": {
     "id": 97461,
     "name": "Lilo & Stitch Collection",
@@ -31,7 +31,7 @@
   "original_language": "en",
   "original_title": "Lilo & Stitch",
   "overview": "As Stitch, a runaway genetic experiment from a faraway planet, wreaks havoc on the Hawaiian Islands, he becomes the mischievous adopted alien \"puppy\" of an independent little girl named Lilo and learns about loyalty, friendship, and ʻohana, the Hawaiian tradition of family.",
-  "popularity": 118.1579,
+  "popularity": 164.2947,
   "poster_path": "/m13Vbzv7R2GMAl3GXFrkmMEgCFQ.jpg",
   "production_companies": [
     {
@@ -67,6 +67,6 @@
   "tagline": "There's one in every family.",
   "title": "Lilo & Stitch",
   "video": false,
-  "vote_average": 7.542,
-  "vote_count": 6489
+  "vote_average": 7.543,
+  "vote_count": 6524
 }

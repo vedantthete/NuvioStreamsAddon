@@ -1,8 +1,8 @@
 {
-  "id": "com.stremio.nuvio.streams",
-  "version": "0.1.0",
+  "id": "org.nuvio.streams",
+  "version": "0.2.0",
   "name": "Nuvio Streams",
-  "description": "Stremio addon for high-quality streaming links. Requires your own ScraperAPI key.",
+  "description": "Stremio addon for high-quality streaming links.",
   "logo": "https://raw.githubusercontent.com/tapframe/NuvioStreaming/main/assets/titlelogo.png",
   "resources": ["stream"],
   "types": ["movie", "series"],

@@ -1,6 +1,6 @@
 {
   "adult": false,
-  "backdrop_path": "/gKSbTwTvdfJYAJyTNOxlpNoiktH.jpg",
+  "backdrop_path": "/uQ4lG7E7mlyKsGvbASftQ6Hu2IX.jpg",
   "created_by": [
     {
       "id": 1295692,
@@ -33,38 +33,24 @@
   "languages": [
     "en"
   ],
-  "last_air_date": "2025-05-18",
+  "last_air_date": "2025-05-25",
   "last_episode_to_air": {
-    "id": 5994272,
-    "name": "The Price",
-    "overview": "Joel surprises Ellie for her birthday. As their rift continues to widen, Ellie prepares for a confrontation, while Joel makes a difficult choice out on patrol.",
-    "vote_average": 6.926,
-    "vote_count": 27,
-    "air_date": "2025-05-18",
-    "episode_number": 6,
-    "episode_type": "standard",
-    "production_code": "",
-    "runtime": 60,
-    "season_number": 2,
-    "show_id": 100088,
-    "still_path": "/iyqiOrn1253erbEpX9UeSPYXhTh.jpg"
-  },
-  "name": "The Last of Us",
-  "next_episode_to_air": {
     "id": 5994273,
     "name": "Convergence",
-    "overview": "",
-    "vote_average": 0,
-    "vote_count": 0,
+    "overview": "As the Wolves and the Scars prepare for a battle that could potentially end their longstanding feud, Ellie's search draws her away from her friends and toward a devastating confrontation.",
+    "vote_average": 6,
+    "vote_count": 23,
     "air_date": "2025-05-25",
     "episode_number": 7,
     "episode_type": "finale",
     "production_code": "",
-    "runtime": 53,
+    "runtime": 50,
     "season_number": 2,
     "show_id": 100088,
     "still_path": "/4IZqCZRmBq9LifHFQkYA1QqqE0x.jpg"
   },
+  "name": "The Last of Us",
+  "next_episode_to_air": null,
   "networks": [
     {
       "id": 49,
@@ -81,7 +67,7 @@
   "original_language": "en",
   "original_name": "The Last of Us",
   "overview": "Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.",
-  "popularity": 293.7823,
+  "popularity": 393.9559,
   "poster_path": "/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg",
   "production_companies": [
     {
@@ -146,7 +132,7 @@
       "overview": "After five years of peace following the events of the first season, Joel and Ellie's collective past catches up to them, drawing them into conflict with each other and a world even more dangerous and unpredictable than the one they left behind.",
       "poster_path": "/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg",
       "season_number": 2,
-      "vote_average": 6.9
+      "vote_average": 6.5
     }
   ],
   "spoken_languages": [
@@ -159,6 +145,6 @@
   "status": "Returning Series",
   "tagline": "Every path has a price.",
   "type": "Scripted",
-  "vote_average": 8.563,
-  "vote_count": 5997
+  "vote_average": 8.55,
+  "vote_count": 6062
 }

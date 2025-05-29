@@ -152,14 +152,15 @@ const saveToCache = async (cacheKey, content, subDir = '') => {
 };
 
 // NEW FUNCTION: Search ShowBox and extract the most relevant URL
-const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaYear, showboxScraperInstance) => {
+const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaYear, showboxScraperInstance, tmdbType) => {
     const cacheSubDir = 'showbox_search_results';
     
     // Add a cache version to invalidate previous incorrect cached results
     const CACHE_VERSION = "v2"; // Increment this whenever the search algorithm significantly changes
     
     // Create a proper hash for the cache key to avoid filename issues with special characters
-    const cacheKeyData = `${CACHE_VERSION}_${originalTmdbTitle}_${mediaYear || 'noYear'}`;
+    // const cacheKeyData = `${CACHE_VERSION}_${originalTmdbTitle}_${mediaYear || 'noYear'}`;
+    const cacheKeyData = `${CACHE_VERSION}_${tmdbType}_${originalTmdbTitle}_${mediaYear || 'noYear'}`;
     const cacheKeyHash = crypto.createHash('md5').update(cacheKeyData).digest('hex');
     const searchTermKey = `${cacheKeyHash}.txt`;
     
@@ -315,13 +316,27 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
                 const isTv = itemHref.includes('/tv/');
                 
                 // Expected type based on URL (very basic logic - could be improved)
-                const expectedTypeIsMovie = !mediaYear || parseInt(mediaYear) >= 1900; // Most common scenario
+                // const expectedTypeIsMovie = !mediaYear || parseInt(mediaYear) >= 1900; // Most common scenario // REMOVED OLD LOGIC
                 
-                if ((expectedTypeIsMovie && isMovie) || (!expectedTypeIsMovie && isTv)) {
-                    score += 3; // Bonus for matching expected type
-                } else if ((expectedTypeIsMovie && isTv) || (!expectedTypeIsMovie && isMovie)) {
-                    score -= 3; // Penalty for wrong type
+                // NEW MEDIA TYPE SCORING based on tmdbType parameter
+                if (tmdbType === 'movie') {
+                    if (isMovie) {
+                        score += 7; // Strong bonus for matching movie type
+                    } else if (isTv) {
+                        score -= 7; // Strong penalty for TV show when movie expected
+                    }
+                } else if (tmdbType === 'tv') {
+                    if (isTv) {
+                        score += 7; // Strong bonus for matching TV type
+                    } else if (isMovie) {
+                        score -= 7; // Strong penalty for movie when TV show expected
+                    }
                 }
+                // if ((expectedTypeIsMovie && isMovie) || (!expectedTypeIsMovie && isTv)) { // REMOVED OLD LOGIC
+                //     score += 3; // Bonus for matching expected type
+                // } else if ((expectedTypeIsMovie && isTv) || (!expectedTypeIsMovie && isMovie)) {
+                //     score -= 3; // Penalty for wrong type
+                // }
                 
                 searchResults.push({
                     title: itemTitle,
@@ -355,8 +370,8 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
             console.log(`  No results found for strategy "${strategy.description}"`);
         }
         
-        // If we found a really good match (score > 10), don't try more strategies
-        if (bestResult.score > 10) {
+        // If we found a really good match (score > 18), don't try more strategies
+        if (bestResult.score > 18) { // New threshold
             console.log(`  Found excellent match with score ${bestResult.score.toFixed(1)} using strategy "${bestResult.strategy}", stopping search`);
             break;
         }
@@ -454,7 +469,7 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId) => {
     const showboxScraperInstance = new ShowBoxScraper(); // Simplified for now
 
     // First attempt: Search with title + year
-    let searchResult = await _searchAndExtractShowboxUrl(searchTerm, title, year, showboxScraperInstance);
+    let searchResult = await _searchAndExtractShowboxUrl(searchTerm, title, year, showboxScraperInstance, tmdbType);
     let showboxUrl = searchResult.url;
     let matchScore = searchResult.score;
 
@@ -464,7 +479,7 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId) => {
     if (!showboxUrl || matchScore < lowScoreThreshold) {
         console.log(`  Initial search for "${searchTerm}" yielded a poor result (URL: ${showboxUrl}, Score: ${matchScore}). Retrying search without year.`);
         const searchTermWithoutYear = title; // Search with title only
-        const fallbackSearchResult = await _searchAndExtractShowboxUrl(searchTermWithoutYear, title, null, showboxScraperInstance);
+        const fallbackSearchResult = await _searchAndExtractShowboxUrl(searchTermWithoutYear, title, null, showboxScraperInstance, tmdbType);
         
         // Use fallback if it's better or if the initial search failed completely
         if (fallbackSearchResult.url && fallbackSearchResult.score > matchScore) {
@@ -1185,14 +1200,38 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
     // Sort streams by quality before returning
     const sortedStreams = sortStreamsByQuality(allStreams);
     
-    if (sortedStreams.length > 0) {
-        console.log(`Found ${sortedStreams.length} streams (sorted by quality):`);
-        sortedStreams.forEach((stream, i) => {
+    // Filter out 360p and 480p streams specifically for streams marked as from ShowBox
+    const streamsToShowBoxFiltered = sortedStreams.filter(stream => {
+        // This filter applies if the stream object has a `provider` property set to 'ShowBox'
+        // (This property is added in addon.js before getStreamsFromTmdbId calls sortStreamsByQuality)
+        // However, getStreamsFromTmdbId from scraper.js doesn't know about this `provider` property inherently.
+        // For this filter to work as intended *within scraper.js before returning to addon.js*,
+        // the streams coming from ShowBox within scraper.js itself would need to be identifiable.
+        // Let's assume for now that all streams processed by *this* function are implicitly ShowBox
+        // or that the filtering is primarily for when this function is used standalone for ShowBox.
+        // A cleaner way would be to have ShowBox-specific stream fetching functions always tag their streams.
+
+        // Given that this function (getStreamsFromTmdbId in scraper.js) primarily orchestrates ShowBox and FebBox interaction,
+        // we can assume streams in `allStreams` here are candidates for this ShowBox-specific filter.
+        const quality = stream.quality ? String(stream.quality).toLowerCase() : '';
+        if (quality === '360p' || quality === '480p') {
+            // We need a way to be sure this is a ShowBox stream. 
+            // If the stream.title uniquely identifies it as ShowBox-derived, that could work, or a specific flag.
+            // For now, applying generally as this function is ShowBox-centric in scraper.js
+            console.log(`  Filtering out potential ShowBox low-quality stream: ${stream.title} (${stream.quality})`);
+            return false; // Exclude 360p and 480p
+        }
+        return true; // Keep all other streams
+    });
+
+    if (streamsToShowBoxFiltered.length > 0) {
+        console.log(`Found ${streamsToShowBoxFiltered.length} streams (sorted and ShowBox-low-quality-filtered):`);
+        streamsToShowBoxFiltered.forEach((stream, i) => {
             console.log(`  ${i+1}. ${stream.quality} (${stream.size || 'Unknown size'}) [${(stream.codecs || []).join(', ') || 'No codec info'}]: ${stream.title}`);
         });
     }
     console.timeEnd(mainTimerLabel);
-    return sortedStreams;
+    return streamsToShowBoxFiltered;
 };
 
 // Function to handle TV shows with seasons and episodes
@@ -1380,9 +1419,6 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
                 // Get next cookie in rotation
                 const nextCookie = await getNextCookie();
                 
-                // MODIFICATION: Removed ScraperAPI conditional logic
-                // const useScraperApi = process.env.USE_SCRAPER_API === 'true';
-                // const scraperApiKey = process.env.SCRAPER_API_KEY_VALUE;
                 let finalFolderUrl = targetFolderListUrl;
                 let axiosConfigFolder = {
                     headers: {
@@ -1393,14 +1429,45 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
                     timeout: 20000
                 };
 
-                // ... existing code ...
                 console.log(`Fetching FebBox folder ${targetFolderListUrl} directly`);
 
                 const folderResponse = await axios.get(finalFolderUrl, axiosConfigFolder);
+                console.log(`  FebBox folder list response status: ${folderResponse.status}`);
+                console.log(`  FebBox folder list response content-type: ${folderResponse.headers['content-type']}`);
+                // Log the beginning of the data to inspect its structure
+                const responseDataPreview = (typeof folderResponse.data === 'string') 
+                    ? folderResponse.data.substring(0, 500) 
+                    : JSON.stringify(folderResponse.data).substring(0,500);
+                console.log(`  FebBox folder list response data (preview): ${responseDataPreview}`);
                 
-                // ... existing code ...
+                if (folderResponse.data && typeof folderResponse.data === 'object' && folderResponse.data.html) {
+                    folderHtml = folderResponse.data.html;
+                    console.log(`    Successfully extracted HTML from FebBox folder list JSON response.`);
+                } else if (typeof folderResponse.data === 'string') {
+                    folderHtml = folderResponse.data;
+                    console.log(`    Received direct HTML string from FebBox folder list response.`);
+                } else {
+                    console.log(`    Invalid or unexpected response format from FebBox folder API for ${selectedFolder.id}. Data: ${JSON.stringify(folderResponse.data)}`);
+                    // folderHtml remains null
+                }
+                
+                if (folderHtml && folderHtml.trim().length > 0) { // Also check if html is not just whitespace
+                    await saveToCache(cacheKeyFolderHtml, folderHtml, cacheSubDirFolderHtml);
+                    console.log(`    Cached FebBox folder HTML for ${selectedFolder.id}`);
+                } else {
+                    console.log(`    Folder HTML from FebBox was empty or null for ${selectedFolder.id}. Not caching.`);
+                    folderHtml = null; // Ensure it's explicitly null if empty
+                }
+                console.timeEnd(fetchFolderTimer);
             } catch (error) {
-                // ... existing code ...
+                console.error(`  ERROR fetching FebBox folder content for ${selectedFolder.id}: ${error.message}`);
+                if (error.response) {
+                    console.error(`    FebBox Error Status: ${error.response.status}`);
+                    console.error(`    FebBox Error Data: ${JSON.stringify(error.response.data)}`);
+                }
+                // console.timeEnd(fetchFolderTimer); // fetchFolderTimer might not be defined if cache hit for HTML but miss for parsed
+                console.timeEnd(processTimerLabel); // End outer timer
+                return; // Exit if fetching folder content fails
             }
         }
     }

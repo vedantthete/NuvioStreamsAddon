@@ -2,6 +2,8 @@ const { addonBuilder } = require('stremio-addon-sdk');
 require('dotenv').config(); // Ensure environment variables are loaded
 
 const { getXprimeStreams } = require('./xprime.js'); // Import from xprime.js
+const { getHollymovieStreams } = require('./hollymoviehd.js'); // Import from hollymoviehd.js
+const { getSoaperTvStreams } = require('./soapertv.js'); // Import from soapertv.js
 
 // --- Constants ---
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
@@ -81,12 +83,12 @@ builder.defineStreamHandler(async (args) => {
                     'in': '🇮🇳',
                     // Add more as needed
                 };
-                return flagMap[countryCode] || '🏳️'; // Default to white flag if no specific match
+                return flagMap[countryCode] || ''; // Return empty string if no match
             }
         } catch (e) {
             // Invalid URL or other error
         }
-        return '🏳️'; // Default flag
+        return ''; // Default to empty string
     };
 
     const userScraperApiKey = (config && config.scraperApiKey) ? config.scraperApiKey : null;
@@ -192,7 +194,7 @@ builder.defineStreamHandler(async (args) => {
     let combinedRawStreams = [];
 
     // --- Parallel Fetching of Streams ---
-    console.log('Initiating parallel fetch for ShowBox and Xprime.tv streams...');
+    console.log('Initiating parallel fetch for ShowBox, Xprime.tv, Soaper TV, and HollyMovieHD streams (in that priority order after ShowBox)...');
 
     const showBoxPromise = getStreamsFromTmdbId(tmdbTypeFromId, tmdbId, seasonNum, episodeNum, userScraperApiKey)
         .then(streams => {
@@ -211,29 +213,60 @@ builder.defineStreamHandler(async (args) => {
     let xprimePromise;
     if (movieOrSeriesTitle && movieOrSeriesYear) {
         xprimePromise = getXprimeStreams(movieOrSeriesTitle, movieOrSeriesYear, tmdbTypeFromId, seasonNum, episodeNum)
-            // getXprimeStreams already adds provider and handles its errors, returning [] on failure.
             .then(streams => {
                 if (streams && streams.length > 0) {
                     console.log(`  Successfully fetched ${streams.length} streams from Xprime.tv.`);
                 }
-                return streams; // streams already have provider info and are an empty array on error
+                return streams; 
             })
-            .catch(err => { // This catch is a fallback, xprime.js should handle its internal errors
+            .catch(err => { 
                 console.error('Fallback error catcher for Xprime.tv in addon.js:', err.message);
                 return [];
             });
     } else {
         console.log('[Xprime.tv] Skipping fetch in addon.js because title or year is missing or not applicable.');
-        xprimePromise = Promise.resolve([]); // Resolve with empty array if skipped
+        xprimePromise = Promise.resolve([]); 
     }
+
+    const soaperTvPromise = getSoaperTvStreams(tmdbId, tmdbTypeFromId, seasonNum, episodeNum)
+        .then(streams => {
+            if (streams && streams.length > 0) {
+                console.log(`  Successfully fetched ${streams.length} streams from Soaper TV.`);
+                return streams;
+            }
+            console.log(`  No streams returned from Soaper TV for TMDB ${tmdbTypeFromId}/${tmdbId}`);
+            return [];
+        })
+        .catch(err => {
+            console.error(`Error fetching Soaper TV streams:`, err.message);
+            return []; 
+        });
+        
+    const hollymoviePromise = getHollymovieStreams(tmdbId, tmdbTypeFromId, seasonNum, episodeNum)
+        .then(streams => {
+            if (streams && streams.length > 0) {
+                console.log(`  Successfully fetched ${streams.length} streams from HollyMovieHD.`);
+                return streams;
+            }
+            console.log(`  No streams returned from HollyMovieHD for TMDB ${tmdbTypeFromId}/${tmdbId}`);
+            return [];
+        })
+        .catch(err => {
+            console.error(`Error fetching HollyMovieHD streams:`, err.message);
+            return [];
+        });
     
     try {
-        const results = await Promise.all([showBoxPromise, xprimePromise]);
+        const results = await Promise.all([showBoxPromise, xprimePromise, soaperTvPromise, hollymoviePromise]);
         const showBoxResults = results[0] || [];
         const xprimeResults = results[1] || [];
+        const soaperTvResults = results[2] || [];
+        const hollymovieResults = results[3] || [];
 
         combinedRawStreams = combinedRawStreams.concat(showBoxResults);
         combinedRawStreams = combinedRawStreams.concat(xprimeResults);
+        combinedRawStreams = combinedRawStreams.concat(soaperTvResults);
+        combinedRawStreams = combinedRawStreams.concat(hollymovieResults);
         
         console.log(`Total raw streams after parallel fetch: ${combinedRawStreams.length}`);
 
@@ -261,7 +294,11 @@ builder.defineStreamHandler(async (args) => {
         if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null && movieOrSeriesTitle) {
             displayTitle = `${movieOrSeriesTitle} S${String(seasonNum).padStart(2, '0')}E${String(episodeNum).padStart(2, '0')}`;
         } else if (movieOrSeriesTitle) {
-            displayTitle = movieOrSeriesTitle;
+            if (tmdbTypeFromId === 'movie' && movieOrSeriesYear) {
+                displayTitle = `${movieOrSeriesTitle} (${movieOrSeriesYear})`;
+            } else {
+                displayTitle = movieOrSeriesTitle;
+            }
         } else {
             displayTitle = stream.title || "Unknown Title"; // Fallback to the title from the raw stream data
         }
@@ -273,13 +310,17 @@ builder.defineStreamHandler(async (args) => {
             providerDisplayName = 'XPRIME ⚡';
         } else if (stream.provider === 'ShowBox') {
             providerDisplayName = 'ShowBox';
+        } else if (stream.provider === 'HollyMovieHD') {
+            providerDisplayName = 'HollyMovieHD'; // Changed from HollyHD
+        } else if (stream.provider === 'Soaper TV') {
+            providerDisplayName = 'Soaper TV';
         }
 
         let nameDisplay;
-        if (stream.provider === 'Xprime.tv') {
-            nameDisplay = `${providerDisplayName} - ${qualityLabel}`; // No flag for XPRIME ⚡
+        if (flagEmoji) {
+            nameDisplay = `${flagEmoji} ${providerDisplayName} - ${qualityLabel}`;
         } else {
-            nameDisplay = `${flagEmoji} ${providerDisplayName} - ${qualityLabel}`; // Flag for others (e.g., ShowBox 💎)
+            nameDisplay = `${providerDisplayName} - ${qualityLabel}`;
         }
         
         const nameVideoTechTags = [];
