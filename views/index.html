@@ -1057,6 +1057,33 @@
             });
         }
 
+        // Function to pre-fill cookie from URL query parameter
+        const prefillCookieFromUrl = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const cookieFromUrl = urlParams.get('cookie');
+            if (cookieFromUrl && cookieInput) {
+                try {
+                    const decodedCookie = decodeURIComponent(cookieFromUrl);
+                    cookieInput.value = decodedCookie;
+                    // Optionally, automatically process this pre-filled cookie
+                    if (setCookieBtn) {
+                        setCookieBtn.click(); // Simulate click to process and show manifest
+                        toast.textContent = "Cookie loaded from URL and processed!";
+                        toast.classList.add('show');
+                        setTimeout(() => { toast.classList.remove('show'); }, 3500);
+                    }
+                } catch (e) {
+                    console.error("Error decoding cookie from URL for pre-fill:", e.message);
+                    toast.textContent = "Error decoding cookie from URL.";
+                    toast.classList.add('show');
+                    setTimeout(() => { toast.classList.remove('show'); }, 3500);
+                }
+            }
+        };
+
+        // Call prefill function on page load
+        prefillCookieFromUrl();
+
     </script>
 </body>
 </html> 
