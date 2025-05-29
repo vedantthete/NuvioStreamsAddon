@@ -1744,12 +1744,12 @@ function sortStreamsByQuality(streams) {
 
     // Provider sort order: lower number means earlier in array (lower in Stremio UI for same quality/size)
     const providerSortKeys = {
-        'HollyMovieHD': 1,
-        'Soaper TV': 2,
-        'Xprime.tv': 3,
-        'ShowBox': 4,
+        'ShowBox': 1,
+        'Xprime.tv': 2,
+        'HollyMovieHD': 3,
+        'Soaper TV': 4,
         // Default for unknown providers
-        default: 99 
+        default: 99
     };
     
     return [...streams].sort((a, b) => {

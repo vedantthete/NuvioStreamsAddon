@@ -194,7 +194,7 @@ builder.defineStreamHandler(async (args) => {
     let combinedRawStreams = [];
 
     // --- Parallel Fetching of Streams ---
-    console.log('Initiating parallel fetch for ShowBox, Xprime.tv, Soaper TV, and HollyMovieHD streams (in that priority order after ShowBox)...');
+    console.log('Initiating parallel fetch for ShowBox, Xprime.tv, HollyMovieHD, and Soaper TV streams (in that priority order after ShowBox)...');
 
     const showBoxPromise = getStreamsFromTmdbId(tmdbTypeFromId, tmdbId, seasonNum, episodeNum, userScraperApiKey)
         .then(streams => {
@@ -216,8 +216,9 @@ builder.defineStreamHandler(async (args) => {
             .then(streams => {
                 if (streams && streams.length > 0) {
                     console.log(`  Successfully fetched ${streams.length} streams from Xprime.tv.`);
+                    return streams.map(stream => ({ ...stream, provider: 'Xprime.tv' }));
                 }
-                return streams; 
+                return [];
             })
             .catch(err => { 
                 console.error('Fallback error catcher for Xprime.tv in addon.js:', err.message);
@@ -232,7 +233,7 @@ builder.defineStreamHandler(async (args) => {
         .then(streams => {
             if (streams && streams.length > 0) {
                 console.log(`  Successfully fetched ${streams.length} streams from Soaper TV.`);
-                return streams;
+                return streams.map(stream => ({ ...stream, provider: 'Soaper TV' }));
             }
             console.log(`  No streams returned from Soaper TV for TMDB ${tmdbTypeFromId}/${tmdbId}`);
             return [];
@@ -246,7 +247,7 @@ builder.defineStreamHandler(async (args) => {
         .then(streams => {
             if (streams && streams.length > 0) {
                 console.log(`  Successfully fetched ${streams.length} streams from HollyMovieHD.`);
-                return streams;
+                return streams.map(stream => ({ ...stream, provider: 'HollyMovieHD' }));
             }
             console.log(`  No streams returned from HollyMovieHD for TMDB ${tmdbTypeFromId}/${tmdbId}`);
             return [];
@@ -257,18 +258,34 @@ builder.defineStreamHandler(async (args) => {
         });
     
     try {
-        const results = await Promise.all([showBoxPromise, xprimePromise, soaperTvPromise, hollymoviePromise]);
+        const results = await Promise.all([showBoxPromise, xprimePromise, hollymoviePromise, soaperTvPromise]);
         const showBoxResults = results[0] || [];
         const xprimeResults = results[1] || [];
-        const soaperTvResults = results[2] || [];
-        const hollymovieResults = results[3] || [];
+        const hollymovieResults = results[2] || [];
+        const soaperTvResults = results[3] || [];
 
-        combinedRawStreams = combinedRawStreams.concat(showBoxResults);
-        combinedRawStreams = combinedRawStreams.concat(xprimeResults);
-        combinedRawStreams = combinedRawStreams.concat(soaperTvResults);
-        combinedRawStreams = combinedRawStreams.concat(hollymovieResults);
+        // Group streams by provider first
+        const streamsByProvider = {
+            'ShowBox': showBoxResults,
+            'Xprime.tv': xprimeResults,
+            'HollyMovieHD': hollymovieResults,
+            'Soaper TV': soaperTvResults
+        };
         
-        console.log(`Total raw streams after parallel fetch: ${combinedRawStreams.length}`);
+        // Sort each provider's streams by quality
+        Object.keys(streamsByProvider).forEach(provider => {
+            streamsByProvider[provider] = sortStreamsByQuality(streamsByProvider[provider]);
+        });
+        
+        // Combine streams in the preferred provider order
+        combinedRawStreams = [
+            ...streamsByProvider['ShowBox'],
+            ...streamsByProvider['Xprime.tv'],
+            ...streamsByProvider['HollyMovieHD'],
+            ...streamsByProvider['Soaper TV']
+        ];
+        
+        console.log(`Total raw streams after provider-ordered fetch: ${combinedRawStreams.length}`);
 
     } catch (error) {
         // This catch block might be redundant if individual promises handle their errors and return [].
@@ -283,9 +300,10 @@ builder.defineStreamHandler(async (args) => {
         return { streams: [] };
     }
     
-    // Sort all combined streams by quality before mapping
-    const sortedCombinedStreams = sortStreamsByQuality(combinedRawStreams);
-    console.log(`Total streams after sorting: ${sortedCombinedStreams.length}`);
+    // We'll skip global quality sorting, as we've already sorted each provider's streams by quality
+    // const sortedCombinedStreams = sortStreamsByQuality(combinedRawStreams);
+    const sortedCombinedStreams = combinedRawStreams;
+    console.log(`Total streams after provider-ordered sorting: ${sortedCombinedStreams.length}`);
         
     const stremioStreamObjects = sortedCombinedStreams.map((stream) => {
         const qualityLabel = stream.quality || 'UNK'; // UNK for unknown

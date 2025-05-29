@@ -21,33 +21,43 @@ After receiving feedback and working on improvements, I'm excited to announce **
 * **Indie Development** \- As a solo developer, I'll try to fix or replace broken providers when I can
 * **No Guarantees** \- Providers can change or disappear at any time without warning
 
->**Important Note:** While I've added more providers to improve reliability, this is still a scraper addon that depends on external services. As an independent developer, I'll do my best to maintain it, but functionality can still break unexpectedly.
-
 **Disclaimer:** This addon is a personal project intended for educational purposes.
+
+# Who's This For?
+
+This addon is primarily for Stremio users who:
+
+* **Prefer direct streaming links:** If you're looking for an alternative to debrid services and want to stream directly, Nuvio Streams attempts to provide that.
+* **Understand the nature of scrapers:** As a scraper, this addon relies on the availability of public sources, which can be unreliable.
+
+**Important Reminder:** While I strive to keep Nuvio Streams functional, there's **no guarantee that the addon or its sources will last long-term.** External provider sites can change or shut down without notice, which directly impacts the addon's ability to find streams.
 
 # Where to find it:
 
 # Nuvio Streaming Addon for Stremio
 
+**Great News!** Nuvio Streams is now officially listed on the **Stremio Community Addons page**! This makes it easier for everyone to find and install.
+
 **Installation Links:**
-* [**Nuvio Streams Addon**](https://nuvioaddon.vercel.app)
-* [**Stremio Community Addons Page**](https://beta.stremio-addons.net/addons/nuvio-streams)
 
->**Note:** The addon is now available both through its dedicated website and on the official Stremio Community Addons page. You can install or configure it from either location.
+* [**Nuvio Streams Addon (Main Page)**](https://nuvioaddon.vercel.app) \- *Install or configure here.*
+* [**Stremio Community Addons Page**](https://beta.stremio-addons.net/addons/nuvio-streams) \- *You can also install from the official community list!*
 
-# Personalized Configuration  (New Feature)
+**Support the addon on the Community Page!** If you find Nuvio Streams useful, please consider **giving it a star ⭐ on the Stremio Community Addons page**. It helps a lot with visibility and lets others know you appreciate the addon!
+
+You can install or configure the addon from either of the links above.
+
+# Personal Cookie Token Setup (Key New Feature)
 
 A key new feature in v0.2.0 is the ability to use your own cookie for one of the main providers:
 
 * **Why personalize?** Without personalization, you'll share limited bandwidth with other addon users and be restricted to smaller file sizes (under 9GB)
 * **Benefits of personalization:** Your own dedicated 100GB monthly quota, faster speeds, and no file size restrictions
-* **How to set it up:** Visit the addon's configuration page and follow the step-by-step instructions to get and set your own cookie
+* **How to set it up:** Visit the addon's configuration page (accessible via the installation links). **A detailed tutorial on how to get your cookie token is available on the main addon installation page.**
 
 This feature is **Extremely Recommended** for the best experience, especially if you want access to larger, higher-quality streams including 4K, HDR, Dolby Vision content.
 
 >**Future Notice:** Due to extremely limited resources, I plan to eventually transition this addon to only support personalized cookies. If the addon and providers are still operational in the coming months, non-personalized access will likely be phased out. I strongly encourage setting up your personal cookie now to ensure continued access.
->
->**Coming Soon:** Additional configuration options such as selecting which providers to use and customizing quality sorting will be implemented in future updates based on user feedback and requests.
 
 # Frequently Asked Questions:
 
@@ -86,4 +96,4 @@ Your support helps me:
 * Cover hosting costs and infrastructure expenses
 * Develop more Stremio addons in the future
 
-**Follow me on GitHub:** [https://github.com/tapframe](https://github.com/tapframe) (Currently the repository is private, see 'Contributing to Development' above for details on potential collaboration) 
+**Follow me on GitHub:** [https://github.com/tapframe](https://github.com/tapframe) (Currently the repository is private, see 'Contributing to Development' above for details on potential collaboration)
