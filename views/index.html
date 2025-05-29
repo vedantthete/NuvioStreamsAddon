@@ -750,7 +750,7 @@
             border: 1px solid var(--border);
             position: relative;
             overflow: hidden;
-            max-height: 500px; /* Adjust as needed, should be larger than content height */
+            max-height: 700px; /* Increased from 500px */
             opacity: 1;
             transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, padding 0.5s ease-in-out;
         }
@@ -919,7 +919,7 @@
                     
                     <div class="cookie-config" id="cookieConfigSection">
                         <p>ShowBox fetches content from a cloud storage provider called FebBox. Each FebBox user gets 100GB/month of fast streaming before speeds are reduced.</p>
-                        <p><strong>Why use your own cookie?</strong> Without personalization, you'll share cookies with other addon users, which can exhaust the 100GB quota quickly and result in slow or failed streams. With your own cookie, you'll have your personal 100GB quota for fast, reliable streams.</p>
+                        <p><strong>Why use your own cookie?</strong> Without personalization, you'll share cookies with other addon users, which can exhaust the 100GB quota quickly and result in slow or failed streams. Additionally, when not using a personal cookie, ShowBox streams will be limited to sizes below 9GB. With your own cookie, you'll have your personal 100GB quota for fast, reliable streams, and no size restrictions on ShowBox content.</p>
                         
                         <div class="cookie-form">
                             <input type="text" id="cookieInput" placeholder="Enter your ui=... cookie" class="cookie-input">
@@ -996,8 +996,43 @@
         // --- Default Manifest Setup ---
         const defaultManifestUrl = window.location.origin + '/manifest.json';
         const defaultInstallProtocolUrl = 'stremio://' + defaultManifestUrl.replace(/^https?:\/\//, '');
+        
+        let currentManifestUrlToCopy = defaultManifestUrl;
+        let currentInstallUrl = defaultInstallProtocolUrl;
+
         if (installLink) {
-            installLink.href = defaultInstallProtocolUrl;
+            installLink.href = currentInstallUrl; // Set initial href
+
+            installLink.addEventListener('click', () => {
+                if (currentInstallUrl === defaultInstallProtocolUrl) {
+                    toast.innerHTML = "Installing with default settings.<br>Note: ShowBox streams are limited to &lt;9GB. Use a personal cookie for full access to all formats (HDR/DV etc.).";
+                    toast.classList.add('show');
+                    // Keep toast longer for this important message
+                    setTimeout(() => { toast.classList.remove('show'); }, 6000); 
+                }
+                // Allow default link behavior to proceed
+            });
+        }
+
+        if (copyLinkBtn) {
+            copyLinkBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(currentManifestUrlToCopy);
+                    if (currentManifestUrlToCopy === defaultManifestUrl) {
+                        toast.innerHTML = "Default manifest copied!<br>Note: ShowBox streams are limited to &lt;9GB. Use a personal cookie for full access.";
+                        setTimeout(() => { toast.classList.remove('show'); }, 5000); // Longer display
+                    } else {
+                        toast.textContent = "Personalized manifest link copied!";
+                        setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                    }
+                    toast.classList.add('show');
+                } catch (err) {
+                    console.error('Failed to copy manifest: ', err);
+                    toast.textContent = "Failed to copy link.";
+                    toast.classList.add('show');
+                    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                }
+            });
         }
 
         // --- UI Interaction for More Addons (unchanged) ---
@@ -1049,20 +1084,6 @@
         // Update layout on window resize
         window.addEventListener('resize', updateLayoutForScreenSize);
 
-        // --- Copy Default Manifest Link (unchanged) ---
-        if (copyLinkBtn) {
-            copyLinkBtn.addEventListener('click', async () => {
-                try {
-                    await navigator.clipboard.writeText(defaultManifestUrl);
-                    toast.textContent = "Default manifest link copied!";
-                    toast.classList.add('show');
-                    setTimeout(() => { toast.classList.remove('show'); }, 3000);
-                } catch (err) {
-                    console.error('Failed to copy default manifest: ', err);
-                }
-            });
-        }
-
         // --- New Cookie Configuration Functionality (Client-Side Only) ---
         const cookieInput = document.getElementById('cookieInput');
         const setCookieBtn = document.getElementById('setCookieBtn');
@@ -1078,6 +1099,13 @@
                     toast.textContent = "Please enter your FebBox cookie.";
                     toast.classList.add('show');
                     setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                    
+                    // Revert main buttons to default if cookie is cleared
+                    currentManifestUrlToCopy = defaultManifestUrl;
+                    currentInstallUrl = defaultInstallProtocolUrl;
+                    if (installLink) installLink.href = currentInstallUrl;
+                    manifestResult.style.display = 'none'; // Hide personalized section
+
                     return;
                 }
 
@@ -1087,31 +1115,22 @@
                 const personalizedInstallUrl = `stremio://${personalizedManifestURL.replace(/^https?:\/\//, '')}`;
 
                 personalManifestUrlSpan.textContent = personalizedManifestURL;
-                installPersonalLinkAnchor.href = personalizedInstallUrl;
+                // installPersonalLinkAnchor.href = personalizedInstallUrl; // No longer needed here
                 manifestResult.style.display = 'block';
 
-                toast.textContent = "Personalized manifest ready!";
+                // Update main buttons
+                currentManifestUrlToCopy = personalizedManifestURL;
+                currentInstallUrl = personalizedInstallUrl;
+                if (installLink) installLink.href = currentInstallUrl;
+
+                // Hide buttons within the personalized box
+                if (installPersonalLinkAnchor) installPersonalLinkAnchor.style.display = 'none';
+                if (copyPersonalLinkBtn) copyPersonalLinkBtn.style.display = 'none';
+
+
+                toast.textContent = "Personalized manifest ready! Main buttons updated.";
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 3000);
-            });
-        }
-
-        if (copyPersonalLinkBtn) {
-            copyPersonalLinkBtn.addEventListener('click', async () => {
-                const urlToCopy = personalManifestUrlSpan.textContent;
-                if (!urlToCopy) return;
-                try {
-                    await navigator.clipboard.writeText(urlToCopy);
-                    copyPersonalLinkBtn.textContent = "Copied!";
-                    toast.textContent = "Personalized manifest link copied!";
-                    toast.classList.add('show');
-                    setTimeout(() => {
-                        copyPersonalLinkBtn.textContent = "Copy";
-                        toast.classList.remove('show');
-                    }, 2000);
-                } catch (err) {
-                    console.error('Failed to copy personalized manifest: ', err);
-                }
             });
         }
 

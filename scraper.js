@@ -1233,14 +1233,29 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
         return true; // Keep all other streams
     });
 
-    if (streamsToShowBoxFiltered.length > 0) {
-        console.log(`Found ${streamsToShowBoxFiltered.length} streams (sorted and ShowBox-low-quality-filtered):`);
-        streamsToShowBoxFiltered.forEach((stream, i) => {
+    // NEW: Apply size limit if not using a personal cookie
+    let finalFilteredStreams = streamsToShowBoxFiltered;
+    if (!global.currentRequestUserCookie) { // Check if personal cookie is NOT set
+        console.log('[SizeLimit] No personal cookie detected. Applying 9GB size limit to ShowBox streams.');
+        const NINE_GB_IN_BYTES = 9 * 1024 * 1024 * 1024;
+        finalFilteredStreams = streamsToShowBoxFiltered.filter(stream => {
+            const sizeInBytes = parseSizeToBytes(stream.size);
+            if (sizeInBytes >= NINE_GB_IN_BYTES) {
+                console.log(`[SizeLimit] Filtering out ShowBox stream due to size (${stream.size || 'Unknown size'}): ${stream.title}`);
+                return false;
+            }
+            return true;
+        });
+    }
+
+    if (finalFilteredStreams.length > 0) {
+        console.log(`Found ${finalFilteredStreams.length} streams (sorted, ShowBox-low-quality-filtered, and size-limited if applicable):`);
+        finalFilteredStreams.forEach((stream, i) => {
             console.log(`  ${i+1}. ${stream.quality} (${stream.size || 'Unknown size'}) [${(stream.codecs || []).join(', ') || 'No codec info'}]: ${stream.title}`);
         });
     }
     console.timeEnd(mainTimerLabel);
-    return streamsToShowBoxFiltered;
+    return finalFilteredStreams;
 };
 
 // Function to handle TV shows with seasons and episodes
