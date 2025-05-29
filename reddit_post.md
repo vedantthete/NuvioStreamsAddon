@@ -86,4 +86,4 @@ Your support helps me:
 * Cover hosting costs and infrastructure expenses
 * Develop more Stremio addons in the future
 
-**Follow me on GitHub:** [https://github.com/tapframe](https://github.com/tapframe) (Currently private, see 'Contributing to Development' above for details on potential collaboration) 
+**Follow me on GitHub:** [https://github.com/tapframe](https://github.com/tapframe) (Currently the repository is private, see 'Contributing to Development' above for details on potential collaboration) 
