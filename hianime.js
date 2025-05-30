@@ -1,20 +1,4 @@
-require('dotenv').config(); // Load .env file variables
 const https = require('https');
-
-// --- Cache Objects ---
-const tmdbTitleCache = new Map();
-const hianimeSlugCache = new Map(); // Keyed by tmdbShowId
-const tmdbSeasonEpisodesCache = new Map();
-const hianimeEpisodeListCache = new Map(); // Keyed by animeSlug
-const hianimeEpisodeSourceCache = new Map(); // Keyed by hianimeFullEpisodeId_server_category
-
-const CACHE_TTL = {
-  TMDB_TITLE: 24 * 60 * 60 * 1000, // 24 hours
-  HIANIME_SLUG: 24 * 60 * 60 * 1000, // 24 hours
-  TMDB_SEASON_EPISODES: 6 * 60 * 60 * 1000, // 6 hours
-  HIANIME_EPISODE_LIST: 1 * 60 * 60 * 1000,  // 1 hour (for ongoing shows)
-  HIANIME_EPISODE_SOURCE: 30 * 60 * 1000,   // 30 minutes
-};
 
 // --- Configuration & Constants ---
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36';
@@ -22,10 +6,9 @@ const API_HEADERS = {
   'User-Agent': USER_AGENT,
   'Accept': 'application/json, text/plain, */*',
   'Accept-Language': 'en-US,en;q=0.9',
-  'Origin': 'https://pstream.org',
+  'Origin': 'https://pstream.org', // Or the specific origin Hianime expects for its API
 };
-const TMDB_API_KEY = process.env.TMDB_API_KEY || '5b9790d9305dca8713b9a0afad42ea8d'; // Use env var or fallback
-const HIAnime_PROXY_URL = process.env.SHOWBOX_PROXY_URL_VALUE; // Read proxy from env
+const TMDB_API_KEY = '5b9790d9305dca8713b9a0afad42ea8d'; // Public API key
 
 const SERVERS_TO_TRY = [
   { server: 'hd-1', category: 'dub' },
@@ -37,92 +20,68 @@ const SERVERS_TO_TRY = [
 // --- Helper Functions ---
 
 async function fetchJson(url, options = {}, attempt = 1) {
-  let finalUrl = url;
-  const isTmdbRequest = url.includes('api.themoviedb.org');
-
-  if (HIAnime_PROXY_URL && !isTmdbRequest) {
-    finalUrl = `${HIAnime_PROXY_URL}${encodeURIComponent(url)}`;
-    console.log(`[Hianime] Using proxy for JSON request: ${finalUrl} (Original: ${url})`);
-  } else {
-    console.log(`[Hianime] Fetching JSON directly: ${url}`);
-  }
-
   try {
-    const response = await fetch(finalUrl, {
+    // Assuming global fetch is available (Node 18+) or polyfilled by the addon environment
+    const response = await fetch(url, {
+      // The original script used an https.Agent. If 'fetch' is global and from node-fetch,
+      // agent configuration might be different or handled by a global agent.
+      // For now, keeping it simple. If issues arise, agent might need to be added.
       ...options,
     });
     if (!response.ok) {
       const errorText = await response.text().catch(() => 'Could not read error text');
-      console.error(`[Hianime] API Error: ${response.status} for ${finalUrl}. Response: ${errorText.substring(0, 200)}`);
-      if (response.status === 403 && attempt < 3 && !isTmdbRequest) { // Retry only for non-TMDB proxied requests on 403
-        console.warn(`[Hianime] Retrying fetch for ${finalUrl} (attempt ${attempt + 1}) after 403...`);
+      console.error(`[Hianime] API Error: ${response.status} for ${url}. Response: ${errorText.substring(0, 200)}`);
+      if (response.status === 403 && attempt < 3) {
+        console.warn(`[Hianime] Retrying fetch for ${url} (attempt ${attempt + 1}) after 403...`);
         await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
-        // Pass original URL to retry, proxy logic will re-apply
         return fetchJson(url, options, attempt + 1);
       }
-      throw new Error(`Failed to fetch ${finalUrl}: ${response.status} ${response.statusText}`);
+      throw new Error(`Failed to fetch ${url}: ${response.status} ${response.statusText}`);
     }
     return response.json();
   } catch (error) {
-    console.error(`[Hianime] Fetch error for ${finalUrl}:`, error.message);
+    console.error(`[Hianime] Fetch error for ${url}:`, error.message);
     throw error;
   }
 }
 
-async function searchAnimeOnHianime(tmdbShowId, title) {
-  const cacheKey = tmdbShowId; 
-  const cached = hianimeSlugCache.get(cacheKey);
-  if (cached && (Date.now() - cached.timestamp < CACHE_TTL.HIANIME_SLUG)) {
-      console.log(`[Hianime] CACHE HIT: Hianime Slug for TMDB ID ${tmdbShowId}`);
-      return cached.data;
-  }
+async function searchAnimeOnHianime(title) {
   const searchUrl = `https://hianime.pstream.org/api/v2/hianime/search?q=${encodeURIComponent(title)}`;
-  console.log(`[Hianime] API REQ: Searching for anime: "${title}" using ${searchUrl}`);
+  console.log(`[Hianime] Searching for anime: "${title}" using ${searchUrl}`);
   const data = await fetchJson(searchUrl, { headers: API_HEADERS });
+
   if (!data.success || !data.data.animes || data.data.animes.length === 0) {
-    throw new Error(`Anime "${title}" (TMDB: ${tmdbShowId}) not found on Hianime.`);
+    throw new Error(`Anime "${title}" not found on Hianime or no animes array in response.`);
   }
+  // Prioritize exact match, case-insensitive
   let animeSlug = data.data.animes.find(anime => anime.name.toLowerCase() === title.toLowerCase())?.id;
+  
   if (!animeSlug && data.data.animes.length > 0) {
+    // Fallback to the first result if no exact match
     animeSlug = data.data.animes[0].id;
     console.log(`[Hianime] No exact title match for "${title}". Using first result: ${data.data.animes[0].name} (Slug: ${animeSlug})`);
   } else if (!animeSlug) {
-     throw new Error(`Anime "${title}" (TMDB: ${tmdbShowId}) not found after checking all results.`);
+     throw new Error(`Anime "${title}" not found on Hianime after checking all results.`);
   }
-  hianimeSlugCache.set(cacheKey, { data: animeSlug, timestamp: Date.now() });
+  
   console.log(`[Hianime] Found Hianime slug: ${animeSlug} for title "${title}"`);
   return animeSlug;
 }
 
 async function getShowTitleFromTmdb(tmdbShowId) {
-    const cacheKey = tmdbShowId;
-    const cached = tmdbTitleCache.get(cacheKey);
-    if (cached && (Date.now() - cached.timestamp < CACHE_TTL.TMDB_TITLE)) {
-        console.log(`[Hianime] CACHE HIT: TMDB Title for ${tmdbShowId}`);
-        return cached.data;
-    }
     const url = `https://api.themoviedb.org/3/tv/${tmdbShowId}?api_key=${TMDB_API_KEY}`;
-    console.log(`[Hianime] API REQ: Fetching show title from TMDB for ID: ${tmdbShowId}`);
-    const data = await fetchJson(url, { headers: { 'User-Agent': USER_AGENT } });
+    console.log(`[Hianime] Fetching show title from TMDB for ID: ${tmdbShowId}`);
+    const data = await fetchJson(url, { headers: { 'User-Agent': USER_AGENT } }); // TMDB doesn't need API_HEADERS
     if (!data.name) throw new Error('Could not get show title from TMDB.');
-    tmdbTitleCache.set(cacheKey, { data: data.name, timestamp: Date.now() });
     console.log(`[Hianime] TMDB Show Title: ${data.name}`);
     return data.name;
 }
 
 async function fetchTmdbSeasonEpisodes(tmdbShowId, seasonNumber) {
-  const cacheKey = `${tmdbShowId}_S${seasonNumber}`;
-  const cached = tmdbSeasonEpisodesCache.get(cacheKey);
-  if (cached && (Date.now() - cached.timestamp < CACHE_TTL.TMDB_SEASON_EPISODES)) {
-      console.log(`[Hianime] CACHE HIT: TMDB S${seasonNumber} episodes for ${tmdbShowId}`);
-      return cached.data;
-  }
   const url = `https://api.themoviedb.org/3/tv/${tmdbShowId}/season/${seasonNumber}?api_key=${TMDB_API_KEY}`;
-  console.log(`[Hianime] API REQ: Fetching TMDB S${seasonNumber} episodes for show ${tmdbShowId}`);
+  console.log(`[Hianime] Fetching TMDB season ${seasonNumber} episodes for show ${tmdbShowId}`);
   const data = await fetchJson(url, { headers: { 'User-Agent': USER_AGENT } });
-  const episodes = data.episodes || [];
-  tmdbSeasonEpisodesCache.set(cacheKey, { data: episodes, timestamp: Date.now() });
-  return episodes;
+  return data.episodes || [];
 }
 
 async function calculateAbsoluteEpisodeNumber(tmdbShowId, seasonNumber, episodeNumber) {
@@ -139,31 +98,18 @@ async function calculateAbsoluteEpisodeNumber(tmdbShowId, seasonNumber, episodeN
 }
 
 async function fetchEpisodeListForAnimeFromHianime(animeSlug) {
-  const cacheKey = animeSlug;
-  const cached = hianimeEpisodeListCache.get(cacheKey);
-  if (cached && (Date.now() - cached.timestamp < CACHE_TTL.HIANIME_EPISODE_LIST)) {
-      console.log(`[Hianime] CACHE HIT: Hianime episode list for slug ${animeSlug}`);
-      return cached.data;
-  }
   const url = `https://hianime.pstream.org/api/v2/hianime/anime/${animeSlug}/episodes`;
-  console.log(`[Hianime] API REQ: Fetching Hianime episode list for slug: ${animeSlug}`);
+  console.log(`[Hianime] Fetching Hianime episode list for slug: ${animeSlug}`);
   const data = await fetchJson(url, { headers: API_HEADERS });
   if (!data.success || !data.data.episodes) {
     throw new Error('Failed to fetch Hianime episode list or no episodes in response.');
   }
-  hianimeEpisodeListCache.set(cacheKey, { data: data.data.episodes, timestamp: Date.now() });
   return data.data.episodes;
 }
 
 async function fetchEpisodeSources(hianimeFullEpisodeId, server, category) {
-  const cacheKey = `${hianimeFullEpisodeId}_${server}_${category}`;
-  const cached = hianimeEpisodeSourceCache.get(cacheKey);
-  if (cached && (Date.now() - cached.timestamp < CACHE_TTL.HIANIME_EPISODE_SOURCE)) {
-      console.log(`[Hianime] CACHE HIT: Episode sources for ${hianimeFullEpisodeId} ${server}/${category}`);
-      return cached.data;
-  }
   const sourceApiUrl = `https://hianime.pstream.org/api/v2/hianime/episode/sources?animeEpisodeId=${hianimeFullEpisodeId}&server=${server}&category=${category}`;
-  console.log(`[Hianime] API REQ: Fetching sources: ${server}/${category} from ${sourceApiUrl}`);
+  console.log(`[Hianime] Fetching sources: ${server}/${category} from ${sourceApiUrl}`);
   try {
     const data = await fetchJson(sourceApiUrl, { headers: API_HEADERS });
     if (!data.success || !data.data.sources || data.data.sources.length === 0) {
@@ -179,9 +125,10 @@ async function fetchEpisodeSources(hianimeFullEpisodeId, server, category) {
         console.log(`[Hianime] Skipping non-netmagcdn.com link: ${masterPlaylistUrl}`);
         return null;
     }
-    const sourceData = { playlistUrl: masterPlaylistUrl, headers: data.data.headers || {} };
-    hianimeEpisodeSourceCache.set(cacheKey, { data: sourceData, timestamp: Date.now() });
-    return sourceData;
+    return {
+        playlistUrl: masterPlaylistUrl,
+        headers: data.data.headers || {}, // Ensure headers is an object
+    };
   } catch (error) {
     console.error(`[Hianime] Error fetching sources for ${server}/${category}: ${error.message}`);
     return null;
@@ -191,30 +138,21 @@ async function fetchEpisodeSources(hianimeFullEpisodeId, server, category) {
 async function parseM3U8(playlistUrl, m3u8Headers, category, tmdbShowId, seasonNumber, episodeNumber) {
   const streams = [];
   let streamCounter = 0;
-  let finalPlaylistUrl = playlistUrl;
-
-  if (HIAnime_PROXY_URL) {
-    finalPlaylistUrl = `${HIAnime_PROXY_URL}${encodeURIComponent(playlistUrl)}`;
-    console.log(`[Hianime] Using proxy for M3U8 request: ${finalPlaylistUrl} (Original: ${playlistUrl})`);
-  } else {
-    console.log(`[Hianime] Fetching M3U8 directly: ${playlistUrl}`);
-  }
-
   try {
-    console.log(`[Hianime] Parsing M3U8 from ${finalPlaylistUrl}...`);
+    console.log(`[Hianime] Parsing M3U8 from ${playlistUrl}...`);
+    // Ensure headers are properly formatted for fetch
     const fetchHeaders = { ...m3u8Headers, 'User-Agent': USER_AGENT };
     if (fetchHeaders.Referer === undefined || fetchHeaders.Referer === null || fetchHeaders.Referer === '') {
-        fetchHeaders.Referer = 'https://megacloud.blog/'; 
+        fetchHeaders.Referer = 'https://megacloud.blog/'; // Default referer if not provided
     }
 
-    const response = await fetch(finalPlaylistUrl, { headers: fetchHeaders }); // Pass original headers for proxied request destination
+    const response = await fetch(playlistUrl, { headers: fetchHeaders });
     if (!response.ok) {
-      console.warn(`[Hianime] Failed to fetch M3U8 content from ${finalPlaylistUrl} - ${response.status}`);
+      console.warn(`[Hianime] Failed to fetch M3U8 content from ${playlistUrl} - ${response.status}`);
       return [];
     }
     const masterPlaylistText = await response.text();
     const lines = masterPlaylistText.split(/\r?\n/);
-    // IMPORTANT: masterBaseUrl must be from the ORIGINAL playlistUrl for resolving relative segments
     const masterBaseUrl = playlistUrl.substring(0, playlistUrl.lastIndexOf('/') + 1);
     let variantsFoundInMaster = 0;
 
@@ -231,59 +169,44 @@ async function parseM3U8(playlistUrl, m3u8Headers, category, tmdbShowId, seasonN
 
         if (i + 1 < lines.length && lines[i+1].trim() && !lines[i+1].startsWith('#')) {
           const mediaPlaylistPath = lines[i+1].trim();
-          // Segments URLs in M3U8 are relative to original M3U8 location
-          let mediaPlaylistUrl = new URL(mediaPlaylistPath, masterBaseUrl).href;
-          let finalMediaPlaylistUrlForStremio = mediaPlaylistUrl; // This is what Stremio will use
-
-          // If proxy is enabled, the URL Stremio receives should also be proxied
-          if (HIAnime_PROXY_URL) {
-            finalMediaPlaylistUrlForStremio = `${HIAnime_PROXY_URL}${encodeURIComponent(mediaPlaylistUrl)}`;
-          }
+          const mediaPlaylistUrl = new URL(mediaPlaylistPath, masterBaseUrl).href;
           
           const streamId = `hianime-${tmdbShowId}-S${seasonNumber}E${episodeNumber}-${category}-${qualityLabel}-${streamCounter++}`;
           streams.push({
             id: streamId,
             title: `Hianime ${category.toUpperCase()} - ${qualityLabel}`,
             quality: qualityLabel,
-            language: category, 
-            url: finalMediaPlaylistUrlForStremio, // Stremio will use this (potentially proxied) URL
-            // Store original headers, Stremio might need them if it can bypass proxy or for direct play tests
-            behaviorHints: {
-                notWebReady: true,
-                // Pass original headers that the PROXY target (netmagcdn) needs.
-                // The proxy itself will handle its own connection to the target using these.
-                proxyHeaders: { "request": fetchHeaders }
-            },
+            language: category, // dub or sub
+            url: mediaPlaylistUrl,
             type: 'hls',
             provider: 'Hianime',
+            behaviorHints: {
+                notWebReady: true, // Common for HLS streams that need specific handling or external players
+            },
+            headers: fetchHeaders // Pass along the headers needed to play the stream
           });
           variantsFoundInMaster++;
         }
       }
     }
-    // Handling for master playlist being a media playlist itself
-    if (variantsFoundInMaster === 0 && masterPlaylistText.includes('#EXTINF:')) {
+    if (variantsFoundInMaster === 0 && masterPlaylistText.includes('#EXTINF:')) { // Is a media playlist
       const streamId = `hianime-${tmdbShowId}-S${seasonNumber}E${episodeNumber}-${category}-auto-${streamCounter++}`;
-      let finalPlaylistUrlForStremio = playlistUrl;
-      if (HIAnime_PROXY_URL) {
-        finalPlaylistUrlForStremio = `${HIAnime_PROXY_URL}${encodeURIComponent(playlistUrl)}`;
-      }
       streams.push({
         id: streamId,
         title: `Hianime ${category.toUpperCase()} - Auto`,
         quality: 'auto',
         language: category,
-        url: finalPlaylistUrlForStremio,
-        behaviorHints: {
-            notWebReady: true,
-            proxyHeaders: { "request": fetchHeaders }
-        },
+        url: playlistUrl,
         type: 'hls',
         provider: 'Hianime',
+        behaviorHints: {
+            notWebReady: true,
+        },
+        headers: fetchHeaders
       });
     }
   } catch (err) {
-    console.error(`[Hianime] Error parsing M3U8 ${finalPlaylistUrl}:`, err.message);
+    console.error(`[Hianime] Error parsing M3U8 ${playlistUrl}:`, err.message);
   }
   return streams;
 }
@@ -297,7 +220,7 @@ async function getHianimeStreams(tmdbShowId, seasonNumber, episodeNumber) {
     return [];
   }
 
-  console.log(`[Hianime] Processing request for TMDB ID: ${tmdbShowId}, S${seasonNumber}E${episodeNumber}`);
+  console.log(`[Hianime] Fetching streams for TMDB ID: ${tmdbShowId}, S${seasonNumber}E${episodeNumber}`);
 
   try {
     const showTitle = await getShowTitleFromTmdb(tmdbShowId);
@@ -305,7 +228,7 @@ async function getHianimeStreams(tmdbShowId, seasonNumber, episodeNumber) {
         console.error(`[Hianime] Could not get show title for TMDB ID ${tmdbShowId}. Cannot proceed.`);
         return [];
     }
-    const animeSlug = await searchAnimeOnHianime(tmdbShowId, showTitle);
+    const animeSlug = await searchAnimeOnHianime(showTitle);
     const absoluteEpNum = await calculateAbsoluteEpisodeNumber(tmdbShowId, seasonNumber, episodeNumber);
     const hianimeEpisodeList = await fetchEpisodeListForAnimeFromHianime(animeSlug);
 
@@ -340,10 +263,9 @@ async function getHianimeStreams(tmdbShowId, seasonNumber, episodeNumber) {
     return allStreams;
 
   } catch (error) {
-    console.error('[Hianime] --- ERROR Processing Request ---');
+    console.error('[Hianime] --- ERROR ---');
     console.error(error.message);
-    // For more detailed debugging:
-    // if (error.stack) console.error(error.stack);
+    // console.error(error.stack); // Optionally log stack for more details
     return []; // Return empty on error
   }
 }
