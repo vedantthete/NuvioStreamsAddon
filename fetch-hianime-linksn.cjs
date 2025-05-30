@@ -16,7 +16,6 @@ const API_HEADERS = {
   'Origin': 'https://pstream.org',
 };
 const TMDB_API_KEY = '5b9790d9305dca8713b9a0afad42ea8d'; // Public API key
-const TMDB_PROXY_URL = 'https://starlit-valkyrie-39f5ab.netlify.app/?destination='; // Proxy for TMDB calls
 
 const SERVERS_TO_TRY = [
   { server: 'hd-1', category: 'dub' },
@@ -66,9 +65,8 @@ async function searchAnimeOnHianime(title) {
 }
 
 async function getShowTitleFromTmdb(tmdbShowId) {
-    const rawTmdbUrl = `https://api.themoviedb.org/3/tv/${tmdbShowId}?api_key=${TMDB_API_KEY}`;
-    const url = TMDB_PROXY_URL + rawTmdbUrl;
-    console.log(`Fetching show title via proxy from TMDB for ID: ${tmdbShowId}... (URL: ${url})`);
+    const url = `https://api.themoviedb.org/3/tv/${tmdbShowId}?api_key=${TMDB_API_KEY}`;
+    console.log(`Fetching show title from TMDB for ID: ${tmdbShowId}...`);
     const data = await fetchJson(url, { headers: { 'User-Agent': USER_AGENT } });
     if (!data.name) throw new Error('Could not get show title from TMDB.');
     console.log(`TMDB Show Title: ${data.name}`);
@@ -77,9 +75,7 @@ async function getShowTitleFromTmdb(tmdbShowId) {
 
 
 async function fetchTmdbSeasonEpisodes(tmdbShowId, seasonNumber) {
-  const rawTmdbUrl = `https://api.themoviedb.org/3/tv/${tmdbShowId}/season/${seasonNumber}?api_key=${TMDB_API_KEY}`;
-  const url = TMDB_PROXY_URL + rawTmdbUrl;
-  console.log(`Fetching TMDB season episodes via proxy (S${seasonNumber} for ID ${tmdbShowId})... (URL: ${url})`);
+  const url = `https://api.themoviedb.org/3/tv/${tmdbShowId}/season/${seasonNumber}?api_key=${TMDB_API_KEY}`;
   const data = await fetchJson(url, { headers: { 'User-Agent': USER_AGENT } });
   return data.episodes || [];
 }
