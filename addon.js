@@ -59,6 +59,40 @@ async function fetchWithRetry(url, options, maxRetries = MAX_RETRIES) {
     throw lastError;
 }
 
+// Helper function for fetching with a timeout
+function fetchWithTimeout(promise, timeoutMs, providerName) {
+  return new Promise((resolve) => { // Always resolve to prevent Promise.all from rejecting
+    let timer = null;
+
+    const timeoutPromise = new Promise(r => {
+      timer = setTimeout(() => {
+        console.log(`[${providerName}] Request timed out after ${timeoutMs}ms. Returning empty array.`);
+        r({ streams: [], provider: providerName, error: new Error('Timeout') }); // Resolve with an object indicating timeout
+      }, timeoutMs);
+    });
+
+    Promise.race([promise, timeoutPromise])
+      .then((result) => {
+        clearTimeout(timer);
+        // Ensure the result is an object with a streams array, even if the original promise resolved with just an array
+        if (Array.isArray(result)) {
+          resolve({ streams: result, provider: providerName });
+        } else if (result && typeof result.streams !== 'undefined') {
+          resolve(result); // Already in the expected format (e.g. from timeoutPromise)
+        } else {
+          // This case might happen if the promise resolves with something unexpected
+          console.warn(`[${providerName}] Resolved with unexpected format. Returning empty array. Result:`, result);
+          resolve({ streams: [], provider: providerName });
+        }
+      })
+      .catch(error => {
+        clearTimeout(timer);
+        console.error(`[${providerName}] Error fetching streams: ${error.message}. Returning empty array.`);
+        resolve({ streams: [], provider: providerName, error }); // Resolve with an object indicating error
+      });
+  });
+}
+
 // Define stream handler for movies
 builder.defineStreamHandler(async (args) => {
     const { type, id, config } = args;
@@ -279,19 +313,32 @@ builder.defineStreamHandler(async (args) => {
             return []; 
         });
         
-    const hollymoviePromise = getHollymovieStreams(tmdbId, tmdbTypeFromId, seasonNum, episodeNum)
-        .then(streams => {
-            if (streams && streams.length > 0) {
-                console.log(`  Successfully fetched ${streams.length} streams from HollyMovieHD.`);
-                return streams.map(stream => ({ ...stream, provider: 'HollyMovieHD' }));
+    let hollymoviePromise;
+    if (type === 'movie' || type === 'series' && episodeNum) { // Ensure it's a movie or a specific episode
+        const isMovie = type === 'movie';
+        // Fetch VRF token first (assuming getVRFToken is defined elsewhere and returns a promise)
+        try {
+            const cachedVRF = await getVRFToken(); // Assuming this function exists and is async
+            if (cachedVRF) {
+                 console.log('[HollyMovieHD] Using VRF token for request:', cachedVRF);
+                 const originalHollymoviePromise = getHollymovieStreams(tmdbId, seasonNum, episodeNum, isMovie, cachedVRF);
+                 hollymoviePromise = fetchWithTimeout(
+                    originalHollymoviePromise, 
+                    15000, // 15-second timeout
+                    'HollyMovieHD'
+                 ).then(result => result.streams); // Extract just the streams array for Promise.all
+            } else {
+                console.log('[HollyMovieHD] VRF token not available, skipping HollyMovieHD.');
+                hollymoviePromise = Promise.resolve([]); // Resolve with empty if no VRF token
             }
-            console.log(`  No streams returned from HollyMovieHD for TMDB ${tmdbTypeFromId}/${tmdbId}`);
-            return [];
-        })
-        .catch(err => {
-            console.error(`Error fetching HollyMovieHD streams:`, err.message);
-            return [];
-        });
+        } catch (vrfError) {
+            console.error('[HollyMovieHD] Error fetching VRF token:', vrfError.message);
+            hollymoviePromise = Promise.resolve([]); // Resolve with empty if VRF token fetch fails
+        }
+    } else {
+        console.log('[HollyMovieHD] Skipping fetch because content is not a movie or a specific episode.');
+        hollymoviePromise = Promise.resolve([]); // Not a movie or specific episode, resolve empty
+    }
     
     // Add Cuevana promise to fetch in parallel with others
     const cuevanaPromise = (async () => {

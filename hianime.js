@@ -21,18 +21,14 @@ const SERVERS_TO_TRY = [
 
 async function fetchJson(url, options = {}, attempt = 1) {
   try {
-    // Assuming global fetch is available (Node 18+) or polyfilled by the addon environment
     const response = await fetch(url, {
-      // The original script used an https.Agent. If 'fetch' is global and from node-fetch,
-      // agent configuration might be different or handled by a global agent.
-      // For now, keeping it simple. If issues arise, agent might need to be added.
       ...options,
     });
     if (!response.ok) {
       const errorText = await response.text().catch(() => 'Could not read error text');
-      console.error(`[Hianime] API Error: ${response.status} for ${url}. Response: ${errorText.substring(0, 200)}`);
+      console.error(`[HianimeAddon] API Error: ${response.status} for ${url}. Response: ${errorText.substring(0, 200)}`);
       if (response.status === 403 && attempt < 3) {
-        console.warn(`[Hianime] Retrying fetch for ${url} (attempt ${attempt + 1}) after 403...`);
+        console.warn(`[HianimeAddon] Retrying fetch for ${url} (attempt ${attempt + 1}) after 403...`);
         await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
         return fetchJson(url, options, attempt + 1);
       }
@@ -40,7 +36,7 @@ async function fetchJson(url, options = {}, attempt = 1) {
     }
     return response.json();
   } catch (error) {
-    console.error(`[Hianime] Fetch error for ${url}:`, error.message);
+    console.error(`[HianimeAddon] Fetch error for ${url}:`, error.message);
     throw error;
   }
 }
@@ -70,30 +66,30 @@ async function searchAnimeOnHianime(title) {
 
 async function getShowTitleFromTmdb(tmdbShowId) {
     const url = `https://api.themoviedb.org/3/tv/${tmdbShowId}?api_key=${TMDB_API_KEY}`;
-    console.log(`[Hianime] Fetching show title from TMDB for ID: ${tmdbShowId}`);
-    const data = await fetchJson(url, { headers: { 'User-Agent': USER_AGENT } }); // TMDB doesn't need API_HEADERS
+    console.log(`[HianimeAddon] Fetching show title from TMDB for ID: ${tmdbShowId}`);
+    const data = await fetchJson(url, { headers: { 'User-Agent': USER_AGENT } });
     if (!data.name) throw new Error('Could not get show title from TMDB.');
-    console.log(`[Hianime] TMDB Show Title: ${data.name}`);
+    console.log(`[HianimeAddon] TMDB Show Title: ${data.name}`);
     return data.name;
 }
 
 async function fetchTmdbSeasonEpisodes(tmdbShowId, seasonNumber) {
   const url = `https://api.themoviedb.org/3/tv/${tmdbShowId}/season/${seasonNumber}?api_key=${TMDB_API_KEY}`;
-  console.log(`[Hianime] Fetching TMDB season ${seasonNumber} episodes for show ${tmdbShowId}`);
+  console.log(`[HianimeAddon] Fetching TMDB season ${seasonNumber} episodes for show ${tmdbShowId}`);
   const data = await fetchJson(url, { headers: { 'User-Agent': USER_AGENT } });
   return data.episodes || [];
 }
 
 async function calculateAbsoluteEpisodeNumber(tmdbShowId, seasonNumber, episodeNumber) {
-  console.log(`[Hianime] Calculating absolute episode number for S${seasonNumber}E${episodeNumber}...`);
+  console.log(`[HianimeAddon] Calculating absolute episode number for S${seasonNumber}E${episodeNumber}...`);
   let episodesBefore = 0;
   for (let i = 1; i < seasonNumber; i++) {
     const seasonEpisodes = await fetchTmdbSeasonEpisodes(tmdbShowId, i);
     episodesBefore += seasonEpisodes.length;
-    console.log(`[Hianime] Season ${i} has ${seasonEpisodes.length} episodes. Total before current: ${episodesBefore}`);
+    console.log(`[HianimeAddon] Season ${i} has ${seasonEpisodes.length} episodes. Total before current: ${episodesBefore}`);
   }
   const absoluteEp = episodesBefore + episodeNumber;
-  console.log(`[Hianime] Absolute episode number: ${absoluteEp}`);
+  console.log(`[HianimeAddon] Absolute episode number: ${absoluteEp}`);
   return absoluteEp;
 }
 
@@ -213,60 +209,57 @@ async function parseM3U8(playlistUrl, m3u8Headers, category, tmdbShowId, seasonN
 
 // Main exported function for the addon
 async function getHianimeStreams(tmdbShowId, seasonNumber, episodeNumber) {
-  // Hianime is typically for 'series' type content.
-  // If your addon strictly uses tmdbType ('movie' or 'tv'), ensure this function is only called for 'tv'.
   if (!tmdbShowId || seasonNumber == null || episodeNumber == null) {
-    console.error('[Hianime] Missing required parameters: tmdbShowId, seasonNumber, or episodeNumber.');
+    console.error('[HianimeAddon] Missing required parameters: tmdbShowId, seasonNumber, or episodeNumber.');
     return [];
   }
 
-  console.log(`[Hianime] Fetching streams for TMDB ID: ${tmdbShowId}, S${seasonNumber}E${episodeNumber}`);
-
   try {
+    // Step 1: Get Show Title and Absolute Episode Number using TMDB (here in the addon)
+    console.log('[HianimeAddon] Fetching TMDB data before calling Oracle VPS...');
     const showTitle = await getShowTitleFromTmdb(tmdbShowId);
-    if (!showTitle) {
-        console.error(`[Hianime] Could not get show title for TMDB ID ${tmdbShowId}. Cannot proceed.`);
+    const absoluteEpisodeNum = await calculateAbsoluteEpisodeNumber(tmdbShowId, seasonNumber, episodeNumber);
+
+    if (!showTitle || absoluteEpisodeNum == null) {
+        console.error('[HianimeAddon] Failed to get show title or absolute episode number from TMDB. Cannot proceed.');
         return [];
     }
-    const animeSlug = await searchAnimeOnHianime(showTitle);
-    const absoluteEpNum = await calculateAbsoluteEpisodeNumber(tmdbShowId, seasonNumber, episodeNumber);
-    const hianimeEpisodeList = await fetchEpisodeListForAnimeFromHianime(animeSlug);
+    console.log(`[HianimeAddon] TMDB data fetched: Title='${showTitle}', AbsEp=${absoluteEpisodeNum}`);
 
-    const targetHianimeEpisode = hianimeEpisodeList.find(ep => ep.number === absoluteEpNum);
+    // Step 2: Call Oracle VPS with the fetched TMDB data
+    const oracleVpsEndpoint = process.env.HIANIME_ORACLE_VPS_URL || 'https://m3u8nuvio.duckdns.org/fetch-hianime'; 
+    const fetchUrl = `${oracleVpsEndpoint}?tmdbId=${tmdbShowId}&season=${seasonNumber}&episode=${episodeNumber}&title=${encodeURIComponent(showTitle)}&absEp=${absoluteEpisodeNum}`;
 
-    if (!targetHianimeEpisode) {
-      console.warn(`[Hianime] Episode S${seasonNumber}E${episodeNumber} (Abs: ${absoluteEpNum}) not found in Hianime's list for ${animeSlug}.`);
+    console.log(`[HianimeAddon] Forwarding request to Oracle VPS: ${fetchUrl}`);
+
+    const response = await fetch(fetchUrl, { 
+        method: 'GET',
+        headers: {
+            // 'X-Oracle-Secret': process.env.HIANIME_ORACLE_SECRET || 'your-secret-key',
+            'Accept': 'application/json'
+        },
+        timeout: 45000 
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => 'Could not read error text from Oracle VPS');
+      console.error(`[HianimeAddon] Error fetching from Oracle VPS: ${response.status} ${response.statusText}. Response: ${errorText.substring(0, 300)}`);
       return [];
     }
-    
-    const hianimeFullEpisodeId = targetHianimeEpisode.episodeId;
-    console.log(`[Hianime] Using Hianime full episode ID: ${hianimeFullEpisodeId}`);
 
-    const allStreams = [];
-
-    for (const serverInfo of SERVERS_TO_TRY) {
-      const sourceData = await fetchEpisodeSources(hianimeFullEpisodeId, serverInfo.server, serverInfo.category);
-      if (sourceData && sourceData.playlistUrl) {
-        const parsedStreams = await parseM3U8(sourceData.playlistUrl, sourceData.headers, serverInfo.category, tmdbShowId, seasonNumber, episodeNumber);
-        if (parsedStreams.length > 0) {
-            console.log(`[Hianime] Found ${parsedStreams.length} stream(s) from ${serverInfo.server}/${serverInfo.category}`);
-            allStreams.push(...parsedStreams);
-        }
-      }
-    }
-
-    if (allStreams.length === 0) {
-      console.log('[Hianime] No HLS streams found after checking all servers.');
+    const streams = await response.json();
+    if (streams && Array.isArray(streams)) {
+        console.log(`[HianimeAddon] Successfully received ${streams.length} streams from Oracle VPS.`);
+        return streams;
     } else {
-      console.log(`[Hianime] Successfully fetched ${allStreams.length} HLS streams.`);
+        console.error('[HianimeAddon] Invalid response format from Oracle VPS. Expected a JSON array of streams.');
+        return [];
     }
-    return allStreams;
 
   } catch (error) {
-    console.error('[Hianime] --- ERROR ---');
-    console.error(error.message);
-    // console.error(error.stack); // Optionally log stack for more details
-    return []; // Return empty on error
+    console.error(`[HianimeAddon] Error in getHianimeStreams: ${error.message}`);
+    if (error.stack) console.error(error.stack.substring(0,500));
+    return [];
   }
 }
 
