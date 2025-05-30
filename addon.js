@@ -292,7 +292,11 @@ builder.defineStreamHandler(async (args) => {
 
     let xprimePromise;
     if (movieOrSeriesTitle && movieOrSeriesYear) {
-        xprimePromise = getXprimeStreams(movieOrSeriesTitle, movieOrSeriesYear, tmdbTypeFromId, seasonNum, episodeNum)
+        // Read the XPRIME_USE_PROXY environment variable
+        const useXprimeProxy = process.env.XPRIME_USE_PROXY !== 'false'; // Defaults to true if not set or not exactly 'false'
+        console.log(`[Xprime.tv] Proxy usage for Xprime.tv: ${useXprimeProxy}`);
+
+        xprimePromise = getXprimeStreams(movieOrSeriesTitle, movieOrSeriesYear, tmdbTypeFromId, seasonNum, episodeNum, useXprimeProxy)
             .then(streams => {
                 if (streams && streams.length > 0) {
                     console.log(`  Successfully fetched ${streams.length} streams from Xprime.tv.`);

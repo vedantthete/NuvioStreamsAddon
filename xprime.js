@@ -161,7 +161,7 @@ async function fetchWithRetryXprime(url, options, maxRetries = MAX_RETRIES_XPRIM
     else throw new Error(`[Xprime.tv] All fetch attempts failed for ${url} without a specific error captured.`); // Fallback error
 }
 
-async function getXprimeStreams(title, year, type, seasonNum, episodeNum) {
+async function getXprimeStreams(title, year, type, seasonNum, episodeNum, useProxy = true) {
     if (!title || !year) {
         console.log('[Xprime.tv] Skipping fetch: title or year is missing.');
         return [];
@@ -169,7 +169,7 @@ async function getXprimeStreams(title, year, type, seasonNum, episodeNum) {
 
     let rawXprimeStreams = [];
     try {
-        console.log(`[Xprime.tv] Attempting to fetch streams for '${title}' (${year}), Type: ${type}, S: ${seasonNum}, E: ${episodeNum}`);
+        console.log(`[Xprime.tv] Attempting to fetch streams for '${title}' (${year}), Type: ${type}, S: ${seasonNum}, E: ${episodeNum}, UseProxy: ${useProxy}`);
         const xprimeName = encodeURIComponent(title);
         let xprimeApiUrl;
 
@@ -189,11 +189,13 @@ async function getXprimeStreams(title, year, type, seasonNum, episodeNum) {
         }
 
         let fetchUrl = xprimeApiUrl;
-        if (XPRIME_PROXY_URL) {
+        if (useProxy && XPRIME_PROXY_URL) {
             console.log(`[Xprime.tv] Using proxy: ${XPRIME_PROXY_URL}`);
             // Ensure proxy URL doesn't have a trailing slash before appending query params
             const cleanedProxyUrl = XPRIME_PROXY_URL.replace(/\/$/, '');
             fetchUrl = `${cleanedProxyUrl}/?destination=${encodeURIComponent(xprimeApiUrl)}`;
+        } else {
+            console.log(`[Xprime.tv] Fetching directly (Proxy disabled or not configured).`);
         }
 
         console.log(`[Xprime.tv] Fetching from: ${fetchUrl}`);
