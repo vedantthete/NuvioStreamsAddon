@@ -1,6 +1,10 @@
 const { addonBuilder } = require('stremio-addon-sdk');
 require('dotenv').config(); // Ensure environment variables are loaded
 
+// NEW: Read environment variable for Cuevana
+const ENABLE_CUEVANA_PROVIDER = process.env.ENABLE_CUEVANA_PROVIDER !== 'false'; // Defaults to true if not set or not 'false'
+console.log(`[addon.js] Cuevana provider fetching enabled: ${ENABLE_CUEVANA_PROVIDER}`);
+
 const { getXprimeStreams } = require('./xprime.js'); // Import from xprime.js
 const { getHollymovieStreams } = require('./hollymoviehd.js'); // Import from hollymoviehd.js
 const { getSoaperTvStreams } = require('./soapertv.js'); // Import from soapertv.js
@@ -519,25 +523,37 @@ builder.defineStreamHandler(async (args) => {
         hollymoviePromise = Promise.resolve([]); 
     }
     
-    const cuevanaPromise = shouldFetch('cuevana') ? (async () => {
-        try {
-            let cuevanaStreams = [];
-            if (tmdbTypeFromId === 'movie') {
-                cuevanaStreams = await getCuevanaStreams(tmdbId, 'movie');
-            } else if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null) {
-                cuevanaStreams = await getCuevanaStreams(tmdbId, 'tv', seasonNum, episodeNum);
+    // Updated Cuevana Promise Logic
+    let cuevanaPromise = Promise.resolve([]); 
+    if (ENABLE_CUEVANA_PROVIDER && shouldFetch('cuevana')) {
+        console.log('[Cuevana] Attempting to fetch: Enabled by environment variable and user selection.');
+        cuevanaPromise = (async () => {
+            try {
+                let cuevanaStreams = [];
+                if (tmdbTypeFromId === 'movie') {
+                    cuevanaStreams = await getCuevanaStreams(tmdbId, 'movie');
+                } else if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null) {
+                    cuevanaStreams = await getCuevanaStreams(tmdbId, 'tv', seasonNum, episodeNum);
+                }
+                if (cuevanaStreams && cuevanaStreams.length > 0) {
+                    console.log(`  Successfully fetched ${cuevanaStreams.length} streams from Cuevana.`);
+                    return cuevanaStreams; 
+                }
+                console.log(`  No streams returned from Cuevana for TMDB ${tmdbTypeFromId}/${tmdbId}`);
+                return [];
+            } catch (err) {
+                console.error(`Error fetching Cuevana streams:`, err.message);
+                return [];
             }
-            if (cuevanaStreams && cuevanaStreams.length > 0) {
-                console.log(`  Successfully fetched ${cuevanaStreams.length} streams from Cuevana.`);
-                return cuevanaStreams; 
-            }
-            console.log(`  No streams returned from Cuevana for TMDB ${tmdbTypeFromId}/${tmdbId}`);
-            return [];
-        } catch (err) {
-            console.error(`Error fetching Cuevana streams:`, err.message);
-            return [];
+        })();
+    } else {
+        if (!ENABLE_CUEVANA_PROVIDER) {
+            console.log('[Cuevana] Skipping fetch: Disabled by environment variable (ENABLE_CUEVANA_PROVIDER=false).');
+        } else { // Implies shouldFetch('cuevana') was false
+            console.log('[Cuevana] Skipping fetch: Not selected by user.');
         }
-    })() : Promise.resolve([]);
+        // cuevanaPromise is already Promise.resolve([])
+    }
 
     let hianimePromise = Promise.resolve([]); 
     if (shouldFetch('hianime')) {
