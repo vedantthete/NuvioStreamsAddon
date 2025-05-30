@@ -1,4 +1,70 @@
 const https = require('https');
+const fs = require('fs').promises;
+const path = require('path');
+const crypto = require('crypto'); // For hashing cache keys if needed
+
+// --- Cache Configuration ---
+const CACHE_DIR = process.env.VERCEL_CACHE_DIR || (process.env.NODE_ENV === 'production' ? path.join('/tmp', '.hianime_cache') : path.join(__dirname, '.hianime_cache'));
+const CACHE_TTL_SLUG_MS = 7 * 24 * 60 * 60 * 1000; // 7 days for title-to-slug mapping
+const CACHE_TTL_EPISODE_LIST_MS = 1 * 24 * 60 * 60 * 1000; // 1 day for episode lists
+const CACHE_TTL_SOURCES_MS = 3 * 60 * 60 * 1000; // 3 hours for episode sources (M3U8 URLs)
+
+// Ensure cache directories exist
+const ensureCacheDir = async (dirPath) => {
+    try {
+        await fs.mkdir(dirPath, { recursive: true });
+    } catch (error) {
+        if (error.code !== 'EEXIST') {
+            console.warn(`[HianimeScraperVPS_Cache] Warning: Could not create cache directory ${dirPath}: ${error.message}`);
+        }
+    }
+};
+
+// Initialize cache directory on startup
+ensureCacheDir(CACHE_DIR).then(() => console.log(`[HianimeScraperVPS_Cache] Cache directory ensured at ${CACHE_DIR}`)).catch(console.error);
+
+const getFromCache = async (cacheKey) => {
+    if (process.env.DISABLE_HIANIME_CACHE === 'true') {
+        // console.log(`[HianimeScraperVPS_Cache] CACHE DISABLED: Skipping read for ${cacheKey}`);
+        return null;
+    }
+    const cachePath = path.join(CACHE_DIR, cacheKey);
+    try {
+        const data = await fs.readFile(cachePath, 'utf-8');
+        const item = JSON.parse(data);
+        if (item.expiry && Date.now() > item.expiry) {
+            // console.log(`[HianimeScraperVPS_Cache] CACHE EXPIRED for: ${cacheKey}`);
+            await fs.unlink(cachePath).catch(err => console.warn(`[HianimeScraperVPS_Cache] Failed to delete expired cache file ${cacheKey}: ${err.message}`));
+            return null;
+        }
+        // console.log(`[HianimeScraperVPS_Cache] CACHE HIT for: ${cacheKey}`);
+        return item.value;
+    } catch (error) {
+        if (error.code !== 'ENOENT') {
+            // console.warn(`[HianimeScraperVPS_Cache] CACHE READ ERROR for ${cacheKey}: ${error.message}`);
+        }
+        return null;
+    }
+};
+
+const saveToCache = async (cacheKey, value, ttlMs) => {
+    if (process.env.DISABLE_HIANIME_CACHE === 'true') {
+        // console.log(`[HianimeScraperVPS_Cache] CACHE DISABLED: Skipping write for ${cacheKey}`);
+        return;
+    }
+    const cachePath = path.join(CACHE_DIR, cacheKey);
+    const item = {
+        value,
+        expiry: ttlMs ? Date.now() + ttlMs : null // No expiry if ttlMs is not provided or is 0
+    };
+    try {
+        await fs.writeFile(cachePath, JSON.stringify(item), 'utf-8');
+        // console.log(`[HianimeScraperVPS_Cache] SAVED TO CACHE: ${cacheKey}`);
+    } catch (error) {
+        console.warn(`[HianimeScraperVPS_Cache] CACHE WRITE ERROR for ${cacheKey}: ${error.message}`);
+    }
+};
+// --- END Cache Configuration ---
 
 // --- Configuration & Constants ---
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36';
@@ -41,6 +107,14 @@ async function fetchJson(url, options = {}, attempt = 1) {
 }
 
 async function searchAnimeOnHianime(title) {
+  const safeTitle = title.toLowerCase().replace(/[^a-z0-9\-_]/g, '_').substring(0, 50);
+  const cacheKey = `hianime_slug_${safeTitle}.json`;
+  const cachedSlug = await getFromCache(cacheKey);
+  if (cachedSlug) {
+    console.log(`[HianimeScraperVPS_Cache] Using cached slug for title "${title}": ${cachedSlug}`);
+    return cachedSlug;
+  }
+
   const searchUrl = `https://hianime.pstream.org/api/v2/hianime/search?q=${encodeURIComponent(title)}`;
   console.log(`[HianimeScraperVPS] Searching for anime: "${title}" using ${searchUrl}`);
   const data = await fetchJson(searchUrl, { headers: API_HEADERS });
@@ -55,21 +129,39 @@ async function searchAnimeOnHianime(title) {
   } else if (!animeSlug) {
      throw new Error(`Anime "${title}" not found on Hianime after checking all results.`);
   }
-  console.log(`[HianimeScraperVPS] Found Hianime slug: ${animeSlug} for title "${title}"`);
+  
+  await saveToCache(cacheKey, animeSlug, CACHE_TTL_SLUG_MS);
+  console.log(`[HianimeScraperVPS] Found and cached Hianime slug: ${animeSlug} for title "${title}"`);
   return animeSlug;
 }
 
 async function fetchEpisodeListForAnimeFromHianime(animeSlug) {
+  const cacheKey = `hianime_episodes_${animeSlug}.json`;
+  const cachedList = await getFromCache(cacheKey);
+  if (cachedList) {
+    console.log(`[HianimeScraperVPS_Cache] Using cached episode list for slug ${animeSlug}`);
+    return cachedList;
+  }
+
   const url = `https://hianime.pstream.org/api/v2/hianime/anime/${animeSlug}/episodes`;
   const data = await fetchJson(url, { headers: API_HEADERS });
   if (!data.success || !data.data.episodes) {
     throw new Error('Failed to fetch Hianime episode list or no episodes in response.');
   }
+  await saveToCache(cacheKey, data.data.episodes, CACHE_TTL_EPISODE_LIST_MS);
   return data.data.episodes;
 }
 
 async function fetchEpisodeSources(hianimeFullEpisodeId, server, category) {
+  const cacheKey = `hianime_sources_${hianimeFullEpisodeId}_${server}_${category}.json`;
+  const cachedSourceData = await getFromCache(cacheKey);
+  if (cachedSourceData) {
+    console.log(`[HianimeScraperVPS_Cache] Using cached sources for ep ${hianimeFullEpisodeId}, ${server}/${category}`);
+    return cachedSourceData;
+  }
+
   const sourceApiUrl = `https://hianime.pstream.org/api/v2/hianime/episode/sources?animeEpisodeId=${hianimeFullEpisodeId}&server=${server}&category=${category}`;
+  console.log(`[HianimeScraperVPS] Fetching sources for ep ${hianimeFullEpisodeId}, ${server}/${category} from ${sourceApiUrl}`);
   try {
     const data = await fetchJson(sourceApiUrl, { headers: API_HEADERS });
     if (!data.success || !data.data.sources || data.data.sources.length === 0) {
@@ -85,10 +177,12 @@ async function fetchEpisodeSources(hianimeFullEpisodeId, server, category) {
         console.log(`[HianimeScraperVPS] Skipping non-netmagcdn.com link: ${masterPlaylistUrl}`);
         return null;
     }
-    return {
+    const sourceData = {
         playlistUrl: masterPlaylistUrl,
         headers: data.data.headers || {},
     };
+    await saveToCache(cacheKey, sourceData, CACHE_TTL_SOURCES_MS);
+    return sourceData;
   } catch (error) {
     console.error(`[HianimeScraperVPS] Error fetching sources for ${server}/${category}: ${error.message}`);
     return null;
@@ -127,19 +221,24 @@ async function parseM3U8(playlistUrl, m3u8Headers, category, tmdbShowId, seasonN
         if (i + 1 < lines.length && lines[i+1].trim() && !lines[i+1].startsWith('#')) {
           const mediaPlaylistPath = lines[i+1].trim();
           const mediaPlaylistUrl = new URL(mediaPlaylistPath, masterBaseUrl).href;
-          const streamId = `hianime-${tmdbShowId}-S${seasonNumber}E${episodeNumber}-${category}-${qualityLabel}-${streamCounter++}`;
-          streams.push({
-            id: streamId,
-            title: `Hianime ${category.toUpperCase()} - ${qualityLabel}`,
-            quality: qualityLabel,
-            language: category,
-            url: mediaPlaylistUrl,
-            type: 'hls',
-            provider: 'Hianime', // Important: Set provider for addon.js to correctly identify
-            behaviorHints: { notWebReady: true },
-            headers: fetchHeaders
-          });
-          variantsFoundInMaster++;
+          
+          if (qualityLabel === '360p') {
+            console.log(`[HianimeScraperVPS] Filtering out 360p stream for ${category} from ${playlistUrl}`);
+          } else {
+            const streamId = `hianime-${tmdbShowId}-S${seasonNumber}E${episodeNumber}-${category}-${qualityLabel}-${streamCounter++}`;
+            streams.push({
+              id: streamId,
+              title: `Hianime ${category.toUpperCase()} - ${qualityLabel}`,
+              quality: qualityLabel,
+              language: category,
+              url: mediaPlaylistUrl,
+              type: 'hls',
+              provider: 'Hianime', // Important: Set provider for addon.js to correctly identify
+              behaviorHints: { notWebReady: true },
+              headers: fetchHeaders
+            });
+            variantsFoundInMaster++;
+          }
         }
       }
     }

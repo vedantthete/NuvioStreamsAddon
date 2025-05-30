@@ -986,7 +986,7 @@
             line-height: 1.5;
             margin-bottom: 0.75rem;
         }
-        
+
         .cookie-config.collapsed {
             max-height: 0;
             opacity: 0;
@@ -1407,6 +1407,11 @@
             cursor: not-allowed;
         }
 
+        /* First add the CSS for the VidSrc icon */
+        .vidsrc-icon {
+            background: linear-gradient(135deg, #2196F3, #03A9F4); /* Blue gradient for VidSrc */
+        }
+
     </style>
 </head>
 <body>
@@ -1456,6 +1461,11 @@
                         <div class="provider-name">Hianime</div>
                         <span class="provider-detail">Anime (Dub/Sub)</span>
                     </div>
+                    <div class="provider-item">
+                        <div class="provider-icon vidsrc-icon">🎬</div>
+                        <div class="provider-name">VidSrc</div>
+                        <span class="provider-detail">Multi-Source</span>
+                    </div>
                 </div>
                 
                 <div class="provider-info-note">
@@ -1463,13 +1473,57 @@
                     <span>The flag emoji (e.g., 🇺🇸, 🇬🇧) next to ShowBox stream names indicates the server location, not the content's language.</span>
                 </div>
 
+                <!-- NEW: Provider Selection Section -->
+                <div class="provider-selection-container full-width" style="margin-top: 1.5rem;">
+                    <h2 style="font-size: 1rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--text); opacity: 0.9;">Customize Your Providers</h2>
+                    <p style="font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem; color: var(--text-light);">
+                        Select the providers you want to use. Unchecking providers can speed up results if you only use specific sources. If all are checked (default), the addon fetches from all.
+                    </p>
+                    <div class="provider-checkbox-list" style="background-color: rgba(15, 15, 15, 0.7); border-radius: 0.6rem; padding: 1rem; border: 1px solid var(--border);">
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.6rem;">
+                            <input type="checkbox" id="providerShowbox" name="providerSelect" value="showbox" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                            <label for="providerShowbox" style="font-size: 0.9rem;">ShowBox</label>
+                        </div>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.6rem;">
+                            <input type="checkbox" id="providerXprime" name="providerSelect" value="xprime" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                            <label for="providerXprime" style="font-size: 0.9rem;">Xprime.tv</label>
+                        </div>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.6rem;">
+                            <input type="checkbox" id="providerHollymoviehd" name="providerSelect" value="hollymoviehd" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                            <label for="providerHollymoviehd" style="font-size: 0.9rem;">HollyMovieHD</label>
+                        </div>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.6rem;">
+                            <input type="checkbox" id="providerSoapertv" name="providerSelect" value="soapertv" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                            <label for="providerSoapertv" style="font-size: 0.9rem;">Soaper TV</label>
+                        </div>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.6rem;">
+                            <input type="checkbox" id="providerCuevana" name="providerSelect" value="cuevana" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                            <label for="providerCuevana" style="font-size: 0.9rem;">Cuevana</label>
+                        </div>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.6rem;">
+                            <input type="checkbox" id="providerHianime" name="providerSelect" value="hianime" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                            <label for="providerHianime" style="font-size: 0.9rem;">Hianime</label>
+                        </div>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; margin-bottom: 0;"> <!-- Last item no margin-bottom -->
+                            <input type="checkbox" id="providerVidsrc" name="providerSelect" value="vidsrc" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                            <label for="providerVidsrc" style="font-size: 0.9rem;">VidSrc</label>
+                        </div>
+                         <div style="margin-top: 1rem;">
+                            <button id="selectAllProvidersBtn" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; background-color: rgba(0, 163, 255, 0.15); border: 1px solid rgba(0, 163, 255, 0.4); color: var(--primary); border-radius: 0.4rem; cursor: pointer; transition: all 0.2s ease; margin-right: 0.5rem;">Select All</button>
+                            <button id="deselectAllProvidersBtn" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; background-color: rgba(255, 58, 58, 0.15); border: 1px solid rgba(255, 58, 58, 0.4); color: #ff3a3a; border-radius: 0.4rem; cursor: pointer; transition: all 0.2s ease;">Deselect All</button>
+                            <button id="applyProvidersBtn" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; background-color: rgba(0, 193, 110, 0.15); border: 1px solid rgba(0, 193, 110, 0.4); color: var(--secondary); border-radius: 0.4rem; cursor: pointer; transition: all 0.2s ease; margin-left: 0.5rem; float: right;">Apply Selection</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- END NEW: Provider Selection Section -->
+
                 <div class="disclaimer">
                     <div class="disclaimer-header">
                         <span class="disclaimer-icon">ℹ️</span>
                         <span>Disclaimer</span>
                     </div>
                     <div class="disclaimer-content">
-                        <p>Nuvio Streams is a scraper-based addon that aggregates content from various providers. I do not own or host any of the content provided.</p>
+                    <p>Nuvio Streams is a scraper-based addon that aggregates content from various providers. I do not own or host any of the content provided.</p>
                         <p>Providers (including ShowBox) may become unavailable without notice. As an independent developer, I'll make every effort to maintain functionality, but sources may stop working unexpectedly.</p>
                     </div>
                 </div>
@@ -1491,7 +1545,7 @@
                         <div class="cookie-form">
                             <div class="cookie-input-container">
                                 <span id="cookieStatusIndicator" class="cookie-status-indicator"></span>
-                                <input type="text" id="cookieInput" placeholder="Enter your token" class="cookie-input">
+                            <input type="text" id="cookieInput" placeholder="Enter your token" class="cookie-input">
                                 <button id="checkCookieBtn" class="inline-check-btn">Check</button>
                             </div>
                             <!-- Server Region Selector -->
@@ -1509,8 +1563,8 @@
                                 <option value="SZ">China</option>
                             </select>
                             <div class="button-group">
-                                <button id="setCookieBtn" class="btn btn-secondary">Set Cookie</button>
-                                <button id="howToGetBtn" class="how-to-get-btn">How to Get</button>
+                            <button id="setCookieBtn" class="btn btn-secondary">Set Cookie</button>
+                            <button id="howToGetBtn" class="how-to-get-btn">How to Get</button>
                             </div>
                         </div>
                         
@@ -1725,6 +1779,161 @@
 
         // --- Add new elements for cookie status ---
         const cookieStatusIndicator = document.getElementById('cookieStatusIndicator');
+        const cookieConfigSection = document.getElementById('cookieConfigSection');
+        const cookieConfigContainer = document.querySelector('.cookie-config-container');
+
+        // --- NEW: Provider Selection Elements ---
+        const providerCheckboxes = document.querySelectorAll('input[name="providerSelect"]');
+        const selectAllProvidersBtn = document.getElementById('selectAllProvidersBtn');
+        const deselectAllProvidersBtn = document.getElementById('deselectAllProvidersBtn');
+        const applyProvidersBtn = document.getElementById('applyProvidersBtn');
+        const totalProviders = providerCheckboxes.length;
+        
+        // Get reference to ShowBox checkbox specifically
+        const showboxCheckbox = document.getElementById('providerShowbox');
+
+        // Function to update region selector enabled state based on cookie validity
+        function updateRegionSelectorState() {
+            const isCookieValid = cookieStatusIndicator.classList.contains('valid');
+            if (regionSelector) {
+                regionSelector.disabled = !isCookieValid;
+                if (!isCookieValid) {
+                    // If cookie is not valid, set region to a US option
+                    // Look for USA7 first, then any USA option
+                    const usa7Option = Array.from(regionSelector.options).find(opt => opt.value === 'USA7');
+                    if (usa7Option) {
+                        regionSelector.value = 'USA7';
+                    } else {
+                        // Find any USA option as fallback
+                        const usaOption = Array.from(regionSelector.options).find(opt => opt.value.startsWith('USA'));
+                        if (usaOption) {
+                            regionSelector.value = usaOption.value;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Function to update cookie section based on ShowBox selection
+        function updateCookieSectionState() {
+            const isShowBoxSelected = showboxCheckbox && showboxCheckbox.checked;
+            
+            if (cookieConfigContainer) {
+                if (!isShowBoxSelected) {
+                    // If ShowBox is not selected, disable and collapse cookie section
+                    cookieConfigContainer.style.opacity = '0.5';
+                    cookieConfigContainer.style.pointerEvents = 'none';
+                    cookieInput.disabled = true;
+                    regionSelector.disabled = true;
+                    setCookieBtn.disabled = true;
+                    checkCookieBtn.disabled = true;
+                    // Optionally collapse it
+                    if (cookieConfigSection && !cookieConfigSection.classList.contains('collapsed')) {
+                        cookieConfigSection.classList.add('collapsed');
+                        // Update toggle button if it exists
+                        const toggleBtn = document.getElementById('toggleCookieSection');
+                        if (toggleBtn) toggleBtn.classList.add('collapsed');
+                    }
+                } else {
+                    // If ShowBox is selected, enable cookie section
+                    cookieConfigContainer.style.opacity = '1';
+                    cookieConfigContainer.style.pointerEvents = 'auto';
+                    cookieInput.disabled = false;
+                    checkCookieBtn.disabled = cookieInput.value.trim() === '';
+                    // Only update region selector and set cookie button based on cookie validity
+                    updateRegionSelectorState();
+                }
+            }
+        }
+
+        // --- NEW: Function to apply provider selection without cookie ---
+        function applyProviderSelectionOnly() {
+            const selectedProviders = [];
+            providerCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedProviders.push(checkbox.value);
+                }
+            });
+
+            let providersQueryParam = '';
+            // Only add the providers query param if a SUBSET is selected (not all and not none)
+            if (selectedProviders.length > 0 && selectedProviders.length < totalProviders) {
+                providersQueryParam = `?providers=${selectedProviders.join(',')}`;
+            }
+
+            // Only include region if ShowBox is selected AND a valid cookie exists
+            let regionQueryParam = '';
+            if (showboxCheckbox && showboxCheckbox.checked && cookieStatusIndicator.classList.contains('valid')) {
+                const regionValue = regionSelector ? regionSelector.value : null;
+                if (regionValue) {
+                    // Use & or ? depending on whether we already have providers param
+                    const connector = providersQueryParam ? '&' : '?';
+                    regionQueryParam = `${connector}region=${regionValue}`;
+                }
+            }
+
+            // Create manifest URL with just provider selection (and region if ShowBox + valid cookie)
+            const customManifestURL = `${window.location.origin}/manifest.json${providersQueryParam}${regionQueryParam}`;
+            const customInstallUrl = `stremio://${customManifestURL.replace(/^https?:\/\//, '')}`;
+
+            // Update main buttons
+            currentManifestUrlToCopy = customManifestURL;
+            currentInstallUrl = customInstallUrl;
+            if (installLink) installLink.href = currentInstallUrl;
+
+            // Show confirmation toast
+            toast.textContent = selectedProviders.length === totalProviders 
+                ? "Using all providers! Main buttons updated." 
+                : `Using ${selectedProviders.length} providers! Main buttons updated.`;
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        }
+
+        // Add event listener for the Apply button
+        if (applyProvidersBtn) {
+            applyProvidersBtn.addEventListener('click', applyProviderSelectionOnly);
+        }
+
+        // --- Event listeners for provider selection ---
+        if (selectAllProvidersBtn) {
+            selectAllProvidersBtn.addEventListener('click', () => {
+                providerCheckboxes.forEach(checkbox => checkbox.checked = true);
+                updateCookieSectionState(); // Update cookie section state
+                toast.textContent = "All providers selected. Click 'Apply Selection' to update.";
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 3000);
+            });
+        }
+
+        if (deselectAllProvidersBtn) {
+            deselectAllProvidersBtn.addEventListener('click', () => {
+                providerCheckboxes.forEach(checkbox => checkbox.checked = false);
+                updateCookieSectionState(); // Update cookie section state
+                toast.textContent = "All providers deselected. Click 'Apply Selection' to update.";
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 3000);
+            });
+        }
+
+        // Add special handler for the ShowBox checkbox
+        if (showboxCheckbox) {
+            showboxCheckbox.addEventListener('change', () => {
+                updateCookieSectionState();
+                toast.textContent = `Provider selection changed. ${showboxCheckbox.checked ? 'ShowBox enabled, cookie section available.' : 'ShowBox disabled, cookie section disabled.'} Click "Apply Selection" to update manifest.`;
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 3000);
+            });
+        }
+
+        providerCheckboxes.forEach(checkbox => {
+            if (checkbox !== showboxCheckbox) { // Skip ShowBox as it has its own handler
+                checkbox.addEventListener('change', () => {
+                    toast.textContent = `Provider selection changed. Click "Apply Selection" to update manifest.`;
+                    toast.classList.add('show');
+                    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                });
+            }
+        });
 
         // --- Disable Set Cookie button initially ---
         if (setCookieBtn) {
@@ -1753,6 +1962,7 @@
                     setCookieBtn.style.cursor = 'not-allowed';
                 }
                 if (checkCookieBtn) checkCookieBtn.disabled = false; // Re-enable check button
+                updateRegionSelectorState(); // Update region selector state
                 return false;
             }
 
@@ -1788,6 +1998,7 @@
                     toast.textContent = "Not a valid token."; // Generic error message
                     toast.classList.add('show');
                     setTimeout(() => { toast.classList.remove('show'); }, 4000);
+                    updateRegionSelectorState(); // Update region selector state
                     return false;
                 }
 
@@ -1801,6 +2012,7 @@
                         setCookieBtn.style.cursor = 'pointer';
                     }
                     if (checkCookieBtn) checkCookieBtn.disabled = false; // Re-enable check button
+                    updateRegionSelectorState(); // Update region selector state
                     return true;
                 } else {
                     cookieStatusIndicator.className = 'cookie-status-indicator invalid';
@@ -1814,6 +2026,7 @@
                     toast.textContent = "Not a valid token."; 
                     toast.classList.add('show');
                     setTimeout(() => { toast.classList.remove('show'); }, 4000);
+                    updateRegionSelectorState(); // Update region selector state
                     return false;
                 }
             } catch (error) {
@@ -1828,6 +2041,7 @@
                 toast.textContent = "Not a valid token."; // Generic error message
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 4000);
+                updateRegionSelectorState(); // Update region selector state
                 return false;
             }
         }
@@ -1848,7 +2062,8 @@
                         setCookieBtn.style.opacity = '0.6';
                         setCookieBtn.style.cursor = 'not-allowed';
                     }
-                    if (checkCookieBtn) checkCookieBtn.disabled = true; 
+                    if (checkCookieBtn) checkCookieBtn.disabled = true;
+                    updateRegionSelectorState(); // Update region selector state
                 }
             });
 
@@ -1906,6 +2121,9 @@
 
                 // Update check button state (debounced)
                 debouncedUpdateCheckButtonState();
+                
+                // Update region selector state
+                updateRegionSelectorState();
             }); 
         }
 
@@ -1942,6 +2160,9 @@
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 3000);
             });
+            
+            // Initially set disabled state based on cookie existence
+            regionSelector.disabled = true; // Default to disabled
         }
 
         if (setCookieBtn) {
@@ -1949,6 +2170,20 @@
             setCookieBtn.addEventListener('click', async () => {
                 const cookieValue = cookieInput.value.trim();
                 const regionValue = regionSelector.value;
+                
+                // --- Get selected providers ---
+                const selectedProviders = [];
+                providerCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        selectedProviders.push(checkbox.value);
+                    }
+                });
+
+                let providersQueryParam = '';
+                // Only add the providers query param if a SUBSET is selected (not all and not none)
+                if (selectedProviders.length > 0 && selectedProviders.length < totalProviders) {
+                    providersQueryParam = `&providers=${selectedProviders.join(',')}`;
+                }
                 
                 // Perform server-side cookie validation before generating manifest
                 if (cookieValue) { // Only validate if there's a cookie
@@ -1959,18 +2194,12 @@
                            toast.classList.add('show');
                            setTimeout(() => { toast.classList.remove('show'); }, 4000);
                         }
-                        // Do not proceed to generate manifest if cookie is invalid
-                        // Optionally clear the personalized manifest section:
-                        // currentManifestUrlToCopy = defaultManifestUrl;
-                        // currentInstallUrl = defaultInstallProtocolUrl;
-                        // if (installLink) installLink.href = currentInstallUrl;
-                        // manifestResult.style.display = 'none';
                         return; 
                     }
                 } else { // No cookie entered
                      cookieStatusIndicator.className = 'cookie-status-indicator'; // Reset to neutral
                 }
-
+                
                 if (!cookieValue) {
                     toast.textContent = "Please enter your FebBox cookie.";
                     toast.classList.add('show');
@@ -1987,7 +2216,9 @@
 
                 // URL-encode the cookie to make it safe for a query parameter
                 const encodedCookie = encodeURIComponent(cookieValue);
-                const personalizedManifestURL = `${window.location.origin}/manifest.json?cookie=${encodedCookie}&region=${regionValue}`;
+                
+                // If we get here, we have a valid cookie and can include region in the manifest URL
+                const personalizedManifestURL = `${window.location.origin}/manifest.json?cookie=${encodedCookie}&region=${regionValue}${providersQueryParam}`;
                 const personalizedInstallUrl = `stremio://${personalizedManifestURL.replace(/^https?:\/\//, '')}`;
 
                 personalManifestUrlSpan.textContent = personalizedManifestURL;
@@ -1997,7 +2228,7 @@
                 currentManifestUrlToCopy = personalizedManifestURL;
                 currentInstallUrl = personalizedInstallUrl;
                 if (installLink) installLink.href = currentInstallUrl;
-                
+
                 toast.textContent = `Personalized manifest ready with ${regionValue} region! Main buttons updated.`;
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 3000);
@@ -2047,8 +2278,7 @@
 
         // Cookie section toggle functionality
         const toggleCookieBtn = document.getElementById('toggleCookieSection');
-        const cookieConfigSection = document.getElementById('cookieConfigSection');
-
+        
         if (toggleCookieBtn && cookieConfigSection) {
             // Set initial state to expanded (remove collapsed class if present from HTML)
             cookieConfigSection.classList.remove('collapsed');
@@ -2059,12 +2289,6 @@
             toggleCookieBtn.addEventListener('click', () => {
                 const isCollapsed = cookieConfigSection.classList.toggle('collapsed');
                 toggleCookieBtn.classList.toggle('collapsed', isCollapsed);
-                
-                // Update the toggle icon - handled by CSS :before content now
-                // const toggleIcon = toggleCookieBtn.querySelector('.toggle-icon');
-                // if (toggleIcon) {
-                //    toggleIcon.textContent = isCollapsed ? '▶' : '▼'; 
-                // }
             });
         }
 
@@ -2160,6 +2384,9 @@
         
         // Call this when the page loads
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize cookie section state based on ShowBox checkbox
+            updateCookieSectionState();
+            
             startRegionStatusCheck();
             // Initialize indicator if cookie is pre-filled
             if (cookieInput && cookieInput.value.trim()) {
@@ -2192,7 +2419,6 @@
                 lastSelectedRegion = regionSelector.value;
             });
         }
-
     </script>
 </body>
 </html> 

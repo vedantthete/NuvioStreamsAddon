@@ -6,6 +6,7 @@ const { getHollymovieStreams } = require('./hollymoviehd.js'); // Import from ho
 const { getSoaperTvStreams } = require('./soapertv.js'); // Import from soapertv.js
 const { getCuevanaStreams } = require('./cuevana.js'); // Import from cuevana.js
 const { getHianimeStreams } = require('./hianime.js'); // Import from hianime.js
+const { getStreamContent } = require('./vidsrcextractor.js'); // Import from vidsrcextractor.js
 
 // --- Constants ---
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
@@ -93,9 +94,92 @@ function fetchWithTimeout(promise, timeoutMs, providerName) {
   });
 }
 
+// Define function to get streams from VidSrc
+async function getVidSrcStreams(tmdbId, mediaType, seasonNum = null, episodeNum = null) {
+    try {
+        console.log(`[VidSrc] Attempting to fetch streams for TMDB ID: ${tmdbId}, Type: ${mediaType}, Season: ${seasonNum}, Episode: ${episodeNum}`);
+        
+        // Convert TMDB ID to IMDb ID for VidSrc
+        // This is a simplified example - you might need to implement proper TMDB to IMDb conversion
+        // For now, assuming we have access to the IMDb ID from the caller
+        let imdbId;
+        if (tmdbId.startsWith('tt')) {
+            imdbId = tmdbId; // Already an IMDb ID
+        } else {
+            // You would need to implement this conversion
+            // For example, using the convertTmdbToImdb function if available
+            // imdbId = await convertTmdbToImdb(tmdbId, mediaType);
+            console.log(`[VidSrc] TMDB ID conversion not implemented yet. Skipping...`);
+            return [];
+        }
+        
+        // Format the ID according to VidSrc requirements
+        let vidsrcId;
+        if (mediaType === 'movie') {
+            vidsrcId = imdbId;
+        } else if (mediaType === 'tv' && seasonNum !== null && episodeNum !== null) {
+            vidsrcId = `${imdbId}:${seasonNum}:${episodeNum}`;
+        } else {
+            console.log(`[VidSrc] Invalid parameters for TV show. Need season and episode numbers.`);
+            return [];
+        }
+        
+        // Call the getStreamContent function from vidsrcextractor.js
+        const typeForVidSrc = mediaType === 'movie' ? 'movie' : 'series';
+        const results = await getStreamContent(vidsrcId, typeForVidSrc);
+        
+        if (!results || results.length === 0) {
+            console.log(`[VidSrc] No streams found for ${vidsrcId}.`);
+            return [];
+        }
+        
+        // Process the results into the standard stream format
+        const streams = [];
+        
+        for (const result of results) {
+            if (result.streams && result.streams.length > 0) {
+                for (const streamInfo of result.streams) {
+                    const quality = streamInfo.quality.includes('x') 
+                        ? streamInfo.quality.split('x')[1] + 'p' // Convert "1280x720" to "720p"
+                        : streamInfo.quality; // Keep as is for kbps or unknown
+                    
+                    streams.push({
+                        title: result.name || "VidSrc Stream",
+                        url: streamInfo.url,
+                        quality: quality,
+                        provider: "VidSrc",
+                        // You can add additional metadata if needed
+                        size: "Unknown size",
+                        languages: ["Unknown"],
+                        subtitles: [],
+                        // If the referer is needed for playback
+                        headers: result.referer ? { referer: result.referer } : undefined
+                    });
+                }
+            }
+        }
+        
+        console.log(`[VidSrc] Successfully extracted ${streams.length} streams.`);
+        return streams;
+    } catch (error) {
+        console.error(`[VidSrc] Error fetching streams:`, error.message);
+        return [];
+    }
+}
+
 // Define stream handler for movies
 builder.defineStreamHandler(async (args) => {
-    const { type, id, config } = args;
+    const { type, id, config: sdkConfig } = args;
+
+    // Read config from global set by server.js middleware
+    const requestSpecificConfig = global.currentRequestConfig || {};
+    console.log(`[addon.js] Read from global.currentRequestConfig: ${JSON.stringify(requestSpecificConfig)}`);
+
+    console.log("--- FULL ARGS OBJECT (from SDK) ---");
+    console.log(JSON.stringify(args, null, 2));
+    console.log("--- SDK ARGS.CONFIG (still logging for comparison) ---");
+    console.log(JSON.stringify(sdkConfig, null, 2)); // Log the original sdkConfig
+    console.log("---------------------------------");
 
     // Helper to get flag emoji from URL hostname
     const getFlagEmojiForUrl = (url) => {
@@ -127,39 +211,43 @@ builder.defineStreamHandler(async (args) => {
         return ''; // Default to empty string
     };
 
-    const userScraperApiKey = (config && config.scraperApiKey) ? config.scraperApiKey : null;
+    const userScraperApiKey = (sdkConfig && sdkConfig.scraperApiKey) ? sdkConfig.scraperApiKey : null;
     
-    // Extract the region preference directly from config - don't use global variable
-    let userRegionPreference = null;
-    let userCookie = null;
-    
-    // Check config first
-    if (config && config.region) {
-        userRegionPreference = config.region;
-        console.log(`[addon.js] Using region from config: ${userRegionPreference}`);
-    } 
-    // Then check global - for backward compatibility
-    else if (global.currentRequestRegionPreference) {
-        userRegionPreference = global.currentRequestRegionPreference;
-        console.log(`[addon.js] Using region from URL parameter: ${userRegionPreference}`);
-    }
-
-    // Extract user cookie from global - for backward compatibility
-    if (global.currentRequestUserCookie) {
-        userCookie = global.currentRequestUserCookie;
-        console.log(`[addon.js] Using cookie from URL parameter (length: ${userCookie.length})`);
-    }
+    // Use values from requestSpecificConfig (derived from global)
+    let userRegionPreference = requestSpecificConfig.region || null;
+    let userCookie = requestSpecificConfig.cookie || null; // Already decoded by server.js
     
     // Log the request information in a more detailed way
     console.log(`Stream request for Stremio type: '${type}', id: '${id}'`);
-    console.log(`Request config: ${JSON.stringify({
+    
+    let selectedProvidersArray = null;
+    if (requestSpecificConfig.providers) {
+        selectedProvidersArray = requestSpecificConfig.providers.split(',').map(p => p.trim().toLowerCase());
+    }
+    
+    console.log(`Effective request details: ${JSON.stringify({
         hasScraperApiKey: !!userScraperApiKey,
         regionPreference: userRegionPreference || 'none',
-        hasCookie: !!userCookie
+        hasCookie: !!userCookie,
+        selectedProviders: selectedProvidersArray ? selectedProvidersArray.join(', ') : 'all'
     })}`);
     
-    if (!userRegionPreference) {
-        console.log(`[addon.js] No region preference found in request config or URL parameters`);
+    if (userRegionPreference) {
+        console.log(`[addon.js] Using region from global config: ${userRegionPreference}`);
+    } else {
+        console.log(`[addon.js] No region preference found in global config.`);
+    }
+    
+    if (userCookie) {
+        console.log(`[addon.js] Using cookie from global config (length: ${userCookie.length})`);
+    } else {
+        console.log(`[addon.js] No cookie found in global config.`);
+    }
+
+    if (selectedProvidersArray) {
+        console.log(`[addon.js] Using providers from global config: ${selectedProvidersArray.join(', ')}`);
+    } else {
+        console.log('[addon.js] No specific providers selected by user in global config, will attempt all.');
     }
 
     if (userScraperApiKey) {
@@ -275,8 +363,14 @@ builder.defineStreamHandler(async (args) => {
     // --- Parallel Fetching of Streams ---
     console.log('Initiating parallel fetch for ShowBox, Xprime.tv, HollyMovieHD, and Soaper TV streams (in that priority order after ShowBox)...');
 
+    // --- Provider Selection Logic ---
+    const shouldFetch = (providerId) => {
+        if (!selectedProvidersArray) return true; // If no selection, fetch all
+        return selectedProvidersArray.includes(providerId.toLowerCase());
+    };
+
     // Pass userRegionPreference and userCookie directly to getStreamsFromTmdbId
-    const showBoxPromise = getStreamsFromTmdbId(tmdbTypeFromId, tmdbId, seasonNum, episodeNum, userRegionPreference, userCookie)
+    const showBoxPromise = shouldFetch('showbox') ? getStreamsFromTmdbId(tmdbTypeFromId, tmdbId, seasonNum, episodeNum, userRegionPreference, userCookie)
         .then(streams => {
             if (streams && streams.length > 0) {
                 console.log(`  Successfully fetched ${streams.length} streams from ShowBox.`);
@@ -288,10 +382,10 @@ builder.defineStreamHandler(async (args) => {
         .catch(err => {
             console.error(`Error fetching ShowBox streams:`, err.message);
             return []; // Return empty array on error
-        });
+        }) : Promise.resolve([]);
 
     let xprimePromise;
-    if (movieOrSeriesTitle && movieOrSeriesYear) {
+    if (shouldFetch('xprime') && movieOrSeriesTitle && movieOrSeriesYear) {
         // Read the XPRIME_USE_PROXY environment variable
         const useXprimeProxy = process.env.XPRIME_USE_PROXY !== 'false'; // Defaults to true if not set or not exactly 'false'
         console.log(`[Xprime.tv] Proxy usage for Xprime.tv: ${useXprimeProxy}`);
@@ -309,11 +403,12 @@ builder.defineStreamHandler(async (args) => {
                 return [];
             });
     } else {
-        console.log('[Xprime.tv] Skipping fetch in addon.js because title or year is missing or not applicable.');
+        if (shouldFetch('xprime')) console.log('[Xprime.tv] Skipping fetch in addon.js because title or year is missing or not applicable.');
+        else console.log('[Xprime.tv] Skipping fetch: Not selected by user.');
         xprimePromise = Promise.resolve([]); 
     }
 
-    const soaperTvPromise = getSoaperTvStreams(tmdbId, tmdbTypeFromId, seasonNum, episodeNum)
+    const soaperTvPromise = shouldFetch('soapertv') ? getSoaperTvStreams(tmdbId, tmdbTypeFromId, seasonNum, episodeNum)
         .then(streams => {
             if (streams && streams.length > 0) {
                 console.log(`  Successfully fetched ${streams.length} streams from Soaper TV.`);
@@ -325,37 +420,37 @@ builder.defineStreamHandler(async (args) => {
         .catch(err => {
             console.error(`Error fetching Soaper TV streams:`, err.message);
             return []; 
-        });
+        }) : Promise.resolve([]);
         
     let hollymoviePromise;
-    if (type === 'movie' || type === 'series' && episodeNum) { // Ensure it's a movie or a specific episode
+    if (shouldFetch('hollymoviehd') && (type === 'movie' || type === 'series' && episodeNum)) { // Ensure it's a movie or a specific episode
         const isMovie = type === 'movie';
-        // Fetch VRF token first (assuming getVRFToken is defined elsewhere and returns a promise)
         try {
-            const cachedVRF = await getVRFToken(); // Assuming this function exists and is async
-            if (cachedVRF) {
-                 console.log('[HollyMovieHD] Using VRF token for request:', cachedVRF);
-                 const originalHollymoviePromise = getHollymovieStreams(tmdbId, seasonNum, episodeNum, isMovie, cachedVRF);
-                 hollymoviePromise = fetchWithTimeout(
-                    originalHollymoviePromise, 
-                    15000, // 15-second timeout
-                    'HollyMovieHD'
-                 ).then(result => result.streams); // Extract just the streams array for Promise.all
-            } else {
-                console.log('[HollyMovieHD] VRF token not available, skipping HollyMovieHD.');
-                hollymoviePromise = Promise.resolve([]); // Resolve with empty if no VRF token
-            }
-        } catch (vrfError) {
-            console.error('[HollyMovieHD] Error fetching VRF token:', vrfError.message);
-            hollymoviePromise = Promise.resolve([]); // Resolve with empty if VRF token fetch fails
+            const mediaTypeForHolly = isMovie ? 'movie' : 'tv';
+            console.log(`[HollyMovieHD] Preparing to call getHollymovieStreams with TMDB ID: ${tmdbId}, Type: ${mediaTypeForHolly}, S: ${seasonNum || ''}, E: ${episodeNum || ''}`);
+            const originalHollymoviePromise = getHollymovieStreams(tmdbId, mediaTypeForHolly, seasonNum, episodeNum);
+            hollymoviePromise = fetchWithTimeout(
+                originalHollymoviePromise, 
+                15000, // 15-second timeout
+                'HollyMovieHD'
+            ).then(result => {
+                if (result && result.streams) {
+                    return result.streams.map(s => ({ ...s, provider: 'HollyMovieHD' }));
+                }
+                console.warn('[HollyMovieHD] fetchWithTimeout did not return expected streams array. Result:', result);
+                return [];
+            });
+        } catch (hollyError) { 
+            console.error('[HollyMovieHD] Error setting up HollyMovieHD promise:', hollyError.message);
+            hollymoviePromise = Promise.resolve([]); 
         }
     } else {
-        console.log('[HollyMovieHD] Skipping fetch because content is not a movie or a specific episode.');
-        hollymoviePromise = Promise.resolve([]); // Not a movie or specific episode, resolve empty
+        if (shouldFetch('hollymoviehd')) console.log('[HollyMovieHD] Skipping fetch because content is not a movie or a specific episode.');
+        else console.log('[HollyMovieHD] Skipping fetch: Not selected by user.');
+        hollymoviePromise = Promise.resolve([]); 
     }
     
-    // Add Cuevana promise to fetch in parallel with others
-    const cuevanaPromise = (async () => {
+    const cuevanaPromise = shouldFetch('cuevana') ? (async () => {
         try {
             let cuevanaStreams = [];
             if (tmdbTypeFromId === 'movie') {
@@ -363,10 +458,9 @@ builder.defineStreamHandler(async (args) => {
             } else if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null) {
                 cuevanaStreams = await getCuevanaStreams(tmdbId, 'tv', seasonNum, episodeNum);
             }
-            
             if (cuevanaStreams && cuevanaStreams.length > 0) {
                 console.log(`  Successfully fetched ${cuevanaStreams.length} streams from Cuevana.`);
-                return cuevanaStreams; // Provider already set in the cuevana.js module
+                return cuevanaStreams; 
             }
             console.log(`  No streams returned from Cuevana for TMDB ${tmdbTypeFromId}/${tmdbId}`);
             return [];
@@ -374,68 +468,103 @@ builder.defineStreamHandler(async (args) => {
             console.error(`Error fetching Cuevana streams:`, err.message);
             return [];
         }
-    })();
+    })() : Promise.resolve([]);
 
-    // Add Hianime promise - MODIFIED: only for TV shows that are Animation
-    let hianimePromise = Promise.resolve([]); // Default to empty if not applicable
-    if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null && isAnimation) {
-        console.log('[Hianime] Initiating fetch because content is a TV show episode AND identified as Animation.');
-        hianimePromise = getHianimeStreams(tmdbId, seasonNum, episodeNum)
-            .then(streams => {
-                if (streams && streams.length > 0) {
-                    console.log(`  Successfully fetched ${streams.length} streams from Hianime.`);
-                    return streams; // Provider and title are set in hianime.js
-                }
-                console.log(`  No streams returned from Hianime for TMDB ${tmdbTypeFromId}/${tmdbId} S${seasonNum}E${episodeNum}`);
-                return [];
-            })
-            .catch(err => {
-                console.error(`Error fetching Hianime streams:`, err.message);
-                return [];
-            });
-    } else {
-        if (tmdbTypeFromId === 'tv' && !isAnimation) {
-            console.log('[Hianime] Skipping fetch: content is a TV show episode BUT NOT identified as Animation.');
-        } else if (tmdbTypeFromId !== 'tv'){
-            console.log('[Hianime] Skipping fetch: content is not a TV show.');
+    let hianimePromise = Promise.resolve([]); 
+    if (shouldFetch('hianime')) {
+        if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null && isAnimation) {
+            console.log('[Hianime] Initiating fetch because content is a TV show episode AND identified as Animation.');
+            hianimePromise = getHianimeStreams(tmdbId, seasonNum, episodeNum)
+                .then(streams => {
+                    if (streams && streams.length > 0) {
+                        console.log(`  Successfully fetched ${streams.length} streams from Hianime.`);
+                        return streams; 
+                    }
+                    console.log(`  No streams returned from Hianime for TMDB ${tmdbTypeFromId}/${tmdbId} S${seasonNum}E${episodeNum}`);
+                    return [];
+                })
+                .catch(err => {
+                    console.error(`Error fetching Hianime streams:`, err.message);
+                    return [];
+                });
         } else {
-            console.log('[Hianime] Skipping fetch: missing season/episode or not identified as Animation TV show.');
+            if (tmdbTypeFromId === 'tv' && !isAnimation) {
+                console.log('[Hianime] Skipping fetch: content is a TV show episode BUT NOT identified as Animation.');
+            } else if (tmdbTypeFromId !== 'tv'){
+                console.log('[Hianime] Skipping fetch: content is not a TV show.');
+            } else {
+                console.log('[Hianime] Skipping fetch: missing season/episode or not identified as Animation TV show.');
+            }
         }
+    } else {
+        console.log('[Hianime] Skipping fetch: Not selected by user.');
     }
     
+    // Add VidSrc promise
+    const vidSrcPromise = shouldFetch('vidsrc') ? (async () => {
+        try {
+            // For VidSrc, we can directly use the getVidSrcStreams function
+            const vidSrcStreams = await getVidSrcStreams(
+                id.startsWith('tt') ? id.split(':')[0] : tmdbId, 
+                tmdbTypeFromId, 
+                seasonNum, 
+                episodeNum
+            );
+            
+            if (vidSrcStreams && vidSrcStreams.length > 0) {
+                console.log(`  Successfully fetched ${vidSrcStreams.length} streams from VidSrc.`);
+                return vidSrcStreams.map(stream => ({ ...stream, provider: 'VidSrc' }));
+            }
+            console.log(`  No streams returned from VidSrc for ID ${id}`);
+            return [];
+        } catch (err) {
+            console.error(`Error fetching VidSrc streams:`, err.message);
+            return [];
+        }
+    })() : Promise.resolve([]);
+    
     try {
-        const results = await Promise.all([showBoxPromise, xprimePromise, hollymoviePromise, soaperTvPromise, cuevanaPromise, hianimePromise].filter(Boolean)); // Filter out undefined promises if any
-        const showBoxResults = results[0] || [];
-        const xprimeResults = results[1] || [];
-        const hollymovieResults = results[2] || [];
-        const soaperTvResults = results[3] || [];
-        const cuevanaResults = results[4] || [];
-        const hianimeResults = results[5] || []; // New Hianime results
+        // Ensure all promises are actual Promise objects before Promise.all
+        const promisesToAwait = [
+            showBoxPromise,
+            xprimePromise,
+            hollymoviePromise,
+            soaperTvPromise,
+            cuevanaPromise,
+            hianimePromise,
+            vidSrcPromise
+        ].map(p => p || Promise.resolve([])); // Ensure every element is a promise
 
-        // Group streams by provider first
-        const streamsByProvider = {
-            'ShowBox': showBoxResults,
-            'Xprime.tv': xprimeResults,
-            'HollyMovieHD': hollymovieResults,
-            'Soaper TV': soaperTvResults,
-            'Cuevana': cuevanaResults,
-            'Hianime': hianimeResults // Add Hianime to the group
-        };
+        const results = await Promise.all(promisesToAwait); 
         
+        const streamsByProvider = {};
+
+        // Correctly assign results based on whether they were fetched
+        if (shouldFetch('showbox')) streamsByProvider['ShowBox'] = results[promisesToAwait.indexOf(showBoxPromise)] || [];
+        if (shouldFetch('xprime')) streamsByProvider['Xprime.tv'] = results[promisesToAwait.indexOf(xprimePromise)] || [];
+        if (shouldFetch('hollymoviehd')) streamsByProvider['HollyMovieHD'] = results[promisesToAwait.indexOf(hollymoviePromise)] || [];
+        if (shouldFetch('soapertv')) streamsByProvider['Soaper TV'] = results[promisesToAwait.indexOf(soaperTvPromise)] || [];
+        if (shouldFetch('cuevana')) streamsByProvider['Cuevana'] = results[promisesToAwait.indexOf(cuevanaPromise)] || [];
+        if (shouldFetch('hianime')) streamsByProvider['Hianime'] = results[promisesToAwait.indexOf(hianimePromise)] || [];
+        if (shouldFetch('vidsrc')) streamsByProvider['VidSrc'] = results[promisesToAwait.indexOf(vidSrcPromise)] || [];
+
         // Sort each provider's streams by quality
         Object.keys(streamsByProvider).forEach(provider => {
-            streamsByProvider[provider] = sortStreamsByQuality(streamsByProvider[provider]);
+            if (streamsByProvider[provider]) { // Check if provider key exists
+                 streamsByProvider[provider] = sortStreamsByQuality(streamsByProvider[provider]);
+            } else {
+                streamsByProvider[provider] = []; // Ensure it's an empty array if not fetched
+            }
         });
         
-        // Combine streams in the preferred provider order
-        combinedRawStreams = [
-            ...streamsByProvider['ShowBox'],
-            ...streamsByProvider['Xprime.tv'],
-            ...streamsByProvider['HollyMovieHD'],
-            ...streamsByProvider['Soaper TV'],
-            ...streamsByProvider['Cuevana'],
-            ...streamsByProvider['Hianime'] // Add Hianime to the combined list
-        ];
+        // Combine streams in the preferred provider order, only including fetched ones
+        combinedRawStreams = [];
+        const providerOrder = ['ShowBox', 'Xprime.tv', 'HollyMovieHD', 'Soaper TV', 'Cuevana', 'Hianime', 'VidSrc'];
+        providerOrder.forEach(providerKey => {
+            if (streamsByProvider[providerKey] && streamsByProvider[providerKey].length > 0) {
+                combinedRawStreams.push(...streamsByProvider[providerKey]);
+            }
+        });
         
         console.log(`Total raw streams after provider-ordered fetch: ${combinedRawStreams.length}`);
 

@@ -30,37 +30,55 @@ app.use(express.static(path.join(__dirname, 'views')));
 // Serve static files from the 'static' directory (for videos, images, etc.)
 app.use('/static', express.static(path.join(__dirname, 'static')));
 
-// Add route to render the main configuration page also at /configure
 app.get('/configure', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
-// Middleware to extract user-supplied cookie from request query
+// Middleware to extract user-supplied cookie, region, and providers from request query
+// and make them available globally for the current request.
 app.use(async (req, res, next) => {
-    const userSuppliedCookie = req.query.cookie; 
+    const userSuppliedCookie = req.query.cookie;
     const userRegionPreference = req.query.region;
+    const userProvidersQuery = req.query.providers; // Get providers
+
+    // Initialize global for THIS request
+    global.currentRequestConfig = {}; 
 
     if (userSuppliedCookie) {
-        // Decode the cookie value from the URL query parameter
         try {
-            req.userCookie = decodeURIComponent(userSuppliedCookie);
-            console.log(`Using user-supplied cookie from URL. Length: ${req.userCookie.length} characters`);
-        } catch (e) {
-            console.error('Error decoding cookie from URL parameter:', e.message);
-            // Potentially handle error, like ignoring malformed cookie
+            global.currentRequestConfig.cookie = decodeURIComponent(userSuppliedCookie);
+        } catch (e) { 
+            console.error(`[server.js] Error decoding cookie from query: ${userSuppliedCookie}`, e.message);
         }
     }
-
-    // Store region preference if provided
     if (userRegionPreference) {
-        req.userRegion = userRegionPreference.toUpperCase();
-        console.log(`Received region preference from URL: ${req.userRegion}`);
+        global.currentRequestConfig.region = userRegionPreference.toUpperCase();
+    }
+    if (userProvidersQuery) {
+        global.currentRequestConfig.providers = userProvidersQuery; // Store as string, addon.js will parse
+    }
+
+    if (Object.keys(global.currentRequestConfig).length > 0) {
+        console.log(`[server.js] Set global.currentRequestConfig for this request: ${JSON.stringify(global.currentRequestConfig)}`);
+    } else {
+        // console.log('[server.js] No cookie, region, or providers in query for global.currentRequestConfig.');
     }
 
     // Log the full URL for debugging (mask the cookie value)
     const fullUrl = req.originalUrl || req.url;
     const maskedUrl = fullUrl.replace(/cookie=([^&]+)/, 'cookie=[MASKED]');
-    console.log(`Incoming request: ${maskedUrl}`);
+    // Only log for relevant paths to reduce noise
+    if (req.path.startsWith('/manifest') || req.path.startsWith('/stream')) {
+        console.log(`Incoming request: ${maskedUrl}`);
+    }
+
+    // Crucial: Clean up after the request is done
+    res.on('finish', () => {
+        if (global.currentRequestConfig) { // Check if it exists before deleting
+            // console.log('[server.js] Clearing global.currentRequestConfig after request.');
+            delete global.currentRequestConfig;
+        }
+    });
 
     next();
 });
@@ -242,34 +260,110 @@ app.get('/manifest.json', async (req, res) => {
     try {
         const userCookie = req.query.cookie; // Get cookie directly from query
         const userRegion = req.query.region; // Get region directly from query
-        const originalManifest = addonInterface.manifest;
-        let personalizedManifest = { ...originalManifest };
+        const userProviders = req.query.providers; // Get providers directly from query
 
-        if (userCookie || userRegion) {
-            // Create a simple identifier from the cookie and/or region for the manifest ID and Name
-            let identifierSource = userCookie || '';
-            if (userRegion) identifierSource += `-${userRegion}`;
-            const cookieIdentifier = crypto.createHash('md5').update(identifierSource).digest('hex').substring(0, 8);
-            
-            personalizedManifest.id = `${originalManifest.id}_${cookieIdentifier}`;
-            
-            let personalizationText = [];
-            if (userCookie) personalizationText.push("Cookie");
-            if (userRegion) personalizationText.push(`${userRegion} Region`);
-            
-            personalizedManifest.name = `${originalManifest.name} (${personalizationText.join(', ')})`;
-            personalizedManifest.description = `${originalManifest.description} (Using your ${personalizationText.join(' and ')} for enhanced access.)`;
-            
-            // Add flags to indicate personalization
-            if (userCookie) personalizedManifest.isCookiePersonalized = true;
-            if (userRegion) personalizedManifest.isRegionPersonalized = true;
+        const originalManifest = addonInterface.manifest;
+        let personalizedManifest = JSON.parse(JSON.stringify(originalManifest)); // Deep clone
+
+        // Ensure the config array exists
+        if (!personalizedManifest.config) {
+            personalizedManifest.config = [];
         }
-        
+
+        // Flag to check if any personalization was applied for ID/Name generation
+        let isPersonalized = false;
+
+        if (userCookie) {
+            isPersonalized = true;
+            // Add/Update cookie in the manifest config (though Stremio SDK doesn't use this directly for stream handler args)
+            // It's more for informational purposes if a user inspects the installed addon's manifest JSON
+            const cookieConfigIndex = personalizedManifest.config.findIndex(c => c.key === 'userFebBoxCookie');
+            const cookieValueForManifest = userCookie.startsWith('ui=') ? userCookie : `ui=${userCookie}`;
+            if (cookieConfigIndex > -1) {
+                personalizedManifest.config[cookieConfigIndex].default = cookieValueForManifest;
+            } else {
+                personalizedManifest.config.push({
+                    key: 'userFebBoxCookie',
+                    type: 'text',
+                    title: 'Your FebBox Cookie (auto-set)',
+                    default: cookieValueForManifest,
+                    required: false,
+                    hidden: true // Hide this from user settings as it's set via URL
+                });
+            }
+            console.log(`[Manifest] Cookie will be part of the config.`);
+        }
+
+        if (userRegion) {
+            isPersonalized = true;
+            // Add/Update region in the manifest config
+            const regionConfigIndex = personalizedManifest.config.findIndex(c => c.key === 'userRegionChoice');
+            if (regionConfigIndex > -1) {
+                personalizedManifest.config[regionConfigIndex].default = userRegion;
+            } else {
+                personalizedManifest.config.push({
+                    key: 'userRegionChoice',
+                    type: 'text',
+                    title: 'Selected Region (auto-set)',
+                    default: userRegion,
+                    required: false,
+                    hidden: true // Hide this from user settings
+                });
+            }
+            personalizedManifest.name = `${originalManifest.name} (${userRegion} Region)`;
+            personalizedManifest.description = `${originalManifest.description} (Using your ${userRegion} Region for enhanced access.)`;
+            personalizedManifest.isRegionPersonalized = true; // Custom flag for UI
+            console.log(`[Manifest] Region ${userRegion} applied to name, description, and config.`);
+        }
+
+        if (userProviders) {
+            isPersonalized = true;
+            const providersString = userProviders.split(',').map(p => p.trim().toLowerCase()).join(',');
+            const providersConfigIndex = personalizedManifest.config.findIndex(c => c.key === 'selectedProviders');
+            if (providersConfigIndex > -1) {
+                personalizedManifest.config[providersConfigIndex].default = providersString;
+            } else {
+                personalizedManifest.config.push({
+                    key: 'selectedProviders',
+                    type: 'text',
+                    title: 'Selected Providers (auto-set)',
+                    default: providersString,
+                    required: false,
+                    // hidden: true // Temporarily remove hidden to observe in Stremio settings
+                });
+            }
+            // Optionally, modify name/description for providers as well
+            // For now, just ensuring it's in the config for addon.js to use
+            console.log(`[Manifest] Providers (${providersString}) will be part of the config.`);
+
+            // Add a test dynamic field
+            personalizedManifest.config.push({
+                key: 'testDynamicField',
+                type: 'text',
+                title: 'Test Dynamic Field',
+                default: 'dynamicValue123',
+                required: false
+            });
+            console.log('[Manifest] Added testDynamicField to config.');
+        }
+
+        if (isPersonalized) {
+            // Create a simple identifier from the combination for the manifest ID
+            let identifierSource = (userCookie || 'nocookie') + '-' + (userRegion || 'noregion') + '-' + (userProviders || 'allproviders');
+            const hash = crypto.createHash('sha1').update(identifierSource).digest('hex').substring(0, 8);
+            personalizedManifest.id = `${originalManifest.id}_${hash}`;
+            console.log(`[Manifest] Personalized manifest ID set to: ${personalizedManifest.id}`);
+        } else {
+            // If no personalization, explicitly ensure no custom flags are set from previous logic
+            delete personalizedManifest.isRegionPersonalized;
+        }
+
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(personalizedManifest, null, 2));
+        res.send(JSON.stringify(personalizedManifest));
+
     } catch (error) {
-        console.error('Error serving manifest:', error.message, error.stack);
-        res.status(500).json({ error: 'Failed to generate manifest', details: error.message });
+        console.error('Error serving personalized manifest:', error);
+        res.status(500).send('Error generating manifest');
     }
 });
 
