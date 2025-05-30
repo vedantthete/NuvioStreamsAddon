@@ -1467,11 +1467,6 @@
                         <span class="provider-detail">Auto Quality</span>
                     </div>
                     <div class="provider-item">
-                        <div class="provider-icon cuevana-icon">🎭</div>
-                        <div class="provider-name">Cuevana</div>
-                        <span class="provider-detail">Multiple Qualities</span>
-                    </div>
-                    <div class="provider-item">
                         <div class="provider-icon hianime-icon">🍥</div>
                         <div class="provider-name">Hianime</div>
                         <span class="provider-detail">Anime (Dub/Sub)</span>
@@ -1524,7 +1519,7 @@
                                 <input type="checkbox" id="providerHollymoviehd" name="providerSelect" value="hollymoviehd" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
                                 <label for="providerHollymoviehd" style="font-size: 0.9rem;">HollyMovieHD</label>
                             </div>
-                            <select id="qualityHollymoviehd" name="providerQuality" data-provider="hollymoviehd" class="provider-sort-select">
+                            <select id="qualityHollymoviehd" name="providerQuality" data-provider="hollymoviehd" class="provider-sort-select" disabled>
                                 <option value="all" selected>All Qualities</option>
                                 <option value="480p">480p & Up</option>
                                 <option value="720p">720p & Up</option>
@@ -1536,19 +1531,7 @@
                                 <input type="checkbox" id="providerSoapertv" name="providerSelect" value="soapertv" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
                                 <label for="providerSoapertv" style="font-size: 0.9rem;">Soaper TV</label>
                             </div>
-                            <select id="qualitySoapertv" name="providerQuality" data-provider="soapertv" class="provider-sort-select">
-                                <option value="all" selected>All Qualities</option>
-                                <option value="480p">480p & Up</option>
-                                <option value="720p">720p & Up</option>
-                                <option value="1080p">1080p & Up</option>
-                            </select>
-                        </div>
-                        <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
-                            <div style="display: flex; align-items: center;">
-                                <input type="checkbox" id="providerCuevana" name="providerSelect" value="cuevana" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
-                                <label for="providerCuevana" style="font-size: 0.9rem;">Cuevana</label>
-                            </div>
-                            <select id="qualityCuevana" name="providerQuality" data-provider="cuevana" class="provider-sort-select">
+                            <select id="qualitySoapertv" name="providerQuality" data-provider="soapertv" class="provider-sort-select" disabled>
                                 <option value="all" selected>All Qualities</option>
                                 <option value="480p">480p & Up</option>
                                 <option value="720p">720p & Up</option>
@@ -2550,7 +2533,11 @@
                 const providerValue = checkbox.value;
                 const qualityDropdown = document.getElementById(`quality${providerValue.charAt(0).toUpperCase() + providerValue.slice(1)}`); // Changed ID pattern
                 if (qualityDropdown) {
-                    qualityDropdown.disabled = !checkbox.checked;
+                    if (providerValue === 'soapertv' || providerValue === 'hollymoviehd') {
+                        qualityDropdown.disabled = true; // Always keep these disabled
+                    } else {
+                        qualityDropdown.disabled = !checkbox.checked;
+                    }
                 }
             });
         }
