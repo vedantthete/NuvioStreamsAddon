@@ -140,18 +140,19 @@ async function fetchEpisodeSources(hianimeFullEpisodeId, server, category) {
 
 async function parseM3U8(playlistUrl, m3u8Headers, category) {
   const streams = [];
-  // Fetching the M3U8 content directly from CDN (no proxy for this specific fetch)
-  // const proxiedPlaylistUrl = `${PROXY_URL_BASE}${encodeURIComponent(playlistUrl)}`; // No longer using this for the fetch
+  // Use proxy for fetching the M3U8 content from CDN
+  const proxiedPlaylistUrl = `${PROXY_URL_BASE}${encodeURIComponent(playlistUrl)}`;
   try {
-    console.log(`Parsing M3U8 from direct CDN URL: ${playlistUrl}...`);
-    // Note: m3u8Headers are for the CDN, and we are calling it directly now.
-    const response = await fetch(playlistUrl, { // Changed from proxiedPlaylistUrl to playlistUrl
-        headers: m3u8Headers, // Use the full m3u8Headers as we are calling CDN directly
+    console.log(`Parsing M3U8 from proxied URL: ${proxiedPlaylistUrl} (Original: ${playlistUrl})...`);
+    // Note: m3u8Headers are for the CDN, the proxy might or might not forward them.
+    // The proxy itself might require specific headers, but PROXY_URL_BASE doesn't indicate that.
+    const response = await fetch(proxiedPlaylistUrl, { 
+        headers: { 'User-Agent': USER_AGENT }, // Send basic UA to proxy, it handles destination headers.
         agent: new https.Agent({ rejectUnauthorized: false })
     });
     if (!response.ok) {
       const errorText = await response.text().catch(() => 'Could not read error text');
-      console.warn(`Hianime Script: Failed to fetch M3U8 content from ${playlistUrl} - ${response.status}. Response: ${errorText}`);
+      console.warn(`Hianime Script: Failed to fetch M3U8 content from ${proxiedPlaylistUrl} - ${response.status}. Response: ${errorText}`);
       return [];
     }
     const masterPlaylistText = await response.text();
@@ -201,7 +202,7 @@ async function parseM3U8(playlistUrl, m3u8Headers, category) {
       });
     }
   } catch (err) {
-    console.error(`Hianime Script: Error parsing M3U8 ${playlistUrl}:`, err.message);
+    console.error(`Hianime Script: Error parsing M3U8 ${proxiedPlaylistUrl}:`, err.message);
   }
   return streams;
 }
@@ -304,4 +305,4 @@ async function main() {
   }
 }
 
-main(); 
+main();
