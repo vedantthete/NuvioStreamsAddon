@@ -179,7 +179,8 @@ builder.defineStreamHandler(async (args) => {
     let tmdbTypeFromId;
     let seasonNum = null;
     let episodeNum = null;
-    let initialTitleFromConversion = null; // To store title from IMDb conversion
+    let initialTitleFromConversion = null;
+    let isAnimation = false; // <--- New flag to track if content is animation
     
     const idParts = id.split(':');
     
@@ -253,11 +254,20 @@ builder.defineStreamHandler(async (args) => {
                 movieOrSeriesYear = tmdbDetails.first_air_date ? tmdbDetails.first_air_date.substring(0, 4) : null;
             }
             console.log(`  Fetched/Confirmed TMDB details: Title='${movieOrSeriesTitle}', Year='${movieOrSeriesYear}'`);
+
+            // Check for Animation genre
+            if (tmdbDetails.genres && Array.isArray(tmdbDetails.genres)) {
+                if (tmdbDetails.genres.some(genre => genre.name.toLowerCase() === 'animation')) {
+                    isAnimation = true;
+                    console.log('  Content identified as Animation based on TMDB genres.');
+                }
+            }
+
         } catch (e) {
             console.error(`  Error fetching details from TMDB: ${e.message}`);
         }
     } else if (tmdbId && !TMDB_API_KEY) {
-        console.warn("TMDB_API_KEY is not configured. Cannot fetch full title/year. Xprime.tv functionality might be limited or fail.");
+        console.warn("TMDB_API_KEY is not configured. Cannot fetch full title/year/genres. Hianime and Xprime.tv functionality might be limited or fail.");
     }
     
     let combinedRawStreams = [];
@@ -362,9 +372,10 @@ builder.defineStreamHandler(async (args) => {
         }
     })();
 
-    // Add Hianime promise - only for TV shows
+    // Add Hianime promise - MODIFIED: only for TV shows that are Animation
     let hianimePromise = Promise.resolve([]); // Default to empty if not applicable
-    if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null) {
+    if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null && isAnimation) {
+        console.log('[Hianime] Initiating fetch because content is a TV show episode AND identified as Animation.');
         hianimePromise = getHianimeStreams(tmdbId, seasonNum, episodeNum)
             .then(streams => {
                 if (streams && streams.length > 0) {
@@ -379,11 +390,17 @@ builder.defineStreamHandler(async (args) => {
                 return [];
             });
     } else {
-        console.log('[Hianime] Skipping fetch because content is not a TV show episode.');
+        if (tmdbTypeFromId === 'tv' && !isAnimation) {
+            console.log('[Hianime] Skipping fetch: content is a TV show episode BUT NOT identified as Animation.');
+        } else if (tmdbTypeFromId !== 'tv'){
+            console.log('[Hianime] Skipping fetch: content is not a TV show.');
+        } else {
+            console.log('[Hianime] Skipping fetch: missing season/episode or not identified as Animation TV show.');
+        }
     }
     
     try {
-        const results = await Promise.all([showBoxPromise, xprimePromise, hollymoviePromise, soaperTvPromise, cuevanaPromise, hianimePromise]);
+        const results = await Promise.all([showBoxPromise, xprimePromise, hollymoviePromise, soaperTvPromise, cuevanaPromise, hianimePromise].filter(Boolean)); // Filter out undefined promises if any
         const showBoxResults = results[0] || [];
         const xprimeResults = results[1] || [];
         const hollymovieResults = results[2] || [];
