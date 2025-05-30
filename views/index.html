@@ -1262,6 +1262,21 @@
             margin-bottom: 1.5rem;
         }
 
+        /* Style for provider sort dropdowns */
+        .provider-sort-select {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.5rem;
+            border-radius: 0.4rem;
+            border: 1px solid var(--border);
+            background-color: rgba(20, 20, 20, 0.9);
+            color: var(--text);
+            margin-left: auto; /* Pushes it to the right */
+        }
+        .provider-sort-select:disabled {
+            opacity: 0.5;
+            background-color: rgba(30,30,30,0.7);
+        }
+
         @media (max-width: 700px) {
             .two-column-layout {
                 grid-template-columns: 1fr;
@@ -1480,33 +1495,89 @@
                         Select the providers you want to use. Unchecking providers can speed up results if you only use specific sources. If all are checked (default), the addon fetches from all.
                     </p>
                     <div class="provider-checkbox-list" style="background-color: rgba(15, 15, 15, 0.7); border-radius: 0.6rem; padding: 1rem; border: 1px solid var(--border);">
-                        <div class="provider-checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.6rem;">
-                            <input type="checkbox" id="providerShowbox" name="providerSelect" value="showbox" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
-                            <label for="providerShowbox" style="font-size: 0.9rem;">ShowBox</label>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
+                            <div style="display: flex; align-items: center;">
+                                <input type="checkbox" id="providerShowbox" name="providerSelect" value="showbox" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                                <label for="providerShowbox" style="font-size: 0.9rem;">ShowBox</label>
+                            </div>
+                            <select id="qualityShowbox" name="providerQuality" data-provider="showbox" class="provider-sort-select">
+                                <option value="all" selected>All Qualities</option>
+                                <option value="480p">480p & Up</option>
+                                <option value="720p">720p & Up</option>
+                                <option value="1080p">1080p & Up</option>
+                            </select>
                         </div>
-                        <div class="provider-checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.6rem;">
-                            <input type="checkbox" id="providerXprime" name="providerSelect" value="xprime" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
-                            <label for="providerXprime" style="font-size: 0.9rem;">Xprime.tv</label>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
+                            <div style="display: flex; align-items: center;">
+                                <input type="checkbox" id="providerXprime" name="providerSelect" value="xprime" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                                <label for="providerXprime" style="font-size: 0.9rem;">Xprime.tv</label>
+                            </div>
+                            <select id="qualityXprime" name="providerQuality" data-provider="xprime" class="provider-sort-select">
+                                <option value="all" selected>All Qualities</option>
+                                <option value="480p">480p & Up</option>
+                                <option value="720p">720p & Up</option>
+                                <option value="1080p">1080p & Up</option>
+                            </select>
                         </div>
-                        <div class="provider-checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.6rem;">
-                            <input type="checkbox" id="providerHollymoviehd" name="providerSelect" value="hollymoviehd" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
-                            <label for="providerHollymoviehd" style="font-size: 0.9rem;">HollyMovieHD</label>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
+                            <div style="display: flex; align-items: center;">
+                                <input type="checkbox" id="providerHollymoviehd" name="providerSelect" value="hollymoviehd" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                                <label for="providerHollymoviehd" style="font-size: 0.9rem;">HollyMovieHD</label>
+                            </div>
+                            <select id="qualityHollymoviehd" name="providerQuality" data-provider="hollymoviehd" class="provider-sort-select">
+                                <option value="all" selected>All Qualities</option>
+                                <option value="480p">480p & Up</option>
+                                <option value="720p">720p & Up</option>
+                                <option value="1080p">1080p & Up</option>
+                            </select>
                         </div>
-                        <div class="provider-checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.6rem;">
-                            <input type="checkbox" id="providerSoapertv" name="providerSelect" value="soapertv" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
-                            <label for="providerSoapertv" style="font-size: 0.9rem;">Soaper TV</label>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
+                            <div style="display: flex; align-items: center;">
+                                <input type="checkbox" id="providerSoapertv" name="providerSelect" value="soapertv" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                                <label for="providerSoapertv" style="font-size: 0.9rem;">Soaper TV</label>
+                            </div>
+                            <select id="qualitySoapertv" name="providerQuality" data-provider="soapertv" class="provider-sort-select">
+                                <option value="all" selected>All Qualities</option>
+                                <option value="480p">480p & Up</option>
+                                <option value="720p">720p & Up</option>
+                                <option value="1080p">1080p & Up</option>
+                            </select>
                         </div>
-                        <div class="provider-checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.6rem;">
-                            <input type="checkbox" id="providerCuevana" name="providerSelect" value="cuevana" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
-                            <label for="providerCuevana" style="font-size: 0.9rem;">Cuevana</label>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
+                            <div style="display: flex; align-items: center;">
+                                <input type="checkbox" id="providerCuevana" name="providerSelect" value="cuevana" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                                <label for="providerCuevana" style="font-size: 0.9rem;">Cuevana</label>
+                            </div>
+                            <select id="qualityCuevana" name="providerQuality" data-provider="cuevana" class="provider-sort-select">
+                                <option value="all" selected>All Qualities</option>
+                                <option value="480p">480p & Up</option>
+                                <option value="720p">720p & Up</option>
+                                <option value="1080p">1080p & Up</option>
+                            </select>
                         </div>
-                        <div class="provider-checkbox-item" style="display: flex; align-items: center; margin-bottom: 0.6rem;">
-                            <input type="checkbox" id="providerHianime" name="providerSelect" value="hianime" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
-                            <label for="providerHianime" style="font-size: 0.9rem;">Hianime</label>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
+                            <div style="display: flex; align-items: center;">
+                                <input type="checkbox" id="providerHianime" name="providerSelect" value="hianime" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                                <label for="providerHianime" style="font-size: 0.9rem;">Hianime</label>
+                            </div>
+                            <select id="qualityHianime" name="providerQuality" data-provider="hianime" class="provider-sort-select">
+                                <option value="all" selected>All Qualities</option>
+                                <option value="480p">480p & Up</option>
+                                <option value="720p">720p & Up</option>
+                                <option value="1080p">1080p & Up</option>
+                            </select>
                         </div>
-                        <div class="provider-checkbox-item" style="display: flex; align-items: center; margin-bottom: 0;"> <!-- Last item no margin-bottom -->
-                            <input type="checkbox" id="providerVidsrc" name="providerSelect" value="vidsrc" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
-                            <label for="providerVidsrc" style="font-size: 0.9rem;">VidSrc</label>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0;">
+                            <div style="display: flex; align-items: center;">
+                                <input type="checkbox" id="providerVidsrc" name="providerSelect" value="vidsrc" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                                <label for="providerVidsrc" style="font-size: 0.9rem;">VidSrc</label>
+                            </div>
+                             <select id="qualityVidsrc" name="providerQuality" data-provider="vidsrc" class="provider-sort-select">
+                                <option value="all" selected>All Qualities</option>
+                                <option value="480p">480p & Up</option>
+                                <option value="720p">720p & Up</option>
+                                <option value="1080p">1080p & Up</option>
+                            </select>
                         </div>
                          <div style="margin-top: 1rem;">
                             <button id="selectAllProvidersBtn" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; background-color: rgba(0, 163, 255, 0.15); border: 1px solid rgba(0, 163, 255, 0.4); color: var(--primary); border-radius: 0.4rem; cursor: pointer; transition: all 0.2s ease; margin-right: 0.5rem;">Select All</button>
@@ -1788,6 +1859,7 @@
         const deselectAllProvidersBtn = document.getElementById('deselectAllProvidersBtn');
         const applyProvidersBtn = document.getElementById('applyProvidersBtn');
         const totalProviders = providerCheckboxes.length;
+        const providerQualitySelects = document.querySelectorAll('select[name="providerQuality"]'); // Changed from providerSortSelects
         
         // Get reference to ShowBox checkbox specifically
         const showboxCheckbox = document.getElementById('providerShowbox');
@@ -1842,6 +1914,8 @@
                     checkCookieBtn.disabled = cookieInput.value.trim() === '';
                     // Only update region selector and set cookie button based on cookie validity
                     updateRegionSelectorState();
+                     // Also ensure quality dropdowns are updated based on provider selections
+                    updateQualityDropdownStates(); // Changed call
                 }
             }
         }
@@ -1855,25 +1929,45 @@
                 }
             });
 
-            let providersQueryParam = '';
-            // Only add the providers query param if a SUBSET is selected (not all and not none)
+            // Collect quality preferences
+            const qualityPreferences = {};
+            let hasQualityPreferences = false;
+            providerCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const providerValue = checkbox.value;
+                    const qualityDropdown = document.getElementById(`quality${providerValue.charAt(0).toUpperCase() + providerValue.slice(1)}`); // Changed ID pattern
+                    if (qualityDropdown && qualityDropdown.value !== 'all') { // Only include if not default
+                        qualityPreferences[providerValue] = qualityDropdown.value;
+                        hasQualityPreferences = true;
+                    }
+                }
+            });
+
+            const queryParams = [];
+
+            // Only add the providers query param if a SUBSET is selected
             if (selectedProviders.length > 0 && selectedProviders.length < totalProviders) {
-                providersQueryParam = `?providers=${selectedProviders.join(',')}`;
+                queryParams.push(`providers=${selectedProviders.join(',')}`);
+            }
+
+            if (hasQualityPreferences) {
+                queryParams.push(`min_qualities=${encodeURIComponent(JSON.stringify(qualityPreferences))}`);
             }
 
             // Only include region if ShowBox is selected AND a valid cookie exists
-            let regionQueryParam = '';
             if (showboxCheckbox && showboxCheckbox.checked && cookieStatusIndicator.classList.contains('valid')) {
                 const regionValue = regionSelector ? regionSelector.value : null;
                 if (regionValue) {
-                    // Use & or ? depending on whether we already have providers param
-                    const connector = providersQueryParam ? '&' : '?';
-                    regionQueryParam = `${connector}region=${regionValue}`;
+                    queryParams.push(`region=${regionValue}`);
                 }
             }
 
-            // Create manifest URL with just provider selection (and region if ShowBox + valid cookie)
-            const customManifestURL = `${window.location.origin}/manifest.json${providersQueryParam}${regionQueryParam}`;
+            let finalQueryString = '';
+            if (queryParams.length > 0) {
+                finalQueryString = '?' + queryParams.join('&');
+            }
+
+            const customManifestURL = `${window.location.origin}/manifest.json${finalQueryString}`;
             const customInstallUrl = `stremio://${customManifestURL.replace(/^https?:\/\//, '')}`;
 
             // Update main buttons
@@ -1899,6 +1993,7 @@
             selectAllProvidersBtn.addEventListener('click', () => {
                 providerCheckboxes.forEach(checkbox => checkbox.checked = true);
                 updateCookieSectionState(); // Update cookie section state
+                updateQualityDropdownStates(); // Changed call
                 toast.textContent = "All providers selected. Click 'Apply Selection' to update.";
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 3000);
@@ -1909,6 +2004,7 @@
             deselectAllProvidersBtn.addEventListener('click', () => {
                 providerCheckboxes.forEach(checkbox => checkbox.checked = false);
                 updateCookieSectionState(); // Update cookie section state
+                updateQualityDropdownStates(); // Changed call
                 toast.textContent = "All providers deselected. Click 'Apply Selection' to update.";
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 3000);
@@ -1919,6 +2015,7 @@
         if (showboxCheckbox) {
             showboxCheckbox.addEventListener('change', () => {
                 updateCookieSectionState();
+                updateQualityDropdownStates(); // Changed call
                 toast.textContent = `Provider selection changed. ${showboxCheckbox.checked ? 'ShowBox enabled, cookie section available.' : 'ShowBox disabled, cookie section disabled.'} Click "Apply Selection" to update manifest.`;
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 3000);
@@ -1928,7 +2025,8 @@
         providerCheckboxes.forEach(checkbox => {
             if (checkbox !== showboxCheckbox) { // Skip ShowBox as it has its own handler
                 checkbox.addEventListener('change', () => {
-                    toast.textContent = `Provider selection changed. Click "Apply Selection" to update manifest.`;
+                    updateQualityDropdownStates(); // Changed call
+                    toast.textContent = `Provider selection changed. Click \"Apply Selection\" to update manifest.`;
                     toast.classList.add('show');
                     setTimeout(() => { toast.classList.remove('show'); }, 3000);
                 });
@@ -2179,12 +2277,20 @@
                     }
                 });
 
-                let providersQueryParam = '';
-                // Only add the providers query param if a SUBSET is selected (not all and not none)
-                if (selectedProviders.length > 0 && selectedProviders.length < totalProviders) {
-                    providersQueryParam = `&providers=${selectedProviders.join(',')}`;
-                }
-                
+                // --- Get quality preferences ---
+                const qualityPreferences = {};
+                let hasQualityPreferences = false; // Define it here for this scope
+                providerCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const providerValue = checkbox.value;
+                        const qualityDropdown = document.getElementById(`quality${providerValue.charAt(0).toUpperCase() + providerValue.slice(1)}`);
+                        if (qualityDropdown && qualityDropdown.value !== 'all') {
+                            qualityPreferences[providerValue] = qualityDropdown.value;
+                            hasQualityPreferences = true;
+                        }
+                    }
+                });
+
                 // Perform server-side cookie validation before generating manifest
                 if (cookieValue) { // Only validate if there's a cookie
                     const isValid = await checkCookieOnServer(cookieValue);
@@ -2217,8 +2323,25 @@
                 // URL-encode the cookie to make it safe for a query parameter
                 const encodedCookie = encodeURIComponent(cookieValue);
                 
-                // If we get here, we have a valid cookie and can include region in the manifest URL
-                const personalizedManifestURL = `${window.location.origin}/manifest.json?cookie=${encodedCookie}&region=${regionValue}${providersQueryParam}`;
+                // Construct query parameters
+                const queryParams = [];
+                queryParams.push(`cookie=${encodedCookie}`);
+                queryParams.push(`region=${regionValue}`);
+
+                if (selectedProviders.length > 0 && selectedProviders.length < totalProviders) {
+                    queryParams.push(`providers=${selectedProviders.join(',')}`);
+                }
+                
+                if (hasQualityPreferences) {
+                    queryParams.push(`min_qualities=${encodeURIComponent(JSON.stringify(qualityPreferences))}`);
+                }
+
+                let finalQueryString = '';
+                if (queryParams.length > 0) {
+                    finalQueryString = '?' + queryParams.join('&');
+                }
+
+                const personalizedManifestURL = `${window.location.origin}/manifest.json${finalQueryString}`;
                 const personalizedInstallUrl = `stremio://${personalizedManifestURL.replace(/^https?:\/\//, '')}`;
 
                 personalManifestUrlSpan.textContent = personalizedManifestURL;
@@ -2386,6 +2509,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize cookie section state based on ShowBox checkbox
             updateCookieSectionState();
+            updateQualityDropdownStates(); // Changed call, and initialize quality dropdown states
             
             startRegionStatusCheck();
             // Initialize indicator if cookie is pre-filled
@@ -2417,6 +2541,17 @@
         if (regionSelector) {
             regionSelector.addEventListener('change', () => {
                 lastSelectedRegion = regionSelector.value;
+            });
+        }
+
+        // Function to enable/disable quality dropdowns based on provider checkbox state
+        function updateQualityDropdownStates() { // Renamed from updateSortDropdownStates
+            providerCheckboxes.forEach(checkbox => {
+                const providerValue = checkbox.value;
+                const qualityDropdown = document.getElementById(`quality${providerValue.charAt(0).toUpperCase() + providerValue.slice(1)}`); // Changed ID pattern
+                if (qualityDropdown) {
+                    qualityDropdown.disabled = !checkbox.checked;
+                }
             });
         }
     </script>

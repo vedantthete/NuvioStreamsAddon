@@ -34,6 +34,67 @@ const manifest = require('./manifest.json');
 const builder = new addonBuilder(manifest);
 
 // --- Helper Functions ---
+
+// NEW: Helper function to parse quality strings into numerical values
+function parseQuality(qualityString) {
+    if (!qualityString || typeof qualityString !== 'string') {
+        return 0; // Default for unknown or undefined
+    }
+    const q = qualityString.toLowerCase();
+
+    if (q.includes('4k') || q.includes('2160')) return 2160;
+    if (q.includes('1440')) return 1440;
+    if (q.includes('1080')) return 1080;
+    if (q.includes('720')) return 720;
+    if (q.includes('576')) return 576;
+    if (q.includes('480')) return 480;
+    if (q.includes('360')) return 360;
+    if (q.includes('240')) return 240;
+
+    // Handle kbps by extracting number, e.g., "2500k" -> 2.5 (lower than p values)
+    const kbpsMatch = q.match(/(\d+)k/);
+    if (kbpsMatch && kbpsMatch[1]) {
+        return parseInt(kbpsMatch[1], 10) / 1000; // Convert to a small number relative to pixel heights
+    }
+
+    if (q.includes('hd')) return 720; // Generic HD
+    if (q.includes('sd')) return 480; // Generic SD
+
+    // Lower quality tags
+    if (q.includes('cam') || q.includes('camrip')) return 100;
+    if (q.includes('ts') || q.includes('telesync')) return 200;
+    if (q.includes('scr') || q.includes('screener')) return 300;
+    if (q.includes('dvdscr')) return 350;
+    if (q.includes('r5') || q.includes('r6')) return 400;
+
+
+    return 0; // Default for anything else not recognized
+}
+
+// NEW: Helper function to filter streams by minimum quality
+function filterStreamsByQuality(streams, minQualitySetting, providerName) {
+    if (!minQualitySetting || minQualitySetting.toLowerCase() === 'all') {
+        console.log(`[${providerName}] No minimum quality filter applied (set to 'all' or not specified).`);
+        return streams; // No filtering needed
+    }
+
+    const minQualityNumeric = parseQuality(minQualitySetting);
+    if (minQualityNumeric === 0 && minQualitySetting.toLowerCase() !== 'all') { // Check if minQualitySetting was something unrecognized
+        console.warn(`[${providerName}] Minimum quality setting '${minQualitySetting}' was not recognized. No filtering applied.`);
+        return streams;
+    }
+
+    console.log(`[${providerName}] Filtering streams. Minimum quality: ${minQualitySetting} (Parsed as: ${minQualityNumeric}). Original count: ${streams.length}`);
+
+    const filteredStreams = streams.filter(stream => {
+        const streamQualityNumeric = parseQuality(stream.quality);
+        return streamQualityNumeric >= minQualityNumeric;
+    });
+
+    console.log(`[${providerName}] Filtered count: ${filteredStreams.length}`);
+    return filteredStreams;
+}
+
 async function fetchWithRetry(url, options, maxRetries = MAX_RETRIES) {
     const { default: fetchFunction } = await import('node-fetch'); // Dynamically import
     let lastError;
@@ -174,6 +235,14 @@ builder.defineStreamHandler(async (args) => {
     // Read config from global set by server.js middleware
     const requestSpecificConfig = global.currentRequestConfig || {};
     console.log(`[addon.js] Read from global.currentRequestConfig: ${JSON.stringify(requestSpecificConfig)}`);
+
+    // NEW: Get minimum quality preferences
+    const minQualitiesPreferences = requestSpecificConfig.minQualities || {};
+    if (Object.keys(minQualitiesPreferences).length > 0) {
+        console.log(`[addon.js] Minimum quality preferences: ${JSON.stringify(minQualitiesPreferences)}`);
+    } else {
+        console.log(`[addon.js] No minimum quality preferences set by user.`);
+    }
 
     console.log("--- FULL ARGS OBJECT (from SDK) ---");
     console.log(JSON.stringify(args, null, 2));
@@ -540,23 +609,50 @@ builder.defineStreamHandler(async (args) => {
         const streamsByProvider = {};
 
         // Correctly assign results based on whether they were fetched
-        if (shouldFetch('showbox')) streamsByProvider['ShowBox'] = results[promisesToAwait.indexOf(showBoxPromise)] || [];
-        if (shouldFetch('xprime')) streamsByProvider['Xprime.tv'] = results[promisesToAwait.indexOf(xprimePromise)] || [];
-        if (shouldFetch('hollymoviehd')) streamsByProvider['HollyMovieHD'] = results[promisesToAwait.indexOf(hollymoviePromise)] || [];
-        if (shouldFetch('soapertv')) streamsByProvider['Soaper TV'] = results[promisesToAwait.indexOf(soaperTvPromise)] || [];
-        if (shouldFetch('cuevana')) streamsByProvider['Cuevana'] = results[promisesToAwait.indexOf(cuevanaPromise)] || [];
-        if (shouldFetch('hianime')) streamsByProvider['Hianime'] = results[promisesToAwait.indexOf(hianimePromise)] || [];
-        if (shouldFetch('vidsrc')) streamsByProvider['VidSrc'] = results[promisesToAwait.indexOf(vidSrcPromise)] || [];
+        // AND apply quality filtering before sorting
+        if (shouldFetch('showbox')) {
+            let fetchedStreams = results[promisesToAwait.indexOf(showBoxPromise)] || [];
+            const minQuality = minQualitiesPreferences.showbox;
+            fetchedStreams = filterStreamsByQuality(fetchedStreams, minQuality, 'ShowBox');
+            streamsByProvider['ShowBox'] = sortStreamsByQuality(fetchedStreams);
+        }
+        if (shouldFetch('xprime')) {
+            let fetchedStreams = results[promisesToAwait.indexOf(xprimePromise)] || [];
+            const minQuality = minQualitiesPreferences.xprime;
+            fetchedStreams = filterStreamsByQuality(fetchedStreams, minQuality, 'Xprime.tv');
+            streamsByProvider['Xprime.tv'] = sortStreamsByQuality(fetchedStreams);
+        }
+        if (shouldFetch('hollymoviehd')) {
+            let fetchedStreams = results[promisesToAwait.indexOf(hollymoviePromise)] || [];
+            const minQuality = minQualitiesPreferences.hollymoviehd;
+            fetchedStreams = filterStreamsByQuality(fetchedStreams, minQuality, 'HollyMovieHD');
+            streamsByProvider['HollyMovieHD'] = sortStreamsByQuality(fetchedStreams);
+        }
+        if (shouldFetch('soapertv')) {
+            let fetchedStreams = results[promisesToAwait.indexOf(soaperTvPromise)] || [];
+            const minQuality = minQualitiesPreferences.soapertv;
+            fetchedStreams = filterStreamsByQuality(fetchedStreams, minQuality, 'Soaper TV');
+            streamsByProvider['Soaper TV'] = sortStreamsByQuality(fetchedStreams);
+        }
+        if (shouldFetch('cuevana')) {
+            let fetchedStreams = results[promisesToAwait.indexOf(cuevanaPromise)] || [];
+            const minQuality = minQualitiesPreferences.cuevana;
+            fetchedStreams = filterStreamsByQuality(fetchedStreams, minQuality, 'Cuevana');
+            streamsByProvider['Cuevana'] = sortStreamsByQuality(fetchedStreams);
+        }
+        if (shouldFetch('hianime')) {
+            let fetchedStreams = results[promisesToAwait.indexOf(hianimePromise)] || [];
+            const minQuality = minQualitiesPreferences.hianime;
+            fetchedStreams = filterStreamsByQuality(fetchedStreams, minQuality, 'Hianime');
+            streamsByProvider['Hianime'] = sortStreamsByQuality(fetchedStreams);
+        }
+        if (shouldFetch('vidsrc')) {
+            let fetchedStreams = results[promisesToAwait.indexOf(vidSrcPromise)] || [];
+            const minQuality = minQualitiesPreferences.vidsrc;
+            fetchedStreams = filterStreamsByQuality(fetchedStreams, minQuality, 'VidSrc');
+            streamsByProvider['VidSrc'] = sortStreamsByQuality(fetchedStreams);
+        }
 
-        // Sort each provider's streams by quality
-        Object.keys(streamsByProvider).forEach(provider => {
-            if (streamsByProvider[provider]) { // Check if provider key exists
-                 streamsByProvider[provider] = sortStreamsByQuality(streamsByProvider[provider]);
-            } else {
-                streamsByProvider[provider] = []; // Ensure it's an empty array if not fetched
-            }
-        });
-        
         // Combine streams in the preferred provider order, only including fetched ones
         combinedRawStreams = [];
         const providerOrder = ['ShowBox', 'Xprime.tv', 'HollyMovieHD', 'Soaper TV', 'Cuevana', 'Hianime', 'VidSrc'];

@@ -40,6 +40,7 @@ app.use(async (req, res, next) => {
     const userSuppliedCookie = req.query.cookie;
     const userRegionPreference = req.query.region;
     const userProvidersQuery = req.query.providers; // Get providers
+    const userMinQualitiesQuery = req.query.min_qualities; // Get min_qualities
 
     // Initialize global for THIS request
     global.currentRequestConfig = {}; 
@@ -56,6 +57,16 @@ app.use(async (req, res, next) => {
     }
     if (userProvidersQuery) {
         global.currentRequestConfig.providers = userProvidersQuery; // Store as string, addon.js will parse
+    }
+    if (userMinQualitiesQuery) {
+        try {
+            const decodedQualities = decodeURIComponent(userMinQualitiesQuery);
+            global.currentRequestConfig.minQualities = JSON.parse(decodedQualities);
+        } catch (e) {
+            console.error(`[server.js] Error parsing min_qualities from query: ${userMinQualitiesQuery}`, e.message);
+            // Optionally, you could set a default or an error indicator here
+            // For now, if it fails to parse, it simply won't be set.
+        }
     }
 
     if (Object.keys(global.currentRequestConfig).length > 0) {
