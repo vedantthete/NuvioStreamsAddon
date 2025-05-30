@@ -10,6 +10,7 @@ const { getHianimeStreams } = require('./hianime.js'); // Import from hianime.js
 // --- Constants ---
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
 const TMDB_API_KEY = process.env.TMDB_API_KEY;
+const NETLIFY_PROXY_URL = 'https://starlit-valkyrie-39f5ab.netlify.app/?destination='; // Added Netlify proxy
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 1000;
 
@@ -34,11 +35,21 @@ const builder = new addonBuilder(manifest);
 
 // --- Helper Functions ---
 async function fetchWithRetry(url, options, maxRetries = MAX_RETRIES) {
-    const { default: fetchFunction } = await import('node-fetch'); // Dynamically import
+    const { default: fetchFunction } = await import('node-fetch');
     let lastError;
+    let finalUrl = url;
+
+    // Check if it's a TMDB API call and prepend proxy if so
+    if (url.startsWith(TMDB_API_URL) && NETLIFY_PROXY_URL) {
+        finalUrl = `${NETLIFY_PROXY_URL}${encodeURIComponent(url)}`;
+        console.log(`[addon.js] Using Netlify proxy for TMDB request: ${finalUrl} (Original: ${url})`);
+    } else {
+        console.log(`[addon.js] Fetching directly (no proxy for this URL or proxy not set): ${url}`);
+    }
+
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
         try {
-            const response = await fetchFunction(url, options); // Use the dynamically imported function
+            const response = await fetchFunction(finalUrl, options); // Use finalUrl (potentially proxied)
             if (!response.ok) {
                 let errorBody = '';
                 try {
@@ -49,13 +60,14 @@ async function fetchWithRetry(url, options, maxRetries = MAX_RETRIES) {
             return response;
         } catch (error) {
             lastError = error;
-            console.warn(`Fetch attempt ${attempt}/${maxRetries} failed for ${url}: ${error.message}`);
+            // When retrying a proxied URL, we use the original URL, so the proxy logic applies again if needed.
+            console.warn(`Fetch attempt ${attempt}/${maxRetries} failed for ${finalUrl} (original: ${url}): ${error.message}`);
             if (attempt < maxRetries) {
                 await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS * Math.pow(2, attempt - 1)));
             }
         }
     }
-    console.error(`All fetch attempts failed for ${url}. Last error:`, lastError.message);
+    console.error(`All fetch attempts failed for ${finalUrl} (original: ${url}). Last error:`, lastError.message);
     throw lastError;
 }
 

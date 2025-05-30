@@ -25,9 +25,9 @@ async function proxiedFetchHolly(url, isJsonExpected = false) {
   
   const controller = new AbortController();
   const timeoutId = setTimeout(() => {
-    console.warn(`[HollyMovieHD] Request timed out for ${url}`);
+    console.warn(`[HollyMovieHD] Request timed out for ${url} after 3 seconds.`);
     controller.abort();
-  }, 20000); // 20-second timeout
+  }, 3000); // 3-second timeout
   
   try {
     const response = await fetch(proxiedUrl, { signal: controller.signal });
