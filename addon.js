@@ -4,6 +4,8 @@ require('dotenv').config(); // Ensure environment variables are loaded
 const { getXprimeStreams } = require('./xprime.js'); // Import from xprime.js
 const { getHollymovieStreams } = require('./hollymoviehd.js'); // Import from hollymoviehd.js
 const { getSoaperTvStreams } = require('./soapertv.js'); // Import from soapertv.js
+const { getCuevanaStreams } = require('./cuevana.js'); // Import from cuevana.js
+const { getHianimeStreams } = require('./hianime.js'); // Import from hianime.js
 
 // --- Constants ---
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
@@ -291,19 +293,65 @@ builder.defineStreamHandler(async (args) => {
             return [];
         });
     
+    // Add Cuevana promise to fetch in parallel with others
+    const cuevanaPromise = (async () => {
+        try {
+            let cuevanaStreams = [];
+            if (tmdbTypeFromId === 'movie') {
+                cuevanaStreams = await getCuevanaStreams(tmdbId, 'movie');
+            } else if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null) {
+                cuevanaStreams = await getCuevanaStreams(tmdbId, 'tv', seasonNum, episodeNum);
+            }
+            
+            if (cuevanaStreams && cuevanaStreams.length > 0) {
+                console.log(`  Successfully fetched ${cuevanaStreams.length} streams from Cuevana.`);
+                return cuevanaStreams; // Provider already set in the cuevana.js module
+            }
+            console.log(`  No streams returned from Cuevana for TMDB ${tmdbTypeFromId}/${tmdbId}`);
+            return [];
+        } catch (err) {
+            console.error(`Error fetching Cuevana streams:`, err.message);
+            return [];
+        }
+    })();
+
+    // Add Hianime promise - only for TV shows
+    let hianimePromise = Promise.resolve([]); // Default to empty if not applicable
+    if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null) {
+        hianimePromise = getHianimeStreams(tmdbId, seasonNum, episodeNum)
+            .then(streams => {
+                if (streams && streams.length > 0) {
+                    console.log(`  Successfully fetched ${streams.length} streams from Hianime.`);
+                    return streams; // Provider and title are set in hianime.js
+                }
+                console.log(`  No streams returned from Hianime for TMDB ${tmdbTypeFromId}/${tmdbId} S${seasonNum}E${episodeNum}`);
+                return [];
+            })
+            .catch(err => {
+                console.error(`Error fetching Hianime streams:`, err.message);
+                return [];
+            });
+    } else {
+        console.log('[Hianime] Skipping fetch because content is not a TV show episode.');
+    }
+    
     try {
-        const results = await Promise.all([showBoxPromise, xprimePromise, hollymoviePromise, soaperTvPromise]);
+        const results = await Promise.all([showBoxPromise, xprimePromise, hollymoviePromise, soaperTvPromise, cuevanaPromise, hianimePromise]);
         const showBoxResults = results[0] || [];
         const xprimeResults = results[1] || [];
         const hollymovieResults = results[2] || [];
         const soaperTvResults = results[3] || [];
+        const cuevanaResults = results[4] || [];
+        const hianimeResults = results[5] || []; // New Hianime results
 
         // Group streams by provider first
         const streamsByProvider = {
             'ShowBox': showBoxResults,
             'Xprime.tv': xprimeResults,
             'HollyMovieHD': hollymovieResults,
-            'Soaper TV': soaperTvResults
+            'Soaper TV': soaperTvResults,
+            'Cuevana': cuevanaResults,
+            'Hianime': hianimeResults // Add Hianime to the group
         };
         
         // Sort each provider's streams by quality
@@ -316,7 +364,9 @@ builder.defineStreamHandler(async (args) => {
             ...streamsByProvider['ShowBox'],
             ...streamsByProvider['Xprime.tv'],
             ...streamsByProvider['HollyMovieHD'],
-            ...streamsByProvider['Soaper TV']
+            ...streamsByProvider['Soaper TV'],
+            ...streamsByProvider['Cuevana'],
+            ...streamsByProvider['Hianime'] // Add Hianime to the combined list
         ];
         
         console.log(`Total raw streams after provider-ordered fetch: ${combinedRawStreams.length}`);
@@ -366,13 +416,54 @@ builder.defineStreamHandler(async (args) => {
             providerDisplayName = 'HollyMovieHD'; // Changed from HollyHD
         } else if (stream.provider === 'Soaper TV') {
             providerDisplayName = 'Soaper TV';
+        } else if (stream.provider === 'Cuevana') {
+            // Include language in the provider display name
+            let langForDisplay = stream.language ? stream.language.toUpperCase() : 'UNK';
+            if (langForDisplay === 'SPANISH') {
+                langForDisplay = 'ESP';
+            }
+            // Add other specific mappings here if they become necessary in the future, e.g.:
+            // else if (langForDisplay === 'LATINO') {
+            //     langForDisplay = 'LAT';
+            // }
+            providerDisplayName = `Cuevana ${langForDisplay} 🎭`;
+        } else if (stream.provider === 'Hianime') {
+            // For Hianime, language is 'dub' or 'sub' from the stream object
+            const category = stream.language ? stream.language.toUpperCase() : 'UNK'; // language field holds dub/sub
+            providerDisplayName = `Hianime ${category} 🍥`;
         }
 
         let nameDisplay;
-        if (flagEmoji) {
-            nameDisplay = `${flagEmoji} ${providerDisplayName} - ${qualityLabel}`;
-        } else {
-            nameDisplay = `${providerDisplayName} - ${qualityLabel}`;
+        if (stream.provider === 'Cuevana') {
+            let qualitySuffix = '';
+            const quality = stream.quality || 'UNK'; // qualityLabel is essentially stream.quality
+            const qualityNumberMatch = quality.match(/^(\d+)p$/); // Match "720p", "1080p" etc.
+            
+            if (qualityNumberMatch) {
+                const resolution = parseInt(qualityNumberMatch[1], 10);
+                if (resolution >= 1080) {
+                    qualitySuffix = ` - ${quality}`; // e.g., " - 1080p"
+                }
+                // If below 1080p, qualitySuffix remains empty, so no quality is shown
+            } 
+            // If it's 'auto', 'UNK', or a bitrate (e.g., '700k'), qualitySuffix also remains empty.
+            
+            nameDisplay = `${providerDisplayName}${qualitySuffix}`;
+            // Note: flagEmoji is typically not applicable to Cuevana's stream URLs with current logic
+        } else if (stream.provider === 'Hianime') {
+            // Hianime specific display (Quality is included in title from hianime.js)
+            // So, we might just use the stream.title directly or format similarly to Cuevana if preferred
+            // For now, let's assume stream.title is already formatted as `Hianime CATEGORY - Quality`
+            nameDisplay = stream.title || `${providerDisplayName} - ${stream.quality || 'Auto'}`;
+            // If stream.title already includes providerDisplayName, we can simplify:
+            // nameDisplay = stream.title; 
+        } else { // For other providers (ShowBox, Xprime, etc.)
+            const qualityLabel = stream.quality || 'UNK';
+            if (flagEmoji) {
+                nameDisplay = `${flagEmoji} ${providerDisplayName} - ${qualityLabel}`;
+            } else {
+                nameDisplay = `${providerDisplayName} - ${qualityLabel}`;
+            }
         }
         
         const nameVideoTechTags = [];
