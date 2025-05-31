@@ -22,16 +22,9 @@ const TMDB_API_KEY = process.env.TMDB_API_KEY;
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 1000;
 
-// Determine which scraper to use based on environment variable
-let scraper;
-if (process.env.SCRAPER_MODE === 'api') {
-    console.log('Using ScraperAPI mode with scraperapi.js');
-    scraper = require('./scraperapi.js');
-} else {
-    // Default to proxy/direct mode
-    console.log('Using proxy/direct mode with Showbox.js');
-    scraper = require('./providers/Showbox.js');
-}
+// Default to proxy/direct mode with Showbox.js
+console.log('Using proxy/direct mode with Showbox.js');
+const scraper = require('./providers/Showbox.js');
 
 // Destructure the required functions from the selected scraper
 const { getStreamsFromTmdbId, convertImdbToTmdb, sortStreamsByQuality } = scraper;
@@ -288,8 +281,6 @@ builder.defineStreamHandler(async (args) => {
         return ''; // Default to empty string
     };
 
-    const userScraperApiKey = (sdkConfig && sdkConfig.scraperApiKey) ? sdkConfig.scraperApiKey : null;
-    
     // Use values from requestSpecificConfig (derived from global)
     let userRegionPreference = requestSpecificConfig.region || null;
     let userCookie = requestSpecificConfig.cookie || null; // Already decoded by server.js
@@ -303,7 +294,6 @@ builder.defineStreamHandler(async (args) => {
     }
     
     console.log(`Effective request details: ${JSON.stringify({
-        hasScraperApiKey: !!userScraperApiKey,
         regionPreference: userRegionPreference || 'none',
         hasCookie: !!userCookie,
         selectedProviders: selectedProvidersArray ? selectedProvidersArray.join(', ') : 'all'
@@ -327,14 +317,8 @@ builder.defineStreamHandler(async (args) => {
         console.log('[addon.js] No specific providers selected by user in global config, will attempt all.');
     }
 
-    if (userScraperApiKey) {
-        const maskedApiKey = userScraperApiKey.length > 8 
-            ? `${userScraperApiKey.substring(0, 4)}...${userScraperApiKey.substring(userScraperApiKey.length - 4)}` 
-            : userScraperApiKey;
-        console.log(`  Using ScraperAPI Key: ${maskedApiKey}`);
-    } else {
-        console.log("  No ScraperAPI Key configured by user.");
-    }
+    // Removed ScraperAPI Key logging
+    console.log("  ScraperAPI Key usage has been removed.");
 
     if (type !== 'movie' && type !== 'series') {
         return { streams: [] };
