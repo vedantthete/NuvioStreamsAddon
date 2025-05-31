@@ -145,13 +145,6 @@ If you find Nuvio Streams useful, please consider supporting its development. Yo
 
 You can also follow on GitHub: [https://github.com/tapframe](https://github.com/tapframe)
 
-## Public Repository - Coming Soon!
-
-The codebase is being cleaned up and prepared for public release. Soon, you'll be able to:
-*   Check out the code.
-*   Contribute improvements or fixes.
-*   Self-host your own instance with more control.
-
 ## Disclaimer
 
 *   Nuvio Streams is an addon that scrapes content from third-party websites. The availability, legality, and quality of the content are the responsibility of these external sites.
