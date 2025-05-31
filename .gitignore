@@ -2,7 +2,7 @@ node_modules
 
 package-lock.json 
 .vercel
-cookies.txt
+
 reddit_post.md
 reddit_post_title.md
 .env
