@@ -5,12 +5,16 @@ require('dotenv').config(); // Ensure environment variables are loaded
 const ENABLE_CUEVANA_PROVIDER = process.env.ENABLE_CUEVANA_PROVIDER !== 'false'; // Defaults to true if not set or not 'false'
 console.log(`[addon.js] Cuevana provider fetching enabled: ${ENABLE_CUEVANA_PROVIDER}`);
 
-const { getXprimeStreams } = require('./xprime.js'); // Import from xprime.js
-const { getHollymovieStreams } = require('./hollymoviehd.js'); // Import from hollymoviehd.js
-const { getSoaperTvStreams } = require('./soapertv.js'); // Import from soapertv.js
-const { getCuevanaStreams } = require('./cuevana.js'); // Import from cuevana.js
-const { getHianimeStreams } = require('./hianime.js'); // Import from hianime.js
-const { getStreamContent } = require('./vidsrcextractor.js'); // Import from vidsrcextractor.js
+// NEW: Read environment variable for HollyMovieHD
+const ENABLE_HOLLYMOVIEHD_PROVIDER = process.env.ENABLE_HOLLYMOVIEHD_PROVIDER !== 'false'; // Defaults to true if not set or not 'false'
+console.log(`[addon.js] HollyMovieHD provider fetching enabled: ${ENABLE_HOLLYMOVIEHD_PROVIDER}`);
+
+const { getXprimeStreams } = require('./providers/xprime.js'); // Import from xprime.js
+const { getHollymovieStreams } = require('./providers/hollymoviehd.js'); // Import from hollymoviehd.js
+const { getSoaperTvStreams } = require('./providers/soapertv.js'); // Import from soapertv.js
+const { getCuevanaStreams } = require('./providers/cuevana.js'); // Import from cuevana.js
+const { getHianimeStreams } = require('./providers/hianime.js'); // Import from hianime.js
+const { getStreamContent } = require('./providers/vidsrcextractor.js'); // Import from vidsrcextractor.js
 
 // --- Constants ---
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
@@ -496,7 +500,7 @@ builder.defineStreamHandler(async (args) => {
         }) : Promise.resolve([]);
         
     let hollymoviePromise;
-    if (shouldFetch('hollymoviehd') && (type === 'movie' || type === 'series' && episodeNum)) { // Ensure it's a movie or a specific episode
+    if (ENABLE_HOLLYMOVIEHD_PROVIDER && shouldFetch('hollymoviehd') && (type === 'movie' || type === 'series' && episodeNum)) { // Ensure it's a movie or a specific episode
         const isMovie = type === 'movie';
         try {
             const mediaTypeForHolly = isMovie ? 'movie' : 'tv';
@@ -518,8 +522,13 @@ builder.defineStreamHandler(async (args) => {
             hollymoviePromise = Promise.resolve([]); 
         }
     } else {
-        if (shouldFetch('hollymoviehd')) console.log('[HollyMovieHD] Skipping fetch because content is not a movie or a specific episode.');
-        else console.log('[HollyMovieHD] Skipping fetch: Not selected by user.');
+        if (!ENABLE_HOLLYMOVIEHD_PROVIDER) {
+            console.log('[HollyMovieHD] Skipping fetch: Disabled by environment variable (ENABLE_HOLLYMOVIEHD_PROVIDER=false).');
+        } else if (!shouldFetch('hollymoviehd')) {
+            console.log('[HollyMovieHD] Skipping fetch: Not selected by user.');
+        } else {
+            console.log('[HollyMovieHD] Skipping fetch because content is not a movie or a specific episode.');
+        }
         hollymoviePromise = Promise.resolve([]); 
     }
     
@@ -738,7 +747,7 @@ builder.defineStreamHandler(async (args) => {
             providerDisplayName = `Cuevana ${langForDisplay} 🎭`;
         } else if (stream.provider === 'Hianime') {
             // For Hianime, language is 'dub' or 'sub' from the stream object
-            const category = stream.language ? stream.language.toUpperCase() : 'UNK'; // language field holds dub/sub
+            const category = stream.language ? (stream.language === 'sub' ? 'OG' : stream.language.toUpperCase()) : 'UNK';
             providerDisplayName = `Hianime ${category} 🍥`;
         }
 

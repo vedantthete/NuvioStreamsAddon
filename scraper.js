@@ -239,15 +239,250 @@ const saveToCache = async (cacheKey, content, subDir = '') => {
     }
 };
 
+// NEW HELPER FUNCTIONS
+
+// Function to create URL-friendly slugs
+function slugify(text) {
+    if (!text) return '';
+    return text
+        .toString()
+        .toLowerCase()
+        .trim()
+        .replace(/&/g, 'and')             // Replace & with 'and'
+        .replace(/[_\s]+/g, '-')          // Replace spaces and underscores with -
+        .replace(/[^\w-]+/g, '')          // Remove all non-word chars (except -)
+        .replace(/--+/g, '-')             // Replace multiple - with single -
+        .replace(/^-+/, '')               // Trim - from start of text
+        .replace(/-+$/, '');              // Trim - from end of text
+}
+
+// Function to normalize titles for comparison
+const normalizeTitleForComparison = (title) => {
+    if (!title) return '';
+    // Remove common season/episode patterns, year in parenthesis, and normalize
+    return title
+        .toLowerCase()
+        .replace(/\(?\d{4}\)?$/, '')                            // Remove year like (2023) at the end
+        .replace(/\s*-\s*(season|s)\s*\d+\s*(episode|e)\s*\d+/i, '') // Remove SXXEXX patterns
+        .replace(/\s*(season|s)\s*\d+/i, '')                    // Remove SXX patterns
+        .replace(/\s*(episode|e)\s*\d+/i, '')                   // Remove EXX patterns
+        .replace(/[^\w\s]|_/g, "")                              // Remove punctuation except spaces
+        .replace(/\s+/g, ' ')                                   // Normalize multiple spaces to one
+        .trim();
+};
+
+// Function to validate if a ShowBox page title matches TMDB titles
+function validateShowboxTitle(showboxPageTitle, tmdbMainTitle, tmdbOriginalTitle, tmdbAlternativeTitles = []) {
+    if (!showboxPageTitle || !tmdbMainTitle) {
+        console.log(`  [Validation] Missing titles. SB: "${showboxPageTitle}", TMDB Main: "${tmdbMainTitle}"`);
+        return false;
+    }
+
+    const normalizedPageTitle = normalizeTitleForComparison(showboxPageTitle);
+    
+    // Collect all TMDB titles for comparison (main, original, alternatives)
+    const titlesToCompare = [tmdbMainTitle, tmdbOriginalTitle, ...tmdbAlternativeTitles.map(alt => alt.title)]
+        .filter(Boolean) // Remove any null/undefined titles
+        .map(normalizeTitleForComparison); // Normalize all titles
+
+    // Check for exact matches
+    if (titlesToCompare.some(normTmdbTitle => normalizedPageTitle === normTmdbTitle && normTmdbTitle.length > 0)) {
+        console.log(`  [Validation] SUCCESS: Exact match. SB: "${normalizedPageTitle}" == TMDB: One of "${titlesToCompare.filter(t => t.length > 0).join('", "')}"`);
+        return true;
+    }
+
+    // Check for partial matches (e.g., "Title" in "Title: The Series" or vice versa)
+    if (titlesToCompare.some(normTmdbTitle => 
+        normTmdbTitle.length > 3 && normalizedPageTitle.length > 3 && // ensure titles aren't too short
+        (normalizedPageTitle.includes(normTmdbTitle) || normTmdbTitle.includes(normalizedPageTitle))
+    )) {
+        console.log(`  [Validation] SUCCESS: Partial match. SB: "${normalizedPageTitle}" vs TMDB: One of "${titlesToCompare.filter(t => t.length > 0).join('", "')}"`);
+        return true;
+    }
+    
+    console.log(`  [Validation] FAILED: No strong match. SB: "${normalizedPageTitle}" vs TMDB Titles: "${titlesToCompare.filter(t => t.length > 0).join('", "')}"`);
+    return false;
+}
+
+// Function to extract special title forms for anime (e.g., Romaji)
+function extractSpecialTitles(tmdbData, alternativeTitles = []) {
+    const specialTitles = [];
+    console.log(`  [TITLE] Alternative titles available: ${alternativeTitles.length}`);
+    if (alternativeTitles.length > 0) {
+        console.log(`  [TITLE] Available alternatives: ${alternativeTitles.map(t => `"${t.title}" (${t.iso_3166_1 || 'unknown'}-${t.iso_639_1 || 'unknown'})`).join(', ')}`);
+    }
+    
+    // Get original title
+    const originalTitle = tmdbData.original_title || tmdbData.original_name || '';
+    const originalLanguage = tmdbData.original_language || '';
+    
+    // Check if original title uses non-Latin script
+    // This regex covers most non-Latin scripts: CJK (Chinese, Japanese, Korean), Arabic, Cyrillic, etc.
+    const hasNonLatinChars = /[\u0400-\u04FF\u0500-\u052F\u1100-\u11FF\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\u3130-\u318F\u31F0-\u31FF\u3400-\u4DBF\u4E00-\u9FFF\uAC00-\uD7AF\uF900-\uFAFF\uFF00-\uFFEF]/.test(originalTitle);
+    
+    if (hasNonLatinChars) {
+        console.log(`  [ROMAN] Detected non-Latin title: "${originalTitle}" (Language: ${originalLanguage}). Looking for Romanized version.`);
+        
+        // Get language name for better logging
+        const languageNames = {
+            'ko': 'Korean',
+            'ja': 'Japanese',
+            'zh': 'Chinese',
+            'ru': 'Russian',
+            'ar': 'Arabic',
+            'th': 'Thai',
+            'hi': 'Hindi'
+            // Add more as needed
+        };
+        const languageName = languageNames[originalLanguage] || originalLanguage;
+        
+        // STEP 1: Try to find explicitly labeled romanized titles
+        const romanizedCandidates = alternativeTitles.filter(alt => 
+            // Any alt title labeled as "Romanized" or has "Romaji"/"Romanization" in type
+            (alt.type && (
+                alt.type.toLowerCase().includes('roman') || 
+                alt.type.toLowerCase().includes('romaji')
+            )) ||
+            // Special case: original language country code with Latin script
+            (alt.iso_3166_1 === originalLanguage.toUpperCase() && 
+             /^[a-zA-Z0-9\s\-:;,.!?()&'"]+$/.test(alt.title) &&
+             alt.iso_639_1 !== 'en')
+        );
+        
+        if (romanizedCandidates.length > 0) {
+            romanizedCandidates.forEach(rc => {
+                console.log(`  [ROMAN] Found labeled Romanized title: "${rc.title}" (${rc.iso_3166_1 || 'unknown'}-${rc.iso_639_1 || 'unknown'}${rc.type ? ', Type: ' + rc.type : ''})`);
+                specialTitles.push(rc.title);
+            });
+        } else {
+            console.log(`  [ROMAN] No explicitly labeled Romanized titles found in alternatives.`);
+            
+            // STEP 2: Identify Romanized by language and character set
+            // For non-Latin scripts, look for titles that:
+            // 1. Use Latin script
+            // 2. Are from the same country/language (if available)
+            // 3. Are not English
+            const nonEnglishLatinTitles = alternativeTitles.filter(alt => 
+                // Must use Latin script
+                /^[a-zA-Z0-9\s\-:;,.!?()&'"]+$/.test(alt.title) &&
+                // Should not be English if we can determine it
+                (alt.iso_639_1 !== 'en' || !alt.iso_639_1)
+            );
+            
+            // Try to find titles from the same country/region first
+            const sameRegionTitles = nonEnglishLatinTitles.filter(alt => 
+                alt.iso_3166_1 && 
+                (alt.iso_3166_1 === originalLanguage.toUpperCase() ||
+                 // Special case for languages that don't map directly to country codes
+                 (originalLanguage === 'zh' && ['CN', 'TW', 'HK'].includes(alt.iso_3166_1)) ||
+                 (originalLanguage === 'ja' && alt.iso_3166_1 === 'JP') ||
+                 (originalLanguage === 'ko' && alt.iso_3166_1 === 'KR'))
+            );
+            
+            if (sameRegionTitles.length > 0) {
+                sameRegionTitles.forEach(title => {
+                    console.log(`  [ROMAN] Found likely ${languageName} Romanized title: "${title.title}" (matched region)`);
+                    specialTitles.push(title.title);
+                });
+            } else if (nonEnglishLatinTitles.length > 0) {
+                // If no same-region titles, try any non-English Latin title
+                // Prefer longer titles as they're often more descriptive/accurate
+                nonEnglishLatinTitles.sort((a, b) => b.title.length - a.title.length);
+                const bestCandidate = nonEnglishLatinTitles[0];
+                console.log(`  [ROMAN] Using best non-English Latin title as Romanized version: "${bestCandidate.title}"`);
+                specialTitles.push(bestCandidate.title);
+            } else {
+                // STEP 3: Language-specific fallbacks based on patterns
+                // For Korean: Look for titles with particles like "-eui", "-ui", "-ga", "-reul", etc.
+                // For Japanese: Look for titles with particles like "no", "ga", "wo", "ni", etc.
+                // For Chinese: Look for titles with pinyin patterns
+                
+                const languagePatterns = {
+                    'ko': /\b(ui|eui|ga|reul|neun|eun|leul|seo|e|ro)\b/i,  // Korean particles
+                    'ja': /\b(no|ga|wo|ni|to|wa|ka|he|mo|de|kun|san|chan|sama|sensei)\b/i, // Japanese particles
+                    'zh': /\b(de|le|ba|ma|ne|ge|zai|shi)\b/i // Common Mandarin particles
+                };
+                
+                if (languagePatterns[originalLanguage]) {
+                    const patternMatches = alternativeTitles.filter(alt => 
+                        // Must use Latin script
+                        /^[a-zA-Z0-9\s\-:;,.!?()&'"]+$/.test(alt.title) &&
+                        // Should match language pattern
+                        languagePatterns[originalLanguage].test(alt.title.toLowerCase())
+                    );
+                    
+                    if (patternMatches.length > 0) {
+                        patternMatches.forEach(match => {
+                            console.log(`  [ROMAN] Found likely ${languageName} Romanized title: "${match.title}" (matched language particles)`);
+                            specialTitles.push(match.title);
+                        });
+                    } else {
+                        console.log(`  [ROMAN] No titles matching ${languageName} language patterns found.`);
+                        
+                        // STEP 4: Last resort - use any longer alternative title in Latin script
+                        const latinTitles = alternativeTitles.filter(alt => 
+                            /^[a-zA-Z0-9\s\-:;,.!?()&'"]+$/.test(alt.title)
+                        );
+                        
+                        if (latinTitles.length > 0) {
+                            // Prefer longer titles as they're often the romanized version
+                            latinTitles.sort((a, b) => b.title.length - a.title.length);
+                            const longestLatin = latinTitles[0];
+                            console.log(`  [ROMAN] Using longest Latin script title as fallback: "${longestLatin.title}"`);
+                            specialTitles.push(longestLatin.title);
+                        } else {
+                            console.log(`  [ROMAN] Could not find any suitable Romanized alternative for "${originalTitle}"`);
+                        }
+                    }
+                } else {
+                    // For languages without specific patterns, just use the longest Latin title
+                    const latinTitles = alternativeTitles.filter(alt => 
+                        /^[a-zA-Z0-9\s\-:;,.!?()&'"]+$/.test(alt.title)
+                    );
+                    
+                    if (latinTitles.length > 0) {
+                        // Prefer longer titles as they're often the romanized version
+                        latinTitles.sort((a, b) => b.title.length - a.title.length);
+                        const longestLatin = latinTitles[0];
+                        console.log(`  [ROMAN] Using longest Latin script title for ${languageName}: "${longestLatin.title}"`);
+                        specialTitles.push(longestLatin.title);
+                    } else {
+                        console.log(`  [ROMAN] Could not find any suitable Romanized alternative for "${originalTitle}"`);
+                    }
+                }
+            }
+        }
+    } else if (originalLanguage && originalLanguage !== 'en') {
+        // For Latin-script non-English titles, still check for alternative titles
+        console.log(`  [TITLE] Original title already uses Latin script: "${originalTitle}" (${originalLanguage})`);
+        
+        // Some Latin-script languages might have alternative spellings/titles worth trying
+        const nonEnglishAlts = alternativeTitles.filter(alt => 
+            alt.iso_639_1 && alt.iso_639_1 !== 'en' && alt.title !== originalTitle
+        );
+        
+        if (nonEnglishAlts.length > 0) {
+            nonEnglishAlts.forEach(alt => {
+                console.log(`  [TITLE] Adding non-English alternative title: "${alt.title}"`);
+                specialTitles.push(alt.title);
+            });
+        }
+    }
+    
+    return specialTitles;
+}
+
 // NEW FUNCTION: Search ShowBox and extract the most relevant URL
-const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaYear, showboxScraperInstance, tmdbType, regionPreference = null) => {
+const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaYear, showboxScraperInstance, tmdbType, regionPreference = null, tmdbAllTitles = []) => {
     const cacheSubDir = 'showbox_search_results';
     
+    // Define mediaTypeString here to fix the undefined error
+    const mediaTypeString = tmdbType === 'movie' ? 'movie' : 'tv';
+    
     // Add a cache version to invalidate previous incorrect cached results
-    const CACHE_VERSION = "v2"; // Increment this whenever the search algorithm significantly changes
+    const CACHE_VERSION = "v3"; // Increment this whenever the search algorithm significantly changes
     
     // Create a proper hash for the cache key to avoid filename issues with special characters
-    // const cacheKeyData = `${CACHE_VERSION}_${originalTmdbTitle}_${mediaYear || 'noYear'}`;
     const cacheKeyData = `${CACHE_VERSION}_${tmdbType}_${originalTmdbTitle}_${mediaYear || 'noYear'}`;
     const cacheKeyHash = crypto.createHash('md5').update(cacheKeyData).digest('hex');
     const searchTermKey = `${cacheKeyHash}.txt`;
@@ -255,17 +490,22 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
     // Log what we're looking for to help with debugging
     console.log(`  Searching for ShowBox match for: "${originalTmdbTitle}" (${mediaYear || 'N/A'}) [Cache key: ${cacheKeyHash}]`);
     
-    const cachedBestUrl = await getFromCache(searchTermKey, cacheSubDir);
-    if (cachedBestUrl) {
-        console.log(`  CACHE HIT for ShowBox search best match URL (${originalTmdbTitle} ${mediaYear || ''}): ${cachedBestUrl}`);
-        if (cachedBestUrl === 'NO_MATCH_FOUND') return { url: null, score: -1 };
-        return { url: cachedBestUrl, score: 10 }; // Assume a good score for a cached valid URL
+    // Check if DISABLE_CACHE is set to 'true'
+    if (process.env.DISABLE_CACHE !== 'true') {
+        const cachedBestUrl = await getFromCache(searchTermKey, cacheSubDir);
+        if (cachedBestUrl) {
+            console.log(`  CACHE HIT for ShowBox search best match URL (${originalTmdbTitle} ${mediaYear || ''}): ${cachedBestUrl}`);
+            if (cachedBestUrl === 'NO_MATCH_FOUND') return { url: null, score: -1 };
+            return { url: cachedBestUrl, score: 10 }; // Assume a good score for a cached valid URL
+        }
+    } else {
+        console.log(`  Cache disabled, skipping cache check for ShowBox search.`);
     }
     
     // Special characters often cause search issues, create a cleaned version of the search term
     // Replace special characters with spaces, ensure words are properly separated
     const cleanedSearchTerm = searchTerm.replace(/[&\-_:;,.]/g, ' ').replace(/\s+/g, ' ').trim();
-    console.log(`  CACHE MISS for ShowBox search. Using cleaned search term: "${cleanedSearchTerm}" (Original: "${searchTerm}")`);
+    console.log(`  Using cleaned search term: "${cleanedSearchTerm}" (Original: "${searchTerm}")`);
 
     // Try multiple search strategies if needed
     const searchStrategies = [
@@ -293,6 +533,22 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
         searchStrategies.push({ term: `${originalTmdbTitle} ${mediaYear}`, description: "original TMDB title with year" });
     }
     
+    // Add all TMDB alternative titles as search strategies
+    tmdbAllTitles.forEach((altTitle, index) => {
+        if (altTitle && altTitle !== originalTmdbTitle) {
+            if (mediaYear) {
+                searchStrategies.push({ 
+                    term: `${altTitle} ${mediaYear}`, 
+                    description: `alternative title ${index+1} with year` 
+                });
+            }
+            searchStrategies.push({ 
+                term: altTitle, 
+                description: `alternative title ${index+1}` 
+            });
+        }
+    });
+    
     // Add original TMDB title only
     searchStrategies.push({ term: originalTmdbTitle, description: "original TMDB title only" });
     
@@ -315,48 +571,96 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
     
     let bestResult = { url: null, score: -1, strategy: null };
     
+    // Generate all possible slugs from TMDB titles
+    const allPossibleSlugs = tmdbAllTitles.map(title => slugify(title)).filter(Boolean);
+    console.log(`  Generated ${allPossibleSlugs.length} possible slugs for matching: ${allPossibleSlugs.join(', ')}`);
+    
     for (const strategy of searchStrategies) {
         const searchUrl = `https://www.showbox.media/search?keyword=${encodeURIComponent(strategy.term)}`;
         console.log(`  Searching ShowBox with URL: ${searchUrl} (Strategy: ${strategy.description})`);
 
-    const htmlContent = await showboxScraperInstance._makeRequest(searchUrl);
-    if (!htmlContent) {
+        const htmlContent = await showboxScraperInstance._makeRequest(searchUrl);
+        if (!htmlContent) {
             console.log(`  Failed to fetch ShowBox search results for strategy: ${strategy.description}`);
             continue; // Try next strategy
-    }
+        }
 
-    const $ = cheerio.load(htmlContent);
+        const $ = cheerio.load(htmlContent);
         const searchResults = [];
 
-    // Helper for simple string similarity (case-insensitive, removes non-alphanumeric)
-    const simplifyString = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
-    const simplifiedTmdbTitle = simplifyString(originalTmdbTitle);
+        // Helper for simple string similarity (case-insensitive, removes non-alphanumeric)
+        const simplifyString = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const simplifiedTmdbTitle = simplifyString(originalTmdbTitle);
+        
+        // Create normalized versions of all TMDB titles for comparison
+        const normalizedTmdbTitles = tmdbAllTitles.map(title => normalizeTitleForComparison(title));
 
-    $('div.film-poster').each((i, elem) => {
-        const linkElement = $(elem).find('a.film-poster-ahref');
-        const itemTitle = linkElement.attr('title');
-        const itemHref = linkElement.attr('href');
+        $('div.film-poster').each((i, elem) => {
+            const linkElement = $(elem).find('a.film-poster-ahref');
+            const itemTitle = linkElement.attr('title');
+            const itemHref = linkElement.attr('href');
 
-        if (itemTitle && itemHref) {
-            const simplifiedItemTitle = simplifyString(itemTitle);
-            
-            // Attempt to extract year from title if present, e.g., "Title (YYYY)"
-            let itemYear = null;
-            const yearMatch = itemTitle.match(/\((\d{4})\)$/);
-            if (yearMatch && yearMatch[1]) {
-                itemYear = yearMatch[1];
-            }
+            if (itemTitle && itemHref) {
+                const simplifiedItemTitle = simplifyString(itemTitle);
+                const normalizedItemTitle = normalizeTitleForComparison(itemTitle);
+                
+                // Extract slug from URL
+                const urlSlugMatch = itemHref.match(/\/(movie|tv)\/([mt]-[a-z0-9-]+-\d{4})/);
+                const itemSlug = urlSlugMatch ? urlSlugMatch[2] : '';
+                
+                // Check if the slug matches any of our generated slugs
+                const slugMatchScore = allPossibleSlugs.some(slug => 
+                    itemSlug.includes(slug) || // Direct inclusion of our slug in their slug
+                    allPossibleSlugs.some(ourSlug => ourSlug.includes(itemSlug.replace(/^[mt]-/, ''))) // Their slug in our slug
+                ) ? 10 : 0;
+                
+                // Attempt to extract year from title if present, e.g., "Title (YYYY)"
+                let itemYear = null;
+                const yearMatch = itemTitle.match(/\((\d{4})\)$/);
+                if (yearMatch && yearMatch[1]) {
+                    itemYear = yearMatch[1];
+                }
+                
+                // Extract year from URL if possible
+                if (!itemYear && itemHref) {
+                    const urlYearMatch = itemHref.match(/-(20\d{2})$/);
+                    if (urlYearMatch) {
+                        itemYear = urlYearMatch[1];
+                    }
+                }
 
                 // IMPROVED SCORING LOGIC
-            let score = 0;
+                let score = 0;
                 
-                // Exact title match (case-insensitive)
-                if (itemTitle.toLowerCase() === originalTmdbTitle.toLowerCase()) {
-                    score += 10; // Strong bonus for exact match
+                // Extra points for URLs that match our expected pattern
+                const mediaTypeInUrl = itemHref.includes(`/${mediaTypeString}/`);
+                const correctMediaType = (tmdbType === 'movie' && itemHref.includes('/movie/')) || 
+                                       (tmdbType === 'tv' && itemHref.includes('/tv/'));
+                
+                // Strong bonus for matching the expected media type
+                if (correctMediaType) {
+                    score += 12; // Significantly increase importance of correct media type
+                } else {
+                    score -= 15; // Heavy penalty for wrong media type
+                }
+                
+                // Strong bonus for slug match
+                score += slugMatchScore;
+                
+                // Exact title match (any of our titles)
+                if (normalizedTmdbTitles.some(normTitle => normTitle === normalizedItemTitle)) {
+                    score += 15; // Very strong bonus for exact normalized match
+                }
+                // Title contains our title or vice versa (any of our titles)
+                else if (normalizedTmdbTitles.some(normTitle => 
+                    normTitle.length > 3 && normalizedItemTitle.length > 3 &&
+                    (normalizedItemTitle.includes(normTitle) || normTitle.includes(normalizedItemTitle))
+                )) {
+                    score += 10; // Good bonus for partial match
                 }
                 // Simplified title contains the entire simplified TMDB title
                 else if (simplifiedItemTitle.includes(simplifiedTmdbTitle)) {
-                    score += 7; // Good bonus for containing the entire title
+                    score += 7; // Moderate bonus
                 }
                 // TMDB title contains the simplified item title (could be abbreviation/shortened)
                 else if (simplifiedTmdbTitle.includes(simplifiedItemTitle) && simplifiedItemTitle.length > 3) {
@@ -381,58 +685,34 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
                     score += wordMatchPercent * 5; // Up to 5 points for word matches
                 }
                 
-                // STRICT YEAR MATCHING
+                // YEAR MATCHING - now much more important
                 if (mediaYear && itemYear) {
                     if (mediaYear === itemYear) {
-                        score += 8; // Strong bonus for exact year match
+                        score += 18; // MUCH stronger bonus for exact year match
                     } else {
-                        // Small penalty for year mismatch, larger for bigger differences
+                        // Penalty for year mismatch, larger for bigger differences
                         const yearDiff = Math.abs(parseInt(mediaYear) - parseInt(itemYear));
                         if (yearDiff <= 1) {
-                            score -= 1; // Small penalty for 1 year difference
+                            score -= 3; // Small penalty for 1 year difference
+                        } else if (yearDiff <= 3) {
+                            score -= 10; // Medium penalty for 2-3 year difference
                         } else {
-                            score -= Math.min(5, yearDiff) * 2; // Larger penalty for bigger differences
+                            score -= 20; // Large penalty for > 3 year difference
                         }
                     }
                 } else if (mediaYear && !itemYear) {
                     // If we have a year but the item doesn't, apply a small penalty
-                    score -= 2;
+                    score -= 5;
                 }
-                
-                // Media type matching - bonus for matching the expected type
-                const isMovie = itemHref.includes('/movie/');
-                const isTv = itemHref.includes('/tv/');
-                
-                // Expected type based on URL (very basic logic - could be improved)
-                // const expectedTypeIsMovie = !mediaYear || parseInt(mediaYear) >= 1900; // Most common scenario // REMOVED OLD LOGIC
-                
-                // NEW MEDIA TYPE SCORING based on tmdbType parameter
-                if (tmdbType === 'movie') {
-                    if (isMovie) {
-                        score += 7; // Strong bonus for matching movie type
-                    } else if (isTv) {
-                        score -= 7; // Strong penalty for TV show when movie expected
-                    }
-                } else if (tmdbType === 'tv') {
-                    if (isTv) {
-                        score += 7; // Strong bonus for matching TV type
-                    } else if (isMovie) {
-                        score -= 7; // Strong penalty for movie when TV show expected
-                    }
-                }
-                // if ((expectedTypeIsMovie && isMovie) || (!expectedTypeIsMovie && isTv)) { // REMOVED OLD LOGIC
-                //     score += 3; // Bonus for matching expected type
-                // } else if ((expectedTypeIsMovie && isTv) || (!expectedTypeIsMovie && isMovie)) {
-                //     score -= 3; // Penalty for wrong type
-                // }
                 
                 searchResults.push({
                     title: itemTitle,
                     href: itemHref,
                     year: itemYear,
                     score: score,
-                    isMovie: isMovie,
-                    isTv: isTv
+                    slug: itemSlug,
+                    isMovie: itemHref.includes('/movie/'),
+                    isTv: itemHref.includes('/tv/')
                 });
             }
         });
@@ -443,7 +723,7 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
         if (searchResults.length > 0) {
             console.log(`  Search results for strategy "${strategy.description}":`);
             searchResults.slice(0, 3).forEach((result, i) => {
-                console.log(`    ${i+1}. Title: "${result.title}", Year: ${result.year || 'N/A'}, Score: ${result.score.toFixed(1)}, URL: ${result.href}`);
+                console.log(`    ${i+1}. Title: "${result.title}", Year: ${result.year || 'N/A'}, Score: ${result.score.toFixed(1)}, URL: ${result.href}, Media Type: ${result.isMovie ? 'Movie' : (result.isTv ? 'TV' : 'Unknown')}`);
             });
             
             const bestMatch = searchResults[0];
@@ -451,15 +731,18 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
                 bestResult = {
                     url: `https://www.showbox.media${bestMatch.href}`,
                     score: bestMatch.score,
-                    strategy: strategy.description
+                    strategy: strategy.description,
+                    title: bestMatch.title,
+                    year: bestMatch.year,
+                    isCorrectType: (tmdbType === 'movie' && bestMatch.isMovie) || (tmdbType === 'tv' && bestMatch.isTv)
                 };
             }
-    } else {
+        } else {
             console.log(`  No results found for strategy "${strategy.description}"`);
         }
         
-        // If we found a really good match (score > 18), don't try more strategies
-        if (bestResult.score > 18) { // New threshold
+        // If we found a really good match (high score AND correct type), don't try more strategies
+        if (bestResult.score > 25 && bestResult.isCorrectType) {
             console.log(`  Found excellent match with score ${bestResult.score.toFixed(1)} using strategy "${bestResult.strategy}", stopping search`);
             break;
         }
@@ -467,18 +750,12 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
 
     // Final decision based on all strategies
     if (bestResult.url) {
-        // Analyze match confidence based on score and exact year match
-        let matchConfidence = "HIGH";
-        if (bestResult.score < 8) {
-            matchConfidence = "LOW";
-        } else if (bestResult.score < 15) {
+        // Analyze match confidence based on score, correct type, and year match
+        let matchConfidence = "LOW";
+        if (bestResult.score >= 25 && bestResult.isCorrectType) {
+            matchConfidence = "HIGH";
+        } else if (bestResult.score >= 15 && bestResult.isCorrectType) {
             matchConfidence = "MEDIUM";
-        }
-        
-        // Check if URL contains the correct year (if we have a media year)
-        let yearInUrl = false;
-        if (mediaYear) {
-            yearInUrl = bestResult.url.includes(mediaYear);
         }
         
         const confidenceWarning = matchConfidence !== "HIGH" ? 
@@ -486,113 +763,271 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
         
         console.log(`  Best overall match: ${bestResult.url} (Score: ${bestResult.score.toFixed(1)}, Strategy: ${bestResult.strategy}) ${confidenceWarning}`);
         
-        // Add extra warning for suspicious year mismatches
-        if (mediaYear && !yearInUrl && matchConfidence !== "HIGH") {
-            console.log(`  ⚠️ WARNING: Year ${mediaYear} not found in URL path. This may be the wrong content!`);
+        // Only save to cache if we have high confidence or if there's no better option
+        if (matchConfidence === "HIGH" || (bestResult.score > 5 && bestResult.isCorrectType)) {
+            if (process.env.DISABLE_CACHE !== 'true') {
+                await saveToCache(searchTermKey, bestResult.url, cacheSubDir);
+            }
         }
-        
-        await saveToCache(searchTermKey, bestResult.url, cacheSubDir);
         return { url: bestResult.url, score: bestResult.score };
     } else {
         console.log(`  No suitable match found on ShowBox search for: ${originalTmdbTitle} (${mediaYear || 'N/A'})`);
-        await saveToCache(searchTermKey, 'NO_MATCH_FOUND', cacheSubDir);
+        if (process.env.DISABLE_CACHE !== 'true') {
+            await saveToCache(searchTermKey, 'NO_MATCH_FOUND', cacheSubDir);
+        }
         return { url: null, score: -1 };
     }
 };
 
 // TMDB helper function to get ShowBox URL from TMDB ID
-// MODIFICATION: Remove scraperApiKey parameter
+// MODIFICATION: Enhanced for better anime and title matching
 const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId, regionPreference = null) => {
     console.time('getShowboxUrlFromTmdbInfo_total');
-    const cacheSubDir = 'tmdb_api';
-    const cacheKey = `tmdb-${tmdbType}-${tmdbId}.json`;
-    let tmdbData = await getFromCache(cacheKey, cacheSubDir);
-    if (!tmdbData) {
+    const mainCacheSubDir = 'tmdb_api';
+    const mainCacheKey = `tmdb-${tmdbType}-${tmdbId}.json`;
+    let tmdbData = await getFromCache(mainCacheKey, mainCacheSubDir);
+    
+    if (!tmdbData || process.env.DISABLE_CACHE === 'true') {
         const tmdbApiUrl = `${TMDB_BASE_URL}/${tmdbType}/${tmdbId}?api_key=${TMDB_API_KEY}`;
         console.log(`  Fetching TMDB data from: ${tmdbApiUrl}`);
         try {
             const response = await axios.get(tmdbApiUrl, { timeout: 10000 });
             tmdbData = response.data;
-            if (tmdbData) await saveToCache(cacheKey, tmdbData, cacheSubDir);
-            else { console.log('No TMDB data'); return null; }
-        } catch (error) { console.log('Error fetching TMDB', error); return null; }
+            if (tmdbData) {
+                if (process.env.DISABLE_CACHE !== 'true') {
+                    await saveToCache(mainCacheKey, tmdbData, mainCacheSubDir);
+                }
+            } else { 
+                console.log('  No TMDB data received.'); 
+                console.timeEnd('getShowboxUrlFromTmdbInfo_total'); 
+                return null; 
+            }
+        } catch (error) { 
+            console.log(`  Error fetching TMDB main data: ${error.message}`); 
+            console.timeEnd('getShowboxUrlFromTmdbInfo_total'); 
+            return null; 
+        }
     }
-    // Ensure tmdbData is available
+    
     if (!tmdbData) {
-        console.log(`  Could not fetch TMDB data for ${tmdbType}/${tmdbId}. Cannot proceed to ShowBox search.`);
+        console.log(`  Could not fetch TMDB data for ${tmdbType}/${tmdbId}. Cannot proceed.`);
+        console.timeEnd('getShowboxUrlFromTmdbInfo_total');
         return null;
     }
 
-
-    let title = null;
+    // Fetch alternative titles
+    const altTitlesCacheKey = `tmdb-${tmdbType}-${tmdbId}-alternatives.json`;
+    let tmdbAlternativeTitlesData = await getFromCache(altTitlesCacheKey, mainCacheSubDir);
+    
+    if (!tmdbAlternativeTitlesData || process.env.DISABLE_CACHE === 'true') {
+        const altTitlesApiUrl = `${TMDB_BASE_URL}/${tmdbType}/${tmdbId}/alternative_titles?api_key=${TMDB_API_KEY}`;
+        console.log(`  Fetching TMDB alternative titles from: ${altTitlesApiUrl}`);
+        try {
+            const response = await axios.get(altTitlesApiUrl, { timeout: 10000 });
+            tmdbAlternativeTitlesData = response.data;
+            if (tmdbAlternativeTitlesData) {
+                if (process.env.DISABLE_CACHE !== 'true') {
+                    await saveToCache(altTitlesCacheKey, tmdbAlternativeTitlesData, mainCacheSubDir);
+                }
+            }
+        } catch (error) { 
+            console.log(`  Error fetching TMDB alternative titles: ${error.message}`); 
+            tmdbAlternativeTitlesData = { titles: [] }; 
+        }
+    }
+    
+    // Get alternative titles array, or empty array if none
+    const alternativeTitles = tmdbAlternativeTitlesData?.titles || [];
+    
+    // Log anime genres to help identify anime content
+    if (tmdbData.genres && Array.isArray(tmdbData.genres)) {
+        const animeGenre = tmdbData.genres.find(g => g.name === 'Animation');
+        if (animeGenre) {
+            console.log(`  [ANIME] Content identified as Animation genre, will check for anime-specific titles`);
+        }
+    }
+    
+    // Extract main titles and year
+    let mainTitle = null;      // Primary/localized title
+    let originalTitle = null;  // Original title (could be in non-Latin script)
     let year = null;
-    // let originalTitleForShowbox = null; // Removed the Andor specific fix for now
-
+    
     if (tmdbType === 'movie') {
-        title = tmdbData.title || tmdbData.original_title;
+        mainTitle = tmdbData.title; // Prioritize .title for movies (localized)
+        originalTitle = tmdbData.original_title;
         if (tmdbData.release_date && String(tmdbData.release_date).length >= 4) {
             year = String(tmdbData.release_date).substring(0, 4);
         }
     } else if (tmdbType === 'tv') {
-        title = tmdbData.name || tmdbData.original_name;
+        mainTitle = tmdbData.name; // Prioritize .name for TV (localized)
+        originalTitle = tmdbData.original_name;
         let rawFirstAirDate = tmdbData.first_air_date;
         if (rawFirstAirDate && String(rawFirstAirDate).length >= 4) {
             year = String(rawFirstAirDate).substring(0, 4);
         }
     }
 
-    if (!title) {
-        console.log(`  Could not determine title from TMDB data for ${tmdbType}/${tmdbId}.`);
+    if (!mainTitle && !originalTitle) {
+        console.log(`  Could not determine any title from TMDB data for ${tmdbType}/${tmdbId}.`);
+        console.timeEnd('getShowboxUrlFromTmdbInfo_total');
         return null;
     }
     
-    const searchTerm = year ? `${title} ${year}` : title;
-    console.log(`  Preparing to search ShowBox with term: "${searchTerm}" (Original TMDB title: "${title}", Year: ${year || 'N/A'})`);
+    // If mainTitle is missing, use originalTitle as fallback
+    if (!mainTitle) mainTitle = originalTitle;
+    
+    // Extract special titles like Romaji for anime
+    const specialTitles = extractSpecialTitles(tmdbData, alternativeTitles);
+    
+    // Collect all available titles in one array for processing
+    const allTitles = [mainTitle, originalTitle, ...specialTitles, ...alternativeTitles.map(alt => alt.title)]
+        .filter(Boolean) // Remove nulls/undefined
+        .filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates
+    
+    console.log(`  Collected ${allTitles.length} unique titles for "${mainTitle || originalTitle}":`);
+    allTitles.forEach((title, idx) => {
+        console.log(`    [${idx+1}] "${title}"`);
+    });
+    
+    // Initialize ShowBox scraper instance
+    const showboxScraperInstance = new ShowBoxScraper(regionPreference);
+    const mediaTypeString = tmdbType === 'movie' ? 'movie' : 'tv';
+    const mediaTypePrefix = tmdbType === 'movie' ? 'm' : 't';
 
-    // We need an instance of ShowBoxScraper to call _makeRequest
-    // Assuming ShowBoxScraper is instantiated somewhere accessible or we pass it
-    // For now, let's assume getStreamsFromTmdbId (the caller) will pass it,
-    // or we instantiate it here if this function is called standalone.
-    // THIS IS A TEMPORARY SIMPLIFICATION - ShowBoxScraper instance needs to be handled properly.
-    const showboxScraperInstance = new ShowBoxScraper(regionPreference); // Pass regionPreference
-
-    // First attempt: Search with title + year
-    let searchResult = await _searchAndExtractShowboxUrl(searchTerm, title, year, showboxScraperInstance, tmdbType, regionPreference);
-    let showboxUrl = searchResult.url;
-    let matchScore = searchResult.score;
-
-    // If the first attempt is poor (no URL or low score), try searching with title only
-    // Define a low score threshold, e.g., 2. If score is below this, try without year.
-    const lowScoreThreshold = 2;
-    if (!showboxUrl || matchScore < lowScoreThreshold) {
-        console.log(`  Initial search for "${searchTerm}" yielded a poor result (URL: ${showboxUrl}, Score: ${matchScore}). Retrying search without year.`);
-        const searchTermWithoutYear = title; // Search with title only
-        const fallbackSearchResult = await _searchAndExtractShowboxUrl(searchTermWithoutYear, title, null, showboxScraperInstance, tmdbType, regionPreference);
+    // If we have a year, try direct URL construction with all titles
+    if (year) {
+        console.log(`  Attempting direct ShowBox URL construction for ${tmdbType} "${mainTitle}" (${year}) with ${allTitles.length} title variants.`);
         
-        // Use fallback if it's better or if the initial search failed completely
-        if (fallbackSearchResult.url && fallbackSearchResult.score > matchScore) {
-            console.log(`  Fallback search for "${searchTermWithoutYear}" provided a better result (URL: ${fallbackSearchResult.url}, Score: ${fallbackSearchResult.score}).`);
-            showboxUrl = fallbackSearchResult.url;
-            matchScore = fallbackSearchResult.score; // Update score to reflect the better match
-        } else if (fallbackSearchResult.url && !showboxUrl) {
-            console.log(`  Fallback search for "${searchTermWithoutYear}" provided a result (URL: ${fallbackSearchResult.url}, Score: ${fallbackSearchResult.score}) where initial search failed.`);
-            showboxUrl = fallbackSearchResult.url;
-            matchScore = fallbackSearchResult.score;
-        } else {
-            console.log(`  Fallback search for "${searchTermWithoutYear}" did not yield a better result. Sticking with initial result (URL: ${showboxUrl}, Score: ${matchScore}).`);
+        // Try each title variant for direct slug construction
+        for (const candidateTitle of allTitles) {
+            const slug = slugify(candidateTitle);
+            if (!slug) {
+                console.log(`    Skipping empty slug for title: "${candidateTitle}"`);
+                continue;
+            }
+            
+            const directShowboxUrl = `https://www.showbox.media/${mediaTypeString}/${mediaTypePrefix}-${slug}-${year}`;
+            console.log(`    Trying direct URL: ${directShowboxUrl} (from title: "${candidateTitle}")`);
+            
+            const htmlContent = await showboxScraperInstance._makeRequest(directShowboxUrl);
+            if (htmlContent) {
+                console.log(`    Successfully fetched content from direct URL: ${directShowboxUrl}`);
+                const pageInfo = showboxScraperInstance.extractContentIdAndType(directShowboxUrl, htmlContent);
+                
+                if (pageInfo && pageInfo.title) {
+                    console.log(`      Extracted title from page: "${pageInfo.title}" (Source: ${pageInfo.source}, ID: ${pageInfo.id}, Type: ${pageInfo.type})`);
+                    
+                    if (validateShowboxTitle(pageInfo.title, mainTitle, originalTitle, alternativeTitles)) {
+                        console.log(`      SUCCESS: Validated title for ${directShowboxUrl}. Using this URL.`);
+                        console.timeEnd('getShowboxUrlFromTmdbInfo_total');
+                        return { showboxUrl: directShowboxUrl, year: year, title: mainTitle };
+                    } else {
+                        console.log(`      Validation FAILED for title from ${directShowboxUrl}. Page title: "${pageInfo.title}", TMDB main title: "${mainTitle}".`);
+                    }
+                } else {
+                    console.log(`      Could not extract title or necessary info from ${directShowboxUrl}. Content ID: ${pageInfo ? pageInfo.id : 'N/A'}`);
+                    
+                    // Try to extract title from HTML directly using cheerio as fallback
+                    try {
+                        const $ = cheerio.load(htmlContent);
+                        const extractedTitle = $('h1.heading-name, meta[property="og:title"]').first().text() || 
+                                              $('meta[property="og:title"]').attr('content') || 
+                                              $('title').text();
+                        
+                        if (extractedTitle) {
+                            console.log(`      Fallback title extraction from HTML: "${extractedTitle}"`);
+                            
+                            // Clean up extracted title (remove " - ShowBox" etc.)
+                            let cleanTitle = extractedTitle.replace(/\s*-\s*ShowBox.*$/, '').trim();
+                            
+                            if (cleanTitle && validateShowboxTitle(cleanTitle, mainTitle, originalTitle, alternativeTitles)) {
+                                console.log(`      SUCCESS (fallback extraction): Validated title for ${directShowboxUrl}. Using this URL.`);
+                                console.timeEnd('getShowboxUrlFromTmdbInfo_total');
+                                return { showboxUrl: directShowboxUrl, year: year, title: mainTitle };
+                            }
+                        }
+                    } catch (e) {
+                        console.log(`      Fallback HTML title extraction failed: ${e.message}`);
+                    }
+                }
+            } else {
+                 console.log(`    Failed to fetch content from direct URL: ${directShowboxUrl}`);
+            }
+        }
+        console.log(`  Direct URL construction did not yield a validated ShowBox URL for "${mainTitle}" (${year}).`);
+    } else {
+        console.log(`  Year not available for "${mainTitle}", skipping direct URL construction attempt.`);
+    }
+
+    // If a special title was found but unused by direct URL, try a few more fixed slug formats that ShowBox uses
+    if (specialTitles.length > 0) {
+        console.log(`  Trying common ShowBox slug patterns with special titles (${specialTitles.length} special titles):`);
+        
+        // Common slug formats ShowBox uses for anime:
+        // t-title-year  (standard)
+        // t-title       (no year)
+        // tv-title-year (tv prefix instead of t)
+        
+        for (const specialTitle of specialTitles) {
+            const specialSlug = slugify(specialTitle);
+            if (!specialSlug) continue;
+            
+            // Try formats without the actual mediaType prefix (sometimes ShowBox is inconsistent)
+            const directUrls = [
+                `https://www.showbox.media/${mediaTypeString}/${mediaTypePrefix}-${specialSlug}${year ? `-${year}` : ''}`,
+                `https://www.showbox.media/${mediaTypeString}/t-${specialSlug}${year ? `-${year}` : ''}`,
+                `https://www.showbox.media/${mediaTypeString}/tv-${specialSlug}${year ? `-${year}` : ''}`
+            ];
+            
+            for (const directUrl of directUrls) {
+                console.log(`    Trying special slug URL: ${directUrl} (from title: "${specialTitle}")`);
+                
+                const htmlContent = await showboxScraperInstance._makeRequest(directUrl);
+                if (htmlContent) {
+                    console.log(`    Successfully fetched content from special URL: ${directUrl}`);
+                    const pageInfo = showboxScraperInstance.extractContentIdAndType(directUrl, htmlContent);
+                    
+                    if (pageInfo && pageInfo.title) {
+                        console.log(`      Extracted title from page: "${pageInfo.title}" (Source: ${pageInfo.source})`);
+                        
+                        if (validateShowboxTitle(pageInfo.title, mainTitle, originalTitle, alternativeTitles)) {
+                            console.log(`      SUCCESS: Validated special URL ${directUrl}. Using this URL.`);
+                            console.timeEnd('getShowboxUrlFromTmdbInfo_total');
+                            return { showboxUrl: directUrl, year: year, title: mainTitle };
+                        }
+                    }
+                }
+            }
         }
     }
 
+    // Fallback to enhanced search logic if direct URL construction fails
+    console.log(`  Falling back to ShowBox search for: "${mainTitle}" (Year: ${year || 'N/A'})`);
+    const searchTerm = year ? `${mainTitle} ${year}` : mainTitle;
+    
+    // Pass all collected titles to the search function for better matching
+    let searchResult = await _searchAndExtractShowboxUrl(
+        searchTerm,
+        mainTitle,
+        year, 
+        showboxScraperInstance, 
+        tmdbType, 
+        regionPreference,
+        allTitles
+    );
+    
+    let showboxUrl = searchResult.url;
+    let matchScore = searchResult.score;
+
     if (!showboxUrl) {
-        console.log(`  Could not find a ShowBox URL via search for: ${title}`);
-        // Fallback to old slug construction as a last resort? Or just fail?
-        // For now, let's just fail if search fails.
+        console.log(`  Could not find a ShowBox URL via search for: ${mainTitle}`);
+        console.timeEnd('getShowboxUrlFromTmdbInfo_total');
         return null;
     }
     
-    // The year and title here are from TMDB, which is fine.
-    // The showboxUrl is now the one found from search.
-    return { showboxUrl: showboxUrl, year: year, title: title };
+    console.log(`  Found ShowBox URL via search: ${showboxUrl} (Score: ${matchScore > -1 ? matchScore.toFixed(1) : 'N/A'})`);
+    console.timeEnd('getShowboxUrlFromTmdbInfo_total');
+    return { showboxUrl: showboxUrl, year: year, title: mainTitle };
 };
 
 // Function to fetch sources for a single FID

@@ -60,6 +60,22 @@ async function parseMasterM3U8(m3u8Content, masterM3U8Url) {
             }
         }
     }
+    
+    // Sort streams by quality (highest first)
+    streams.sort((a, b) => {
+        // Extract resolution height from quality (e.g., "1280x720" -> 720)
+        const getHeight = (quality) => {
+            const match = quality.match(/(\d+)x(\d+)/);
+            return match ? parseInt(match[2], 10) : 0;
+        };
+        
+        const heightA = getHeight(a.quality);
+        const heightB = getHeight(b.quality);
+        
+        // Higher resolution comes first
+        return heightB - heightA;
+    });
+    
     return streams;
 }
 async function PRORCPhandler(prorcp) {

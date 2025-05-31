@@ -170,7 +170,7 @@ async function parseM3U8(playlistUrl, m3u8Headers, category, tmdbShowId, seasonN
           const streamId = `hianime-${tmdbShowId}-S${seasonNumber}E${episodeNumber}-${category}-${qualityLabel}-${streamCounter++}`;
           streams.push({
             id: streamId,
-            title: `Hianime ${category.toUpperCase()} - ${qualityLabel}`,
+            title: `Hianime ${category === 'sub' ? 'OG' : category.toUpperCase()} - ${qualityLabel}`,
             quality: qualityLabel,
             language: category, // dub or sub
             url: mediaPlaylistUrl,
