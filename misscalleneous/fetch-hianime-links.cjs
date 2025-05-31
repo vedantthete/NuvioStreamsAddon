@@ -2,19 +2,18 @@
 
 // Standalone Node.js script to fetch HLS stream links from Hianime (netmagcdn.com only)
 // for a specific TV show episode using its TMDB ID.
-// Usage: node fetch-hianime-links.cjs --show <TMDB_ID> --season <S_NUM> --episode <E_NUM>
-// Example: node fetch-hianime-links.cjs --show 127532 --season 1 --episode 1
+// Usage: node fetch-hianime-links.js --show <TMDB_ID> --season <S_NUM> --episode <E_NUM>
+// Example: node fetch-hianime-links.js --show 127532 --season 1 --episode 1
 
 const https = require('https');
 
 // --- Configuration & Constants ---
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36';
-const PROXY_URL_BASE = 'https://starlit-valkyrie-39f5ab.netlify.app/?destination='; // Added Proxy
 const API_HEADERS = {
   'User-Agent': USER_AGENT,
   'Accept': 'application/json, text/plain, */*',
   'Accept-Language': 'en-US,en;q=0.9',
-  'Origin': 'https://pstream.org', // Origin header might be for the proxy or the destination, usually destination
+  'Origin': 'https://pstream.org',
 };
 const TMDB_API_KEY = '5b9790d9305dca8713b9a0afad42ea8d'; // Public API key
 
@@ -27,52 +26,204 @@ const SERVERS_TO_TRY = [
 
 // --- Helper Functions ---
 
-async function fetchJson(url, options = {}, attempt = 1, useProxy = false) { // Added useProxy flag
-  const finalUrl = useProxy ? `${PROXY_URL_BASE}${encodeURIComponent(url)}` : url;
-  console.log(`Fetching JSON from: ${finalUrl}`)
+async function fetchJson(url, options = {}, attempt = 1) {
   try {
-    const response = await fetch(finalUrl, {
-      agent: new https.Agent({ rejectUnauthorized: false }),
+    const response = await fetch(url, {
+      agent: new https.Agent({ rejectUnauthorized: false }), // Allow self-signed certs if any issues arise
        ...options,
     });
     if (!response.ok) {
       const errorText = await response.text().catch(() => 'Could not read error text');
-      console.error(`API Error: ${response.status} for ${finalUrl}. Response: ${errorText}`);
-      if (response.status === 403 && attempt < 3) {
-        console.warn(`Retrying fetch for ${finalUrl} (attempt ${attempt + 1}) after 403...`);
+      console.error(`API Error: ${response.status} for ${url}. Response: ${errorText}`);
+      if (response.status === 403 && attempt < 3) { // Retry for 403s sometimes helps
+        console.warn(`Retrying fetch for ${url} (attempt ${attempt + 1}) after 403...`);
         await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
-        return fetchJson(url, options, attempt + 1, useProxy); // Pass useProxy in retry
+        return fetchJson(url, options, attempt + 1);
       }
-      throw new Error(`Failed to fetch ${finalUrl}: ${response.status} ${response.statusText}`);
+      throw new Error(`Failed to fetch ${url}: ${response.status} ${response.statusText}`);
     }
     return response.json();
   } catch (error) {
-    console.error(`Fetch error for ${finalUrl}:`, error.message);
+    console.error(`Fetch error for ${url}:`, error.message);
     throw error;
   }
 }
 
 
-async function searchAnimeOnHianime(title) {
+async function searchAnimeOnHianime(title, seasonNumber = null) {
   const searchUrl = `https://hianime.pstream.org/api/v2/hianime/search?q=${encodeURIComponent(title)}`;
-  console.log(`Attempting to search anime: "${title}" via Hianime API...`);
-  // Use proxy for this Hianime API call
-  const data = await fetchJson(searchUrl, { headers: API_HEADERS }, 1, true);
+  console.log(`Searching for anime: "${title}"...`);
+  const data = await fetchJson(searchUrl, { headers: API_HEADERS });
 
   if (!data.success || !data.data.animes || data.data.animes.length === 0) {
     throw new Error(`Anime "${title}" not found on Hianime or no animes array in response.`);
   }
-  const match = data.data.animes.find(anime => anime.name.toLowerCase() === title.toLowerCase());
-  const animeSlug = match?.id ?? data.data.animes[0].id;
-  console.log(`Found Hianime slug: ${animeSlug}`);
-  return animeSlug;
+  
+  // Extract the main title without season/part information
+  const mainTitle = title.split(':')[0].trim();
+  
+  // Print all available matches
+  console.log('All available matches on Hianime:');
+  data.data.animes.forEach((anime, index) => {
+    console.log(`${index+1}. ID: ${anime.id}, Name: ${anime.name}`);
+  });
+  
+  // Filter results to only include anime that contain the main title
+  const relevantResults = data.data.animes.filter(anime => 
+    anime.name.toLowerCase().includes(mainTitle.toLowerCase())
+  );
+  
+  console.log(`Found ${relevantResults.length} results containing the main title "${mainTitle}"`);
+  
+  // If seasonNumber is provided, try to find the matching season
+  if (seasonNumber !== null && relevantResults.length > 0) {
+    console.log(`Looking for entries matching season ${seasonNumber}...`);
+    
+    // Season keywords to look for
+    const seasonKeywords = [
+      `season ${seasonNumber}`,
+      `s${seasonNumber}`,
+      `${seasonNumber}rd season`,
+      `${seasonNumber}nd season`,
+      `${seasonNumber}th season`,
+      `${seasonNumber}st season`
+    ];
+    
+    // First try to find direct season number matches
+    let seasonMatch = relevantResults.find(anime => 
+      seasonKeywords.some(keyword => 
+        anime.name.toLowerCase().includes(keyword.toLowerCase())
+      )
+    );
+    
+    if (seasonMatch) {
+      console.log(`Found direct season number match: ${seasonMatch.name}`);
+      return {
+        slug: seasonMatch.id,
+        useRelativeEpisodeNumber: true
+      };
+    }
+    
+    // Filter out movies when looking for TV seasons
+    const nonMovieEntries = relevantResults.filter(anime => 
+      !anime.name.toLowerCase().includes('movie') && 
+      !anime.id.toLowerCase().includes('movie')
+    );
+    
+    if (nonMovieEntries.length > 0) {
+      console.log(`Found ${nonMovieEntries.length} non-movie entries`);
+    
+      // If no direct season number match, try finding entries with specific arc names
+      // Common patterns for Demon Slayer and other anime
+      if (seasonNumber === 2) {
+        // For season 2, look for entries containing 'entertainment district', 'mugen train' (TV), etc.
+        const seasonArcMatch = nonMovieEntries.find(anime => {
+          const lowerName = anime.name.toLowerCase();
+          return lowerName.includes('entertainment district') || 
+                 (lowerName.includes('mugen train') && !lowerName.includes('movie')) ||
+                 lowerName.includes('arc tv');
+        });
+        
+        if (seasonArcMatch) {
+          console.log(`Found likely season 2 arc match: ${seasonArcMatch.name}`);
+          return {
+            slug: seasonArcMatch.id,
+            useRelativeEpisodeNumber: true
+          };
+        }
+      }
+      
+      if (seasonNumber === 3) {
+        // For season 3, look for entries containing 'swordsmith village', etc.
+        const seasonArcMatch = nonMovieEntries.find(anime => 
+          anime.name.toLowerCase().includes('swordsmith')
+        );
+        
+        if (seasonArcMatch) {
+          console.log(`Found likely season 3 arc match: ${seasonArcMatch.name}`);
+          return {
+            slug: seasonArcMatch.id,
+            useRelativeEpisodeNumber: true
+          };
+        }
+      }
+      
+      if (seasonNumber === 4) {
+        // For season 4, look for entries containing 'hashira training', etc.
+        const seasonArcMatch = nonMovieEntries.find(anime => 
+          anime.name.toLowerCase().includes('hashira')
+        );
+        
+        if (seasonArcMatch) {
+          console.log(`Found likely season 4 arc match: ${seasonArcMatch.name}`);
+          return {
+            slug: seasonArcMatch.id,
+            useRelativeEpisodeNumber: true
+          };
+        }
+      }
+      
+      // If we're looking for season 2, try to find the first non-base non-movie entry
+      if (seasonNumber === 2) {
+        // Get the base entry (likely season 1) - one with the shortest name or closest to main title
+        const baseEntry = nonMovieEntries.find(anime => 
+          anime.name.toLowerCase() === title.toLowerCase() || 
+          anime.name.toLowerCase() === mainTitle.toLowerCase()
+        ) || nonMovieEntries.sort((a, b) => a.name.length - b.name.length)[0];
+        
+        // Remove base entry from consideration
+        const nonBaseEntries = nonMovieEntries.filter(anime => anime.id !== baseEntry.id);
+        
+        if (nonBaseEntries.length > 0) {
+          // Sort by ID (assuming lower non-base ID = season 2)
+          const seasonEntries = nonBaseEntries.sort((a, b) => {
+            const numA = parseInt(a.id.match(/\d+$/)?.[0] || '0');
+            const numB = parseInt(b.id.match(/\d+$/)?.[0] || '0');
+            return numA - numB; // Sort ascending
+          });
+          
+          const season2Candidate = seasonEntries[0];
+          console.log(`Using first non-base non-movie entry for season 2: ${season2Candidate.name}`);
+          return {
+            slug: season2Candidate.id,
+            useRelativeEpisodeNumber: true
+          };
+        }
+      }
+    }
+    
+    // If season 1 is requested, find entry without special suffixes and isn't a movie
+    if (seasonNumber === 1) {
+      const season1Candidates = relevantResults.filter(anime => 
+        !anime.name.toLowerCase().includes('movie') &&
+        !anime.id.toLowerCase().includes('movie')
+      ).sort((a, b) => a.name.length - b.name.length);
+      
+      if (season1Candidates.length > 0) {
+        const baseEntry = season1Candidates[0];
+        console.log(`Using base non-movie entry for season 1: ${baseEntry.name}`);
+        return {
+          slug: baseEntry.id,
+          useRelativeEpisodeNumber: true
+        };
+      }
+    }
+  }
+  
+  // Default: use exact title match or first result if no season-specific match found
+  const exactMatch = data.data.animes.find(anime => anime.name.toLowerCase() === title.toLowerCase());
+  const animeSlug = exactMatch?.id ?? data.data.animes[0].id;
+  console.log(`Using default Hianime slug: ${animeSlug}`);
+  return {
+    slug: animeSlug,
+    useRelativeEpisodeNumber: false // Use absolute episode calculation
+  };
 }
 
 async function getShowTitleFromTmdb(tmdbShowId) {
     const url = `https://api.themoviedb.org/3/tv/${tmdbShowId}?api_key=${TMDB_API_KEY}`;
-    // No proxy for TMDB
     console.log(`Fetching show title from TMDB for ID: ${tmdbShowId}...`);
-    const data = await fetchJson(url, { headers: { 'User-Agent': USER_AGENT } }, 1, false);
+    const data = await fetchJson(url, { headers: { 'User-Agent': USER_AGENT } });
     if (!data.name) throw new Error('Could not get show title from TMDB.');
     console.log(`TMDB Show Title: ${data.name}`);
     return data.name;
@@ -81,8 +232,7 @@ async function getShowTitleFromTmdb(tmdbShowId) {
 
 async function fetchTmdbSeasonEpisodes(tmdbShowId, seasonNumber) {
   const url = `https://api.themoviedb.org/3/tv/${tmdbShowId}/season/${seasonNumber}?api_key=${TMDB_API_KEY}`;
-  // No proxy for TMDB
-  const data = await fetchJson(url, { headers: { 'User-Agent': USER_AGENT } }, 1, false);
+  const data = await fetchJson(url, { headers: { 'User-Agent': USER_AGENT } });
   return data.episodes || [];
 }
 
@@ -100,21 +250,25 @@ async function calculateAbsoluteEpisodeNumber(tmdbShowId, seasonNumber, episodeN
 
 async function fetchEpisodeListForAnimeFromHianime(animeSlug) {
   const url = `https://hianime.pstream.org/api/v2/hianime/anime/${animeSlug}/episodes`;
-  console.log(`Attempting to fetch Hianime episode list for slug: ${animeSlug}...`);
-  // Use proxy for this Hianime API call
-  const data = await fetchJson(url, { headers: API_HEADERS }, 1, true);
+  console.log(`Fetching Hianime episode list for slug: ${animeSlug}...`);
+  const data = await fetchJson(url, { headers: API_HEADERS });
   if (!data.success || !data.data.episodes) {
     throw new Error('Failed to fetch Hianime episode list or no episodes in response.');
   }
+  
+  // Add debug info about available episodes
+  console.log(`Available episodes for ${animeSlug}:`);
+  const episodeNumbers = data.data.episodes.map(ep => ep.number).sort((a, b) => a - b);
+  console.log(`Episode numbers: ${episodeNumbers.join(', ')}`);
+  
   return data.data.episodes;
 }
 
 async function fetchEpisodeSources(hianimeFullEpisodeId, server, category) {
   const sourceApiUrl = `https://hianime.pstream.org/api/v2/hianime/episode/sources?animeEpisodeId=${hianimeFullEpisodeId}&server=${server}&category=${category}`;
-  console.log(`Attempting to fetch sources: ${server}/${category} via Hianime API`);
+  console.log(`Fetching sources: ${server}/${category} from ${sourceApiUrl}`);
   try {
-    // Use proxy for this Hianime API call
-    const data = await fetchJson(sourceApiUrl, { headers: API_HEADERS }, 1, true);
+    const data = await fetchJson(sourceApiUrl, { headers: API_HEADERS });
     if (!data.success || !data.data.sources || data.data.sources.length === 0) {
       console.warn(`Hianime Script: No sources found from ${server}/${category}.`);
       return null;
@@ -129,7 +283,7 @@ async function fetchEpisodeSources(hianimeFullEpisodeId, server, category) {
         return null;
     }
     return {
-        playlistUrl: masterPlaylistUrl, // This is the CDN URL, will be proxied in parseM3U8
+        playlistUrl: masterPlaylistUrl,
         headers: data.data.headers || {},
     };
   } catch (error) {
@@ -140,24 +294,16 @@ async function fetchEpisodeSources(hianimeFullEpisodeId, server, category) {
 
 async function parseM3U8(playlistUrl, m3u8Headers, category) {
   const streams = [];
-  // Use proxy for fetching the M3U8 content from CDN
-  const proxiedPlaylistUrl = `${PROXY_URL_BASE}${encodeURIComponent(playlistUrl)}`;
+  let streamCounter = 0;
   try {
-    console.log(`Parsing M3U8 from proxied URL: ${proxiedPlaylistUrl} (Original: ${playlistUrl})...`);
-    // Note: m3u8Headers are for the CDN, the proxy might or might not forward them.
-    // The proxy itself might require specific headers, but PROXY_URL_BASE doesn't indicate that.
-    const response = await fetch(proxiedPlaylistUrl, { 
-        headers: { 'User-Agent': USER_AGENT }, // Send basic UA to proxy, it handles destination headers.
-        agent: new https.Agent({ rejectUnauthorized: false })
-    });
+    console.log(`Parsing M3U8 from ${playlistUrl}...`);
+    const response = await fetch(playlistUrl, { headers: m3u8Headers });
     if (!response.ok) {
-      const errorText = await response.text().catch(() => 'Could not read error text');
-      console.warn(`Hianime Script: Failed to fetch M3U8 content from ${proxiedPlaylistUrl} - ${response.status}. Response: ${errorText}`);
+      console.warn(`Hianime Script: Failed to fetch M3U8 content from ${playlistUrl} - ${response.status}`);
       return [];
     }
     const masterPlaylistText = await response.text();
     const lines = masterPlaylistText.split(/\r?\n/);
-    // IMPORTANT: masterBaseUrl must be from the ORIGINAL playlistUrl for resolving relative segments
     const masterBaseUrl = playlistUrl.substring(0, playlistUrl.lastIndexOf('/') + 1);
     let variantsFoundInMaster = 0;
 
@@ -166,9 +312,7 @@ async function parseM3U8(playlistUrl, m3u8Headers, category) {
         const streamInfoLine = lines[i];
         let qualityLabel = 'auto';
         const resolutionMatch = streamInfoLine.match(/RESOLUTION=\d+x(\d+)/);
-        // In the original script, resolutionMatch[1] was used, but it should be resolutionMatch[2] for height.
-        // Assuming quality is based on height e.g. 720p from 1280x720
-        if (resolutionMatch && resolutionMatch[2]) qualityLabel = resolutionMatch[2] + 'p'; 
+        if (resolutionMatch && resolutionMatch[1]) qualityLabel = resolutionMatch[1] + 'p';
         else {
           const bandwidthMatch = streamInfoLine.match(/BANDWIDTH=(\d+)/);
           if (bandwidthMatch) qualityLabel = Math.round(parseInt(bandwidthMatch[1]) / 1000) + 'k';
@@ -176,15 +320,12 @@ async function parseM3U8(playlistUrl, m3u8Headers, category) {
 
         if (i + 1 < lines.length && lines[i+1].trim() && !lines[i+1].startsWith('#')) {
           const mediaPlaylistPath = lines[i+1].trim();
-          // Segments URLs in M3U8 are relative to original M3U8 location, not the proxy
           const mediaPlaylistUrl = new URL(mediaPlaylistPath, masterBaseUrl).href;
           
           streams.push({
             quality: qualityLabel,
             language: category, // dub or sub
-            // The final stream URL should also be proxied for playback if players can't handle proxying themselves
-            url: `${PROXY_URL_BASE}${encodeURIComponent(mediaPlaylistUrl)}`, 
-            originalUrl: mediaPlaylistUrl, // For reference
+            url: mediaPlaylistUrl,
             type: 'hls',
           });
           variantsFoundInMaster++;
@@ -195,18 +336,36 @@ async function parseM3U8(playlistUrl, m3u8Headers, category) {
       streams.push({
         quality: 'auto (media playlist)',
         language: category,
-        // The final stream URL should also be proxied
-        url: `${PROXY_URL_BASE}${encodeURIComponent(playlistUrl)}`,
-        originalUrl: playlistUrl, // For reference
+        url: playlistUrl,
         type: 'hls',
       });
     }
   } catch (err) {
-    console.error(`Hianime Script: Error parsing M3U8 ${proxiedPlaylistUrl}:`, err.message);
+    console.error(`Hianime Script: Error parsing M3U8 ${playlistUrl}:`, err.message);
   }
   return streams;
 }
 
+// Map TMDB seasons to specific Hianime slugs for shows that are split across multiple entries
+function getHianimeSlugForSeason(tmdbId, showTitle, seasonNumber) {
+  // Special case for Demon Slayer (TMDB ID: 85937)
+  if (tmdbId === '85937') {
+    console.log(`Using specific season mapping for Demon Slayer, season ${seasonNumber}`);
+    const demonSlayerSeasons = {
+      1: 'demon-slayer-kimetsu-no-yaiba-47', // Season 1
+      2: 'demon-slayer-entertainment-district-arc-17483', // Season 2 (Entertainment District Arc)
+      3: 'demon-slayer-kimetsu-no-yaiba-swordsmith-village-arc-18056', // Season 3 (Swordsmith Village Arc)
+      4: 'demon-slayer-kimetsu-no-yaiba-hashira-training-arc-19107' // Season 4 (Hashira Training Arc)
+    };
+    
+    if (demonSlayerSeasons[seasonNumber]) {
+      return demonSlayerSeasons[seasonNumber];
+    }
+  }
+  
+  // Default: return null to use regular title search
+  return null;
+}
 
 // --- Main Execution ---
 async function main() {
@@ -216,27 +375,36 @@ async function main() {
   const episodeArg = args.indexOf('--episode') !== -1 ? parseInt(args[args.indexOf('--episode') + 1], 10) : null;
 
   if (!tmdbIdArg || seasonArg === null || episodeArg === null) {
-    console.log('Usage: node fetch-hianime-links.cjs --show <TMDB_ID> --season <S_NUM> --episode <E_NUM>');
-    console.log('Example: node fetch-hianime-links.cjs --show 127532 --season 1 --episode 1');
+    console.log('Usage: node fetch-hianime-links.js --show <TMDB_ID> --season <S_NUM> --episode <E_NUM>');
+    console.log('Example: node fetch-hianime-links.js --show 127532 --season 1 --episode 1');
     process.exit(1);
   }
 
-  console.log(`Fetching Hianime (netmagcdn.com) links via Proxy for TMDB ID: ${tmdbIdArg}, Season: ${seasonArg}, Episode: ${episodeArg}`);
-  console.log(`Using Proxy: ${PROXY_URL_BASE}YOUR_TARGET_URL`);
+  console.log(`Fetching Hianime (netmagcdn.com) links for TMDB ID: ${tmdbIdArg}, Season: ${seasonArg}, Episode: ${episodeArg}`);
 
   try {
     const showTitle = await getShowTitleFromTmdb(tmdbIdArg);
-    const animeSlug = await searchAnimeOnHianime(showTitle);
-    const absoluteEpNum = await calculateAbsoluteEpisodeNumber(tmdbIdArg, seasonArg, episodeArg);
-    const hianimeEpisodeList = await fetchEpisodeListForAnimeFromHianime(animeSlug);
-
-    const targetHianimeEpisode = hianimeEpisodeList.find(ep => ep.number === absoluteEpNum);
-
-    if (!targetHianimeEpisode) {
-      throw new Error(`Episode S${seasonArg}E${episodeArg} (Abs: ${absoluteEpNum}) not found in Hianime's list for ${animeSlug}.`);
+    const animeResult = await searchAnimeOnHianime(showTitle, seasonArg);
+    
+    // Determine which episode number to use (relative or absolute)
+    let episodeToUse;
+    if (animeResult.useRelativeEpisodeNumber) {
+      console.log(`Using episode number ${episodeArg} directly (not calculating absolute)`);
+      episodeToUse = episodeArg;
+    } else {
+      const absoluteEpNum = await calculateAbsoluteEpisodeNumber(tmdbIdArg, seasonArg, episodeArg);
+      episodeToUse = absoluteEpNum;
     }
     
-    const hianimeFullEpisodeId = targetHianimeEpisode.episodeId; 
+    const hianimeEpisodeList = await fetchEpisodeListForAnimeFromHianime(animeResult.slug);
+
+    const targetHianimeEpisode = hianimeEpisodeList.find(ep => ep.number === episodeToUse);
+
+    if (!targetHianimeEpisode) {
+      throw new Error(`Episode S${seasonArg}E${episodeArg} (Ep: ${episodeToUse}) not found in Hianime's list for ${animeResult.slug}.`);
+    }
+    
+    const hianimeFullEpisodeId = targetHianimeEpisode.episodeId; // e.g., "solo-leveling-18718?ep=114721"
     console.log(`Using Hianime full episode ID: ${hianimeFullEpisodeId}`);
 
     const allStreams = [];
@@ -244,33 +412,27 @@ async function main() {
     for (const serverInfo of SERVERS_TO_TRY) {
       const sourceData = await fetchEpisodeSources(hianimeFullEpisodeId, serverInfo.server, serverInfo.category);
       if (sourceData && sourceData.playlistUrl) {
-         // m3u8Headers from sourceData.headers are for the *destination* CDN (netmagcdn)
-         // The proxy itself may or may not use/forward them. 
-         // For fetching M3U8 via proxy, we mainly rely on User-Agent for the proxy request itself.
-         const cdnHeaders = {
+         const m3u8Headers = {
             ...(sourceData.headers || {}),
             'User-Agent': USER_AGENT,
             'Referer': sourceData.headers?.Referer || 'https://megacloud.blog/',
         };
-        Object.keys(cdnHeaders).forEach(key => {
-            if (cdnHeaders[key] === undefined) delete cdnHeaders[key];
+        Object.keys(m3u8Headers).forEach(key => {
+            if (m3u8Headers[key] === undefined) delete m3u8Headers[key];
         });
 
-        // Pass original CDN headers to parseM3U8, as they might be needed if the proxy forwards them
-        // or if we ever bypass the proxy for M3U8 fetching.
-        // However, the immediate fetch *to the proxy* for the M3U8 will use basic headers.
-        const parsedStreams = await parseM3U8(sourceData.playlistUrl, cdnHeaders, serverInfo.category);
+        const parsedStreams = await parseM3U8(sourceData.playlistUrl, m3u8Headers, serverInfo.category);
         if (parsedStreams.length > 0) {
-            console.log(`Found ${parsedStreams.length} stream(s) from ${serverInfo.server}/${serverInfo.category} on netmagcdn.com (via proxy)`);
+            console.log(`Found ${parsedStreams.length} stream(s) from ${serverInfo.server}/${serverInfo.category} on netmagcdn.com`);
             allStreams.push(...parsedStreams);
         }
       }
     }
 
     if (allStreams.length === 0) {
-      console.log('\nNo netmagcdn.com HLS streams found after checking all servers (via proxy).');
+      console.log('\nNo netmagcdn.com HLS streams found after checking all servers.');
     } else {
-      console.log(`\n--- Found ${allStreams.length} Hianime (netmagcdn.com) HLS Streams (via Proxy) ---`);
+      console.log(`\n--- Found ${allStreams.length} Hianime (netmagcdn.com) HLS Streams ---`);
       const streamsByLanguage = allStreams.reduce((acc, stream) => {
         const lang = stream.language || 'unknown';
         if (!acc[lang]) acc[lang] = [];
@@ -280,7 +442,7 @@ async function main() {
 
       for (const lang in streamsByLanguage) {
         console.log(`\n  Language: ${lang.toUpperCase()}`);
-        streamsByLanguage[lang].sort((a,b) => { 
+        streamsByLanguage[lang].sort((a,b) => { // Sort by quality (simple numeric sort on 'p' or 'k')
             const aVal = parseInt(a.quality);
             const bVal = parseInt(b.quality);
             if (isNaN(aVal) && isNaN(bVal)) return 0;
@@ -288,9 +450,7 @@ async function main() {
             if (isNaN(bVal)) return -1;
             return bVal - aVal;
         }).forEach(stream => {
-          // Display both proxied URL for direct use and original URL for reference
-          console.log(`    Quality: ${stream.quality.padEnd(20)} URL: ${stream.url}`);
-          console.log(`                              Original URL: ${stream.originalUrl}`);
+          console.log(`    Quality: ${stream.quality.padEnd(25)} URL: ${stream.url}`);
         });
       }
       console.log('\n--------------------------------------------------');
@@ -305,4 +465,4 @@ async function main() {
   }
 }
 
-main();
+main(); 

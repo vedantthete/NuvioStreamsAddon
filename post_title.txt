@@ -1,0 +1,119 @@
+# Hey r/StremioAddons!
+
+First of all, I want to thank everyone for the amazing response to my previous post. Your feedback, support, and enthusiasm mean a lot to me and have been a huge motivation to keep improving this addon. It's great to see this community so engaged!
+
+I'm back with an update to the **Nuvio Streaming Addon** for Stremio.
+
+After working on improvements based on your feedback, I'm releasing **version 0.3.0**. This update includes several new features that should improve the addon's functionality and customization options.
+
+# What's New in v0.3.0:
+
+* **New Providers Added** \- Added **HiAnime** for anime fans.
+* **Provider Customization** \- You can now choose which providers to use in the configuration page
+* **Quality Selection** \- Set minimum quality preferences for each provider (480p, 720p, 1080p)
+* **Performance Improvements** \- Backend optimizations for better stability
+
+# Reality Check:
+
+I want to be transparent: **this is a scraper addon** that relies on external providers. These providers can change their sites or shut down at any time without notice. While I'll try to maintain it as long as possible:
+
+* **No Long-Term Guarantees** \- Providers may stop working unexpectedly
+* **Limited Resources** \- As a solo developer, I fix things when I can
+* **Educational Project** \- This addon is primarily a personal project
+
+# About this addon:
+
+Now includes **six diverse providers** including specialized options for anime fans and multi-source capabilities. The addon attempts to find streams when available from these sources, with some providers supporting 4K, HDR, and Dolby Vision content. Personal cookie configuration remains the recommended way to get the best experience.
+
+# Who's This For?
+
+This addon is primarily for Stremio users who:
+
+1. **Prefer direct streaming links** as an alternative to debrid services
+2. **Understand the nature of scrapers** and that public sources can be unreliable
+3. **Are willing to configure** by setting up a personal cookie for the best experience
+
+# Personal Cookie Token Setup (Extremely Recommended)
+
+>**Why personalize?** Without personalization, you share limited bandwidth with other users and are restricted to smaller file sizes.
+>
+>**Benefits:** Your own dedicated 100GB monthly quota, faster speeds, and no file size restrictions.
+>
+>**Server Selection:** Choose your own custom server location after setting up your cookie - pick the one closest to you for faster loading and smoother playback.
+>
+>**How to set up:** Visit the addon's configuration page for instructions.
+
+# New Provider Customization
+
+With v0.3.0, you can now customize your experience in several ways:
+
+1. **Select which providers to use** \- Disable providers you don't need
+2. **Set quality preferences** \- Choose minimum quality for compatible providers
+3. **Improve performance** \- Disabling unused providers can speed up results
+
+# A Note on Regional Providers (LATAM)
+
+Many of you have requested providers from Latin America, I want to address this:
+
+The challenge with Most providers is that they require proxy connections to work properly. I've been researching VPS (Virtual Private Server) solutions that would handle these region-specific requests efficiently. Adding these diverse sources would significantly improve the addon's resilience when other providers go down.
+
+This is part of my roadmap for future development - I'm gradually working toward implementing the necessary infrastructure as resources become available. In the meantime, I'm focusing on optimizing the current providers while planning for these regional expansions.
+
+If you're interested in helping with this aspect of development, your expertise or resources would accelerate these improvements for the entire community. Collaboration on this front would benefit users across multiple regions.
+
+Just a reminder that even with these additions, no scraper addon can guarantee permanent availability. If you have technical expertise in this area and want to contribute, feel free to reach out.
+
+# Where to find it:
+
+# Nuvio Streaming Addon for Stremio
+
+**Installation Links:**
+
+* [**Nuvio Streams Addon (Main Page)**](https://nuvioaddon.vercel.app) \- *Install or configure here*
+* [**Stremio Community Addons Page**](https://beta.stremio-addons.net/addons/nuvio-streams) \- *Also available on the official community list*
+
+**Support the addon:** If you find Nuvio Streams useful, please consider **giving it a star ⭐ on the Stremio Community Addons page**.
+
+![img](a37vvy6vl44f1 "Example Anime : Attack on Titan")
+
+# Frequently Asked Questions:
+
+**Q: How reliable is this addon long-term?**  
+A: As a scraper addon, its reliability depends entirely on the external providers. They can change or disappear at any time, and when that happens, I'll try to update or replace them when possible, but there are no guarantees.
+
+**Q: What's the difference between personalized and non-personalized usage?**  
+A: Non-personalized users share limited bandwidth and can only access streams under 9GB from certain providers. Personalized users get their own 100GB monthly quota and access to all quality levels.
+
+**Q: Does this addon use torrents or P2P technology?**  
+A: No. This addon only scrapes direct HTTP streams from websites. It does not use P2P or torrents.
+
+**Q: Why do some streams not work?**  
+A: Providers can change their websites or go offline at any time. When this happens, streams will stop working until I update the addon.
+
+**Q: How often is the addon updated?**  
+A: As an indie developer with limited time, I update when I can. If a provider breaks, I'll try to fix it or find a replacement, but please be patient.
+
+**Q: Will more providers be added?**  
+A: I'm always looking for reliable providers to add. This update already adds two new ones.
+
+If you encounter issues, you can DM me or comment below. Please understand that it may take time to find solutions or alternative providers.
+
+# Support Development
+
+If you find this addon useful: [**Buy Me a Coffee**](https://buymeacoffee.com/tapframe)
+
+Your support helps maintain reliable streams, find new providers when old ones break, and keep things running smoothly. It's what makes continued development possible!
+
+**Follow me on GitHub:** [https://github.com/tapframe](https://github.com/tapframe)
+
+# Coming Soon: Public Repository
+
+I'm currently cleaning up the codebase and preparing to make the repository publicly available. Soon you'll be able to:
+
+* Check out the code yourself
+* Contribute improvements or fixes
+* Self-host your own instance of the addon
+
+This will give everyone more control over their streaming experience and help ensure the addon's longevity through community involvement.
+
+Thank you for your support and understanding of the nature of scraper addons!
