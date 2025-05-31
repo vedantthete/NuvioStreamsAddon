@@ -14,7 +14,7 @@ let detectedOssGroup = null; // To store the detected oss_group value
 // Function to load cookies from cookies.txt (for fallback)
 const loadFallbackCookies = async () => {
     try {
-        const cookiesPath = path.join(__dirname, 'cookies.txt');
+        const cookiesPath = path.join(__dirname, '..', 'cookies.txt');
         const cookiesContent = await fs.readFile(cookiesPath, 'utf-8');
         const loadedCookies = cookiesContent
             .split('\n')
@@ -45,21 +45,19 @@ const getCookieForRequest = async (regionPreference = null, userCookie = null) =
     let detectedOssGroup = null;
     let originalRegion = regionPreference;
     let usingFallback = false;
-    
-    // First, determine which region to use, prioritizing the parameter
+    let baseCookieToUse = null; // Will store the cookie string before region is applied
+
+    // --- Region Detection Logic (copied from existing, ensure it's complete) ---
     if (regionPreference) {
-        // Check if this region has been flagged as unavailable
-        if (global.regionAvailabilityStatus[regionPreference] === false) {
-            // If the region is known to be unavailable, immediately use a fallback
+        if (global.regionAvailabilityStatus && global.regionAvailabilityStatus[regionPreference] === false) {
             usingFallback = true;
             for (const fallbackRegion of US_FALLBACK_REGIONS) {
-                if (global.regionAvailabilityStatus[fallbackRegion] !== false) {
+                if (!global.regionAvailabilityStatus || global.regionAvailabilityStatus[fallbackRegion] !== false) {
                     detectedOssGroup = fallbackRegion;
                     console.log(`[CookieManager] Region ${regionPreference} known to be unavailable, using fallback US region: ${detectedOssGroup}`);
                     break;
                 }
             }
-            // If all fallbacks are also unavailable, try the original anyway as a last resort
             if (!detectedOssGroup) {
                 detectedOssGroup = regionPreference;
                 console.log(`[CookieManager] All fallback regions unavailable, trying original region: ${detectedOssGroup} anyway`);
@@ -69,71 +67,75 @@ const getCookieForRequest = async (regionPreference = null, userCookie = null) =
             detectedOssGroup = regionPreference;
         }
     } else {
-        // If no explicit region, use the configured default
         console.log(`[CookieManager] No explicit region preference provided, using default: ${DEFAULT_OSS_REGION}`);
         detectedOssGroup = DEFAULT_OSS_REGION;
     }
-    
-    // Store for tracking availability
+
     global.lastRequestedRegion = {
         original: originalRegion,
         used: detectedOssGroup,
         usingFallback: usingFallback
     };
-    
-    // 1. Prioritize user-supplied cookie passed directly to this function
-    if (userCookie) {
-        console.log('[CookieManager] Using user-supplied cookie passed to function.');
-        
-        // ALWAYS add the oss_group to ensure it overrides any default in the cookie
-        if (detectedOssGroup) {
-            console.log(`[CookieManager] Applying region: ${detectedOssGroup} to cookie`);
-            return userCookie + `; oss_group=${detectedOssGroup}`;
-        } else {
-            return userCookie;
+    // --- End of Region Detection Logic ---
+
+    // Check if a base cookie has already been chosen and cached for this specific request cycle
+    if (global.currentRequestConfig && global.currentRequestConfig.chosenFebboxBaseCookieForRequest) {
+        console.log(`[CookieManager] Re-using request-cached base cookie for this cycle.`);
+        baseCookieToUse = global.currentRequestConfig.chosenFebboxBaseCookieForRequest;
+    } else {
+        // No request-cached cookie, so we need to select one.
+        // 1. Prioritize user-supplied cookie passed directly to this function
+        if (userCookie) {
+            console.log('[CookieManager] Using user-supplied cookie passed to function for this cycle.');
+            baseCookieToUse = userCookie;
         }
-    }
-    
-    // 2. Prioritize user-supplied cookie from global (fallback for backward compatibility)
-    if (global.currentRequestUserCookie) {
-        console.log('[CookieManager] Using user-supplied cookie from global state (legacy mode).');
-        
-        // ALWAYS add the oss_group to ensure it overrides any default in the cookie
-        if (detectedOssGroup) {
-            console.log(`[CookieManager] Applying region: ${detectedOssGroup} to cookie`);
-            return global.currentRequestUserCookie + `; oss_group=${detectedOssGroup}`;
-        } else {
-            return global.currentRequestUserCookie;
+        // 2. Prioritize user-supplied cookie from global (fallback for backward compatibility)
+        else if (global.currentRequestUserCookie) {
+            console.log('[CookieManager] Using user-supplied cookie from global state (legacy mode) for this cycle.');
+            baseCookieToUse = global.currentRequestUserCookie;
+        }
+        // 3. Fallback to rotating cookies from cookies.txt
+        else {
+            if (cookieCache === null) {
+                cookieCache = await loadFallbackCookies();
+            }
+
+            if (cookieCache && cookieCache.length > 0) {
+                const fallbackCookie = cookieCache[cookieIndex]; // Get current fallback
+                const currentFallbackIndexDisplay = cookieIndex + 1; // For 1-based logging
+                // Advance index for the *next independent request cycle*, not for subsequent calls within this one.
+                cookieIndex = (cookieIndex + 1) % cookieCache.length;
+                console.log(`[CookieManager] Selected fallback cookie ${currentFallbackIndexDisplay} of ${cookieCache.length} from cookies.txt for this request cycle.`);
+                baseCookieToUse = fallbackCookie;
+            } else {
+                console.log('[CookieManager] No user-supplied or fallback cookies available for this cycle.');
+                baseCookieToUse = ''; // No base cookie to use
+            }
+        }
+
+        // Cache the chosen base cookie for this request cycle
+        if (global.currentRequestConfig) {
+            global.currentRequestConfig.chosenFebboxBaseCookieForRequest = baseCookieToUse;
+            console.log(`[CookieManager] Cached base cookie for this request cycle.`);
         }
     }
 
-    // 3. Fallback to rotating cookies from cookies.txt
-    if (cookieCache === null) {
-        cookieCache = await loadFallbackCookies();
-    }
-    
-    if (!cookieCache || cookieCache.length === 0) {
-        console.log('[CookieManager] No fallback cookies available in cookies.txt.');
-        
-        // Return just the region as a cookie if we have one
+    // Now, apply the detected OSS group to the chosen base cookie
+    if (baseCookieToUse && baseCookieToUse.trim() !== '') {
         if (detectedOssGroup) {
-            console.log(`[CookieManager] No cookie available, using only region: ${detectedOssGroup}`);
+            console.log(`[CookieManager] Applying region: ${detectedOssGroup} to chosen base cookie.`);
+            return `${baseCookieToUse}; oss_group=${detectedOssGroup}`;
+        }
+        return baseCookieToUse; // Return base cookie if no region detected/needed
+    } else {
+        // No base cookie was chosen (neither user-supplied nor fallback)
+        if (detectedOssGroup) {
+            console.log(`[CookieManager] No base cookie available, using only region: ${detectedOssGroup} as cookie.`);
             return `oss_group=${detectedOssGroup}`;
         }
-        return '';
+        console.log(`[CookieManager] No base cookie and no region detected. Returning empty cookie string.`);
+        return ''; // No cookie and no region
     }
-    
-    const fallbackCookie = cookieCache[cookieIndex];
-    const currentFallbackIndex = cookieIndex + 1; // For 1-based logging
-    cookieIndex = (cookieIndex + 1) % cookieCache.length;
-    console.log(`[CookieManager] Using fallback cookie ${currentFallbackIndex} of ${cookieCache.length} from cookies.txt.`);
-    
-    // ALWAYS add the oss_group to ensure it overrides any default
-    if (detectedOssGroup) {
-        console.log(`[CookieManager] Applying region: ${detectedOssGroup} to fallback cookie`);
-        return fallbackCookie + `; oss_group=${detectedOssGroup}`;
-    }
-    return fallbackCookie;
 };
 
 // Helper function to fetch stream size using a HEAD request
@@ -242,7 +244,7 @@ const saveToCache = async (cacheKey, content, subDir = '') => {
 // NEW HELPER FUNCTIONS
 
 // Function to create URL-friendly slugs
-function slugify(text) {
+const slugify = (text) => {
     if (!text) return '';
     return text
         .toString()
@@ -254,7 +256,7 @@ function slugify(text) {
         .replace(/--+/g, '-')             // Replace multiple - with single -
         .replace(/^-+/, '')               // Trim - from start of text
         .replace(/-+$/, '');              // Trim - from end of text
-}
+};
 
 // Function to normalize titles for comparison
 const normalizeTitleForComparison = (title) => {
@@ -272,7 +274,7 @@ const normalizeTitleForComparison = (title) => {
 };
 
 // Function to validate if a ShowBox page title matches TMDB titles
-function validateShowboxTitle(showboxPageTitle, tmdbMainTitle, tmdbOriginalTitle, tmdbAlternativeTitles = []) {
+const validateShowboxTitle = (showboxPageTitle, tmdbMainTitle, tmdbOriginalTitle, tmdbAlternativeTitles = []) => {
     if (!showboxPageTitle || !tmdbMainTitle) {
         console.log(`  [Validation] Missing titles. SB: "${showboxPageTitle}", TMDB Main: "${tmdbMainTitle}"`);
         return false;
@@ -302,10 +304,10 @@ function validateShowboxTitle(showboxPageTitle, tmdbMainTitle, tmdbOriginalTitle
     
     console.log(`  [Validation] FAILED: No strong match. SB: "${normalizedPageTitle}" vs TMDB Titles: "${titlesToCompare.filter(t => t.length > 0).join('", "')}"`);
     return false;
-}
+};
 
 // Function to extract special title forms for anime (e.g., Romaji)
-function extractSpecialTitles(tmdbData, alternativeTitles = []) {
+const extractSpecialTitles = (tmdbData, alternativeTitles = []) => {
     const specialTitles = [];
     console.log(`  [TITLE] Alternative titles available: ${alternativeTitles.length}`);
     if (alternativeTitles.length > 0) {
@@ -470,7 +472,7 @@ function extractSpecialTitles(tmdbData, alternativeTitles = []) {
     }
     
     return specialTitles;
-}
+};
 
 // NEW FUNCTION: Search ShowBox and extract the most relevant URL
 const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaYear, showboxScraperInstance, tmdbType, regionPreference = null, tmdbAllTitles = []) => {
@@ -2158,7 +2160,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
 };
 
 // Helper function to get episode number from filename
-function getEpisodeNumberFromName(name) {
+const getEpisodeNumberFromName = (name) => {
     const nameLower = name.toLowerCase();
     
     // Common TV episode naming patterns
@@ -2195,10 +2197,10 @@ function getEpisodeNumberFromName(name) {
     
     // Default to infinity (for sorting purposes)
     return Infinity;
-}
+};
 
 // Helper function to parse quality from label
-function parseQualityFromLabel(label) {
+const parseQualityFromLabel = (label) => {
     if (!label) return "ORG";
     
     const labelLower = String(label).toLowerCase();
@@ -2222,7 +2224,7 @@ function parseQualityFromLabel(label) {
     
     // Use ORG (original) label for unknown quality
     return "ORG";
-}
+};
 
 // Helper function to parse size string to bytes
 const parseSizeToBytes = (sizeString) => {
@@ -2290,7 +2292,7 @@ const extractCodecDetails = (text) => {
 };
 
 // Utility function to sort streams by quality in order of resolution
-function sortStreamsByQuality(streams) {
+const sortStreamsByQuality = (streams) => {
     // Since Stremio displays streams from bottom to top,
     // we need to sort in reverse order to what we want to show
     const qualityOrder = {

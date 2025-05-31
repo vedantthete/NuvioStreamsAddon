@@ -29,8 +29,8 @@ if (process.env.SCRAPER_MODE === 'api') {
     scraper = require('./scraperapi.js');
 } else {
     // Default to proxy/direct mode
-    console.log('Using proxy/direct mode with scraper.js');
-    scraper = require('./scraper.js');
+    console.log('Using proxy/direct mode with Showbox.js');
+    scraper = require('./providers/Showbox.js');
 }
 
 // Destructure the required functions from the selected scraper
