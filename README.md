@@ -19,7 +19,7 @@ Based on community feedback and continued development, this addon aims to offer 
 *   **TMDB & IMDb Support:** Works with both ID types.
 *   **User-Friendly Configuration:** All settings are managed through the addon's main page.
 
-## Self-Hosting Guide (Beginner Friendly)
+## Self-Hosting Guide
 
 This guide will help you set up your own instance of Nuvio Streams, including both the main addon and the Hianime service (for anime content).
 
