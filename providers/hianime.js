@@ -216,7 +216,7 @@ async function getHianimeStreams(tmdbShowId, seasonNumber, episodeNumber) {
 
   try {
     // Step 1: Get Show Title and Absolute Episode Number using TMDB (here in the addon)
-    console.log('[HianimeAddon] Fetching TMDB data before calling Oracle VPS...');
+    console.log('[HianimeAddon] Fetching TMDB data before calling Hianime Server...');
     const showTitle = await getShowTitleFromTmdb(tmdbShowId);
     const absoluteEpisodeNum = await calculateAbsoluteEpisodeNumber(tmdbShowId, seasonNumber, episodeNumber);
 
@@ -226,11 +226,11 @@ async function getHianimeStreams(tmdbShowId, seasonNumber, episodeNumber) {
     }
     console.log(`[HianimeAddon] TMDB data fetched: Title='${showTitle}', AbsEp=${absoluteEpisodeNum}`);
 
-    // Step 2: Call Oracle VPS with the fetched TMDB data
-    const oracleVpsEndpoint = process.env.HIANIME_ORACLE_VPS_URL || 'https://m3u8nuvio.duckdns.org/fetch-hianime'; 
+    // Step 2: Call Hianime Server with the fetched TMDB data
+    const oracleVpsEndpoint = process.env.HIANIME_SERVER || 'https://m3u8nuvio.duckdns.org/fetch-hianime'; 
     const fetchUrl = `${oracleVpsEndpoint}?tmdbId=${tmdbShowId}&season=${seasonNumber}&episode=${episodeNumber}&title=${encodeURIComponent(showTitle)}&absEp=${absoluteEpisodeNum}`;
 
-    console.log(`[HianimeAddon] Forwarding request to Oracle VPS: ${fetchUrl}`);
+    console.log(`[HianimeAddon] Forwarding request to Hianime server: ${fetchUrl}`);
 
     const response = await fetch(fetchUrl, { 
         method: 'GET',
@@ -242,17 +242,17 @@ async function getHianimeStreams(tmdbShowId, seasonNumber, episodeNumber) {
     });
 
     if (!response.ok) {
-      const errorText = await response.text().catch(() => 'Could not read error text from Oracle VPS');
-      console.error(`[HianimeAddon] Error fetching from Oracle VPS: ${response.status} ${response.statusText}. Response: ${errorText.substring(0, 300)}`);
+      const errorText = await response.text().catch(() => 'Could not read error text from Hianime Server');
+      console.error(`[HianimeAddon] Error fetching from Hianime Server: ${response.status} ${response.statusText}. Response: ${errorText.substring(0, 300)}`);
       return [];
     }
 
     const streams = await response.json();
     if (streams && Array.isArray(streams)) {
-        console.log(`[HianimeAddon] Successfully received ${streams.length} streams from Oracle VPS.`);
+        console.log(`[HianimeAddon] Successfully received ${streams.length} streams from Hianime Server.`);
         return streams;
     } else {
-        console.error('[HianimeAddon] Invalid response format from Oracle VPS. Expected a JSON array of streams.');
+        console.error('[HianimeAddon] Invalid response format from Hianime Server. Expected a JSON array of streams.');
         return [];
     }
 

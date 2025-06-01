@@ -4,10 +4,6 @@ Welcome to Nuvio Streams! This addon for Stremio fetches direct streaming links 
 
 Based on community feedback and continued development, this addon aims to offer a customizable and user-friendly streaming alternative.
 
-## About Nuvio Streams
-
-Nuvio Streams is a scraper-based addon. It currently searches across several diverse providers, including specialized options for anime (HiAnime) and multi-source capabilities. Users can customize which providers are active and set minimum quality preferences (e.g., 480p, 720p, 1080p) for compatible sources. The addon attempts to find streams when available, with some providers supporting 4K, HDR, and Dolby Vision content. Backend optimizations have also been implemented for better stability.
-
 **This addon is for Stremio users who:**
 
 1.  Prefer direct HTTP streaming links as an alternative to debrid services.
@@ -23,48 +19,24 @@ Nuvio Streams is a scraper-based addon. It currently searches across several div
 *   **TMDB & IMDb Support:** Works with both ID types.
 *   **User-Friendly Configuration:** All settings are managed through the addon's main page.
 
-## Installation & Configuration
+## Self-Hosting Guide (Beginner Friendly)
 
-The easiest way to install and configure Nuvio Streams is through its main page:
+This guide will help you set up your own instance of Nuvio Streams, including both the main addon and the Hianime service (for anime content).
 
-*   **Install & Configure Here:** [**https://nuvioaddon.vercel.app**](https://nuvioaddon.vercel.app)
-
-You can also find it on the Stremio Community Addons list:
-
-*   **Stremio Community Addons:** [https://beta.stremio-addons.net/addons/nuvio-streams](https://beta.stremio-addons.net/addons/nuvio-streams)
-
-On the main addon page, you can:
-*   Install the addon into Stremio.
-*   Configure your personal cookie for ShowBox (FebBox).
-*   Select your preferred server region for ShowBox.
-*   Choose which content providers to enable/disable.
-*   Set minimum stream quality for each provider.
-
-## Personal Cookie Token Setup (Extremely Recommended)
-
-For the ShowBox provider (which uses FebBox), personalizing your setup with your own cookie token is crucial for the best experience.
-
-*   **Why personalize?** Without it, you share a limited 100GB/month bandwidth quota with all other non-personalized users, leading to slower speeds, failed streams, and a restriction to streams under 9GB (often excluding 4K HDR/DV). With your own cookie, you get your own 100GB quota and access to all qualities.
-*   **How to set it up:** Visit the [Nuvio Streams Addon Page](https://nuvioaddon.vercel.app) and follow the "Personal Cookie Configuration" section, which includes a "How to Get" guide.
-
-## Self-Hosting (For Advanced Users)
-
-If you prefer to run your own instance of Nuvio Streams, follow these steps:
-
-**1. Prerequisites:**
+### Prerequisites
 
 *   [Node.js](https://nodejs.org/) (LTS version recommended)
-*   [npm](https://www.npmjs.com/) (usually comes with Node.js) or [yarn](https://yarnpkg.com/)
+*   [npm](https://www.npmjs.com/) (comes with Node.js) or [yarn](https://yarnpkg.com/)
+*   Basic familiarity with command line
 
-**2. Get the Code:**
+### Step 1: Get the Code
 
-(Once the repository is public)
 ```bash
 git clone <repository-url>
 cd nuvio-streams-addon 
 ```
 
-**3. Install Dependencies:**
+### Step 2: Install Dependencies
 
 ```bash
 npm install
@@ -72,42 +44,116 @@ npm install
 yarn install
 ```
 
-**4. Configure Your Instance (`.env` file):**
+### Step 3: Basic Configuration
 
 Create a `.env` file in the project root by copying the example:
 ```bash
 cp .env.example .env
 ```
-Now, edit your `.env` file. Here are the key settings:
 
-*   `TMDB_API_KEY`: **Required.** Get this from [The Movie Database (TMDB)](https://www.themoviedb.org/settings/api).
-*   `ENABLE_CUEVANA_PROVIDER`: Set to `true` to enable Cuevana. It will use your server's direct IP address. (Note: This is often disabled on public instances. If Cuevana is geo-restricted for your server's IP, this won't bypass it.)
-*   `ENABLE_HOLLYMOVIEHD_PROVIDER`: Set to `true` or `false`.
-*   `DISABLE_CACHE`: (Optional) `true` to disable caching.
+Edit your `.env` file with at least these essential settings:
 
-*   **Proxies (Optional but Recommended for ShowBox/Xprime):**
-    *   **Why?** Your server's IP (especially from cloud providers) might be blocked by ShowBox or Xprime. A proxy can improve reliability.
-    *   **How?** You can deploy a [simple proxy using Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/p-stream/simple-proxy).
-    *   **In `.env`:**
-        *   `SHOWBOX_PROXY_URL_VALUE`: If using the simple proxy, format as `https://your-proxy.netlify.app/?destination=`.
-        *   `XPRIME_PROXY_URL`: Similar format if using the simple proxy for Xprime.
-        *   `XPRIME_USE_PROXY`: Set to `true` if you configure `XPRIME_PROXY_URL`.
-    *   You can leave proxy URLs blank to attempt direct connections.
+```
+# Required: Get this from https://www.themoviedb.org/settings/api
+TMDB_API_KEY=your_tmdb_api_key_here
 
-*   **ShowBox Cookie Configuration (for self-hosting):**
-    *   **Method 1: `cookies.txt` file (Recommended for simplicity on self-host):**
-        *   Create a `cookies.txt` file in the project root.
-        *   Add one ShowBox/FebBox cookie token per line.
-        *   **Important:** Add `cookies.txt` to your `.gitignore` file.
-    *   **Method 2: Addon Configuration UI:** Access your self-hosted addon in a browser (e.g., `http://localhost:7000`) and use the configuration page to set the cookie (similar to the public instance).
+# Optional: Enable/disable specific providers
+ENABLE_CUEVANA_PROVIDER=false
+ENABLE_HOLLYMOVIEHD_PROVIDER=true
 
-**5. Run the Addon:**
+# Optional: Disable caching if needed
+DISABLE_CACHE=false
+```
+
+### Step 4: Run the Main Addon
 
 ```bash
-npm start 
+npm start
 # Or your designated start script, e.g., node server.js
 ```
-Your self-hosted addon will typically run on `http://localhost:7000` (or as configured). The console will show the manifest URL to install it in Stremio.
+
+Your self-hosted addon will typically run on `http://localhost:7000`. The console will show the manifest URL to install it in Stremio.
+
+### Step 5: ShowBox Cookie Setup (Recommended)
+
+ShowBox works best with a personal cookie. You have two options:
+
+**Option A: Using a `cookies.txt` file:**
+1. Create a `cookies.txt` file in the project root
+2. Add one ShowBox/FebBox cookie token per line
+3. Add `cookies.txt` to your `.gitignore` file
+
+**Option B: Using the Configuration UI:**
+1. Access your addon in a browser (e.g., `http://localhost:7000`)
+2. Use the configuration page to set your cookie
+
+### Step 6: Setting Up Hianime (For Anime Content)
+
+The Hianime provider requires a separate service that handles the communication with Hianime's API. Here's how to set it up:
+
+1. **Navigate to the Hianime Service Directory:**
+   ```bash
+   cd providers/hianime
+   ```
+
+2. **Install Hianime Service Dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Start the Hianime Service:**
+   ```bash
+   npm start
+   ```
+   This service will run on port `8082` by default.
+
+4. **Configure the Main Addon to Use Your Hianime Service:**
+   
+   Return to the main directory and edit your `.env` file to add:
+   ```
+   # For local testing:
+   HIANIME_SERVER=http://localhost:8082/fetch-hianime
+   
+   # If deploying to a server:
+   # HIANIME_SERVER=http://your-server-ip:8082/fetch-hianime
+   ```
+
+### Step 7: Advanced Configuration (Optional)
+
+#### Proxy Setup (If Providers Are Blocked in Your Region)
+
+Some providers like ShowBox or Xprime might block your server's IP. You can deploy a simple proxy:
+
+1. Deploy a [simple proxy using Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/p-stream/simple-proxy)
+2. Add to your `.env` file:
+   ```
+   # For ShowBox
+   SHOWBOX_PROXY_URL_VALUE=https://your-proxy.netlify.app/?destination=
+   
+   # For Xprime
+   XPRIME_PROXY_URL=https://your-proxy.netlify.app
+   XPRIME_USE_PROXY=true
+   ```
+
+#### Hianime Caching (Optional)
+
+By default, the Hianime service caches results to improve performance. If you want to disable caching:
+
+1. Create a `.env` file in the `providers/hianime` directory
+2. Add: `DISABLE_HIANIME_CACHE=true`
+
+## Provider-Specific Notes
+
+### Hianime - Understanding its Operation
+
+The Hianime provider works in two steps:
+
+1. **Main Addon Step:** Gathers show title and episode information from TMDB
+2. **Hianime Service Step:** Communicates with Hianime's API to find and extract stream links
+
+By self-hosting both components as described above, you have full control over the entire process.
 
 ## Support Development
 
