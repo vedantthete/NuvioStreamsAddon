@@ -155,6 +155,36 @@ The Hianime provider works in two steps:
 
 By self-hosting both components as described above, you have full control over the entire process.
 
+## Contributing
+
+Contributions to Nuvio Streams are highly welcomed and encouraged! The longevity and reliability of this addon depend on community involvement. Here's how you can contribute:
+
+### Ways to Contribute
+
+* **Code Contributions:** Help improve existing providers or add new ones
+* **Bug Reports:** Report issues you encounter while using the addon
+* **Feature Requests:** Suggest new features or improvements
+* **Documentation:** Help improve or translate the documentation
+* **Testing:** Test the addon on different platforms and configurations
+
+### How to Submit Changes
+
+1. Fork the repository
+2. Create a new branch for your feature (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Provider Development
+
+If you're interested in adding a new provider or improving an existing one:
+
+1. Study the structure of existing providers in the `providers/` directory
+2. Follow the established patterns for error handling, logging, and stream formatting
+3. Ensure your code is well-commented and handles edge cases appropriately
+
+Your contributions help ensure that Nuvio Streams remains a reliable and feature-rich addon for the Stremio community!
+
 ## Support Development
 
 If you find Nuvio Streams useful, please consider supporting its development. Your support helps maintain reliable streams, find new providers, and keep things running smoothly.
@@ -167,4 +197,10 @@ You can also follow on GitHub: [https://github.com/tapframe](https://github.com/
 
 *   Nuvio Streams is an addon that scrapes content from third-party websites. The availability, legality, and quality of the content are the responsibility of these external sites.
 *   Ensure you are complying with the terms of service of any websites being accessed and any applicable local laws.
-*   This addon is provided for educational and personal use. The developers are not responsible for any misuse. 
+*   This addon is provided for educational and personal use. The developers are not responsible for any misuse.
+
+## License
+
+Nuvio Streams is released under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+Copyright (c) 2024 tapframe and contributors 
