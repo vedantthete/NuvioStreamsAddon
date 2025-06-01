@@ -47,30 +47,16 @@ For the ShowBox provider (which uses FebBox), personalizing your setup with your
 *   **Why personalize?** Without it, you share a limited 100GB/month bandwidth quota with all other non-personalized users, leading to slower speeds, failed streams, and a restriction to streams under 9GB (often excluding 4K HDR/DV). With your own cookie, you get your own 100GB quota and access to all qualities.
 *   **How to set it up:** Visit the [Nuvio Streams Addon Page](https://nuvioaddon.vercel.app) and follow the "Personal Cookie Configuration" section, which includes a "How to Get" guide.
 
-## Reality Check: The Nature of Scraper Addons
-
-It's important to be transparent about how Nuvio Streams works:
-
-*   **External Reliance:** This is a scraper addon. Its functionality depends entirely on external, third-party providers. These providers can change their website structure, implement stricter anti-bot measures, or shut down at any time without notice.
-*   **No Long-Term Guarantees:** While efforts will be made to maintain the addon, providers may stop working unexpectedly.
-*   **Limited Resources:** As a solo-developed project, fixes and updates will be made when possible.
-*   **Educational Project:** This addon is primarily a personal project that has grown with community interest.
-
-## Future Development
-
-*   **Regional Providers (e.g., LATAM):** Research is ongoing for adding more region-specific providers, which often require proxy solutions. This is a roadmap item, and contributions or expertise in this area are welcome.
-*   **Community Involvement:** With the codebase becoming public (see below), community contributions will be encouraged.
-
 ## Self-Hosting (For Advanced Users)
 
-If you prefer to run your own instance of the Nuvio Streams addon:
+If you prefer to run your own instance of Nuvio Streams, follow these steps:
 
-### Prerequisites
+**1. Prerequisites:**
 
 *   [Node.js](https://nodejs.org/) (LTS version recommended)
 *   [npm](https://www.npmjs.com/) (usually comes with Node.js) or [yarn](https://yarnpkg.com/)
 
-### 1. Clone the Repository
+**2. Get the Code:**
 
 (Once the repository is public)
 ```bash
@@ -78,7 +64,7 @@ git clone <repository-url>
 cd nuvio-streams-addon 
 ```
 
-### 2. Install Dependencies
+**3. Install Dependencies:**
 
 ```bash
 npm install
@@ -86,58 +72,42 @@ npm install
 yarn install
 ```
 
-### 3. Configure Environment Variables
+**4. Configure Your Instance (`.env` file):**
 
-Create a `.env` file in the root of the project by copying the example file:
+Create a `.env` file in the project root by copying the example:
 ```bash
 cp .env.example .env
 ```
-Edit the `.env` file with your values:
+Now, edit your `.env` file. Here are the key settings:
 
-*   `DISABLE_CACHE`: (Optional) Set to `true` to disable caching. Defaults to `false`.
-*   `SHOWBOX_PROXY_URL_VALUE`: (Optional but Recommended) URL for a proxy to be used with the Showbox provider. Using a proxy is recommended as direct scraping from server IPs can sometimes be blocked or rate-limited by content sources. If deploying the `simple-proxy` (see Proxy Setup section), ensure the URL ends with `/?destination=` (e.g., `https://your-proxy.netlify.app/?destination=`). Users can leave this blank to attempt direct scraping.
-*   `TMDB_API_KEY`: **(Required)** Your API key from [The Movie Database (TMDB)](https://www.themoviedb.org/settings/api).
-*   `XPRIME_PROXY_URL`: (Optional but Recommended if `XPRIME_USE_PROXY=true`) URL for a proxy for Xprime.tv. Similar to Showbox, using a proxy can improve scraping reliability if direct server IP access is restricted. Format may require `/?destination=` if using a generic proxy like `simple-proxy`.
-*   `XPRIME_USE_PROXY`: (Optional) Set to `true` to use a proxy for Xprime.tv (recommended for reliability).
-*   `ENABLE_CUEVANA_PROVIDER`: (Optional) Set to `true` to enable the Cuevana provider for your self-hosted instance. When enabled, it will attempt to fetch links using your server's direct IP address. This provider is disabled by default on public instances due to potential IP exposure or regional access complexities. If Cuevana content is geo-restricted for your server's IP, enabling it here might not bypass that; it simply allows the addon to *try* fetching from Cuevana using your server's IP.
-*   `ENABLE_HOLLYMOVIEHD_PROVIDER`: (Optional) Set to `true` (default) or `false`.
+*   `TMDB_API_KEY`: **Required.** Get this from [The Movie Database (TMDB)](https://www.themoviedb.org/settings/api).
+*   `ENABLE_CUEVANA_PROVIDER`: Set to `true` to enable Cuevana. It will use your server's direct IP address. (Note: This is often disabled on public instances. If Cuevana is geo-restricted for your server's IP, this won't bypass it.)
+*   `ENABLE_HOLLYMOVIEHD_PROVIDER`: Set to `true` or `false`.
+*   `DISABLE_CACHE`: (Optional) `true` to disable caching.
 
-### Proxy Setup (Recommended for ShowBox/Xprime to improve scraping reliability)
+*   **Proxies (Optional but Recommended for ShowBox/Xprime):**
+    *   **Why?** Your server's IP (especially from cloud providers) might be blocked by ShowBox or Xprime. A proxy can improve reliability.
+    *   **How?** You can deploy a [simple proxy using Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/p-stream/simple-proxy).
+    *   **In `.env`:**
+        *   `SHOWBOX_PROXY_URL_VALUE`: If using the simple proxy, format as `https://your-proxy.netlify.app/?destination=`.
+        *   `XPRIME_PROXY_URL`: Similar format if using the simple proxy for Xprime.
+        *   `XPRIME_USE_PROXY`: Set to `true` if you configure `XPRIME_PROXY_URL`.
+    *   You can leave proxy URLs blank to attempt direct connections.
 
-When self-hosting, your server's IP address (especially from common cloud providers) might be blocked or rate-limited by some content providers (like ShowBox or Xprime.tv). Using a proxy routes scraping requests through a different IP, which can significantly improve the chances of successfully fetching stream links. Users can still attempt to use the addon without a proxy for these providers, but results may vary.
+*   **ShowBox Cookie Configuration (for self-hosting):**
+    *   **Method 1: `cookies.txt` file (Recommended for simplicity on self-host):**
+        *   Create a `cookies.txt` file in the project root.
+        *   Add one ShowBox/FebBox cookie token per line.
+        *   **Important:** Add `cookies.txt` to your `.gitignore` file.
+    *   **Method 2: Addon Configuration UI:** Access your self-hosted addon in a browser (e.g., `http://localhost:7000`) and use the configuration page to set the cookie (similar to the public instance).
 
-*   **Deploy a Simple Proxy:** For this purpose, you can deploy a basic proxy service using Netlify:
-    
-    [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/p-stream/simple-proxy)
-
-*   **Proxy URL Formatting:** When using the `simple-proxy` for providers that expect the target URL to be passed as a query parameter (like ShowBox often does), you typically need to append `/?destination=` to your deployed proxy URL. For example, if your deployed proxy is `https://my-cool-proxy.netlify.app`, you would use `https://my-cool-proxy.netlify.app/?destination=` in the `SHOWBOX_PROXY_URL_VALUE` or `XPRIME_PROXY_URL` field in your `.env` file.
-    *   The `XPRIME_PROXY_URL` in the original `.env` example (`https://frolicking-semolina-769185.netlify.app`) does not include `/?destination=`. This suggests that particular proxy might be specifically configured for Xprime, or Xprime integration handles URLs differently. Always test your setup.
-    *   The `SHOWBOX_PROXY_URL_VALUE` in the original `.env` example (`https://starlit-valkyrie-39f5ab.netlify.app/?destination=`) *does* include `/?destination=`. Adapt your proxy URLs accordingly based on the proxy you deploy and the provider's needs.
-
-**Note on Cuevana & Proxies:** The `ENABLE_CUEVANA_PROVIDER` setting allows your self-hosted instance to attempt fetching Cuevana links directly with your server's IP. The general proxy settings above (`SHOWBOX_PROXY_URL_VALUE`, `XPRIME_PROXY_URL`) are typically not used by the Cuevana integration in this addon. If Cuevana is geo-restricted for your server's IP, a simple general-purpose proxy like the one linked might not be sufficient or correctly routed for Cuevana within this addon; dedicated solutions or VPNs at the server level would be needed, which is outside the scope of this addon's proxy configuration.
-
-### Cookie Configuration for Self-Hosting
-
-For self-hosted instances, you have two ways to configure cookies for ShowBox (FebBox):
-
-1. **Using the Addon Configuration Page**: After setting up your addon, you can use the configuration interface in Stremio to add your cookie, as described earlier in this document.
-
-2. **Using a `cookies.txt` File**: Alternatively, you can create a `cookies.txt` file in the root directory of the project. This method is useful if you:
-   - Don't want to manually configure cookies each time through the UI
-   - Are maintaining multiple self-hosted instances
-   - Prefer to store settings in files rather than through a UI
-
-The `cookies.txt` file should contain one valid cookie token per line. The addon will automatically use these cookies when needed.
-
-**Important:** Make sure to add `cookies.txt` to your `.gitignore` file to prevent accidentally sharing your personal cookies in public repositories.
-
-### 4. Run the Addon
+**5. Run the Addon:**
 
 ```bash
 npm start 
 # Or your designated start script, e.g., node server.js
 ```
-The addon will typically run on `http://localhost:7000` (or as configured). The console will show the URL to install your local instance in Stremio.
+Your self-hosted addon will typically run on `http://localhost:7000` (or as configured). The console will show the manifest URL to install it in Stremio.
 
 ## Support Development
 
