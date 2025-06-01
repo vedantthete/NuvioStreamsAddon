@@ -1167,6 +1167,9 @@ class ShowBoxScraper {
         this.regionPreference = regionPreference;
         this.userCookie = userCookie;
         
+        // Initialize proxy rotation counter for this instance
+        this.proxyCounter = Math.floor(Math.random() * 1000); // Random start to avoid patterns
+        
         this.baseHeaders = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -1183,6 +1186,30 @@ class ShowBoxScraper {
         };
     }
 
+    // Get the next proxy URL from the rotation
+    getNextProxy() {
+        // Read proxy configuration from environment
+        const useRotatingProxy = process.env.SHOWBOX_USE_ROTATING_PROXY === 'true';
+        const primaryProxy = process.env.SHOWBOX_PROXY_URL_VALUE;
+        const alternateProxy = process.env.SHOWBOX_PROXY_URL_ALTERNATE;
+        
+        // Return direct connection if both proxies are missing
+        if (!primaryProxy && !alternateProxy) return null;
+        
+        // If rotation disabled or alternate proxy not set, just use primary proxy
+        if (!useRotatingProxy || !alternateProxy) return primaryProxy;
+        
+        // Increment the counter for this instance
+        this.proxyCounter++;
+        
+        // Use modulo to alternate between available proxies
+        const proxyIndex = this.proxyCounter % 2;
+        const selectedProxy = proxyIndex === 0 ? primaryProxy : alternateProxy;
+        
+        console.log(`[Rotating Proxy] Selected proxy ${proxyIndex+1}/2 for request #${this.proxyCounter}`);
+        return selectedProxy;
+    }
+
     async _makeRequest(url, isJsonExpected = false) {
         const cacheSubDir = 'showbox_generic';
         const simpleUrlKey = url.replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9_.-]/g, '_');
@@ -1196,14 +1223,15 @@ class ShowBoxScraper {
             }
         }
 
-        const showboxProxyUrlFromEnv = process.env.SHOWBOX_PROXY_URL_VALUE;
+        // Get the next proxy URL from the rotation
+        const selectedProxy = this.getNextProxy();
         let requestUrl = url;
 
-        if (showboxProxyUrlFromEnv && showboxProxyUrlFromEnv.trim() !== '') {
-            requestUrl = `${showboxProxyUrlFromEnv}${encodeURIComponent(url)}`;
-            console.log(`ShowBoxScraper: Making request to: ${url} via Proxy: ${showboxProxyUrlFromEnv}`);
+        if (selectedProxy && selectedProxy.trim() !== '') {
+            requestUrl = `${selectedProxy}${encodeURIComponent(url)}`;
+            console.log(`ShowBoxScraper: Making request to: ${url} via Proxy: ${selectedProxy}`);
         } else {
-            console.log(`ShowBoxScraper: Making direct request to: ${url}`);
+            console.log(`ShowBoxScraper: Making direct request to: ${url} (no proxy available)`);
         }
         
         console.time(timerLabel);
