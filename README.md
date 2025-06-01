@@ -110,24 +110,41 @@ cp .env.example .env
 Edit the `.env` file with your values:
 
 *   `DISABLE_CACHE`: (Optional) Set to `true` to disable caching. Defaults to `false`.
-*   `SHOWBOX_PROXY_URL_VALUE`: (Optional) URL for a proxy to be used with the Showbox provider. If deploying the `simple-proxy` (see Proxy Setup section below), ensure the URL ends with `/?destination=` (e.g., `https://your-proxy.netlify.app/?destination=`).
+*   `SHOWBOX_PROXY_URL_VALUE`: (Optional but Recommended) URL for a proxy to be used with the Showbox provider. Using a proxy is recommended as direct scraping from server IPs can sometimes be blocked or rate-limited by content sources. If deploying the `simple-proxy` (see Proxy Setup section), ensure the URL ends with `/?destination=` (e.g., `https://your-proxy.netlify.app/?destination=`). Users can leave this blank to attempt direct scraping.
 *   `TMDB_API_KEY`: **(Required)** Your API key from [The Movie Database (TMDB)](https://www.themoviedb.org/settings/api).
-*   `XPRIME_PROXY_URL`: (Optional) URL for a proxy to be used with Xprime.tv if `XPRIME_USE_PROXY=true`. Some providers might require the proxy URL to have a specific path or query string (e.g., `/?destination=`) if you use a generic proxy like `simple-proxy`.
-*   `XPRIME_USE_PROXY`: (Optional) Set to `true` to use a proxy for Xprime.tv.
-*   `ENABLE_CUEVANA_PROVIDER`: (Optional) Set to `true` to enable the Cuevana provider. Defaults to `false` as it often requires a proxy (see Proxy Setup section). This might be disabled on public instances but can be enabled for your self-hosted version if you configure a proxy.
+*   `XPRIME_PROXY_URL`: (Optional but Recommended if `XPRIME_USE_PROXY=true`) URL for a proxy for Xprime.tv. Similar to Showbox, using a proxy can improve scraping reliability if direct server IP access is restricted. Format may require `/?destination=` if using a generic proxy like `simple-proxy`.
+*   `XPRIME_USE_PROXY`: (Optional) Set to `true` to use a proxy for Xprime.tv (recommended for reliability).
+*   `ENABLE_CUEVANA_PROVIDER`: (Optional) Set to `true` to enable the Cuevana provider for your self-hosted instance. When enabled, it will attempt to fetch links using your server's direct IP address. This provider is disabled by default on public instances due to potential IP exposure or regional access complexities. If Cuevana content is geo-restricted for your server's IP, enabling it here might not bypass that; it simply allows the addon to *try* fetching from Cuevana using your server's IP.
 *   `ENABLE_HOLLYMOVIEHD_PROVIDER`: (Optional) Set to `true` (default) or `false`.
 
-### Proxy Setup (for Cuevana and potentially other providers)
+### Proxy Setup (Recommended for ShowBox/Xprime to improve scraping reliability)
 
-Some providers, like Cuevana, may require a proxy to function correctly, especially if you are outside their intended region or if they have strict access controls.
+When self-hosting, your server's IP address (especially from common cloud providers) might be blocked or rate-limited by some content providers (like ShowBox or Xprime.tv). Using a proxy routes scraping requests through a different IP, which can significantly improve the chances of successfully fetching stream links. Users can still attempt to use the addon without a proxy for these providers, but results may vary.
 
-*   **Deploy a Simple Proxy:** You can easily deploy a basic proxy service using Netlify by clicking the button below. This proxy is suitable for many use cases.
+*   **Deploy a Simple Proxy:** For this purpose, you can deploy a basic proxy service using Netlify:
     
     [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/p-stream/simple-proxy)
 
-*   **Proxy URL Formatting:** When using the `simple-proxy` (or a similar one) for providers that expect the target URL to be passed as a query parameter, you typically need to append `/?destination=` to your deployed proxy URL. For example, if your deployed proxy is `https://my-cool-proxy.netlify.app`, you would use `https://my-cool-proxy.netlify.app/?destination=` in the `.env` file for the relevant provider's proxy URL field (e.g., `SHOWBOX_PROXY_URL_VALUE` or a dedicated proxy URL for Cuevana if the addon supports it).
-    *   The `XPRIME_PROXY_URL` in the provided `.env` example (`https://frolicking-semolina-769185.netlify.app`) does not include `/?destination=`. This implies that particular proxy or the Xprime provider integration might handle the destination URL differently or the proxy itself is specifically configured for Xprime. Always check the provider's requirements or test.
-    *   The `SHOWBOX_PROXY_URL_VALUE` in the provided `.env` example (`https://starlit-valkyrie-39f5ab.netlify.app/?destination=`) *does* include `/?destination=`. Adapt your proxy URLs accordingly.
+*   **Proxy URL Formatting:** When using the `simple-proxy` for providers that expect the target URL to be passed as a query parameter (like ShowBox often does), you typically need to append `/?destination=` to your deployed proxy URL. For example, if your deployed proxy is `https://my-cool-proxy.netlify.app`, you would use `https://my-cool-proxy.netlify.app/?destination=` in the `SHOWBOX_PROXY_URL_VALUE` or `XPRIME_PROXY_URL` field in your `.env` file.
+    *   The `XPRIME_PROXY_URL` in the original `.env` example (`https://frolicking-semolina-769185.netlify.app`) does not include `/?destination=`. This suggests that particular proxy might be specifically configured for Xprime, or Xprime integration handles URLs differently. Always test your setup.
+    *   The `SHOWBOX_PROXY_URL_VALUE` in the original `.env` example (`https://starlit-valkyrie-39f5ab.netlify.app/?destination=`) *does* include `/?destination=`. Adapt your proxy URLs accordingly based on the proxy you deploy and the provider's needs.
+
+**Note on Cuevana & Proxies:** The `ENABLE_CUEVANA_PROVIDER` setting allows your self-hosted instance to attempt fetching Cuevana links directly with your server's IP. The general proxy settings above (`SHOWBOX_PROXY_URL_VALUE`, `XPRIME_PROXY_URL`) are typically not used by the Cuevana integration in this addon. If Cuevana is geo-restricted for your server's IP, a simple general-purpose proxy like the one linked might not be sufficient or correctly routed for Cuevana within this addon; dedicated solutions or VPNs at the server level would be needed, which is outside the scope of this addon's proxy configuration.
+
+### Cookie Configuration for Self-Hosting
+
+For self-hosted instances, you have two ways to configure cookies for ShowBox (FebBox):
+
+1. **Using the Addon Configuration Page**: After setting up your addon, you can use the configuration interface in Stremio to add your cookie, as described earlier in this document.
+
+2. **Using a `cookies.txt` File**: Alternatively, you can create a `cookies.txt` file in the root directory of the project. This method is useful if you:
+   - Don't want to manually configure cookies each time through the UI
+   - Are maintaining multiple self-hosted instances
+   - Prefer to store settings in files rather than through a UI
+
+The `cookies.txt` file should contain one valid cookie token per line. The addon will automatically use these cookies when needed.
+
+**Important:** Make sure to add `cookies.txt` to your `.gitignore` file to prevent accidentally sharing your personal cookies in public repositories.
 
 ### 4. Run the Addon
 
