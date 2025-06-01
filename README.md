@@ -23,6 +23,17 @@ Based on community feedback and continued development, this addon aims to offer 
 
 This guide will help you set up your own instance of Nuvio Streams, including both the main addon and the Hianime service (for anime content).
 
+### Quick Deploy
+
+The easiest way to deploy your own instance of Nuvio Streams:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftapframe%2FNuvioStreamsAddon)
+
+After deploying with Vercel, you'll need to:
+1. Set up your environment variables in the Vercel dashboard
+2. Add your TMDB API key (required)
+3. Configure other optional settings as needed
+
 ### Prerequisites
 
 *   [Node.js](https://nodejs.org/) (LTS version recommended)
@@ -126,16 +137,17 @@ The Hianime provider requires a separate service that handles the communication 
 
 Some providers like ShowBox or Xprime might block your server's IP. You can deploy a simple proxy:
 
-1. Deploy a [simple proxy using Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/p-stream/simple-proxy)
-2. Add to your `.env` file:
-   ```
-   # For ShowBox
-   SHOWBOX_PROXY_URL_VALUE=https://your-proxy.netlify.app/?destination=
-   
-   # For Xprime
-   XPRIME_PROXY_URL=https://your-proxy.netlify.app
-   XPRIME_USE_PROXY=true
-   ```
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/p-stream/simple-proxy)
+
+After deploying, add the proxy URL to your `.env` file:
+```
+# For ShowBox
+SHOWBOX_PROXY_URL_VALUE=https://your-netlify-proxy.netlify.app/?destination=
+
+# For Xprime
+XPRIME_PROXY_URL=https://your-netlify-proxy.netlify.app
+XPRIME_USE_PROXY=true
+```
 
 #### Hianime Caching (Optional)
 
