@@ -1,5 +1,8 @@
 const { addonBuilder } = require('stremio-addon-sdk');
 require('dotenv').config(); // Ensure environment variables are loaded
+const fs = require('fs').promises;
+const path = require('path');
+const crypto = require('crypto'); // For hashing cookies
 
 // NEW: Read environment variable for Cuevana
 const ENABLE_CUEVANA_PROVIDER = process.env.ENABLE_CUEVANA_PROVIDER !== 'false'; // Defaults to true if not set or not 'false'
@@ -8,6 +11,12 @@ console.log(`[addon.js] Cuevana provider fetching enabled: ${ENABLE_CUEVANA_PROV
 // NEW: Read environment variable for HollyMovieHD
 const ENABLE_HOLLYMOVIEHD_PROVIDER = process.env.ENABLE_HOLLYMOVIEHD_PROVIDER !== 'false'; // Defaults to true if not set or not 'false'
 console.log(`[addon.js] HollyMovieHD provider fetching enabled: ${ENABLE_HOLLYMOVIEHD_PROVIDER}`);
+
+// NEW: Stream caching config
+const STREAM_CACHE_DIR = process.env.VERCEL ? path.join('/tmp', '.streams_cache') : path.join(__dirname, '.streams_cache');
+const STREAM_CACHE_TTL_MS = 9 * 60 * 1000; // 9 minutes
+const ENABLE_STREAM_CACHE = process.env.DISABLE_STREAM_CACHE !== 'true'; // Enabled by default
+console.log(`[addon.js] Stream links caching ${ENABLE_STREAM_CACHE ? 'enabled' : 'disabled'}`);
 
 const { getXprimeStreams } = require('./providers/xprime.js'); // Import from xprime.js
 const { getHollymovieStreams } = require('./providers/hollymoviehd.js'); // Import from hollymoviehd.js
@@ -229,6 +238,104 @@ async function getVidSrcStreams(tmdbId, mediaType, seasonNum = null, episodeNum 
     }
 }
 
+// --- Stream Caching Functions ---
+// Ensure stream cache directory exists
+const ensureStreamCacheDir = async () => {
+    if (!ENABLE_STREAM_CACHE) return;
+    
+    try {
+        await fs.mkdir(STREAM_CACHE_DIR, { recursive: true });
+        console.log(`[Stream Cache] Cache directory ensured at ${STREAM_CACHE_DIR}`);
+    } catch (error) {
+        if (error.code !== 'EEXIST') {
+            console.warn(`[Stream Cache] Warning: Could not create cache directory ${STREAM_CACHE_DIR}: ${error.message}`);
+        }
+    }
+};
+
+// Initialize stream cache directory on startup
+ensureStreamCacheDir().catch(err => console.error(`[Stream Cache] Error creating cache directory: ${err.message}`));
+
+// Generate cache key for a provider's streams
+const getStreamCacheKey = (provider, type, id, seasonNum = null, episodeNum = null, region = null, cookie = null) => {
+    // Basic key parts
+    let key = `streams_${provider}_${type}_${id}`;
+    
+    // Add season/episode for TV series
+    if (seasonNum !== null && episodeNum !== null) {
+        key += `_s${seasonNum}e${episodeNum}`;
+    }
+    
+    // For ShowBox with custom cookie/region, add those to the cache key
+    if (provider.toLowerCase() === 'showbox' && (region || cookie)) {
+        key += '_custom';
+        if (region) key += `_${region}`;
+        if (cookie) {
+            // Hash the cookie to avoid storing sensitive info in filenames
+            const cookieHash = crypto.createHash('md5').update(cookie).digest('hex').substring(0, 10);
+            key += `_${cookieHash}`;
+        }
+    }
+    
+    return key + '.json';
+};
+
+// Get cached streams for a provider
+const getStreamFromCache = async (provider, type, id, seasonNum = null, episodeNum = null, region = null, cookie = null) => {
+    if (!ENABLE_STREAM_CACHE) return null;
+    
+    const cacheKey = getStreamCacheKey(provider, type, id, seasonNum, episodeNum, region, cookie);
+    const cachePath = path.join(STREAM_CACHE_DIR, cacheKey);
+    
+    try {
+        const data = await fs.readFile(cachePath, 'utf-8');
+        const cached = JSON.parse(data);
+        
+        // Check if cache is expired
+        if (cached.expiry && Date.now() > cached.expiry) {
+            console.log(`[Stream Cache] EXPIRED for ${provider}: ${cacheKey}`);
+            await fs.unlink(cachePath).catch(() => {}); // Delete expired cache
+            return null;
+        }
+        
+        // Check for failed status - retry on next request
+        if (cached.status === 'failed') {
+            console.log(`[Stream Cache] RETRY for previously failed ${provider}: ${cacheKey}`);
+            return null;
+        }
+        
+        console.log(`[Stream Cache] HIT for ${provider}: ${cacheKey}`);
+        return cached.streams;
+    } catch (error) {
+        if (error.code !== 'ENOENT') {
+            console.warn(`[Stream Cache] READ ERROR for ${provider}: ${cacheKey}: ${error.message}`);
+        }
+        return null;
+    }
+};
+
+// Save streams to cache for a provider
+const saveStreamToCache = async (provider, type, id, streams, status = 'ok', seasonNum = null, episodeNum = null, region = null, cookie = null) => {
+    if (!ENABLE_STREAM_CACHE) return;
+    
+    const cacheKey = getStreamCacheKey(provider, type, id, seasonNum, episodeNum, region, cookie);
+    const cachePath = path.join(STREAM_CACHE_DIR, cacheKey);
+    
+    try {
+        const cacheData = {
+            streams: streams,
+            status: status,
+            expiry: Date.now() + STREAM_CACHE_TTL_MS,
+            timestamp: Date.now()
+        };
+        
+        await fs.writeFile(cachePath, JSON.stringify(cacheData), 'utf-8');
+        console.log(`[Stream Cache] SAVED for ${provider}: ${cacheKey} (${streams.length} streams, status: ${status})`);
+    } catch (error) {
+        console.warn(`[Stream Cache] WRITE ERROR for ${provider}: ${cacheKey}: ${error.message}`);
+    }
+};
+
 // Define stream handler for movies
 builder.defineStreamHandler(async (args) => {
     const { type, id, config: sdkConfig } = args;
@@ -421,248 +528,356 @@ builder.defineStreamHandler(async (args) => {
     
     let combinedRawStreams = [];
 
-    // --- Parallel Fetching of Streams ---
-    console.log('Initiating parallel fetch for ShowBox, Xprime.tv, HollyMovieHD, and Soaper TV streams (in that priority order after ShowBox)...');
-
     // --- Provider Selection Logic ---
     const shouldFetch = (providerId) => {
         if (!selectedProvidersArray) return true; // If no selection, fetch all
         return selectedProvidersArray.includes(providerId.toLowerCase());
     };
 
-    // Pass userRegionPreference and userCookie directly to getStreamsFromTmdbId
-    const showBoxPromise = shouldFetch('showbox') ? getStreamsFromTmdbId(tmdbTypeFromId, tmdbId, seasonNum, episodeNum, userRegionPreference, userCookie)
-        .then(streams => {
-            if (streams && streams.length > 0) {
-                console.log(`  Successfully fetched ${streams.length} streams from ShowBox.`);
-                return streams.map(stream => ({ ...stream, provider: 'ShowBox' }));
-            }
-            console.log(`  No streams returned from ShowBox for TMDB ${tmdbTypeFromId}/${tmdbId}`);
-            return [];
-        })
-        .catch(err => {
-            console.error(`Error fetching ShowBox streams:`, err.message);
-            return []; // Return empty array on error
-        }) : Promise.resolve([]);
-
-    let xprimePromise;
-    if (shouldFetch('xprime') && movieOrSeriesTitle && movieOrSeriesYear) {
-        // Read the XPRIME_USE_PROXY environment variable
-        const useXprimeProxy = process.env.XPRIME_USE_PROXY !== 'false'; // Defaults to true if not set or not exactly 'false'
-        console.log(`[Xprime.tv] Proxy usage for Xprime.tv: ${useXprimeProxy}`);
-
-        xprimePromise = getXprimeStreams(movieOrSeriesTitle, movieOrSeriesYear, tmdbTypeFromId, seasonNum, episodeNum, useXprimeProxy)
-            .then(streams => {
-                if (streams && streams.length > 0) {
-                    console.log(`  Successfully fetched ${streams.length} streams from Xprime.tv.`);
-                    return streams.map(stream => ({ ...stream, provider: 'Xprime.tv' }));
-                }
-                return [];
-            })
-            .catch(err => { 
-                console.error('Fallback error catcher for Xprime.tv in addon.js:', err.message);
-                return [];
-            });
-    } else {
-        if (shouldFetch('xprime')) console.log('[Xprime.tv] Skipping fetch in addon.js because title or year is missing or not applicable.');
-        else console.log('[Xprime.tv] Skipping fetch: Not selected by user.');
-        xprimePromise = Promise.resolve([]); 
-    }
-
-    const soaperTvPromise = shouldFetch('soapertv') ? getSoaperTvStreams(tmdbId, tmdbTypeFromId, seasonNum, episodeNum)
-        .then(streams => {
-            if (streams && streams.length > 0) {
-                console.log(`  Successfully fetched ${streams.length} streams from Soaper TV.`);
-                return streams.map(stream => ({ ...stream, provider: 'Soaper TV' }));
-            }
-            console.log(`  No streams returned from Soaper TV for TMDB ${tmdbTypeFromId}/${tmdbId}`);
-            return [];
-        })
-        .catch(err => {
-            console.error(`Error fetching Soaper TV streams:`, err.message);
-            return []; 
-        }) : Promise.resolve([]);
-        
-    let hollymoviePromise;
-    if (ENABLE_HOLLYMOVIEHD_PROVIDER && shouldFetch('hollymoviehd') && (type === 'movie' || type === 'series' && episodeNum)) { // Ensure it's a movie or a specific episode
-        const isMovie = type === 'movie';
-        try {
-            const mediaTypeForHolly = isMovie ? 'movie' : 'tv';
-            console.log(`[HollyMovieHD] Preparing to call getHollymovieStreams with TMDB ID: ${tmdbId}, Type: ${mediaTypeForHolly}, S: ${seasonNum || ''}, E: ${episodeNum || ''}`);
-            const originalHollymoviePromise = getHollymovieStreams(tmdbId, mediaTypeForHolly, seasonNum, episodeNum);
-            hollymoviePromise = fetchWithTimeout(
-                originalHollymoviePromise, 
-                15000, // 15-second timeout
-                'HollyMovieHD'
-            ).then(result => {
-                if (result && result.streams) {
-                    return result.streams.map(s => ({ ...s, provider: 'HollyMovieHD' }));
-                }
-                console.warn('[HollyMovieHD] fetchWithTimeout did not return expected streams array. Result:', result);
-                return [];
-            });
-        } catch (hollyError) { 
-            console.error('[HollyMovieHD] Error setting up HollyMovieHD promise:', hollyError.message);
-            hollymoviePromise = Promise.resolve([]); 
-        }
-    } else {
-        if (!ENABLE_HOLLYMOVIEHD_PROVIDER) {
-            console.log('[HollyMovieHD] Skipping fetch: Disabled by environment variable (ENABLE_HOLLYMOVIEHD_PROVIDER=false).');
-        } else if (!shouldFetch('hollymoviehd')) {
-            console.log('[HollyMovieHD] Skipping fetch: Not selected by user.');
-        } else {
-            console.log('[HollyMovieHD] Skipping fetch because content is not a movie or a specific episode.');
-        }
-        hollymoviePromise = Promise.resolve([]); 
-    }
+    // --- NEW: Asynchronous provider fetching with caching ---
+    console.log('[Stream Cache] Checking cache for all enabled providers...');
     
-    // Updated Cuevana Promise Logic
-    let cuevanaPromise = Promise.resolve([]); 
-    if (ENABLE_CUEVANA_PROVIDER && shouldFetch('cuevana')) {
-        console.log('[Cuevana] Attempting to fetch: Enabled by environment variable and user selection.');
-        cuevanaPromise = (async () => {
-            try {
-                let cuevanaStreams = [];
-                if (tmdbTypeFromId === 'movie') {
-                    cuevanaStreams = await getCuevanaStreams(tmdbId, 'movie');
-                } else if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null) {
-                    cuevanaStreams = await getCuevanaStreams(tmdbId, 'tv', seasonNum, episodeNum);
-                }
-                if (cuevanaStreams && cuevanaStreams.length > 0) {
-                    console.log(`  Successfully fetched ${cuevanaStreams.length} streams from Cuevana.`);
-                    return cuevanaStreams; 
-                }
-                console.log(`  No streams returned from Cuevana for TMDB ${tmdbTypeFromId}/${tmdbId}`);
-                return [];
-            } catch (err) {
-                console.error(`Error fetching Cuevana streams:`, err.message);
+    const providerFetchFunctions = {
+        // ShowBox provider with cache integration
+        showbox: async () => {
+            if (!shouldFetch('showbox')) {
+                console.log('[ShowBox] Skipping fetch: Not selected by user.');
                 return [];
             }
-        })();
-    } else {
-        if (!ENABLE_CUEVANA_PROVIDER) {
-            console.log('[Cuevana] Skipping fetch: Disabled by environment variable (ENABLE_CUEVANA_PROVIDER=false).');
-        } else { // Implies shouldFetch('cuevana') was false
-            console.log('[Cuevana] Skipping fetch: Not selected by user.');
-        }
-        // cuevanaPromise is already Promise.resolve([])
-    }
-
-    let hianimePromise = Promise.resolve([]); 
-    if (shouldFetch('hianime')) {
-        if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null && isAnimation) {
-            console.log('[Hianime] Initiating fetch because content is a TV show episode AND identified as Animation.');
-            hianimePromise = getHianimeStreams(tmdbId, seasonNum, episodeNum)
-                .then(streams => {
-                    if (streams && streams.length > 0) {
-                        console.log(`  Successfully fetched ${streams.length} streams from Hianime.`);
-                        return streams; 
-                    }
-                    console.log(`  No streams returned from Hianime for TMDB ${tmdbTypeFromId}/${tmdbId} S${seasonNum}E${episodeNum}`);
-                    return [];
-                })
-                .catch(err => {
-                    console.error(`Error fetching Hianime streams:`, err.message);
-                    return [];
-                });
-        } else {
-            if (tmdbTypeFromId === 'tv' && !isAnimation) {
-                console.log('[Hianime] Skipping fetch: content is a TV show episode BUT NOT identified as Animation.');
-            } else if (tmdbTypeFromId !== 'tv'){
-                console.log('[Hianime] Skipping fetch: content is not a TV show.');
-            } else {
-                console.log('[Hianime] Skipping fetch: missing season/episode or not identified as Animation TV show.');
-            }
-        }
-    } else {
-        console.log('[Hianime] Skipping fetch: Not selected by user.');
-    }
-    
-    // Add VidSrc promise
-    const vidSrcPromise = shouldFetch('vidsrc') ? (async () => {
-        try {
-            // For VidSrc, we can directly use the getVidSrcStreams function
-            const vidSrcStreams = await getVidSrcStreams(
-                id.startsWith('tt') ? id.split(':')[0] : tmdbId, 
-                tmdbTypeFromId, 
-                seasonNum, 
-                episodeNum
-            );
             
-            if (vidSrcStreams && vidSrcStreams.length > 0) {
-                console.log(`  Successfully fetched ${vidSrcStreams.length} streams from VidSrc.`);
-                return vidSrcStreams.map(stream => ({ ...stream, provider: 'VidSrc' }));
+            // Try to get cached streams first
+            const cachedStreams = await getStreamFromCache('showbox', tmdbTypeFromId, tmdbId, seasonNum, episodeNum, userRegionPreference, userCookie);
+            if (cachedStreams) {
+                console.log(`[ShowBox] Using ${cachedStreams.length} streams from cache.`);
+                return cachedStreams.map(stream => ({ ...stream, provider: 'ShowBox' }));
             }
-            console.log(`  No streams returned from VidSrc for ID ${id}`);
-            return [];
-        } catch (err) {
-            console.error(`Error fetching VidSrc streams:`, err.message);
-            return [];
+            
+            // No cache or expired, fetch fresh
+            try {
+                console.log(`[ShowBox] Fetching new streams...`);
+                const streams = await getStreamsFromTmdbId(tmdbTypeFromId, tmdbId, seasonNum, episodeNum, userRegionPreference, userCookie);
+                
+                if (streams && streams.length > 0) {
+                    console.log(`[ShowBox] Successfully fetched ${streams.length} streams.`);
+                    // Save to cache with success status
+                    await saveStreamToCache('showbox', tmdbTypeFromId, tmdbId, streams, 'ok', seasonNum, episodeNum, userRegionPreference, userCookie);
+                    return streams.map(stream => ({ ...stream, provider: 'ShowBox' }));
+                } else {
+                    console.log(`[ShowBox] No streams returned for TMDB ${tmdbTypeFromId}/${tmdbId}`);
+                    // Save empty result with failed status
+                    await saveStreamToCache('showbox', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum, userRegionPreference, userCookie);
+                    return [];
+                }
+            } catch (err) {
+                console.error(`[ShowBox] Error fetching streams:`, err.message);
+                // Save error status to cache
+                await saveStreamToCache('showbox', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum, userRegionPreference, userCookie);
+                return [];
+            }
+        },
+        
+        // Xprime provider with cache integration
+        xprime: async () => {
+            if (!shouldFetch('xprime') || !movieOrSeriesTitle || !movieOrSeriesYear) {
+                if (!shouldFetch('xprime')) console.log('[Xprime.tv] Skipping fetch: Not selected by user.');
+                else console.log('[Xprime.tv] Skipping fetch: Missing title or year data.');
+                return [];
+            }
+            
+            // Try to get cached streams first
+            const cachedStreams = await getStreamFromCache('xprime', tmdbTypeFromId, tmdbId, seasonNum, episodeNum);
+            if (cachedStreams) {
+                console.log(`[Xprime.tv] Using ${cachedStreams.length} streams from cache.`);
+                return cachedStreams.map(stream => ({ ...stream, provider: 'Xprime.tv' }));
+            }
+            
+            // No cache or expired, fetch fresh
+            try {
+                console.log(`[Xprime.tv] Fetching new streams...`);
+                // Read the XPRIME_USE_PROXY environment variable
+                const useXprimeProxy = process.env.XPRIME_USE_PROXY !== 'false';
+                console.log(`[Xprime.tv] Proxy usage: ${useXprimeProxy}`);
+                
+                const streams = await getXprimeStreams(movieOrSeriesTitle, movieOrSeriesYear, tmdbTypeFromId, seasonNum, episodeNum, useXprimeProxy);
+                
+                if (streams && streams.length > 0) {
+                    console.log(`[Xprime.tv] Successfully fetched ${streams.length} streams.`);
+                    // Save to cache
+                    await saveStreamToCache('xprime', tmdbTypeFromId, tmdbId, streams, 'ok', seasonNum, episodeNum);
+                    return streams.map(stream => ({ ...stream, provider: 'Xprime.tv' }));
+                } else {
+                    console.log(`[Xprime.tv] No streams returned.`);
+                    // Save empty result
+                    await saveStreamToCache('xprime', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
+                    return [];
+                }
+            } catch (err) {
+                console.error(`[Xprime.tv] Error fetching streams:`, err.message);
+                // Save error status to cache
+                await saveStreamToCache('xprime', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
+                return [];
+            }
+        },
+
+        // HollyMovieHD provider with cache integration
+        hollymoviehd: async () => {
+            if (!ENABLE_HOLLYMOVIEHD_PROVIDER || !shouldFetch('hollymoviehd') || 
+                !(type === 'movie' || (type === 'series' && episodeNum))) {
+                if (!ENABLE_HOLLYMOVIEHD_PROVIDER) {
+                    console.log('[HollyMovieHD] Skipping fetch: Disabled by environment variable.');
+                } else if (!shouldFetch('hollymoviehd')) {
+                    console.log('[HollyMovieHD] Skipping fetch: Not selected by user.');
+                } else {
+                    console.log('[HollyMovieHD] Skipping fetch: Not applicable content type.');
+                }
+                return [];
+            }
+            
+            // Try to get cached streams first
+            const cachedStreams = await getStreamFromCache('hollymoviehd', tmdbTypeFromId, tmdbId, seasonNum, episodeNum);
+            if (cachedStreams) {
+                console.log(`[HollyMovieHD] Using ${cachedStreams.length} streams from cache.`);
+                return cachedStreams.map(stream => ({ ...stream, provider: 'HollyMovieHD' }));
+            }
+            
+            // No cache or expired, fetch fresh
+            try {
+                console.log(`[HollyMovieHD] Fetching new streams...`);
+                const mediaTypeForHolly = type === 'movie' ? 'movie' : 'tv';
+                
+                const result = await fetchWithTimeout(
+                    getHollymovieStreams(tmdbId, mediaTypeForHolly, seasonNum, episodeNum),
+                    15000, // 15-second timeout
+                    'HollyMovieHD'
+                );
+                
+                let streams = [];
+                if (result && result.streams) {
+                    streams = result.streams;
+                    console.log(`[HollyMovieHD] Successfully fetched ${streams.length} streams.`);
+                    // Save to cache
+                    await saveStreamToCache('hollymoviehd', tmdbTypeFromId, tmdbId, streams, 'ok', seasonNum, episodeNum);
+                } else {
+                    console.log(`[HollyMovieHD] No streams returned.`);
+                    // Save empty result
+                    await saveStreamToCache('hollymoviehd', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
+                }
+                
+                return streams.map(stream => ({ ...stream, provider: 'HollyMovieHD' }));
+            } catch (err) {
+                console.error(`[HollyMovieHD] Error fetching streams:`, err.message);
+                // Save error status to cache
+                await saveStreamToCache('hollymoviehd', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
+                return [];
+            }
+        },
+
+        // SoaperTV provider with cache integration
+        soapertv: async () => {
+            if (!shouldFetch('soapertv')) {
+                console.log('[SoaperTV] Skipping fetch: Not selected by user.');
+                return [];
+            }
+            
+            // Try to get cached streams first
+            const cachedStreams = await getStreamFromCache('soapertv', tmdbTypeFromId, tmdbId, seasonNum, episodeNum);
+            if (cachedStreams) {
+                console.log(`[SoaperTV] Using ${cachedStreams.length} streams from cache.`);
+                return cachedStreams.map(stream => ({ ...stream, provider: 'Soaper TV' }));
+            }
+            
+            // No cache or expired, fetch fresh
+            try {
+                console.log(`[SoaperTV] Fetching new streams...`);
+                const streams = await getSoaperTvStreams(tmdbId, tmdbTypeFromId, seasonNum, episodeNum);
+                
+                if (streams && streams.length > 0) {
+                    console.log(`[SoaperTV] Successfully fetched ${streams.length} streams.`);
+                    // Save to cache
+                    await saveStreamToCache('soapertv', tmdbTypeFromId, tmdbId, streams, 'ok', seasonNum, episodeNum);
+                    return streams.map(stream => ({ ...stream, provider: 'Soaper TV' }));
+                } else {
+                    console.log(`[SoaperTV] No streams returned.`);
+                    // Save empty result
+                    await saveStreamToCache('soapertv', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
+                    return [];
+                }
+            } catch (err) {
+                console.error(`[SoaperTV] Error fetching streams:`, err.message);
+                // Save error status to cache
+                await saveStreamToCache('soapertv', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
+                return [];
+            }
+        },
+
+        // Cuevana provider with cache integration
+        cuevana: async () => {
+            if (!ENABLE_CUEVANA_PROVIDER || !shouldFetch('cuevana')) {
+                if (!ENABLE_CUEVANA_PROVIDER) {
+                    console.log('[Cuevana] Skipping fetch: Disabled by environment variable.');
+                } else {
+                    console.log('[Cuevana] Skipping fetch: Not selected by user.');
+                }
+                return [];
+            }
+            
+            // Try to get cached streams first
+            const cachedStreams = await getStreamFromCache('cuevana', tmdbTypeFromId, tmdbId, seasonNum, episodeNum);
+            if (cachedStreams) {
+                console.log(`[Cuevana] Using ${cachedStreams.length} streams from cache.`);
+                return cachedStreams;
+            }
+            
+            // No cache or expired, fetch fresh
+            try {
+                console.log(`[Cuevana] Fetching new streams...`);
+                let streams = [];
+                
+                if (tmdbTypeFromId === 'movie') {
+                    streams = await getCuevanaStreams(tmdbId, 'movie');
+                } else if (tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null) {
+                    streams = await getCuevanaStreams(tmdbId, 'tv', seasonNum, episodeNum);
+                }
+                
+                if (streams && streams.length > 0) {
+                    console.log(`[Cuevana] Successfully fetched ${streams.length} streams.`);
+                    // Save to cache
+                    await saveStreamToCache('cuevana', tmdbTypeFromId, tmdbId, streams, 'ok', seasonNum, episodeNum);
+                } else {
+                    console.log(`[Cuevana] No streams returned.`);
+                    // Save empty result
+                    await saveStreamToCache('cuevana', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
+                }
+                
+                return streams;
+            } catch (err) {
+                console.error(`[Cuevana] Error fetching streams:`, err.message);
+                // Save error status to cache
+                await saveStreamToCache('cuevana', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
+                return [];
+            }
+        },
+
+        // Hianime provider with cache integration
+        hianime: async () => {
+            if (!shouldFetch('hianime') || !(tmdbTypeFromId === 'tv' && seasonNum !== null && episodeNum !== null && isAnimation)) {
+                if (!shouldFetch('hianime')) {
+                    console.log('[Hianime] Skipping fetch: Not selected by user.');
+                } else if (tmdbTypeFromId === 'tv' && !isAnimation) {
+                    console.log('[Hianime] Skipping fetch: Content is a TV show but not identified as Animation.');
+                } else {
+                    console.log('[Hianime] Skipping fetch: Not applicable content type or missing parameters.');
+                }
+                return [];
+            }
+            
+            // Try to get cached streams first
+            const cachedStreams = await getStreamFromCache('hianime', tmdbTypeFromId, tmdbId, seasonNum, episodeNum);
+            if (cachedStreams) {
+                console.log(`[Hianime] Using ${cachedStreams.length} streams from cache.`);
+                return cachedStreams;
+            }
+            
+            // No cache or expired, fetch fresh
+            try {
+                console.log(`[Hianime] Fetching new streams...`);
+                const streams = await getHianimeStreams(tmdbId, seasonNum, episodeNum);
+                
+                if (streams && streams.length > 0) {
+                    console.log(`[Hianime] Successfully fetched ${streams.length} streams.`);
+                    // Save to cache
+                    await saveStreamToCache('hianime', tmdbTypeFromId, tmdbId, streams, 'ok', seasonNum, episodeNum);
+                } else {
+                    console.log(`[Hianime] No streams returned.`);
+                    // Save empty result
+                    await saveStreamToCache('hianime', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
+                }
+                
+                return streams;
+            } catch (err) {
+                console.error(`[Hianime] Error fetching streams:`, err.message);
+                // Save error status to cache
+                await saveStreamToCache('hianime', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
+                return [];
+            }
+        },
+
+        // VidSrc provider with cache integration
+        vidsrc: async () => {
+            if (!shouldFetch('vidsrc')) {
+                console.log('[VidSrc] Skipping fetch: Not selected by user.');
+                return [];
+            }
+            
+            // Try to get cached streams first
+            const cachedStreams = await getStreamFromCache('vidsrc', tmdbTypeFromId, tmdbId, seasonNum, episodeNum);
+            if (cachedStreams) {
+                console.log(`[VidSrc] Using ${cachedStreams.length} streams from cache.`);
+                return cachedStreams.map(stream => ({ ...stream, provider: 'VidSrc' }));
+            }
+            
+            // No cache or expired, fetch fresh
+            try {
+                console.log(`[VidSrc] Fetching new streams...`);
+                const streams = await getVidSrcStreams(
+                    id.startsWith('tt') ? id.split(':')[0] : tmdbId, 
+                    tmdbTypeFromId, 
+                    seasonNum, 
+                    episodeNum
+                );
+                
+                if (streams && streams.length > 0) {
+                    console.log(`[VidSrc] Successfully fetched ${streams.length} streams.`);
+                    // Save to cache
+                    await saveStreamToCache('vidsrc', tmdbTypeFromId, tmdbId, streams, 'ok', seasonNum, episodeNum);
+                    return streams.map(stream => ({ ...stream, provider: 'VidSrc' }));
+                } else {
+                    console.log(`[VidSrc] No streams returned.`);
+                    // Save empty result
+                    await saveStreamToCache('vidsrc', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
+                    return [];
+                }
+            } catch (err) {
+                console.error(`[VidSrc] Error fetching streams:`, err.message);
+                // Save error status to cache
+                await saveStreamToCache('vidsrc', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
+                return [];
+            }
         }
-    })() : Promise.resolve([]);
+    };
+
+    // Execute all provider fetches in parallel
+    console.log('Running parallel provider fetches with caching...');
     
     try {
-        // Ensure all promises are actual Promise objects before Promise.all
-        const promisesToAwait = [
-            showBoxPromise,
-            xprimePromise,
-            hollymoviePromise,
-            soaperTvPromise,
-            cuevanaPromise,
-            hianimePromise,
-            vidSrcPromise
-        ].map(p => p || Promise.resolve([])); // Ensure every element is a promise
-
-        const results = await Promise.all(promisesToAwait); 
+        // Execute all provider functions in parallel
+        const providerResults = await Promise.all([
+            providerFetchFunctions.showbox(),
+            providerFetchFunctions.xprime(),
+            providerFetchFunctions.hollymoviehd(),
+            providerFetchFunctions.soapertv(),
+            providerFetchFunctions.cuevana(),
+            providerFetchFunctions.hianime(),
+            providerFetchFunctions.vidsrc()
+        ]);
         
-        const streamsByProvider = {};
+        // Process results into streamsByProvider object
+        const streamsByProvider = {
+            'ShowBox': shouldFetch('showbox') ? filterStreamsByQuality(providerResults[0], minQualitiesPreferences.showbox, 'ShowBox') : [],
+            'Xprime.tv': shouldFetch('xprime') ? filterStreamsByQuality(providerResults[1], minQualitiesPreferences.xprime, 'Xprime.tv') : [],
+            'HollyMovieHD': shouldFetch('hollymoviehd') ? filterStreamsByQuality(providerResults[2], minQualitiesPreferences.hollymoviehd, 'HollyMovieHD') : [],
+            'Soaper TV': shouldFetch('soapertv') ? filterStreamsByQuality(providerResults[3], minQualitiesPreferences.soapertv, 'Soaper TV') : [],
+            'Cuevana': shouldFetch('cuevana') ? filterStreamsByQuality(providerResults[4], minQualitiesPreferences.cuevana, 'Cuevana') : [],
+            'Hianime': shouldFetch('hianime') ? filterStreamsByQuality(providerResults[5], minQualitiesPreferences.hianime, 'Hianime') : [],
+            'VidSrc': shouldFetch('vidsrc') ? filterStreamsByQuality(providerResults[6], minQualitiesPreferences.vidsrc, 'VidSrc') : []
+        };
 
-        // Correctly assign results based on whether they were fetched
-        // AND apply quality filtering before sorting
-        if (shouldFetch('showbox')) {
-            let fetchedStreams = results[promisesToAwait.indexOf(showBoxPromise)] || [];
-            const minQuality = minQualitiesPreferences.showbox;
-            fetchedStreams = filterStreamsByQuality(fetchedStreams, minQuality, 'ShowBox');
-            streamsByProvider['ShowBox'] = sortStreamsByQuality(fetchedStreams);
+        // Sort streams by quality for each provider
+        for (const provider in streamsByProvider) {
+            streamsByProvider[provider] = sortStreamsByQuality(streamsByProvider[provider]);
         }
-        if (shouldFetch('xprime')) {
-            let fetchedStreams = results[promisesToAwait.indexOf(xprimePromise)] || [];
-            const minQuality = minQualitiesPreferences.xprime;
-            fetchedStreams = filterStreamsByQuality(fetchedStreams, minQuality, 'Xprime.tv');
-            streamsByProvider['Xprime.tv'] = sortStreamsByQuality(fetchedStreams);
-        }
-        if (shouldFetch('hollymoviehd')) {
-            let fetchedStreams = results[promisesToAwait.indexOf(hollymoviePromise)] || [];
-            const minQuality = minQualitiesPreferences.hollymoviehd;
-            fetchedStreams = filterStreamsByQuality(fetchedStreams, minQuality, 'HollyMovieHD');
-            streamsByProvider['HollyMovieHD'] = sortStreamsByQuality(fetchedStreams);
-        }
-        if (shouldFetch('soapertv')) {
-            let fetchedStreams = results[promisesToAwait.indexOf(soaperTvPromise)] || [];
-            const minQuality = minQualitiesPreferences.soapertv;
-            fetchedStreams = filterStreamsByQuality(fetchedStreams, minQuality, 'Soaper TV');
-            streamsByProvider['Soaper TV'] = sortStreamsByQuality(fetchedStreams);
-        }
-        if (shouldFetch('cuevana')) {
-            let fetchedStreams = results[promisesToAwait.indexOf(cuevanaPromise)] || [];
-            const minQuality = minQualitiesPreferences.cuevana;
-            fetchedStreams = filterStreamsByQuality(fetchedStreams, minQuality, 'Cuevana');
-            streamsByProvider['Cuevana'] = sortStreamsByQuality(fetchedStreams);
-        }
-        if (shouldFetch('hianime')) {
-            let fetchedStreams = results[promisesToAwait.indexOf(hianimePromise)] || [];
-            const minQuality = minQualitiesPreferences.hianime;
-            fetchedStreams = filterStreamsByQuality(fetchedStreams, minQuality, 'Hianime');
-            streamsByProvider['Hianime'] = sortStreamsByQuality(fetchedStreams);
-        }
-        if (shouldFetch('vidsrc')) {
-            let fetchedStreams = results[promisesToAwait.indexOf(vidSrcPromise)] || [];
-            const minQuality = minQualitiesPreferences.vidsrc;
-            fetchedStreams = filterStreamsByQuality(fetchedStreams, minQuality, 'VidSrc');
-            streamsByProvider['VidSrc'] = sortStreamsByQuality(fetchedStreams);
-        }
-
-        // Combine streams in the preferred provider order, only including fetched ones
+        
+        // Combine streams in the preferred provider order
         combinedRawStreams = [];
         const providerOrder = ['ShowBox', 'Xprime.tv', 'HollyMovieHD', 'Soaper TV', 'Cuevana', 'Hianime', 'VidSrc'];
         providerOrder.forEach(providerKey => {
@@ -674,11 +889,8 @@ builder.defineStreamHandler(async (args) => {
         console.log(`Total raw streams after provider-ordered fetch: ${combinedRawStreams.length}`);
 
     } catch (error) {
-        // This catch block might be redundant if individual promises handle their errors and return [].
-        // However, it can catch unexpected errors from Promise.all itself if any arise, though unlikely with .catch in each promise.
-        console.error('Error during Promise.all execution for stream fetching:', error);
-        // combinedRawStreams will remain as initialized (empty) or with partial results if one promise was resolved before an error
-        // But the .catch in each promise should prevent Promise.all from rejecting outright.
+        console.error('Error during provider fetching:', error);
+        // Continue with any streams we were able to fetch
     }
     
     if (combinedRawStreams.length === 0) {

@@ -45,4 +45,5 @@ env/
 pip-wheel-metadata/
 .Python
 *.tar.gz
-*.whl
+collaboration_message.md
+.streams_cache
