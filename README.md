@@ -56,21 +56,6 @@ It's important to be transparent about how Nuvio Streams works:
 *   **Limited Resources:** As a solo-developed project, fixes and updates will be made when possible.
 *   **Educational Project:** This addon is primarily a personal project that has grown with community interest.
 
-## Frequently Asked Questions (FAQ)
-
-*   **Q: How reliable is this addon long-term?**
-    *   A: As a scraper addon, its reliability depends entirely on the external providers. They can change or disappear at any time. Updates will be attempted when possible, but there are no guarantees.
-*   **Q: What's the difference between personalized (cookie) and non-personalized usage?**
-    *   A: Non-personalized users share limited ShowBox/FebBox bandwidth and are restricted to streams under 9GB. Personalized users get their own 100GB monthly FebBox quota and access to all quality levels from ShowBox.
-*   **Q: Does this addon use torrents or P2P technology?**
-    *   A: No. This addon only scrapes direct HTTP streams from websites.
-*   **Q: Why do some streams not work?**
-    *   A: Providers can change their websites or go offline. When this happens, streams may stop working until the addon is updated.
-*   **Q: How often is the addon updated?**
-    *   A: As an indie developer, updates are made when time and resources allow.
-*   **Q: Will more providers be added?**
-    *   A: New, reliable providers are always being considered.
-
 ## Future Development
 
 *   **Regional Providers (e.g., LATAM):** Research is ongoing for adding more region-specific providers, which often require proxy solutions. This is a roadmap item, and contributions or expertise in this area are welcome.
