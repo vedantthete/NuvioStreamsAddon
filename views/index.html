@@ -1452,18 +1452,8 @@
                         <span class="provider-detail">May contain 4K/DV/HDR</span>
                     </div>
                     <div class="provider-item">
-                        <div class="provider-icon xprime-icon">⚡</div>
-                        <div class="provider-name">Xprime.tv</div>
-                        <span class="provider-detail">Typically Faster</span>
-                    </div>
-                    <div class="provider-item">
                         <div class="provider-icon soapertv-icon">🧼</div> 
                         <div class="provider-name">Soaper TV</div>
-                        <span class="provider-detail">Auto Quality</span>
-                    </div>
-                    <div class="provider-item">
-                        <div class="provider-icon hollymovie-icon">🎬</div>
-                        <div class="provider-name">HollyMovieHD</div>
                         <span class="provider-detail">Auto Quality</span>
                     </div>
                     <div class="provider-item">
@@ -1472,26 +1462,46 @@
                         <span class="provider-detail">Anime (Dub/Sub)</span>
                     </div>
                     <div class="provider-item">
+                        <div class="provider-icon xprime-icon">⚡</div>
+                        <div class="provider-name">Xprime.tv</div>
+                        <span class="provider-detail" style="color: #ff8c00;">Self-hosted instances only</span>
+                    </div>
+                    <div class="provider-item">
+                        <div class="provider-icon hollymovie-icon">🎬</div>
+                        <div class="provider-name">HollyMovieHD</div>
+                        <span class="provider-detail" style="color: #ff3a3a;">Offline</span>
+                    </div>
+                    <div class="provider-item">
                         <div class="provider-icon vidsrc-icon">🎬</div>
                         <div class="provider-name">VidSrc</div>
-                        <span class="provider-detail">Multi-Source</span>
+                        <span class="provider-detail" style="color: #ff3a3a;">Offline</span>
                     </div>
                 </div>
                 
+                <!-- Provider info note remains in place -->
                 <div class="provider-info-note">
                     <span class="info-icon">💡</span> 
                     <span>The flag emoji (e.g., 🇺🇸, 🇬🇧) next to ShowBox stream names indicates the server location, not the content's language.</span>
                 </div>
 
-                <!-- NEW: Provider Selection Section -->
+                <!-- Disclaimer moved from below to here -->
+                <div class="disclaimer">
+                    <div class="disclaimer-header">
+                        <span class="disclaimer-icon">ℹ️</span>
+                        <span>Disclaimer</span>
+                    </div>
+                    <div class="disclaimer-content">
+                    <p>Nuvio Streams is a scraper-based addon that aggregates content from various providers. I do not own or host any of the content provided.</p>
+                        <p>Providers (including ShowBox) may become unavailable without notice. As an independent developer, I'll make every effort to maintain functionality, but sources may stop working unexpectedly.</p>
+                    </div>
+                </div>
+                
+                <!-- Provider Selection Section -->
                 <div class="provider-selection-container full-width" style="margin-top: 1.5rem;">
                     <h2 style="font-size: 1rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--text); opacity: 0.9;">Customize Your Providers</h2>
                     <p style="font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem; color: var(--text-light);">
                         Select the providers you want to use. Unchecking providers can speed up results if you only use specific sources. If all are checked (default), the addon fetches from all.
                     </p>
-                    <div style="background-color: rgba(255, 100, 50, 0.1); border: 1px solid rgba(255, 100, 50, 0.3); color: var(--text-light); padding: 0.75rem; border-radius: 0.4rem; margin-bottom: 1rem; font-size: 0.8rem; line-height: 1.4;">
-                        ⚠️ <strong>HollyMovieHD Status:</strong> Currently experiencing issues and is disabled by default to improve overall addon speed. While you can still select it, links may not be available until service is restored.
-                    </div>
                     <div class="provider-checkbox-list" style="background-color: rgba(15, 15, 15, 0.7); border-radius: 0.6rem; padding: 1rem; border: 1px solid var(--border);">
                         <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
                             <div style="display: flex; align-items: center;">
@@ -1507,10 +1517,10 @@
                         </div>
                         <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
                             <div style="display: flex; align-items: center;">
-                                <input type="checkbox" id="providerXprime" name="providerSelect" value="xprime" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
-                                <label for="providerXprime" style="font-size: 0.9rem;">Xprime.tv</label>
+                                <input type="checkbox" id="providerXprime" name="providerSelect" value="xprime" disabled style="margin-right: 0.5rem; accent-color: var(--primary); opacity: 0.5;">
+                                <label for="providerXprime" style="font-size: 0.9rem; opacity: 0.5;">Xprime.tv</label>
                             </div>
-                            <select id="qualityXprime" name="providerQuality" data-provider="xprime" class="provider-sort-select">
+                            <select id="qualityXprime" name="providerQuality" data-provider="xprime" class="provider-sort-select" disabled>
                                 <option value="all" selected>All Qualities</option>
                                 <option value="480p">480p & Up</option>
                                 <option value="720p">720p & Up</option>
@@ -1519,8 +1529,8 @@
                         </div>
                         <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
                             <div style="display: flex; align-items: center;">
-                                <input type="checkbox" id="providerHollymoviehd" name="providerSelect" value="hollymoviehd" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
-                                <label for="providerHollymoviehd" style="font-size: 0.9rem;">HollyMovieHD</label>
+                                <input type="checkbox" id="providerHollymoviehd" name="providerSelect" value="hollymoviehd" disabled style="margin-right: 0.5rem; accent-color: var(--primary); opacity: 0.5;">
+                                <label for="providerHollymoviehd" style="font-size: 0.9rem; opacity: 0.5;">HollyMovieHD</label>
                             </div>
                             <select id="qualityHollymoviehd" name="providerQuality" data-provider="hollymoviehd" class="provider-sort-select" disabled>
                                 <option value="all" selected>All Qualities</option>
@@ -1555,10 +1565,10 @@
                         </div>
                         <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0;">
                             <div style="display: flex; align-items: center;">
-                                <input type="checkbox" id="providerVidsrc" name="providerSelect" value="vidsrc" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
-                                <label for="providerVidsrc" style="font-size: 0.9rem;">VidSrc</label>
+                                <input type="checkbox" id="providerVidsrc" name="providerSelect" value="vidsrc" disabled style="margin-right: 0.5rem; accent-color: var(--primary); opacity: 0.5;">
+                                <label for="providerVidsrc" style="font-size: 0.9rem; opacity: 0.5;">VidSrc</label>
                             </div>
-                             <select id="qualityVidsrc" name="providerQuality" data-provider="vidsrc" class="provider-sort-select">
+                             <select id="qualityVidsrc" name="providerQuality" data-provider="vidsrc" class="provider-sort-select" disabled>
                                 <option value="all" selected>All Qualities</option>
                                 <option value="480p">480p & Up</option>
                                 <option value="720p">720p & Up</option>
@@ -1574,17 +1584,6 @@
                 </div>
                 <!-- END NEW: Provider Selection Section -->
 
-                <div class="disclaimer">
-                    <div class="disclaimer-header">
-                        <span class="disclaimer-icon">ℹ️</span>
-                        <span>Disclaimer</span>
-                    </div>
-                    <div class="disclaimer-content">
-                    <p>Nuvio Streams is a scraper-based addon that aggregates content from various providers. I do not own or host any of the content provided.</p>
-                        <p>Providers (including ShowBox) may become unavailable without notice. As an independent developer, I'll make every effort to maintain functionality, but sources may stop working unexpectedly.</p>
-                    </div>
-                </div>
-                
                 <!-- Add Cookie Configuration Section -->
                 <div class="cookie-config-container full-width">
                     <div class="cookie-header">

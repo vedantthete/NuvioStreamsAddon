@@ -43,6 +43,10 @@ console.log(`[addon.js] Cuevana provider fetching enabled: ${ENABLE_CUEVANA_PROV
 const ENABLE_HOLLYMOVIEHD_PROVIDER = process.env.ENABLE_HOLLYMOVIEHD_PROVIDER !== 'false'; // Defaults to true if not set or not 'false'
 console.log(`[addon.js] HollyMovieHD provider fetching enabled: ${ENABLE_HOLLYMOVIEHD_PROVIDER}`);
 
+// NEW: Read environment variable for Xprime
+const ENABLE_XPRIME_PROVIDER = process.env.ENABLE_XPRIME_PROVIDER !== 'false'; // Defaults to true if not set or not 'false'
+console.log(`[addon.js] Xprime provider fetching enabled: ${ENABLE_XPRIME_PROVIDER}`);
+
 // NEW: Stream caching config
 const STREAM_CACHE_DIR = process.env.VERCEL ? path.join('/tmp', '.streams_cache') : path.join(__dirname, '.streams_cache');
 const STREAM_CACHE_TTL_MS = 9 * 60 * 1000; // 9 minutes
@@ -380,14 +384,16 @@ const getStreamFromCache = async (provider, type, id, seasonNum = null, episodeN
 };
 
 // Save streams to cache - Hybrid approach (Redis + file)
-const saveStreamToCache = async (provider, type, id, streams, status = 'ok', seasonNum = null, episodeNum = null, region = null, cookie = null) => {
+const saveStreamToCache = async (provider, type, id, streams, status = 'ok', seasonNum = null, episodeNum = null, region = null, cookie = null, ttlMs = null) => {
     if (!ENABLE_STREAM_CACHE) return;
     
     const cacheKey = getStreamCacheKey(provider, type, id, seasonNum, episodeNum, region, cookie);
+    const effectiveTtlMs = ttlMs !== null ? ttlMs : STREAM_CACHE_TTL_MS; // Use provided TTL or default
+
     const cacheData = {
         streams: streams,
         status: status,
-        expiry: Date.now() + STREAM_CACHE_TTL_MS,
+        expiry: Date.now() + effectiveTtlMs, // Use effective TTL
         timestamp: Date.now()
     };
     
@@ -397,8 +403,8 @@ const saveStreamToCache = async (provider, type, id, streams, status = 'ok', sea
     if (redis) {
         try {
             // PX sets expiry in milliseconds
-            await redis.set(cacheKey, JSON.stringify(cacheData), 'PX', STREAM_CACHE_TTL_MS);
-            console.log(`[Redis Cache] SAVED for ${provider}: ${cacheKey} (${streams.length} streams, status: ${status})`);
+            await redis.set(cacheKey, JSON.stringify(cacheData), 'PX', effectiveTtlMs); // Use effective TTL
+            console.log(`[Redis Cache] SAVED for ${provider}: ${cacheKey} (${streams.length} streams, status: ${status}, TTL: ${effectiveTtlMs / 1000}s)`);
             redisSuccess = true;
         } catch (error) {
             console.warn(`[Redis Cache] WRITE ERROR for ${provider}: ${cacheKey}: ${error.message}`);
@@ -414,7 +420,7 @@ const saveStreamToCache = async (provider, type, id, streams, status = 'ok', sea
         
         // Only log if Redis didn't succeed to avoid redundant logging
         if (!redisSuccess) {
-            console.log(`[File Cache] SAVED for ${provider}: ${fileCacheKey} (${streams.length} streams, status: ${status})`);
+            console.log(`[File Cache] SAVED for ${provider}: ${fileCacheKey} (${streams.length} streams, status: ${status}, TTL: ${effectiveTtlMs / 1000}s)`);
         }
     } catch (error) {
         console.warn(`[File Cache] WRITE ERROR for ${provider}: ${cacheKey}.json: ${error.message}`);
@@ -689,19 +695,25 @@ builder.defineStreamHandler(async (args) => {
         
         // Xprime provider with cache integration
         xprime: async () => {
+            if (!ENABLE_XPRIME_PROVIDER) { // Check if Xprime is disabled
+                console.log('[Xprime.tv] Skipping fetch: Disabled by environment variable.');
+                return [];
+            }
             if (!shouldFetch('xprime') || !movieOrSeriesTitle || !movieOrSeriesYear) {
                 if (!shouldFetch('xprime')) console.log('[Xprime.tv] Skipping fetch: Not selected by user.');
                 else console.log('[Xprime.tv] Skipping fetch: Missing title or year data.');
                 return [];
             }
-            
+
+            const XPRIME_CACHE_TTL_MS = 10 * 24 * 60 * 60 * 1000; // 10 days in milliseconds
+
             // Try to get cached streams first
             const cachedStreams = await getStreamFromCache('xprime', tmdbTypeFromId, tmdbId, seasonNum, episodeNum);
             if (cachedStreams) {
                 console.log(`[Xprime.tv] Using ${cachedStreams.length} streams from cache.`);
                 return cachedStreams.map(stream => ({ ...stream, provider: 'Xprime.tv' }));
             }
-            
+
             // No cache or expired, fetch fresh
             try {
                 console.log(`[Xprime.tv] Fetching new streams...`);
@@ -710,21 +722,21 @@ builder.defineStreamHandler(async (args) => {
                 console.log(`[Xprime.tv] Proxy usage: ${useXprimeProxy}`);
 
                 const streams = await getXprimeStreams(movieOrSeriesTitle, movieOrSeriesYear, tmdbTypeFromId, seasonNum, episodeNum, useXprimeProxy);
-                
+
                 if (streams && streams.length > 0) {
                     console.log(`[Xprime.tv] Successfully fetched ${streams.length} streams.`);
-                    // Save to cache
-                    await saveStreamToCache('xprime', tmdbTypeFromId, tmdbId, streams, 'ok', seasonNum, episodeNum);
+                    // Save to cache with custom 10-day TTL
+                    await saveStreamToCache('xprime', tmdbTypeFromId, tmdbId, streams, 'ok', seasonNum, episodeNum, null, null, XPRIME_CACHE_TTL_MS);
                     return streams.map(stream => ({ ...stream, provider: 'Xprime.tv' }));
                 } else {
                     console.log(`[Xprime.tv] No streams returned.`);
-                    // Save empty result
+                    // Save empty result with default (shorter) TTL for quick retry
                     await saveStreamToCache('xprime', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
                     return [];
                 }
             } catch (err) {
                 console.error(`[Xprime.tv] Error fetching streams:`, err.message);
-                // Save error status to cache
+                // Save error status to cache with default (shorter) TTL for quick retry
                 await saveStreamToCache('xprime', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
                 return [];
             }
@@ -975,8 +987,8 @@ builder.defineStreamHandler(async (args) => {
         // Process results into streamsByProvider object
         const streamsByProvider = {
             'ShowBox': shouldFetch('showbox') ? filterStreamsByQuality(providerResults[0], minQualitiesPreferences.showbox, 'ShowBox') : [],
-            'Xprime.tv': shouldFetch('xprime') ? filterStreamsByQuality(providerResults[1], minQualitiesPreferences.xprime, 'Xprime.tv') : [],
-            'HollyMovieHD': shouldFetch('hollymoviehd') ? filterStreamsByQuality(providerResults[2], minQualitiesPreferences.hollymoviehd, 'HollyMovieHD') : [],
+            'Xprime.tv': ENABLE_XPRIME_PROVIDER && shouldFetch('xprime') ? filterStreamsByQuality(providerResults[1], minQualitiesPreferences.xprime, 'Xprime.tv') : [],
+            'HollyMovieHD': ENABLE_HOLLYMOVIEHD_PROVIDER && shouldFetch('hollymoviehd') ? filterStreamsByQuality(providerResults[2], minQualitiesPreferences.hollymoviehd, 'HollyMovieHD') : [],
             'Soaper TV': shouldFetch('soapertv') ? filterStreamsByQuality(providerResults[3], minQualitiesPreferences.soapertv, 'Soaper TV') : [],
             'Cuevana': shouldFetch('cuevana') ? filterStreamsByQuality(providerResults[4], minQualitiesPreferences.cuevana, 'Cuevana') : [],
             'Hianime': shouldFetch('hianime') ? filterStreamsByQuality(providerResults[5], minQualitiesPreferences.hianime, 'Hianime') : [],

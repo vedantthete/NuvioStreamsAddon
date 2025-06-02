@@ -5,6 +5,38 @@ const cheerio = require('cheerio');
 const fs = require('fs').promises;
 const path = require('path');
 const crypto = require('crypto');
+const Redis = require('ioredis'); // Added for Redis
+
+// --- Redis Cache Initialization ---
+let redisClient = null;
+if (process.env.USE_REDIS_CACHE === 'true' && process.env.REDIS_URL) {
+    console.log(`Attempting to connect to Redis at: ${process.env.REDIS_URL}`);
+    redisClient = new Redis(process.env.REDIS_URL, {
+        // Optional: Add connection options here if needed
+        // e.g., tls: process.env.REDIS_TLS === 'true' ? {} : undefined,
+        maxRetriesPerRequest: 3, // Don't retry indefinitely
+        connectTimeout: 10000, // 10 seconds
+        lazyConnect: true // Connect on first command
+    });
+
+    redisClient.on('connect', () => {
+        console.log('Successfully connected to Redis server.');
+    });
+
+    redisClient.on('error', (err) => {
+        console.error(`Redis connection error: ${err.message}. Falling back to file system cache for operations. Redis Host: ${err.host}, Port: ${err.port}`);
+        // Optionally, you could set redisClient to null here to prevent further attempts if error is persistent
+        // For now, it will keep trying to reconnect based on ioredis default behavior or specified options.
+    });
+    
+    // Attempt an initial connection check
+    redisClient.connect().catch(err => {
+        console.error(`Initial Redis connection failed: ${err.message}. Ensure Redis is running and accessible.`);
+    });
+
+} else {
+    console.log("Redis cache is disabled or REDIS_URL is not set. Using file system cache only.");
+}
 
 // --- Cookie Management ---
 let cookieIndex = 0;
@@ -207,18 +239,59 @@ const getFromCache = async (cacheKey, subDir = '') => {
         console.log(`  CACHE DISABLED: Skipping read for ${path.join(subDir, cacheKey)}`);
         return null;
     }
+
+    const fullCacheKey = subDir ? `${subDir}:${cacheKey}` : cacheKey; // Redis key format
+
+    // Try to get from Redis first
+    if (redisClient && redisClient.status === 'ready') {
+        try {
+            const redisData = await redisClient.get(fullCacheKey);
+            if (redisData !== null) {
+                console.log(`  REDIS CACHE HIT for: ${fullCacheKey}`);
+                try {
+                    return JSON.parse(redisData); // Try to parse as JSON
+                } catch (e) {
+                    return redisData; // Return as string if not JSON
+                }
+            }
+            console.log(`  REDIS CACHE MISS for: ${fullCacheKey}`);
+        } catch (redisError) {
+            console.warn(`  REDIS CACHE READ ERROR for ${fullCacheKey}: ${redisError.message}. Falling back to file system cache.`);
+        }
+    } else if (redisClient) {
+        console.log(`  Redis client not ready (status: ${redisClient.status}). Skipping Redis read for ${fullCacheKey}, trying file system.`);
+    }
+
+    // Fallback to file system cache
     const cachePath = path.join(CACHE_DIR, subDir, cacheKey);
     try {
-        const data = await fs.readFile(cachePath, 'utf-8');
-        console.log(`  CACHE HIT for: ${path.join(subDir, cacheKey)}`);
+        const fileData = await fs.readFile(cachePath, 'utf-8');
+        console.log(`  FILE SYSTEM CACHE HIT for: ${path.join(subDir, cacheKey)}`);
+        // If Redis is available, and we got a hit from file system, let's populate Redis for next time
+        if (redisClient && redisClient.status === 'ready') {
+            try {
+                let ttlSeconds = 24 * 60 * 60; // Default 24 hours, same logic as saveToCache
+                if (subDir === 'showbox_search_results') ttlSeconds = 6 * 60 * 60;
+                else if (subDir.startsWith('tmdb_')) ttlSeconds = 48 * 60 * 60;
+                else if (subDir.startsWith('febbox_')) ttlSeconds = 12 * 60 * 60;
+                else if (subDir === 'stream_sizes') ttlSeconds = 72 * 60 * 60;
+
+                await redisClient.set(fullCacheKey, fileData, 'EX', ttlSeconds);
+                console.log(`  Populated REDIS CACHE from FILE SYSTEM for: ${fullCacheKey} (TTL: ${ttlSeconds / 3600}h)`);
+            } catch (redisSetError) {
+                console.warn(`  REDIS CACHE SET ERROR (after file read) for ${fullCacheKey}: ${redisSetError.message}`);
+            }
+        }
         try {
-            return JSON.parse(data);
+            return JSON.parse(fileData);
         } catch (e) {
-            return data;
+            return fileData; // Return as string if not JSON
         }
     } catch (error) {
         if (error.code !== 'ENOENT') {
-            console.warn(`  CACHE READ ERROR for ${cacheKey}: ${error.message}`);
+            console.warn(`  FILE SYSTEM CACHE READ ERROR for ${cacheKey}: ${error.message}`);
+        } else {
+            console.log(`  FILE SYSTEM CACHE MISS for: ${path.join(subDir, cacheKey)}`);
         }
         return null;
     }
@@ -229,15 +302,44 @@ const saveToCache = async (cacheKey, content, subDir = '') => {
         console.log(`  CACHE DISABLED: Skipping write for ${path.join(subDir, cacheKey)}`);
         return;
     }
+
+    const dataToSave = typeof content === 'string' ? content : JSON.stringify(content, null, 2);
+    const fullCacheKey = subDir ? `${subDir}:${cacheKey}` : cacheKey; // Redis key format
+
+    // Attempt to save to Redis first
+    if (redisClient && redisClient.status === 'ready') {
+        try {
+            // Set a default TTL, e.g., 24 hours. Adjust as needed.
+            // ShowBox search results (subDir 'showbox_search_results') might benefit from shorter TTL like 1-6 hours.
+            // TMDB data (subDir 'tmdb_api', 'tmdb_external_id') can have longer TTL like 24-72 hours.
+            // FebBox HTML/parsed data ('febbox_page_html', 'febbox_parsed_page', 'febbox_season_folders', 'febbox_parsed_season_folders') can have medium TTL like 6-24 hours.
+            // Stream sizes ('stream_sizes') can have a longer TTL if they don't change often, or shorter if they do.
+            let ttlSeconds = 24 * 60 * 60; // Default 24 hours
+            if (subDir === 'showbox_search_results') ttlSeconds = 6 * 60 * 60; // 6 hours
+            else if (subDir.startsWith('tmdb_')) ttlSeconds = 48 * 60 * 60; // 48 hours
+            else if (subDir.startsWith('febbox_')) ttlSeconds = 12 * 60 * 60; // 12 hours
+            else if (subDir === 'stream_sizes') ttlSeconds = 72 * 60 * 60; // 72 hours
+
+
+            await redisClient.set(fullCacheKey, dataToSave, 'EX', ttlSeconds);
+            console.log(`  SAVED TO REDIS CACHE: ${fullCacheKey} (TTL: ${ttlSeconds / 3600}h)`);
+        } catch (redisError) {
+            console.warn(`  REDIS CACHE WRITE ERROR for ${fullCacheKey}: ${redisError.message}. Proceeding with file system cache.`);
+        }
+    } else if (redisClient) {
+        console.log(`  Redis client not ready (status: ${redisClient.status}). Skipping Redis write for ${fullCacheKey}.`);
+    }
+
+
+    // Always save to file system cache as a fallback or if Redis is disabled
     const fullSubDir = path.join(CACHE_DIR, subDir);
     await ensureCacheDir(fullSubDir);
     const cachePath = path.join(fullSubDir, cacheKey);
     try {
-        const dataToSave = typeof content === 'string' ? content : JSON.stringify(content, null, 2);
         await fs.writeFile(cachePath, dataToSave, 'utf-8');
-        console.log(`  SAVED TO CACHE: ${path.join(subDir, cacheKey)}`);
+        console.log(`  SAVED TO FILE SYSTEM CACHE: ${path.join(subDir, cacheKey)}`);
     } catch (error) {
-        console.warn(`  CACHE WRITE ERROR for ${cacheKey}: ${error.message}`);
+        console.warn(`  FILE SYSTEM CACHE WRITE ERROR for ${cacheKey}: ${error.message}`);
     }
 };
 
