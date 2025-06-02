@@ -1427,9 +1427,143 @@
             background: linear-gradient(135deg, #2196F3, #03A9F4); /* Blue gradient for VidSrc */
         }
 
+        /* Migration Tool Styles */
+        .migration-tool-container {
+            background-color: rgba(255, 100, 50, 0.1);
+            border: 1px solid rgba(255, 100, 50, 0.3);
+            border-radius: 0.6rem;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            grid-column: 1 / -1; /* Span full width in grid */
+        }
+
+        .migration-tool-container h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ff6432; /* Orange-red for urgency */
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        .migration-tool-container p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .migration-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .migration-input {
+            padding: 0.65rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            background-color: rgba(20, 20, 20, 0.9);
+            color: var(--text);
+            font-size: 0.9rem;
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .migration-input:focus {
+            border-color: #ff6432;
+            box-shadow: 0 0 0 2px rgba(255, 100, 50, 0.2);
+        }
+
+        .migration-output-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .migration-output {
+            flex-grow: 1;
+            padding: 0.65rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--secondary) !important; /* Green border for success */
+            background-color: rgba(0, 193, 110, 0.05) !important;
+            color: var(--text) !important;
+            font-size: 0.9rem;
+            word-break: break-all;
+            box-shadow: 0 0 0 2px rgba(0, 193, 110, 0.1);
+        }
+
+        /* New Instance Banner Styles */
+        .instance-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #ff3a3a, #ff6432);
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            font-weight: 500;
+            z-index: 1000;
+            display: none; /* Hidden by default */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .instance-banner a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        
+        .instance-banner-close {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        
+        .instance-banner-close:hover {
+            opacity: 1;
+        }
+        
+        /* Adjust body padding when banner is visible */
+        body.has-instance-banner {
+            padding-top: 50px;
+        }
+        
+        /* Adjust for mobile */
+        @media (max-width: 600px) {
+            .instance-banner {
+                padding: 10px 30px 10px 10px; /* Make room for close button */
+                font-size: 14px;
+            }
+            body.has-instance-banner {
+                padding-top: 40px;
+            }
+        }
+
     </style>
 </head>
 <body>
+    <!-- New Vercel-to-Koyeb Banner -->
+    <div id="instanceBanner" class="instance-banner">
+        ⚠️ This Vercel instance will shut down soon! Please use our new Koyeb instance: 
+        <a href="https://aesthetic-jodie-tapframe-ab46446c.koyeb.app/" target="_blank">
+            Click here to access the Koyeb instance
+        </a>
+        <button id="closeBanner" class="instance-banner-close">×</button>
+    </div>
+    
     <div class="cards-container" id="cardsContainer">
         <div class="card main-card">
             <div class="card-header">
@@ -1437,6 +1571,25 @@
                 <h1>Nuvio Streams Addon</h1>
             </div>
             <div class="card-body">
+                <!-- URGENT MIGRATION TOOL -->
+                <div class="migration-tool-container">
+                    <h2>URGENT: Migrate Your Manifest URL!</h2>
+                    <p>The old Vercel public instance is shutting down very soon. If you have a personalized Vercel manifest link, paste it below to convert it to the new temporary Koyeb instance.</p>
+                    <div class="migration-input-group">
+                        <input type="text" id="vercelManifestInput" class="migration-input" placeholder="Paste your old Vercel Manifest URL here">
+                        <button id="convertManifestBtn" class="btn btn-primary" style="background: linear-gradient(135deg, #ff6432 0%, #e04a1a 100%);">Convert to New Koyeb URL</button>
+                    </div>
+                    <div id="koyebManifestOutputContainer" style="display:none;">
+                        <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 0.5rem;">Your new Koyeb Manifest URL (Install or Copy):</p>
+                        <div class="migration-output-group">
+                            <input type="text" id="koyebManifestOutput" class="migration-output" readonly>
+                            <button id="copyKoyebManifestBtn" class="btn btn-secondary" style="flex-shrink: 0;">Copy URL</button>
+                        </div>
+                         <p style="font-size: 0.75rem; color: var(--text-light); margin-top: 0.75rem;">Remember: This Koyeb instance is temporary. Self-hosting is the best long-term solution. Xprime and Cuevana remain self-host only.</p>
+                    </div>
+                </div>
+                <!-- END URGENT MIGRATION TOOL -->
+
                 <p class="full-width">Your gateway to high-quality streaming on Stremio. Enjoy movies and TV shows from multiple sources with our powerful addon.</p>
                 
                 <button class="more-addons-btn full-width" id="moreAddonsBtn">
@@ -1465,6 +1618,11 @@
                         <div class="provider-icon xprime-icon">⚡</div>
                         <div class="provider-name">Xprime.tv</div>
                         <span class="provider-detail" style="color: #ff8c00;">Self-hosted instances only</span>
+                    </div>
+                    <div class="provider-item">
+                        <div class="provider-icon cuevana-icon">🇨</div> <!-- Placeholder icon, can be updated -->
+                        <div class="provider-name">Cuevana</div>
+                        <span class="provider-detail" style="color: #ff8c00;">LATAM Provider (Self-hosted only)</span>
                     </div>
                     <div class="provider-item">
                         <div class="provider-icon hollymovie-icon">🎬</div>
@@ -1521,6 +1679,18 @@
                                 <label for="providerXprime" style="font-size: 0.9rem; opacity: 0.5;">Xprime.tv</label>
                             </div>
                             <select id="qualityXprime" name="providerQuality" data-provider="xprime" class="provider-sort-select" disabled>
+                                <option value="all" selected>All Qualities</option>
+                                <option value="480p">480p & Up</option>
+                                <option value="720p">720p & Up</option>
+                                <option value="1080p">1080p & Up</option>
+                            </select>
+                        </div>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
+                            <div style="display: flex; align-items: center;">
+                                <input type="checkbox" id="providerCuevana" name="providerSelect" value="cuevana" disabled style="margin-right: 0.5rem; accent-color: var(--primary); opacity: 0.5;">
+                                <label for="providerCuevana" style="font-size: 0.9rem; opacity: 0.5;">Cuevana</label>
+                            </div>
+                            <select id="qualityCuevana" name="providerQuality" data-provider="cuevana" class="provider-sort-select" disabled>
                                 <option value="all" selected>All Qualities</option>
                                 <option value="480p">480p & Up</option>
                                 <option value="720p">720p & Up</option>
@@ -2543,6 +2713,60 @@
                 }
             });
         }
+
+        // --- MANIFEST URL MIGRATION TOOL SCRIPT ---
+        const vercelManifestInput = document.getElementById('vercelManifestInput');
+        const convertManifestBtn = document.getElementById('convertManifestBtn');
+        const koyebManifestOutputContainer = document.getElementById('koyebManifestOutputContainer');
+        const koyebManifestOutput = document.getElementById('koyebManifestOutput');
+        const copyKoyebManifestBtn = document.getElementById('copyKoyebManifestBtn');
+
+        if (convertManifestBtn) {
+            convertManifestBtn.addEventListener('click', () => {
+                const vercelUrl = vercelManifestInput.value.trim();
+                if (!vercelUrl) {
+                    toast.textContent = 'Please paste your Vercel manifest URL.';
+                    toast.classList.add('show');
+                    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                    return;
+                }
+
+                if (!vercelUrl.includes('nuvioaddon.vercel.app')) {
+                    toast.textContent = 'This does not look like a Nuvio Vercel URL.';
+                    toast.classList.add('show');
+                    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                    return;
+                }
+
+                const koyebUrl = vercelUrl.replace('https://nuvioaddon.vercel.app', 'https://aesthetic-jodie-tapframe-ab46446c.koyeb.app');
+                
+                koyebManifestOutput.value = koyebUrl;
+                koyebManifestOutputContainer.style.display = 'block';
+
+                toast.textContent = 'Manifest URL converted to Koyeb!';
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 3000);
+            });
+        }
+
+        if (copyKoyebManifestBtn) {
+            copyKoyebManifestBtn.addEventListener('click', async () => {
+                if (!koyebManifestOutput.value) return;
+                try {
+                    await navigator.clipboard.writeText(koyebManifestOutput.value);
+                    toast.textContent = 'New Koyeb manifest URL copied!';
+                    toast.classList.add('show');
+                    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                } catch (err) {
+                    console.error('Failed to copy Koyeb manifest: ', err);
+                    toast.textContent = 'Failed to copy new URL.';
+                    toast.classList.add('show');
+                    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                }
+            });
+        }
+        // --- END MANIFEST URL MIGRATION TOOL SCRIPT ---
+
     </script>
     <script src="/_vercel/insights/script.js" defer></script>
     <!-- Buy Me a Coffee Widget -->
@@ -2556,6 +2780,42 @@
             data-position="Left" 
             data-x_margin="18" 
             data-y_margin="18">
+    </script>
+
+    <!-- Add at the end of the file, before the closing body tag -->
+    <script>
+        // Instance banner logic - show on Vercel and localhost
+        (function() {
+            const hostname = window.location.hostname;
+            const isVercelInstance = hostname.includes('nuvioaddon.vercel.app');
+            const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1';
+            const isKoyebInstance = hostname.includes('koyeb.app');
+            
+            const instanceBanner = document.getElementById('instanceBanner');
+            const closeBanner = document.getElementById('closeBanner');
+            
+            // Show banner on Vercel instance or localhost, but not on Koyeb
+            if ((isVercelInstance || isLocalhost) && !isKoyebInstance && instanceBanner) {
+                // Check if user has dismissed the banner
+                if (!localStorage.getItem('instanceBannerDismissed')) {
+                    instanceBanner.style.display = 'block';
+                    document.body.classList.add('has-instance-banner');
+                }
+            }
+            
+            // Handle close button
+            if (closeBanner) {
+                closeBanner.addEventListener('click', () => {
+                    instanceBanner.style.display = 'none';
+                    document.body.classList.remove('has-instance-banner');
+                    // Remember dismiss for 24 hours
+                    localStorage.setItem('instanceBannerDismissed', 'true');
+                    setTimeout(() => {
+                        localStorage.removeItem('instanceBannerDismissed');
+                    }, 24 * 60 * 60 * 1000);
+                });
+            }
+        })();
     </script>
 </body>
 </html> 
