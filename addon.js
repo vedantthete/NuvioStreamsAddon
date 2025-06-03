@@ -1049,6 +1049,9 @@ builder.defineStreamHandler(async (args) => {
             providerDisplayName = 'XPRIME ⚡';
         } else if (stream.provider === 'ShowBox') {
             providerDisplayName = 'ShowBox';
+            if (!userCookie) {
+                providerDisplayName += ' (SLOW)';
+            }
         } else if (stream.provider === 'HollyMovieHD') {
             providerDisplayName = 'HollyMovieHD'; // Changed from HollyHD
         } else if (stream.provider === 'Soaper TV') {
@@ -1166,7 +1169,15 @@ builder.defineStreamHandler(async (args) => {
         }
             
         const titleSecondLine = titleParts.join(" • ");
-        const finalTitle = titleSecondLine ? `${displayTitle}\n${titleSecondLine}` : displayTitle;
+        let finalTitle = titleSecondLine ? `${displayTitle}
+${titleSecondLine}` : displayTitle;
+
+        // Add warning for ShowBox if no user cookie is present
+        if (stream.provider === 'ShowBox' && !userCookie) {
+            const warningMessage = "⚠️ Slow? Add personal FebBox cookie in addon config for faster streaming.";
+            finalTitle += `
+${warningMessage}`;
+        }
 
         return {
             name: nameDisplay, 
