@@ -699,7 +699,6 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
     // STRATEGY 3: Special titles (like anime romanizations) with year
     const specialTitlesFromAll = tmdbAllTitles.filter(title => 
         title !== originalTmdbTitle && 
-        title !== mainTitle && 
         (title.length > originalTmdbTitle.length || // Prefer longer titles
         /[^\x00-\x7F]/.test(originalTmdbTitle)) // Or if original has non-ASCII chars
     ).slice(0, 2); // Limit to 2 special titles
