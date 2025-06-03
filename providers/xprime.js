@@ -167,6 +167,16 @@ async function getXprimeStreams(title, year, type, seasonNum, episodeNum, usePro
         return [];
     }
 
+    // If no ScraperAPI key is provided for this request,
+    // AND the general environment setting is to use ScraperAPI (USE_SCRAPER_API is true),
+    // AND they are not effectively using a custom XPRIME_PROXY_URL (which would be a self-hoster's override for Xprime),
+    // then skip fetching for Xprime. This prevents direct fetches on public instances when an API key is expected but missing.
+    // Note: 'useProxy' reflects the XPRIME_USE_PROXY env var, XPRIME_PROXY_URL is the actual custom proxy URL.
+    if (!scraperApiKey && USE_SCRAPER_API && !(useProxy && XPRIME_PROXY_URL)) {
+        console.log('[Xprime.tv] Skipping fetch: No ScraperAPI key provided on an instance configured to use ScraperAPI for Xprime, and no custom proxy is set.');
+        return [];
+    }
+
     let rawXprimeStreams = [];
     try {
         // Updated log to be more descriptive of parameter sources
