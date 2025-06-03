@@ -1155,15 +1155,15 @@ builder.defineStreamHandler(async (args) => {
         if (stream.codecs && Array.isArray(stream.codecs) && stream.codecs.length > 0) {
             stream.codecs.forEach(codec => {
                 if (['DV', 'HDR10+', 'HDR', 'SDR'].includes(codec)) {
-                    titleParts.push(`✨ ${codec}`);
+                    titleParts.push(codec);
                 } else if (['Atmos', 'TrueHD', 'DTS-HD MA'].includes(codec)) {
-                    titleParts.push(`🔊 ${codec}`);
+                    titleParts.push(codec);
                 } else if (['H.265', 'H.264', 'AV1'].includes(codec)) {
-                    titleParts.push(`🎞️ ${codec}`);
+                    titleParts.push(codec);
                 } else if (['EAC3', 'AC3', 'AAC', 'Opus', 'MP3', 'DTS-HD', 'DTS'].includes(codec)) { 
-                    titleParts.push(`🎧 ${codec}`);
+                    titleParts.push(codec);
                 } else if (['10-bit', '8-bit'].includes(codec)) {
-                    titleParts.push(`⚙️ ${codec}`);
+                    titleParts.push(codec);
                 } else {
                     titleParts.push(codec); 
                 }
