@@ -655,66 +655,146 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
     console.log(`  Using cleaned search term: "${cleanedSearchTerm}" (Original: "${searchTerm}")`);
 
     // Try multiple search strategies if needed
-    const searchStrategies = [
-        { term: cleanedSearchTerm, description: "cleaned search term" }
-    ];
+    const searchStrategies = [];
     
-    // For titles with "&", create specific search strategies
-    if (originalTmdbTitle.includes('&')) {
-        // Try with "and" instead of "&" (very common replacement)
-        const andTitle = originalTmdbTitle.replace(/&/g, 'and');
+    // Track strategy effectiveness (could be persisted to disk in a production system)
+    // Higher priority strategies should be tried first
+    const STRATEGY_PRIORITIES = {
+        "original_with_year": 10,
+        "cleaned_with_year": 9,
+        "special_title_with_year": 8,
+        "original_only": 7,
+        "and_replacement_with_year": 6,
+        "first_part_with_year": 5,
+        "alternative_with_year": 4,
+        "alternative_only": 3,
+        "first_word_with_year": 2,
+        "year_only": 1
+    };
+    
+    // STRATEGY 1: Original TMDB title with year (highest priority)
+    if (mediaYear) {
+        searchStrategies.push({ 
+            term: `${originalTmdbTitle} ${mediaYear}`, 
+            description: "original TMDB title with year",
+            priority: STRATEGY_PRIORITIES.original_with_year
+        });
+    }
+    
+    // STRATEGY 2: Cleaned search term with year
+    if (mediaYear) {
+        searchStrategies.push({ 
+            term: `${cleanedSearchTerm} ${mediaYear}`, 
+            description: "cleaned search term with year",
+            priority: STRATEGY_PRIORITIES.cleaned_with_year
+        });
+    } else {
+        searchStrategies.push({ 
+            term: cleanedSearchTerm, 
+            description: "cleaned search term",
+            priority: STRATEGY_PRIORITIES.cleaned_with_year
+        });
+    }
+    
+    // STRATEGY 3: Special titles (like anime romanizations) with year
+    const specialTitlesFromAll = tmdbAllTitles.filter(title => 
+        title !== originalTmdbTitle && 
+        title !== mainTitle && 
+        (title.length > originalTmdbTitle.length || // Prefer longer titles
+        /[^\x00-\x7F]/.test(originalTmdbTitle)) // Or if original has non-ASCII chars
+    ).slice(0, 2); // Limit to 2 special titles
+    
+    specialTitlesFromAll.forEach((specialTitle, idx) => {
         if (mediaYear) {
-            searchStrategies.push({ term: `${andTitle} ${mediaYear}`, description: "& replaced with 'and', with year" });
-        }
-        searchStrategies.push({ term: andTitle, description: "& replaced with 'and'" });
-        
-        // Try with just the first part before "&"
-        const firstPart = originalTmdbTitle.split('&')[0].trim();
-        if (firstPart.length > 3 && mediaYear) {
-            searchStrategies.push({ term: `${firstPart} ${mediaYear}`, description: "first part before &, with year" });
-        }
-    }
-    
-    // Add TMDB title with year as a strategy (if not already in the strategies)
-    if (mediaYear && !searchStrategies.some(s => s.term === `${originalTmdbTitle} ${mediaYear}`)) {
-        searchStrategies.push({ term: `${originalTmdbTitle} ${mediaYear}`, description: "original TMDB title with year" });
-    }
-    
-    // Add all TMDB alternative titles as search strategies
-    tmdbAllTitles.forEach((altTitle, index) => {
-        if (altTitle && altTitle !== originalTmdbTitle) {
-            if (mediaYear) {
-                searchStrategies.push({ 
-                    term: `${altTitle} ${mediaYear}`, 
-                    description: `alternative title ${index+1} with year` 
-                });
-            }
             searchStrategies.push({ 
-                term: altTitle, 
-                description: `alternative title ${index+1}` 
+                term: `${specialTitle} ${mediaYear}`, 
+                description: `special title ${idx+1} with year`,
+                priority: STRATEGY_PRIORITIES.special_title_with_year
             });
         }
     });
     
-    // Add original TMDB title only
-    searchStrategies.push({ term: originalTmdbTitle, description: "original TMDB title only" });
+    // STRATEGY 4: Original TMDB title only
+    searchStrategies.push({ 
+        term: originalTmdbTitle, 
+        description: "original TMDB title only",
+        priority: STRATEGY_PRIORITIES.original_only
+    });
     
-    // Add direct year search for popular movies (especially if the title is very common)
-    if (mediaYear) {
-        searchStrategies.push({ term: mediaYear, description: "year only (for popular movies)" });
-    }
-    
-    // If the title contains multiple words, add a search with just the first part to catch shortened titles
-    const titleWords = originalTmdbTitle.split(/\s+/);
-    if (titleWords.length > 1) {
-        const firstWord = titleWords[0];
-        if (firstWord.length > 3 && !searchStrategies.some(s => s.term === firstWord)) { // Only use significant first words
+    // STRATEGY 5: For titles with "&", try "and" replacement
+    if (originalTmdbTitle.includes('&')) {
+        const andTitle = originalTmdbTitle.replace(/&/g, 'and');
+        if (mediaYear) {
             searchStrategies.push({ 
-                term: mediaYear ? `${firstWord} ${mediaYear}` : firstWord,
-                description: "first word of title" 
+                term: `${andTitle} ${mediaYear}`, 
+                description: "& replaced with 'and', with year",
+                priority: STRATEGY_PRIORITIES.and_replacement_with_year
             });
         }
     }
+    
+    // STRATEGY 6: First part before "&" with year
+    if (originalTmdbTitle.includes('&')) {
+        const firstPart = originalTmdbTitle.split('&')[0].trim();
+        if (firstPart.length > 3 && mediaYear) {
+            searchStrategies.push({ 
+                term: `${firstPart} ${mediaYear}`, 
+                description: "first part before &, with year",
+                priority: STRATEGY_PRIORITIES.first_part_with_year
+            });
+        }
+    }
+    
+    // STRATEGY 7-8: Alternative titles (limit to 2 alternatives to reduce API calls)
+    const limitedAlternatives = tmdbAllTitles
+        .filter(altTitle => altTitle && altTitle !== originalTmdbTitle)
+        .slice(0, 2);
+        
+    limitedAlternatives.forEach((altTitle, index) => {
+        if (mediaYear) {
+            searchStrategies.push({ 
+                term: `${altTitle} ${mediaYear}`, 
+                description: `alternative title ${index+1} with year`,
+                priority: STRATEGY_PRIORITIES.alternative_with_year
+            });
+        }
+        searchStrategies.push({ 
+            term: altTitle, 
+            description: `alternative title ${index+1}`,
+            priority: STRATEGY_PRIORITIES.alternative_only
+        });
+    });
+    
+    // STRATEGY 9: First word with year (for potentially shortened titles)
+    const titleWords = originalTmdbTitle.split(/\s+/);
+    if (titleWords.length > 1) {
+        const firstWord = titleWords[0];
+        if (firstWord.length > 3 && !searchStrategies.some(s => s.term === firstWord) && mediaYear) {
+            searchStrategies.push({ 
+                term: `${firstWord} ${mediaYear}`,
+                description: "first word of title with year",
+                priority: STRATEGY_PRIORITIES.first_word_with_year
+            });
+        }
+    }
+    
+    // STRATEGY 10: Year only (last resort for popular movies)
+    if (mediaYear) {
+        searchStrategies.push({ 
+            term: mediaYear, 
+            description: "year only (for popular movies)",
+            priority: STRATEGY_PRIORITIES.year_only
+        });
+    }
+    
+    // Sort strategies by priority
+    searchStrategies.sort((a, b) => b.priority - a.priority);
+    
+    // For debugging
+    console.log(`  Search strategies in order of priority:`);
+    searchStrategies.forEach((strategy, idx) => {
+        console.log(`    ${idx+1}. ${strategy.description} (Priority: ${strategy.priority}): "${strategy.term}"`);
+    });
     
     let bestResult = { url: null, score: -1, strategy: null };
     
@@ -722,13 +802,29 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
     const allPossibleSlugs = tmdbAllTitles.map(title => slugify(title)).filter(Boolean);
     console.log(`  Generated ${allPossibleSlugs.length} possible slugs for matching: ${allPossibleSlugs.join(', ')}`);
     
+    // Track strategy effectiveness
+    const strategyResults = {};
+    
+    // Limit the number of strategies to try (to reduce API calls)
+    const MAX_STRATEGIES_TO_TRY = 5;
+    let strategiesAttempted = 0;
+    
     for (const strategy of searchStrategies) {
+        // Limit the number of strategies we try
+        if (strategiesAttempted >= MAX_STRATEGIES_TO_TRY) {
+            console.log(`  Reached maximum number of search strategies (${MAX_STRATEGIES_TO_TRY}). Stopping search.`);
+            break;
+        }
+        
+        strategiesAttempted++;
         const searchUrl = `https://www.showbox.media/search?keyword=${encodeURIComponent(strategy.term)}`;
         console.log(`  Searching ShowBox with URL: ${searchUrl} (Strategy: ${strategy.description})`);
 
         const htmlContent = await showboxScraperInstance._makeRequest(searchUrl);
         if (!htmlContent) {
             console.log(`  Failed to fetch ShowBox search results for strategy: ${strategy.description}`);
+            // Track failed strategy
+            strategyResults[strategy.description] = { success: false, score: 0 };
             continue; // Try next strategy
         }
 
@@ -883,17 +979,46 @@ const _searchAndExtractShowboxUrl = async (searchTerm, originalTmdbTitle, mediaY
                     year: bestMatch.year,
                     isCorrectType: (tmdbType === 'movie' && bestMatch.isMovie) || (tmdbType === 'tv' && bestMatch.isTv)
                 };
+                
+                // Track successful strategy
+                strategyResults[strategy.description] = { 
+                    success: true, 
+                    score: bestMatch.score,
+                    correctType: bestResult.isCorrectType
+                };
+            } else {
+                // Track strategy that didn't beat our current best
+                strategyResults[strategy.description] = { 
+                    success: true, 
+                    score: bestMatch.score,
+                    correctType: (tmdbType === 'movie' && bestMatch.isMovie) || (tmdbType === 'tv' && bestMatch.isTv),
+                    notBest: true
+                };
             }
         } else {
             console.log(`  No results found for strategy "${strategy.description}"`);
+            // Track failed strategy
+            strategyResults[strategy.description] = { success: false, score: 0 };
         }
         
-        // If we found a really good match (high score AND correct type), don't try more strategies
-        if (bestResult.score > 25 && bestResult.isCorrectType) {
-            console.log(`  Found excellent match with score ${bestResult.score.toFixed(1)} using strategy "${bestResult.strategy}", stopping search`);
+        // LOWERED THRESHOLD: If we found a good enough match (score > 20 instead of 25), stop searching
+        if (bestResult.score > 20 && bestResult.isCorrectType) {
+            console.log(`  Found good match with score ${bestResult.score.toFixed(1)} using strategy "${bestResult.strategy}", stopping search`);
             break;
         }
     }
+    
+    // Log strategy effectiveness summary
+    console.log(`  Strategy effectiveness summary:`);
+    Object.entries(strategyResults).forEach(([strategy, result]) => {
+        if (result.success) {
+            const status = result.notBest ? "Found results but not best" : 
+                          (result.correctType ? "Found correct type" : "Found wrong type");
+            console.log(`    - ${strategy}: ${status} (Score: ${result.score.toFixed(1)})`);
+        } else {
+            console.log(`    - ${strategy}: No results found`);
+        }
+    });
 
     // Final decision based on all strategies
     if (bestResult.url) {
