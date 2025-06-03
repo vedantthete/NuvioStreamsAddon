@@ -41,6 +41,7 @@ app.use(async (req, res, next) => {
     const userRegionPreference = req.query.region;
     const userProvidersQuery = req.query.providers; // Get providers
     const userMinQualitiesQuery = req.query.min_qualities; // Get min_qualities
+    const userScraperApiKey = req.query.scraper_api_key; // NEW: Get ScraperAPI key
 
     // Initialize global for THIS request
     global.currentRequestConfig = {}; 
@@ -68,16 +69,31 @@ app.use(async (req, res, next) => {
             // For now, if it fails to parse, it simply won't be set.
         }
     }
+    // NEW: Add ScraperAPI key to global config if present
+    if (userScraperApiKey) {
+        try {
+            global.currentRequestConfig.scraper_api_key = decodeURIComponent(userScraperApiKey);
+        } catch (e) {
+            console.error(`[server.js] Error decoding scraper_api_key from query: ${userScraperApiKey}`, e.message);
+        }
+    }
 
     if (Object.keys(global.currentRequestConfig).length > 0) {
-        console.log(`[server.js] Set global.currentRequestConfig for this request: ${JSON.stringify(global.currentRequestConfig)}`);
+        // Mask sensitive information in logs
+        const configForLog = {...global.currentRequestConfig};
+        if (configForLog.cookie) configForLog.cookie = `[PRESENT: ${configForLog.cookie.substring(0, 10)}...]`;
+        if (configForLog.scraper_api_key) configForLog.scraper_api_key = '[PRESENT]';
+        
+        console.log(`[server.js] Set global.currentRequestConfig for this request: ${JSON.stringify(configForLog)}`);
     } else {
         // console.log('[server.js] No cookie, region, or providers in query for global.currentRequestConfig.');
     }
 
-    // Log the full URL for debugging (mask the cookie value)
+    // Log the full URL for debugging (mask the cookie value and API key for privacy)
     const fullUrl = req.originalUrl || req.url;
-    const maskedUrl = fullUrl.replace(/cookie=([^&]+)/, 'cookie=[MASKED]');
+    let maskedUrl = fullUrl.replace(/cookie=([^&]+)/, 'cookie=[MASKED]');
+    maskedUrl = maskedUrl.replace(/scraper_api_key=([^&]+)/, 'scraper_api_key=[MASKED]');
+    
     // Only log for relevant paths to reduce noise
     if (req.path.startsWith('/manifest') || req.path.startsWith('/stream')) {
         console.log(`Incoming request: ${maskedUrl}`);

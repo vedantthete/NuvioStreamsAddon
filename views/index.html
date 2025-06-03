@@ -1617,7 +1617,7 @@
                     <div class="provider-item">
                         <div class="provider-icon xprime-icon">⚡</div>
                         <div class="provider-name">Xprime.tv</div>
-                        <span class="provider-detail" style="color: #ff8c00;">Self-hosted instances only</span>
+                        <span class="provider-detail" style="color: #ff8c00;">Public (w/ API Key) / Self-host</span>
                     </div>
                     <div class="provider-item">
                         <div class="provider-icon cuevana-icon">🇨</div> <!-- Placeholder icon, can be updated -->
@@ -1675,10 +1675,10 @@
                         </div>
                         <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
                             <div style="display: flex; align-items: center;">
-                                <input type="checkbox" id="providerXprime" name="providerSelect" value="xprime" disabled style="margin-right: 0.5rem; accent-color: var(--primary); opacity: 0.5;">
-                                <label for="providerXprime" style="font-size: 0.9rem; opacity: 0.5;">Xprime.tv</label>
+                                <input type="checkbox" id="providerXprime" name="providerSelect" value="xprime" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                                <label for="providerXprime" style="font-size: 0.9rem;">Xprime.tv</label>
                             </div>
-                            <select id="qualityXprime" name="providerQuality" data-provider="xprime" class="provider-sort-select" disabled>
+                            <select id="qualityXprime" name="providerQuality" data-provider="xprime" class="provider-sort-select">
                                 <option value="all" selected>All Qualities</option>
                                 <option value="480p">480p & Up</option>
                                 <option value="720p">720p & Up</option>
@@ -1754,6 +1754,20 @@
                 </div>
                 <!-- END NEW: Provider Selection Section -->
 
+                <!-- ScraperAPI Key Input - MOVED OUTSIDE of cookie-config -->
+                <div class="scraper-api-key-container full-width" style="margin-top: 1.5rem;">
+                    <div style="background-color: rgba(15, 15, 15, 0.7); border-radius: 0.6rem; padding: 1rem; border: 1px solid var(--border);">
+                        <label for="scraperApiKeyInput" style="display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 0.25rem;">ScraperAPI Key (Optional for Xprime):</label>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <input type="text" id="scraperApiKeyInput" placeholder="Enter your ScraperAPI key" class="cookie-input" style="flex-grow: 1;">
+                            <button id="applyScraperApiKeyBtn" class="how-to-get-btn" style="flex-shrink: 0;">Apply Key</button>
+                            <button id="howToGetScraperApiKeyBtn" class="how-to-get-btn" style="flex-shrink: 0;">How to Get</button>
+                        </div>
+                        <p style="font-size: 0.75rem; color: var(--text-light); margin-top: 0.25rem;">Xprime requires a ScraperAPI key on this public instance. Alternatively, self-host the addon for direct Xprime access. Leave blank if not using Xprime or if self-hosting.</p>
+                    </div>
+                </div>
+                <!-- End ScraperAPI Key Input -->
+
                 <!-- Add Cookie Configuration Section -->
                 <div class="cookie-config-container full-width">
                     <div class="cookie-header">
@@ -1797,6 +1811,8 @@
                         <p class="server-selection-note" style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-light);">
                             <strong>Server Selection:</strong> Choose the server region closest to your physical location for best performance. Different regions may have different content availability and speed. If a region doesn't work well, try another one. <span style="color: #00c16e;">The system will automatically fall back to a US server if your selected region is unavailable.</span>
                         </p>
+
+                        <!-- ScraperAPI Key Input was here, MOVED OUT -->
                         
                         <div id="personalizedManifest" class="personalized-manifest">
                             <div class="manifest-result" style="display:none;">
@@ -1895,6 +1911,45 @@
             <p>I'll do my best to maintain this addon, but can't guarantee all sources will always work. Using your own cookie is the best way to maximize reliability while sources are available.</p>
         </div>
     </div>
+
+    <!-- NEW: ScraperAPI Key Tutorial Panel -->
+    <div class="video-tutorial-panel" id="scraperApiTutorialPanel">
+        <div class="tutorial-header">
+            <h2 class="tutorial-title">How to Get a ScraperAPI Key</h2>
+            <button class="close-tutorial" id="closeScraperApiTutorial">×</button>
+        </div>
+        <div class="tutorial-steps">
+            <h3>Text Instructions:</h3>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-text">Go to <a href="https://www.scraperapi.com/" target="_blank" style="color: var(--primary);">www.scraperapi.com</a>.</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-text">Click on "Sign Up" (usually in the top right corner) and create an account, for example, by using your Google account.</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-text">After signing up and logging in, find your API Key. It's typically displayed on your dashboard.</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-text">ScraperAPI provides a free plan that usually includes 1,000 API credits per month, which reset automatically.</div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-text">Copy this API Key and paste it into the "ScraperAPI Key" input field on the Nuvio Streams configuration page.</div>
+            </div>
+        </div>
+        <div class="tutorial-warning">
+            <h3>Important Notice for Xprime:</h3>
+            <p>Using a ScraperAPI key is one way to access Xprime.tv streams on this public Nuvio Streams instance. This helps bypass potential blocking that Xprime might implement.</p>
+            <p>However, this is not a guaranteed long-term solution. Access through ScraperAPI can become unreliable if ScraperAPI itself is blocked by Xprime, if your free credits run out, or if ScraperAPI changes its service terms.</p>
+            <p><strong>For the most stable and reliable Xprime access, self-hosting this addon is strongly recommended.</strong> When self-hosting, you can configure your own proxy solutions or attempt direct access, bypassing the need for a third-party service like ScraperAPI for Xprime.</p>
+            <p style="margin-top: 10px; font-style: italic;"><strong>Disclaimer:</strong> This project is not associated with ScraperAPI in any way. The ScraperAPI service is utilized here solely as a technical means to facilitate the scraping of links, which is necessary for accessing content from certain providers on this public instance.</p>
+        </div>
+    </div>
+    <!-- END NEW: ScraperAPI Key Tutorial Panel -->
 
     <script>
         const cardsContainer = document.getElementById('cardsContainer');
@@ -2012,12 +2067,15 @@
         const providerCheckboxes = document.querySelectorAll('input[name="providerSelect"]');
         const selectAllProvidersBtn = document.getElementById('selectAllProvidersBtn');
         const deselectAllProvidersBtn = document.getElementById('deselectAllProvidersBtn');
-        const applyProvidersBtn = document.getElementById('applyProvidersBtn');
+        const applyProvidersBtn = document.getElementById('applyProvidersBtn'); // This button will now use the new function
         const totalProviders = providerCheckboxes.length;
-        const providerQualitySelects = document.querySelectorAll('select[name="providerQuality"]'); // Changed from providerSortSelects
-        
+        const providerQualitySelects = document.querySelectorAll('select[name="providerQuality"]');
+        const scraperApiKeyInput = document.getElementById('scraperApiKeyInput'); // Get the ScraperAPI input
+        const applyScraperApiKeyBtn = document.getElementById('applyScraperApiKeyBtn'); // NEW: Get the Apply Scraper API Key button
+
         // Get reference to ShowBox checkbox specifically
         const showboxCheckbox = document.getElementById('providerShowbox');
+        const xprimeCheckbox = document.getElementById('providerXprime'); // Get Xprime checkbox
 
         // Function to update region selector enabled state based on cookie validity
         function updateRegionSelectorState() {
@@ -2075,8 +2133,25 @@
             }
         }
 
-        // --- NEW: Function to apply provider selection without cookie ---
-        function applyProviderSelectionOnly() {
+        // --- NEW: Function to enable/disable ScraperAPI key input based on Xprime selection ---
+        function updateScraperApiKeyInputState() {
+            if (scraperApiKeyInput && xprimeCheckbox) {
+                if (xprimeCheckbox.checked) {
+                    scraperApiKeyInput.disabled = false;
+                    scraperApiKeyInput.style.opacity = '1';
+                } else {
+                    scraperApiKeyInput.disabled = true;
+                    scraperApiKeyInput.style.opacity = '0.6';
+                }
+            }
+        }
+
+        // --- NEW: Centralized function to regenerate the personalized manifest URL ---
+        async function regeneratePersonalizedManifest() {
+            const cookieValue = cookieInput.value.trim();
+            const regionValue = regionSelector ? regionSelector.value : null;
+            const scraperApiKeyValue = scraperApiKeyInput.value.trim();
+
             const selectedProviders = [];
             providerCheckboxes.forEach(checkbox => {
                 if (checkbox.checked) {
@@ -2084,14 +2159,13 @@
                 }
             });
 
-            // Collect quality preferences
             const qualityPreferences = {};
             let hasQualityPreferences = false;
             providerCheckboxes.forEach(checkbox => {
                 if (checkbox.checked) {
                     const providerValue = checkbox.value;
-                    const qualityDropdown = document.getElementById(`quality${providerValue.charAt(0).toUpperCase() + providerValue.slice(1)}`); // Changed ID pattern
-                    if (qualityDropdown && qualityDropdown.value !== 'all') { // Only include if not default
+                    const qualityDropdown = document.getElementById(`quality${providerValue.charAt(0).toUpperCase() + providerValue.slice(1)}`);
+                    if (qualityDropdown && qualityDropdown.value !== 'all') {
                         qualityPreferences[providerValue] = qualityDropdown.value;
                         hasQualityPreferences = true;
                     }
@@ -2099,22 +2173,36 @@
             });
 
             const queryParams = [];
+            let manifestPersonalized = false;
 
-            // Only add the providers query param if a SUBSET is selected
-            if (selectedProviders.length > 0 && selectedProviders.length < totalProviders) {
-                queryParams.push(`providers=${selectedProviders.join(',')}`);
-            }
+            // Cookie and Region handling: Only add if ShowBox is selected AND cookie is valid
+            const isShowBoxSelected = showboxCheckbox && showboxCheckbox.checked;
+            const isCookieValid = cookieStatusIndicator.classList.contains('valid');
 
-            if (hasQualityPreferences) {
-                queryParams.push(`min_qualities=${encodeURIComponent(JSON.stringify(qualityPreferences))}`);
-            }
-
-            // Only include region if ShowBox is selected AND a valid cookie exists
-            if (showboxCheckbox && showboxCheckbox.checked && cookieStatusIndicator.classList.contains('valid')) {
-                const regionValue = regionSelector ? regionSelector.value : null;
+            if (isShowBoxSelected && cookieValue && isCookieValid) {
+                queryParams.push(`cookie=${encodeURIComponent(cookieValue)}`);
                 if (regionValue) {
                     queryParams.push(`region=${regionValue}`);
                 }
+                manifestPersonalized = true;
+            }
+
+            // Providers handling: Only add if a subset is selected
+            if (selectedProviders.length > 0 && selectedProviders.length < totalProviders) {
+                queryParams.push(`providers=${selectedProviders.join(',')}`);
+                manifestPersonalized = true;
+            }
+
+            // Quality preferences handling
+            if (hasQualityPreferences) {
+                queryParams.push(`min_qualities=${encodeURIComponent(JSON.stringify(qualityPreferences))}`);
+                manifestPersonalized = true;
+            }
+
+            // ScraperAPI key handling
+            if (scraperApiKeyValue) {
+                queryParams.push(`scraper_api_key=${encodeURIComponent(scraperApiKeyValue)}`);
+                manifestPersonalized = true;
             }
 
             let finalQueryString = '';
@@ -2122,25 +2210,34 @@
                 finalQueryString = '?' + queryParams.join('&');
             }
 
-            const customManifestURL = `${window.location.origin}/manifest.json${finalQueryString}`;
-            const customInstallUrl = `stremio://${customManifestURL.replace(/^https?:\/\//, '')}`;
+            const newManifestURL = `${window.location.origin}/manifest.json${finalQueryString}`;
+            const newInstallUrl = `stremio://${newManifestURL.replace(/^https?:\/\//, '')}`;
 
-            // Update main buttons
-            currentManifestUrlToCopy = customManifestURL;
-            currentInstallUrl = customInstallUrl;
-            if (installLink) installLink.href = currentInstallUrl;
+            currentManifestUrlToCopy = newManifestURL;
+            currentInstallUrl = newInstallUrl;
+            if (installLink) installLink.href = newInstallUrl;
 
-            // Show confirmation toast
-            toast.textContent = selectedProviders.length === totalProviders 
-                ? "Using all providers! Main buttons updated." 
-                : `Using ${selectedProviders.length} providers! Main buttons updated.`;
+            if (manifestPersonalized) {
+                personalManifestUrlSpan.textContent = newManifestURL;
+                manifestResult.style.display = 'block';
+                toast.textContent = "Personalized manifest URL updated!";
+            } else {
+                // If no personalization options are active, revert to default and hide section
+                personalManifestUrlSpan.textContent = defaultManifestUrl; // Show default if nothing custom
+                manifestResult.style.display = 'none';
+                currentManifestUrlToCopy = defaultManifestUrl;
+                currentInstallUrl = defaultInstallProtocolUrl;
+                if (installLink) installLink.href = defaultInstallProtocolUrl;
+                toast.textContent = "Manifest reverted to default settings.";
+            }
+            
             toast.classList.add('show');
             setTimeout(() => { toast.classList.remove('show'); }, 3000);
         }
 
-        // Add event listener for the Apply button
+        // Add event listener for the Apply button (now calls the new function)
         if (applyProvidersBtn) {
-            applyProvidersBtn.addEventListener('click', applyProviderSelectionOnly);
+            applyProvidersBtn.addEventListener('click', regeneratePersonalizedManifest);
         }
 
         // --- Event listeners for provider selection ---
@@ -2148,7 +2245,8 @@
             selectAllProvidersBtn.addEventListener('click', () => {
                 providerCheckboxes.forEach(checkbox => checkbox.checked = true);
                 updateCookieSectionState(); // Update cookie section state
-                updateQualityDropdownStates(); // Changed call
+                updateQualityDropdownStates(); 
+                updateScraperApiKeyInputState(); // Update ScraperAPI input state
                 toast.textContent = "All providers selected. Click 'Apply Selection' to update.";
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 3000);
@@ -2159,7 +2257,8 @@
             deselectAllProvidersBtn.addEventListener('click', () => {
                 providerCheckboxes.forEach(checkbox => checkbox.checked = false);
                 updateCookieSectionState(); // Update cookie section state
-                updateQualityDropdownStates(); // Changed call
+                updateQualityDropdownStates(); 
+                updateScraperApiKeyInputState(); // Update ScraperAPI input state
                 toast.textContent = "All providers deselected. Click 'Apply Selection' to update.";
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 3000);
@@ -2170,23 +2269,35 @@
         if (showboxCheckbox) {
             showboxCheckbox.addEventListener('change', () => {
                 updateCookieSectionState();
-                updateQualityDropdownStates(); // Changed call
-                toast.textContent = `Provider selection changed. ${showboxCheckbox.checked ? 'ShowBox enabled, cookie section available.' : 'ShowBox disabled, cookie section disabled.'} Click "Apply Selection" to update manifest.`;
-                toast.classList.add('show');
-                setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                updateQualityDropdownStates();
+                // updateScraperApiKeyInputState(); // Not strictly needed here unless Showbox affects Xprime directly
+                // Instead of direct toast, let user click "Apply" or "Set Cookie" or blur API key
+                // toast.textContent = `Provider selection changed. ${showboxCheckbox.checked ? 'ShowBox enabled, cookie section available.' : 'ShowBox disabled, cookie section disabled.'} Click "Apply Selection" to update manifest.`;
+                // toast.classList.add('show');
             });
         }
 
         providerCheckboxes.forEach(checkbox => {
             if (checkbox !== showboxCheckbox) { // Skip ShowBox as it has its own handler
                 checkbox.addEventListener('change', () => {
-                    updateQualityDropdownStates(); // Changed call
-                    toast.textContent = `Provider selection changed. Click \"Apply Selection\" to update manifest.`;
-                    toast.classList.add('show');
-                    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                    updateQualityDropdownStates();
+                    updateScraperApiKeyInputState(); // Update ScraperAPI input state when any other provider changes
+                    // toast.textContent = `Provider selection changed. Click \"Apply Selection\" to update manifest.`;
+                    // toast.classList.add('show');
+                    // setTimeout(() => { toast.classList.remove('show'); }, 3000);
                 });
             }
         });
+        
+        // Add event listener for ScraperAPI key input (on blur)
+        if (scraperApiKeyInput) {
+            scraperApiKeyInput.addEventListener('blur', regeneratePersonalizedManifest);
+        }
+
+        // NEW: Event listener for Apply Scraper API Key button
+        if (applyScraperApiKeyBtn) {
+            applyScraperApiKeyBtn.addEventListener('click', regeneratePersonalizedManifest);
+        }
 
         // --- Disable Set Cookie button initially ---
         if (setCookieBtn) {
@@ -2422,97 +2533,37 @@
             // Make it async
             setCookieBtn.addEventListener('click', async () => {
                 const cookieValue = cookieInput.value.trim();
-                const regionValue = regionSelector.value;
-                
-                // --- Get selected providers ---
-                const selectedProviders = [];
-                providerCheckboxes.forEach(checkbox => {
-                    if (checkbox.checked) {
-                        selectedProviders.push(checkbox.value);
-                    }
-                });
-
-                // --- Get quality preferences ---
-                const qualityPreferences = {};
-                let hasQualityPreferences = false; // Define it here for this scope
-                providerCheckboxes.forEach(checkbox => {
-                    if (checkbox.checked) {
-                        const providerValue = checkbox.value;
-                        const qualityDropdown = document.getElementById(`quality${providerValue.charAt(0).toUpperCase() + providerValue.slice(1)}`);
-                        if (qualityDropdown && qualityDropdown.value !== 'all') {
-                            qualityPreferences[providerValue] = qualityDropdown.value;
-                            hasQualityPreferences = true;
-                        }
-                    }
-                });
+                // const regionValue = regionSelector.value; // Not needed here, regeneratePersonalizedManifest will get it
+                // const scraperApiKeyValue = document.getElementById('scraperApiKeyInput').value.trim(); // Not needed here
 
                 // Perform server-side cookie validation before generating manifest
-                if (cookieValue) { // Only validate if there's a cookie
+                if (cookieValue) {
                     const isValid = await checkCookieOnServer(cookieValue);
                     if (!isValid) {
                         toast.textContent = "Cookie is invalid. Please check and try again.";
-                        if (!toast.classList.contains('show')) { // Avoid overlapping toasts
+                        if (!toast.classList.contains('show')) {
                            toast.classList.add('show');
                            setTimeout(() => { toast.classList.remove('show'); }, 4000);
                         }
+                        // Explicitly call regeneratePersonalizedManifest to ensure UI updates if cookie becomes invalid
+                        await regeneratePersonalizedManifest(); 
                         return; 
                     }
-                } else { // No cookie entered
-                     cookieStatusIndicator.className = 'cookie-status-indicator'; // Reset to neutral
+                    // If valid, proceed to regenerate manifest which includes the cookie
+                } else {
+                     cookieStatusIndicator.className = 'cookie-status-indicator';
+                     toast.textContent = "Please enter your FebBox cookie.";
+                     toast.classList.add('show');
+                     setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                     await regeneratePersonalizedManifest(); // Update manifest (will revert to default if no cookie)
+                     return;
                 }
                 
-                if (!cookieValue) {
-                    toast.textContent = "Please enter your FebBox cookie.";
-                    toast.classList.add('show');
-                    setTimeout(() => { toast.classList.remove('show'); }, 3000);
-                    
-                    // Revert main buttons to default if cookie is cleared
-                    currentManifestUrlToCopy = defaultManifestUrl;
-                    currentInstallUrl = defaultInstallProtocolUrl;
-                    if (installLink) installLink.href = currentInstallUrl;
-                    manifestResult.style.display = 'none'; // Hide personalized section
+                // All checks passed or cookie is now valid, regenerate the manifest with all settings
+                await regeneratePersonalizedManifest();
 
-                    return;
-                }
-
-                // URL-encode the cookie to make it safe for a query parameter
-                const encodedCookie = encodeURIComponent(cookieValue);
-                
-                // Construct query parameters
-                const queryParams = [];
-                queryParams.push(`cookie=${encodedCookie}`);
-                queryParams.push(`region=${regionValue}`);
-
-                if (selectedProviders.length > 0 && selectedProviders.length < totalProviders) {
-                    queryParams.push(`providers=${selectedProviders.join(',')}`);
-                }
-                
-                if (hasQualityPreferences) {
-                    queryParams.push(`min_qualities=${encodeURIComponent(JSON.stringify(qualityPreferences))}`);
-                }
-
-                let finalQueryString = '';
-                if (queryParams.length > 0) {
-                    finalQueryString = '?' + queryParams.join('&');
-                }
-
-                const personalizedManifestURL = `${window.location.origin}/manifest.json${finalQueryString}`;
-                const personalizedInstallUrl = `stremio://${personalizedManifestURL.replace(/^https?:\/\//, '')}`;
-
-                personalManifestUrlSpan.textContent = personalizedManifestURL;
-                manifestResult.style.display = 'block';
-
-                // Update main buttons
-                currentManifestUrlToCopy = personalizedManifestURL;
-                currentInstallUrl = personalizedInstallUrl;
-                if (installLink) installLink.href = currentInstallUrl;
-
-                toast.textContent = `Personalized manifest ready with ${regionValue} region! Main buttons updated.`;
-                toast.classList.add('show');
-                setTimeout(() => { toast.classList.remove('show'); }, 3000);
-                
-                // Store the newly selected region for region status tracking
-                lastSelectedRegion = regionValue;
+                // Store the newly selected region for region status tracking (already done by regenerate)
+                // lastSelectedRegion = regionValue; // Not needed here
                 
                 // Restart region status checking
                 startRegionStatusCheck();
@@ -2548,6 +2599,17 @@
                 toast.textContent = "Settings loaded from URL and processed!";
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 3500);
+            }
+
+            // Pre-fill ScraperAPI key from URL
+            const scraperApiKeyFromUrl = urlParams.get('scraper_api_key');
+            const scraperApiKeyInput = document.getElementById('scraperApiKeyInput');
+            if (scraperApiKeyFromUrl && scraperApiKeyInput) {
+                try {
+                    scraperApiKeyInput.value = decodeURIComponent(scraperApiKeyFromUrl);
+                } catch (e) {
+                    console.error("Error decoding ScraperAPI key from URL for pre-fill:", e.message);
+                }
             }
         };
 
@@ -2664,10 +2726,11 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize cookie section state based on ShowBox checkbox
             updateCookieSectionState();
-            updateQualityDropdownStates(); // Changed call, and initialize quality dropdown states
+            updateQualityDropdownStates(); 
+            updateScraperApiKeyInputState(); // Initialize ScraperAPI input state on load
             
             startRegionStatusCheck();
-            // Initialize indicator if cookie is pre-filled
+            // Initialize indicator if cookie is pre-filled and call regenerate manifest
             if (cookieInput && cookieInput.value.trim()) {
                 checkCookieOnServer(cookieInput.value.trim());
             }
@@ -2766,6 +2829,31 @@
             });
         }
         // --- END MANIFEST URL MIGRATION TOOL SCRIPT ---
+
+        // NEW: ScraperAPI Tutorial Panel Elements
+        const scraperApiTutorialPanel = document.getElementById('scraperApiTutorialPanel');
+        const closeScraperApiTutorialBtn = document.getElementById('closeScraperApiTutorial');
+        const howToGetScraperApiKeyBtn = document.getElementById('howToGetScraperApiKeyBtn');
+
+        if (closeTutorialBtn) {
+            closeTutorialBtn.addEventListener('click', () => {
+                videoTutorialPanel.classList.remove('show');
+                // Note: Can't directly pause iframe videos
+            });
+        }
+
+        // NEW: Event listeners for ScraperAPI tutorial panel
+        if (closeScraperApiTutorialBtn && scraperApiTutorialPanel) {
+            closeScraperApiTutorialBtn.addEventListener('click', () => {
+                scraperApiTutorialPanel.classList.remove('show');
+            });
+        }
+
+        if (howToGetScraperApiKeyBtn && scraperApiTutorialPanel) {
+            howToGetScraperApiKeyBtn.addEventListener('click', () => {
+                scraperApiTutorialPanel.classList.add('show');
+            });
+        }
 
     </script>
     <script src="/_vercel/insights/script.js" defer></script>

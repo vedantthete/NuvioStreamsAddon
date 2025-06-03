@@ -13,6 +13,7 @@ if (USE_REDIS_CACHE) {
         redis = new Redis(process.env.REDIS_URL, {
             maxRetriesPerRequest: 2,
             connectTimeout: 10000,
+            commandTimeout: 5000, // Added command timeout
             // TLS is auto-enabled with rediss:// URLs
             retryStrategy(times) {
                 const delay = Math.min(times * 200, 2000);
@@ -482,6 +483,7 @@ builder.defineStreamHandler(async (args) => {
     // Use values from requestSpecificConfig (derived from global)
     let userRegionPreference = requestSpecificConfig.region || null;
     let userCookie = requestSpecificConfig.cookie || null; // Already decoded by server.js
+    let userScraperApiKey = requestSpecificConfig.scraper_api_key || null; // NEW: Get ScraperAPI Key
     
     // Log the request information in a more detailed way
     console.log(`Stream request for Stremio type: '${type}', id: '${id}'`);
@@ -721,7 +723,7 @@ builder.defineStreamHandler(async (args) => {
                 const useXprimeProxy = process.env.XPRIME_USE_PROXY !== 'false';
                 console.log(`[Xprime.tv] Proxy usage: ${useXprimeProxy}`);
 
-                const streams = await getXprimeStreams(movieOrSeriesTitle, movieOrSeriesYear, tmdbTypeFromId, seasonNum, episodeNum, useXprimeProxy);
+                const streams = await getXprimeStreams(movieOrSeriesTitle, movieOrSeriesYear, tmdbTypeFromId, seasonNum, episodeNum, useXprimeProxy, userScraperApiKey);
 
                 if (streams && streams.length > 0) {
                     console.log(`[Xprime.tv] Successfully fetched ${streams.length} streams.`);
