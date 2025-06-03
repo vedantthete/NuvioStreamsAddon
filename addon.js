@@ -1207,6 +1207,31 @@ ${warningMessage}`;
     // No need to clean up global variables since we're not using them anymore
     console.log(`Request for ${id} completed successfully`);
 
+    // Add Xprime configuration banner if needed
+    const needsXprimeConfig = ENABLE_XPRIME_PROVIDER && // Xprime is globally enabled
+                             shouldFetch('xprime') &&   // User wants Xprime streams for this request
+                             process.env.USE_SCRAPER_API === 'true' && // This instance typically uses ScraperAPI for Xprime
+                             !userScraperApiKey && // User did NOT provide a ScraperAPI key for THIS request
+                             !(process.env.XPRIME_USE_PROXY !== 'false' && process.env.XPRIME_PROXY_URL); // User is NOT overriding with a custom proxy
+
+    if (needsXprimeConfig) {
+        let configPageUrl = 'https://aesthetic-jodie-tapframe-ab46446c.koyeb.app/';
+
+        // Ensure the URL has a scheme. Default to https if missing.
+        if (configPageUrl && !configPageUrl.startsWith('http://') && !configPageUrl.startsWith('https://')) {
+            configPageUrl = 'https://' + configPageUrl;
+        }
+        
+        const xprimeConfigBanner = {
+            name: "Xprime: Now Available on Public Instances!", 
+            title: "Setup with an API key (or self-host). Deselect Xprime in settings to hide this.\nTap to configure (opens browser).", 
+            externalUrl: configPageUrl 
+            // No type or behaviorHints needed when using externalUrl for this purpose
+        };
+        stremioStreamObjects.push(xprimeConfigBanner);
+        console.log(`[addon.js] Added Xprime configuration banner. URL: ${configPageUrl}`);
+    }
+
     return {
         streams: stremioStreamObjects
     };
