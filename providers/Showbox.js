@@ -1190,6 +1190,10 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId, regionPreference = nu
         console.log(`    [${idx+1}] "${title}"`);
     });
     
+    const MAX_DIRECT_URL_ATTEMPTS = 3; // Configurable limit for direct URL construction
+    const titlesForDirectAttempt = allTitles.slice(0, MAX_DIRECT_URL_ATTEMPTS);
+    console.log(`  Limiting direct URL construction attempts to first ${titlesForDirectAttempt.length} titles out of ${allTitles.length} total unique titles.`);
+
     // Initialize ShowBox scraper instance
     const showboxScraperInstance = new ShowBoxScraper(regionPreference);
     const mediaTypeString = tmdbType === 'movie' ? 'movie' : 'tv';
@@ -1197,10 +1201,10 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId, regionPreference = nu
 
     // If we have a year, try direct URL construction with all titles
     if (year) {
-        console.log(`  Attempting direct ShowBox URL construction for ${tmdbType} "${mainTitle}" (${year}) with ${allTitles.length} title variants.`);
+        console.log(`  Attempting direct ShowBox URL construction for ${tmdbType} "${mainTitle}" (${year}) with ${titlesForDirectAttempt.length} title variants.`);
         
-        // Try each title variant for direct slug construction
-        for (const candidateTitle of allTitles) {
+        // Try each title variant for direct slug construction - MODIFIED to use titlesForDirectAttempt
+        for (const candidateTitle of titlesForDirectAttempt) {
             const slug = slugify(candidateTitle);
             if (!slug) {
                 console.log(`    Skipping empty slug for title: "${candidateTitle}"`);
@@ -1267,7 +1271,7 @@ const getShowboxUrlFromTmdbInfo = async (tmdbType, tmdbId, regionPreference = nu
                  console.log(`    Failed to fetch content from direct URL: ${directShowboxUrl}`);
             }
         }
-        console.log(`  Direct URL construction did not yield a validated ShowBox URL for "${mainTitle}" (${year}).`);
+        console.log(`  Direct URL construction with limited titles did not yield a validated ShowBox URL for "${mainTitle}" (${year}).`);
     } else {
         console.log(`  Year not available for "${mainTitle}", skipping direct URL construction attempt.`);
     }
@@ -2046,13 +2050,11 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
         return [];
     }
     
-    // For each FebBox link, get the video sources
-    const allStreams = [];
-    
-    for (const shareInfo of febboxShareInfos) {
+    // MODIFIED: Process FebBox share links in parallel
+    const streamPromises = febboxShareInfos.map(async (shareInfo) => {
+        const streamsFromThisShareInfo = [];
         try {
             const febboxUrl = shareInfo.febbox_share_url;
-            // MODIFICATION: Construct base title, add year for movies
             let baseStreamTitle = shareInfo.showbox_title || "Unknown Title";
             if (tmdbType === 'movie' && mediaYear) {
                 baseStreamTitle = `${baseStreamTitle} (${mediaYear})`;
@@ -2060,75 +2062,72 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
             
             console.log(`Processing FebBox URL: ${febboxUrl} (${baseStreamTitle})`);
             
-            // For TV shows, handle season and episode
             if (tmdbType === 'tv' && seasonNum !== null) {
-                // Pass baseStreamTitle (which will be just show name for TV) and regionPreference
-                await processShowWithSeasonsEpisodes(febboxUrl, baseStreamTitle, seasonNum, episodeNum, allStreams, true, regionPreference, userCookie);
+                // Call refactored processShowWithSeasonsEpisodes (which now returns streams)
+                const tvStreams = await processShowWithSeasonsEpisodes(febboxUrl, baseStreamTitle, seasonNum, episodeNum, true, regionPreference, userCookie);
+                streamsFromThisShareInfo.push(...tvStreams);
             } else {
-                // Handle movies or TV shows without season/episode specified (old behavior)
-                // Extract FIDs from FebBox page - Pass regionPreference
-                try {
-                    const { fids, shareKey, directSources } = await extractFidsFromFebboxPage(febboxUrl, regionPreference, userCookie);
-                    
-                    // If we have direct sources from player setup
-                    if (directSources && directSources.length > 0) {
-                        for (const source of directSources) {
-                            const streamTitle = `${baseStreamTitle} - ${source.label}`;
-                            let key5FromDirectSource = null;
-                            try {
-                                const urlParams = new URLSearchParams(new URL(source.url).search);
-                                if (urlParams.has('KEY5')) {
-                                    key5FromDirectSource = urlParams.get('KEY5');
-                                }
-                            } catch(e) { /* ignore if URL parsing fails */ }
-                            allStreams.push({
-                                title: streamTitle, 
-                                url: source.url,
-                                quality: parseQualityFromLabel(source.label),
-                                codecs: extractCodecDetails(key5FromDirectSource || streamTitle) 
-                            });
-                        }
-                        continue; // Skip FID processing if we have direct sources
+                // Handle movies or TV shows without season/episode specified
+                const { fids, shareKey, directSources } = await extractFidsFromFebboxPage(febboxUrl, regionPreference, userCookie);
+                
+                if (directSources && directSources.length > 0) {
+                    for (const source of directSources) {
+                        const streamTitle = `${baseStreamTitle} - ${source.label}`;
+                        let key5FromDirectSource = null;
+                        try {
+                            const urlParams = new URLSearchParams(new URL(source.url).search);
+                            if (urlParams.has('KEY5')) {
+                                key5FromDirectSource = urlParams.get('KEY5');
+                            }
+                        } catch(e) { /* ignore if URL parsing fails */ }
+                        streamsFromThisShareInfo.push({
+                            title: streamTitle, 
+                            url: source.url,
+                            quality: parseQualityFromLabel(source.label),
+                            codecs: extractCodecDetails(key5FromDirectSource || streamTitle) 
+                        });
                     }
-                    
-                    // Process FIDs
-                    if (fids.length > 0 && shareKey) {
-                        // Pass regionPreference and userCookie to fetchSourcesForSingleFid
-                        const fidPromises = fids.map(fid => fetchSourcesForSingleFid(fid, shareKey, regionPreference, userCookie));
-                        const fidSourcesArray = await Promise.all(fidPromises);
+                    // If direct sources are found, original code used 'continue', 
+                    // effectively skipping FID processing for this shareInfo. 
+                    // This behavior is maintained as FID processing is in the 'else if' block.
+                } else if (fids.length > 0 && shareKey) { // Only process FIDs if no directSources were found
+                    const fidPromises = fids.map(fid => fetchSourcesForSingleFid(fid, shareKey, regionPreference, userCookie));
+                    const fidSourcesArray = await Promise.all(fidPromises);
 
-                        for (const sources of fidSourcesArray) {
-                            if (!sources || !Array.isArray(sources)) {
-                                console.log(`  Warning: Invalid sources data received: ${typeof sources}`);
+                    for (const sources of fidSourcesArray) {
+                        if (!sources || !Array.isArray(sources)) {
+                            console.log(`  Warning: Invalid sources data received: ${typeof sources}`);
+                            continue;
+                        }
+                        
+                        for (const source of sources) {
+                            if (!source || !source.url || !source.label) {
+                                console.log(`  Warning: Invalid source object: ${JSON.stringify(source)}`);
                                 continue;
                             }
                             
-                            for (const source of sources) {
-                                if (!source || !source.url || !source.label) {
-                                    console.log(`  Warning: Invalid source object: ${JSON.stringify(source)}`);
-                                    continue;
-                                }
-                                
-                                const streamTitle = `${baseStreamTitle} - ${source.label}`;
-                                allStreams.push({
-                                    title: streamTitle, 
-                                    url: source.url,
-                                    quality: parseQualityFromLabel(source.label),
-                                    codecs: extractCodecDetails(source.detailedFilename || streamTitle) 
-                                });
-                            }
+                            const streamTitle = `${baseStreamTitle} - ${source.label}`;
+                            streamsFromThisShareInfo.push({
+                                title: streamTitle, 
+                                url: source.url,
+                                quality: parseQualityFromLabel(source.label),
+                                codecs: extractCodecDetails(source.detailedFilename || streamTitle) 
+                            });
                         }
-                    } else if (!directSources || directSources.length === 0) {
-                        console.log(`No FIDs or share key found, and no direct sources for ${febboxUrl}`);
                     }
-                } catch (error) {
-                    console.error(`Error processing FebBox URL ${febboxUrl}: ${error.message}`);
+                } else if (!directSources || directSources.length === 0) {
+                    console.log(`No FIDs or share key found, and no direct sources for ${febboxUrl}`);
                 }
             }
         } catch (error) {
-            console.error(`Error processing share info: ${error.message}`);
+            console.error(`Error processing share info for ${shareInfo.febbox_share_url}: ${error.message}`);
         }
-    }
+        return streamsFromThisShareInfo;
+    });
+
+    const nestedStreams = await Promise.all(streamPromises);
+    const allStreams = nestedStreams.flat();
+    // END MODIFICATION
     
     // Fetch sizes for all streams concurrently
     if (allStreams.length > 0) {
@@ -2185,11 +2184,12 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
 // Function to handle TV shows with seasons and episodes
 // MODIFICATION: Accept scraperApiKey -> MODIFICATION: Remove scraperApiKey
 // New parameter: resolveFids, defaults to true. If false, skips fetching sources for FIDs.
-const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum, episodeNum, allStreams, resolveFids = true, regionPreference = null, userCookie = null) => {
+const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum, episodeNum, resolveFids = true, regionPreference = null, userCookie = null) => {
     const processTimerLabel = `processShowWithSeasonsEpisodes_total_s${seasonNum}` + (episodeNum ? `_e${episodeNum}` : '_all') + (resolveFids ? '_resolve' : '_noresolve');
     console.time(processTimerLabel);
     console.log(`Processing TV Show: ${showboxTitle}, Season: ${seasonNum}, Episode: ${episodeNum !== null ? episodeNum : 'all'}${resolveFids ? '' : ' (FIDs not resolved)'}`);
     
+    const streamsForThisCall = []; // Initialize local array to store streams for this call
     let selectedEpisode = null; // Ensure selectedEpisode is declared here
 
     // Cache for the main FebBox page
@@ -2271,7 +2271,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         if (directSources && directSources.length > 0) {
             for (const source of directSources) {
                 const streamTitle = `${showboxTitle} - ${source.label}`;
-                allStreams.push({
+                streamsForThisCall.push({ // MODIFIED: Push to streamsForThisCall
                     title: streamTitle, 
                     url: source.url,
                     quality: parseQualityFromLabel(source.label),
@@ -2291,7 +2291,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
             for (const sources of fallbackFidSourcesArray) {
                 for (const source of sources) {
                     const streamTitle = `${showboxTitle} - ${source.label}`;
-                    allStreams.push({
+                    streamsForThisCall.push({ // MODIFIED: Push to streamsForThisCall
                         title: streamTitle, 
                         url: source.url,
                         quality: parseQualityFromLabel(source.label),
@@ -2509,7 +2509,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
                 const episodeName = episodeDetail ? episodeDetail.name : '';
                 
                 const streamTitle = `${showboxTitle} - S${seasonNum}${episodeNum && selectedEpisode && fid === selectedEpisode.fid ? `E${episodeNum}` : (episodeDetail ? `E${episodeDetail.episodeNum}`: '')} - ${episodeName} - ${source.label}`;
-                allStreams.push({
+                streamsForThisCall.push({ // MODIFIED: Push to streamsForThisCall
                     title: streamTitle, 
                     url: source.url,
                     quality: parseQualityFromLabel(source.label),
@@ -2524,6 +2524,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         console.log(`  Skipping FID resolution for ${episodeFids.length} episodes in S${seasonNum} as per request.`);
     }
     console.timeEnd(processTimerLabel);
+    return streamsForThisCall; // MODIFIED: Return the collected streams
 };
 
 // Helper function to get episode number from filename

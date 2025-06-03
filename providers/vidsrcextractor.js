@@ -284,9 +284,11 @@ async function getStreamContent(id, type) {
     const embedResp = await embedRes.text();
     const { servers, title } = await serversLoad(embedResp);
     const apiResponse = [];
-    for (const server of servers) {
-        if (!server.dataHash)
-            continue;
+
+    // MODIFIED: Process servers in parallel
+    const serverPromises = servers.map(async (server) => {
+        if (!server.dataHash) return null; // Skip servers without dataHash
+
         try {
             const rcpUrl = `${BASEDOM}/rcp/${server.dataHash}`;
             const rcpRes = await fetch(rcpUrl, {
@@ -294,45 +296,53 @@ async function getStreamContent(id, type) {
             });
             if (!rcpRes.ok) {
                 console.warn(`RCP fetch failed for server ${server.name}: ${rcpRes.status}`);
-                continue;
+                return null; // Failed to fetch RCP
             }
             const rcpHtml = await rcpRes.text();
             const rcpData = await rcpGrabber(rcpHtml);
+
             if (!rcpData || !rcpData.data) {
                 console.warn(`Skipping server ${server.name} due to missing rcp data.`);
-                continue;
+                return null; // Missing RCP data
             }
+
+            let streamDetails = null;
             if (rcpData.data.startsWith("/prorcp/")) {
-                const streamDetails = await PRORCPhandler(rcpData.data.replace("/prorcp/", ""));
-                if (streamDetails && streamDetails.length > 0) {
-                    apiResponse.push({
-                        name: title, image: rcpData.metadata.image, mediaId: id,
-                        streams: streamDetails, referer: BASEDOM,
-                    });
-                }
-                else {
-                    console.warn(`No stream details from PRORCPhandler for server ${server.name} (${rcpData.data})`);
-                }
-            }
-            else if (rcpData.data.startsWith("/srcrcp/")) {
-                const streamDetails = await SRCRCPhandler(rcpData.data, rcpUrl); // Pass rcpUrl as referer
-                if (streamDetails && streamDetails.length > 0) {
-                    apiResponse.push({
-                        name: title, image: rcpData.metadata.image, mediaId: id,
-                        streams: streamDetails, referer: BASEDOM,
-                    });
-                } else {
-                    console.warn(`No stream details from SRCRCPhandler for server ${server.name} (${rcpData.data})`);
-                }
-            }
-            else {
+                streamDetails = await PRORCPhandler(rcpData.data.replace("/prorcp/", ""));
+            } else if (rcpData.data.startsWith("/srcrcp/")) {
+                streamDetails = await SRCRCPhandler(rcpData.data, rcpUrl); // Pass rcpUrl as referer
+            } else {
                 console.warn(`Unhandled rcp data type for server ${server.name}: ${rcpData.data.substring(0, 50)}`);
+                return null; // Unhandled type
             }
-        }
-        catch (e) {
+
+            if (streamDetails && streamDetails.length > 0) {
+                return {
+                    name: title,
+                    image: rcpData.metadata.image,
+                    mediaId: id,
+                    streams: streamDetails,
+                    referer: BASEDOM,
+                };
+            } else {
+                console.warn(`No stream details from handler for server ${server.name} (${rcpData.data})`);
+                return null; // No stream details found by the handler
+            }
+        } catch (e) {
             console.error(`Error processing server ${server.name} (${server.dataHash}):`, e);
+            return null; // Error during server processing
         }
-    }
+    });
+
+    const results = await Promise.all(serverPromises);
+    // Filter out null results (failed servers or no streams) and add valid results to apiResponse
+    results.forEach(result => {
+        if (result) {
+            apiResponse.push(result);
+        }
+    });
+    // END MODIFICATION
+
     return apiResponse;
 }
 // --- Main execution logic (conditional) ---
