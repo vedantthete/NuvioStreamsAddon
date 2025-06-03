@@ -99,6 +99,7 @@ async function PRORCPhandler(prorcp) {
                 "sec-fetch-dest": "script", "sec-fetch-mode": "no-cors", "sec-fetch-site": "same-origin",
                 'Sec-Fetch-Dest': 'iframe', "Referer": `${BASEDOM}/`, "Referrer-Policy": "origin",
             },
+            timeout: 10000
         });
         if (!prorcpFetch.ok) {
             console.error(`Failed to fetch prorcp: ${prorcpUrl}, status: ${prorcpFetch.status}`);
@@ -110,7 +111,8 @@ async function PRORCPhandler(prorcp) {
         if (match && match[1]) {
             const masterM3U8Url = match[1];
             const m3u8FileFetch = await fetch(masterM3U8Url, {
-                headers: { "Referer": prorcpUrl, "Accept": "*/*" }
+                headers: { "Referer": prorcpUrl, "Accept": "*/*" },
+                timeout: 10000
             });
             if (!m3u8FileFetch.ok) {
                 console.error(`Failed to fetch master M3U8: ${masterM3U8Url}, status: ${m3u8FileFetch.status}`);
@@ -144,6 +146,7 @@ async function SRCRCPhandler(srcrcpPath, refererForSrcrcp) {
                 "Referer": refererForSrcrcp,
                 "Referrer-Policy": "origin",
             },
+            timeout: 10000
         });
 
         if (!response.ok) {
@@ -161,7 +164,8 @@ async function SRCRCPhandler(srcrcpPath, refererForSrcrcp) {
             const masterM3U8Url = fileMatch[1];
             console.log(`[VidSrc - SRCRCP] Found M3U8 URL (via fileMatch): ${masterM3U8Url}`);
             const m3u8FileFetch = await fetch(masterM3U8Url, {
-                headers: { "Referer": srcrcpUrl, "Accept": "*/*" }
+                headers: { "Referer": srcrcpUrl, "Accept": "*/*" },
+                timeout: 10000
             });
             if (!m3u8FileFetch.ok) {
                 console.error(`[VidSrc - SRCRCP] Failed to fetch master M3U8: ${masterM3U8Url}, status: ${m3u8FileFetch.status}`);
@@ -229,7 +233,8 @@ async function SRCRCPhandler(srcrcpPath, refererForSrcrcp) {
                  // Ensure URL is absolute
                  const absoluteM3u8Url = m3u8Source.url.startsWith('http') ? m3u8Source.url : new URL(m3u8Source.url, srcrcpUrl).href;
                  const m3u8FileFetch = await fetch(absoluteM3u8Url, {
-                    headers: { "Referer": srcrcpUrl, "Accept": "*/*" }
+                    headers: { "Referer": srcrcpUrl, "Accept": "*/*" },
+                    timeout: 10000
                  });
                  if (!m3u8FileFetch.ok) {
                      console.error(`[VidSrc - SRCRCP] Failed to fetch M3U8 from script source: ${absoluteM3u8Url}, status: ${m3u8FileFetch.status}`);
@@ -310,6 +315,10 @@ async function getStreamContent(id, type) {
             if (rcpData.data.startsWith("/prorcp/")) {
                 streamDetails = await PRORCPhandler(rcpData.data.replace("/prorcp/", ""));
             } else if (rcpData.data.startsWith("/srcrcp/")) {
+                if (server.name === "Superembed" || server.name === "2Embed") {
+                    console.warn(`[VidSrc] Skipping SRCRCP for known problematic server: ${server.name}`);
+                    return null; 
+                }
                 streamDetails = await SRCRCPhandler(rcpData.data, rcpUrl); // Pass rcpUrl as referer
             } else {
                 console.warn(`Unhandled rcp data type for server ${server.name}: ${rcpData.data.substring(0, 50)}`);
