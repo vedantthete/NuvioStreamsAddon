@@ -1051,6 +1051,8 @@ builder.defineStreamHandler(async (args) => {
             providerDisplayName = 'ShowBox';
             if (!userCookie) {
                 providerDisplayName += ' (SLOW)';
+            } else {
+                providerDisplayName += ' ⚡';
             }
         } else if (stream.provider === 'HollyMovieHD') {
             providerDisplayName = 'HollyMovieHD'; // Changed from HollyHD
