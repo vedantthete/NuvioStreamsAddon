@@ -743,6 +743,7 @@
                 margin: 0;
                 border-left: none;
                 border-right: none;
+                overflow: visible; /* Allow card to expand with content */
             }
             
             .card:before {
@@ -1758,8 +1759,8 @@
                 <div class="scraper-api-key-container full-width" style="margin-top: 1.5rem;">
                     <div style="background-color: rgba(15, 15, 15, 0.7); border-radius: 0.6rem; padding: 1rem; border: 1px solid var(--border);">
                         <label for="scraperApiKeyInput" style="display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 0.25rem;">ScraperAPI Key (Optional for Xprime):</label>
-                        <div style="display: flex; gap: 0.5rem; align-items: center;">
-                            <input type="text" id="scraperApiKeyInput" placeholder="Enter your ScraperAPI key" class="cookie-input" style="flex-grow: 1;">
+                        <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                            <input type="text" id="scraperApiKeyInput" placeholder="Enter your ScraperAPI key" class="cookie-input" style="flex-grow: 1; min-width: 150px;">
                             <button id="applyScraperApiKeyBtn" class="how-to-get-btn" style="flex-shrink: 0;">Apply Key</button>
                             <button id="howToGetScraperApiKeyBtn" class="how-to-get-btn" style="flex-shrink: 0;">How to Get</button>
                         </div>
@@ -1814,17 +1815,21 @@
 
                         <!-- ScraperAPI Key Input was here, MOVED OUT -->
                         
-                        <div id="personalizedManifest" class="personalized-manifest">
-                            <div class="manifest-result" style="display:none;">
-                                <h4>Your Personalized Addon</h4>
-                                <p class="manifest-note">This URL is unique to you and includes your cookie and server region. Keep it private.</p>
-                                <div class="manifest-url-box">
-                                    <span id="personalManifestUrl"></span>
-                                </div>
-                            </div>
+                    </div> <!-- This is the closing div for id="cookieConfigSection" -->
+                </div> <!-- This is the closing div for class="cookie-config-container full-width" -->
+                <!-- End Cookie Configuration Section -->
+
+                <!-- Personalized Manifest Section - MOVED OUTSIDE of cookie-config -->
+                <div id="personalizedManifest" class="personalized-manifest full-width" style="margin-top: 1.5rem;">
+                    <div class="manifest-result" style="display:none;">
+                        <h4>Your Personalized Addon</h4>
+                        <p class="manifest-note">This URL is unique to you and includes your cookie and server region. Keep it private.</p>
+                        <div class="manifest-url-box">
+                            <span id="personalManifestUrl"></span>
                         </div>
                     </div>
                 </div>
+                <!-- End Personalized Manifest Section -->
                 
                 <div class="buttons">
                     <a href="#" id="installLink" class="btn btn-primary">Install Addon</a>
