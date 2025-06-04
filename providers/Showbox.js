@@ -1524,10 +1524,11 @@ const fetchSourcesForSingleFid = async (fidToProcess, shareKey, regionPreference
 // ShowBox scraper class
 class ShowBoxScraper {
     // MODIFICATION: Constructor accepts scraperApiKey -> MODIFICATION: Constructor no longer needs scraperApiKey
-    constructor(regionPreference = null, userCookie = null) {
+    constructor(regionPreference = null, userCookie = null, userScraperApiKey = null) {
         // Store the region preference and user cookie
         this.regionPreference = regionPreference;
         this.userCookie = userCookie;
+        this.userScraperApiKey = userScraperApiKey; // Store the ScraperAPI key
         
         // Initialize proxy rotation counter for this instance
         this.proxyCounter = Math.floor(Math.random() * 1000); // Random start to avoid patterns
@@ -1555,14 +1556,25 @@ class ShowBoxScraper {
         const primaryProxy = process.env.SHOWBOX_PROXY_URL_VALUE;
         const alternateProxy = process.env.SHOWBOX_PROXY_URL_ALTERNATE;
         
+        // Increment the counter for this instance
+        this.proxyCounter++;
+        
+        // If ScraperAPI key is available, use it for 30% of the requests
+        // (adjust percentage as needed)
+        if (this.userScraperApiKey && this.proxyCounter % 10 < 3) {
+            console.log(`[Rotating Proxy] Using ScraperAPI for request #${this.proxyCounter} (user-provided key)`);
+            // Return a function that will format the URL for ScraperAPI
+            return (url) => {
+                const scraperApiUrl = 'https://api.scraperapi.com/';
+                return `${scraperApiUrl}?api_key=${this.userScraperApiKey}&url=${encodeURIComponent(url)}&country_code=us`;
+            };
+        }
+        
         // Return direct connection if both proxies are missing
         if (!primaryProxy && !alternateProxy) return null;
         
         // If rotation disabled or alternate proxy not set, just use primary proxy
         if (!useRotatingProxy || !alternateProxy) return primaryProxy;
-        
-        // Increment the counter for this instance
-        this.proxyCounter++;
         
         // Use modulo to alternate between available proxies
         const proxyIndex = this.proxyCounter % 2;
@@ -1588,10 +1600,19 @@ class ShowBoxScraper {
         // Get the next proxy URL from the rotation
         const selectedProxy = this.getNextProxy();
         let requestUrl = url;
+        let isUsingScraperApi = false;
 
-        if (selectedProxy && selectedProxy.trim() !== '') {
-            requestUrl = `${selectedProxy}${encodeURIComponent(url)}`;
-            console.log(`ShowBoxScraper: Making request to: ${url} via Proxy: ${selectedProxy}`);
+        if (selectedProxy) {
+            if (typeof selectedProxy === 'function') {
+                // This is a ScraperAPI proxy function
+                requestUrl = selectedProxy(url);
+                isUsingScraperApi = true;
+                console.log(`ShowBoxScraper: Making request to: ${url} via ScraperAPI`);
+            } else if (selectedProxy.trim() !== '') {
+                // This is a regular proxy URL
+                requestUrl = `${selectedProxy}${encodeURIComponent(url)}`;
+                console.log(`ShowBoxScraper: Making request to: ${url} via Proxy: ${selectedProxy}`);
+            }
         } else {
             console.log(`ShowBoxScraper: Making direct request to: ${url} (no proxy available)`);
         }
@@ -1600,7 +1621,8 @@ class ShowBoxScraper {
 
         // Get the cookie with region preference if site requires it
         let cookieValue = null;
-        if (url.includes('febbox.com')) {
+        // Skip cookie for ScraperAPI requests, as it handles cookies differently
+        if (url.includes('febbox.com') && !isUsingScraperApi) {
             if (this.regionPreference) {
                 console.log(`[ShowBoxScraper] Getting cookie with explicit region preference: ${this.regionPreference}`);
                 cookieValue = await getCookieForRequest(this.regionPreference, this.userCookie);
@@ -1619,8 +1641,8 @@ class ShowBoxScraper {
             delete currentHeaders['Upgrade-Insecure-Requests'];
         }
         
-        // Add cookie to headers if available
-        if (cookieValue) {
+        // Add cookie to headers if available and not using ScraperAPI
+        if (cookieValue && !isUsingScraperApi) {
             currentHeaders['Cookie'] = `ui=${cookieValue}`;
         }
 
@@ -2045,7 +2067,7 @@ const convertImdbToTmdb = async (imdbId, regionPreference = null) => {
 // Exposed API for the Stremio addon
 // This will be a function to get streams from a TMDB ID
 // MODIFICATION: Accept scraperApiKey -> MODIFICATION: Remove scraperApiKey
-const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeNum = null, regionPreference = null, userCookie = null) => {
+const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeNum = null, regionPreference = null, userCookie = null, userScraperApiKey = null) => {
     const mainTimerLabel = `getStreamsFromTmdbId_total_${tmdbType}_${tmdbId}` + (seasonNum ? `_s${seasonNum}` : '') + (episodeNum ? `_e${episodeNum}` : '');
     console.time(mainTimerLabel);
     console.log(`Getting streams for TMDB ${tmdbType}/${tmdbId}${seasonNum !== null ? `, Season ${seasonNum}` : ''}${episodeNum !== null ? `, Episode ${episodeNum}` : ''}`);
@@ -2061,7 +2083,7 @@ const getStreamsFromTmdbId = async (tmdbType, tmdbId, seasonNum = null, episodeN
     const mediaYear = tmdbInfo.year; // Year from TMDB
 
     // Then, get FebBox link from ShowBox
-    const showboxScraper = new ShowBoxScraper(regionPreference, userCookie);
+    const showboxScraper = new ShowBoxScraper(regionPreference, userCookie, userScraperApiKey);
     const febboxShareInfos = await showboxScraper.extractFebboxShareLinks(showboxUrl);
     if (!febboxShareInfos || febboxShareInfos.length === 0) {
         console.log(`No FebBox share links found for ${showboxUrl}`);

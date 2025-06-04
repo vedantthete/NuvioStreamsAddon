@@ -664,7 +664,7 @@ builder.defineStreamHandler(async (args) => {
             for (let attempt = 1; attempt <= MAX_SHOWBOX_RETRIES; attempt++) {
                 try {
                     console.log(`[ShowBox] Attempt ${attempt}/${MAX_SHOWBOX_RETRIES}`);
-                    const streams = await getStreamsFromTmdbId(tmdbTypeFromId, tmdbId, seasonNum, episodeNum, userRegionPreference, userCookie);
+                    const streams = await getStreamsFromTmdbId(tmdbTypeFromId, tmdbId, seasonNum, episodeNum, userRegionPreference, userCookie, userScraperApiKey);
                     
             if (streams && streams.length > 0) {
                         console.log(`[ShowBox] Successfully fetched ${streams.length} streams on attempt ${attempt}.`);
