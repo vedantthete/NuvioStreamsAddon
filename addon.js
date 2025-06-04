@@ -10,15 +10,28 @@ const USE_REDIS_CACHE = process.env.USE_REDIS_CACHE === 'true';
 let redis = null;
 if (USE_REDIS_CACHE) {
     try {
+        console.log(`[Redis Cache] Initializing Redis in addon.js. REDIS_URL from env: ${process.env.REDIS_URL ? 'exists and has value' : 'MISSING or empty'}`);
+        if (!process.env.REDIS_URL) {
+            throw new Error("REDIS_URL environment variable is not set or is empty.");
+        }
         redis = new Redis(process.env.REDIS_URL, {
-            maxRetriesPerRequest: 2,
-            connectTimeout: 10000,
-            commandTimeout: 5000, // Added command timeout
-            // TLS is auto-enabled with rediss:// URLs
+            maxRetriesPerRequest: 5,
             retryStrategy(times) {
-                const delay = Math.min(times * 200, 2000);
+                const delay = Math.min(times * 500, 5000);
                 return delay;
-            }
+            },
+            reconnectOnError: function(err) {
+                const targetError = 'READONLY';
+                if (err.message.includes(targetError)) {
+                    return true;
+                }
+                return false;
+            },
+            enableOfflineQueue: true,
+            enableReadyCheck: true,
+            autoResubscribe: true,
+            autoResendUnfulfilledCommands: true,
+            lazyConnect: false
         });
         
         redis.on('error', (err) => {
@@ -517,9 +530,6 @@ builder.defineStreamHandler(async (args) => {
         console.log('[addon.js] No specific providers selected by user in global config, will attempt all.');
     }
 
-    // Removed ScraperAPI Key logging
-    console.log("  ScraperAPI Key usage has been removed.");
-
     if (type !== 'movie' && type !== 'series') {
         return { streams: [] };
     }
@@ -707,7 +717,7 @@ builder.defineStreamHandler(async (args) => {
                 return [];
             }
 
-            const XPRIME_CACHE_TTL_MS = 10 * 24 * 60 * 60 * 1000; // 10 days in milliseconds
+            const XPRIME_CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
             // Try to get cached streams first
             const cachedStreams = await getStreamFromCache('xprime', tmdbTypeFromId, tmdbId, seasonNum, episodeNum);

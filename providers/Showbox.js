@@ -9,33 +9,53 @@ const Redis = require('ioredis'); // Added for Redis
 
 // --- Redis Cache Initialization ---
 let redisClient = null;
-if (process.env.USE_REDIS_CACHE === 'true' && process.env.REDIS_URL) {
-    console.log(`Attempting to connect to Redis at: ${process.env.REDIS_URL}`);
-    redisClient = new Redis(process.env.REDIS_URL, {
-        // Optional: Add connection options here if needed
-        // e.g., tls: process.env.REDIS_TLS === 'true' ? {} : undefined,
-        maxRetriesPerRequest: 3, // Don't retry indefinitely
-        connectTimeout: 10000, // 10 seconds
-        lazyConnect: true // Connect on first command
-    });
+if (process.env.USE_REDIS_CACHE === 'true') { // Modified condition
+    try { // Added try-catch for initialization
+        console.log(`[Showbox Cache] Initializing Redis in Showbox.js. REDIS_URL from env: ${process.env.REDIS_URL ? 'exists and has value' : 'MISSING or empty'}`);
+        if (!process.env.REDIS_URL) {
+            throw new Error("REDIS_URL environment variable is not set or is empty for Showbox Redis.");
+        }
+        // console.log(`Attempting to connect to Redis at: ${process.env.REDIS_URL}`); // Original log, can be kept or removed. Let's keep it for now.
+        redisClient = new Redis(process.env.REDIS_URL, {
+            maxRetriesPerRequest: 5, // Increased from 3
+            retryStrategy(times) {
+                const delay = Math.min(times * 500, 5000);
+                return delay;
+            },
+            reconnectOnError: function(err) {
+                const targetError = 'READONLY';
+                if (err.message.includes(targetError)) {
+                    return true;
+                }
+                return false;
+            },
+            enableOfflineQueue: true,
+            enableReadyCheck: true,
+            autoResubscribe: true,
+            autoResendUnfulfilledCommands: true,
+            lazyConnect: false // Changed from true for immediate connection attempt
+        });
 
-    redisClient.on('connect', () => {
-        console.log('Successfully connected to Redis server.');
-    });
+        redisClient.on('connect', () => {
+            console.log('[Showbox Cache] Successfully connected to Redis server.'); // Added prefix for clarity
+        });
 
-    redisClient.on('error', (err) => {
-        console.error(`Redis connection error: ${err.message}. Falling back to file system cache for operations. Redis Host: ${err.host}, Port: ${err.port}`);
-        // Optionally, you could set redisClient to null here to prevent further attempts if error is persistent
-        // For now, it will keep trying to reconnect based on ioredis default behavior or specified options.
-    });
-    
-    // Attempt an initial connection check
-    redisClient.connect().catch(err => {
-        console.error(`Initial Redis connection failed: ${err.message}. Ensure Redis is running and accessible.`);
-    });
+        redisClient.on('error', (err) => {
+            // Using optional chaining for host and port from options as err.host/err.port might not always be populated
+            console.error(`[Showbox Redis Error] ${err.message}. Falling back to FS. Showbox Redis Opts Host: ${redisClient?.options?.host}, Port: ${redisClient?.options?.port}`);
+        });
+        
+        // Attempt an initial connection check
+        redisClient.connect().catch(err => {
+            console.error(`Initial Redis connection failed: ${err.message}. Ensure Redis is running and accessible.`);
+        });
 
+    } catch (initError) { // Catch errors from new Redis() or the explicit REDIS_URL check
+        console.error(`[Showbox Cache] Failed to initialize Redis client: ${initError.message}`);
+        redisClient = null; // Ensure client is null if initialization fails
+    }
 } else {
-    console.log("Redis cache is disabled or REDIS_URL is not set. Using file system cache only.");
+    console.log("[Showbox Cache] Redis cache is disabled (USE_REDIS_CACHE is not 'true'). Using file system cache only.");
 }
 
 // --- Cookie Management ---

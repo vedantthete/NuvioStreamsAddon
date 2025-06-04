@@ -6,7 +6,7 @@ const axios = require('axios'); // For making HTTP requests including HEAD reque
 const crypto = require('crypto'); // For hashing URLs
 
 const XPRIME_PROXY_URL = process.env.XPRIME_PROXY_URL;
-const USE_SCRAPER_API = process.env.USE_SCRAPER_API === 'true'; // New: Control whether ScraperAPI should be used
+// const USE_SCRAPER_API = process.env.USE_SCRAPER_API === 'true'; // REMOVED: No longer using this env var as a gatekeeper
 const MAX_RETRIES_XPRIME = 3;
 const RETRY_DELAY_MS_XPRIME = 1000;
 
@@ -145,12 +145,22 @@ async function fetchWithRetryXprime(url, options, maxRetries = MAX_RETRIES_XPRIM
             if (!response.ok) {
                 let errorBody = '';
                 try { errorBody = await response.text(); } catch (e) { /* ignore */ }
-                throw new Error(`HTTP error! Status: ${response.status} ${response.statusText}. Body: ${errorBody.substring(0, 200)}`);
+                // Construct an error object that includes the status
+                const httpError = new Error(`HTTP error! Status: ${response.status} ${response.statusText}. Body: ${errorBody.substring(0, 200)}`);
+                httpError.status = response.status; // Attach status to the error object
+                throw httpError;
             }
             return response;
         } catch (error) {
             lastError = error;
             console.warn(`[Xprime.tv] Fetch attempt ${attempt}/${maxRetries} failed for ${url}: ${error.message}`);
+            
+            // If it's a 403 error, stop retrying immediately.
+            if (error.status === 403) {
+                console.log(`[Xprime.tv] Encountered 403 Forbidden for ${url}. Halting retries.`);
+                throw lastError; // Re-throw the error to exit the retry loop
+            }
+
             if (attempt < maxRetries) {
                 await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS_XPRIME * Math.pow(2, attempt - 1)));
             }
@@ -167,20 +177,10 @@ async function getXprimeStreams(title, year, type, seasonNum, episodeNum, usePro
         return [];
     }
 
-    // If no ScraperAPI key is provided for this request,
-    // AND the general environment setting is to use ScraperAPI (USE_SCRAPER_API is true),
-    // AND they are not effectively using a custom XPRIME_PROXY_URL (which would be a self-hoster's override for Xprime),
-    // then skip fetching for Xprime. This prevents direct fetches on public instances when an API key is expected but missing.
-    // Note: 'useProxy' reflects the XPRIME_USE_PROXY env var, XPRIME_PROXY_URL is the actual custom proxy URL.
-    if (!scraperApiKey && USE_SCRAPER_API && !(useProxy && XPRIME_PROXY_URL)) {
-        console.log('[Xprime.tv] Skipping fetch: No ScraperAPI key provided on an instance configured to use ScraperAPI for Xprime, and no custom proxy is set.');
-        return [];
-    }
-
     let rawXprimeStreams = [];
     try {
         // Updated log to be more descriptive of parameter sources
-        console.log(`[Xprime.tv] Fetch attempt for '${title}' (${year}). Type: ${type}, S: ${seasonNum}, E: ${episodeNum}. CustomProxyParam(useProxy): ${useProxy}, EnvUSE_SCRAPER_API: ${USE_SCRAPER_API}, ScraperApiKeyParam: ${scraperApiKey ? 'Yes' : 'No'}`);
+        console.log(`[Xprime.tv] Fetch attempt for '${title}' (${year}). Type: ${type}, S: ${seasonNum}, E: ${episodeNum}. CustomProxyParam(useProxy): ${useProxy}, ScraperApiKeyParam: ${scraperApiKey ? 'Yes' : 'No'}`);
         
         const xprimeName = encodeURIComponent(title);
         let xprimeApiUrl;
@@ -202,9 +202,9 @@ async function getXprimeStreams(title, year, type, seasonNum, episodeNum, usePro
 
         let xprimeResult;
 
-        // Decision logic for fetching
-        if (USE_SCRAPER_API && scraperApiKey) {
-            console.log('[Xprime.tv] Attempting to use ScraperAPI.');
+        // Decision logic for fetching - PRIORITIZE scraperApiKey if present
+        if (scraperApiKey) { // If a scraperApiKey is provided (from user config), try to use it.
+            console.log('[Xprime.tv] Attempting to use ScraperAPI (key provided).');
             try {
                 const scraperApiUrl = 'https://api.scraperapi.com/';
                 const scraperResponse = await axios.get(scraperApiUrl, {
@@ -233,16 +233,13 @@ async function getXprimeStreams(title, year, type, seasonNum, episodeNum, usePro
                         ? scraperError.response.data.substring(0, 200) 
                         : JSON.stringify(scraperError.response.data).substring(0, 200));
                 }
-                // Do not return here yet, allow fallback to other methods if desired, or handle as fatal error.
-                // For now, if ScraperAPI fails, we'll let it fall through to potentially try direct/custom proxy or just fail.
-                // Depending on desired behavior, you might want to return [] here.
-                // For this implementation, if ScraperAPI is configured and fails, we assume it's the preferred method and don't fallback.
+                // For this implementation, if ScraperAPI is attempted (because a key was provided) and fails, we return empty.
+                // We don't fall back to other methods if a key was explicitly provided but failed.
                 return []; 
             }
         } else if (useProxy && XPRIME_PROXY_URL) {
-            // ScraperAPI not used (either disabled by USE_SCRAPER_API or no scraperApiKey provided).
-            // Now check if the custom proxy (controlled by 'useProxy' param and XPRIME_PROXY_URL env var) should be used.
-            console.log(`[Xprime.tv] ScraperAPI not used/configured. Attempting to use custom proxy: ${XPRIME_PROXY_URL}`);
+            // No ScraperAPI key provided by user. Now check if a custom proxy (controlled by 'useProxy' param and XPRIME_PROXY_URL env var) should be used.
+            console.log(`[Xprime.tv] No ScraperAPI key provided. Attempting to use custom proxy: ${XPRIME_PROXY_URL}`);
             const cleanedProxyUrl = XPRIME_PROXY_URL.replace(/\/$/, '');
             const fetchUrl = `${cleanedProxyUrl}/?destination=${encodeURIComponent(xprimeApiUrl)}`;
             console.log(`[Xprime.tv] Fetching via custom proxy: ${fetchUrl}`);
@@ -258,8 +255,8 @@ async function getXprimeStreams(title, year, type, seasonNum, episodeNum, usePro
             });
             xprimeResult = await xprimeResponse.json();
         } else {
-            // ScraperAPI not used, and custom proxy not used (either 'useProxy' param is false or XPRIME_PROXY_URL not set).
-            console.log(`[Xprime.tv] ScraperAPI and custom proxy not used/configured. Fetching directly: ${xprimeApiUrl}`);
+            // No ScraperAPI key, and custom proxy not used/configured.
+            console.log(`[Xprime.tv] No ScraperAPI key and no custom proxy. Fetching directly: ${xprimeApiUrl}`);
             const xprimeResponse = await fetchWithRetryXprime(xprimeApiUrl, {
                 headers: {
                     ...BROWSER_HEADERS_XPRIME,
