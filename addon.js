@@ -61,6 +61,10 @@ console.log(`[addon.js] HollyMovieHD provider fetching enabled: ${ENABLE_HOLLYMO
 const ENABLE_XPRIME_PROVIDER = process.env.ENABLE_XPRIME_PROVIDER !== 'false'; // Defaults to true if not set or not 'false'
 console.log(`[addon.js] Xprime provider fetching enabled: ${ENABLE_XPRIME_PROVIDER}`);
 
+// NEW: Read environment variable for VidZee
+const ENABLE_VIDZEE_PROVIDER = process.env.ENABLE_VIDZEE_PROVIDER !== 'false'; // Defaults to true
+console.log(`[addon.js] VidZee provider fetching enabled: ${ENABLE_VIDZEE_PROVIDER}`);
+
 // NEW: Stream caching config
 const STREAM_CACHE_DIR = process.env.VERCEL ? path.join('/tmp', '.streams_cache') : path.join(__dirname, '.streams_cache');
 const STREAM_CACHE_TTL_MS = 9 * 60 * 1000; // 9 minutes
@@ -74,6 +78,7 @@ const { getSoaperTvStreams } = require('./providers/soapertv.js'); // Import fro
 const { getCuevanaStreams } = require('./providers/cuevana.js'); // Import from cuevana.js
 const { getHianimeStreams } = require('./providers/hianime.js'); // Import from hianime.js
 const { getStreamContent } = require('./providers/vidsrcextractor.js'); // Import from vidsrcextractor.js
+const { getVidZeeStreams } = require('./providers/VidZee.js'); // NEW: Import from VidZee.js
 
 // --- Constants ---
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
@@ -978,6 +983,48 @@ builder.defineStreamHandler(async (args) => {
                 await saveStreamToCache('vidsrc', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum);
             return [];
         }
+        },
+
+        // VidZee provider with cache integration
+        vidzee: async () => {
+            if (!ENABLE_VIDZEE_PROVIDER) { // Check if VidZee is globally disabled
+                console.log('[VidZee] Skipping fetch: Disabled by environment variable.');
+                return [];
+            }
+            if (!shouldFetch('vidzee')) {
+                console.log('[VidZee] Skipping fetch: Not selected by user.');
+                return [];
+            }
+            
+            // Try to get cached streams first
+            const cachedStreams = await getStreamFromCache('vidzee', tmdbTypeFromId, tmdbId, seasonNum, episodeNum, null, userScraperApiKey);
+            if (cachedStreams) {
+                console.log(`[VidZee] Using ${cachedStreams.length} streams from cache.`);
+                return cachedStreams.map(stream => ({ ...stream, provider: 'VidZee' }));
+            }
+            
+            // No cache or expired, fetch fresh
+            try {
+                console.log(`[VidZee] Fetching new streams...`);
+                const streams = await getVidZeeStreams(tmdbId, tmdbTypeFromId, seasonNum, episodeNum, userScraperApiKey);
+                
+                if (streams && streams.length > 0) {
+                    console.log(`[VidZee] Successfully fetched ${streams.length} streams.`);
+                    // Save to cache
+                    await saveStreamToCache('vidzee', tmdbTypeFromId, tmdbId, streams, 'ok', seasonNum, episodeNum, null, userScraperApiKey);
+                    return streams.map(stream => ({ ...stream, provider: 'VidZee' }));
+                } else {
+                    console.log(`[VidZee] No streams returned.`);
+                    // Save empty result
+                    await saveStreamToCache('vidzee', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum, null, userScraperApiKey);
+                    return [];
+                }
+            } catch (err) {
+                console.error(`[VidZee] Error fetching streams:`, err.message);
+                // Save error status to cache
+                await saveStreamToCache('vidzee', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum, null, userScraperApiKey);
+                return [];
+            }
         }
     };
 
@@ -993,7 +1040,8 @@ builder.defineStreamHandler(async (args) => {
             providerFetchFunctions.soapertv(),
             providerFetchFunctions.cuevana(),
             providerFetchFunctions.hianime(),
-            providerFetchFunctions.vidsrc()
+            providerFetchFunctions.vidsrc(),
+            providerFetchFunctions.vidzee()
         ]);
         
         // Process results into streamsByProvider object
@@ -1002,9 +1050,10 @@ builder.defineStreamHandler(async (args) => {
             'Xprime.tv': ENABLE_XPRIME_PROVIDER && shouldFetch('xprime') ? filterStreamsByQuality(providerResults[1], minQualitiesPreferences.xprime, 'Xprime.tv') : [],
             'HollyMovieHD': ENABLE_HOLLYMOVIEHD_PROVIDER && shouldFetch('hollymoviehd') ? filterStreamsByQuality(providerResults[2], minQualitiesPreferences.hollymoviehd, 'HollyMovieHD') : [],
             'Soaper TV': shouldFetch('soapertv') ? filterStreamsByQuality(providerResults[3], minQualitiesPreferences.soapertv, 'Soaper TV') : [],
-            'Cuevana': shouldFetch('cuevana') ? filterStreamsByQuality(providerResults[4], minQualitiesPreferences.cuevana, 'Cuevana') : [],
+            'Cuevana': ENABLE_CUEVANA_PROVIDER && shouldFetch('cuevana') ? filterStreamsByQuality(providerResults[4], minQualitiesPreferences.cuevana, 'Cuevana') : [],
             'Hianime': shouldFetch('hianime') ? filterStreamsByQuality(providerResults[5], minQualitiesPreferences.hianime, 'Hianime') : [],
-            'VidSrc': shouldFetch('vidsrc') ? filterStreamsByQuality(providerResults[6], minQualitiesPreferences.vidsrc, 'VidSrc') : []
+            'VidSrc': shouldFetch('vidsrc') ? filterStreamsByQuality(providerResults[6], minQualitiesPreferences.vidsrc, 'VidSrc') : [],
+            'VidZee': ENABLE_VIDZEE_PROVIDER && shouldFetch('vidzee') ? filterStreamsByQuality(providerResults[7], minQualitiesPreferences.vidzee, 'VidZee') : []
         };
 
         // Sort streams by quality for each provider
@@ -1014,7 +1063,7 @@ builder.defineStreamHandler(async (args) => {
 
         // Combine streams in the preferred provider order
         combinedRawStreams = [];
-        const providerOrder = ['ShowBox', 'Xprime.tv', 'HollyMovieHD', 'Soaper TV', 'Cuevana', 'Hianime', 'VidSrc'];
+        const providerOrder = ['ShowBox', 'Xprime.tv', 'HollyMovieHD', 'Soaper TV', 'Cuevana', 'Hianime', 'VidSrc', 'VidZee'];
         providerOrder.forEach(providerKey => {
             if (streamsByProvider[providerKey] && streamsByProvider[providerKey].length > 0) {
                 combinedRawStreams.push(...streamsByProvider[providerKey]);

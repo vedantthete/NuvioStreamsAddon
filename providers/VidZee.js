@@ -23,7 +23,7 @@ const parseArgs = () => {
     return options;
 };
 
-const getVidZeeStreams = async (tmdbId, mediaType, seasonNum, episodeNum) => {
+const getVidZeeStreams = async (tmdbId, mediaType, seasonNum, episodeNum, scraperApiKey = null) => {
     if (!tmdbId) {
         console.error('[VidZee] Error: TMDB ID (tmdbId) is required.');
         return [];
@@ -49,17 +49,30 @@ const getVidZeeStreams = async (tmdbId, mediaType, seasonNum, episodeNum) => {
         targetApiUrl += `&ss=${seasonNum}&ep=${episodeNum}`;
     }
 
-    const proxyBaseUrl = 'https://starlit-valkyrie-39f5ab.netlify.app/?destination='; // Consider making this configurable
-    const finalApiUrl = proxyBaseUrl + encodeURIComponent(targetApiUrl);
+    let finalApiUrl;
+    let headers = {
+        'Referer': 'https://core.vidzee.wtf/' // Default for proxy method
+    };
+    let timeout = 15000; // Default timeout
+
+    if (scraperApiKey) {
+        console.log('[VidZee] Using ScraperAPI (key provided).');
+        finalApiUrl = `https://api.scraperapi.com/?api_key=${scraperApiKey}&url=${encodeURIComponent(targetApiUrl)}`;
+        // For ScraperAPI, we don't set a Referer on our request to them.
+        headers = {}; 
+        timeout = 25000; // Longer timeout for ScraperAPI
+    } else {
+        const proxyBaseUrl = 'https://starlit-valkyrie-39f5ab.netlify.app/?destination=';
+        finalApiUrl = proxyBaseUrl + encodeURIComponent(targetApiUrl);
+        console.log('[VidZee] Using proxy method.');
+    }
 
     console.log(`[VidZee] Fetching from: ${finalApiUrl}`);
 
     try {
         const response = await axios.get(finalApiUrl, {
-            headers: {
-                'Referer': 'https://core.vidzee.wtf/' // Important Referer
-            },
-            timeout: 15000 // Added timeout
+            headers: headers,
+            timeout: timeout
         });
 
         const responseData = response.data;
