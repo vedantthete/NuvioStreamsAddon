@@ -1804,7 +1804,7 @@ class ShowBoxScraper {
 
                 if (!directFebboxLink) {
                     const scriptContents = $('script').map((i, el) => $(el).html()).get().join('\n');
-                    const shareKeyMatch = scriptContents.match(/['"](https?:\/\/www\.febbox\.com\/share\/[a-zA-Z0-9]+)['"]/);
+                    const shareKeyMatch = scriptContents.match(/['"](https?:\/\/www\.febbox\.com\/share\/[a-zA-Z0-9-]+)['"]/);
                     if (shareKeyMatch && shareKeyMatch[1]) {
                         directFebboxLink = shareKeyMatch[1];
                     }
@@ -1928,11 +1928,13 @@ const extractFidsFromFebboxPage = async (febboxUrl, regionPreference = null, use
     }
 
     let shareKey = null;
-    const matchShareKeyUrl = febboxUrl.match(/\/share\/([a-zA-Z0-9]+)/);
+    // Update regex to include hyphens in share key pattern
+    const matchShareKeyUrl = febboxUrl.match(/\/share\/([a-zA-Z0-9-]+)/);
     if (matchShareKeyUrl) {
         shareKey = matchShareKeyUrl[1];
     } else if (contentHtml) {
-        const matchShareKeyHtml = contentHtml.match(/(?:var share_key\s*=|share_key:\s*|shareid=)"?([a-zA-Z0-9]+)"?/);
+        // Update regex to include hyphens in share key pattern
+        const matchShareKeyHtml = contentHtml.match(/(?:var share_key\s*=|share_key:\s*|shareid=)"?([a-zA-Z0-9-]+)"?/);
         if (matchShareKeyHtml) {
             shareKey = matchShareKeyHtml[1];
         }
@@ -2279,7 +2281,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
     
     // Parse the HTML to find folders (seasons)
     const $ = cheerio.load(contentHtml);
-    const shareKey = contentHtml.match(/(?:var share_key\s*=|share_key:\s*|shareid=)"?([a-zA-Z0-9]+)"?/)?.[1];
+    const shareKey = contentHtml.match(/(?:var share_key\s*=|share_key:\s*|shareid=)"?([a-zA-Z0-9-]+)"?/)?.[1];
     
     if (!shareKey) {
         console.log(`Could not extract share_key from ${febboxUrl}`);

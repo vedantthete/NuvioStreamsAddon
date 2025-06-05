@@ -176,16 +176,16 @@ app.post('/api/validate-cookie', async (req, res) => {
             }
         }
 
-        let shareKeyMatch = htmlContent.match(/var\s+share_key\s*=\s*['"]([a-zA-Z0-9]+)['"]/);
-        if (!shareKeyMatch) shareKeyMatch = htmlContent.match(/share_key:\s*['"]([a-zA-Z0-9]+)['"]/);
-        if (!shareKeyMatch) shareKeyMatch = htmlContent.match(/shareid\s*=\s*['"]([a-zA-Z0-9]+)['"]/);
+        let shareKeyMatch = htmlContent.match(/var\s+share_key\s*=\s*['"]([a-zA-Z0-9-]+)['"]/);
+        if (!shareKeyMatch) shareKeyMatch = htmlContent.match(/share_key:\s*['"]([a-zA-Z0-9-]+)['"]/);
+        if (!shareKeyMatch) shareKeyMatch = htmlContent.match(/shareid\s*=\s*['"]([a-zA-Z0-9-]+)['"]/);
         if (shareKeyMatch) {
             shareKey = shareKeyMatch[1];
         } else {
             // Fallback: try to get share_key from the test URL itself
             const urlParts = FEBBOX_TEST_SHARE_URL.split('/');
             const potentialKey = urlParts[urlParts.length -1];
-            if (/^[a-zA-Z0-9]+$/.test(potentialKey)) shareKey = potentialKey;
+            if (/^[a-zA-Z0-9-]+$/.test(potentialKey)) shareKey = potentialKey;
         }
 
         if (!fid || !shareKey) {
