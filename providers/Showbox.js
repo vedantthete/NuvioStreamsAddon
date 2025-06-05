@@ -2301,7 +2301,39 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         
         const folderNameEl = feEl.find('p.file_name');
         const folderName = folderNameEl.length ? folderNameEl.text().trim() : feEl.attr('data-path') || `Folder_${dataId}`;
-        folders.push({ id: dataId, name: folderName });
+        
+        // Extract season number from folder name for more accurate matching
+        let extractedSeasonNum = null;
+        const folderNameLower = folderName.toLowerCase();
+        
+        // Try more specific season number extraction patterns
+        const seasonPatterns = [
+            /season\s+(\d+)/i,                // Season 1
+            /s(\d+)/i,                        // S1
+            /season(\d+)/i                     // Season1
+        ];
+        
+        for (const pattern of seasonPatterns) {
+            const match = folderNameLower.match(pattern);
+            if (match && match[1]) {
+                extractedSeasonNum = parseInt(match[1], 10);
+                break;
+            }
+        }
+        
+        // If no specific pattern matched, look for any standalone numbers
+        if (extractedSeasonNum === null) {
+            const numMatches = folderNameLower.match(/\b(\d+)\b/g);
+            if (numMatches && numMatches.length === 1) { // Only if exactly one number is found
+                extractedSeasonNum = parseInt(numMatches[0], 10);
+            }
+        }
+        
+        folders.push({ 
+            id: dataId, 
+            name: folderName,
+            extractedSeasonNum: extractedSeasonNum
+        });
     });
     
     if (folders.length === 0) {
@@ -2322,7 +2354,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
                 });
             }
             console.timeEnd(processTimerLabel);
-            return;
+            return streamsForThisCall;
         }
         
         if (fids.length > 0) {
@@ -2344,38 +2376,96 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
             }
         }
         console.timeEnd(processTimerLabel);
-        return;
+        return streamsForThisCall;
     }
+    
+    console.log(`Found ${folders.length} season folders:`, folders.map(f => 
+        `"${f.name}" (ID: ${f.id}, Extracted Season: ${f.extractedSeasonNum !== null ? f.extractedSeasonNum : 'None'})`
+    ).join(', '));
     
     // Find matching season folder
     let selectedFolder = null;
+    
+    // First, look for exact season number match using extracted season numbers
     for (const folder of folders) {
-        const folderNameLower = folder.name.toLowerCase();
-        if (
-            folderNameLower.includes(`season ${seasonNum}`) || 
-            folderNameLower.includes(`s${seasonNum}`) ||
-            folderNameLower.includes(`season${seasonNum}`) ||
-            folderNameLower === `s${seasonNum}` ||
-            folderNameLower === `season ${seasonNum}` ||
-            (folderNameLower.match(/\d+/g) || []).includes(String(seasonNum))
-        ) {
+        if (folder.extractedSeasonNum === seasonNum) {
             selectedFolder = folder;
+            console.log(`Found exact season match: "${folder.name}" with extracted season number ${folder.extractedSeasonNum}`);
             break;
         }
     }
     
-    // If no exact match, try index-based approach (season 1 = first folder)
+    // If no exact match by extracted number, try the text pattern matches (legacy approach)
+    if (!selectedFolder) {
+        for (const folder of folders) {
+            const folderNameLower = folder.name.toLowerCase();
+            
+            // More precise matching patterns to avoid partial matches
+            if (
+                folderNameLower === `season ${seasonNum}` || 
+                folderNameLower === `s${seasonNum}` ||
+                folderNameLower === `season${seasonNum}` ||
+                // Match with word boundaries to avoid Season 1 matching Season 10
+                folderNameLower.match(new RegExp(`\\bseason\\s+${seasonNum}\\b`)) ||
+                folderNameLower.match(new RegExp(`\\bs${seasonNum}\\b`))
+            ) {
+                selectedFolder = folder;
+                console.log(`Found season match via text pattern: "${folder.name}"`);
+                break;
+            }
+        }
+    }
+    
+    // If still no match, sort folders by extracted season number and try index-based approach
     if (!selectedFolder && seasonNum > 0 && seasonNum <= folders.length) {
-        selectedFolder = folders[seasonNum - 1];
+        // First try to sort by extracted season number (if available)
+        const sortedFolders = [...folders].sort((a, b) => {
+            // If both have extracted season numbers, compare them
+            if (a.extractedSeasonNum !== null && b.extractedSeasonNum !== null) {
+                return a.extractedSeasonNum - b.extractedSeasonNum;
+            }
+            // If only one has extracted season number, put it first
+            if (a.extractedSeasonNum !== null) return -1;
+            if (b.extractedSeasonNum !== null) return 1;
+            // Otherwise, keep original order
+            return 0;
+        });
+        
+        // Log the sorted folders for debugging
+        console.log(`Sorted folders by season number:`, sortedFolders.map(f => 
+            `"${f.name}" (ID: ${f.id}, Extracted Season: ${f.extractedSeasonNum !== null ? f.extractedSeasonNum : 'None'})`
+        ).join(', '));
+        
+        // Check if any folder has an extracted season number matching the requested season
+        const exactExtractedMatch = sortedFolders.find(f => f.extractedSeasonNum === seasonNum);
+        if (exactExtractedMatch) {
+            selectedFolder = exactExtractedMatch;
+            console.log(`Found exact season match in sorted folders: "${selectedFolder.name}" with season ${selectedFolder.extractedSeasonNum}`);
+        } 
+        // Otherwise, if we have folders with extracted season numbers, use them for mapping
+        else if (sortedFolders.some(f => f.extractedSeasonNum !== null)) {
+            // If we have some season numbers, try to find the appropriate folder
+            // This approach is better than using index because folders might be out of order
+            const validFolders = sortedFolders.filter(f => f.extractedSeasonNum !== null);
+            if (seasonNum <= validFolders.length) {
+                selectedFolder = validFolders[seasonNum - 1];
+                console.log(`Using sorted folder by extracted number index: "${selectedFolder.name}" at position ${seasonNum}`);
+            }
+        } 
+        // Last resort: use index-based approach on original folder order
+        else {
+            selectedFolder = folders[seasonNum - 1];
+            console.log(`Using original folder order index: "${selectedFolder.name}" at position ${seasonNum}`);
+        }
     }
     
     if (!selectedFolder) {
         console.log(`Could not find season ${seasonNum} folder in ${febboxUrl}`);
         console.timeEnd(processTimerLabel);
-        return;
+        return streamsForThisCall;
     }
     
-    console.log(`Found season folder: ${selectedFolder.name} (ID: ${selectedFolder.id})`);
+    console.log(`Selected season folder: ${selectedFolder.name} (ID: ${selectedFolder.id})`);
     
     // Cache for season folder content
     const cacheSubDirFolderHtml = 'febbox_season_folders'; 
@@ -2451,7 +2541,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
                 }
                 // console.timeEnd(fetchFolderTimer); // fetchFolderTimer might not be defined if cache hit for HTML but miss for parsed
                 console.timeEnd(processTimerLabel); // End outer timer
-                return; // Exit if fetching folder content fails
+                return streamsForThisCall; // Return empty streams array if fetching folder content fails
             }
         }
     }
@@ -2462,7 +2552,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         if (!folderHtml) { // If still no folderHtml (e.g. HTML cache miss and fetch fail), then error out
             console.log(`No folder HTML content available (and no cached parsed list) for folder ${selectedFolder.id}`);
             console.timeEnd(processTimerLabel);
-            return;
+            return streamsForThisCall;
         }
 
         // Parse the folderHtml since we didn't have a cached parsed list
@@ -2516,7 +2606,7 @@ const processShowWithSeasonsEpisodes = async (febboxUrl, showboxTitle, seasonNum
         if (!selectedEpisode) {
             console.log(`Could not find episode ${episodeNum} in season folder ${selectedFolder.name}`);
             console.timeEnd(processTimerLabel);
-            return;
+            return streamsForThisCall;
         }
         
         console.log(`Found episode: ${selectedEpisode.name} (FID: ${selectedEpisode.fid})`);
