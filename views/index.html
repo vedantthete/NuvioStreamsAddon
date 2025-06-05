@@ -1428,10 +1428,6 @@
             background: linear-gradient(135deg, #2196F3, #03A9F4); /* Blue gradient for VidSrc */
         }
 
-        .vidzee-icon {
-            background: linear-gradient(135deg, #4CAF50, #8BC34A); /* Green gradient for VidZee */
-        }
-
         /* Migration Tool Styles */
         .migration-tool-container {
             background-color: rgba(255, 100, 50, 0.1);
@@ -1615,11 +1611,6 @@
                         <span class="provider-detail">Auto Quality</span>
                     </div>
                     <div class="provider-item">
-                        <div class="provider-icon vidzee-icon">📺</div>
-                        <div class="provider-name">VidZee</div>
-                        <span class="provider-detail">Auto Quality</span>
-                    </div>
-                    <div class="provider-item">
                         <div class="provider-icon hianime-icon">🍥</div>
                         <div class="provider-name">Hianime</div>
                         <span class="provider-detail">Anime (Dub/Sub)</span>
@@ -1749,18 +1740,6 @@
                                 <label for="providerVidsrc" style="font-size: 0.9rem;">VidSrc</label>
                             </div>
                              <select id="qualityVidsrc" name="providerQuality" data-provider="vidsrc" class="provider-sort-select">
-                                <option value="all" selected>All Qualities</option>
-                                <option value="480p">480p & Up</option>
-                                <option value="720p">720p & Up</option>
-                                <option value="1080p">1080p & Up</option>
-                            </select>
-                        </div>
-                        <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0;">
-                            <div style="display: flex; align-items: center;">
-                                <input type="checkbox" id="providerVidzee" name="providerSelect" value="vidzee" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
-                                <label for="providerVidzee" style="font-size: 0.9rem;">VidZee</label>
-                            </div>
-                             <select id="qualityVidzee" name="providerQuality" data-provider="vidzee" class="provider-sort-select">
                                 <option value="all" selected>All Qualities</option>
                                 <option value="480p">480p & Up</option>
                                 <option value="720p">720p & Up</option>
@@ -2102,7 +2081,6 @@
         // Get reference to ShowBox checkbox specifically
         const showboxCheckbox = document.getElementById('providerShowbox');
         const xprimeCheckbox = document.getElementById('providerXprime'); // Get Xprime checkbox
-        const vidzeeCheckbox = document.getElementById('providerVidzee'); // NEW: Get VidZee checkbox
 
         // Function to update region selector enabled state based on cookie validity
         function updateRegionSelectorState() {
