@@ -99,18 +99,48 @@ Create a `.env` file in the project root by copying the example:
 cp .env.example .env
 ```
 
-Edit your `.env` file with at least these essential settings:
+Edit your `.env` file with these settings:
 
 ```
 # Required: Get this from https://www.themoviedb.org/settings/api
 TMDB_API_KEY=your_tmdb_api_key_here
 
-# Optional: Enable/disable specific providers
-ENABLE_CUEVANA_PROVIDER=true
+# Provider configuration
+ENABLE_CUEVANA_PROVIDER=false
+ENABLE_HOLLYMOVIEHD_PROVIDER=true
+ENABLE_XPRIME_PROVIDER=true
+
+# Proxy configuration for ShowBox
+SHOWBOX_PROXY_URL_VALUE=https://your-proxy-url.netlify.app/?destination= # Required if using proxy
+SHOWBOX_PROXY_URL_ALTERNATE=https://your-alternate-proxy.netlify.app/?destination= # Optional: For proxy rotation
+SHOWBOX_USE_ROTATING_PROXY=true # Optional: Enables rotation between VALUE and ALTERNATE
+
+# Proxy configuration for Xprime
+XPRIME_PROXY_URL=
+XPRIME_USE_PROXY=false
+
+# ScraperAPI integration
+USE_SCRAPER_API=true
+
+# Cache configuration
+DISABLE_CACHE=true  # Set to false in production
+DISABLE_STREAM_CACHE=true  # Set to false in production
+
+# Redis cache configuration (optional)
+REDIS_URL=redis://your-redis-host:6379
+USE_REDIS_CACHE=false  # Set to true to enable Redis caching
+
+# Hianime service URL
+HIANIME_SERVER=http://your-hianime-server:8082/fetch-hianime
 
 # Optional: Disable caching if needed
 DISABLE_CACHE=false
 ```
+
+For optimal performance in production, it's recommended to:
+1. Set `DISABLE_CACHE=false` and `DISABLE_STREAM_CACHE=false`
+2. Configure Redis for improved caching: `USE_REDIS_CACHE=true`
+3. Ensure your proxy settings are correct for your region
 
 ### Step 4: Run the Main Addon
 
