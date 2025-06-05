@@ -1628,7 +1628,7 @@
                     <div class="provider-item">
                         <div class="provider-icon hollymovie-icon">🎬</div>
                         <div class="provider-name">HollyMovieHD</div>
-                        <span class="provider-detail" style="color: #ff3a3a;">Offline</span>
+                        <span class="provider-detail">Multiple Qualities</span>
                     </div>
                     <div class="provider-item">
                         <div class="provider-icon vidsrc-icon">🎬</div>
@@ -1700,10 +1700,10 @@
                         </div>
                         <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
                             <div style="display: flex; align-items: center;">
-                                <input type="checkbox" id="providerHollymoviehd" name="providerSelect" value="hollymoviehd" disabled style="margin-right: 0.5rem; accent-color: var(--primary); opacity: 0.5;">
-                                <label for="providerHollymoviehd" style="font-size: 0.9rem; opacity: 0.5;">HollyMovieHD</label>
+                                <input type="checkbox" id="providerHollymoviehd" name="providerSelect" value="hollymoviehd" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                                <label for="providerHollymoviehd" style="font-size: 0.9rem;">HollyMovieHD</label>
                             </div>
-                            <select id="qualityHollymoviehd" name="providerQuality" data-provider="hollymoviehd" class="provider-sort-select" disabled>
+                            <select id="qualityHollymoviehd" name="providerQuality" data-provider="hollymoviehd" class="provider-sort-select">
                                 <option value="all" selected>All Qualities</option>
                                 <option value="480p">480p & Up</option>
                                 <option value="720p">720p & Up</option>
@@ -2773,8 +2773,8 @@
                 const providerValue = checkbox.value;
                 const qualityDropdown = document.getElementById(`quality${providerValue.charAt(0).toUpperCase() + providerValue.slice(1)}`); // Changed ID pattern
                 if (qualityDropdown) {
-                    if (providerValue === 'soapertv' || providerValue === 'hollymoviehd') {
-                        qualityDropdown.disabled = true; // Always keep these disabled
+                    if (providerValue === 'soapertv') { // HollyMovieHD removed from this condition
+                        qualityDropdown.disabled = true; // Always keep SoaperTV disabled
                     } else {
                         qualityDropdown.disabled = !checkbox.checked;
                     }
