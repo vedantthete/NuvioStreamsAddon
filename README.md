@@ -29,7 +29,7 @@ The Koyeb instance is currently the main public instance: [https://aesthetic-jod
 * Cuevana isn't available on this public instance
 
 ### Vercel Instance (Limited Duration)
-The Vercel instance is still online despite hitting resource limits: [https://nuvio-streams.vercel.app/](https://nuvioaddon.vercel.app/)
+The Vercel instance is still online despite hitting resource limits: [https://nuvioaddon.vercel.app/](https://nuvioaddon.vercel.app/)
 
 * This instance could disappear at any time
 * Using the Koyeb instance or self-hosting is recommended for reliability
