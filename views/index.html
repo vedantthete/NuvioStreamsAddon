@@ -2199,7 +2199,9 @@
                 }
             });
 
-            const queryParams = [];
+            // Build the path components for the new URL format
+            let pathParams = [];
+            let queryParams = [];
             let manifestPersonalized = false;
 
             // Cookie and Region handling: Only add if ShowBox is selected AND cookie is valid
@@ -2207,8 +2209,10 @@
             const isCookieValid = cookieStatusIndicator.classList.contains('valid');
 
             if (isShowBoxSelected && cookieValue && isCookieValid) {
+                pathParams.push(`cookie=${encodeURIComponent(cookieValue)}`);
                 queryParams.push(`cookie=${encodeURIComponent(cookieValue)}`);
                 if (regionValue) {
+                    pathParams.push(`region=${regionValue}`);
                     queryParams.push(`region=${regionValue}`);
                 }
                 manifestPersonalized = true;
@@ -2216,36 +2220,52 @@
 
             // Providers handling: Only add if a subset is selected
             if (selectedProviders.length > 0 && selectedProviders.length < totalProviders) {
+                pathParams.push(`providers=${selectedProviders.join(',')}`);
                 queryParams.push(`providers=${selectedProviders.join(',')}`);
                 manifestPersonalized = true;
             }
 
             // Quality preferences handling
             if (hasQualityPreferences) {
-                queryParams.push(`min_qualities=${encodeURIComponent(JSON.stringify(qualityPreferences))}`);
+                const encodedQualities = encodeURIComponent(JSON.stringify(qualityPreferences));
+                pathParams.push(`min_qualities=${encodedQualities}`);
+                queryParams.push(`min_qualities=${encodedQualities}`);
                 manifestPersonalized = true;
             }
 
             // ScraperAPI key handling
             if (scraperApiKeyValue) {
+                pathParams.push(`scraper_api_key=${encodeURIComponent(scraperApiKeyValue)}`);
                 queryParams.push(`scraper_api_key=${encodeURIComponent(scraperApiKeyValue)}`);
                 manifestPersonalized = true;
             }
 
-            let finalQueryString = '';
+            // Create both URL formats
+            let pathString = '';
+            if (pathParams.length > 0) {
+                pathString = pathParams.join('/') + '/';
+            }
+            
+            let queryString = '';
             if (queryParams.length > 0) {
-                finalQueryString = '?' + queryParams.join('&');
+                queryString = '?' + queryParams.join('&');
             }
 
-            const newManifestURL = `${window.location.origin}/manifest.json${finalQueryString}`;
-            const newInstallUrl = `stremio://${newManifestURL.replace(/^https?:\/\//, '')}`;
-
-            currentManifestUrlToCopy = newManifestURL;
+            // Android-compatible URL (path-based format)
+            const newPathManifestURL = `${window.location.origin}/${pathString}manifest.json`;
+            // Legacy URL (query-based format, for backward compatibility)
+            const newQueryManifestURL = `${window.location.origin}/manifest.json${queryString}`;
+            
+            // Use the path-based URL for installation (Android compatibility)
+            const newInstallUrl = `stremio://${newPathManifestURL.replace(/^https?:\/\//, '')}`;
+            
+            // Set the URLs for use
+            currentManifestUrlToCopy = newPathManifestURL; // Prefer Android-compatible URL for copying
             currentInstallUrl = newInstallUrl;
             if (installLink) installLink.href = newInstallUrl;
 
             if (manifestPersonalized) {
-                personalManifestUrlSpan.textContent = newManifestURL;
+                personalManifestUrlSpan.textContent = newPathManifestURL;
                 manifestResult.style.display = 'block';
                 toast.textContent = "Personalized manifest URL updated!";
             } else {
@@ -2828,12 +2848,38 @@
                     return;
                 }
 
-                const koyebUrl = vercelUrl.replace('https://nuvioaddon.vercel.app', 'https://aesthetic-jodie-tapframe-ab46446c.koyeb.app');
+                let koyebUrl;
+                const koyebBase = 'https://aesthetic-jodie-tapframe-ab46446c.koyeb.app';
+                
+                if (vercelUrl.includes('manifest.json?')) {
+                    // Handle query parameter format - convert to path-based format for Android compatibility
+                    const queryString = vercelUrl.split('manifest.json?')[1];
+                    const params = new URLSearchParams(queryString);
+                    
+                    // Build path parameters
+                    const pathParams = [];
+                    params.forEach((value, key) => {
+                        pathParams.push(`${key}=${value}`);
+                    });
+                    
+                    if (pathParams.length > 0) {
+                        koyebUrl = `${koyebBase}/${pathParams.join('/')}/manifest.json`;
+                    } else {
+                        koyebUrl = `${koyebBase}/manifest.json`;
+                    }
+                } else if (vercelUrl.includes('/manifest.json')) {
+                    // URL might already be in path format, just replace domain
+                    const pathPart = vercelUrl.split('nuvioaddon.vercel.app')[1];
+                    koyebUrl = `${koyebBase}${pathPart}`;
+                } else {
+                    // Fallback for any other format - just use base URL
+                    koyebUrl = `${koyebBase}/manifest.json`;
+                }
                 
                 koyebManifestOutput.value = koyebUrl;
                 koyebManifestOutputContainer.style.display = 'block';
 
-                toast.textContent = 'Manifest URL converted to Koyeb!';
+                toast.textContent = 'Manifest URL converted to Koyeb with Android-compatible format!';
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 3000);
             });
