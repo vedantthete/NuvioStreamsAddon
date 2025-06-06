@@ -786,7 +786,7 @@ builder.defineStreamHandler(async (args) => {
                 const mediaTypeForHolly = type === 'movie' ? 'movie' : 'tv';
                 
                 const result = await fetchWithTimeout(
-                    getHollymovieStreams(tmdbId, mediaTypeForHolly, seasonNum, episodeNum, userScraperApiKey),
+                    getHollymovieStreams(tmdbId, mediaTypeForHolly, seasonNum, episodeNum),
                 15000, // 15-second timeout
                 'HollyMovieHD'
                 );

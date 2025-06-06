@@ -19,26 +19,12 @@ function generateVrf(tmdbId, season = '', episode = '') {
 }
 
 // Proxy wrapper for fetch, adapted for this module
-async function proxiedFetchHolly(url, isJsonExpected = false, scraperApiKey = null) {
+async function proxiedFetchHolly(url, isJsonExpected = false) {
   let fetchUrl;
-  let fetchHeaders = {
-    'origin': 'https://watch.bludclart.com',
-    'referer': 'https://watch.bludclart.com/'
-  };
-  let timeout = 20000; // Default timeout
-  
-  if (scraperApiKey) {
-    // Use ScraperAPI if key is provided
-    fetchUrl = `https://api.scraperapi.com/?api_key=${scraperApiKey}&url=${encodeURIComponent(url)}`;
-    console.log(`[HollyMovieHD] Using ScraperAPI (key provided)`);
-    fetchHeaders = {}; // No need for special headers with ScraperAPI
-    timeout = 25000; // Longer timeout for ScraperAPI
-  } else if (PROXY_URL) {
-    // Use proxy if available
+  if (PROXY_URL) {
     fetchUrl = `${PROXY_URL}${encodeURIComponent(url)}`;
     console.log(`[HollyMovieHD] Fetching: ${url} (via proxy)`);
   } else {
-    // Direct request if no proxy or ScraperAPI
     fetchUrl = url;
     console.log(`[HollyMovieHD] Fetching: ${url} (direct request)`);
   }
@@ -47,12 +33,18 @@ async function proxiedFetchHolly(url, isJsonExpected = false, scraperApiKey = nu
   const timeoutId = setTimeout(() => {
     console.warn(`[HollyMovieHD] Request timed out for ${url}`);
     controller.abort();
-  }, timeout);
+  }, 20000); // 20-second timeout
   
   try {
+    // Add required headers to fix the 403 Forbidden error
+    const headers = {
+      'origin': 'https://watch.bludclart.com',
+      'referer': 'https://watch.bludclart.com/'
+    };
+
     const response = await fetch(fetchUrl, { 
       signal: controller.signal,
-      headers: fetchHeaders
+      headers: headers
     });
     clearTimeout(timeoutId); // Clear timeout if fetch completes
 
@@ -100,7 +92,7 @@ function parseQualityFromVariant(variant, index) {
 }
 
 // Main function to be exported
-async function getHollymovieStreams(tmdbId, mediaType = 'movie', season = '', episode = '', scraperApiKey = null) {
+async function getHollymovieStreams(tmdbId, mediaType = 'movie', season = '', episode = '') {
   console.log(`[HollyMovieHD] Fetching streams for TMDB ID: ${tmdbId} (Type: ${mediaType}${mediaType === 'show' ? `, S:${season} E:${episode}` : ''})`);
   const allStreams = []; // Changed variable name for clarity
 
@@ -120,7 +112,7 @@ async function getHollymovieStreams(tmdbId, mediaType = 'movie', season = '', ep
     apiUrl += `?vrf=${vrf}&pow_nonce=${powNonce}`;
     
     console.log(`[HollyMovieHD] Requesting initial data from: ${apiUrl}`);
-    const initialData = await proxiedFetchHolly(apiUrl, true, scraperApiKey);
+    const initialData = await proxiedFetchHolly(apiUrl, true);
 
     if (!initialData || !initialData.sources || !Array.isArray(initialData.sources) || initialData.sources.length === 0) {
       console.error('[HollyMovieHD] No sources array found, array is not valid, or is empty in API response. Response:', JSON.stringify(initialData, null, 2));
@@ -136,7 +128,7 @@ async function getHollymovieStreams(tmdbId, mediaType = 'movie', season = '', ep
       // You could potentially use sourceEntry.label here if useful, e.g., for logging or initial quality hint
       console.log(`[HollyMovieHD] Processing source file from API: ${mainPlaylistUrl}` + (sourceEntry.label ? ` (Label: ${sourceEntry.label})` : ''));
       
-      const mainPlaylistContent = await directFetchM3U8(mainPlaylistUrl, scraperApiKey);
+      const mainPlaylistContent = await directFetchM3U8(mainPlaylistUrl);
 
       if (typeof mainPlaylistContent !== 'string' || !mainPlaylistContent.trim().startsWith('#EXTM3U')) {
           console.error(`[HollyMovieHD] Fetched content for ${mainPlaylistUrl} is not a valid M3U8 format.`);
@@ -236,33 +228,26 @@ async function getHollymovieStreams(tmdbId, mediaType = 'movie', season = '', ep
 }
 
 // Direct fetch for M3U8 files with required headers
-async function directFetchM3U8(url, scraperApiKey = null) {
+async function directFetchM3U8(url) {
   console.log(`[HollyMovieHD] Directly fetching M3U8 from: ${url}`);
   
   const controller = new AbortController();
-  let timeout = 20000; // Default timeout
   const timeoutId = setTimeout(() => {
     console.warn(`[HollyMovieHD] Request timed out for ${url}`);
     controller.abort();
-  }, timeout);
+  }, 20000); // 20-second timeout
   
   try {
     // Add required headers to fix the 403 Forbidden error
-    let headers = {
+    const headers = {
       'origin': 'https://watch.bludclart.com',
       'referer': 'https://watch.bludclart.com/',
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'
     };
 
-    // Use ScraperAPI, proxied URL, or direct request
+    // Use proxied URL if PROXY_URL is available
     let fetchUrl = url;
-    
-    if (scraperApiKey) {
-      fetchUrl = `https://api.scraperapi.com/?api_key=${scraperApiKey}&url=${encodeURIComponent(url)}`;
-      console.log(`[HollyMovieHD] Using ScraperAPI for M3U8 fetch`);
-      headers = {}; // No need for special headers with ScraperAPI
-      timeout = 25000; // Longer timeout for ScraperAPI
-    } else if (PROXY_URL) {
+    if (PROXY_URL) {
       fetchUrl = `${PROXY_URL}${encodeURIComponent(url)}`;
       console.log(`[HollyMovieHD] Using proxy for M3U8 fetch`);
     }
