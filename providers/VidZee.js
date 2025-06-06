@@ -62,9 +62,14 @@ const getVidZeeStreams = async (tmdbId, mediaType, seasonNum, episodeNum, scrape
         headers = {}; 
         timeout = 25000; // Longer timeout for ScraperAPI
     } else {
-        const proxyBaseUrl = 'https://starlit-valkyrie-39f5ab.netlify.app/?destination=';
-        finalApiUrl = proxyBaseUrl + encodeURIComponent(targetApiUrl);
-        console.log('[VidZee] Using proxy method.');
+        const proxyBaseUrl = process.env.VIDZEE_PROXY_URL || process.env.SHOWBOX_PROXY_URL_VALUE;
+        if (proxyBaseUrl) {
+            finalApiUrl = proxyBaseUrl + encodeURIComponent(targetApiUrl);
+            console.log('[VidZee] Using proxy method.');
+        } else {
+            finalApiUrl = targetApiUrl;
+            console.log('[VidZee] Using direct request method (no proxy).');
+        }
     }
 
     console.log(`[VidZee] Fetching from: ${finalApiUrl}`);

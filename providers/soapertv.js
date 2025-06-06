@@ -3,7 +3,7 @@ const cheerio = require('cheerio'); // As per original script: npm install cheer
 const { URLSearchParams } = require('url'); // For form data
 
 // Constants
-const PROXY_URL = 'https://starlit-valkyrie-39f5ab.netlify.app/?destination=';
+const PROXY_URL = process.env.SOAPERTV_PROXY_URL || process.env.SHOWBOX_PROXY_URL_VALUE;
 const BASE_URL = 'https://soaper.cc';
 const TMDB_API_KEY_SOAPERTV = "439c478a771f35c05022f9feabcca01c"; // Public TMDB API key used by this provider
 
@@ -43,12 +43,18 @@ function saveToCache(type, key, data) {
 async function proxiedFetchSoaper(url, options = {}, isFullUrlOverride = false) {
   const isHttpUrl = url.startsWith('http://') || url.startsWith('https://');
   const fullUrl = isHttpUrl || isFullUrlOverride ? url : `${BASE_URL}${url}`;
-  const proxiedUrl = `${PROXY_URL}${encodeURIComponent(fullUrl)}`;
   
-  console.log(`[Soaper TV] Fetching: ${url} (via proxy: ${proxiedUrl.substring(0,100)}...)`);
+  let fetchUrl;
+  if (PROXY_URL) {
+    fetchUrl = `${PROXY_URL}${encodeURIComponent(fullUrl)}`;
+    console.log(`[Soaper TV] Fetching: ${url} (via proxy: ${fetchUrl.substring(0,100)}...)`);
+  } else {
+    fetchUrl = fullUrl;
+    console.log(`[Soaper TV] Fetching: ${url} (direct request)`);
+  }
   
   try {
-    const response = await fetch(proxiedUrl, options);
+    const response = await fetch(fetchUrl, options);
     
     if (!response.ok) {
       let errorBody = '';
@@ -279,4 +285,4 @@ async function getSoaperTvStreams(tmdbId, mediaType = 'movie', season = '', epis
   }
 }
 
-module.exports = { getSoaperTvStreams }; 
+module.exports = { getSoaperTvStreams };
