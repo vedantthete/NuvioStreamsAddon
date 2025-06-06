@@ -1560,8 +1560,14 @@
     </style>
 </head>
 <body>
-    <!-- New Vercel-to-Koyeb Banner -->
-    <div id="instanceBanner" class="instance-banner">
+    <!-- New Koyeb Down Banner -->
+    <div id="koyebDownBanner" class="instance-banner" style="display: block; background: linear-gradient(135deg, #ff3a3a, #ff6432);">
+        ⚠️ The Koyeb instance is currently down due to high usage! This Vercel instance is available as a temporary solution.
+        <button id="closeKoyebDownBanner" class="instance-banner-close">×</button>
+    </div>
+
+    <!-- Remove the Vercel-to-Koyeb Banner -->
+    <div id="instanceBanner" class="instance-banner" style="display: none;">
         ⚠️ This Vercel instance will shut down soon! Please use our new Koyeb instance: 
         <a href="https://aesthetic-jodie-tapframe-ab46446c.koyeb.app/" target="_blank">
             Click here to access the Koyeb instance
@@ -1576,25 +1582,8 @@
                 <h1>Nuvio Streams Addon</h1>
             </div>
             <div class="card-body">
-                <!-- URGENT MIGRATION TOOL -->
-                <div class="migration-tool-container">
-                    <h2>URGENT: Migrate Your Manifest URL!</h2>
-                    <p>The old Vercel public instance is shutting down very soon. If you have a personalized Vercel manifest link, paste it below to convert it to the new temporary Koyeb instance.</p>
-                    <div class="migration-input-group">
-                        <input type="text" id="vercelManifestInput" class="migration-input" placeholder="Paste your old Vercel Manifest URL here">
-                        <button id="convertManifestBtn" class="btn btn-primary" style="background: linear-gradient(135deg, #ff6432 0%, #e04a1a 100%);">Convert to New Koyeb URL</button>
-                    </div>
-                    <div id="koyebManifestOutputContainer" style="display:none;">
-                        <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 0.5rem;">Your new Koyeb Manifest URL (Install or Copy):</p>
-                        <div class="migration-output-group">
-                            <input type="text" id="koyebManifestOutput" class="migration-output" readonly>
-                            <button id="copyKoyebManifestBtn" class="btn btn-secondary" style="flex-shrink: 0;">Copy URL</button>
-                        </div>
-                         <p style="font-size: 0.75rem; color: var(--text-light); margin-top: 0.75rem;">Remember: This Koyeb instance is temporary. Self-hosting is the best long-term solution. Xprime and Cuevana remain self-host only.</p>
-                    </div>
-                </div>
-                <!-- END URGENT MIGRATION TOOL -->
-
+                <!-- REMOVE URGENT MIGRATION TOOL SECTION -->
+                
                 <p class="full-width">Your gateway to high-quality streaming on Stremio. Enjoy movies and TV shows from multiple sources with our powerful addon.</p>
                 
                 <button class="more-addons-btn full-width" id="moreAddonsBtn">
@@ -3032,36 +3021,34 @@
 
     <!-- Add at the end of the file, before the closing body tag -->
     <script>
-        // Instance banner logic - show on Vercel and localhost
+        // Instance banner logic - show Koyeb down banner
         (function() {
-            const hostname = window.location.hostname;
-            const isVercelInstance = hostname.includes('nuvioaddon.vercel.app');
-            const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1';
-            const isKoyebInstance = hostname.includes('koyeb.app');
+            const koyebDownBanner = document.getElementById('koyebDownBanner');
+            const closeKoyebDownBanner = document.getElementById('closeKoyebDownBanner');
             
-            const instanceBanner = document.getElementById('instanceBanner');
-            const closeBanner = document.getElementById('closeBanner');
-            
-            // Show banner on Vercel instance or localhost, but not on Koyeb
-            if ((isVercelInstance || isLocalhost) && !isKoyebInstance && instanceBanner) {
-                // Check if user has dismissed the banner
-                if (!localStorage.getItem('instanceBannerDismissed')) {
-                    instanceBanner.style.display = 'block';
-                    document.body.classList.add('has-instance-banner');
-                }
+            // Show Koyeb down banner by default
+            if (koyebDownBanner && !localStorage.getItem('koyebDownBannerDismissed')) {
+                koyebDownBanner.style.display = 'block';
+                document.body.classList.add('has-instance-banner');
             }
             
-            // Handle close button
-            if (closeBanner) {
-                closeBanner.addEventListener('click', () => {
-                    instanceBanner.style.display = 'none';
+            // Handle close button for Koyeb down banner
+            if (closeKoyebDownBanner) {
+                closeKoyebDownBanner.addEventListener('click', () => {
+                    koyebDownBanner.style.display = 'none';
                     document.body.classList.remove('has-instance-banner');
                     // Remember dismiss for 24 hours
-                    localStorage.setItem('instanceBannerDismissed', 'true');
+                    localStorage.setItem('koyebDownBannerDismissed', 'true');
                     setTimeout(() => {
-                        localStorage.removeItem('instanceBannerDismissed');
+                        localStorage.removeItem('koyebDownBannerDismissed');
                     }, 24 * 60 * 60 * 1000);
                 });
+            }
+            
+            // Hide the old Vercel-to-Koyeb banner
+            const instanceBanner = document.getElementById('instanceBanner');
+            if (instanceBanner) {
+                instanceBanner.style.display = 'none';
             }
         })();
     </script>
