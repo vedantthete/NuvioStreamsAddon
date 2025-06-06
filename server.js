@@ -30,7 +30,8 @@ app.use(express.static(path.join(__dirname, 'views')));
 // Serve static files from the 'static' directory (for videos, images, etc.)
 app.use('/static', express.static(path.join(__dirname, 'static')));
 
-app.get('/configure', (req, res) => {
+// Configure route - handles both direct access and path-based parametrized access
+app.get('*configure', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 

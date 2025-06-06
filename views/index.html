@@ -1848,6 +1848,11 @@
                         <div class="manifest-url-box">
                             <span id="personalManifestUrl"></span>
                         </div>
+                        <div style="display: flex; margin-top: 0.75rem; gap: 0.5rem;">
+                            <a href="/configure" id="configureLink" class="copy-btn" style="flex: 1; display: flex; align-items: center; justify-content: center; text-decoration: none; color: inherit; cursor: pointer;">
+                                <span style="margin-right: 0.25rem;">⚙️</span> Configure Settings
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <!-- End Personalized Manifest Section -->
@@ -2256,13 +2261,20 @@
             // Legacy URL (query-based format, for backward compatibility)
             const newQueryManifestURL = `${window.location.origin}/manifest.json${queryString}`;
             
-            // Use the path-based URL for installation (Android compatibility)
-            const newInstallUrl = `stremio://${newPathManifestURL.replace(/^https?:\/\//, '')}`;
+            // Generate a configuration URL that preserves all settings
+            const configureUrl = `${window.location.origin}/${pathString}configure`;
             
             // Set the URLs for use
             currentManifestUrlToCopy = newPathManifestURL; // Prefer Android-compatible URL for copying
-            currentInstallUrl = newInstallUrl;
-            if (installLink) installLink.href = newInstallUrl;
+            currentInstallUrl = `stremio://${newPathManifestURL.replace(/^https?:\/\//, '')}`;
+            if (installLink) installLink.href = currentInstallUrl;
+            
+            // Update the configure link if it exists
+            const configureLink = document.getElementById('configureLink');
+            if (configureLink) {
+                configureLink.href = configureUrl;
+                configureLink.style.display = manifestPersonalized ? 'block' : 'none';
+            }
 
             if (manifestPersonalized) {
                 personalManifestUrlSpan.textContent = newPathManifestURL;
@@ -2619,10 +2631,30 @@
 
         // Function to pre-fill cookie and region from URL query parameters
         const prefillFromUrl = () => {
+            // Extract parameters from query string
             const urlParams = new URLSearchParams(window.location.search);
-            const cookieFromUrl = urlParams.get('cookie');
-            const regionFromUrl = urlParams.get('region');
             
+            // Extract parameters from path segments (new Android-compatible format)
+            const pathParams = {};
+            const pathSegments = window.location.pathname.split('/').filter(segment => segment);
+            pathSegments.forEach(segment => {
+                const paramParts = segment.split('=');
+                if (paramParts.length === 2) {
+                    const [key, value] = paramParts;
+                    pathParams[key] = value;
+                }
+            });
+            
+            // Prioritize path params over query params for each parameter
+            
+            // Handle cookie parameter
+            const cookieFromUrl = pathParams.cookie || urlParams.get('cookie');
+            const regionFromUrl = pathParams.region || urlParams.get('region');
+            const providersFromUrl = pathParams.providers || urlParams.get('providers');
+            const minQualitiesFromUrl = pathParams.min_qualities || urlParams.get('min_qualities');
+            const scraperApiKeyFromUrl = pathParams.scraper_api_key || urlParams.get('scraper_api_key');
+            
+            // Set cookie and region
             if (cookieFromUrl && cookieInput) {
                 try {
                     const decodedCookie = decodeURIComponent(cookieFromUrl);
@@ -2640,23 +2672,77 @@
                 }
             }
             
-            // Optionally, automatically process pre-filled values
-            if ((cookieFromUrl || regionFromUrl) && setCookieBtn) {
-                setCookieBtn.click(); // Simulate click to process and show manifest
-                toast.textContent = "Settings loaded from URL and processed!";
-                toast.classList.add('show');
-                setTimeout(() => { toast.classList.remove('show'); }, 3500);
+            // Set providers
+            if (providersFromUrl && providerCheckboxes) {
+                const selectedProviders = providersFromUrl.split(',').map(p => p.trim().toLowerCase());
+                
+                // First uncheck all providers
+                providerCheckboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                
+                // Then check only the selected ones
+                providerCheckboxes.forEach(checkbox => {
+                    if (selectedProviders.includes(checkbox.value.toLowerCase())) {
+                        checkbox.checked = true;
+                    }
+                });
+                
+                // Update UI state based on provider selections
+                updateCookieSectionState();
+                updateQualityDropdownStates();
+                updateScraperApiKeyInputState();
             }
-
-            // Pre-fill ScraperAPI key from URL
-            const scraperApiKeyFromUrl = urlParams.get('scraper_api_key');
-            const scraperApiKeyInput = document.getElementById('scraperApiKeyInput');
+            
+            // Set minimum qualities
+            if (minQualitiesFromUrl) {
+                try {
+                    const decodedQualities = decodeURIComponent(minQualitiesFromUrl);
+                    const qualityPreferences = JSON.parse(decodedQualities);
+                    
+                    // Apply quality preferences to dropdowns
+                    Object.keys(qualityPreferences).forEach(provider => {
+                        const qualityDropdown = document.getElementById(`quality${provider.charAt(0).toUpperCase() + provider.slice(1)}`);
+                        if (qualityDropdown) {
+                            qualityDropdown.value = qualityPreferences[provider];
+                        }
+                    });
+                } catch (e) {
+                    console.error("Error parsing min_qualities from URL for pre-fill:", e.message);
+                }
+            }
+            
+            // Set ScraperAPI key
             if (scraperApiKeyFromUrl && scraperApiKeyInput) {
                 try {
                     scraperApiKeyInput.value = decodeURIComponent(scraperApiKeyFromUrl);
                 } catch (e) {
                     console.error("Error decoding ScraperAPI key from URL for pre-fill:", e.message);
                 }
+            }
+            
+            // Automatically validate cookie if one is provided
+            if (cookieFromUrl && cookieInput && cookieInput.value) {
+                // Trigger cookie validation
+                checkCookieOnServer(cookieInput.value);
+                
+                // Generate manifest after a short delay to allow validation to complete
+                setTimeout(() => {
+                    if (setCookieBtn) {
+                        setCookieBtn.click(); // Simulate Set Cookie button click
+                        toast.textContent = "Settings loaded from URL and applied!";
+                        toast.classList.add('show');
+                        setTimeout(() => { toast.classList.remove('show'); }, 3500);
+                    }
+                }, 1000);
+            } else if ((providersFromUrl || minQualitiesFromUrl || scraperApiKeyFromUrl) && applyProvidersBtn) {
+                // If we have any other parameters but no cookie, just apply providers
+                setTimeout(() => {
+                    applyProvidersBtn.click(); // Simulate Apply Selection button click
+                    toast.textContent = "Provider settings loaded from URL and applied!";
+                    toast.classList.add('show');
+                    setTimeout(() => { toast.classList.remove('show'); }, 3500);
+                }, 500);
             }
         };
 
