@@ -1597,9 +1597,53 @@
                     <p style="font-size: 1rem; text-align: center; margin-bottom: 0.5rem; color: #fff;">
                         <span style="font-weight: 600; color: #8c52ff;"> NEW HOSTING PARTNER </span>
                     </p>
-                    <p style="text-align: center; margin-bottom: 0;">
+                    <p style="text-align: center; margin-bottom: 0.75rem;">
                         Hosting infrastructure donated by <a href="https://elfhosted.com/" target="_blank" style="color: #00c16e; font-weight: 600; text-decoration: none;">ElfHosted</a> ❤️, and independently maintained by <a href="https://hayd.uk" target="_blank" style="color: #00a3ff; font-weight: 600; text-decoration: none;">Hayduk</a>. See the <a href="https://stremio-addons-guide.elfhosted.com/" target="_blank" style="color: #00a3ff; font-weight: 600; text-decoration: none;">ElfHosted Stremio Addons Guide</a> for more addons, or grab <a href="https://store.elfhosted.com/product/nuviostreams/" target="_blank" style="color: #00c16e; font-weight: 600; text-decoration: none;">your own isolated, private instance</a> (<i>directly supports your developer!</i>)
                     </p>
+                    
+                    <!-- Toggle button for private instance features -->
+                    <div style="text-align: center; margin-bottom: 0.5rem;">
+                        <button id="togglePrivateFeatures" class="toggle-btn" style="display: inline-flex; align-items: center; background-color: rgba(140, 82, 255, 0.2); border-radius: 0.4rem; padding: 0.4rem 0.8rem; border: 1px solid rgba(140, 82, 255, 0.4); cursor: pointer;">
+                            <span class="toggle-icon" style="margin-right: 0.5rem; transition: transform 0.3s ease;">▼</span>
+                            <span style="font-weight: 500; color: #8c52ff;">View Private Instance Features</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Collapsible features section -->
+                    <div id="privateInstanceFeatures" class="cookie-config collapsed" style="background: rgba(15, 15, 15, 0.5); margin-top: 0.5rem;">
+                        <div style="padding: 0.75rem;">
+                            <h3 style="font-size: 0.95rem; margin-bottom: 0.75rem; color: #fff; text-align: center;">ElfHosted Private Instance Information</h3>
+                            
+                            <ul style="list-style-type: none; padding: 0; margin: 0;">
+                                <li style="display: flex; align-items: flex-start; margin-bottom: 0.6rem;">
+                                    <span style="color: #00c16e; margin-right: 0.5rem;">•</span>
+                                    <span style="font-size: 0.85rem; color: #fff;">Private instance with separate rate-limits</span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start; margin-bottom: 0.6rem;">
+                                    <span style="color: #00c16e; margin-right: 0.5rem;">•</span>
+                                    <span style="font-size: 0.85rem; color: #fff;">Includes <strong>Cuevana</strong> provider with LATAM content</span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start; margin-bottom: 0.6rem;">
+                                    <span style="color: #00c16e; margin-right: 0.5rem;">•</span>
+                                    <span style="font-size: 0.85rem; color: #fff;">Additional regional providers in development</span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start; margin-bottom: 0;">
+                                    <span style="color: #00c16e; margin-right: 0.5rem;">•</span>
+                                    <span style="font-size: 0.85rem; color: #fff;">33% of hosting fees go to addon development</span>
+                                </li>
+                            </ul>
+                            
+                            <div style="margin-top: 1rem; background: rgba(10, 10, 10, 0.4); border-radius: 0.5rem; padding: 0.75rem; border: 1px dashed rgba(140, 82, 255, 0.3);">
+                                <p style="font-size: 0.85rem; color: #fff; margin: 0; text-align: center;">
+                                    Hosted by ElfHosted with free trial available
+                                </p>
+                            </div>
+                            
+                            <div style="text-align: center; margin-top: 1rem;">
+                                <a href="https://store.elfhosted.com/product/nuvio-streams/" target="_blank" style="display: inline-block; padding: 0.5rem 1rem; background: rgba(140, 82, 255, 0.2); color: #8c52ff; font-weight: 500; font-size: 0.85rem; border-radius: 0.5rem; text-decoration: none; border: 1px solid rgba(140, 82, 255, 0.4);">View on ElfHosted</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <button class="more-addons-btn full-width" id="moreAddonsBtn">
@@ -1642,7 +1686,7 @@
                     <div class="provider-item">
                         <div class="provider-icon cuevana-icon">🇨</div> <!-- Placeholder icon, can be updated -->
                         <div class="provider-name">Cuevana</div>
-                        <span class="provider-detail" style="color: #ff8c00;">LATAM Provider (Self-hosted only)</span>
+                        <span class="provider-detail" style="color: #ff8c00;">LATAM Provider (ElfHosted Private Instance Exclusive)</span>
                     </div>
                     <div class="provider-item">
                         <div class="provider-icon vidsrc-icon">🎬</div>
@@ -1703,7 +1747,7 @@
                         <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
                             <div style="display: flex; align-items: center;">
                                 <input type="checkbox" id="providerCuevana" name="providerSelect" value="cuevana" disabled style="margin-right: 0.5rem; accent-color: var(--primary); opacity: 0.5;">
-                                <label for="providerCuevana" style="font-size: 0.9rem; opacity: 0.5;">Cuevana</label>
+                                <label for="providerCuevana" style="font-size: 0.9rem; opacity: 0.5;">Cuevana (ElfHosted Private Instance Exclusive)</label>
                             </div>
                             <select id="qualityCuevana" name="providerQuality" data-provider="cuevana" class="provider-sort-select" disabled>
                                 <option value="all" selected>All Qualities</option>
@@ -3097,6 +3141,27 @@
             const vercelToKoyebBanner = document.getElementById('instanceBanner');
             if (vercelToKoyebBanner) {
                 vercelToKoyebBanner.style.display = 'none';
+            }
+            
+            // Add toggle functionality for the private instance features section
+            const togglePrivateFeaturesBtn = document.getElementById('togglePrivateFeatures');
+            const privateInstanceFeatures = document.getElementById('privateInstanceFeatures');
+            
+            if (togglePrivateFeaturesBtn && privateInstanceFeatures) {
+                togglePrivateFeaturesBtn.addEventListener('click', () => {
+                    const isCollapsed = privateInstanceFeatures.classList.toggle('collapsed');
+                    const toggleIcon = togglePrivateFeaturesBtn.querySelector('.toggle-icon');
+                    
+                    if (toggleIcon) {
+                        if (isCollapsed) {
+                            toggleIcon.textContent = '▼';
+                            togglePrivateFeaturesBtn.querySelector('span:last-child').textContent = 'View Private Instance Features';
+                        } else {
+                            toggleIcon.textContent = '▲';
+                            togglePrivateFeaturesBtn.querySelector('span:last-child').textContent = 'Hide Private Instance Features';
+                        }
+                    }
+                });
             }
 
         })();
