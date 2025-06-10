@@ -9,6 +9,7 @@ This guide will help you set up your own personal Nuvio Streams addon for Stremi
 - [Configuration Options](#configuration-options) - All the settings you can change
 - [Troubleshooting](#troubleshooting) - Help if something goes wrong
 - [Optimization Tips](#optimization-tips) - Making your addon run better
+- [Complete Example](#complete-example) - Full configuration example
 
 ## 💨 Super Quick Start
 
@@ -29,7 +30,10 @@ npm install
 # Copy the example settings file
 cp .env.example .env
 
-# Start the addon
+# IMPORTANT: Edit the .env file to add your TMDB API key
+# Open .env in any text editor and set TMDB_API_KEY=your_key_here
+
+# Start the addon only AFTER setting up your .env file
 npm start
 ```
 
@@ -43,6 +47,7 @@ npm start
 - **Computer** with internet access (Windows, Mac, or Linux)
 - **Node.js** (version 16 or newer) - This runs the addon
 - **npm** (comes with Node.js) - This helps install the needed files
+- **TMDB API Key** - Required for movie/TV information
 - **Basic computer skills** - Using terminal/command prompt, editing text files
 
 ### 1️⃣ Install Node.js
@@ -87,25 +92,64 @@ npm install
 
 This might take a minute or two. You'll see a progress bar and some text output.
 
-### 4️⃣ Set Up Configuration
+### 4️⃣ Set Up Configuration File
 
-1. Copy the example configuration file:
+This is the most important step! You need to create and edit a file called `.env` that contains all your settings.
+
+1. First, copy the example configuration file:
    ```bash
    cp .env.example .env
    ```
 
-2. Edit the `.env` file using any text editor (Notepad, VS Code, etc.)
-   - Find the line with `TMDB_API_KEY=` and add your API key after the equals sign
+2. Now open the `.env` file in any text editor (Notepad, VS Code, etc.)
+
+3. Find and set the required TMDB API key:
+   ```env
+   TMDB_API_KEY=your_tmdb_api_key_here
+   ```
    
    To get a TMDB API key:
-   1. Create a free account at [themoviedb.org](https://www.themoviedb.org/signup)
-   2. Go to [Settings → API](https://www.themoviedb.org/settings/api) after logging in
-   3. Request an API key for personal use
-   4. Copy the API key they give you
+   - Create a free account at [themoviedb.org](https://www.themoviedb.org/signup)
+   - Go to [Settings → API](https://www.themoviedb.org/settings/api) after logging in
+   - Request an API key for personal use
+   - Copy the API key they give you
 
-3. Save and close the file
+4. Configure the providers you want to use:
+   ```env
+   # Enable or disable providers (true/false)
+   ENABLE_VIDZEE_PROVIDER=true
+   ENABLE_HOLLYMOVIEHD_PROVIDER=true
+   ENABLE_XPRIME_PROVIDER=true
+   ENABLE_CUEVANA_PROVIDER=false
+   ```
 
-### 5️⃣ Start the Addon
+5. Enable caching for better performance:
+   ```env
+   # Cache settings - "false" means caching is ON
+   DISABLE_CACHE=false
+   DISABLE_STREAM_CACHE=false
+   ```
+
+6. Save and close the file
+
+### 5️⃣ Set Up ShowBox Cookie (Optional but Recommended)
+
+For the best streaming experience:
+
+1. Create a file named `cookies.txt` in the main folder
+2. Add your ShowBox cookie to this file
+
+To get a ShowBox cookie:
+1. Visit [showbox.media](https://showbox.media/) in your browser
+2. Log in or create an account
+3. Press F12 to open developer tools
+4. Go to "Application" tab → "Cookies" → find the site
+5. Copy the cookie value
+6. Paste into your `cookies.txt` file
+
+### 6️⃣ Start the Addon
+
+Now that you've configured everything, you can start the addon:
 
 ```bash
 npm start
@@ -116,7 +160,7 @@ You should see output that ends with something like:
 Addon running at: http://localhost:7000/manifest.json
 ```
 
-### 6️⃣ Install in Stremio
+### 7️⃣ Install in Stremio
 
 1. Open your web browser and go to: `http://localhost:7000`
 2. You'll see a page with an "Install Addon" button
@@ -154,7 +198,7 @@ ENABLE_CUEVANA_PROVIDER=false
 | Xprime.tv | Movies & TV shows | Works best with personal setup |
 | Cuevana | Spanish/LATAM content | Only works when self-hosting |
 
-### Improving Performance (Optional)
+### Performance Settings
 
 These settings help your addon run faster and use less resources:
 
@@ -166,7 +210,7 @@ DISABLE_STREAM_CACHE=false
 
 Caching saves previous searches and results, making everything faster!
 
-### ShowBox Configuration (Optional but Recommended)
+### ShowBox Configuration
 
 ShowBox is one of the best providers but needs a bit more setup:
 
@@ -174,14 +218,6 @@ ShowBox is one of the best providers but needs a bit more setup:
 
 1. Create a file named `cookies.txt` in the main folder
 2. Add your ShowBox cookie to this file
-
-To get a ShowBox cookie:
-1. Visit [showbox.media](https://showbox.media/) in your browser
-2. Log in or create an account
-3. Press F12 to open developer tools
-4. Go to "Application" tab → "Cookies" → find the site
-5. Copy the cookie value
-6. Paste into your `cookies.txt` file
 
 With your own cookie:
 - You get your own 100GB monthly quota
@@ -202,7 +238,7 @@ With your own cookie:
 **What to try:**
 1. Make sure Node.js is installed correctly
 2. Check you've run `npm install`
-3. Verify the `.env` file exists
+3. Verify the `.env` file exists and has TMDB_API_KEY set
 4. Look for error messages in the terminal
 
 ### Common Problem: Slow Performance
@@ -275,6 +311,41 @@ For the best experience:
    git pull
    npm install
    ```
+
+## 🔥 Complete Example
+
+Here's a complete `.env` file example with all the common settings:
+
+```env
+# Required API key
+TMDB_API_KEY=your_tmdb_api_key_here
+
+# Cache Settings (recommended for better performance)
+DISABLE_CACHE=false
+DISABLE_STREAM_CACHE=false
+
+# Provider Enablement (enable only what you need)
+ENABLE_VIDZEE_PROVIDER=true
+ENABLE_HOLLYMOVIEHD_PROVIDER=true
+ENABLE_XPRIME_PROVIDER=true
+ENABLE_CUEVANA_PROVIDER=false
+
+# HiAnime Configuration (if you want anime)
+HIANIME_SERVER=http://localhost:8082/fetch-hianime
+
+# Xprime Configuration (only if direct access fails)
+USE_SCRAPER_API=false
+# SCRAPER_API_KEY=your_key_here  # Uncomment if needed
+
+# Proxy Configuration (only if providers are blocked in your region)
+# SHOWBOX_PROXY_URL_VALUE=https://your-proxy-url.netlify.app/?destination=
+```
+
+Important notes:
+1. Replace `your_tmdb_api_key_here` with your actual TMDB API key
+2. The `cookies.txt` file is separate from this configuration
+3. Only enable the providers you actually use
+4. Uncomment lines (remove #) only if you need those features
 
 ## 🎉 Success!
 
