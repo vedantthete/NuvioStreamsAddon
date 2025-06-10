@@ -303,7 +303,7 @@ With your own cookie:
 4. **Check the format** - The `cookies.txt` file should only contain the cookie value, nothing else
 5. **Restart the addon** - After updating the cookie, restart the addon with `npm start`
 
-## 🚀 Running Your Addon All the Time
+## Running Your Addon All the Time
 
 If you want your addon to keep running even when you close the terminal:
 
