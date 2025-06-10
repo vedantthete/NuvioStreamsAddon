@@ -117,38 +117,38 @@ Self-hosting provides the best experience with full provider access and personal
 
 1. **Clone the repository**
    ```sh
-   git clone https://github.com/tapframe/NuvioStreamsAddon.git
-   cd NuvioStreamsAddon
-   ```
+git clone https://github.com/tapframe/NuvioStreamsAddon.git
+cd NuvioStreamsAddon 
+```
 
 2. **Install dependencies**
    ```sh
-   npm install
+npm install
    ```
 
 3. **Create configuration file**
    ```sh
-   cp .env.example .env
-   ```
+cp .env.example .env
+```
 
 4. **Configure your settings** (edit `.env` file)
    ```env
    # Required: Get from https://www.themoviedb.org/settings/api
-   TMDB_API_KEY=your_tmdb_api_key_here
-   
+TMDB_API_KEY=your_tmdb_api_key_here
+
    # Provider settings
-   ENABLE_CUEVANA_PROVIDER=false
-   ENABLE_HOLLYMOVIEHD_PROVIDER=true
-   ENABLE_XPRIME_PROVIDER=true
-   
+ENABLE_CUEVANA_PROVIDER=false
+ENABLE_HOLLYMOVIEHD_PROVIDER=true
+ENABLE_XPRIME_PROVIDER=true
+
    # Performance settings (production)
-   DISABLE_CACHE=false
+DISABLE_CACHE=false
    DISABLE_STREAM_CACHE=false
    ```
 
 5. **Start the addon**
    ```sh
-   npm start
+npm start
    ```
 
 Your addon will run on `http://localhost:7000` by default.
@@ -184,7 +184,7 @@ For anime content:
    npm install
    npm start
    ```
-
+   
 3. **Configure main addon**
    ```env
    HIANIME_SERVER=http://localhost:8082/fetch-hianime
