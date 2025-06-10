@@ -1,4 +1,4 @@
-# 🚀 Nuvio Streams Self-Hosting Guide for Beginners
+# Nuvio Streams Self-Hosting Guide for Beginners
 
 This guide will help you set up your own personal Nuvio Streams addon for Stremio. Don't worry if you're new to this - we'll go through each step clearly!
 
