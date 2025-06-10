@@ -130,7 +130,17 @@ This is the most important step! You need to create and edit a file called `.env
    DISABLE_STREAM_CACHE=false
    ```
 
-6. Save and close the file
+6. Set up a ShowBox proxy (recommended):
+   ```env
+   # ShowBox often needs a proxy to work properly
+   SHOWBOX_PROXY_URL_VALUE=https://your-proxy-url.netlify.app/?destination=
+   ```
+   
+   To get a proxy URL:
+   - Deploy a proxy using the button in the [Advanced Options](#advanced-options) section
+   - Or use a public proxy (less reliable)
+
+7. Save and close the file
 
 ### 5️⃣ Set Up ShowBox Cookie (Optional but Recommended)
 
@@ -139,13 +149,49 @@ For the best streaming experience:
 1. Create a file named `cookies.txt` in the main folder
 2. Add your ShowBox cookie to this file
 
-To get a ShowBox cookie:
-1. Visit [showbox.media](https://showbox.media/) in your browser
-2. Log in or create an account
-3. Press F12 to open developer tools
-4. Go to "Application" tab → "Cookies" → find the site
-5. Copy the cookie value
-6. Paste into your `cookies.txt` file
+#### Detailed Guide: How to Get ShowBox Cookie
+
+1. **Create a FebBox account**:
+   - Visit [FebBox.com](https://www.febbox.com)
+   - Sign up using your Google account or email
+
+2. **Log in to your account**
+
+3. **Open developer tools in your browser**:
+   - **Chrome/Edge**: Press `F12` or right-click anywhere and select "Inspect"
+   - **Firefox**: Press `F12` or right-click and select "Inspect Element"
+   - **Safari**: Enable developer tools in Preferences → Advanced, then press `Command+Option+I`
+
+4. **Navigate to the cookies section**:
+   - **Chrome/Edge**: Click on "Application" tab → expand "Storage" → "Cookies" → click on "febbox.com"
+   - **Firefox**: Click on "Storage" tab → "Cookies" → select "febbox.com"
+   - **Safari**: Click on "Storage" tab → "Cookies"
+
+5. **Find the "ui" cookie**:
+   - Look for a cookie named `ui` in the list
+   - This is a long string that usually starts with "ey"
+   - If you don't see it, try refreshing the page and checking again
+
+6. **Copy the cookie value**:
+   - Click on the `ui` cookie
+   - Double-click the value field to select it all
+   - Copy the entire string (Ctrl+C or Command+C)
+
+7. **Paste into `cookies.txt`**:
+   - Open/create the `cookies.txt` file in the root of your addon folder
+   - Paste the cookie value (just the value, nothing else)
+   - Save the file
+
+**Visual Cues:**
+- The `ui` cookie is usually the one with the longest value
+- It typically starts with "ey" followed by many random characters
+- The cookie value is what you need, not the cookie name
+
+**Important Notes:**
+- Cookies expire after some time, so you might need to repeat this process occasionally
+- Each account gets its own 100GB monthly quota
+- Using your own cookie gives you access to 4K/HDR/DV content
+- With a personal cookie, streams will be faster and show the ⚡ lightning emoji
 
 ### 6️⃣ Start the Addon
 
@@ -248,6 +294,15 @@ With your own cookie:
 2. Use your own ShowBox cookie
 3. Only enable the providers you actually use
 
+### Common Problem: Cookie Not Working
+
+**What to try:**
+1. **Verify the cookie** - Make sure you copied the entire value
+2. **Check for whitespace** - There should be no extra spaces before or after the cookie
+3. **Get a fresh cookie** - Cookies expire, so you might need to get a new one
+4. **Check the format** - The `cookies.txt` file should only contain the cookie value, nothing else
+5. **Restart the addon** - After updating the cookie, restart the addon with `npm start`
+
 ## 🚀 Running Your Addon All the Time
 
 If you want your addon to keep running even when you close the terminal:
@@ -301,10 +356,15 @@ For the best experience:
 2. **Use personal cookies** - Get your own bandwidth quota
    - Create and set up `cookies.txt` file
 
-3. **Only enable providers you use** - Reduces search time
+3. **Set up a ShowBox proxy** - Recommended for reliable streams
+   ```env
+   SHOWBOX_PROXY_URL_VALUE=https://your-proxy-url.netlify.app/?destination=
+   ```
+
+4. **Only enable providers you use** - Reduces search time
    - Turn off unused providers in your `.env` file
 
-4. **Keep your addon updated**
+5. **Keep your addon updated**
    - Check for updates weekly:
    ```bash
    cd NuvioStreamsAddon
@@ -330,22 +390,25 @@ ENABLE_HOLLYMOVIEHD_PROVIDER=true
 ENABLE_XPRIME_PROVIDER=true
 ENABLE_CUEVANA_PROVIDER=false
 
+# ShowBox Proxy Configuration (recommended)
+SHOWBOX_PROXY_URL_VALUE=https://your-proxy-url.netlify.app/?destination=
+# SHOWBOX_PROXY_URL_ALTERNATE=https://your-alternate-proxy.netlify.app/?destination=
+# SHOWBOX_USE_ROTATING_PROXY=false
+
 # HiAnime Configuration (if you want anime)
 HIANIME_SERVER=http://localhost:8082/fetch-hianime
 
 # Xprime Configuration (only if direct access fails)
 USE_SCRAPER_API=false
 # SCRAPER_API_KEY=your_key_here  # Uncomment if needed
-
-# Proxy Configuration (only if providers are blocked in your region)
-# SHOWBOX_PROXY_URL_VALUE=https://your-proxy-url.netlify.app/?destination=
 ```
 
 Important notes:
 1. Replace `your_tmdb_api_key_here` with your actual TMDB API key
-2. The `cookies.txt` file is separate from this configuration
-3. Only enable the providers you actually use
-4. Uncomment lines (remove #) only if you need those features
+2. Replace `your-proxy-url.netlify.app` with your actual proxy URL
+3. The `cookies.txt` file is separate from this configuration
+4. Only enable the providers you actually use
+5. Uncomment lines (remove #) only if you need those features
 
 ## 🎉 Success!
 
@@ -368,10 +431,10 @@ If you want to dive deeper into configuration options, check these sections:
 
 ### Advanced Proxy Configuration
 
-If certain providers are blocked in your region:
+ShowBox usually requires a proxy to work properly in most regions:
 
 ```env
-# Set up a proxy for ShowBox
+# Set up a proxy for ShowBox (recommended)
 SHOWBOX_PROXY_URL_VALUE=https://your-proxy-url.netlify.app/?destination=
 ```
 
@@ -379,7 +442,7 @@ SHOWBOX_PROXY_URL_VALUE=https://your-proxy-url.netlify.app/?destination=
 
 1. Deploy: [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/p-stream/simple-proxy)
 2. Copy the deployed URL and add `?destination=` at the end
-3. Add to your `.env` file
+3. Add to your `.env` file as `SHOWBOX_PROXY_URL_VALUE=your-url/?destination=`
 
 ### Provider-Specific Proxies
 
