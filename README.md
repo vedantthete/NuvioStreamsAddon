@@ -107,7 +107,7 @@ Nuvio Streams is a powerful Stremio addon that provides direct HTTP streaming li
 
 Self-hosting provides the best experience with full provider access and personalized performance. For detailed setup and configuration instructions, please refer to our documentation.
 
-**[➡️ View the Self-Hosting Guide](documentation.md)**
+**[➡️ View the Self-Hosting Guide](https://github.com/tapframe/NuvioStreamsAddon/blob/master/DOCUMENTATION.md)**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
