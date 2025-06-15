@@ -23,7 +23,7 @@ const parseArgs = () => {
     return options;
 };
 
-const getVidZeeStreams = async (tmdbId, mediaType, seasonNum, episodeNum, scraperApiKey = null) => {
+const getVidZeeStreams = async (tmdbId, mediaType, seasonNum, episodeNum) => {
     if (!tmdbId) {
         console.error('[VidZee] Error: TMDB ID (tmdbId) is required.');
         return [];
@@ -60,18 +60,11 @@ const getVidZeeStreams = async (tmdbId, mediaType, seasonNum, episodeNum, scrape
         };
         let timeout = 7000; // Reduced timeout
 
-        if (scraperApiKey) {
-            // Use ScraperAPI if a key is provided
-            finalApiUrl = `https://api.scraperapi.com/?api_key=${scraperApiKey}&url=${encodeURIComponent(targetApiUrl)}`;
-            headers = {}; 
-            timeout = 15000;
+        const proxyBaseUrl = process.env.VIDZEE_PROXY_URL || process.env.SHOWBOX_PROXY_URL_VALUE;
+        if (proxyBaseUrl) {
+            finalApiUrl = proxyBaseUrl + encodeURIComponent(targetApiUrl);
         } else {
-            const proxyBaseUrl = process.env.VIDZEE_PROXY_URL || process.env.SHOWBOX_PROXY_URL_VALUE;
-            if (proxyBaseUrl) {
-                finalApiUrl = proxyBaseUrl + encodeURIComponent(targetApiUrl);
-            } else {
-                finalApiUrl = targetApiUrl;
-            }
+            finalApiUrl = targetApiUrl;
         }
 
         console.log(`[VidZee] Fetching from server ${sr}: ${targetApiUrl}`);
@@ -106,19 +99,17 @@ const getVidZeeStreams = async (tmdbId, mediaType, seasonNum, episodeNum, scrape
             }
 
             const streams = apiSources.map(sourceItem => {
+                // Prefer sourceItem.name as label, fallback to sourceItem.type, then 'VidZee Stream'
                 const label = sourceItem.name || sourceItem.type || 'VidZee';
+                // Ensure quality has 'p' if it's a resolution, or keep it as is
                 const quality = String(label).match(/^\d+$/) ? `${label}p` : label;
                 const language = sourceItem.language || sourceItem.lang;
-
-                let title = `VidZee S${sr} - ${quality}`;
-                if (language) {
-                    title += ` (${language.toUpperCase()})`;
-                }
                 
                 return {
-                    title: title,
-                    url: sourceItem.link,
+                    title: `VidZee S${sr} - ${quality}`,
+                    url: sourceItem.link, // Use sourceItem.link for the URL
                     quality: quality,
+                    language: language,
                     provider: "VidZee",
                     size: "Unknown size",
                     behaviorHints: {
@@ -128,7 +119,7 @@ const getVidZeeStreams = async (tmdbId, mediaType, seasonNum, episodeNum, scrape
                         }
                     }
                 };
-            }).filter(stream => stream.url); 
+            }).filter(stream => stream.url);
 
             console.log(`[VidZee S${sr}] Successfully extracted ${streams.length} streams.`);
             return streams;

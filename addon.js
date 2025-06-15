@@ -1058,7 +1058,7 @@ builder.defineStreamHandler(async (args) => {
             }
             
             // Try to get cached streams first
-            const cachedStreams = await getStreamFromCache('vidzee', tmdbTypeFromId, tmdbId, seasonNum, episodeNum, null, userScraperApiKey);
+            const cachedStreams = await getStreamFromCache('vidzee', tmdbTypeFromId, tmdbId, seasonNum, episodeNum, null, null);
             if (cachedStreams) {
                 console.log(`[VidZee] Using ${cachedStreams.length} streams from cache.`);
                 return cachedStreams.map(stream => ({ ...stream, provider: 'VidZee' }));
@@ -1067,23 +1067,23 @@ builder.defineStreamHandler(async (args) => {
             // No cache or expired, fetch fresh
             try {
                 console.log(`[VidZee] Fetching new streams...`);
-                const streams = await getVidZeeStreams(tmdbId, tmdbTypeFromId, seasonNum, episodeNum, userScraperApiKey);
+                const streams = await getVidZeeStreams(tmdbId, tmdbTypeFromId, seasonNum, episodeNum);
                 
                 if (streams && streams.length > 0) {
                     console.log(`[VidZee] Successfully fetched ${streams.length} streams.`);
                     // Save to cache
-                    await saveStreamToCache('vidzee', tmdbTypeFromId, tmdbId, streams, 'ok', seasonNum, episodeNum, null, userScraperApiKey);
+                    await saveStreamToCache('vidzee', tmdbTypeFromId, tmdbId, streams, 'ok', seasonNum, episodeNum, null, null);
                     return streams.map(stream => ({ ...stream, provider: 'VidZee' }));
                 } else {
                     console.log(`[VidZee] No streams returned.`);
                     // Save empty result
-                    await saveStreamToCache('vidzee', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum, null, userScraperApiKey);
+                    await saveStreamToCache('vidzee', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum, null, null);
                     return [];
                 }
             } catch (err) {
                 console.error(`[VidZee] Error fetching streams:`, err.message);
                 // Save error status to cache
-                await saveStreamToCache('vidzee', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum, null, userScraperApiKey);
+                await saveStreamToCache('vidzee', tmdbTypeFromId, tmdbId, [], 'failed', seasonNum, episodeNum, null, null);
                 return [];
             }
         }
@@ -1195,6 +1195,10 @@ builder.defineStreamHandler(async (args) => {
             // For Hianime, language is 'dub' or 'sub' from the stream object
             const category = stream.language ? (stream.language === 'sub' ? 'OG' : stream.language.toUpperCase()) : 'UNK';
             providerDisplayName = `Hianime ${category} 🍥`;
+        } else if (stream.provider === 'VidZee') {
+            if (stream.language) {
+                providerDisplayName = `VidZee ${stream.language.toUpperCase()}`;
+            }
         }
 
         let nameDisplay;
