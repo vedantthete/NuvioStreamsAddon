@@ -9,6 +9,8 @@ const Redis = require('ioredis'); // Added for Redis
 
 // --- Redis Cache Initialization ---
 let redisClient = null;
+let redisKeepAliveInterval = null; // Variable to manage the keep-alive interval
+
 if (process.env.USE_REDIS_CACHE === 'true') { // Modified condition
     try { // Added try-catch for initialization
         console.log(`[Showbox Cache] Initializing Redis in Showbox.js. REDIS_URL from env: ${process.env.REDIS_URL ? 'exists and has value' : 'MISSING or empty'}`);
@@ -29,6 +31,11 @@ if (process.env.USE_REDIS_CACHE === 'true') { // Modified condition
                 }
                 return false;
             },
+            // --- BEGIN: Upstash Compatibility Fix ---
+            // Upstash requires a TLS connection, and ioredis needs this explicit
+            // empty object to properly enable and configure TLS.
+            tls: {},
+            // --- END: Upstash Compatibility Fix ---
             enableOfflineQueue: true,
             enableReadyCheck: true,
             autoResubscribe: true,
@@ -38,17 +45,43 @@ if (process.env.USE_REDIS_CACHE === 'true') { // Modified condition
 
         redisClient.on('connect', () => {
             console.log('[Showbox Cache] Successfully connected to Redis server.'); // Added prefix for clarity
+
+            // --- BEGIN: Redis Keep-Alive ---
+            // Managed Redis services like Upstash close idle connections after a few minutes.
+            // To prevent this and avoid the reconnect loop, we send a PING command periodically.
+            if (redisKeepAliveInterval) {
+                clearInterval(redisKeepAliveInterval); // Clear previous interval if reconnecting
+            }
+
+            redisKeepAliveInterval = setInterval(() => {
+                if (redisClient && redisClient.status === 'ready') {
+                    redisClient.ping((err) => { // No need to log success, just handle error
+                        if (err) {
+                            console.error('[Showbox Redis Keep-Alive] Ping failed:', err.message);
+                        }
+                        // else { console.log('[Showbox Redis Keep-Alive] Ping sent successfully.'); } // Uncomment for debugging
+                    });
+                }
+            }, 4 * 60 * 1000); // 4 minutes
+            // --- END: Redis Keep-Alive ---
         });
 
         redisClient.on('error', (err) => {
             // Using optional chaining for host and port from options as err.host/err.port might not always be populated
             console.error(`[Showbox Redis Error] ${err.message}. Falling back to FS. Showbox Redis Opts Host: ${redisClient?.options?.host}, Port: ${redisClient?.options?.port}`);
+            
+            // --- BEGIN: Clear Keep-Alive on Error ---
+            // If the connection errors out, clear the interval. A new one will be set on 'connect'.
+            if (redisKeepAliveInterval) {
+                clearInterval(redisKeepAliveInterval);
+                redisKeepAliveInterval = null;
+            }
+            // --- END: Clear Keep-Alive on Error ---
         });
         
-        // Attempt an initial connection check
-        redisClient.connect().catch(err => {
-            console.error(`Initial Redis connection failed: ${err.message}. Ensure Redis is running and accessible.`);
-        });
+        // No need to explicitly call .connect() when lazyConnect is false (the default).
+        // The client connects automatically upon instantiation.
+        // The 'connect' and 'error' event listeners will handle the connection status.
 
     } catch (initError) { // Catch errors from new Redis() or the explicit REDIS_URL check
         console.error(`[Showbox Cache] Failed to initialize Redis client: ${initError.message}`);

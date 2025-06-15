@@ -8,6 +8,8 @@ const Redis = require('ioredis');
 // Add Redis client if enabled
 const USE_REDIS_CACHE = process.env.USE_REDIS_CACHE === 'true';
 let redis = null;
+let redisKeepAliveInterval = null; // Variable to manage the keep-alive interval
+
 if (USE_REDIS_CACHE) {
     try {
         console.log(`[Redis Cache] Initializing Redis in addon.js. REDIS_URL from env: ${process.env.REDIS_URL ? 'exists and has value' : 'MISSING or empty'}`);
@@ -27,6 +29,7 @@ if (USE_REDIS_CACHE) {
                 }
                 return false;
             },
+            tls: {},
             enableOfflineQueue: true,
             enableReadyCheck: true,
             autoResubscribe: true,
@@ -36,10 +39,32 @@ if (USE_REDIS_CACHE) {
         
         redis.on('error', (err) => {
             console.error(`[Redis Cache] Connection error: ${err.message}`);
+            // --- BEGIN: Clear Keep-Alive on Error ---
+            if (redisKeepAliveInterval) {
+                clearInterval(redisKeepAliveInterval);
+                redisKeepAliveInterval = null;
+            }
+            // --- END: Clear Keep-Alive on Error ---
         });
         
         redis.on('connect', () => {
             console.log('[Redis Cache] Successfully connected to Upstash Redis');
+
+            // --- BEGIN: Redis Keep-Alive ---
+            if (redisKeepAliveInterval) {
+                clearInterval(redisKeepAliveInterval);
+            }
+
+            redisKeepAliveInterval = setInterval(() => {
+                if (redis && redis.status === 'ready') {
+                    redis.ping((err) => {
+                        if (err) {
+                            console.error('[Redis Cache Keep-Alive] Ping failed:', err.message);
+                        }
+                    });
+                }
+            }, 4 * 60 * 1000); // 4 minutes
+            // --- END: Redis Keep-Alive ---
         });
         
         console.log('[Redis Cache] Upstash Redis client initialized');
