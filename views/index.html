@@ -1557,6 +1557,11 @@
             }
         }
 
+        /* Add MP4Hydra icon style after VidZee icon */
+        .mp4hydra-icon {
+            background: linear-gradient(135deg, #ff9800, #ff5722); /* Orange gradient for MP4Hydra */
+        }
+
     </style>
 </head>
 <body>
@@ -1680,6 +1685,11 @@
                         <div class="provider-icon vidsrc-icon">🎬</div>
                         <div class="provider-name">VidSrc</div>
                         <span class="provider-detail">Auto Quality</span>
+                    </div>
+                    <div class="provider-item">
+                        <div class="provider-icon mp4hydra-icon">🎥</div>
+                        <div class="provider-name">MP4Hydra</div>
+                        <span class="provider-detail">Multiple Qualities</span>
                     </div>
 
                     <h2 style="margin-top: 1.25rem; color: #ff6b6b;">Offline Providers</h2>
@@ -1815,6 +1825,18 @@
                                 <label for="providerVidsrc" style="font-size: 0.9rem;">VidSrc</label>
                             </div>
                              <select id="qualityVidsrc" name="providerQuality" data-provider="vidsrc" class="provider-sort-select">
+                                <option value="all" selected>All Qualities</option>
+                                <option value="480p">480p & Up</option>
+                                <option value="720p">720p & Up</option>
+                                <option value="1080p">1080p & Up</option>
+                            </select>
+                        </div>
+                        <div class="provider-checkbox-item" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0;">
+                            <div style="display: flex; align-items: center;">
+                                <input type="checkbox" id="providerMp4hydra" name="providerSelect" value="mp4hydra" checked style="margin-right: 0.5rem; accent-color: var(--primary);">
+                                <label for="providerMp4hydra" style="font-size: 0.9rem;">MP4Hydra</label>
+                            </div>
+                             <select id="qualityMp4hydra" name="providerQuality" data-provider="mp4hydra" class="provider-sort-select">
                                 <option value="all" selected>All Qualities</option>
                                 <option value="480p">480p & Up</option>
                                 <option value="720p">720p & Up</option>
@@ -3067,6 +3089,10 @@
                 scraperApiTutorialPanel.classList.add('show');
             });
         }
+
+        // Combine streams in the preferred provider order
+        combinedRawStreams = [];
+        const providerOrder = ['ShowBox', 'Hianime', 'Xprime.tv', 'HollyMovieHD', 'Soaper TV', 'VidZee', 'MP4Hydra', 'Cuevana', 'VidSrc']; // NEW: Add MP4Hydra provider
 
     </script>
     <script src="/_vercel/insights/script.js" defer></script>
