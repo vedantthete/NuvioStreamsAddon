@@ -1248,6 +1248,14 @@ builder.defineStreamHandler(async (args) => {
             if (stream.language) {
                 providerDisplayName = `VidZee ${stream.language.toUpperCase()}`;
             }
+        } else if (stream.provider === 'MP4Hydra') {
+            // Extract server number from title if present
+            const serverMatch = stream.title && stream.title.match(/\[MP4Hydra (#\d+)\]/);
+            if (serverMatch && serverMatch[1]) {
+                providerDisplayName = `MP4Hydra ${serverMatch[1]}`;
+            } else {
+                providerDisplayName = 'MP4Hydra';
+            }
         }
 
         let nameDisplay;
@@ -1274,6 +1282,10 @@ builder.defineStreamHandler(async (args) => {
             nameDisplay = stream.title || `${providerDisplayName} - ${stream.quality || 'Auto'}`;
             // If stream.title already includes providerDisplayName, we can simplify:
             // nameDisplay = stream.title; 
+        } else if (stream.provider === 'MP4Hydra') {
+            // For MP4Hydra, we want to show the server number prominently
+            const qualityLabel = stream.quality || 'UNK';
+            nameDisplay = `${providerDisplayName} - ${qualityLabel}`;
         } else { // For other providers (ShowBox, Xprime, etc.)
             const qualityLabel = stream.quality || 'UNK';
             if (flagEmoji) {

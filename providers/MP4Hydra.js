@@ -10,7 +10,7 @@ function generateSlug(title) {
 }
 
 // Process episode data from MP4Hydra response
-function processEpisode(episode, baseServer, serverName) {
+function processEpisode(episode, baseServer, serverName, serverNumber) {
     const videoUrl = `${baseServer}${episode.src}`;
     const subtitles = episode.subs ? episode.subs.map(sub => ({
         label: sub.label,
@@ -21,9 +21,10 @@ function processEpisode(episode, baseServer, serverName) {
         title: episode.show_title || episode.title,
         episode: episode.title,
         type: episode.type,
-        quality: episode.label,
+        quality: episode.quality || episode.label,
         videoUrl: videoUrl,
         server: serverName,
+        serverNumber: serverNumber,
         subtitles: subtitles
     };
 }
@@ -105,18 +106,24 @@ async function getMP4HydraStreams(tmdbId, mediaType, seasonNum = null, episodeNu
                 
                 // Process streams from main servers
                 const streams = [];
-                const mainServers = ['Beta', 'Beta#3'];
+                const serverConfig = [
+                    { name: 'Beta', number: '#1' },
+                    { name: 'Beta#3', number: '#2' }
+                ];
                 
-                mainServers.forEach(serverName => {
+                serverConfig.forEach(server => {
+                    const serverName = server.name;
+                    const serverNumber = server.number;
+                    
                     if (servers[serverName]) {
                         const baseServer = servers[serverName];
                         console.log(`[MP4Hydra] Processing server: ${serverName} (${baseServer})`);
                         
-                        const processedEpisode = processEpisode(targetEpisode, baseServer, serverName);
+                        const processedEpisode = processEpisode(targetEpisode, baseServer, serverName, serverNumber);
                         
                         // Convert to standard stream format
                         streams.push({
-                            title: `${details.title} - ${seasonEpisode} - ${processedEpisode.quality} [MP4Hydra-${serverName}]`,
+                            title: `${details.title} - ${seasonEpisode} - ${processedEpisode.quality} [MP4Hydra ${serverNumber}]`,
                             url: processedEpisode.videoUrl,
                             quality: processedEpisode.quality,
                             provider: "MP4Hydra",
@@ -144,19 +151,25 @@ async function getMP4HydraStreams(tmdbId, mediaType, seasonNum = null, episodeNu
             
             // For movies, process all videos
             const streams = [];
-            const mainServers = ['Beta', 'Beta#3'];
+            const serverConfig = [
+                { name: 'Beta', number: '#1' },
+                { name: 'Beta#3', number: '#2' }
+            ];
             
-            mainServers.forEach(serverName => {
+            serverConfig.forEach(server => {
+                const serverName = server.name;
+                const serverNumber = server.number;
+                
                 if (servers[serverName]) {
                     const baseServer = servers[serverName];
                     console.log(`[MP4Hydra] Processing server: ${serverName} (${baseServer})`);
                     
                     playlist.forEach(item => {
-                        const processedItem = processEpisode(item, baseServer, serverName);
+                        const processedItem = processEpisode(item, baseServer, serverName, serverNumber);
                         
                         // Convert to standard stream format
                         streams.push({
-                            title: `${details.title} - ${processedItem.quality} [MP4Hydra-${serverName}]`,
+                            title: `${details.title} - ${processedItem.quality} [MP4Hydra ${serverNumber}]`,
                             url: processedItem.videoUrl,
                             quality: processedItem.quality,
                             provider: "MP4Hydra",
@@ -264,18 +277,24 @@ async function tryAlternativeTitle(details, mediaType, seasonNum, episodeNum) {
                 
                 // Process streams from main servers
                 const streams = [];
-                const mainServers = ['Beta', 'Beta#3'];
+                const serverConfig = [
+                    { name: 'Beta', number: '#1' },
+                    { name: 'Beta#3', number: '#2' }
+                ];
                 
-                mainServers.forEach(serverName => {
+                serverConfig.forEach(server => {
+                    const serverName = server.name;
+                    const serverNumber = server.number;
+                    
                     if (servers[serverName]) {
                         const baseServer = servers[serverName];
                         console.log(`[MP4Hydra] Processing server: ${serverName} (${baseServer})`);
                         
-                        const processedEpisode = processEpisode(targetEpisode, baseServer, serverName);
+                        const processedEpisode = processEpisode(targetEpisode, baseServer, serverName, serverNumber);
                         
                         // Convert to standard stream format
                         streams.push({
-                            title: `${details.original_title} - ${seasonEpisode} - ${processedEpisode.quality} [MP4Hydra-${serverName}]`,
+                            title: `${details.original_title} - ${seasonEpisode} - ${processedEpisode.quality} [MP4Hydra ${serverNumber}]`,
                             url: processedEpisode.videoUrl,
                             quality: processedEpisode.quality,
                             provider: "MP4Hydra",
@@ -303,19 +322,25 @@ async function tryAlternativeTitle(details, mediaType, seasonNum, episodeNum) {
             
             // For movies, process all videos
             const streams = [];
-            const mainServers = ['Beta', 'Beta#3'];
+            const serverConfig = [
+                { name: 'Beta', number: '#1' },
+                { name: 'Beta#3', number: '#2' }
+            ];
             
-            mainServers.forEach(serverName => {
+            serverConfig.forEach(server => {
+                const serverName = server.name;
+                const serverNumber = server.number;
+                
                 if (servers[serverName]) {
                     const baseServer = servers[serverName];
                     console.log(`[MP4Hydra] Processing server: ${serverName} (${baseServer})`);
                     
                     playlist.forEach(item => {
-                        const processedItem = processEpisode(item, baseServer, serverName);
+                        const processedItem = processEpisode(item, baseServer, serverName, serverNumber);
                         
                         // Convert to standard stream format
                         streams.push({
-                            title: `${details.original_title} - ${processedItem.quality} [MP4Hydra-${serverName}]`,
+                            title: `${details.original_title} - ${processedItem.quality} [MP4Hydra ${serverNumber}]`,
                             url: processedItem.videoUrl,
                             quality: processedItem.quality,
                             provider: "MP4Hydra",
@@ -392,19 +417,25 @@ async function tryWithoutYear(details, mediaType, seasonNum, episodeNum) {
             
             // For movies, process all videos
             const streams = [];
-            const mainServers = ['Beta', 'Beta#3'];
+            const serverConfig = [
+                { name: 'Beta', number: '#1' },
+                { name: 'Beta#3', number: '#2' }
+            ];
             
-            mainServers.forEach(serverName => {
+            serverConfig.forEach(server => {
+                const serverName = server.name;
+                const serverNumber = server.number;
+                
                 if (servers[serverName]) {
                     const baseServer = servers[serverName];
                     console.log(`[MP4Hydra] Processing server: ${serverName} (${baseServer})`);
                     
                     playlist.forEach(item => {
-                        const processedItem = processEpisode(item, baseServer, serverName);
+                        const processedItem = processEpisode(item, baseServer, serverName, serverNumber);
                         
                         // Convert to standard stream format
                         streams.push({
-                            title: `${details.title} - ${processedItem.quality} [MP4Hydra-${serverName}]`,
+                            title: `${details.title} - ${processedItem.quality} [MP4Hydra ${serverNumber}]`,
                             url: processedItem.videoUrl,
                             quality: processedItem.quality,
                             provider: "MP4Hydra",
