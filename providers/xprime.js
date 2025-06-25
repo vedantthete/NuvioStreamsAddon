@@ -203,23 +203,16 @@ async function getXprimeStreams(title, year, type, seasonNum, episodeNum, usePro
         let xprimeResult;
 
         // Decision logic for fetching - PRIORITIZE scraperApiKey if present
-        if (true) { // If a scraperApiKey is provided (from user config), try to use it.
+        if (scraperApiKey) { // If a scraperApiKey is provided (from user config), try to use it.
             console.log('[Xprime.tv] Attempting to use ScraperAPI (key provided).');
             try {
-                const scraperApiUrl = 'https://api.scraperapi.com/';
-                const scraperResponse = await axios({
-                    method:"GET",
-                    url:xprimeApiUrl,
-                    proxy: {
-                        protocol:'http',
-                        host: 'proxy.scrape.do',
-                        port: 8080,
-                        auth: {
-                            username: process.env.SCRAPE_DO_KEY,
-                            password: ''
-                        }
+                const scraperApiUrl = encodeURIComponent(xprimeApiUrl);;
+                const scraperResponse = await axios.get(
+                    `https://api.scrape.do/?token=${process.env.SCRAPE_DO_KEY}&url=${scraperApiUrl}`, 
+                    {
+                        timeout: 25000 // Increased timeout for ScraperAPI
                     }
-                })
+                );
                 // Check if we got a Cloudflare challenge page
                 const responseData = scraperResponse.data;
                 if (typeof responseData === 'string' && responseData.includes("Just a moment...")) {
