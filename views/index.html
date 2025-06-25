@@ -24,223 +24,6 @@
             --coming-soon: #6742d9;
             --nuvio-app: #8c52ff;
             --nuvio-app-hover: #7038e0;
-            
-            /* ElfHosted Private Instance Theme */
-            --elfhosted-primary: #8c52ff;
-            --elfhosted-primary-light: #a875ff;
-            --elfhosted-secondary: #00c16e;
-            --elfhosted-secondary-light: #00e684;
-            --elfhosted-accent: #ff6432;
-            --elfhosted-bg: #0d1117;
-            --elfhosted-card: #161b22;
-            --elfhosted-border: #30363d;
-            --elfhosted-text: #f0f6fc;
-            --elfhosted-text-light: #8b949e;
-        }
-        
-        /* ElfHosted Theme Override */
-        body.elfhosted-theme {
-            background: linear-gradient(135deg, var(--elfhosted-bg) 0%, #070B10 100%);
-            color: var(--elfhosted-text);
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        /* Subtle background pattern */
-        body.elfhosted-theme:before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(140, 82, 255, 0.03) 1%, transparent 5%),
-                radial-gradient(circle at 75% 75%, rgba(0, 193, 110, 0.03) 1%, transparent 5%);
-            background-size: 60px 60px;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        body.elfhosted-theme .card {
-            background-color: var(--elfhosted-card);
-            border: 1px solid var(--elfhosted-border);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-        }
-        
-        body.elfhosted-theme .card:before {
-            background: linear-gradient(45deg, var(--elfhosted-primary), transparent, var(--elfhosted-secondary));
-            opacity: 0.5;
-            animation: cardGlow 8s infinite alternate;
-        }
-        
-        @keyframes cardGlow {
-            0% {
-                opacity: 0.3;
-                background-position: 0% 50%;
-            }
-            50% {
-                opacity: 0.6;
-                background-position: 100% 50%;
-            }
-            100% {
-                opacity: 0.3;
-                background-position: 0% 50%;
-            }
-        }
-        
-        body.elfhosted-theme h1, 
-        body.elfhosted-theme h2 {
-            color: var(--elfhosted-text);
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-        body.elfhosted-theme .btn-primary {
-            background: linear-gradient(135deg, var(--elfhosted-primary) 0%, #7038e0 100%);
-            box-shadow: 0 6px 15px rgba(140, 82, 255, 0.3);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-        
-        body.elfhosted-theme .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(140, 82, 255, 0.4);
-        }
-        
-        body.elfhosted-theme .btn-secondary {
-            background: linear-gradient(135deg, var(--elfhosted-secondary) 0%, #00a65c 100%);
-            box-shadow: 0 6px 15px rgba(0, 193, 110, 0.3);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-        
-        body.elfhosted-theme .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 193, 110, 0.4);
-        }
-        
-        body.elfhosted-theme .more-addons-btn {
-            background: linear-gradient(135deg, var(--elfhosted-primary) 0%, #7038e0 100%);
-            box-shadow: 0 6px 15px rgba(140, 82, 255, 0.3);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-        
-        body.elfhosted-theme .more-addons-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(140, 82, 255, 0.4);
-        }
-        
-        body.elfhosted-theme .providers,
-        body.elfhosted-theme .disclaimer,
-        body.elfhosted-theme .provider-checkbox-list,
-        body.elfhosted-theme .provider-info-note {
-            background-color: rgba(22, 27, 34, 0.7);
-            border: 1px solid var(--elfhosted-border);
-            backdrop-filter: blur(10px);
-        }
-        
-        body.elfhosted-theme .elfhosted-credits {
-            background: linear-gradient(135deg, rgba(140, 82, 255, 0.12), rgba(0, 193, 110, 0.12));
-            border: 1px solid rgba(140, 82, 255, 0.25);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* ElfHosted Badge Styles */
-        .elfhosted-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(135deg, var(--elfhosted-primary), var(--elfhosted-secondary));
-            background-size: 200% 200%;
-            animation: gradientBadge 3s ease infinite;
-            color: white;
-            border-radius: 20px;
-            padding: 6px 16px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(140, 82, 255, 0.4);
-            z-index: 5;
-            letter-spacing: 0.5px;
-            transform: translateY(0);
-        }
-        
-        @keyframes gradientBadge {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-        
-        .elfhosted-logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            gap: 1.5rem;
-        }
-        
-        .elfhosted-credits {
-            background: linear-gradient(135deg, rgba(140, 82, 255, 0.15), rgba(0, 193, 110, 0.15));
-            border-radius: 0.8rem;
-            padding: 1.25rem;
-            border: 1px solid rgba(140, 82, 255, 0.3);
-            text-align: center;
-            margin: 1.5rem 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .elfhosted-provider-note {
-            background-color: rgba(140, 82, 255, 0.08);
-            border: 1px solid rgba(140, 82, 255, 0.2);
-            border-radius: 0.7rem;
-            padding: 1rem;
-            font-size: 0.9rem;
-            color: var(--elfhosted-text-light);
-            margin-top: 1rem;
-            line-height: 1.5;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        body.elfhosted-theme .provider-item {
-            transition: all 0.3s ease;
-            padding: 0.5rem 0.25rem;
-            border-radius: 0.5rem;
-        }
-        
-        body.elfhosted-theme .provider-item:hover {
-            background-color: rgba(140, 82, 255, 0.1);
-            transform: translateX(5px);
-        }
-        
-        body.elfhosted-theme .provider-icon {
-            transform: scale(1.1);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Add a premium glint effect to the main title */
-        body.elfhosted-theme .premium-title {
-            background: linear-gradient(90deg, #fff 0%, #a875ff 25%, #fff 50%, #00e684 75%, #fff 100%);
-            background-size: 200% auto;
-            color: #000;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 4s linear infinite;
-        }
-        
-        @keyframes shine {
-            to {
-                background-position: 200% center;
-            }
         }
         
         * {
@@ -1805,33 +1588,25 @@
     
     <div class="cards-container" id="cardsContainer">
         <div class="card main-card">
-            <div class="elfhosted-badge">Private Instance</div>
             <div class="card-header">
-
                 <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 1.5rem;">
                     <img src="https://raw.githubusercontent.com/tapframe/NuvioStreaming/main/assets/titlelogo.png" alt="Nuvio Streams Logo" class="logo" style="max-width: 180px; height: auto; margin-right: 1.5rem; margin-bottom: 0;">
                     <img src="https://store.elfhosted.com/wp-content/uploads/2024/11/logo.svg" alt="ElfHosted Logo" style="height: 100px; margin-left: 1.5rem;">
                 </div>
                 <h1>Nuvio Streams | Elfhosted</h1>
-
             </div>
             <div class="card-body">
                 <!-- REMOVE URGENT MIGRATION TOOL SECTION -->
                 
-                <p class="full-width">Your <strong>private, premium</strong> gateway to high-quality streaming on Stremio. This isolated instance offers enhanced performance, reliability, and all providers fully enabled.</p>
+                <p class="full-width">Your gateway to high-quality streaming on Stremio. Enjoy movies and TV shows from multiple sources with our powerful addon.</p>
                 
-                <!-- ElfHosted Private Instance Information -->
-                <div class="full-width elfhosted-credits">
-                    <p style="font-size: 1.1rem; margin-bottom: 0.5rem; color: #fff;">
-                        <span style="font-weight: 600; color: var(--elfhosted-primary-light);"> PREMIUM PRIVATE INSTANCE </span>
+                <!-- ElfHosted Information -->
+                <div id="elfhostedInfoSection" class="full-width" style="background: linear-gradient(135deg, rgba(140, 82, 255, 0.15), rgba(0, 163, 255, 0.15)); border-radius: 0.6rem; padding: 1rem; margin: 1rem 0; border: 1px solid rgba(140, 82, 255, 0.3); animation: pulse 2s infinite; display: none;">
+                    <p style="font-size: 1rem; text-align: center; margin-bottom: 0.5rem; color: #fff;">
+                        <span style="font-weight: 600; color: #8c52ff;"> NEW HOSTING PARTNER </span>
                     </p>
-                    <p style="margin-bottom: 0.75rem; font-size: 0.95rem;">
-                        Your dedicated instance is hosted by <a href="https://elfhosted.com/" target="_blank" style="color: var(--elfhosted-secondary-light); font-weight: 600; text-decoration: none;">ElfHosted</a> and maintained by <a href="https://hayd.uk" target="_blank" style="color: var(--elfhosted-primary-light); font-weight: 600; text-decoration: none;">Hayduk</a>.
-                    </p>
-
                     <p style="text-align: center; margin-bottom: 0.75rem;">
                         Hosting infrastructure donated by <a href="https://elfhosted.com/" target="_blank" style="color: #00c16e; font-weight: 600; text-decoration: none;">ElfHosted</a> ❤️, and independently maintained by <a href="https://hayd.uk" target="_blank" style="color: #00a3ff; font-weight: 600; text-decoration: none;">Hayduk</a>. See the <a href="https://stremio-addons-guide.elfhosted.com/" target="_blank" style="color: #00a3ff; font-weight: 600; text-decoration: none;">ElfHosted Stremio Addons Guide</a> for more addons, or grab <a href="https://store.elfhosted.com/product/nuviostreams/" target="_blank" style="color: #00c16e; font-weight: 600; text-decoration: none;">your own isolated, private instance</a> (<i>directly supports your developer!</i>)
-
                     </p>
                     
                     <!-- Toggle button for private instance features -->
@@ -1854,11 +1629,11 @@
                                 </li>
                                 <li style="display: flex; align-items: flex-start; margin-bottom: 0.6rem;">
                                     <span style="color: #00c16e; margin-right: 0.5rem;">•</span>
-                                    <span style="font-size: 0.85rem; color: #fff;">Priority access to new providers and features</span>
+                                    <span style="font-size: 0.85rem; color: #fff;">Includes <strong>Cuevana</strong> provider with LATAM content</span>
                                 </li>
                                 <li style="display: flex; align-items: flex-start; margin-bottom: 0.6rem;">
                                     <span style="color: #00c16e; margin-right: 0.5rem;">•</span>
-                                    <span style="font-size: 0.85rem; color: #fff;">Early access to beta providers and updates</span>
+                                    <span style="font-size: 0.85rem; color: #fff;">Additional regional providers in development</span>
                                 </li>
                                 <li style="display: flex; align-items: flex-start; margin-bottom: 0;">
                                     <span style="color: #00c16e; margin-right: 0.5rem;">•</span>
@@ -1902,6 +1677,11 @@
                         <span class="provider-detail">Auto Quality</span>
                     </div>
                     <div class="provider-item">
+                        <div class="provider-icon cuevana-icon">🇨</div> <!-- Placeholder icon, can be updated -->
+                        <div class="provider-name">Cuevana</div>
+                        <span class="provider-detail" style="color: #ff8c00;">LATAM Provider (ElfHosted Private Instance Exclusive)</span>
+                    </div>
+                    <div class="provider-item">
                         <div class="provider-icon vidsrc-icon">🎬</div>
                         <div class="provider-name">VidSrc</div>
                         <span class="provider-detail">Auto Quality</span>
@@ -1919,11 +1699,6 @@
 
                     <h2 style="margin-top: 1.25rem; color: #ff6b6b;">Offline Providers</h2>
                     <div class="provider-item">
-                        <div class="provider-icon cuevana-icon">🇨</div>
-                        <div class="provider-name">Cuevana</div>
-                        <span class="provider-detail" style="color: #ff6b6b;">LATAM Provider - Currently Offline</span>
-                    </div>
-                    <div class="provider-item">
                         <div class="provider-icon hianime-icon">🍥</div>
                         <div class="provider-name">Hianime</div>
                         <span class="provider-detail" style="color: #ff3a3a;">Anime (Dub/Sub) - Offline</span>
@@ -1935,14 +1710,10 @@
                     </div>
                 </div>
                 
-                <!-- Updated Provider info note for ElfHosted -->
+                <!-- Provider info note remains in place -->
                 <div class="provider-info-note">
-                    <span class="info-icon" style="color: var(--elfhosted-primary-light);">💡</span> 
+                    <span class="info-icon">💡</span> 
                     <span>The flag emoji (e.g., 🇺🇸, 🇬🇧) next to ShowBox stream names indicates the server location, not the content's language.</span>
-                </div>
-
-                <div class="elfhosted-provider-note">
-                    <strong style="color: var(--elfhosted-primary-light);">ElfHosted Premium Benefit:</strong> Your private instance has all providers enabled, including Cuevana, with dedicated resources. Some providers that might be unavailable or throttled on public instances work optimally here.
                 </div>
 
                 <!-- Disclaimer moved from below to here -->
@@ -1990,12 +1761,10 @@
                         </div>
                         <div class="provider-checkbox-item" style="display: none; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
                             <div style="display: flex; align-items: center;">
-
                                 <input type="checkbox" id="providerCuevana" name="providerSelect" value="cuevana" disabled style="margin-right: 0.5rem; accent-color: var(--primary); opacity: 0.5;">
                                 <label for="providerCuevana" style="font-size: 0.9rem; opacity: 0.5;">Cuevana (ElfHosted Private Instance Exclusive)</label>
-
                             </div>
-                            <select id="qualityCuevana" name="providerQuality" data-provider="cuevana" class="provider-sort-select">
+                            <select id="qualityCuevana" name="providerQuality" data-provider="cuevana" class="provider-sort-select" disabled>
                                 <option value="all" selected>All Qualities</option>
                                 <option value="480p">480p & Up</option>
                                 <option value="720p">720p & Up</option>
@@ -2174,13 +1943,9 @@
                 </div>
             </div>
             <div class="card-footer">
-
                 <span class="footer-text">Nuvio Streams | Elfhosted • Seamless Streaming, Elevated</span>
-
                 <div class="footer-text">
                     Developed by <a href="https://github.com/tapframe" target="_blank" class="github-link">TapFrame</a> 
-                    <span style="margin: 0 0.5rem;">•</span>
-                    Hosted by <a href="https://elfhosted.com" target="_blank" class="github-link" style="color: var(--elfhosted-secondary-light);">ElfHosted</a>
                 </div>
             </div>
         </div>
@@ -3447,7 +3212,6 @@
         'floating-chat.donateButton.text-color': '#fff'
       });
     </script>
-
     
     <!-- Discord button -->
     <div style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
@@ -3458,6 +3222,5 @@
             Join Discord
         </a>
     </div>
-
 </body>
 </html> 
