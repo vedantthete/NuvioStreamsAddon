@@ -187,10 +187,10 @@ async function getXprimeStreams(title, year, type, seasonNum, episodeNum, usePro
 
         // type here is tmdbTypeFromId which is 'movie' or 'tv'
         if (type === 'movie') {
-            xprimeApiUrl = `https://api.scrape.do?token=${process.env.SCRAPE_DO_KEY}&url=https://backend.xprime.tv/primebox?name=${xprimeName}&year=${year}&fallback_year=${year}`;
+            xprimeApiUrl = `https://backend.xprime.tv/primebox?name=${xprimeName}&year=${year}&fallback_year=${year}`;
         } else if (type === 'tv') { // 'tv' corresponds to series for Xprime
             if (seasonNum !== null && episodeNum !== null) {
-                xprimeApiUrl = `https://api.scrape.do?token=${process.env.SCRAPE_DO_KEY}&url=https://backend.xprime.tv/primebox?name=${xprimeName}&year=${year}&fallback_year=${year}&season=${seasonNum}&episode=${episodeNum}`;
+                xprimeApiUrl = `https://backend.xprime.tv/primebox?name=${xprimeName}&year=${year}&fallback_year=${year}&season=${seasonNum}&episode=${episodeNum}`;
             } else {
                 console.log('[Xprime.tv] Skipping series request: missing season/episode numbers.');
                 return [];
@@ -203,16 +203,16 @@ async function getXprimeStreams(title, year, type, seasonNum, episodeNum, usePro
         let xprimeResult;
 
         // Decision logic for fetching - PRIORITIZE scraperApiKey if present
-        if (scraperApiKey) { // If a scraperApiKey is provided (from user config), try to use it.
+        if (true) { // If a scraperApiKey is provided (from user config), try to use it.
             console.log('[Xprime.tv] Attempting to use ScraperAPI (key provided).');
             try {
                 const scraperApiUrl = 'https://api.scraperapi.com/';
-                const scraperResponse = await axios.get(scraperApiUrl, {
-                    params: {
-                        api_key: scraperApiKey,
-                        url: xprimeApiUrl
-                    },
-                    timeout: 25000 // Increased timeout for ScraperAPI
+                const scraperResponse = await axios.get(xprimeApiUrl, {
+                    proxy: {
+                        protocol: 'http',
+                        host: `${process.env.SCRAPE_DO_KEY}@proxy.scrape.do`,
+                        port: 8080
+                    }
                 });
 
                 // Check if we got a Cloudflare challenge page
