@@ -187,10 +187,10 @@ async function getXprimeStreams(title, year, type, seasonNum, episodeNum, usePro
 
         // type here is tmdbTypeFromId which is 'movie' or 'tv'
         if (type === 'movie') {
-            xprimeApiUrl = `https://backend.xprime.tv/primebox?name=${xprimeName}&year=${year}&fallback_year=${year}`;
+            xprimeApiUrl = `https://api.scrape.do?token=${process.env.SCRAPE_DO_KEY}&url=https://backend.xprime.tv/primebox?name=${xprimeName}&year=${year}&fallback_year=${year}`;
         } else if (type === 'tv') { // 'tv' corresponds to series for Xprime
             if (seasonNum !== null && episodeNum !== null) {
-                xprimeApiUrl = `https://backend.xprime.tv/primebox?name=${xprimeName}&year=${year}&fallback_year=${year}&season=${seasonNum}&episode=${episodeNum}`;
+                xprimeApiUrl = `https://api.scrape.do?token=${process.env.SCRAPE_DO_KEY}&url=https://backend.xprime.tv/primebox?name=${xprimeName}&year=${year}&fallback_year=${year}&season=${seasonNum}&episode=${episodeNum}`;
             } else {
                 console.log('[Xprime.tv] Skipping series request: missing season/episode numbers.');
                 return [];

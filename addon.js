@@ -1383,7 +1383,13 @@ ${warningMessage}`;
             type: 'url', // CRITICAL: This is the type of the stream itself, not the content
             availability: 2, 
             behaviorHints: {
-                notWebReady: true // As per the working example, indicates Stremio might need to handle it carefully or use external player
+                notWebReady: true,
+                proxyHeaders: {
+                    "request": { 
+                      "Origin": "https://xprime.tv", 
+                      "Referer": "https://xprime.tv/"
+                    } 
+                } // As per the working example, indicates Stremio might need to handle it carefully or use external player
             }
         };
     });
