@@ -207,7 +207,9 @@ async function getXprimeStreams(title, year, type, seasonNum, episodeNum, usePro
             console.log('[Xprime.tv] Attempting to use ScraperAPI (key provided).');
             try {
                 const scraperApiUrl = 'https://api.scraperapi.com/';
-                const scraperResponse = await axios.get(xprimeApiUrl, {
+                const scraperResponse = await axios({
+                    method:"GET",
+                    url:xprimeApiUrl,
                     proxy: {
                         protocol:'http',
                         host: 'proxy.scrape.do',
@@ -216,9 +218,8 @@ async function getXprimeStreams(title, year, type, seasonNum, episodeNum, usePro
                             username: process.env.SCRAPE_DO_KEY,
                             password: ''
                         }
-                }
-                });
-
+                    }
+                })
                 // Check if we got a Cloudflare challenge page
                 const responseData = scraperResponse.data;
                 if (typeof responseData === 'string' && responseData.includes("Just a moment...")) {
