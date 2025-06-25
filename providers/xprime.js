@@ -209,10 +209,14 @@ async function getXprimeStreams(title, year, type, seasonNum, episodeNum, usePro
                 const scraperApiUrl = 'https://api.scraperapi.com/';
                 const scraperResponse = await axios.get(xprimeApiUrl, {
                     proxy: {
-                        protocol: 'http',
-                        host: `${process.env.SCRAPE_DO_KEY}@proxy.scrape.do`,
-                        port: 8080
-                    }
+                        protocol:'http',
+                        host: 'proxy.scrape.do',
+                        port: 8080,
+                        auth: {
+                            username: process.env.SCRAPE_DO_KEY,
+                            password: ''
+                        }
+                }
                 });
 
                 // Check if we got a Cloudflare challenge page
